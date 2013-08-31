@@ -24,24 +24,24 @@ glut에는 Cube / Sphere / Cone / Teapot...등을 렌더링할 수 있는 함수
 
 ## Exe / Source / Repo
 
-* [Exe and Source](|filename|../static/simple_mesh/simple_mesh.zip)
+* [Exe and Source](|filename|../static/simple-mesh/simple-mesh.zip)
 * [Repo][repo]
 
 ## Demo
 
 실행하고 1~6을 누르면 아래중에서 적절히 하나가 렌더링된다.
 
-![solid cube](|filename|../static/simple_mesh/solid_cube.png)
+![solid cube](|filename|../static/simple-mesh/solid_cube.png)
 
-![solid sphere](|filename|../static/simple_mesh/solid_sphere.png)
+![solid sphere](|filename|../static/simple-mesh/solid_sphere.png)
 
-![solid teapot](|filename|../static/simple_mesh/solid_teapot.png)
+![solid teapot](|filename|../static/simple-mesh/solid_teapot.png)
 
-![wire cube](|filename|../static/simple_mesh/wire_cube.png)
+![wire cube](|filename|../static/simple-mesh/wire_cube.png)
 
-![wire sphere](|filename|../static/simple_mesh/wire_sphere.png)
+![wire sphere](|filename|../static/simple-mesh/wire_sphere.png)
 
-![wire teapot](|filename|../static/simple_mesh/wire_teapot.png)
+![wire teapot](|filename|../static/simple-mesh/wire_teapot.png)
 
 ## 사용 예제 코드
 
@@ -68,5 +68,5 @@ Draw(solid_cube_mesh);
 ## Resource
 * [Qualcomm Teapot Source][teapot_data]
 
-[repo]: https://github.com/if1live/if1live.github.com.src/tree/master/simple_mesh
+[repo]: https://github.com/if1live/if1live.github.com.src/tree/master/simple-mesh
 [teapot_data]: https://code.google.com/p/virtualwimbledonpro/source/browse/jni/Teapot.h?r=9448d1cb72c71b4addf77c4afcce6fa6f671fd2e

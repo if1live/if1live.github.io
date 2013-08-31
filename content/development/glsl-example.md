@@ -8,8 +8,8 @@ Date: 2013-04-27
 
 그리고 오늘 프로젝트를 분리시켰다!
 
-* [Site](http://libsora.so/glsl_example/)
-* [Repo](https://github.com/if1live/glsl_example)
+* [Site](http://libsora.so/glsl-example/)
+* [Repo](https://github.com/if1live/glsl-example)
 
 ## Library
 OpenGL은 DirectX와는 달리 그 자체로는 뭐 어떻게 써먹을 방법이 없다. 수학라이브러리도 내장되어있지 않고 텍스쳐 로딩도 없고 창초기화도 없고 등등....되는게 하나도 없어서 라이브러리를 적절히 붙여야 돌릴 수 있다. 구현에 사용한 라이브러리/참고코드 목록이다. (아마도 다음부터 GL예제를 올리때는 귀찮아서 안쓰겟지만 한번은 쓰는게 낫겟지...)
@@ -37,7 +37,7 @@ Header-only library라서 링크 신경안쓰고 사용할 수 있어서 자주 
 
 [pope_book]: http://www.hanb.co.kr/book/look.html?isbn=978-89-7914-949-4
 [fabiensanglard]: http://fabiensanglard.net/shadowmapping/index.php
-[release]: /static/static/glsl_example/glsl_example.zip
+[release]: /static/static/glsl-example/glsl-example.zip
 [iphone3d]: http://ofps.oreilly.com/titles/9780596804824/
 [glew]: http://glew.sourceforge.net/
 [glfw]: http://www.glfw.org/

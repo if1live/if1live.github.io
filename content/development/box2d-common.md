@@ -81,8 +81,8 @@ struct b2Version
 ```
 
 ## 자료구조
-* [BlockAllocator](|filename|box2d_block_allocator.md) 참고
-* [StackAllocator](|filename|box2d_stack_allocator.md) 참고
+* [BlockAllocator](|filename|box2d-block-allocator.md) 참고
+* [StackAllocator](|filename|box2d-stack-allocator.md) 참고
 * GrowableStack
 
 ```cpp

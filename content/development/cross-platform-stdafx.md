@@ -31,7 +31,7 @@ Date: 2012-12-08
 #include "stdafx.h"
 ```
 
-PCH를 지원하는 플랫폼/지원하지 않는 플랫폼에 대한 처리를 하기 위해서 다음과 같은 arch.h라는 파일을 미리 만든다. 소스의 내용은 [플랫폼 매크로 선언 없이 윈도/iOS/안드로이드 구분하는 매크로](|filename|platform_macro.md)에서 이어진다
+PCH를 지원하는 플랫폼/지원하지 않는 플랫폼에 대한 처리를 하기 위해서 다음과 같은 arch.h라는 파일을 미리 만든다. 소스의 내용은 [플랫폼 매크로 선언 없이 윈도/iOS/안드로이드 구분하는 매크로](|filename|platform-macro.md)에서 이어진다
 ```cpp
 // 적절히 현재 플랫폼에 따라서 SR_WIN, SR_IPHONE, SR_ANDROID가 0 or 1으로 설정된다
 //pch
