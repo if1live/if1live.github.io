@@ -1,0 +1,42 @@
+Title: 이맥스 내장 한글입력기 사용하기 + 기본한글설정
+Tags: emacs
+Slug: emacs-hangul-key
+Author: if1live
+Date: 2012-12-31
+
+이맥스는 특유의 괴랄한 규모덕분에 다른 에디터에서는 거의 찾아볼수 없는 기능인 **한글입력기**가 내장되어있다. (그러니까 한영키를 눌러서 한글/영문 입력상태를 바꿔주는거) 일반적인 에디터의 경우는 에디터 자체에 입력기는 내장되어있지 않고 OS에 존재하는 입력기를 이용한다. 하지만 이맥스의 경우는 적절히 설정하지 않으면 윈도우의 입력기와 이맥스의 입력기가 꼬여서 한글 입력이 미묘해진다. (이맥스의 한글입력기를 사용할 경우 ㄱ->가->간 과 같은 입력과정을 이맥스에서 볼수 있지만 윈도우의 IME를 사용하게 되면 최종 글자만 보인다)
+
+## 한글 + UTF-8 사용하기
+```cl
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
+```
+
+## 한영변환 키설정
+한영변환을 한영키로 할수도 있지만, shift+space로 할수도 있다. 적절히 고르자(둘다써도 문제 없다)
+
+### 한영키
+한영키에 대응하는 키이름을 보니까 일본어 IME 구현중에 딸려나왔나보다
+```cl
+(global-set-key (kbd "<kana>") 'toggle-input-method)
+```
+
+### shift+space
+```cl
+(global-set-key (kbd "<S-kana>") 'toggle-input-method)
+```
+
+
+## 내 설정
+```cl
+;; 한영키 바꿔치기
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
+(global-set-key (kbd "<S-kana>") 'toggle-input-method)
+(global-set-key (kbd "<kana>") 'toggle-input-method)
+```
+
+
+## Reference
+ * http://props.tistory.com/38
+ * http://kblog.breadncup.com/archives/2009_12_22/1325/
