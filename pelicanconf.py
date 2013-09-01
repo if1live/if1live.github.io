@@ -96,23 +96,14 @@ web으로 먹고 살고 관심분야는 Oculus Rift지만 프로젝트는 딱히
 LANDING_PAGE_ABOUT = {'title' : 'libsora.so', 'details' : markdown.markdown(ABOUT_DETAILS)}
 
 GLSL_EXAMPLE_DESC = u'''
-[셰이더 프로그래밍 입문](http://www.hanb.co.kr/book/look.html?isbn=978-89-7914-949-4) for GLSL. 
-다만 완벽하게 동일한 예제는 아님
-'''
-
-EPIC_EDITOR_DESC = u'''
-[EpicEditor][epic_editor]를 살짝 수정해서 미리보기에서 Code Syntax Highlight이 지원 추가
-[Demo][if1live_epic_editor]
-
-[epic_editor]: http://epiceditor.com/
-[if1live_epic_editor]: ../proj/epiceditor/index.html
+[셰이더 프로그래밍 입문](http://www.hanb.co.kr/book/look.html?isbn=978-89-7914-949-4) for GLSL
 '''
 
 PROJECTS = [
     {
     'name' : u'참참참 with Oculus Rift + Leap Motion',
     'url' : 'http://shipduck.github.io/cham-cham-cham',
-    'description' : u'Oculus Rift + Leap Motion 으로 만든 간단한 기술데모(?)'
+    'description' : u''
     },
     {
     'name' : 'LibOVR',
@@ -122,26 +113,21 @@ PROJECTS = [
     {
     'name' : 'irrlicht-console',
     'url' : 'http://libsora.so/irrlicht-console',
-    'description' : u'''irrlicht engine에서 quake console 같은거를 쓰자!'''
+    'description' : u'''Quake like console for changing program variables or call function at runtime'''
     },
     {
     'name' : 'Controller for Raspberry Pi + MPD',
     'url' : 'https://github.com/if1live/rpi-mpd-controller',
-    'description' : u'''눈 못뜨는 상태에서도 Raspberry Pi로 음악 들르라고 만든거'''
+    'description' : u''
     },
     {
     'name' : 'gles2framework',
     'url' : 'https://github.com/if1live/gles2framework',
-    'description' : u'''원본코드 버그 수정+ 코드 약간 수정''',
+    'description' : u'''a simple framework for OpenGLES 2.0(support Raspberry Pi)''',
     },
     {
     'name': 'GLSL Example',
     'url': 'http://libsora.so/glsl_example/',
     'description': markdown.markdown(GLSL_EXAMPLE_DESC)
     },
-    {
-    'name': 'EpicEditor',
-    'url': 'https://github.com/if1live/epiceditor',
-    'description': markdown.markdown(EPIC_EDITOR_DESC)
-    }
 ]
