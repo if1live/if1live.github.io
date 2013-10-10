@@ -18,6 +18,10 @@ Build CEGUI 0.8.2 on Windows + OGRE
 
 빌드 과정
 #######################
+
+CEGUI Dependencies
+*****************************
+
 cegui-deps-0.8.x-src.zip 압축을 적절히 푼다. 
 앞으로는 해당 경로를 **cegui-deps-path** 라고 부른다.
 그리고 cegui-deps-path 안에 build 폴더를 만든다.
@@ -30,9 +34,10 @@ cmake를 사용해서 의존 라이브러리를 빌드할 준비를 한다. cmak
 
 configure 돌리고 generate를 돌려준다. 생성된 cegui-deps-path/CEGUI-DEPS.sln을 적절히 빌드해준다. debug, release로 각각 빌드해 주는걸 잊지말자. 빌드가 끝나면 **cegui-deps-path/build/dependencies** 가 생겨있다. 
 
+CEGUI
+*****************************
 cegui-0.8.2.zip 압축을 적절히 푼다. 
 앞으로는 해당 경로를 **cegui-path** 라고 부른다. 
-그리고 cegui-path 안에 build 폴더를 만든다.
 
 cegui-deps를 빌드한 다음에 생긴 **cegui-deps-path/build/dependencies** 를 **cegui-path** 로 복사한다. 
 
@@ -54,10 +59,10 @@ CEGUI가 OGRE를 지원하도록 빌드하기 위해서는 OGRE의 경로를 알
 	set(OIS_LIB "D:/ogre/ogre/build/sdk/lib/release/OIS.lib")
 	set(OIS_LIB_DBG "D:/ogre/ogre/build/sdk/lib/debug/OIS_d.lib")
 
-cmake gui 를 돌린다. 일단 경로를 아래와 같이 설정하고 Configure를 돌린다.
+cmake gui 를 돌린다. 일단 경로를 아래와 같이 설정하고 Configure를 돌린다. cegui-deps를 cmake돌릴때는 build라는 폴더를 따로 만들었지만 cegui는 그렇게 하면 망한다. cegui를 cmake돌리면 header 파일이 생성되는데 build폴더를 따로 만들면 경로잡기 귀찮다.
 
-* Where is the source code = cegui-deps-path
-* Where to build the binaries = cegui-deps-path/build
+* Where is the source code = cegui-path
+* Where to build the binaries = cegui-path
 
 돌려서 나온 결과물에서 다음을 확인한다.
 
@@ -79,10 +84,10 @@ cegui.sln의 내용을 전부 컴파일한다. 일단 컴파일을 돌리면 아
 	//finalText += reinterpret_cast<const encoded_char*>("❚");
 	finalText += reinterpret_cast<const encoded_char*>("-");
 
-	//(encoded_char*)"+ - ? B I W Y f n t....
+	//(encoded_char*)"+ - ? B I W Y f n t.... 
 	(encoded_char*)"EPIC_FAIL"
 
-컴파일이 한번 된다 싶으면 deps떄와 마찬가지로 debug/release 로 돌려준다. **cegui-path/build/bin** 에 그럴싸해 보이는 exe와 dll이 보이면 성공한거다.
+컴파일이 한번 된다 싶으면 deps떄와 마찬가지로 debug/release 로 돌려준다. **cegui-path/bin** 에 그럴싸해 보이는 exe와 dll이 보이면 성공한거다.
 
 예제 실행
 ###########################
@@ -95,8 +100,10 @@ PATH 환경변수에 다음 경로를 적절히 추가해준다. OgreSDK의 경�
 * D:/ogre/ogre/build/sdk/bin/debug
 * D:/ogre/ogre/build/sdk/bin/release
 
-오그레 엔진으로 돌리기위한 설정을 마저하기전에 opengl이나 dx같은것으로 먼저 돌려보자. samples.xml을 찾지 못햇다고 하면서 실행이 제대로 되지 않는다. cmake를 build 디렉토리를 따로 만들고 돌려서 그런거같다. 
-**cegui-path/build/datafiles/samples** 를 **cegui-path/datafiles** 에 집어넣는다. 그리고 다시 돌려보자. 제대로 돌아가면 cegui 관련 기본설정은 된거다.
+ogre engine renderer로 돌리면 사용가능한 렌더러가 아무것도 없다. 어떤 render system dll을 갖다써야할지 몰라서 그런거다. 오그레 설치된곳에서 plugins_d.cfg, plugins_d.cfg, 잡탕 ogre dll을 적절히 복사해서 넣어준다. 다시 돌리면 렌더러를 고를수 있을것이고 고른다음에 돌리면 아마도 잘 돌아갈것이다.
 
-ogre engine renderer로 돌리면 사용가능한 렌더러가 아무것도 없다. 어떤 render system dll을 갖다써야할지 몰라서 그런거다. 오그레 설치된곳에서 plugins_d.cfg, plugins_d.cfg를 적절히 복사해서 넣어준다. 다시 돌리면 렌더러를 고를수 있을것이고 고른다음에 돌리면 아마도 잘 돌아갈것이다.
 
+Changelog
+####################
+* 2013/10/09 : 최초 작성일
+* 2013/10/10 : cegui 빌드할 떄 build 폴더 안 만듬
