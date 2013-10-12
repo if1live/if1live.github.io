@@ -10,6 +10,7 @@
 
 *.md text
 *.txt text
+*.rst text
 
 *.js text
 *.py text

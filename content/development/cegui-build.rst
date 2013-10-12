@@ -2,6 +2,7 @@ Build CEGUI 0.8.2 on Windows + OGRE
 ================================================
 
 :date: 2013-10-09
+:modified: <a href="https://github.com/if1live/libsora.so/commits/master/content/development/cegui-build.rst" title="Revision History" target="_blank">2013/10/10</a>
 :tags: cegui, ogre, build, windows
 :slug: cegui-build
 :author: if1life
