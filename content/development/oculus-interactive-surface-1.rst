@@ -103,6 +103,6 @@ p.s. 이미 DOOM3:BFG Edition이 있어서 둠3를 오큘러스로 해봤었지.
 .. _fully-interactive-surfaces-in-doom3: http://battleteam.net/tech/fis/docs/index.html
 .. _repo: https://github.com/shipduck/kuuko/tree/79bb2957d2923571e51a8ef198937828b8f0a365
 .. _gorilla-video: http://www.youtube.com/watch?feature=player_embedded&v=e78Hfo5rIyU
-.. _demo-video: http://www.youtube.com/watch?v=h7UPLhVTSVY
+.. _demo-video: http://youtu.be/-8AOYWkNz1Y
 .. _gorilla: http://www.ogre3d.org/tikiwiki/Gorilla
 .. _release: https://docs.google.com/file/d/0BxRfWUmEuMJxYnI0WTVsUHR1cEU/edit?usp=sharing
