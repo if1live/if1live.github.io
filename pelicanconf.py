@@ -19,17 +19,21 @@ DISQUS_SITENAME = "libsora"
 GOOGLE_ANALYTICS = "UA-37862172-2"
 
 # Feed generation is usually not desired when developing
-#FEED_ALL_ATOM = None
+FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
-FEED_ALL_ATOM = 'feeds/all.atom.xml'
-#CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 TRANSLATION_FEED_ATOM = None
+
+WEBASSETS = True
+LESS_GENERATOR = True
+LESS_RUN_IN_DEBUG = True
 
 ARTICLE_URL = 'posts/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
 
 # Blogroll
-LINKS = ()
+LINKS = (('shipduck', 'http://github.com/shipduck'),)
+SOCIAL = (('Twitter', 'http://twitter.com/if1live'),
+		('GitHub', 'http://github.com/if1live'),)
 
 DEFAULT_PAGINATION = 10
 
@@ -38,6 +42,7 @@ RELATIVE_URLS = True
 
 PLUGIN_PATH = 'ext/pelican-plugins'
 
+		
 THEME = 'ext/pelican-sora'
 
 # attributes for pelican-sora
@@ -67,8 +72,6 @@ SITEMAP = {
 }
 
 # optional attributes for pelican-sora
-SOCIAL_LINK = (('Twitter', 'http://twitter.com/if1live'),
-		('GitHub', 'http://github.com/if1live'),)
 SITE_DESCRIPTION = u'libsora.so'
 SITESUBTITLE = ''
 SITE_LICENSE = ''
