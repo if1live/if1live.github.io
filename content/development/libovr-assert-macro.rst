@@ -5,7 +5,7 @@ LibOVR에서 찾은 적절한 assert macro
 :modified: <a href="https://github.com/if1live/libsora.so/commits/master/content/development/libovr-assert-macro.rst" title="Revision History" target="_blank">Revision History</a>
 :tags: assert, macro
 :slug: libovr-assert-macro
-:author: if1life
+:author: if1live
 :summary: 어지간한 플랫폼에서 잘 굴러가는 assert macro
 
 개발하려면 어쩃든 assert가 있긴 해야겠더라. 근데 기본 assert를 쓰면 callstack 추적하기가 귀찮더라.
