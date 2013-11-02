@@ -5,7 +5,7 @@ OculusRift + 3D GUI 개발기록 part 1
 :tags: ogre, oculus, gorilla, 3d, gui, ui
 :slug: oculus-interactive-surface-1
 :author: if1live
-:summary: OculusRift 지원하는 3D GUI 테스트로 만들어본 기록
+:subtitle: OculusRift 지원하는 3D GUI 테스트로 만들어본 기록
 
 이전부터 계속 만들어보고 싶었던 Doom3 같은 느낌의 3D GUI 데모를 만들어봣다
 

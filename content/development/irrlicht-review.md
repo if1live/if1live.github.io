@@ -3,8 +3,7 @@ Tags: irrlicht
 Slug: irrlight-engine-review
 Author: if1live
 Date: 2013-08-26
-
-최근 2달정도 irrlicht engine를 만져봤고 간단한 프로젝트를 완료한 김에 irrlicht 사용 소감을 정리해봤다. 
+subtitle : 2달 정도 만져보고 간단한 프로젝트를 완료후의 irrlicht 사용 소감
 
 ## 장점
 

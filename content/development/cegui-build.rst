@@ -6,7 +6,7 @@ Build CEGUI 0.8.2 on Windows + OGRE
 :tags: cegui, ogre, build, windows
 :slug: cegui-build
 :author: if1live
-:summary: CEGUI 윈도우에서 컴파일하기
+:subtitle: CEGUI 윈도우에서 컴파일하기
 
 `CEGUI <http://cegui.org.uk/>`_ 빌드 하느라 삽질좀 해서 공유용 문서를 썻다. 어차피 요즘 대세는 유니티니까 팀원말고는 보지도 않겠지.
 

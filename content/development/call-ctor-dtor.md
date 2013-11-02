@@ -2,7 +2,7 @@ Title: 생성자,소멸자 강제호출
 Tags: cpp
 Slug: call-ctor-dtor
 Author: if1live
-Summary: C++에서 생성자/소멸자 강제로 호출하는 방법
+subtitle: C++에서 생성자/소멸자 강제로 호출하는 방법
 Date: 2012-11-26
 
 ## 개요 

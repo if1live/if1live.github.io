@@ -5,7 +5,7 @@
 :tags: oculus
 :slug: oculus-2014-predict-trend
 :author: if1live
-:summary: 내 멋대로 생각한 OculusRift 2014년 트렌드
+:subtitle: 내 멋대로 생각한 OculusRift 2014년 트렌드
 
 개요
 ########################
