@@ -32,10 +32,12 @@ ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
 
 # Blogroll
 LINKS = (('shipduck', 'http://github.com/shipduck'),)
+
+# Social widget
 SOCIAL = (('Twitter', 'http://twitter.com/if1live'),
 		('GitHub', 'http://github.com/if1live'),)
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
@@ -76,4 +78,3 @@ SITE_DESCRIPTION = u'libsora.so'
 SITESUBTITLE = ''
 SITE_LICENSE = ''
 RECENT_ARTICLES_COUNT = 10
-COMMENTS_INTRO = u"So what do you think? Did I miss something? Is any part unclear? Leave your comments below."
