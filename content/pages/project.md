@@ -4,6 +4,9 @@ title:Project
 
 ## Project
 
+### [wireless latency benchmark](https://github.com/if1live/wireless-latency-benchmark)
+wifi/bluetooth latency benchmark
+
 ### [pelican-sora](https://github.com/if1live/pelican-sora)
 Responsive Theme for Pelican. Theme of this blog. 
 
