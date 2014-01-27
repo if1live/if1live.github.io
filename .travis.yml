@@ -13,6 +13,5 @@ install:
   - npm install -g less
   
 script:
-  - echo $GH_TOKEN
   - make github_external
   
