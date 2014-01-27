@@ -38,6 +38,7 @@ help:
 	@echo '   ftp_upload                       upload the web site via FTP        '
 	@echo '   s3_upload                        upload the web site via S3         '
 	@echo '   github                           upload the web site via gh-pages   '
+	@echo '   github_external                  upload the web site via other repo '
 	@echo '                                                                       '
 
 
@@ -84,5 +85,12 @@ s3_upload: publish
 github: publish
 	ghp-import $(OUTPUTDIR)
 	git push origin gh-pages
+	
+github_external: publish
+	git config --global user.email "libsora25@gmail.com"
+	git config --global user.name "Travis"
+	cd output;	\
+	git commit -m "add new site content";	\
+	git push origin master > /dev/null
 
-.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github
+.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github github_external

@@ -8,4 +8,5 @@ install:
   - npm install -g less
   
 script:
-  - make publish
+  - make github_external
+  
