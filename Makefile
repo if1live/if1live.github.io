@@ -92,6 +92,6 @@ github_external: publish
 	cd output;	\
 	git add -f .;	\
 	git commit -a -m "add new site content";	\
-	git push origin master
+	git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github github_external
