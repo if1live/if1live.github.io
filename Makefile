@@ -90,7 +90,8 @@ github_external: publish
 	git config --global user.email "libsora25@gmail.com"
 	git config --global user.name "Travis"
 	cd output;	\
-	git commit -m "add new site content";	\
-	git push origin master > /dev/null
+	git add -f .;	\
+	git commit -a -m "add new site content";	\
+	git push origin master
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github github_external
