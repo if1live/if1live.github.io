@@ -1,2 +1,4 @@
 pelican==3.3
 markdown
+beautifulsoup4
+webassets
