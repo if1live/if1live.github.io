@@ -1,6 +1,3 @@
-[submodule "ext/pelican-plugins"]
-	path = ext/pelican-plugins
-	url = https://github.com/if1live/pelican-plugins.git
 [submodule "output"]
 	path = output
 	url = https://github.com/if1live/if1live.github.io.git
