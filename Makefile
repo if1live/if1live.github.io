@@ -90,6 +90,7 @@ github_external: publish
 	git config --global user.email "libsora25@gmail.com"
 	git config --global user.name "Travis"
 	cd output;	\
+	git pull origin master;	\
 	git checkout master;	\
 	git add -f .;	\
 	git commit -a -m "add new site content";	\
