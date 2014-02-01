@@ -100,6 +100,6 @@ github_external:
 	git commit -a -m "add new site content"
 	export COMMIT_RETCODE=$?
 	cd output;	\
-	test $COMMIT_RETCODE -eq "0" && git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quite
+	test $$COMMIT_RETCODE -eq "0" && git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quite
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github github_external
