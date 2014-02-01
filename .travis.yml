@@ -5,7 +5,7 @@ python:
   
 env:
   global:
-    - secure: "SIZXVDXBhRMYD+F2dSr81kJ1s8GQS7AOSW1XTxgGcUb/8zE497J2RcSJFXha0jNY0uG28wWP2GIzIefpd74OIbMXb98JXYNjeE3NfrsSQjyunIZz0As+mFNFAWy5W9GRYmNRxiMNit4EAzofsXQ7lHdrl9o4Ythz2pvEnPgv6zw="
+    - secure: "kOmUz0WBkmQAW5EUp3rZBBbiKQ5dElFixmdJelnuMU4sgmDbMgx8RYf+3zuK9agT0wS8B7jd2K14o41w7ApMoxN8PS45sbYHH19YcBeiMblLnx+0rppOK1eMcXU4oypEA2RHQ/5F3KdJzE0IopxrF5vFbCID1Y5Xq30pgP8A8P0="
 
 
 install:
