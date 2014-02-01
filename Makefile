@@ -98,7 +98,7 @@ github_external:
 	cd output;	\
 	git add -f .;	\
 	git commit -a -m "add new site content"
-	export COMMIT_RETCODE=$?
+	export COMMIT_RETCODE=$$?
 	cd output;	\
 	test $$COMMIT_RETCODE -eq "0" && git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quite
 
