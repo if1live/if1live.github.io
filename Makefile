@@ -86,13 +86,16 @@ github: publish
 	ghp-import $(OUTPUTDIR)
 	git push origin gh-pages
 	
-github_external: publish
+github_external: 
 	git config --global user.email "libsora25@gmail.com"
 	git config --global user.name "Travis"
 	cd output;	\
 	git checkout master;	\
 	git pull origin master;	\
-	cp ../CNAME .;	\
+	cd ..;	\
+	make publish;	\
+	cp CNAME output;	\
+	cd output;	\
 	git add -f .;	\
 	git commit -a -m "add new site content";	\
 	git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master
