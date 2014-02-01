@@ -38,7 +38,6 @@ help:
 	@echo '   ftp_upload                       upload the web site via FTP        '
 	@echo '   s3_upload                        upload the web site via S3         '
 	@echo '   github                           upload the web site via gh-pages   '
-	@echo '   github_external                  upload the web site via other repo '
 	@echo '                                                                       '
 
 
@@ -85,19 +84,5 @@ s3_upload: publish
 github: publish
 	ghp-import $(OUTPUTDIR)
 	git push origin gh-pages
-	
-github_external: 
-	git config --global user.email "libsora25@gmail.com"
-	git config --global user.name "Travis"
-	cd output;	\
-	git checkout master;	\
-	git pull origin master;	\
-	cd ..;	\
-	make publish;	\
-	cp CNAME output;	\
-	cd output;	\
-	git add -f .;	\
-	git commit -a -m "add new site content";	\
-	git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quiet
 
-.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github github_external
+.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload github
