@@ -13,19 +13,19 @@ Subtitle: 왜 우리는 IE 7,8때문에 고통받아야 하는가?
 
 테스트한 반응형웹 프레임웍은 내가 평소에 알고있던 것과 [10 Best Responsive HTML5 Frameworks and Tools](10-responsive-framework)에 등장한 프레임웍이다.
 
-* [996 Grid](996grid)
-* [Bootstrap 2](bootstrap2)
-* [Bootstrap 3](bootstrap3)
-* [Pure](pure)
-* [Foundation](foundation)
-* [Skeleton](skeleton)
-* [HTML5 Boilerplate](html5-boilerplate)
-* [HTML Kickstart](html-kickstart)
-* [MontageJS](montagejs)
-* [SproutCore](sproutcore)
-* [Zebra](zebra)
-* [CreateJS](createjs)
-* [Less Framework 4](less-framework)
+* [996 Grid][996grid]
+* [Bootstrap 2][bootstrap2]
+* [Bootstrap 3][bootstrap3]
+* [Pure][pure]
+* [Foundation][foundation]
+* [Skeleton][skeleton]
+* [HTML5 Boilerplate][html5-boilerplate]
+* [HTML Kickstart][html-kickstart]
+* [MontageJS][montagejs]
+* [SproutCore][sproutcore]
+* [Zebra][zebra]
+* [CreateJS][createjs]
+* [Less Framework 4][less-framework]
 
 이 글에서는 위의 프레임웍 각각에 대해서 설명하는것은 다루지 않는다.
 IE 7,8을 지원하는 프레임웍에 한해서만 조금 더 자세하게 다룬다.
@@ -61,11 +61,11 @@ CreateJS           |     |
 Less Framework 4   | o   | o
 
 IE 8은 지원하지만 IE 7은 지원하지 못하는 프레임웍은 몇개 있지만 내 관심밖이니까 제외한다.
-[996 Grid](996grid), [Bootstrap 2](bootstrap2), [Pure](pure), [Skeleton](skeleton), [Less Framework](less-framework) 가 IE 7,8 에서 별 문제없다.
+[996 Grid][996grid], [Bootstrap 2][bootstrap2], [Pure][pure], [Skeleton][skeleton], [Less Framework][less-framework] 가 IE 7,8 에서 별 문제없다.
 
 ## 추가기능
 
-[Bootstrap](bootstrap3)는 나같이 디자인 하나도 모르는 사람이 css속성만 추가해주면 버튼도 예쁘게 나오고 테이블도 예쁘게 나오고 메뉴도 예쁘게 만들어줬다. 반면에 [960 Grid System](960gs)라는 라이브러리의 경우는 레이아웃만 잡아준다.
+[Bootstrap][bootstrap3]는 나같이 디자인 하나도 모르는 사람이 css속성만 추가해주면 버튼도 예쁘게 나오고 테이블도 예쁘게 나오고 메뉴도 예쁘게 만들어줬다. 반면에 [960 Grid System][960gs]라는 라이브러리의 경우는 레이아웃만 잡아준다.
 반응형웹 프레임웩이니까 전부다 레이아웃 관련된 기능은 있을테고 레이아웃을 제외하고 어떤 추가기능이 있는지 정리했다.
 
 Name               | 추가기능
@@ -76,7 +76,7 @@ Pure               | form, button, table, menu
 Skeleton           | button, form
 Less Framework 4   | x
 
-Skeleton의 경우 기능 목록만 보면 Typography가 있지만 해당 기능은 어차피 [Normalize.css](normalize), reset.css와 중복되니 무시했다.
+Skeleton의 경우 기능 목록만 보면 Typography가 있지만 해당 기능은 어차피 [Normalize.css][normalize], reset.css와 중복되니 무시했다.
 추가기능 목록을 보면 Bootstrap 2가 제일 많다. 996 Grid와 Less Framework 4는 레이아웃 잡는게 전부다.
 
 
@@ -208,27 +208,27 @@ body {
 
 조사한 범위에서 IE 7,8 까지 제대로 지원하는 반응형웹 프레임웍은 다음과 같다.
 
-* [996 Grid](996grid)
-* [Bootstrap 2](bootstrap2)
-* [Pure](pure)
-* [Skeleton](skeleton)
-* [Less Framework 4](less-framework)
+* [996 Grid][996grid]
+* [Bootstrap 2][bootstrap2]
+* [Pure][pure]
+* [Skeleton][skeleton]
+* [Less Framework 4][less-framework]
 
-[Bootstrap 2](bootstrap2)의 경우는 유지보수가 끊겨서 추천하지 않는다.
+[Bootstrap 2][bootstrap2]의 경우는 유지보수가 끊겨서 추천하지 않는다.
 
-[996 Grid](996grid), [Less Framework 4](less-framework)은 레이아웃만 잡아준다.
+[996 Grid][996grid], [Less Framework 4][less-framework]은 레이아웃만 잡아준다.
 추가기능은 없으니 다른 CSS 라이브러리를 집어넣었을때 충돌할 가능성이 적다는 장점이 있다.
 반응형웹 디자인으로 레이아웃 잡는 기능만으로 충분하면 추천한다.
 
-[Skeleton](skeleton)은 약간의 추가기능이 있지만 없어도 티 안나는 수준이다.
+[Skeleton][skeleton]은 약간의 추가기능이 있지만 없어도 티 안나는 수준이다.
 다만 코딩 스타일(숫자를 영어로 써야한다)이 영어 못하면 짜증난다.
 ```.container .eleven.columns```에서 ```.container .eight.columns```으로 고치는게 쉬울까?
 ```.grid_11```에서 ```.grid_8```로 바꾸는게 쉬울까?
 
-[Pure](pure)는 지속적으로 유지보수 되고있고 추가기능도 많다.
+[Pure][pure]는 지속적으로 유지보수 되고있고 추가기능도 많다.
 다만, 반응형웹을 픽셀이 아니라 %로 구현해서 배너와 같은 이미지를 깨끗하게 만들이 어려울 수 있다.
 
-그리고 내 경우는 실제 프로젝트에서 [Pure](pure)를 써봤는데 폭크기 조절이 %라는 단점때문에 다음에 뭘 만들면 [996 Grid](996grid)를 써볼 생각이다.
+그리고 내 경우는 실제 프로젝트에서 [Pure][pure]를 써봤는데 폭크기 조절이 %라는 단점때문에 다음에 뭘 만들면 [996 Grid][996grid]를 써볼 생각이다.
 
 
 [10-responsive-framework]: http://designinstruct.com/roundups/html5-frameworks/
