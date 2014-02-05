@@ -1,4 +1,4 @@
-Title: 한국형 반응형 웹프레임웍을 찾아서
+Title: 한국형 반응형웹 프레임웍을 찾아서
 Tags: ie7, ie8, ie, responsive web
 Slug: ie7-responsive-web-framework
 Author: if1live
