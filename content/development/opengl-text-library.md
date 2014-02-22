@@ -4,8 +4,8 @@ Slug: opengl-text-library
 Author: if1live
 Date: 2013-04-17
 
-OpenGL 자체에는 텍스트 출력 관련된 함수가 없다. 근데 개발과정, 디버깅의 용도로 텍스트 출력이 있었으면 한다. 
-glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 사용하면 된다. 
+OpenGL 자체에는 텍스트 출력 관련된 함수가 없다. 근데 개발과정, 디버깅의 용도로 텍스트 출력이 있었으면 한다.
+glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 사용하면 된다.
 하지만 나는 glut를 안쓴다. 혹은 glut를 사용할수 없는 환경(예를 들면 OpenGLES)의 경우에는 어떻게 하면될까?
 이 때 선택할 수 있는 방법과 내가 선택한 방법 및 간단하게 만들어본 라이브러리에 대해서 써봣다.
 
@@ -14,7 +14,7 @@ glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 
 * 될수있는한 간단하게 만든다
     * 소스를 복붙하는것만으로도 다른 프로젝트에 사용할 수 있으면 좋겠다
     * cpp/h 딱 2개의 파일만 있으면 좋겟다. 파일이 많아지면 복붙해서 관리하기 귀찮다
-* 외부 라이브러리 의존성을 최소한으로 줄인다. 
+* 외부 라이브러리 의존성을 최소한으로 줄인다.
     * 개발/디버깅 용도라면 엔진의 밑바닥에 가까운 레이어이다. 낮은 레이어 주제에 외부 라이브러리에 너무 많이 의존하면 다른 프로젝트에 복붙만으로 재사용하기 어렵다.
 	* 외부라이브러기 붙으면 linking 신경쓰기 귀찮다
 * ASCII만 잘 나오면 된다
@@ -31,9 +31,9 @@ glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 
 단점은 글자가 못생겼다는 점(...)과 글자를 그리느라 생각보다 많은 성능을 까먹을 가능성이 있다.
 
 ### 구현 참고 자료
-글자를 그리기 위한 데이터로 [FreeGLUT][freeglut]를 사용해서 구현해본 적이 있다. 
+글자를 그리기 위한 데이터로 [FreeGLUT][freeglut]를 사용해서 구현해본 적이 있다.
 아래 3개의 소스를 잘 복붙하면 만들 수 있다.
-나한테는 위의 단점이 크게 느껴져서 한번 해보고 버린 방법이다. 
+나한테는 위의 단점이 크게 느껴져서 한번 해보고 버린 방법이다.
 
 * [fg_font.c][freeglut_func]
 * [fg_stroke_roman.c][freeglut_stroke_roman]
@@ -43,35 +43,35 @@ glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 
 
 [FTGLES][ftgles]같은 라이브러리를 통해 TTF폰트를 로딩해서 적절히 렌더링한다.
 
-장점은 어떤크기의 폰트라도 대응할수 있다는 점과 영어 이외의 문자(한글, 일본어, 한자...)도 문제없이 처리할 수 있다는거다. 
+장점은 어떤크기의 폰트라도 대응할수 있다는 점과 영어 이외의 문자(한글, 일본어, 한자...)도 문제없이 처리할 수 있다는거다.
 
-단점은 외부 라이브러리를 붙여야된다는 점과 폰트파일이 필요하다는거다. 
+단점은 외부 라이브러리를 붙여야된다는 점과 폰트파일이 필요하다는거다.
 
 개발초기의 간단한 도구로써 사용하기(예를 들면 FPS/카메라 위치/객체위치 같은 디버깅 정보출력)에는 좀 무리가 있을거 같아서 방법은 채택하지 않았다.
 
 ## Bitmap Font (BMP / PNG / ..)
 
-비트맵 폰트 이미지 파일을 텍스쳐로 로딩하고 이것을 적절히 렌더링하는 방법이다. 자세한 설명은 [NEHE Bitmap Fonts][nehe_bitmap_font]를 참고하자. 
+비트맵 폰트 이미지 파일을 텍스쳐로 로딩하고 이것을 적절히 렌더링하는 방법이다. 자세한 설명은 [NEHE Bitmap Fonts][nehe_bitmap_font]를 참고하자.
 
-장점은 ttf로딩보다는 구조가 단순하다는거다. 
+장점은 ttf로딩보다는 구조가 단순하다는거다.
 
 단점은 이미지 로딩 라이브러리와 비트맵 폰트 이미지가 필요하다는거다. 경로설정 잘못하고 실행하면 이미지파일 못찾는다고 궁시렁대니까 좀 귀찮다. 더 단순한 구조면 좋겟다.
 
 ## C Array
 
-이미지를 매우 간단하게 생각하면 픽셀 데이터 배열이다. 
+이미지를 매우 간단하게 생각하면 픽셀 데이터 배열이다.
 그렇다면 이를 C배열로 만들어서 코드에 때려박으면 추가적인 의존성 없이 그냥 갖다쓸 수 있지 않을까?
-이런 생각을 가지고 예전에 찾은 헤더파일 하나로 사용할 수 있는 라이센스가 자유로운 폰트로 [Vincent Font][vincent]라는게 있더라. 
+이런 생각을 가지고 예전에 찾은 헤더파일 하나로 사용할 수 있는 라이센스가 자유로운 폰트로 [Vincent Font][vincent]라는게 있더라.
 
 Vincent Font는 대충 이런느낌으로 생겼다.
 
 ![vincent](|filename|../static/opengl-text-library/vincent.png)
 
 
-작년부터 이 폰트를 가지고 잘 썻는데 폰트의 크기가 8*8 밖에 안되서 너무 작은거같더라. 
+작년부터 이 폰트를 가지고 잘 썻는데 폰트의 크기가 8*8 밖에 안되서 너무 작은거같더라.
 게다가 폰트가 은근히 가독성이 떨어지고..
 
-그래서 며칠전부터 다른 대안을 찾던 중에 [AntTweakBar][anttweakbar]라는걸 발견했다. 
+그래서 며칠전부터 다른 대안을 찾던 중에 [AntTweakBar][anttweakbar]라는걸 발견했다.
 소스를 까보니까 폰트 배열이 있더라. 그리고 가독성이 괜찮더라.
 그래서 [AntTweakBar][anttweakbar] 라이브러리에서 폰트부분만 잘라내고 API를 적당히 손봐서 간단한 라이브러리를 만들어봤다.
 
@@ -95,7 +95,6 @@ Vincent Font는 대충 이런느낌으로 생겼다.
 
 적당히 만들어본 라이브러리이다.
 
-* [Exe and Source](|filename|../static/opengl-text-library/text_label.zip)
 * [Repo][textlabel_repo]
 
 
@@ -159,5 +158,5 @@ g_fontDevice->Set2D(kCoordLeftBottom);
 [anttweakbar]: http://anttweakbar.sourceforge.net/doc/
 [vincent]: http://forum.osdev.org/viewtopic.php?f=2&t=22033
 [glutstroke_img_ref]: http://sol.cs.hm.edu/rs/jogl-primer/slide0006.html
-[textlabel_repo]: https://github.com/if1live/if1live.github.com.src/tree/master/text_label
+[textlabel_repo]: https://github.com/if1live/libsora.so-src/tree/master/text_label
 [nehe_bitmap_font]: http://nehe.gamedev.net/tutorial/bitmap_fonts/17002/

@@ -24,7 +24,6 @@ glut에는 Cube / Sphere / Cone / Teapot...등을 렌더링할 수 있는 함수
 
 ## Exe / Source / Repo
 
-* [Exe and Source](|filename|../static/simple-mesh/simple-mesh.zip)
 * [Repo][repo]
 
 ## Demo
@@ -68,5 +67,5 @@ Draw(solid_cube_mesh);
 ## Resource
 * [Qualcomm Teapot Source][teapot_data]
 
-[repo]: https://github.com/if1live/if1live.github.com.src/tree/master/simple-mesh
+[repo]: https://github.com/if1live/libsora.so-src/tree/master/simple_mesh
 [teapot_data]: https://code.google.com/p/virtualwimbledonpro/source/browse/jni/Teapot.h?r=9448d1cb72c71b4addf77c4afcce6fa6f671fd2e

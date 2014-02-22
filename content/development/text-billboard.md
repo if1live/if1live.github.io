@@ -6,7 +6,7 @@ Date: 2013-04-21
 
 ![screen shot](|filename|../static/text-billboard/screenshot.png)
 
-디버깅 용도(예를 들면, 물체의 좌표값, 게임객체의 상태등을 표시)로 3차원 공간상에 2차원 객체(텍스트 포함)를 그냥 출력하고 싶다. 이렇게 사용하기 위해서는 세가지 조건을 만족해야한다. 
+디버깅 용도(예를 들면, 물체의 좌표값, 게임객체의 상태등을 표시)로 3차원 공간상에 2차원 객체(텍스트 포함)를 그냥 출력하고 싶다. 이렇게 사용하기 위해서는 세가지 조건을 만족해야한다.
 
 첫번째는 카메라의 위치가 달라지더라도 빌보드처럼 기울어지지 않아야한다. 카메라 방향따라서 텍스트 방향이 달라지면 기울어지거나 뒤집때도 있을텐데 이걸 어떻게 읽을 수 있겠는가?
 
@@ -17,13 +17,12 @@ Date: 2013-04-21
 이를 적절히 구현한 예제소스를 정리해서 공개한다.
 
 ## Exe / Source / Repo
-* [Exe and Source](|filename|../static/text-billboard/text-billboard.zip)
 * [Repo][repo]
 
 ## 설명
 
 ### 준비사항
-* Projection / View / Model Matrix를 적절히 관리한다. 좌표계산이 이것이 필요하다. 
+* Projection / View / Model Matrix를 적절히 관리한다. 좌표계산이 이것이 필요하다.
 행렬을 따로 관리하지 않고 고정파이프라인 함수호출로 바로 사용한 경우, ```glGetFloatv(GL_PROJECTION_MATRIX, Persmatrix); glGetFloatv(GL_MODELVIEW_MATRIX, MVmatrix);```를 통해서 행렬을 얻어올수 있지만, 속도가 많이 느려지기 때문에 추천하지 않는다
 
 ### 단계별 설명
@@ -35,7 +34,7 @@ Date: 2013-04-21
 
 4. OpenGL 좌표계는 화면에서 나오는 방향이 +Z이다. 그런데 Projection 좌표계에서는 화면에서 나오는 방향이 -Z이다. OpenGL 좌표계를 가지고 2차원 객체를 렌더링할거니까 z값을 뒤집는다
 
-5. Projection 좌표계에서 보여질 영역은 x=-1~+1, y=-1~+1, z=-1~+1이다. 하지만 2차원 객체는 x=0~ScreenWidth, y=0~ScreenHeight의 영역에서 렌더링한다. (그래야 2차원 객체의 크기를 픽셀좌표계로 맞출수있으니까) z값의 경우는 ortho의 NearZ와 FarZ만 -1~1로 Projection 좌표계와 동일한 범위로 유지시켜주면 건드릴 필요 없다. 
+5. Projection 좌표계에서 보여질 영역은 x=-1~+1, y=-1~+1, z=-1~+1이다. 하지만 2차원 객체는 x=0~ScreenWidth, y=0~ScreenHeight의 영역에서 렌더링한다. (그래야 2차원 객체의 크기를 픽셀좌표계로 맞출수있으니까) z값의 경우는 ortho의 NearZ와 FarZ만 -1~1로 Projection 좌표계와 동일한 범위로 유지시켜주면 건드릴 필요 없다.
 
 6. 계산된 Projection Matrix / 좌표는 다음과 같다. 이를 이용해서 적절히 렌더링하면 된다
 
@@ -50,18 +49,18 @@ Date: 2013-04-21
 	* pos_x = (x + 1) * 0.5 * ScreenWidth
 	* pos_y = (y + 1) * 0.5 * screenHeight
 	* pos_z = z
-	
+
 
 ## 구현 핵심 코드
 ```cpp
 void RenderBillboardLabel(haruna::gl::Label &label, float x, float y, float z)
-{	
+{
 	mat4 mvp = g_proj_mat * g_view_mat * g_model_mat;
-	
+
 	//billboard 같은 느낌으로 글자 쓰기
 	//기울어지는거 없이 항상 글자가 뜨도록 적절히 만들기
 	// rendering pipeline통과 후 좌표값
-	vec4 cliping_pos = mvp * vec4(x, y, z, 1);  
+	vec4 cliping_pos = mvp * vec4(x, y, z, 1);
 	cliping_pos /= cliping_pos.w;
 	cliping_pos.z = -cliping_pos.z; //보정된 좌표계는 z방향 다르다
 
@@ -79,7 +78,7 @@ void RenderBillboardLabel(haruna::gl::Label &label, float x, float y, float z)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(win_coord.x, win_coord.y, win_coord.z);
-	
+
 	glVertexPointer(2, GL_FLOAT, sizeof(FontVertex), &label.vertex_list()[0].p);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(FontVertex), &label.vertex_list()[0].uv);
 	glDrawElements(GL_TRIANGLES, label.index_count(), GL_UNSIGNED_SHORT, label.index_data());
@@ -98,4 +97,4 @@ void RenderBillboardLabel(haruna::gl::Label &label, float x, float y, float z)
 }
 ```
 
-[repo]: https://github.com/if1live/if1live.github.com.src/tree/master/text-billboard
+[repo]: https://github.com/if1live/libsora.so-src/tree/master/text_billboard
