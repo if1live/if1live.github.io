@@ -16,7 +16,7 @@ Date: 2013-04-21
 
 이를 적절히 구현한 예제소스를 정리해서 공개한다.
 
-## Exe / Source / Repo
+## Repo
 * [Repo][repo]
 
 ## 설명

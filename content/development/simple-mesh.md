@@ -22,7 +22,7 @@ glut에는 Cube / Sphere / Cone / Teapot...등을 렌더링할 수 있는 함수
 
 모델을 렌더링하는데 필요한 Vertex List, Index List를 계산해준다. 원래 GLES에서 작업하던 코드라서 렌더링하는 함수는 따로 없다. 예제코드를 참고해서 쓰면 별 문제 없을 것이다.
 
-## Exe / Source / Repo
+## Repo
 
 * [Repo][repo]
 
