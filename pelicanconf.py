@@ -89,4 +89,4 @@ TWITTER_CARD_SITE = '@if1live'  # The site's Twitter handle like @my_blog
 TWITTER_CARD_SITE_ID = ''  # The site's Twitter ID
 TWITTER_CARD_CREATOR = ''  # Your twitter handle like @monkmartinez
 TWITTER_CARD_CREATOR_ID = ''  # The site creator's id
-GRAVATAR_URL = 'https://gravatar.com/libsora'
+GRAVATAR_URL = ''
