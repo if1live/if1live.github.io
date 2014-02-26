@@ -44,7 +44,7 @@ RELATIVE_URLS = True
 
 PLUGIN_PATH = 'ext/pelican-plugins'
 
-		
+
 THEME = 'ext/pelican-sora'
 
 # attributes for pelican-sora
@@ -54,7 +54,7 @@ PLUGINS = [
 	'related_posts',
     'assets',
     ]
-	
+
 DIRECT_TEMPLATES = (('index', 'tags', 'categories','archives', 'search', '404'))
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
 STATIC_PATHS = ['theme/images', 'images', 'static']
@@ -78,3 +78,15 @@ SITE_DESCRIPTION = u'libsora.so'
 SITESUBTITLE = ''
 SITE_LICENSE = ''
 RECENT_ARTICLES_COUNT = 10
+
+#=============
+# Twitter Card
+#=============
+# https://dev.twitter.com/cards
+# http://michaelmartinez.in/twitter-card-plugin-for-pelican.html
+TWITTER_CARD_USE = (True) # (False)
+TWITTER_CARD_SITE = '@if1live'  # The site's Twitter handle like @my_blog
+TWITTER_CARD_SITE_ID = ''  # The site's Twitter ID
+TWITTER_CARD_CREATOR = ''  # Your twitter handle like @monkmartinez
+TWITTER_CARD_CREATOR_ID = ''  # The site creator's id
+GRAVATAR_URL = 'https://gravatar.com/libsora'
