@@ -1,3 +1,6 @@
 [submodule "ext/pelican-sora"]
 	path = ext/pelican-sora
 	url = https://github.com/if1live/pelican-sora.git
+[submodule "ext/pelican-plugins"]
+	path = ext/pelican-plugins
+	url = https://github.com/if1live/pelican-plugins.git
