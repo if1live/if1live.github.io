@@ -33,7 +33,7 @@ output/*
 
 _blog/venv/*
 
-.*
+.venv
 */.webassets-cache/*
 
 # Compiled Object files
