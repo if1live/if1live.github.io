@@ -55,7 +55,7 @@ Desktop 18783
 Tablet  1283
 ======= ======
 
-.. image:: |filename|../static/trade-my-info-ga/mobile-desktop.png
+.. image:: {filename}/static/trade-my-info-ga/mobile-desktop.png
 
 모바일의 숫자가 데탑보다 더 많다. 타블렛은 아직 5%정도 수준이다.
 모바일을 모바일+타블렛으로 취급하면 모바일:데스크탑은 55:45 정도이다.
@@ -76,7 +76,7 @@ Firefox   1069
 Opera     116
 ========= =====
 
-.. image:: |filename|../static/trade-my-info-ga/desktop-browser.png
+.. image:: {filename}/static/trade-my-info-ga/desktop-browser.png
 
 
 크롬이 생각이상으로 잘 나간다. 크롬이 너무 높아서 모바일 크롬과 데스크탑 크롬이 섞여 나오는거같은 기분이 들지만 저거 맞다. (크롬 전체 사용자는 15761이고 그중에서 데스크탑이 11490, 모바일이 4271이다.)
@@ -98,7 +98,7 @@ IE 사용자수	desktop 비율
 11 999      5.32
 == ======== ============
 
-.. image:: |filename|../static/trade-my-info-ga/ie.png
+.. image:: {filename}/static/trade-my-info-ga/ie.png
 
 IE7, 8의 사용자가 제일 많다.
 분명히 마소에서 IE7 강제업데이트를 시켰음에도 IE7의 비율이 제일 높다.
@@ -124,7 +124,7 @@ Naver    361
 Google+  243
 ======== =====
 
-.. image:: |filename|../static/trade-my-info-ga/social-chart.png
+.. image:: {filename}/static/trade-my-info-ga/social-chart.png
 
 페이스북의 사용자가 제일 많다. 역시 Facebook!
 Twitter를 통한 유입도 꽤 많다. 최초 유포경로가 트위터인게 한몫했겠지만 그래도 트위터 유저수는 많은거 같다.

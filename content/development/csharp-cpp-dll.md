@@ -5,10 +5,10 @@ Date: 2013-02-12
 Author: if1live
 
 ## 개요
-C#에서 C++ dll을 사용하기 위해서는 pinvoke(platform invoke)를 사용하면 된다. 아래의 내용은 사용법에 대한 간단한 정리이다. 내용 생략하고 [Sample](|filename|../static/csharp-cpp-dll/glcombinesample.zip) 를 받아도 된다.
+C#에서 C++ dll을 사용하기 위해서는 pinvoke(platform invoke)를 사용하면 된다. 아래의 내용은 사용법에 대한 간단한 정리이다. 내용 생략하고 [Sample]({filename}../static/csharp-cpp-dll/glcombinesample.zip) 를 받아도 된다.
 
-## C++ 
-### h 
+## C++
+### h
 ```cpp
 // Ŭnicode please
 #pragma once
@@ -36,7 +36,7 @@ extern "C" __declspec(dllexport) void   OnTest5(int *intTemp);  //입출력 배�
 * C#쪽에서 구조체를 구성하는것은 메모리 구조만 맞추면 되니까 네임스페이스건 뭐건 잇건 없건 큰 문제가 없다
 * dll 인터페이스로 만들기 위해서 ```extern "C" __declspec(dllexport)```를 함수에 넣어준다
 
-### cpp 
+### cpp
 ```cpp
 // Ŭnicode please
 #include "sample.h"
@@ -86,7 +86,7 @@ void OnTest5(int *intTemp)
 }
 ```
 
-## C\# 
+## C\#
 ### 구조체
 ```csharp
 public struct typeTest
@@ -108,16 +108,16 @@ public struct typeTest
 ```csharp
 [DllImport("dll_sample.dll")]
 extern public static void OnTest1();
-	
+
 [DllImport("dll_sample.dll", CallingConvention = CallingConvention.Cdecl)]
 extern public static int intOnTest2(int intTemp);
-	
+
 [DllImport("dll_sample.dll", CharSet = CharSet.Ansi)]
 extern public static IntPtr strOnTest3();
 
 [DllImport("dll_sample.dll", CallingConvention = CallingConvention.Cdecl)]
 extern public static void OnTest4(ref typeTest testTemp);
-	
+
 [DllImport("dll_sample.dll", CallingConvention = CallingConvention.Cdecl)]
 extern public static void OnTest5(int[] intTemp);
 ```

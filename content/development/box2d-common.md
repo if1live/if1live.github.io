@@ -30,7 +30,7 @@ quake3 이후로 계속 많이 쓰인다는 [Fast Inverse square root](http://en
 
 
 
-### IsValid 
+### IsValid
 ```cpp
 /// This function is used to ensure that a floating point number is
 /// not a NaN or infinity.
@@ -52,7 +52,7 @@ NaN이건 INF이건 둘다 못쓰는 숫자니까 함수 하나로 동시에 검
 ### etc
 box2d 안에서 사용하는 행렬 클래스는 열 우선이다. (opengl과 동일한 배치). 다음과 같은 식으로 매칭된다. 행렬은 내부에 데이터로 배열 자체를 가지는게 아니라 벡터를 가진다. 이렇게하면 행벡터를 바로 얻을수잇으니까 일부 연산은 더 간단해진다.
 
-  | 
+  |
 ------------- | -------------
 a11=ex.x      | a12=ey.x
 a21=ex.y      | a22=ey.y
@@ -81,8 +81,8 @@ struct b2Version
 ```
 
 ## 자료구조
-* [BlockAllocator](|filename|box2d-block-allocator.md) 참고
-* [StackAllocator](|filename|box2d-stack-allocator.md) 참고
+* [BlockAllocator]({filename}box2d-block-allocator.md) 참고
+* [StackAllocator]({filename}box2d-stack-allocator.md) 참고
 * GrowableStack
 
 ```cpp

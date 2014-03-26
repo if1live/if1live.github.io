@@ -50,11 +50,15 @@ THEME = 'ext/pelican-sora'
 
 # attributes for pelican-sora
 PLUGINS = [
-	'tipue_search',
-	'sitemap',
-	'related_posts',
+    'tipue_search',
+    'sitemap',
+    'related_posts',
     'assets',
-    ]
+    'code_include',
+    'html_rst_directive',
+    'pelican_youtube',
+#    'better_figures_and_images',
+]
 
 DIRECT_TEMPLATES = (('index', 'tags', 'categories','archives', 'search', '404'))
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']

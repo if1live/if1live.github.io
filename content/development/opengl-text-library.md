@@ -24,7 +24,7 @@ glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 
 
 펜으로 글자를 쓰듯이 글자를 그리는거다. 대충 아래 같은 느낌이다.
 
-![glutStrokeString](|filename|../static/opengl-text-library/glutstroke.png)
+![glutStrokeString]({filename}/static/opengl-text-library/glutstroke.png)
 
 장점은 구조가 단순하다는거다. 그냥 GL에서 선 렌더링하는게 전부니까.
 
@@ -65,7 +65,7 @@ glut기반으로 개발하고 있다면 glutStrokeString / glutBitmapString 를 
 
 Vincent Font는 대충 이런느낌으로 생겼다.
 
-![vincent](|filename|../static/opengl-text-library/vincent.png)
+![vincent]({filename}/static/opengl-text-library/vincent.png)
 
 
 작년부터 이 폰트를 가지고 잘 썻는데 폰트의 크기가 8*8 밖에 안되서 너무 작은거같더라.
@@ -77,19 +77,19 @@ Vincent Font는 대충 이런느낌으로 생겼다.
 
 ### AntTweakBar 작은 폰트
 
-![small font](|filename|../static/opengl-text-library/small.png)
+![small font]({filename}/static/opengl-text-library/small.png)
 
 ### AntTweakBar 중간 폰트
 
-![normal font](|filename|../static/opengl-text-library/normal.png)
+![normal font]({filename}/static/opengl-text-library/normal.png)
 
 ### AntTweakBar 큰 폰트
 
-![large font](|filename|../static/opengl-text-library/large.png)
+![large font]({filename}/static/opengl-text-library/large.png)
 
 ### AntTweakBar 고정폭
 
-![fixed font](|filename|../static/opengl-text-library/fixed.png)
+![fixed font]({filename}/static/opengl-text-library/fixed.png)
 
 ## OpenGL Text Library
 
@@ -98,7 +98,7 @@ Vincent Font는 대충 이런느낌으로 생겼다.
 * [Repo][textlabel_repo]
 
 
-![fixed font](|filename|../static/opengl-text-library/demo.png)
+![fixed font]({filename}/static/opengl-text-library/demo.png)
 
 데모 소스는 대충 이런 느낌이다. (나중에 소스를 고칠수도 있다. [Repo][textlabel_repo]의 실행예제인 main.cpp를 참고하는게 더 나을거다)
 

@@ -5,7 +5,7 @@ Author: if1live
 Date: 2014-02-05
 Subtitle: 왜 우리는 IE 7,8때문에 고통받아야 하는가?
 
-[Trade My Info의 GA 통계](|filename|../etc/trade-my-info-ga.rst)에서 볼 수 있듯이 2014년 2월 기준 우리나라에서 IE 7,8의 사용비율은 데탑유저 중 15%이다. 이를 버리고 차세대 웹으로 가고싶은 마음은 있지만 어쩔수 없이 IE 7,8을 지원해야 하는게 현실이다.
+[Trade My Info의 GA 통계]({filename}../etc/trade-my-info-ga.rst)에서 볼 수 있듯이 2014년 2월 기준 우리나라에서 IE 7,8의 사용비율은 데탑유저 중 15%이다. 이를 버리고 차세대 웹으로 가고싶은 마음은 있지만 어쩔수 없이 IE 7,8을 지원해야 하는게 현실이다.
 
 반응형웹 디자인을 도입하면 데스크탑/모바일 웹디자인을 따로 만들 필요가 없다는 것을 포함해서 여러가지 장점이 있다. 그런데 "반응형웹 디자인은 좋구나!" 하고 도입하려고 하는 순간 한가지 문제가 발생한다. 구형IE에서 깨질 가능성이 높다는 것이다.
 
@@ -167,7 +167,7 @@ Skeleton은 픽셀을 이용한다. (문제는 본격 영어 못하면 못쓰는
 ....
 ```
 
-![잘못된 영어 숫자의 예](|filename|../static/ie7-responsive-web-framework/wrong-english-number.jpg)
+![잘못된 영어 숫자의 예]({filename}/static/ie7-responsive-web-framework/wrong-english-number.jpg)
 
 Less Framework 4의 경우는 요상한 흑마법을 쓰는거같은데 어쨋든 픽셀 기반이다.
 
