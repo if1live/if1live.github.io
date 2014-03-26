@@ -23,3 +23,6 @@ DELETE_OUTPUT_DIRECTORY = False
 DISQUS_SITENAME = "libsora"
 GOOGLE_ANALYTICS = "UA-37862172-2"
 OUTPUT_RETENTION = ['.git', '.gitignore', 'CNAME', 'README.md', 'robots.txt']
+
+# optimize_image slow, use only publish
+PLUGINS += ['optimize_images',]
