@@ -17,6 +17,7 @@ TWITTER_USERNAME = 'if1live'
 
 DISQUS_SITENAME = "libsora"
 GOOGLE_ANALYTICS = "UA-37862172-2"
+DNSEVER_BANNER = True
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
