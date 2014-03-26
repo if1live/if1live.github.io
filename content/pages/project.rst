@@ -1,6 +1,10 @@
 Project
 ===========
 
+.. html::
+   <meta name="gc:client-id" content="785d47c81cbc2fd42b65">
+   <meta name="gc:client-secret" content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7">
+
 User
 ###################
 
