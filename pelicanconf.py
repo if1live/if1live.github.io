@@ -62,6 +62,9 @@ PLUGINS = [
     'html_rst_directive',
     'pelican_youtube',
     'better_figures_and_images',
+
+    # enable w3c validate if py_w3c is fixed
+    #'w3c_validate',
 ]
 
 DIRECT_TEMPLATES = (('index', 'tags', 'categories','archives', 'search', '404'))
