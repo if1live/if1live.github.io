@@ -33,9 +33,15 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 2. \?\?\?\?
 3. PROFIT!
 
-gorilla_ 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 떄문이다. gorilla-video_
+gorilla_ 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 때문이다.
 
-샘플를 적절히 손봐서 만들어봤다. demo-video_
+.. youtube:: e78Hfo5rIyU
+
+
+샘플를 적절히 손봐서 만들어봤다.
+
+.. youtube:: -8AOYWkNz1Y
+
 
 .. image:: {filename}/static/oculus-interactive-surface-1/screenshot-normal.jpg
 	:target: demo-video_
@@ -102,7 +108,5 @@ p.s. 이미 DOOM3:BFG Edition이 있어서 둠3를 오큘러스로 해봤었지.
 
 .. _fully-interactive-surfaces-in-doom3: http://battleteam.net/tech/fis/docs/index.html
 .. _repo: https://github.com/shipduck/kuuko/tree/79bb2957d2923571e51a8ef198937828b8f0a365
-.. _gorilla-video: http://www.youtube.com/watch?feature=player_embedded&v=e78Hfo5rIyU
-.. _demo-video: http://youtu.be/-8AOYWkNz1Y
 .. _gorilla: http://www.ogre3d.org/tikiwiki/Gorilla
 .. _release: https://docs.google.com/file/d/0BxRfWUmEuMJxYnI0WTVsUHR1cEU/edit?usp=sharing
