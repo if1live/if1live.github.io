@@ -32,11 +32,15 @@ ARTICLE_URL = 'posts/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
 
 # Blogroll
-LINKS = (('shipduck', 'http://github.com/shipduck'),)
+LINKS = (
+    ('shipduck', 'http://github.com/shipduck'),
+)
 
 # Social widget
-SOCIAL = (('Twitter', 'http://twitter.com/if1live'),
-		('GitHub', 'http://github.com/if1live'),)
+SOCIAL = (
+    ('Twitter', 'http://twitter.com/if1live'),
+    ('GitHub', 'http://github.com/if1live'),
+)
 
 DEFAULT_PAGINATION = False
 
@@ -57,7 +61,7 @@ PLUGINS = [
     'code_include',
     'html_rst_directive',
     'pelican_youtube',
-#    'better_figures_and_images',
+    'better_figures_and_images',
 ]
 
 DIRECT_TEMPLATES = (('index', 'tags', 'categories','archives', 'search', '404'))
@@ -77,6 +81,8 @@ SITEMAP = {
         'pages': 'monthly'
     }
 }
+
+RESPONSIVE_IMAGES = True
 
 # optional attributes for pelican-sora
 SITE_DESCRIPTION = u'libsora.so'
