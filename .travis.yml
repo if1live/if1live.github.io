@@ -12,6 +12,7 @@ before_install:
   - git config --global user.name "Travis"
 
 install:
+  - sudo apt-get install optipng libjpeg-turbo-progs
   - pip install -r requirements.txt
   - npm install -g less
 

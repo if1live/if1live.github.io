@@ -3,6 +3,5 @@ markdown
 beautifulsoup4
 webassets
 pillow
-py_w3c
 docutils
 pelican_youtube
