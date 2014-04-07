@@ -2,7 +2,6 @@ Trade My Info의 GA 통계
 ===================================================
 
 :date: 2014-02-02
-:modified: <a href="https://github.com/if1live/libsora.so/commits/master/content/etc/trade-my-info-ga.rst" title="Revision History" target="_blank">Revision History</a>
 :tags: web, fucking ie3, trade my info, ga
 :slug: trade-my-info-ga
 :author: if1live

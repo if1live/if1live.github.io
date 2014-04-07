@@ -2,15 +2,14 @@ LibOVR에서 찾은 적절한 assert macro
 ================================================
 
 :date: 2013-10-14
-:modified: <a href="https://github.com/if1live/libsora.so/commits/master/content/development/libovr-assert-macro.rst" title="Revision History" target="_blank">Revision History</a>
 :tags: assert, macro
 :slug: libovr-assert-macro
 :author: if1live
 :subtitle: 어지간한 플랫폼에서 잘 굴러가는 assert macro
 
 개발하려면 어쩃든 assert가 있긴 해야겠더라. 근데 기본 assert를 쓰면 callstack 추적하기가 귀찮더라.
-그래서 맨날 간단한 매크로(`int 3 <http://kblog.popekim.com/2011/06/assert-int-3.html>`_) 만들어서 사용했었는데 나중에 알고보니까 해당 매크로는 64비트 환경에서 작동하지 않는다. 남들은 어떻게 하나 찾아보다가 때마침 Oculus SDK를 보게 되었는데 매우 적절하게 있어서 그냥 갖다쓴다. 
-원본 소스는 OVR_Types.h_ 이다. 
+그래서 맨날 간단한 매크로(`int 3 <http://kblog.popekim.com/2011/06/assert-int-3.html>`_) 만들어서 사용했었는데 나중에 알고보니까 해당 매크로는 64비트 환경에서 작동하지 않는다. 남들은 어떻게 하나 찾아보다가 때마침 Oculus SDK를 보게 되었는데 매우 적절하게 있어서 그냥 갖다쓴다.
+원본 소스는 OVR_Types.h_ 이다.
 
 .. code-block:: c
 

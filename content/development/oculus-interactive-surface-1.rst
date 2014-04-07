@@ -35,19 +35,17 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 
 gorilla_ 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 때문이다.
 
+.. image:: {filename}/static/oculus-interactive-surface-1/screenshot-normal.jpg
+
 .. youtube:: e78Hfo5rIyU
 
 
 샘플를 적절히 손봐서 만들어봤다.
 
+.. image:: {filename}/static/oculus-interactive-surface-1/screenshot-oculus.jpg
+
 .. youtube:: -8AOYWkNz1Y
 
-
-.. image:: {filename}/static/oculus-interactive-surface-1/screenshot-normal.jpg
-	:target: demo-video_
-
-.. image:: {filename}/static/oculus-interactive-surface-1/screenshot-oculus.jpg
-	:target: demo-video_
 
 
 사용법

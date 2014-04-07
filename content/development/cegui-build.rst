@@ -2,7 +2,6 @@ Build CEGUI 0.8.2 on Windows + OGRE
 ================================================
 
 :date: 2013-10-09
-:modified: <a href="https://github.com/if1live/libsora.so/commits/master/content/development/cegui-build.rst" title="Revision History" target="_blank">2013/10/10</a>
 :tags: cegui, ogre, build, windows
 :slug: cegui-build
 :author: if1live
@@ -14,7 +13,7 @@ Build CEGUI 0.8.2 on Windows + OGRE
 ####################
 * OGRE 빌드해놓기. 귀찮으면 prebuilt library가 있어도 된다. 오그레으로 샘플 한번이라도 제대로 빌드해봤으면 뭔소리인지 알거다
 * `CEGUI 0.8.2 source <http://cegui.org.uk/download>`_ 에서 받을 수 있다. 문서 작성 시점의 안정버전이 0.8.2 라서 그거 쓴다
-* `Dependencies (Windows / Apple OS X Only) <http://cegui.org.uk/download>`_ 를 받는다. CEGUI는 의존성이 크고 아름답게 걸린 물건이라서 수동으로 관련 라이브러리 하나씩 깔면 미친다. 
+* `Dependencies (Windows / Apple OS X Only) <http://cegui.org.uk/download>`_ 를 받는다. CEGUI는 의존성이 크고 아름답게 걸린 물건이라서 수동으로 관련 라이브러리 하나씩 깔면 미친다.
 * cmake. 왜냐하면 나는 cmake 빠돌이니까
 
 빌드 과정
@@ -23,24 +22,24 @@ Build CEGUI 0.8.2 on Windows + OGRE
 CEGUI Dependencies
 *****************************
 
-cegui-deps-0.8.x-src.zip 압축을 적절히 푼다. 
+cegui-deps-0.8.x-src.zip 압축을 적절히 푼다.
 앞으로는 해당 경로를 **cegui-deps-path** 라고 부른다.
 그리고 cegui-deps-path 안에 build 폴더를 만든다.
 cmake 빌드 결과를 독립폴더로 분리하는건 그냥 개인취향이다(...)
 
-cmake를 사용해서 의존 라이브러리를 빌드할 준비를 한다. cmake gui를 사용했다. 
+cmake를 사용해서 의존 라이브러리를 빌드할 준비를 한다. cmake gui를 사용했다.
 
 * Where is the source code = cegui-deps-path
 * Where to build the binaries = cegui-deps-path/build
 
-configure 돌리고 generate를 돌려준다. 생성된 cegui-deps-path/CEGUI-DEPS.sln을 적절히 빌드해준다. debug, release로 각각 빌드해 주는걸 잊지말자. 빌드가 끝나면 **cegui-deps-path/build/dependencies** 가 생겨있다. 
+configure 돌리고 generate를 돌려준다. 생성된 cegui-deps-path/CEGUI-DEPS.sln을 적절히 빌드해준다. debug, release로 각각 빌드해 주는걸 잊지말자. 빌드가 끝나면 **cegui-deps-path/build/dependencies** 가 생겨있다.
 
 CEGUI
 *****************************
-cegui-0.8.2.zip 압축을 적절히 푼다. 
-앞으로는 해당 경로를 **cegui-path** 라고 부른다. 
+cegui-0.8.2.zip 압축을 적절히 푼다.
+앞으로는 해당 경로를 **cegui-path** 라고 부른다.
 
-cegui-deps를 빌드한 다음에 생긴 **cegui-deps-path/build/dependencies** 를 **cegui-path** 로 복사한다. 
+cegui-deps를 빌드한 다음에 생긴 **cegui-deps-path/build/dependencies** 를 **cegui-path** 로 복사한다.
 
 CEGUI가 OGRE를 지원하도록 빌드하기 위해서는 OGRE의 경로를 알려줘야한다. cmake gui 돌릴떄 변수를 추가해서 돌릴수도 있지만 귀찮은 관계로 cmake 파일 자체를 수정했다.
 
@@ -81,11 +80,11 @@ cegui.sln의 내용을 전부 컴파일한다. 일단 컴파일을 돌리면 아
 	DefaultResourceProvider* rp = CEGUI_NEW_AO CEGUI::DefaultResourceProvider();
 
 다른거는 **error C2001: newline in constant** 이다. 여러곳에서 발생하는데 아무래도 인코딩문제같다. 그냥 포기하고 관련 라인을 날려버리거나 이상해보이는 문자를 그럴싸한 문자로 고치는 식으로 해결했다(...) ::
-	
+
 	//finalText += reinterpret_cast<const encoded_char*>("❚");
 	finalText += reinterpret_cast<const encoded_char*>("-");
 
-	//(encoded_char*)"+ - ? B I W Y f n t.... 
+	//(encoded_char*)"+ - ? B I W Y f n t....
 	(encoded_char*)"EPIC_FAIL"
 
 컴파일이 한번 된다 싶으면 deps떄와 마찬가지로 debug/release 로 돌려준다. **cegui-path/bin** 에 그럴싸해 보이는 exe와 dll이 보이면 성공한거다.
@@ -93,7 +92,7 @@ cegui.sln의 내용을 전부 컴파일한다. 일단 컴파일을 돌리면 아
 예제 실행
 ###########################
 
-vs에서 **CEGUISampleFramework-0.8** 를 바로 실행하려고 하면 dll을 못찾겠다고 안돌아간다. dll 찾는 경로를 적절히 설정해주거나 dll을 실행파일이 있는 위치로 복사해야된다. 
+vs에서 **CEGUISampleFramework-0.8** 를 바로 실행하려고 하면 dll을 못찾겠다고 안돌아간다. dll 찾는 경로를 적절히 설정해주거나 dll을 실행파일이 있는 위치로 복사해야된다.
 
 PATH 환경변수에 다음 경로를 적절히 추가해준다. OgreSDK의 경로는 OgreMain.dll, OgreMain_d.dll 이 존재하는 경로로 알아서 잘 설정한다.
 
