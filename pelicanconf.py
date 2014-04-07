@@ -61,6 +61,7 @@ PLUGINS = [
     'code_include',
     'html_rst_directive',
     'pelican_youtube',
+    'pelican_jsfiddle',
     'better_figures_and_images',
 
     # enable w3c validate if py_w3c is fixed
