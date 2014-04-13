@@ -41,7 +41,7 @@ Demo
 .. jsfiddle:: if1live/V2P28
     :width: 100%
     :height: 150
-    :tabs: js,resources,html,css,result
+    :tabs: js,result
     :skin: presentation
 
 
