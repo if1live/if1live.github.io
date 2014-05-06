@@ -1,0 +1,214 @@
+EZ430-Chronos 개발 후기
+=============================
+
+:tags: ez430
+:slug: ez430-chronos-development-review
+:author: if1live
+:subtitle: EZ430-Chronos 펌웨어 손보면서 배운것
+:date: 2014-05-06
+
+최근에 ez430-chronos_ 를 가지고 놀면서 `나만의 펌웨어`__ 를 만들었다.
+ez430-chronos 갖고 노는걸 끝내기 전에 그동안 삽질했던 경험+교훈을 정리해봤다. (별거 없지만)
+
+
+uint8_t, uint16_t, uint32_t, int8_t, int16_t, int32_t
+-------------------------------------------------------
+일반적인 데스크탑환경, 또는 모바일환경(iOS, Android)에서 프로그래밍할때는 타입을 그렇게 신경쓰지 않았다.
+32비트 환경이고 사양 높고 메모리가 넉넉하니 char를 쓰건 short를 쓰건 int를 쓰건 문제가 안생기니까 신경쓸 필요도 없었다.
+(char=1byte, short=2byte, int=4byte가 아니라는건 알고있지만 일단 무시한다)
+
+하지만 임베디드에서는 이야기가 다르더라.
+남들이 짜놓은 코드를 보니 uint8_t, uint16_t, uint32_t를 골라서 사용하더라.
+단순히 타입만 신경쓴게 아니라 unsigned와 signed까지 구분해서 사용했다.
+8/16/32비트 구분해서 사용한건 MSP430이라는 물건이 하도 성능이 낮아서 그런거 같더라.
+unsigned와 signed는 작은 크기의 타입을 선택했을때 그래도 표현범위를 넓게 쓰려고 그런거같더라.
+
+지금까지 정수는 성능 문제 딱히 없으니까 복잡한걸 피하기 위해서 항상 signed int만 사용했는데 이런거까지 생각하면서 짜니까 신선했다. 덕분에 평소라면 겪지 않았을 문제를 여러가지 겪었는데...
+
+
+Overflow
+--------
+지금까지는 int만 주로 사용했다. 오버플로우가 존재한다는건 당연히 알고있었지만 21억정도의 숫자를 다룰일이 없어서 구경해본적은 거의 없다.
+하지만 임베디드질을 하면서 int를 잘 안쓰다보니 overflow 문제를 당했다.
+
+다음은 openchronos-ng 에 나오는 함수이다.
+
+.. code:: c
+
+	void helpers_loop(uint8_t *value, uint8_t lower, uint8_t upper, int8_t step)
+	{
+		// For now only increase/decrease on steps of 1 value
+		if (step > 0) {
+			// Prevent overflow
+			if (*value == 255) {
+				*value = lower;
+				return;
+			}
+			(*value)++;
+			...
+
+value값을 step만큼 움직이면서 lower~upper안에서 반복하도록 만들어주는 함수이다.
+예를 들면 분을 0~59 사이로 유지시키는데 다음과 같이 쓸 수 있는 함수다. ``helpers_loop(&tmp_mm, 0, 59, step);``
+
+이 함수를 날짜 편집하는데 적용했다.
+생각해보니 month, day는 uint8_t로 표현 가능하지만 year는 2000 이상이잖아?
+그러면서 함수 인자를 uint8_t가 아니라 uint16_t를 써야하잖아?
+게다가 오버플로우 범위도 255가 아니라 65535여야하잖아?
+그래서 ``helpers_loop_16()`` 이라는 함수를 따로 만들어서 사용했다.
+
+
+unsigned의 함정
+---------------
+
+service_display_remain의 타입은 uint8_t이다. 다음과 같은 코드를 짰다.
+
+.. code:: c
+
+	service_display_remain -= 1;
+	if(service_display_remain >= 0) {
+		return 1;
+	}
+	return 2;
+
+어째 return 1; 로 밖에 진입하지 않더라.
+uint8_t는 unsigned잖아? 0에서 1을 빼면 음수가 아니라 underflow가 발생한다. return 2는 도달할 수 없다.
+unsigned 와 >=0 을 동시에 사용하는건 말이 안된다.
+
+- 맨날 signed int만 쓰다보니까 unsigned에 낚였다
+- 컴파일러 워닝을 대충 봤다가 낚였다.
+
+하도 오래동안 high-level 언어만 쓰다보니까 이런 간단한것도 실수하더라.
+
+
+DO NOT TRUST OTHER SOURCE
+-------------------------
+내가 옛날에 만져본 프로젝트는 `OpenChronos에 Google OTP 지원을 붙인 펌웨어`__ 이다.
+그리고 이번에 직접 손댄 펌웨어의 기반은 `openchronos-ng fork`__ 이다.
+
+openchronos-ng 프로젝트가 openchronos 를 뜯어고친것이기도 하고
+두 프로젝트의 otp.c 가 매우 비슷하길래
+openchronos에서도 OTP는 잘 돌아갔으니 openchronos-ng에서도 잘 되겠지?
+라고 생각했으니 그런일은 일어나지 않았다.
+
+대부분의 코드는 동일하지만 OTP로직에 개입하는 코드 딱 한줄이 다르더라.
+
+.. code:: c
+
+	// openchronos
+	#define HMAC_KEY_LENGTH (sizeof(CONFIG_OTP_KEY) - 1)
+
+	// openchronos-ng
+	#define HMAC_KEY_LENGTH 10
+
+새로운 구조로 손보다가 한줄을 까먹고 고치지 않은거같더라.
+하필이면 google OTP의 길이가 20 글자라서 여기에서 문제가 생겼다.
+남들이 손본건 당연히 되던 기능이라고 하더라고 꼭 한번 다시 테스트해보자.
+
+
+Null-terminated string
+----------------------
+
+어쩌다보니까 OTP secret key가 다음과 같은 형태로 나왔다. "\\x12\\x00\\x34". 딱보니까 문자열이네?
+``strlen()`` 을 사용하면 OTP의 길이를 알 수 있을거라고 생각하고 돌려봤으나 예상한 값인 ``3`` 이 아니라 ``1`` 이 나왔다.
+왜냐하면 가운데에 \\x00이 끼어있어서 strlen이 제대로 작동하지 않더라.
+strlen을 돌려보기전에 문자열 중간에 NULL이 끼는지 확인해봐라.
+
+
+Compiled file size
+-----------------------
+openchronos-ng 의 경우는 make로 컴파일하면 펌웨어 크기가 뜬다.
+
+.. code::
+
+	Building build/openchronos.elf as target RELEASE...  [OK]
+	+- Firmware: 13688/32000 bytes.
+
+ez430-chronos의 경우는 메모리가 4K RAM/32K ROM 으로 제한되어있다.
+펌웨어에 너무 많은 기능을 우겨넣어서 32K의 제한을 초과하면 링킹에서 에러가 난다.
+새로운 기능, 함수 만들때마다 firmware 크기 늘어나는거 보고있으니까 기분이 묘하더라.
+
+
+
+Unit Test
+---------
+
+msp430-gcc로 컴파일되던 간단한 소스 예시이다.
+
+.. code:: c
+
+	#include <msp430.h>
+	#include <stdbool.h>
+
+	static void d_day_activate(void) {
+		display_symbol(0, LCD_SEG_L1_COL, SEG_OFF);
+	}
+
+	bool is_leap_year(uint16_t year) {
+		return ((year%4==0) && ((year%100!=0) || (year%400==0)));
+	}
+
+위의 C파일의 ``is_leap_year()`` 함수에 유닛테스트를 붙이고 싶다.
+하지만 유닛테스트를 msp430 위에서 돌리는건 말이 안된다.
+유닛테스트는 PC에서만 돌아가도 되기때문에 msp430-gcc가 아닌 clang을 사용해서 컴파일하고 싶다.
+위의 코드로는 그것이 가능하지 않다.
+
+- msp430.h 는 이름에서 보여지듯이 msp430-gcc를 위한 헤더파일이다. 데스크탑 환경에서는 제대로 굴러가지 않을수 있다.
+- display_symbol 함수는 LCD로 출력하는 함수이다. 당연히 msp430 의존적인 함수일 것이다.
+- LCD_SEG_L1_COL, SEG_OFF 같은 상수는 없다.
+
+만약 위의 문제를 해결할수 있으면 C소스를 데스크탑에서도 컴파일할수 있을테도 유닛테스트를 붙일수 있을것이다. 아래와 같은 코드로 문제를 해결했다.
+
+.. code:: c
+
+	#ifndef TESTING
+	#include <msp430.h>
+	#else
+	#include <assert.h>
+	#include "cc430f6137_testing.h"
+	#endif
+	#include <stdbool.h>
+
+	#ifdef TESTING
+	void display_symbol(uint8_t scr_nr, enum display_segment symbol, enum display_segstate state) {}
+	#endif
+
+	static void d_day_activate(void) {
+		display_symbol(0, LCD_SEG_L1_COL, SEG_OFF);
+	}
+
+	bool is_leap_year(uint16_t year) {
+		return ((year%4==0) && ((year%100!=0) || (year%400==0)));
+	}
+
+	#ifdef TESTING
+	int main(int argc, char **argv) {
+		assert(is_leap_year(2000) == true);
+		return 0;
+	}
+	#endif
+
+- msp430.h에 있는 내용을 복사해서 새로운 헤더파일로 옮긴다. 문제가 생기지 않을 코드만 여기에 남긴다
+- display_symbol을 가짜로 구현한다.
+- 유닛테스트용으로 사용할 main 함수를 만든다.
+
+이런식으로 코드를 잘 구성하면 동일한 소스를 msp430-gcc, clang으로 컴파일하는것이 가능하더라.
+그리고 실제로 내가 손본 부분인 Day counter와 OTP에는 이것이 적용되어있다.
+
+
+정리
+----
+최근에 계속 웹질만 하면서 python, javascript 같은 고급언어만 만지다가 임베디드 장비 갖고놀면서 low-level을 하니까 고급언어에서는 절대로 볼 수 없는 문제와 이슈를 접하게 되었다.
+이것도 이거 나름대로 재밌더라.
+더 깊게 가지고 놀면 재밌는 문제가 많이 보겠지만 ez430-chronos의 본업은 임베디드 장비가 아니라 시계다.
+시계를 차고다녀야 하니까 깊게 삽질을 못하는게 아쉽다.
+다른 시계를 구하기 전까지는 이거 가지고 펌웨어 삽질은 하지 않을거다.
+
+
+.. _ez430-chronos: http://processors.wiki.ti.com/index.php/EZ430-Chronos
+.. _openchronos: https://github.com/qwandor-google/OpenChronos
+.. _openchronos-ng: https://github.com/freespace/openchronos-ng
+.. _my-openchronos-ng: https://github.com/if1live/openchronos-ng
+
+__ my-openchronos-ng_
+__ openchronos_
+__ openchronos-ng_
