@@ -13,11 +13,11 @@ before_install:
 
 install:
   - sudo apt-get install optipng libjpeg-turbo-progs
-  - pip install -r requirements.txt
+  - pip install -r requirements.txt -q
   - npm install -g less
 
 script:
-  - git clone --depth 5 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
+  - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
   - make publish
   - cp CNAME output
 
@@ -25,7 +25,7 @@ after_success:
   - cd output
   - git add -f .
   - git commit -a -m "add new site content"
-  - git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quiet
+  - git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master
 
 branches:
   only:
