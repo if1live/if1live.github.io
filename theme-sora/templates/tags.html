@@ -13,17 +13,15 @@
 <ul class="list-of-tags">
 {% for tag, articles in tags|sort %}
   <li>
-  <a href="#{{ tag|replace(' ', '-')|e }}-ref" class="tag-link">
-  #{{ tag }}
-  </a>
+  <a href="#{{ tag|replace(' ', '-')|e }}-ref" class="tag-link">#{{ tag }}</a>
   </li>
 {% endfor %}
 </ul>
 
 <div class="tag-article-list-section-wrapper">
 {% for tag, articles in tags|sort %}
-<section id="{{ tag|replace(' ', '-')|e }}-ref" class="tag-article-list-section">
-<h2 class="tag-title">{{ tag }}</h2>
+<details id="{{ tag|replace(' ', '-')|e }}-ref" class="tag-article-list-section">
+<summary class="tag-title">{{ tag }}</summary>
 <ul>
 {% for article in articles %}
 <li>
@@ -33,7 +31,7 @@
 </li>
 {% endfor %}
 </ul>
-</section>
+</details>
 {% endfor %}
 </div>
 
@@ -47,21 +45,31 @@ require(['jquery'], function($) {
     return url.substr(url.indexOf('#') + 1);
   }
 
-  $('.tag-link').click(function() {
+  $('.tag-link').click(function(evt) {
     var target = urlToRef(this.href);
     var node = document.getElementById(target);
     if(node.style.display !== 'block') {
       node.style.display = 'block';
+      node.setAttribute('open', 'open');
+
+      this.classList.add('active');
+      
     } else {
       node.style.display = 'none';
+      node.removeAttribute('open');
+
+      this.classList.remove('active');
     }
     return false;
   });
 
   (function() {
     var target = urlToRef(window.location.hash);
-    var node = document.getElementById(target);
-    node.style.display = 'block';
+    if(target) {
+      var node = document.getElementById(target);
+      node.style.display = 'block';
+      node.open = 'open';
+    }
   })();
 
   (function ($) {
@@ -73,6 +81,8 @@ require(['jquery'], function($) {
     function listFilter() {
       $('.filterinput')
       .change( function () {
+        $('.tag-link').removeClass('active');
+
         var filter = $(this).val();
         if(filter) {
           // this finds all links in a list that contain the input,
@@ -84,15 +94,21 @@ require(['jquery'], function($) {
           visibleList.parent().show();
 
           $.each(hiddenList, function(idx, el) {
+            el.classList.remove('active');
+
             var target = urlToRef(el.href);
-            document.getElementById(target).style.display = 'none';
-          })
+            var node = document.getElementById(target);
+            node.style.display = 'none';
+            node.removeAttribute('open');
+          });
           $.each(visibleList, function(idx, el) {
+            el.classList.add('active');
+
             var target = urlToRef(el.href);
-            document.getElementById(target).style.display = 'block';
-          })
-
-
+            var node = document.getElementById(target);
+            node.style.display = 'block';
+            node.setAttribute('open', 'open');
+          });
         } else {
           $('.list-of-tags').find("li").show();
           $('.tag-article-list-section').hide();

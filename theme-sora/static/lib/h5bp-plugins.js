@@ -22,6 +22,3 @@
 }());
 
 // Place any jQuery/helper plugins in here.
-window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-}, false);
