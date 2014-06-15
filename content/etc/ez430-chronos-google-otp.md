@@ -70,11 +70,11 @@ Google OTP는 해당 스펙이 공개되어있어서 JavaScript로 돌아가는 
 덕분에 시계를 Google OTP로 만든다는 짓이 가능하다. 은행OTP도 알고리즘이 공개되어있으면 똑같이 구현 할 수 있겠지만 우리나라 보안 환경에서 그런게 공개되어있을리는 없으니까 이건 포기하자. (개인적으로는 이게 더 좋은데...)
 어쨋든 Google OTP를 세팅하려면 Secret key가 필요하다. Secret key는 구글의 2차 로그인 설정에서 찾을 수 있다.
 
-![step1]({filename}/static/ez430-chronos-google-otp/step1.png)
+![step1]({filename}../static/ez430-chronos-google-otp/step1.png)
 
 2차 로그인 설정에서 블랙베리를 누른다.
 
-![step2]({filename}/static/ez430-chronos-google-otp/step2.png)
+![step2]({filename}../static/ez430-chronos-google-otp/step2.png)
 
 secret key가 뜬다. 적절히 저장해놓자. 사실 위에서 아이폰/안드로이드 눌러도 별 문제 없지만 블랙베리는 바코드가 없어서 바로 키가 보인다. -_-
 

@@ -1,18 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
-import markdown
 
 AUTHOR = u'if1live'
 SITENAME = u'libsora.so'
-#SITEURL = ''
-SITEURL = 'http://libsora.so'
+SITEURL = ''
+#SITEURL = 'http://libsora.so'
 
 TIMEZONE = u'Asia/Seoul'
 
 DEFAULT_LANG = u'ko'
 
 DEFAULT_DATE_FORMAT = '%Y/%m/%d'
+ARTICLE_URL = 'posts/{slug}/'
+ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
+
 TWITTER_USERNAME = 'if1live'
 
 DISQUS_SITENAME = "libsora"
@@ -25,14 +27,10 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 WEBASSETS = True
-LESS_GENERATOR = True
 LESS_RUN_IN_DEBUG = True
 
-ARTICLE_URL = 'posts/{slug}/'
-ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
-
 # Blogroll
-LINKS = (
+LINKS =  (
     ('shipduck', 'http://github.com/shipduck'),
 )
 
@@ -40,6 +38,7 @@ LINKS = (
 SOCIAL = (
     ('Twitter', 'http://twitter.com/if1live'),
     ('GitHub', 'http://github.com/if1live'),
+    ('BitBucket', 'https://bitbucket.org/if1live'),
 )
 
 DEFAULT_PAGINATION = False
@@ -49,28 +48,26 @@ RELATIVE_URLS = True
 
 PLUGIN_PATH = 'ext/pelican-plugins'
 
+THEME = 'theme-sora'
 
-THEME = 'ext/pelican-sora'
-
-# attributes for pelican-sora
 PLUGINS = [
     'tipue_search',
     'sitemap',
-    'related_posts',
     'assets',
     'code_include',
     'html_rst_directive',
     'pelican_youtube',
     'pelican_jsfiddle',
     'better_figures_and_images',
-
     # enable w3c validate if py_w3c is fixed
     #'w3c_validate',
 ]
 
-DIRECT_TEMPLATES = (('index', 'tags', 'categories','archives', 'search', '404'))
+DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search', 'about', 'project')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
-STATIC_PATHS = ['theme/images', 'images', 'static']
+STATIC_PATHS = ['static']
+
+SITEMAP_SAVE_AS = 'sitemap.xml'
 
 SITEMAP = {
     'format': 'xml',

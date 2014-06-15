@@ -10,19 +10,15 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
+#SITEURL = ''
 SITEURL = 'http://libsora.so'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
-CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 
-DELETE_OUTPUT_DIRECTORY = False
+DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-DISQUS_SITENAME = "libsora"
-GOOGLE_ANALYTICS = "UA-37862172-2"
-OUTPUT_RETENTION = ['.git', '.gitignore', 'CNAME', 'README.md', 'robots.txt']
-
-# optimize_image slow, use only publish
-PLUGINS += ['optimize_images',]
+#DISQUS_SITENAME = ""
+#GOOGLE_ANALYTICS = ""

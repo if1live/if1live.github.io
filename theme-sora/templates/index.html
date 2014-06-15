@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% import "_helpers.html" as helpers %}
+
+{% block content %}
+
+{% set article = articles_page.object_list[0] %}
+<section class="index-content">
+<article class="article-content">
+<header>
+<hgroup class="entry-title">
+  <a href="{{ article.url }}">
+  <h1>{{ article.title }}</h1>
+  <h2>{{ article.subtitle }}</h2>
+  </a>
+</hgroup>
+</header>
+
+<div class="entry-content">
+{{ article.summary }}
+</div>
+</article>
+</section>
+
+<section class="recent-content basic-content">
+<h1>
+  Recent Posts
+  <small class="pull-right">
+    <a class="archives-link" href="{{ SITEURL }}/archives.html">all posts</a>
+  </small>
+</h1>
+
+<div class="article-summary-list">
+
+{% if articles %}
+{% for article in articles %}
+	{% if not RECENT_ARTICLES_COUNT %}
+		{% set RECENT_ARTICLES_COUNT = 10 %}
+	{% endif %}
+	{% if loop.index0 < RECENT_ARTICLES_COUNT %}
+  {{ helpers.render_article_summary(article) }}
+	{% endif %}
+{% endfor %}
+{% endif %}
+
+</div>
+</section>
+{% endblock content %}

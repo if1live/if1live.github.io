@@ -1,4 +1,4 @@
-pelican==3.3
+pelican
 markdown
 beautifulsoup4
 webassets
@@ -6,4 +6,5 @@ pillow
 docutils
 pelican_youtube
 pelican-jsfiddle
-
+jsmin
+cssmin

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{{ DEFAULT_LANG }}" class="no-js"> <!--<![endif]-->
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    {% if article and article.author %}
+    <meta name="author" content="{{ article.author }}" />
+    {% elif page and page.author %}
+    <meta name="author" content="{{ page.author }}" />
+    {% else %}
+    <meta name="author" content="{{ AUTHOR }}" />
+    {% endif %}
+
+    {% if SITE_DESCRIPTION %}
+    <meta name="description" content="{% block head_description %}{{ SITE_DESCRIPTION }}{% endblock head_description %}" />
+    {% endif %}
+
+    {% block meta_tags_in_head %}
+    {% endblock %}
+
+    {% block head_links %}
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="{{ SITEURL }}/theme/images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{{ SITEURL }}/theme/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ SITEURL }}/theme/images/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ SITEURL }}/theme/images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ SITEURL }}/theme/images/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
+    <link rel="icon" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
+
+    {% assets filters="cssmin", output="css/core.css",
+      "lib/pure-0.5.0.min.css",
+      "lib/font-awesome-4.1.0/css/font-awesome.min.css"
+    %}
+    <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% assets filters="less", output="css/style.css", "css/style.less" %}
+    <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% endblock %}
+
+    {% include "feeds.html" %}
+
+    {% endblock head %}
+  </head>
+  <body>
+    <header class="base-header">
+      <h1>
+        <a href="{{ SITEURL }}">/usr/lib/libsora.so</a>
+      </h1>
+      <nav>
+        <h2 hidden>Navigation</h2>
+        <ul class="nav-link-list">
+          <li>
+            <a href="{{ SITEURL }}/about.html" {% if page_name == "about" %} class="active" {% endif %}>about</a>
+          </li>
+          <li>
+            <a href="{{ SITEURL }}/project.html" {% if page_name == "project" %} class="active" {% endif %}>project</a>
+          </li>
+          <li>
+            <a href="{{ SITEURL }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %}>
+              <i class="fa fa-archive"><span hidden>Archives</span></i>
+            </a>
+          </li>
+          <li>
+            <a href="{{ SITEURL }}/tags.html" {% if page_name == "tags" %} class="active" {% endif %}>
+              <i class="fa fa-tags"><span hidden>Tags</span></i>
+            </a>
+          </li>
+          <li><a href="{{ SITEURL }}/search.html">
+            <i class="fa fa-search"><span hidden>Search</span></i></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Add your site or application content here -->
+    <div class="content-wrapper">
+    {% block content %}
+    {% endblock %}
+    </div>
+
+    <footer class="base-footer">
+      <ul class="nav-link-list">
+        {% for social, link in SOCIAL %}
+        <li>
+          <!-- social link icon : http://fontawesome.io/icons/ -->
+          <a href="{{ link }}"><i class="fa fa-{{ social|lower }}"> </i></a>
+        </li>
+        {% endfor %}
+        {% if FEED_ALL_ATOM %}
+        <li>
+          <!-- social link icon : http://fontawesome.io/icons/ -->
+          <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}"><i class="fa fa-rss"> </i></a>
+        </li>
+        {% endif %}
+        {% for name, link in LINKS %}
+        <li><a href="{{ link }}">{{ name }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <p>
+        Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>
+        / <a href="http://purecss.io/" title="Pure Home Page">Pure</a>
+        {% if DNSEVER_BANNER %}
+        / <a href="http://www.dnsever.com" target="dnsever"><img src="{{ SITEURL }}/theme/images/dnsever-banner_80x16.gif" border="0" alt="DNS Powered by DNSEver.com"></a>
+        {% endif %}
+      </p>
+    </footer>
+
+    <!-- js area -->
+    <script>
+var require = {
+  baseUrl: '{{ SITEURL }}/themes/js',
+  paths: {
+    'jquery': '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min'
+  }
+};
+</script>
+    {% assets filters="jsmin", output="js/core.js",
+      "lib/modernizr-2.6.2.min.js",
+      "lib/fastclick-1.0.2.js",
+      "lib/h5bp-plugins.js",
+      "lib/require-2.1.14.min.js"
+    %}
+    <script src="{{ SITEURL }}/{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+    <script src="{{ SITEURL }}/theme/js/common.js"></script>
+    {% block script %}
+    {% endblock %}
+    {% include "analytics.html" %}
+  </body>
+</html>

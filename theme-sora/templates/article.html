@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title -%}
+{{ article.title }} · {{ SITENAME }}
+{%- endblock %}
+
+{% block meta_tags_in_head %}
+{{ super() }}
+
+{% if article.tags or article.category or article.keywords %}
+<meta name="keywords" content="{{ [article.tags|join(', '), article.category, article.keywords]|join(', ') }}" />
+{% endif %}
+
+{% if TWITTER_CARD_USE %}
+{% include 'twitter_card.html' %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<article class="article-content">
+  <header>
+    <hgroup class="entry-title">
+      <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+         title="Permalink to {{ article.title|striptags }}">
+        <h1>{{ article.title }}</h1>
+        <h2>{{ article.subtitle }}</h2>
+      </a>
+    </hgroup>
+  </header>
+
+  <div class="entry-content">
+    {{ article.content }}
+
+    {% include 'disqus.html' %}
+
+  </div><!-- /.entry-content -->
+
+  {% for an_article in dates %}
+  {% if an_article.url == article.url %}
+  {% set index = loop.index0 %}
+  {% if not loop.first %}
+  {% set next_article = dates[index-1] %}
+  {% endif %}
+  {% if not loop.last %}
+  {% set previous_article = dates[index+1] %}
+  {% endif %}
+  <ul class="articles-timeline">
+    {% if previous_article %}
+    {% set ptitle = previous_article.title %}
+    {% set pv_title = ptitle %}
+      {%if previous_article.subtitle %}
+        {% set pv_title = ptitle + " " + "<br/><small>" + previous_article.subtitle + "</small>" %}
+        {% set ptitle = ptitle + " - " + previous_article.subtitle %}
+      {% endif %}
+    <li class="previous-article pull-left">« <a href="{{ SITEURL }}/{{ previous_article.url }}" title="Previous: {{ ptitle }}">{{ pv_title }}</a></li>
+    {% endif %}
+    {% if next_article %}
+    {% set ntitle = next_article.title %}
+    {% set nv_title = ntitle %}
+      {%if next_article.subtitle %}
+        {% set nv_title = ntitle + " " + "<br/><small>" + next_article.subtitle + "</small>" %}
+        {% set ntitle = ntitle + " - " + next_article.subtitle %}
+      {% endif %}
+    <li class="next-article  pull-right"><a href="{{ SITEURL }}/{{ next_article.url }}" title="Next: {{ ntitle }}">{{ nv_title }}</a> »</li>
+    {% endif %}
+  </ul>
+  {% endif %}
+  {% endfor %}
+
+  <footer class="post-info">
+    <!-- TODO github link? -->
+    <abbr class="published" title="{{ article.date.isoformat() }}">
+      {{ article.locale_date }}
+    </abbr>
+
+    {% if article.author %}
+    <address class="vcard author">
+      By <a href="http://twitter.com/{{ TWITTER_USERNAME }}">@{{ article.author }}</a>
+    </address>
+    {% endif %}
+
+    <!-- tags -->
+    {% if article.tags %}
+    <ul class="list-of-tags tags-in-article">
+    {% for tag in article.tags|sort %}
+      <a href="/tags.html#{{ tag|replace(' ', '-')|e }}-ref">
+        #{{ tag }}
+      </a>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- related posts -->
+    {% for related_post in article.related_posts %}
+    <li><a href="{{ SITEURL }}/{{ related_post.url }}" class="pretty-link">{{ related_post.title }}</a></li>
+    {% endfor %}
+
+  </footer><!-- /.post-info -->
+</article>
+{% endblock %}
