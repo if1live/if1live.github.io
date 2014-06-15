@@ -35,12 +35,8 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
     <link rel="icon" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
 
-    {% assets filters="cssmin", output="css/core.css",
-      "lib/pure-0.5.0.min.css",
-      "lib/font-awesome-4.1.0/css/font-awesome.min.css"
-    %}
-    <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
-    {% endassets %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
 
     {% assets filters="less", output="css/style.css", "css/style.less" %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
