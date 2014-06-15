@@ -58,6 +58,12 @@ require(['jquery'], function($) {
     return false;
   });
 
+  (function() {
+    var target = urlToRef(window.location.hash);
+    var node = document.getElementById(target);
+    node.style.display = 'block';
+  })();
+
   (function ($) {
     // custom css expression for a case-insensitive contains()
     jQuery.expr[':'].Contains = function(a,i,m){
