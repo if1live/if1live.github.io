@@ -5,7 +5,7 @@ python:
 
 env:
   global:
-    - secure: "UDqqN6GDX8Bnwh+NJA4ZEDyqs3XJ1fA5noE4y5n2Lu6qXclZ0mEkB/PX+BLb7qQdx6iefrq5+HUQ/JCx7ARCHcPOkDtNalMEwvuAZYO1CrOx7olwFqVN2ORRpjqu4iA3hLrwpuWAiCMUsVkGi0xvTgrCANuW+uHfunO7AkRKngc="
+    - secure: "gsLRF2tCcZlJEeUazvSKWEN1v8NB7oSMR+jCDRKrnHIPdZHAc4LYcAQkzO7zmHNr6hXMVBlKCGezyxTedlmmW01qYOMdJk/U2+aLBuKjuP/i6NBY+dtEKABFHyDRYbeM6Cyv7aYcnquqob5tsLi4HX1y8KIyFa/WUMIkb8L1wZ4="
 
 before_install:
   - git config --global user.email "libsora25@gmail.com"
