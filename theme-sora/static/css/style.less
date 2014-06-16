@@ -101,7 +101,7 @@ code, pre {
 .basic-content {
 	padding: 10px;
 	.core-anchor-mixin;
-	
+
 	h1 {
 		margin: 0;
 		padding: 0;
@@ -151,7 +151,9 @@ code, pre {
 		.tag-link {
 			display: inline-block;
 			padding: 2px 4px;
-			margin: 3px;
+			margin: 3px 0;
+			// border 추가되면서 밀리는 효과 없애려고 가짜 경계 추가
+			border: 1px solid #fff;
 
 			&.active {
 				border: 1px solid #f00;
@@ -159,6 +161,15 @@ code, pre {
 				color: @gray-darker;
 			}
 		}
+		a, a:visited {
+			color: @base-a-tag-color;
+			text-decoration: none;
+		}
+		a:hover {
+			color: @base-a-tag-hover-color;
+			border: 1px solid #fff;
+		}
+
 	}
 }
 
