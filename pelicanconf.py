@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import os
 
 AUTHOR = u'if1live'
 SITENAME = u'libsora.so'
@@ -43,6 +44,7 @@ SOCIAL = (
 
 DEFAULT_PAGINATION = False
 
+				 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
@@ -65,7 +67,15 @@ PLUGINS = [
 
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search', 'about', 'project')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
-STATIC_PATHS = ['static']
+
+STATIC_PATHS = ['static', 'extra']
+
+# 뻐킹 윈도 때문에 extra/CNAME하면 망한다
+EXTRA_PATH_METADATA = {
+    os.sep.join(['extra', 'CNAME']): {'path': 'CNAME'},
+    os.sep.join(['extra', 'favicon.ico']): {'path': 'favicon.ico'},
+    os.sep.join(['extra', 'robots.txt']): {'path': 'robots.txt'},
+}
 
 SITEMAP_SAVE_AS = 'sitemap.xml'
 
