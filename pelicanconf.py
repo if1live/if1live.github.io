@@ -16,7 +16,7 @@ DEFAULT_DATE_FORMAT = '%Y/%m/%d'
 
 ARTICLE_URL = 'posts/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
-#CATEGORY_SAVE_AS = False
+CATEGORY_SAVE_AS = False
 #TAG_SAVE_AS = False
 #AUTHOR_SAVE_AS = False
 
