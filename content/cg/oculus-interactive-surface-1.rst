@@ -18,12 +18,15 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 다음은 스플린터 셀에서 문 비밀번호를 찍는 UI이다. 뒤에 게임화면이 있고 새로운 HUD로 비밀번호를 찍는게 나온다.
 
 .. image:: {filename}../static/oculus-interactive-surface-1/splinter-cell-number-pad.jpg
+	:alt: splinter cell numpad UI
 
 다음은 DOOM3에 등장하는 키패드이다. 화면안에 마우스가 뜨고 잘 움직여서 숫자를 누르면 된다.
 
 .. image:: {filename}../static/oculus-interactive-surface-1/doom3-locker.jpg
+	:alt: doom3 locker
 
 .. image:: {filename}../static/oculus-interactive-surface-1/doom3-number-pad.jpg
+	:alt: doom3 number pad
 
 어느쪽 UI가 더 몰입감 있을까? 또한 오큘러스에 더 잘 어울릴까?
 
@@ -36,6 +39,7 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 gorilla_ 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 때문이다.
 
 .. image:: {filename}../static/oculus-interactive-surface-1/screenshot-normal.jpg
+	:alt: gorilla normal screenshot
 
 .. youtube:: e78Hfo5rIyU
 
@@ -43,6 +47,7 @@ gorilla_ 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘�
 샘플를 적절히 손봐서 만들어봤다.
 
 .. image:: {filename}../static/oculus-interactive-surface-1/screenshot-oculus.jpg
+	:alt: gorilla oculus screenshot
 
 .. youtube:: -8AOYWkNz1Y
 
@@ -84,6 +89,7 @@ GUI모드에서는 고개를 움직이면 처다보는 시야만 움직이다. G
 **생각해보니 DeadSpace GUI..?**
 
 .. image:: {filename}../static/oculus-interactive-surface-1/dead-space-gui.jpg
+	:alt: dead space gui
 
 
 또 다른 대안은 커서를 없애고 **USE키를 여러개** 쓰는거다.
@@ -94,10 +100,12 @@ GUI를 조작할수 있는 범위(GUI 콘솔 앞)으로 이동하면 Hat Switch(
 Hat Switch란?
 
 .. image:: {filename}../static/oculus-interactive-surface-1/joystick-hat.png
+	:alt: joystick hat switch
 
 `Independence War 2: Edfe of Chaos <http://en.wikipedia.org/wiki/Independence_War_2:_Edge_of_Chaos>`_ 의 경우 Hat Switch로 게임내부 GUI를 조작할수 있도록 했다. 그래서 키보드로 손이 갈 일이 없어서 매우 편하다.
 
 .. image:: {filename}../static/oculus-interactive-surface-1/independence-war-2.jpg
+	:alt: independence war 2 screenshot
 
 
 

@@ -61,10 +61,12 @@ Oculus Rift를 활용한 가상현실 게임제작의 유의점
 이를 해결하기 위한 방법이 여러가지가 있겠지만, 팀포트리스2의 경우는 그냥 UI를 가운데로 집어넣었다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/tf2-oculus.jpg
+  :alt: 오큘러스 + 팀포트리스2 UI
 
 **추가사항** UI에서 그래프라든가를 표현하기 위해서 직선을 사용할떄가 있다(예를 들면 스카이림의 체력) 일반 모니터로는 깔끔하게 렌더링된다. 하지만 오큘러스에서는 직선을 꺠끗하게 렌더링하는것이 불가능하다(barrel distortion) 스카이림의 체력바는 저해상도+깨끗하지 않은 직선덕분에 은근히 신경쓰이다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/skyrim-oculus.jpg
+  :alt: 오큘러스 + 스카이림 UI
 
 일반적인 UI를 사용하면 화면이 고정되서 머리를 움직이는데 UI가 따라 움직인다. 이경우 멀미를 발생시킬수 있다. (발표에서 예시로 사용한건 스팀의 Shift+Tab 같은거) UI에서 왼쪽위의 내용을 보기 위해서 고개를 움직이면 화면도 같이 움직여서 볼수가 없다. 고개움직이는것과 UI가 따로 움직이록 하는것이 좋을것이다.
 
@@ -83,30 +85,37 @@ UI 자체에 깊이감이 존재하는 덕분에 게임의 요소를 바꿔야 �
 call of duty : black ops 메인메뉴. 의자에 앉은 상태로 고개를 움직이면 둘러볼수 있고 UI는 TV를 통해서 보여준다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/black-ops-menu.jpg
+  :alt: black ops 메인메뉴
 
 dead space. 등짝에 기본 UI가 표시되고 조준성이 레이저 같은 느낌으로 표시된다. HUD를 안넣은게 적절
 
 .. image:: {filename}../static/kgc2013-oculus-rift/dead-space-back.jpg
+  :alt: 데드스페이스 HUD
 
 dead-space의 상점 UI. MMORPG 처럼 별도의 UI를 띄우는것보다 게임안에서 전부 처리할수 있다면 그쪽이 더 낫다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/dead-space-store.jpg
+  :alt: 데드스페이스 상점 UI
 
 **추가사항**
 doom 3 : 개인적으로는 04년작주제에 UI 관련 연출은 08년작 데스스페이스보다 잘 만들었다고 생각하는 게임.
 게임내부에 UI만으로 여러가지 조작이 된다. 스위치 앞에 가서 E만 누르면 문이 열리는게 아니라 스위치에서 버튼을 직접 클릭해야한다. 얼마나 미친 물건이냐 하면 `Arkanoid <https://www.youtube.com/watch?feature=player_detailpage&v=IcnUkMGstNc#t=213>`_ 를 게임안에 구현해놨다(시간 이동 안되면 3분 30초 참고) 이 좋은 UI시스템이 퀘이크4로 가면 줄더니 RAGE로 가면서 완전히 사라진게 아쉽다. 이것과 관련해서는 `Fully Interactive Surfaces In DOOM3 <http://www.battleteam.net/tech/fis/docs/>`_ 를 읽어보자.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/doom3-ui.png
+  :alt: doom3 UI
 
 the division : UI로 표시할 내용을 게임안에서 layer 로 표기하는것도 괜찮은 방법일듯?
 
 .. image:: {filename}../static/kgc2013-oculus-rift/the-division-map.jpg
+  :alt: the division map ui
 
 .. image:: {filename}../static/kgc2013-oculus-rift/the-division-menu.jpg
+  :alt: the division menu ui
 
 H.A.W.K.E.N : 탑승물 기반의 게임이면 HUD도 적절할거다. 단, 이 경우 조준점과 물체 사이의 초첨조절이 어색할수 있으니 HUD를 반투명으로 하는것도 고려하기
 
 .. image:: {filename}../static/kgc2013-oculus-rift/hawken.jpg
+  :alt: hawken hud
 
 **추가사항**
 wing commander의 경우 탑승자 시점의 HUD를 제공했엇다. 요즘세상에 와서 저 UI를 다시 보면 중요한 내용(실제 게임화면)이 스크린의 절반만 차지하고 나머지 절반이 그다지 중요하지 않은 HUD이다. Dirt3 운전자 시점을 보자. 이것 역시 탑승자 시점이다. 중요하지 않은 내용(차체)를 렌더링하는라고 중요한 부분(게임 화면)이 매우 줄어들었다. Dirt3 3인칭 시점에 비해서 게임에 중요한 내용(시야)이 많이 보이질 않는다.
@@ -114,13 +123,17 @@ wing commander의 경우 탑승자 시점의 HUD를 제공했엇다. 요즘세�
 탑승자 시점+HUD의 도입으로 현실감을 줄수있지만 그 대가로 사용가능한 게임 화면이 줄어드는것도 생각해 봐야할거다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/wing-commander.jpg
+  :alt: wing commander HUD
 
 .. image:: {filename}../static/kgc2013-oculus-rift/dirt3.png
+  :alt: dirt3 ui
 .. image:: {filename}../static/kgc2013-oculus-rift/dirt3-2.jpg
+  :alt: dirt3 ui
 
 iron man : HUD 시점. 깊이를 잘못 조절하면 유저는 멀리있는곳(게임)을 보다가 가까운곳(HUD)를 보는 일을 반복해서 눈이 쉽게 피곤해질수 있다.
 
 .. image:: {filename}../static/kgc2013-oculus-rift/iron_man.jpg
+  :alt: iron man HUD
 
 
 현재 oculus rift의 해상도가 그렇게 높지 않기 떄문에 많은 UI요소가 들어가면 망하는 지름길이다. 글자만 하더라도 많이 집어넣으면 폰트크기가 작아질텐데 이 경우 해상도 문제로 읽을수가 없다.
@@ -152,6 +165,7 @@ super-sampling은 반드시 써라. oculus rift 자체의 해상도가 낮다보
 vertical sync는 켜라. tearing은 막아야한다 (일부 유니티 기반의 데모가 vsync를 신경쓰지 않아서 tearing 발생하더라.. 일루젼의 데모라던가 일루젼의 데모라던가...)
 
 .. image:: {filename}../static/kgc2013-oculus-rift/vsync.jpg
+  :alt: tearing
 
 렌더링/로직 쓰레드 분리하기. 렌더링 성능 올릴떄는 역시 이게 낫겟지. (근데 난 아직 안해봣잖아? 삽질 하겟네...)
 
