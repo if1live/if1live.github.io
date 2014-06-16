@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% set ctx = ABOUT_CTX %}
+
 {% block title %}
 About · {{ super() }}
 {% endblock title %}
@@ -30,7 +32,7 @@ About · {{ super() }}
 
 <section>
 <h2>career</h2>
-TODO
+{{ ctx.get_career() }}
 </section>
 
 </section>
