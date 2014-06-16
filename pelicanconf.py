@@ -13,8 +13,12 @@ TIMEZONE = u'Asia/Seoul'
 DEFAULT_LANG = u'ko'
 
 DEFAULT_DATE_FORMAT = '%Y/%m/%d'
+
 ARTICLE_URL = 'posts/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{slug}/index.html'
+CATEGORY_SAVE_AS = False
+TAG_SAVE_AS = False
+AUTHOR_SAVE_AS = False
 
 TWITTER_USERNAME = 'if1live'
 
@@ -119,4 +123,3 @@ sys.path.append(os.path.dirname(__file__))
 import contexts
 ABOUT_CTX = contexts.about
 PROJECT_CTX = contexts.project
-
