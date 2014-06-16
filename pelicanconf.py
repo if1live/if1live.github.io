@@ -69,10 +69,13 @@ PLUGINS = [
     #'w3c_validate',
 ]
 
-DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search', 'about', 'project')
+DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
 
 STATIC_PATHS = ['static', 'extra']
+PAGE_DIR = 'pages'
+ARTICLE_EXCLUDES = ('pages',)
+IGNORE_FILES = ['.#*', '*.html']
 
 # 뻐킹 윈도 때문에 extra/CNAME하면 망한다
 EXTRA_PATH_METADATA = {
@@ -123,3 +126,8 @@ sys.path.append(os.path.dirname(__file__))
 import contexts
 ABOUT_CTX = contexts.about
 PROJECT_CTX = contexts.project
+
+TEMPLATE_PAGES = {
+    'pages/about.html': 'about.html',
+    'pages/project.html': 'project.html'
+}
