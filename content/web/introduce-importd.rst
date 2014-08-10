@@ -11,14 +11,14 @@ importd - Django as a micro-framework
 What is importd?
 ##################
 
-importd_(importd-repo_) 는 `Amit Upadhyay`__ 라는 사람이 만든 django micro framework이다.
+importd_ (importd-repo_) 는 `Amit Upadhyay`__ 님이 django micro framework이다.
 우리나라에는 거의 알려져있지 않은데 `@cedar101`__ 님의 소개로 알게 되어서 사용해봤다.
 직접 쓰면서 느낀 importd의 특징을 정리해봤다.
 
 micro-framework
 --------------------
 
-*importd Hello World*
+**importd Hello World**
 
 .. code:: python
 
@@ -31,7 +31,7 @@ micro-framework
   if __name__ == "__main__":
       d.main()
 
-*flask Hello World*
+**flask Hello World**
 
 .. code:: python
 
@@ -46,17 +46,16 @@ micro-framework
       app.run()
 
 위의 코드는 importd와 flask_ 로 작성한 hello world이다.
-소스파일 하나로 서버를 띄울 수 있다. 원본 django에 비하면 매우 단순하다.
-``urls.py``, ``views.py`` 로 view가 분리되서 분석하기 어려운 django에 비하면
-importd는 flask만큼 흐름을 이해하기 쉽다.
+소스파일 하나로 서버를 띄울 수 있다. 크고 아름다운 django에 비하면 매우 단순하다.
 
 
 Full compatibility with django
 ----------------------------------
 django 기반으로 만들었기 때문에
 django의 기능과 django용 수많은 라이브러리를 거의 그대로 사용할 수 있다.
-importd와 django 라이브러리가 충돌해서 importd를 수정해야되는 일이 있을수도 있지만 붙일수있는게 어디냐?
+importd와 django 라이브러리가 충돌해서 importd를 수정해야되는 일이 있을수도 있지만 붙일 수 있는게 어디냐? 
 
+참고로 나의 경우, importd 와 django debug toolbar 1.2.1이 충돌나서 importd의 코드 일부를 수정했다. `Support Django Debug Toolbar 1.2.1 <https://github.com/amitu/importd/pull/39>`_. djdt를 제외한 다른 라이브러리는 importd와 심각한 충돌이 발생하진 않았다. 
 
 
 smarurls
@@ -70,7 +69,7 @@ URL 규칙을 표현하기 위한 특별한 문법을 만들고 그것으로 URL
 
 ``^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/$``
 
-두번째로 마음에 안드는건 ``views.py`` 와 ``urls.py``를 다른 파일에 작성한다는 점이다.
+두번째로 마음에 안드는건 ``views.py`` 와 ``urls.py`` 를 다른 파일에 작성한다는 점이다.
 ``/articles/2014/08/`` 라는 URL이 어떻게 행동하는지 알고 싶으면
 ``urls.py`` 에서 해당 URL을 잡아내는 정규식을 찾고
 그 정규식에 연결된 함수를 ``views.py`` 에서 찾아야한다.
@@ -94,7 +93,7 @@ RESTful API
 ------------------
 
 django에서 RESTful API를 만들어야하면 django-rest-framework_ 가 좋은 선택지 중 하나다.
-django를 쓰면 RESTful API의 URL관련 내용은 ``urls.py``, 로직은 ``views.py``로 흩어진다.
+django를 쓰면 RESTful API의 URL관련 내용은 ``urls.py``, 로직은 ``views.py`` 로 흩어진다.
 하지만 importd_ 와 django-rest-framework_ 를 조합하면 아래같이 URL과 로직을 합칠수 있다.
 
 
@@ -111,7 +110,9 @@ django를 쓰면 RESTful API의 URL관련 내용은 ``urls.py``, 로직은 ``vie
 정리
 #####
 
-importd에 몇가지 라이브러리를 붙여서 실제로 굴러가는 예제 프로젝트를 작성했다.
+importd_ 는 micro-framework의 간단한 구조를 유지하면서 django의 막강한 라이브러리를 쓸수 있는 훌륭한 프레임웍이다.
+
+importd에 입문하는 사람들을 위해서 importd에 몇가지 라이브러리를 붙여서 굴러가는 예제를 작성했다.
 importd로 새로운 프로젝트를 시작하기전에 참고하면 도움이 될것이다.
 
 importd-boilerplate_ 에 포함된 라이브러리
@@ -132,5 +133,5 @@ importd-boilerplate_ 에 포함된 라이브러리
 .. _cedar101-twitter: https://twitter.com/cedar101
 .. _smarturls: http://amitu.com/smarturls/
 
-__ armitu_
+__ amitu_
 __ cedar101-twitter_
