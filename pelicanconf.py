@@ -39,8 +39,6 @@ TRANSLATION_FEED_ATOM = None
 WEBASSETS = True
 LESS_RUN_IN_DEBUG = True
 
-CACHE_CONTENT = False
-
 # Blogroll
 LINKS =  (
     ('shipduck', 'http://github.com/shipduck'),
@@ -129,10 +127,3 @@ TWITTER_CARD_SITE_ID = ''  # The site's Twitter ID
 TWITTER_CARD_CREATOR = ''  # Your twitter handle like @monkmartinez
 TWITTER_CARD_CREATOR_ID = ''  # The site creator's id
 GRAVATAR_URL = 'http://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'
-
-# 페이지별로 특수한 정보를 넘기기 위해서 사용하는 모듈
-import sys
-sys.path.append(os.path.dirname(__file__))
-import contexts
-ABOUT_CTX = contexts.about
-PROJECT_CTX = contexts.project
