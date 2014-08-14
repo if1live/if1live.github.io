@@ -24,7 +24,7 @@ after_success:
   - cd output
   - git add -f .
   - git commit -a -m "add new site content"
-  - git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master
+  - git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quiet
 
 branches:
   only:
