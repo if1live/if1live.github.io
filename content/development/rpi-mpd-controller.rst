@@ -16,7 +16,7 @@ Preview
 
 .. youtube:: TRn8TviiMe0
 
-.. image:: https://raw.github.com/if1live/rpi-mpd-controller/master/documentation/image.jpg
+.. image:: {filename}../static/rpi-mpd-controller/image.jpg
 	:alt: controller for raspberry pi + mpd 
 
 소감
