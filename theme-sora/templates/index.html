@@ -2,6 +2,7 @@
 {% import "_helpers.html" as helpers %}
 
 {% block content %}
+<div class="grid_12">
 
 {% set article = articles_page.object_list[0] %}
 <section class="index-content">
@@ -44,4 +45,8 @@
 
 </div>
 </section>
+
+</div> <!-- //grid_12 -->
+<div class="clear"></div>
+
 {% endblock content %}
