@@ -41,7 +41,7 @@ LESS_RUN_IN_DEBUG = True
 
 # Blogroll
 LINKS =  (
-    ('shipduck', 'http://github.com/shipduck'),
+#    ('shipduck', 'http://github.com/shipduck'),
 )
 
 # Social widget

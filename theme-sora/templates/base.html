@@ -58,23 +58,27 @@
         <h2 hidden>Navigation</h2>
         <ul class="nav-link-list">
           <li>
-            <a href="{{ SITEURL }}/about.html" {% if page_name == "about" %} class="active" {% endif %}>about</a>
+            <a href="{{ SITEURL }}/about.html" {% if page_name == "about" %} class="active" {% endif %} title="about">
+	      <i class="fa fa-info"><span hidden>about</span></i>
+	    </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/project.html" {% if page_name == "project" %} class="active" {% endif %}>project</a>
+            <a href="{{ SITEURL }}/project.html" {% if page_name == "project" %} class="active" {% endif %} title="project">
+	      <i class="fa fa-code"><span hidden>project</span></i>
+	    </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %}>
+            <a href="{{ SITEURL }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %} title="archives">
               <i class="fa fa-archive"><span hidden>Archives</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/tags.html" {% if page_name == "tags" %} class="active" {% endif %}>
+            <a href="{{ SITEURL }}/tags.html" {% if page_name == "tags" %} class="active" {% endif %} title="tags">
               <i class="fa fa-tags"><span hidden>Tags</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/search.html" {% if page_name == "search" %} class="active" {% endif %}>
+            <a href="{{ SITEURL }}/search.html" {% if page_name == "search" %} class="active" {% endif %} title="search">
               <i class="fa fa-search"><span hidden>Search</span></i>
             </a>
           </li>
@@ -93,7 +97,7 @@
         {% for social, link in SOCIAL %}
         <li>
           <!-- social link icon : http://fontawesome.io/icons/ -->
-          <a href="{{ link }}"><i class="fa fa-{{ social|lower }}"> </i></a>
+          <a href="{{ link }}" title="{{ social }}"><i class="fa fa-{{ social|lower }}"> </i></a>
         </li>
         {% endfor %}
         {% if FEED_ALL_ATOM %}
@@ -103,7 +107,7 @@
         </li>
         {% endif %}
         {% for name, link in LINKS %}
-        <li><a href="{{ link }}">{{ name }}</a></li>
+        <li><a href="{{ link }}" title="{{ name }}">{{ name }}</a></li>
         {% endfor %}
       </ul>
 
