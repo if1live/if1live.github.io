@@ -1,4 +1,36 @@
-[].forEach.call(document.querySelectorAll('.article-content table'), function(el) {
-  el.className += ' pure-table';
-});
+// Avoid `console` errors in browsers that lack a console.
+(function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
+
+// Place any jQuery/helper plugins in here.
+
+///////////
+if(typeof window.addEventListener !== 'undefined') {
+    window.addEventListener('load', function() {
+	FastClick.attach(document.body);
+    }, false);
+}
+
+$('.article-content table').addClass('pure-table');
+
+
 
