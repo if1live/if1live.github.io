@@ -3,7 +3,13 @@
 @import "mixins-custom.less";
 @import "reset.less";
 @import "code.less";
+@import "utilities.less";
 
+.container {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
 
 .nav-link-list {
 	margin: 0;
@@ -284,7 +290,8 @@
 			color: #d14;
 			background-color: #f3e9e0;
 			border: 1px solid #e1e1e8;
-			white-space: nowrap;
+			//white-space: nowrap;
+			white-space: pre;
 			.border-radius(5px);
 		}
 

@@ -38,7 +38,7 @@
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/960gs/0/960.min.css">
+
 
     {% assets filters="less", output="css/style.css", "css/style.less" %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
@@ -106,7 +106,7 @@
     </header>
 
     <!-- Add your site or application content here -->
-    <div class="container_12">
+    <div class="container">
     {% block content %}
     {% endblock %}
     </div>
@@ -138,6 +138,7 @@
         {% endif %}
       </p>
     </footer>
+
     <script>
 var require = {
   baseUrl: '{{ SITEURL }}/themes/js',
