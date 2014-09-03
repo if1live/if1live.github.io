@@ -49,6 +49,24 @@
     {% include "feeds.html" %}
 
     {% endblock head %}
+
+    <!--[if lt IE 9]>
+    <script>
+    document.createElement('header');
+    document.createElement('nav');
+    document.createElement('section');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('footer');
+    document.createElement('hgroup');
+    </script>
+    <![endif]-->
+  
+    <!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.min.js"></script>
+    <![endif]-->
+
+ 
   </head>
   <body>
     <header class="base-header">
@@ -127,8 +145,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.2/fastclick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
 
-    <!--[if lt IE 8]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="{{ SITEURL }}/theme/js/common.js"></script>
