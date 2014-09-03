@@ -56,13 +56,13 @@ require(['jquery'], function($) {
       node.style.display = 'block';
       node.setAttribute('open', 'open');
 
-      this.classList.add('active');
+      $(this).addClass('active');
 
     } else {
       node.style.display = 'none';
       node.removeAttribute('open');
 
-      this.classList.remove('active');
+      $(this).removeClass('active');
     }
     return false;
   });
