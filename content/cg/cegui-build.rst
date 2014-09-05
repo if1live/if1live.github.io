@@ -12,7 +12,7 @@ Build CEGUI 0.8.2 on Windows + OGRE
 준비물
 ####################
 * OGRE 빌드해놓기. 귀찮으면 prebuilt library가 있어도 된다. 오그레으로 샘플 한번이라도 제대로 빌드해봤으면 뭔소리인지 알거다
-* `CEGUI 0.8.2 source <http://cegui.org.uk/download>`_ 에서 받을 수 있다. 문서 작성 시점의 안정버전이 0.8.2 라서 그거 쓴다
+* `CEGUI 0.8.2 source <http://cegui.org.uk/download>`_ 에서 받을 수 있다. 문서 작성 시점의 안정버전이 0.8.2 라서 그거 쓴다.
 * `Dependencies (Windows / Apple OS X Only) <http://cegui.org.uk/download>`_ 를 받는다. CEGUI는 의존성이 크고 아름답게 걸린 물건이라서 수동으로 관련 라이브러리 하나씩 깔면 미친다.
 * cmake. 왜냐하면 나는 cmake 빠돌이니까
 
