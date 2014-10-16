@@ -216,7 +216,7 @@ Date: 2014-10-17
 	* tasklet
 	* work queue
 	
- ## Interrupt Handler
+## Interrupt Handler
 * (kernel mode에 진입한 상태에서 다음을 따른다)
 * IRQ 값과 현재 작업 상태(레지스터 등)을 커널 스택에 저장한다
 * PIC로 ACK를 보낸다. 그러면 이후에 다시 인터럽트 받는게 가능하다
