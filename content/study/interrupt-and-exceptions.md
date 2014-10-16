@@ -1,0 +1,340 @@
+Title: Interrupt and Exceptions
+Tags: linux, system-programming, interrupt, exception, study
+Slug: sytem-prog-study-interrupt-and-exceptions
+Author: if1live
+Date: 2014-10-17
+
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다. 
+
+# Interrupt and Exceptions
+## Interrupt vs Exception
+### Interrupt
+* Asynchronous Interrupt
+* 외부장치 -> CPU
+	* 외부 장치 : keyboard, etc
+	* CPU : processor's interrupt pin으로 입력 받기 가능
+* 펌웨어와 CPU의 플랫폼/언어/환경이 달라도 통신가능한 인터페이스
+
+### Exception
+* Synchronous Interrupt
+* CPU에서 명령어 실행도중 발생
+	* ex: 0으로 나누기
+
+
+## Interrupt Signal
+* Interrupt Signal 받으면 하는 행동
+	* CPU는 기존 흐름 멈추고 interrupt handler로 jump
+	* 현재 program context를 kernel stack에 저장(eip, cs registers)
+	* PC(program counter)에는 인터럽트 관련 주소 대입
+* Interrupt handling과 Process switching의 차이
+	* Interrupt handler는 프로세스 아님
+	* 현재 프로세스가 작동중인 상태에서 커널 흐름이 바뀜
+	* 프로세스보다 가볍다
+		* interrupt handling에는 mode switching만 필요하니까
+		* 프로세스는 기존 유지
+
+## Interrupt Handling 요구 사항
+* 커널 효율성(kernel Effectiveness)
+	* Top half : 즉시 처리 해야하는 것. 높은 우선순위
+	* Bottom half : defer, 나중에 처리해도 되는 것
+	* 분리하는 이유 : 인터럽트만 붙잡고 이으면 유저 작업이 멈춘다. 반응성 감소
+* 효과적인 I/O 처리
+	* 인터럽트 처리하는 동안 다른 인터럽트를 받을수 있어야한다
+	* **Nested**
+* 커널 동기화(kernel synchronization)
+	* critical region에서는 인터럽트를 꺼야한다.
+	* 하지만 이런 곳은 될 수 있는 한 줄이는 것이 목표
+
+## Interrupt/Exception Handling 기본 개요
+1. H/W interrupt 발생
+2. PIC에서 수신
+3. CPU의 Interrupt PIN으로 인터럽트 넣기
+4. ```do_IRQ()``` (기존 작업 내용 저장)
+5. 해당 인터럽트에 해당하는 핸들러가 존재하는지 확인
+6. 핸들러 존재하는 경우 ```handle_IRQ_event()``` 호출. 관련된 모든 인터럽트 핸들러 호출
+7. ```ret_from_intr()```
+8. 기존 작업 내용 복구
+
+## IA32 Architecture: Registers
+* Segment registers : 세그먼트 메모리 관련
+	* cs : code segment register
+	* ds : data segment register
+	* ss : stack segemnt register
+	* es, fs, gs : general segment register
+* Control registers
+	* CR : 0~3, 4개
+* Debugging registers
+	* DR : 0~7, 8개
+* EFLAGS : Maskable Interrupt 관련
+* System registers
+	* GDTR : global descriptor table register
+	* IDTR : interrupt descriptor table register
+	* LDTR : local descriptor table register
+* etc...
+
+## IRQs and Interrupts
+* Hardware device controller
+	* Interrupt request를 output으로 뱉는다
+	* 이것은 Interrupt controller로 연결된다
+* Interrupt Controller
+	* IRQ line을 감시
+	* 시그널 발생시 다음을 처리
+		* signal을 vector로 변환
+		* Interrupt Controller I/O port에 vector저장
+			* 나중에 CPU에서 읽어간다
+		* INTR PIN을 올린다 => **Interrupt 발생**
+		* CPU가 읽어간 이후에 신호를 주면 INTR 내린다
+
+## Interrupts
+### Maskable Interrupts
+* I/O 장치에서 발생하는 모든 IRQ
+* INTR pin으로 전달
+* CPU status register인 eflags로 enable/disable 설정 가능
+
+### Nonmaskable Interrupts
+* 몇개의 특별한 이벤트로만 발생가능(ex: hardware failure)
+* NMI pin으로 CPU에 전달됨
+	* NMI = NonMaskable Interrupts
+
+## Exceptions
+### Processor-detected exceptions
+* CPU가 특별한 상황에서 발생시킴
+* Fault
+	* 의도하지 않은 상황 
+	* 아마 복구 가능한
+	* 명령은 fault 발생부터 다시 실행, 또는 종료
+		* page-fault (복구가능)
+		* protection faults (복구 불가능)
+		* etc
+* Traps
+	* 의도된 상황
+	* 다음 명령어부터 이어서 실행
+	* 예를 들면 breakpoint
+* Aborts
+	* 의도되지 않은 상황
+	* 복구 불가능
+	* 현재 프로그램 종료
+		* 치명적인 하드웨어 실패(parity error, ...)
+		* etc
+		* 
+### Programmed exceptions(software interrupts)
+* 프로그래머가 의도적으로 발생시킨다
+	* int, int3, etc..
+* 시스템콜을 구현하는데 사용한다(int 0x80, sysenter)
+
+## Interrupt Handling : Hardware part(IA32)
+* IDT(Interrupt Descriptor Table) : 256개의 entry 존재
+* 인터럽트 발생시 CPU 행동
+	* PIC에서 Interrupt vector i 가져옴
+	* i번째 IDT entry 접근, interrupt handler entry point 주소 결정
+	* (user mode인 경우) kernel mode로 mode switch
+	* kernel stack에 작업상태 저장
+	* interrupt handler entry point로 흐름 변경
+
+
+## Types of Interrupt Descriptor
+### x86
+* Task gate : 안씀
+* Interrupt Gate : 인터럽트 핸들러용 (segment selector + offset)
+* Trap Gate : exception 핸들러용 (segment selector + offset)
+
+### Linux
+* Interrupt Gate
+	* DPL field = 0 (user mode에서 접근 불가)
+	* x86 interrupt gate
+	* 모든 리눅스 interrupt handler
+* System Gate
+	* DPL field = 3 (user mode에서 접근 가능)
+	* x86 trap gate
+	* vector = {3|4|5|128}, (int3, into, bound int 0x80)
+* Trap Gate
+	* DPL field = 0
+	* x86 trap gate
+	* 모든 리눅스 exception handler(3, 4, 5, 128 제외)
+
+
+## "Hardware Handling" of Interrupt
+* CPU 통제가 인터럽트 핸들러로 넘어갈때
+	1. 발생한 인터럽트에 해당하는 vector i 알아냄
+	2. idtr 레지스터가 가리키는 IDT에서 i번쨰 엔트리를 읽는다(엔트리에는 인터러브 게이트나 트랩 게이트 들어있음)
+	3. gdtr 레지스터에서 GDT의 기본 주소 가져와서 IDT 엔트리에 있는 셀렉터가 가리키는 세그먼트 디스크립터를 GDT에서 읽어들인다. 디스크립터는 인터럽트 핸들러가 포함된 세그먼트의 시작 주소를 지정 
+	4. 인터럽트가 인증된 곳에서 발생했는지 검증. CPL(current privilege level)과 DPL(Descriptor privilege level) 비교
+	5. privilege level을 바꿀지 결정
+		1. 새로운 특권 수준과 관련된 ss, esp 설정  
+		2. 이전 특권 수준의 ss, esp를 커널 스택에 저장
+	6. fault의 경우 cs, eip를 예외 발생시킨 논리 주소로 변경(fault는 fault 발생지점부터 재시작 해야되니까)
+	7. eflags, cs, eip를 커널 스택에 저장
+	8. 예외에 하드웨어 에러 코드가 붙어있으면 그것을 커널 스택에 저장
+	9. cs, eip를 각각 IDT의 i번쨰 엔트리에 저장된 게이트 디스크립터의 세그먼트 셀렉터와 오프셋 필드로 설정한다. 그리고 핸들러로 점프
+* iret에 의해서 interrupt handler 벗어날 때
+	1. cs, eip, eflags 커널 스택에서 복구
+	2. 핸들러의 CPL 확인
+	3. ss, esp 를 커널 스택에서 복구
+	4. 접근레벨 통제하려고 ds, es, fs, gs 확인 
+
+## Exception Handling
+* 현재 작업 상태(레지스터 등등)을 커널 스택에 저장
+* exception handling(c 함수)
+* ```ret_from_exception()```으로 핸들러 벗어남
+
+## Interrupt Handling
+### Exception handling vs Interrupt handling
+* Exception handling
+	* 대부분의 경우 UNIX Signal을 보낸다
+	* 실제 처리는 signal을 받을 때까지 지연됨. 그래서 커널은 빨리 처리 가능하다
+* Interrupt handling
+	* UNIX Signal 안보낸다
+	* 관계있는 프로세스가 멈춰있고 관계있는 프로세스가 실행중이 아니 상태에서 발생할때가 많다. 
+
+### Interrupt Context
+* Interrupt handler가 작동하는 구산, 기간, 영역
+* interrupt handler는 잠들 수 없다
+* user-space에 접근 불가능
+* scheduler 호출 불가능
+	* 프로세스는 기본적으로 인터럽이 없이 실행 원한다
+	* syscall은 원해서 호출한거니까(직접 호출) 스케줄링 당해도 공평
+	* 인터럽트는 프로세스가 원한게 아닌데(호출한 프로세스랑 받을때의 프로세스가 다를 확률이 높다) 스케줄링 당하면 불공평
+
+## I/O Interrupts
+* 인터러트 종류
+	* I/O interrupt
+	* Timer Interrupt
+	* Interprocessor interrupts
+*  I/O Interrupts
+	*  모든 핸들러가 동일한 우선순위는 아니다. 
+	*  인터럽트 핸들러는 block 함수 못 쓴다(ex: IO disk operation)
+		* 인터럽트 핸들러 실행하는 동안 프로세스가 TASK_RUNNING을 유지하려고
+
+
+## Interrupt Classes
+* Critical : Maskable interrupts가 disable이더라도 즉시 처리되어야 하는것
+* Noncritical : Interrupt가 enabled일때 즉시 처리해야 하는것
+* Noncritical deferrable
+	* 오랫동안 연기했다가 실행할 수 있는 것
+	* 예를 들면 버퍼의 내용을 프로세스 메모리 영역으로 복사하는 작업
+	* softirq
+	* tasklet
+	* work queue
+	
+ ## Interrupt Handler
+* (kernel mode에 진입한 상태에서 다음을 따른다)
+* IRQ 값과 현재 작업 상태(레지스터 등)을 커널 스택에 저장한다
+* PIC로 ACK를 보낸다. 그러면 이후에 다시 인터럽트 받는게 가능하다
+* IRQ과 연관된 ISR을 호출
+* ```ret_from_intr()```을 호출하고 종료
+
+
+## Interrupt Vector
+* 각각의 interrupt/exception은 고유한 숫자가 붙는다
+* 0~255 (8 bit)
+* 이를 vector라고 부른다
+
+## IRQ Data Structure (IRQ Descriptor)
+* irq_desc_t[NR_IRQs]
+* struct hw_interrupt_type
+* struct irqaction : ISR, linked list
+
+## Interrupt Handler 실행 과정
+* ```do_IRQ()``` : 인터럽트와 관련된 ISR 전부 호출
+	* ```handle_IRQ_event()```
+	* 끝나기 직전에 ```do_softirq()``` 호출
+* ```handle_IRQ_event()```
+	* linked list로 연결된 ISR 전부 호출
+
+## Nested Executions
+* Why?
+	* PIC와 디바이스의 처리량 향상(인터럽트를 연속해서 받을수 있으니까)
+	* 우선순위 없는 interrupt model 구현
+* Nested의 선조건
+	* interrupt 도중 context switch 발생 불가
+		* Interrupt context에서는 스케줄러 호출 불가
+	* interupt handler 도중 blocking 함수 사용 불가
+	* 실행상태는 kernel stack에 저장한다
+
+## Returning from Interupts and Exceptions
+* Nested 되어있는지 확인하기
+	* 깊이=1이면 커널은 유저모드로 돌아갈 수 있다
+* 대기중인 process switch 요청
+	* ```TIF_NEED_RESCHED```가 1이면 커널은 프로세스 스케줄링을 수행한다.
+	* 그렇지 않으면 현재 프로세스로 통제 넘긴다
+* 대기주인 시그널 있는 경우
+	* 현재 프로세스에서 시그널 받은 경우, 적절히 처리한다.
+* 총료 진입점
+	* ```ret_from_intr()```
+	* ```ret_from_exception()```
+
+## Deferred invocation의 필요성
+* interrupt handler는 process context에서 작동 안한다
+	* 블럭될수 없다. 블럭 함수 사용 불가
+* interrupt handler 처리하는 동안 유저 작업이 멈춘다. 따라서 빨리 처리되어야 한다.
+
+리눅스는 subtask(function call)을 도입해서 나중에 작업을 처리하는 것이 가능하다(Noncritical deferrable 작업 한정)
+
+* interrupt handler는 가장 충요한것만 처리
+* 작업을 나중에 실행하도록 등록
+* interrupt handler는 될수 있는 한 빨리 return
+* **커널의 반응시간을 최소화**
+
+### Linux 접근법
+* softirq : interrupt context
+* tasklet : interrupt context, softirq 기반
+* worker queue : process context
+* softirq, tasklet, work queue에 실행될 게 없기 전까지 user mode로 돌아가지 않는다
+
+## Tasklet
+* Really Lightweight Task
+* Def : a kernel runtine/function with an argument, which can be scheduled to run later in the **interrupt context**
+* 특징
+	* 1번 실행될 것이 보장됨
+	* 작업 직렬화, Nesting 없다 (strictly serialized)
+	* 다른 타입의 tasklet은 여러 CPU에서 동시 실행 가능
+
+## softirq
+* **Software IRQ**
+* Def : Used to run the schduled tasklet
+* 2.6.11의 경우 6가지 존재
+	* HI_SOFTIRQ
+	* TIMER_SOFTIRQ
+	* NET\_TX_SOFTIRQ
+	* NET\_RX_SOFTIRQ
+	* SCSI_SOFTIRQ
+	* TASKLET_SOFTIRQ
+* tasklet용으로는 HI\_SOFTIRQ, TASKLET_SOFTIRQ를 사용한다. 나머지는 사실상 용도가 정해져있으니까.
+
+## do_softirq()
+* 최대 10개의 작업을 꺼내서 처리한다
+* 이것보다 더 많은 작업이 존재하면 ```wakeup_softirqd()```를 호출해서 ksoftirqd를 깨운다.
+* MAX_SOFTIRQ_RESTART = 10, loop
+
+## ksoftirqd Kernel Thread
+* why?
+	* 많은 softirq가 쏟아지는 것을 즉시 처리하면 user-mode로 갈 수 없다. 예를 들면 네트워크 패킷을 많을때 이것을 계속 처리하면 유저 모드 프로세스의 처리가 밀린다 
+* softirq responsiveness vs 유저 모드 작업 latency
+	* sol 1 : ```do_softirq()``` 동안 softirq 무시. 네트워트 반응성 떨어질수 있다. 
+	* sol 2 : softirq를 받는대로 처리. high load 환경에서 do_softirq()가 안끝날수 있다. 이 경우 user mode 작업은 거의 멈춘다 
+
+### ksoftirqd 방식
+* softirq를 즉시 처리하지 않는다. softirq가 많으면 ksoftirqd를 깨운 다음에 이것이 처리한다
+* ksoftirqd의 우선순위느 가장 낮다. 그래서 user mode 프로그램이 실행될 기회가 있다
+* kernel thread는 유저 프로세스 처럼 행동하낟. 스케줄링되서 실행
+
+## work queue
+* worker thread라는 특별한 커널 쓰레드 써서 작업을 나중에 처리한다
+* process context에서 실행된다.
+	* sleep, block 함수도 사용 가능하다
+* 하나의 work queue는 cpu별로 하나의 work thread를 가진다
+* worker thread : 작업이 있으면 큐에서 꺼내서 실행, 없으면 sleep
+* event work-queue는 커널에서 이미 제공한다
+* 대부분의 드라이버는 기본 worker thread를 사용한다.
+
+## Interrupt Control
+* 인터럽트 끄기는 동기화 때문에 필요
+	* critical region 실행 도중 인터럽트 걸리면?
+	* interrupt handler가 현재 코드를 선점하는 것을 막으려고 필요
+* 관련 함수
+	* ```local_irq_disable()```
+	* ```local_irq_enable()```
+	* ```local_irq_save()``` : save + disable
+	* ```local_irq_restore()``` : restore
+* disabl/enable만 있으면 함수 안에서 다시 함수 호출시 인터럽트 꺼놓은게 꼬일수 있다
+* 모든 CPU의 특정 IRQ를 끄는 함수도 존재

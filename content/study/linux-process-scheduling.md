@@ -1,0 +1,184 @@
+Title: Linux Process Scheduling
+Tags: linux, system-programming, schdeuling, schduler, study
+Slug: system-prog-linux-process-schduling
+Author: if1live
+Date: 2014-10-17
+
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다. 
+
+# Linux Process Scheduling
+## Process Schdeuling
+* 언제 switch 할 것인가 + 무엇을 switch 할 것인가?
+* 목표
+	* 빠른 프로세스 반응 시간
+	* 백그라운드 작업의 좋은 처리량(throughput)
+	* 프로세스 기아 방지
+	* high/low-우선순위 프로세스 중재
+
+## 프로세스 분류
+* 전통적인 분류 방법
+	* I/O-bound vs CPU-bound
+* 다른 분류 방법
+	* 인터렉티브 프로세스
+		* 유저가 입력할때 반응해야됨 -> 빠른 반응성 중요
+	* 배치 프로세스
+		* 높은 처리량
+	* 실시간 프로세스
+		* high/low-우선순위 지기키
+		* 데드라인은 무조건 지키기
+
+## Linux Scheduling 기본 원리
+* 스케줄링 정책 : 언제, 어떻게 프로세스를 선택하는 규칙
+* Time Sharing
+	* time quantum 만큼 실행. 끝나면 스케줄링
+* 우선순위 기반(Priority-based)
+	* 정적 우선순위(static priority) : 실행시 결정
+	* 동적 우선순위(dynamic priority) : 런타임 감시하면서 변동
+* Preemptive Scheduling : 선점 스케줄링
+
+## Preemptive
+* block 풀린게 현재 실행중인 프로세스보다 우선순위가 높으면 즉시 우선순위가 높은 작업을 실행한다
+* Running->Exit, Running->Blocked 일때만 ownership 교체 가능하면 non-preemptive
+* Blocked->Ready, Running->Ready(time quantum 소모) 일때도 스케줄링이 가능하면 Preemptive
+
+## POSIX.4
+### SCHED_FIFO
+* **Real-time**
+* 시간 제한 없이 작업을 실행. 같은 우선순위 작업큐에 여러 프로세스 있어도 이전 작업이 끝날때까지 다음것은 실행되지 않는다
+* 선점 발생하는 조건
+	* 작업중인 프로세스가 blocked(ex:I/O)
+	* 우선순위가 더 높은 프로세스가 실행 가능 상태
+	* ```sched_yield()``` 호출
+* priority : 0~99
+* **only supervisor mode**
+
+### SCHED_RR
+* **Real-time**
+* time quantum만큼 실행된다. 같은 우선순위에 여러개의 프로세스가 존재하면 time quantum씩 돌아가면서 실행됨
+* priority : 0~99
+* **only supervisor mode**
+
+### SCHED_OTHER
+* Best-effort
+* 일반적인 프로세스가 이 정책으로 수행된다
+* proiority: 100~139
+
+## O(1) Scheduler
+* 2.4에서는 O(n), 2.6부터는 O(1)
+* 2.6.23부터는 CFS(Completely Fair Schduler)
+	* RB-Tree기반, I/O 까지 추적해서 스케줄링 정책 결정
+* TASK_RUNNING 상태의 프로세스는 자신의 우선순위에 맞는 runqueue에 들어간다
+* 0~139까지 140개의 runqueue
+* runqueue list는 2개가 존재한다. active, expired
+* active에 있는 모든 작업을 처리하면 active와 expired를 바꾼다. 
+* CPU마다 독립적인 runqueue가 존재
+
+## Static Priority
+* 100~139, 기본값=120 (SCHED_OTHER)
+* time quantum 결정 공식
+	* (140 - static\_prio) * 20 (if static_prio < 120)
+	* (140 - static\_prio) * 5 (if static_prio >= 120)
+
+## Dynamic Priority
+좋은 반응시간을 유지하는 것이 목적이다. 
+Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다. 
+
+### I/O Bound
+1. time quantum을 줘도 못쓴다
+2. 근데 반응성 때문에 자주 실행되어야한다
+3. 높은 우선순위 부여
+### CPU Bound
+1. time quantum을 주면 아마도 전부 다 쓸거다
+2. 독점 발생 가능
+3. 낮은 우선순위 부여
+
+## Real-time / Non-Real-time
+* Real-time process
+	* 정적 우선순위만 존재한다
+* SCHED_FIFO
+	* time quantum이 존재하지 않는다
+* SCHED_RR
+	* time quantum이 존재한다. 
+	* expired로 이동하진 않는다. active에서만 움직임
+* active - expired queue list 교체는 TASK_RUNNING 상태의 Real-time 작업이 없을때만 가능하다.
+
+## Scheduling for fork()
+* time quantum은 parent와 child가 적절히 쪼개 갖는다
+	* child = (time_quantum + 1) / 2
+	* parent = (time_quantum) / 2
+	* orig = chlid + parent
+	* child >= parent
+	* ex: orig=9, child=5, parent=4
+	* ex: orig=1, child=1, parent=0
+* fork한 다음에 child와 parent의 time quantum의 합이 원래보다 크면 불공평 발생(계속 fork할 경우 독점 가능)
+* 부모보다 자식한테 quantum을 더 준다. 자식이 fork후에 실행되서 유저 스택 페이지 복사와 같은 작업을 할 수 있다.
+
+## Scheduler 관련 함수
+* ```schedule()```
+* ```schduler_tick()``` : 매 tick마다 호출
+* ```try_to_wake_up()```
+
+## Invocation
+* Direct Invocation
+	* 현재 프로세스가 직접 ```schduele()``` 함수를 호출
+	* 현재 프로세스가 **리소스를 사용할수 없어서 블럭될 경우 발생**
+	* Non-preemptive에서도 가능
+* Lazy Invocation 
+	* TIF\_NEED\_RESCHED 플래그를 올려놓으면 나중에 스케줄러가 호출된다
+	* 유저 모드 프로세스를 실행하기 전에 flag를 확인한다.
+		* 시스템콜 끝나고 리턴
+		* 인터럽트 핸들러 끝나고 리턴(timer interrupt 같은거 포함)
+		* etc... 
+	* **Preemptive CPU Scheduling 에서만 가능**
+
+### Direct Invocation
+* 현재 프로세스가 블럭될때 커널은 다음 작업을 수행한다
+	1. current를 wait queue에 집어넣는다
+	2. current state = TASK\_INTERRUPTIBLE or TASK_UNINTERRUPTIBLE
+	3. ```schduler()``` 호출
+	4. 리소스가 사용가능한지 확인, 사용할수 없으면 2번으로
+	5. 리소스를 사용할수 있으면 current를 대기큐에서 제거
+	
+### Lazy Invocation
+* current 프로세스의 ```TIF\_NEED\_RESCHED```가 1이면 발생
+* 발생 가능한 경우
+	* time quantum을 전부 사용한 경우(timer interrupt)
+		* ```scheduler_tick()```
+	* 새로 깨어난 프로세스의 우선순위가 현재보다 높은 경우
+		* ```try_to_wake_up()```
+	* ```sched_setscheduler()```, ```sched_yield()``` 호출
+
+## schdule()
+* 적절한 작업을 runqueue에서 선택하기
+* ```switch_mm()``` : virtual address space 교체
+* ```switch_to(prev, next, prev)``` : context switch
+
+## Preemption
+* linux 2.4까지는 non-preemptive
+
+### User-Mode Preemption
+* 커널이 user-space로 되돌아갈때 TIF\_NEED\_RESCHED 확인해서 스케줄러가 동작
+
+### Kernel-Mode Preemption
+* 2.6부터 full preemptive
+* 커널 모드에서도 preempt 가능
+	* 장점 : 현재 프로세스가 user mode 진입할 때 까지 기다리지 않아도 된다. (user-mode preemption만 가능할 경우)
+
+## Kernel Preemption
+* 락이 걸려있지 않을때만 kernel mode에서 preempt 가능
+* struct thread\_info의 preempt\_count 이용
+	* preempt_count : default=0, preemptable
+	* lock 획득 -> preempt_count++
+	* lock 놓기 -> preempt_count--
+* interrupt끝나고 kernel space진입할때 다음을 처리
+	* TIF\_NEED\_RESCHED==1 and preempt_count==0
+		* reschedule
+	* TIF\_NEED\_RESCHED==1 and preempt_count>0
+		* 락이 풀릴때까지 스케줄링 연기
+
+## Multiprocess scheduling
+* Runqueue는 CPU마다 독립적으로 존재한다
+* 프로세스는 한쪽에만 존재할수 있다. 동시에 양쪽에 존재 못함
+* 작업은 일반적으로 했던 CPU에서 다시 실행
+	* CPU를 건너다니면 캐시 miss
+* CPU별로 로드밸런싱이 필요 
