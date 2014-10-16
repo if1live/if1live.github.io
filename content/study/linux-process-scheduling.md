@@ -5,7 +5,7 @@ Slug: system-prog-linux-process-schduling
 Author: if1live
 Date: 2014-10-17
 
-시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다. 
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 
 # Linux Process Scheduling
 ## Process Schdeuling
@@ -71,7 +71,7 @@ Date: 2014-10-17
 * TASK_RUNNING 상태의 프로세스는 자신의 우선순위에 맞는 runqueue에 들어간다
 * 0~139까지 140개의 runqueue
 * runqueue list는 2개가 존재한다. active, expired
-* active에 있는 모든 작업을 처리하면 active와 expired를 바꾼다. 
+* active에 있는 모든 작업을 처리하면 active와 expired를 바꾼다.
 * CPU마다 독립적인 runqueue가 존재
 
 ## Static Priority
@@ -81,8 +81,9 @@ Date: 2014-10-17
 	* (140 - static\_prio) * 5 (if static_prio >= 120)
 
 ## Dynamic Priority
-좋은 반응시간을 유지하는 것이 목적이다. 
-Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다. 
+좋은 반응시간을 유지하는 것이 목적이다.
+Sleep time을 이용해서 프로세스별로 다른 우선순위를 준다.
+**nice**
 
 ### I/O Bound
 1. time quantum을 줘도 못쓴다
@@ -99,7 +100,7 @@ Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다.
 * SCHED_FIFO
 	* time quantum이 존재하지 않는다
 * SCHED_RR
-	* time quantum이 존재한다. 
+	* time quantum이 존재한다.
 	* expired로 이동하진 않는다. active에서만 움직임
 * active - expired queue list 교체는 TASK_RUNNING 상태의 Real-time 작업이 없을때만 가능하다.
 
@@ -124,12 +125,12 @@ Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다.
 	* 현재 프로세스가 직접 ```schduele()``` 함수를 호출
 	* 현재 프로세스가 **리소스를 사용할수 없어서 블럭될 경우 발생**
 	* Non-preemptive에서도 가능
-* Lazy Invocation 
+* Lazy Invocation
 	* TIF\_NEED\_RESCHED 플래그를 올려놓으면 나중에 스케줄러가 호출된다
 	* 유저 모드 프로세스를 실행하기 전에 flag를 확인한다.
 		* 시스템콜 끝나고 리턴
 		* 인터럽트 핸들러 끝나고 리턴(timer interrupt 같은거 포함)
-		* etc... 
+		* etc...
 	* **Preemptive CPU Scheduling 에서만 가능**
 
 ### Direct Invocation
@@ -139,9 +140,9 @@ Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다.
 	3. ```schduler()``` 호출
 	4. 리소스가 사용가능한지 확인, 사용할수 없으면 2번으로
 	5. 리소스를 사용할수 있으면 current를 대기큐에서 제거
-	
+
 ### Lazy Invocation
-* current 프로세스의 ```TIF\_NEED\_RESCHED```가 1이면 발생
+* current 프로세스의 ```TIF_NEED_RESCHED```가 1이면 발생
 * 발생 가능한 경우
 	* time quantum을 전부 사용한 경우(timer interrupt)
 		* ```scheduler_tick()```
@@ -149,7 +150,7 @@ Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다.
 		* ```try_to_wake_up()```
 	* ```sched_setscheduler()```, ```sched_yield()``` 호출
 
-## schdule()
+## schedule()
 * 적절한 작업을 runqueue에서 선택하기
 * ```switch_mm()``` : virtual address space 교체
 * ```switch_to(prev, next, prev)``` : context switch
@@ -182,4 +183,4 @@ Sleed time을 이용해서 프로세스별로 다른 우선순위를 준다.
 * 프로세스는 한쪽에만 존재할수 있다. 동시에 양쪽에 존재 못함
 * 작업은 일반적으로 했던 CPU에서 다시 실행
 	* CPU를 건너다니면 캐시 miss
-* CPU별로 로드밸런싱이 필요 
+* CPU별로 로드밸런싱이 필요

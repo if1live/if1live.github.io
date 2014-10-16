@@ -5,7 +5,7 @@ Slug: sytem-prog-study-interrupt-and-exceptions
 Author: if1live
 Date: 2014-10-17
 
-시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다. 
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 
 # Interrupt and Exceptions
 ## Interrupt vs Exception
@@ -101,7 +101,7 @@ Date: 2014-10-17
 ### Processor-detected exceptions
 * CPU가 특별한 상황에서 발생시킴
 * Fault
-	* 의도하지 않은 상황 
+	* 의도하지 않은 상황
 	* 아마 복구 가능한
 	* 명령은 fault 발생부터 다시 실행, 또는 종료
 		* page-fault (복구가능)
@@ -117,7 +117,7 @@ Date: 2014-10-17
 	* 현재 프로그램 종료
 		* 치명적인 하드웨어 실패(parity error, ...)
 		* etc
-		* 
+
 ### Programmed exceptions(software interrupts)
 * 프로그래머가 의도적으로 발생시킨다
 	* int, int3, etc..
@@ -158,10 +158,10 @@ Date: 2014-10-17
 * CPU 통제가 인터럽트 핸들러로 넘어갈때
 	1. 발생한 인터럽트에 해당하는 vector i 알아냄
 	2. idtr 레지스터가 가리키는 IDT에서 i번쨰 엔트리를 읽는다(엔트리에는 인터러브 게이트나 트랩 게이트 들어있음)
-	3. gdtr 레지스터에서 GDT의 기본 주소 가져와서 IDT 엔트리에 있는 셀렉터가 가리키는 세그먼트 디스크립터를 GDT에서 읽어들인다. 디스크립터는 인터럽트 핸들러가 포함된 세그먼트의 시작 주소를 지정 
+	3. gdtr 레지스터에서 GDT의 기본 주소 가져와서 IDT 엔트리에 있는 셀렉터가 가리키는 세그먼트 디스크립터를 GDT에서 읽어들인다. 디스크립터는 인터럽트 핸들러가 포함된 세그먼트의 시작 주소를 지정
 	4. 인터럽트가 인증된 곳에서 발생했는지 검증. CPL(current privilege level)과 DPL(Descriptor privilege level) 비교
 	5. privilege level을 바꿀지 결정
-		1. 새로운 특권 수준과 관련된 ss, esp 설정  
+		1. 새로운 특권 수준과 관련된 ss, esp 설정
 		2. 이전 특권 수준의 ss, esp를 커널 스택에 저장
 	6. fault의 경우 cs, eip를 예외 발생시킨 논리 주소로 변경(fault는 fault 발생지점부터 재시작 해야되니까)
 	7. eflags, cs, eip를 커널 스택에 저장
@@ -171,7 +171,7 @@ Date: 2014-10-17
 	1. cs, eip, eflags 커널 스택에서 복구
 	2. 핸들러의 CPL 확인
 	3. ss, esp 를 커널 스택에서 복구
-	4. 접근레벨 통제하려고 ds, es, fs, gs 확인 
+	4. 접근레벨 통제하려고 ds, es, fs, gs 확인
 
 ## Exception Handling
 * 현재 작업 상태(레지스터 등등)을 커널 스택에 저장
@@ -185,10 +185,10 @@ Date: 2014-10-17
 	* 실제 처리는 signal을 받을 때까지 지연됨. 그래서 커널은 빨리 처리 가능하다
 * Interrupt handling
 	* UNIX Signal 안보낸다
-	* 관계있는 프로세스가 멈춰있고 관계있는 프로세스가 실행중이 아니 상태에서 발생할때가 많다. 
+	* 관계있는 프로세스가 멈춰있고 관계있는 프로세스가 실행중이 아니 상태에서 발생할때가 많다.
 
 ### Interrupt Context
-* Interrupt handler가 작동하는 구산, 기간, 영역
+* Interrupt handler가 작동하는 구간, 기간, 영역
 * interrupt handler는 잠들 수 없다
 * user-space에 접근 불가능
 * scheduler 호출 불가능
@@ -197,12 +197,12 @@ Date: 2014-10-17
 	* 인터럽트는 프로세스가 원한게 아닌데(호출한 프로세스랑 받을때의 프로세스가 다를 확률이 높다) 스케줄링 당하면 불공평
 
 ## I/O Interrupts
-* 인터러트 종류
+* 인터럽트 종류
 	* I/O interrupt
 	* Timer Interrupt
 	* Interprocessor interrupts
 *  I/O Interrupts
-	*  모든 핸들러가 동일한 우선순위는 아니다. 
+	*  모든 핸들러가 동일한 우선순위는 아니다.
 	*  인터럽트 핸들러는 block 함수 못 쓴다(ex: IO disk operation)
 		* 인터럽트 핸들러 실행하는 동안 프로세스가 TASK_RUNNING을 유지하려고
 
@@ -216,7 +216,7 @@ Date: 2014-10-17
 	* softirq
 	* tasklet
 	* work queue
-	
+
 ## Interrupt Handler
 * (kernel mode에 진입한 상태에서 다음을 따른다)
 * IRQ 값과 현재 작업 상태(레지스터 등)을 커널 스택에 저장한다
@@ -231,9 +231,9 @@ Date: 2014-10-17
 * 이를 vector라고 부른다
 
 ## IRQ Data Structure (IRQ Descriptor)
-* irq_desc_t[NR_IRQs]
-* struct hw_interrupt_type
-* struct irqaction : ISR, linked list
+* ```irq_desc_t[NR_IRQs]```
+* ```struct hw_interrupt_type```
+* ```struct irqaction``` : ISR, linked list
 
 ## Interrupt Handler 실행 과정
 * ```do_IRQ()``` : 인터럽트와 관련된 ISR 전부 호출
@@ -258,7 +258,7 @@ Date: 2014-10-17
 * 대기중인 process switch 요청
 	* ```TIF_NEED_RESCHED```가 1이면 커널은 프로세스 스케줄링을 수행한다.
 	* 그렇지 않으면 현재 프로세스로 통제 넘긴다
-* 대기주인 시그널 있는 경우
+* 대기중인 시그널 있는 경우
 	* 현재 프로세스에서 시그널 받은 경우, 적절히 처리한다.
 * 총료 진입점
 	* ```ret_from_intr()```
@@ -305,14 +305,14 @@ Date: 2014-10-17
 ## do_softirq()
 * 최대 10개의 작업을 꺼내서 처리한다
 * 이것보다 더 많은 작업이 존재하면 ```wakeup_softirqd()```를 호출해서 ksoftirqd를 깨운다.
-* MAX_SOFTIRQ_RESTART = 10, loop
+* ```MAX_SOFTIRQ_RESTART``` = 10, loop
 
 ## ksoftirqd Kernel Thread
 * why?
-	* 많은 softirq가 쏟아지는 것을 즉시 처리하면 user-mode로 갈 수 없다. 예를 들면 네트워크 패킷을 많을때 이것을 계속 처리하면 유저 모드 프로세스의 처리가 밀린다 
+	* 많은 softirq가 쏟아지는 것을 즉시 처리하면 user-mode로 갈 수 없다. 예를 들면 네트워크 패킷을 많을때 이것을 계속 처리하면 유저 모드 프로세스의 처리가 밀린다
 * softirq responsiveness vs 유저 모드 작업 latency
-	* sol 1 : ```do_softirq()``` 동안 softirq 무시. 네트워트 반응성 떨어질수 있다. 
-	* sol 2 : softirq를 받는대로 처리. high load 환경에서 do_softirq()가 안끝날수 있다. 이 경우 user mode 작업은 거의 멈춘다 
+	* sol 1 : ```do_softirq()``` 동안 softirq 무시. 네트워트 반응성 떨어질수 있다.
+	* sol 2 : softirq를 받는대로 처리. high load 환경에서 do_softirq()가 안끝날수 있다. 이 경우 user mode 작업은 거의 멈춘다
 
 ### ksoftirqd 방식
 * softirq를 즉시 처리하지 않는다. softirq가 많으면 ksoftirqd를 깨운 다음에 이것이 처리한다

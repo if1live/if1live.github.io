@@ -5,7 +5,7 @@ Slug: system-prog-linux-processes
 Author: if1live
 Date: 2014-10-17
 
-시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다. 
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 
 
 # Linux Processes
@@ -15,9 +15,9 @@ Date: 2014-10-17
 ### User Mode
 * Level 3
 	* 권한 제한되어있음
-	* 일반적인 프로그램 
+	* 일반적인 프로그램
 ### Kernel Mode
-* Level 1
+* Level 0
 	* 커널의 모든 영역 접근 가능
 * 진입방법
 	* system call
@@ -27,8 +27,8 @@ Date: 2014-10-17
 ### Execution Within User Processes
 * 커널은 유저 프로세스에 붙어서 작동한다
 * Mode Switch = user mode <-> kernel mode
-* 0~3G : User Address Space
-* 3~4G : Kernel Address Space
+* 0~3GB : User Address Space
+* 3~4GB : Kernel Address Space
 * User Address Space/Kernel Address Space 이동이 Mode switch
 * 실행 소유권은 유저한테 있다. 커널은 유저측을 빌려서 사용하는 형태
 * Mode switch overhead는 낮다
@@ -36,6 +36,7 @@ Date: 2014-10-17
 ## Process(프로세스)
 * Process
 	* an instance of a running program
+
 ### 프로세스의 구조
 * Images
 	* Code : 기계어(.text)
@@ -47,7 +48,7 @@ Date: 2014-10-17
 		* program counter(PC)
 		* stack pointer(SP)
 	* Kernel Context
-		* pid, gid, fs, etc...  
+		* pid, gid, fs, etc...
 
 ### Process 메모리 구조
 * .text : program text, code segment, read-only
@@ -67,7 +68,8 @@ Date: 2014-10-17
 	* Kernel Context(공유)
 	* code, data, stack
 
-Process Context = Program Context + Kernel Context 라는걸 기억하자. 이를 쪼개서 program context(data register, SP, PC)의 이름을 Thread Context로 바꿨을 뿐이다.  
+Process Context = Program Context + Kernel Context 라는걸 기억하자.
+이를 쪼개서 program context(data register, SP, PC)의 이름을 Thread Context로 바꿨을 뿐이다.
 
 ## Process State
 ### General Model
@@ -158,14 +160,14 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 * TASK_RUNNING
 	* 실행 상태의 프로세스는 runqueue를 이용해서 연결된다.
 	* 스케줄링할때 접근속도를 빠르게 하는것이 목적
-	* 자새한 것은 scheduling에서 다룬다
+	* 자세한 것은 scheduling에서 다룬다
 	* task\_struct의 run_list를 이용해서도 연결
-* TASK\_STOPPED, TASK_ZOMBIE 
+* TASK\_STOPPED, TASK_ZOMBIE
 	* 특별한 리스트로 연결하지 않는다
 * TASK\_INTERRUPTIBLE, TASK_UNINTERRUPTIBLE
 	* 여러 자료구조에 연결됨
 	* waiting queue에 연결
- 
+
 ### Waiting Queue
 * sleeping processes로 구성됨
 * 특정 조건이 갖춰지면 작업을 깨운다
@@ -176,9 +178,9 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 * 발생 조건
 	* 프로세스가 스스로 잠들었다
 	* 프로세스가 종료됨
-	* 프로세스가 시스템콜을 끝내고 유저모드로 돌아오는데 프로세스를 돌릴수 있는 상태가 적절한 아니다. 
+	* 프로세스가 시스템콜을 끝내고 유저모드로 돌아오는데 프로세스를 돌릴수 있는 상태가 적절한 아니다.
 	* 프로세스가 인터럽트 처리를 끝내고 유저모드로 돌아왔는데 우선순위 문제로 실행자격이 없을때
-	* time quantum을 전부 썼다
+ 		* time quantum을 전부 썼다
 * 간단한 과정
 	* context switch를 할지, 현재 허용되어있는지를 확인
 	* 옛날 프로세스의 실행상태를 저장
@@ -186,7 +188,7 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 	* 선택된 프로세스의 실행상태 복구
 * 용어. 전부 같은 뜻
 	* task switching
-	* context switching 
+	* context switching
 	* process switching
 * 상세 절차
 	1. 이전 프로세스의 실행상태(EIP, ESP, ...)를 이전 프로세스의 커널 스택에 저장한다
@@ -200,7 +202,7 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 * 프로세스를 다시 실행하기전에 CPU 레지스터에 올려야 하는 데이터
 * thread_struct thread와 커널 스택이 저장
 	* eip, esp와 같은것은 thread_struct에 저장
-	* thread_struct에 없는 수많은 레지스터는 커널 스택에 저장   
+	* thread_struct에 없는 수많은 레지스터는 커널 스택에 저장
 
 ### Process Switch
 * 관련 코드
@@ -211,7 +213,7 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 	* CPU 상태를 이전 커널 스택에 저장
 	* **esp**를 새로운 프로세스의 것으로 교체
 	* **eip**를 새로운 프로세스의 것으로 교체
-	* 새로운 프로레스 준비 완료 
+	* 새로운 프로레스 준비 완료
 * switch_to macro 상세
 	* flags, ebp와 같은 CPU 상태를 prev 커널 스택에 저장
 	* esp를 prev 프로세스 thread_struct의 esp에 저장
@@ -229,9 +231,9 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 	* 각각의 프로세스는 공유되는 것이 없다.
 	* 그래서 중복되는게 많다. 비효율적
 * Thread 구현방법
-	* User-level thread
+	* User-level threads
 		* 한 thread에서 block걸리면 모든 thread가 blocked
-	* Kernel-level thread
+	* Kernel-level threads
 	* combined thread : 잡탕, 패스
 
 ### Lightweight Process
@@ -273,7 +275,7 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 	* **스케줄링 가능**하다. 프로세스처럼 취급
 	* **kernel mode에서만 작동**한다
 		* user mode address space가 없다
-		* 3~4G 영역의 메모리만 존재
+		* 3~4GB 영역의 메모리만 존재
 	* 다른 커널 쓰레드와 kernel address space 공유
 	* kernel data struct(ex: open file descriptor)도 공유
 
@@ -284,8 +286,8 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 * 인터럽트 활성화
 * process 1 실행(이것도 커널 쓰레드)
 * process 1 생성후 ```cpu_idle()``` 호출하고 대기
-* TASK_RUNNING 상태의 프로세스가 없으면 스케쥴러가 process 0 선택
-* 각각의 CPU마다 process 0 존재 
+* TASK_RUNNING 상태의 프로세스가 없으면 스케줄러가 process 0 선택
+* 각각의 CPU마다 process 0 존재
 
 ## Process 1 == init
 * 커널 완전히 초기화
@@ -304,4 +306,4 @@ Process Context = Program Context + Kernel Context 라는걸 기억하자. 이�
 * 프로세스 제거
 	* 부모가 ```wait()```을 호출해서 종료값 읽기 전까지 지우지 않는다. 부모가 exit code를 읽으면 제거 가능
 	* ```release_task()``` : 좀비 프로세스의 PCB 해제
-	* 8KB 메모리 회수 : thread_info + kernel stack  
+	* 8KB 메모리 회수 : thread_info + kernel stack
