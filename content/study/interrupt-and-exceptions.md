@@ -1,4 +1,5 @@
 Title: Interrupt and Exceptions
+Subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
 Tags: linux, system-programming, interrupt, exception, study
 Slug: sytem-prog-study-interrupt-and-exceptions
 Author: if1live

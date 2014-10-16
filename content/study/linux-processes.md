@@ -1,4 +1,5 @@
 Title: Linux Processes
+Subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
 Tags: linux, system-programming, process, study
 Slug: system-prog-linux-processes
 Author: if1live
