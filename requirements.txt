@@ -1,4 +1,4 @@
-pelican==3.3.0
+git+https://github.com/if1live/pelican.git@master
 markdown==2.5
 beautifulsoup4==4.3.2
 webassets==0.10.1
