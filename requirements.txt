@@ -1,8 +1,8 @@
 git+https://github.com/if1live/pelican.git@master
-markdown==2.5
+markdown==2.5.1
 beautifulsoup4==4.3.2
 webassets==0.10.1
-pillow==2.5.3
+pillow==2.6.1
 docutils==0.12
 pelican_youtube==0.1.0
 pelican-jsfiddle==0.1.0
