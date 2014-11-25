@@ -14,7 +14,7 @@
 {% if article.tags or article.category or article.keywords %}
 {% set meta_keywords = article.category|string %}
 {% if article.tags %}
-{% set meta_keywords = meta_keywords + article.tags|join(', ') %}
+{% set meta_keywords = meta_keywords + ', ' + article.tags|join(', ') %}
 {% endif %}
 {{ article.keywords }}
 <meta name="keywords" content="{{ meta_keywords }}" />
