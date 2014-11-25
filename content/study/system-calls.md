@@ -1,6 +1,6 @@
 Title: System Calls
 Subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
-Tag: linux, system-programming, system-call
+Tags: linux, system-programming, system-call
 Slug: system-prog-system-call
 Author: if1live
 Date: 2014-11-22

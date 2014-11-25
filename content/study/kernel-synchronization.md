@@ -1,6 +1,6 @@
 Title: Kernel Synchronization
 Subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
-Tag: linux, system-programming, synchronization
+Tags: linux, system-programming, synchronization
 Slug: system-prog-kernel-synchronization
 Author: if1live
 DAte: 2014-11-24
