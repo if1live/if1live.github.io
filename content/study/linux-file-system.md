@@ -1,0 +1,279 @@
+Title: Linux File System
+Subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
+Tags: linux, system-programming, filesystem
+Slug: system-programming-linux-file-system
+Author: if1live
+Date: 2014-12-04
+
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
+
+## Linux File System
+* File System
+    * 커널 및 외부 메모리안의 파일 시스템의 디렉토리를 관리하는 커널 서브 시스템
+    * 저장 장치안의 블럭에 파일 이름을 맵핑
+* Linux supports many file system types
+    * 다양한 파일시스템마다 별도로 구현되어있다
+    * 일반적으로 LKM(loadable module)로 구현
+* Linux supports many file system instance
+    * instance == mount된 파일 시스템
+    * 리눅스는 "root" file system을 갖는다.
+
+## File System Software Architecture
+* Common file system interface
+    * `open()`, `close()`, `seek()`, etc
+* VFS Layer
+    * ext2, vfat, minix, etc
+        * Disk-based file system
+        * Block device layer
+    * NFS, samba, etc
+        * Network-based file system
+        * Networking
+    * proc, dev
+        * Virutal/Speical file system
+        * No real disk space
+
+        
+## VFS Layer
+* Virtual File System(VFS)
+    * 표준 유닉스 파일시스템과 관련된 모든 시스템콜을 수행하는 커널 레이어
+* 목적
+    * 유저 모드 프로세스에 동일한 인터페이스를 제공
+    * 다양한 파일 시스템 구현체를 위한 커널 추상화
+* 기능
+    * 파일, 파일시스템과 관련된 시스템콜
+    * 모든 파일과 파일시스템에 관려된 자료구조 관리
+    * 파일시스템을 조회, 순회하는 효율적인 함수
+    * 특정 파일 시스템 모듈과 상호작용
+* 예제
+    * `cp /flopy/test /tmp/test`
+    * src 파일시스템과 dst 파일시스템이 다르더라도 동작
+    * 각각의 파일시스템에 독립적 
+
+## 4 Basic VFS Object
+### super block
+* 파일 시스템 관련
+* 각각의 마운트된 파일시스템은 superblock 객체를 갖는다
+
+### inode
+* 특정 파일 관련
+* 모든 파일은 디스크상의 inode 레코드로 표현된다
+* 일부는 커널 메모리에 inode 객체로 로드된다
+
+### dentry
+* 디렉토리 트리 구조 관련
+* 디렉토리 안의 각각의 엔트리는 dentry로 표현된다
+* 파일경로-inode를 매핑하는 목적
+
+### file
+* 프로세스가 소유하는 열린 파일 관련
+* 각각의 task은 파일 핸들에 의해 열린 파일을 추적
+
+## VFS Object Relationships
+* In kernel Memory
+    * superblock -> dentry
+    * dentry -> dentry or inode
+    * inode
+    * file -> dentry
+* On disk
+    * superblock
+    * inode blocks
+    * data blocks
+
+* dentry와 inode
+    * dentry는 커널 메모리에만 상주
+    * inode는 디스크상에서 상주하지만 접근이 필요할때 메모리로 로드됨
+        * 변화가 생기는 경우, 디스크로 다시 커밋
+    * 디스크 파일과 inode는 1:1 매핑
+    * 하나의 file(inode)는 여러 개의 dentry와 매핑된다
+        * hardlink
+    
+
+## Object Methods
+* 각각의 VFS 객체마다 operation table을 갖는다
+* 함수 포인터 들어있는 구조체
+* **VFS 레이어에서 사용하는 인터페이스**
+    * 실제 함수는 파일시스템 모듈에서 구현된다
+    * operation table은 VFS 객체가 로드/초기화 될 때 채워진다.
+* super_operations
+    * `read_inode()`, `sync_fs()`, ...
+* inode_operations
+    * `create()`, `link()`, ...
+* dentry_operations
+    * `d_compare()`, `d_delete()`, ...
+* file_operations
+    * `read()`, `write()`, ...
+
+## Memory Management
+* VFS 객체를 위한 메모리는 slab 할당자가 처리
+    * `kmem_cache_alloc()`
+
+## VFS superblock Kernel Code
+### Data Structure
+* 마운트된 파일 시스템을 위한 커널 자료구조
+* include/linux/fs.h : `struct super_block`
+    * s_op : superblock operation table
+    * s\_fs\_info : 특정 파일 시스템과 관련된 정보. 예를 들면 ext2
+
+### Methods (Operations)
+* 파일시스템 인스터스와 관련된 연산 집합
+* `struct super_operations`
+* 파일시스템 별로 구조체의 함수포인터에 적절히 연결
+* ext2 file system 참고
+
+## VFS dentry Kernel Code
+
+### Data Structure
+* 디렉토리 엔트리용 커널 자료구조
+    * VFS는 종종 디렉토리 특화 연산을 수행할 필요가 있다.(예를 들면 파일경로 조회) dentry 객체는 이를 쉽게 한다. 
+    * dentry는 경로의 특정 구성 요소
+    * dentry 객체는 파일을 포함한 모든 경로 요소이다.
+        * `/bin/vi` 는 3개의 dentry 객체를 가진다. `/`, `bin` (directory), `vi` (file)
+    * dentry 객체는 디스크 상의 데이터 구조의 해당하지 않는다.
+        * VFS가 시스템 실행도중 문자열로 표현된 경로명에서 dentry를 생성한다.
+    * 커널은 프로세스가 조회하는 경로이름의 모든 컴포넌트에 해당하는 dentry 객체를 생성한다. dentry 객체는 해당 inode에 구성 요소를 연결
+* include/linux/dcache.h : `struct dentry`
+    * d_op : dentry operation table
+
+### Methods (Operations)
+* 파일시스템 독립적인 dentry 연산 모음
+* 파일시스템 독립점인 일반 함수
+    * include/linux/dcache.h
+    * `d_add()`, `d_alloc()`, `d_lookup()`, ...
+* dentry cache
+    * dentry 다루는 효율성 최대화
+    * 최근에 접근(또는 해제)한 dentry는 성능목적으로 캐싱된다. (slab cache 사용)
+
+## The dentry cache
+* `/opt/sysprog/uml/README.txt`가 있다고 가정
+    * 파일에 접근할때마다 커널은 root dentry `/`부터 `README.txt`를 위한 dentry까지 순회해야 한다.
+    * 시간이 오래 걸리는 작업
+* dentry cache는 최근에 사용한 dentry를 메모리에 저장해놓는다
+    * 해시 테이블과 해시 함수를 이용해서 주어진 경로와 연관된 dentry 객체를 빠르게 찾는다
+        * `/opt/sysprog/uml/README.txt`를 dcache에서 조회
+    * dentry가 dcache에 있으면 그것을 반환
+    * 없으면 `/` -> `opt` -> `syprog` ...를 순서대로 따라가는 작업 수행
+
+## dentry Lists (Tree Layout)
+* 트리 구조 : 부모 포인터와 자식 리스트
+* 디렉토리 구조에 따라서 구성
+* dentry 구조체 안의 `d_parent`, `d_subdirs`, `d_child`
+
+## dentry Lists (Hash/Free/Alias)
+* dentry 해시 리스트
+    * 파일이름을 이용해서 dentry 객체를 빠르게 조회
+    * 해시 충돌은 d_hash로 연결됨
+* 사용하지 않는 dentry 목록 (free list)
+    * d_lru 필드로 연결됨
+* alias 목록 (같은 inode를 가리키는 다른 dentry)
+    * d_alias 필드로 연결
+
+## VFS inode Kernel Code
+* file을 위한 커널 자료구조
+    * 파일을 처리하기 위해 파일 시스템에 필요한 모든 정보는 inode에 들어있다
+    * 디스크에 존재하는 각각의 파일은 하나의 고유한 inode number와 디스크상의 inode 레코드로 표현된다
+* 파일에 접근하려면...
+    * VFS inode 객체를 커널 메모리에 할당
+    * inode 레코드를 디스크에서 불러오기
+* include/linux/fs.h : `struct inode`
+    * inode_operations : inode operations table
+
+## VFS file Kernel Code
+
+* 프로세스에 의해 열린 파일을 위한 커널 자료구조
+* file 객체는 단지 열려있는 파일의 프로세스의 관점을 나타낸다
+* file 객체는 실제로 열려있는 dentry 파일을 가리킨다
+* file 객체는 열려있는 파일의 메모리상의 표현이다. 그것은 실제 디스크상의 데이터와는 대응되지 않는다.
+* 열기 = open() system call, 파괴 : close() system call
+* 하나에 파일에 대응되는 여러개의 file 객체가 존재할 수 있다.
+* include/linux/fs.h : `struct file`
+    * f_open : file operations
+
+## Access from Task Structure
+* include/linux/sched.h : `task_struct`
+* include/linux/fs_struct.h : `struct fs_struct *fs`
+    * task가 돌아가고 있는 파일시스템 정보
+    * struct dentry *root, *pwd field
+* include/linux/file.h : `struct file_struct *files`
+    * task가 연 파일 목록
+    * struct file **fd
+    * task가 연 파일에 접근하기 : t->files->fd[i]
+
+## Filesystem Types
+* 배경
+    * VFS는 커널안에 포함된 모든 파일 시스템 코드를 추적해야 한다.
+    * 파일시스템 타입 등록의 필요성
+* 파일시스템 타입
+    * 파일 시스템 구현체를 위한 커널 레코드
+    * include/linux/fs.h : `struct file_system_type`
+    * built-in 또는 파일시스템 모듈 목록. linked list
+    
+## Mounting a Filesystem
+* 파일시스템 마운트
+    * 각각의 파일 시스템 인스턴스는 트리
+    * 마운트 : 한 파일시스템 트리의 루트를 다른 것의 leaf로 넣어서 더 큰 트리 만들기
+* 용어
+    * 마운트 포인트 : 파일 시스템 트리가 삽입되는 디렉토리
+    * 마운트된 파일시스템의 루트 디렉토리
+    * 루트 파일시스템
+* `mount -t ext2 /dev/fd0 /flp`
+* include/linux/mount.h : `struct vfsmount`
+    * 마운트된 파일시스템 인스턴스 표현
+
+## Walking a Path
+* 경로이름 조회
+    * 어떻게 VFS는 해당 경로에서 inode를 유도하는가?
+    * 경로이름 분석 및 그것을 파일이름의 시퀀스로 쪼개기
+    * 자주 사용되는 VFS 프로시저
+* dentry부터 시작
+    * dentry cache는 속도가 빠른 조회용 프로시저 (LRU 기반. 이전내용 참고)
+    * `/`로 시작하는 경로 이름 : current -> fs -> root
+    * 그렇지 않으면... : current->fs->pwd
+* 경로 따라갈때의 특별한 조작
+    * 심볼릭 링크 (루프 확인)
+    * 접근 권한
+    * 다른 파일 시스템에 마운트 포인트를 교차
+* fs/namei.c : `path_lookup(name, flags, nd)`
+    * `link_path_walk(name, nd)` 호출 : 실제 이름 확인하는 함수. 경로 이름을 최종 dentry로 바꿈
+    * nameidata 구조체 (nd)은 경로이름의 조회 작업에 관한 데이터로 채워진다.
+
+## open() System Call
+1. 유저 프로세스 : `fd = open("xxx", O_RDWR, 0)`
+2. System Call `sys_open()` 호출
+3. `sys_open()` -> `flip_open()`
+    1. `open_namei()` 호출해서 파일 여는게 가능한지 확인
+    2. `dentry_open()` 호출
+        1. `f->f_op->open(inode, f)`
+        2. f_op : file operations table. 진짜로 파일 열기
+
+*  다른 시스템콜 (read)도 이와 유사한 구조
+
+## Linux File Locking
+* 2가지 advisory lock 제공
+    * Advisory lock : 프로그램들이 잠금 파일을 협동적으로 사용
+    * `fcntl()` / `flock()`
+* POSIX fcntl() : FL_POSIX
+    * 프로세스와 inode에 연관됨
+    * 파일의 일부에만 락 걸기 가능
+        * 하나의 파일, 여러 개의 락
+        * overlap 가 없으면 동시 접근 허용
+* BSD flock() : FL_FLOCK
+    * file 객체와 연관됨
+    * 파일 전체에 락 걸기
+* mandatory lock 제공
+    * 커널은 open(), read(), write() 호출될때마다 확인함
+    * 파일시스템 별로 활성화/비활성화 가능
+    * mount() 시스템콜 사용시 MS_MANDLOCK 플래그 사용 (기본값: off)
+    
+
+## VFS Data Structure : Summary
+* 4가지 기본 자료구조
+    * superblock : 파일시스템 인스턴스
+    * inode : 특정 파일
+    * dentry : 디렉토리 트리 구조
+    * file : 프로세스에 의해서 열린 파일 핸들
+* 각각의 파일시스템 구현체는 함수 집합을 제공
+    * ext2용 file operations, superblock operations,...
+* 다른 자료형
+    * file\_system\_type : 다른 파일시스템 구현 정보
+    * vfsmount : 마운트된 파일 시스템 인스턴스
+    * namidata : 경로이름 조회용 함수
