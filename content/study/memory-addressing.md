@@ -9,9 +9,61 @@ Date: 2014-11-26
 
 ## Memroy Addressing (Intel x86)
 * 논리 주소 (Logical Address)
-    * LDT 세그먼트는 모든 프로세스에서 공유
+    * 명령어나 데이터를 참조할때 사용하는 주소
+    * 세그먼트 + 오프셋
+* 선형 주소 (Linear Address)
+    * 32bit unsigned integer, 4GB
+    * 가상 주소 (Virtual Address)
+    * 0x00000000 ~ 0xffffffff
+* 물리 주소 (Physical Address)
+    * 메모리칩 안의 메모리셀에 접근할때 사용하는 주소
+
+* 논리 주소 => 세그멘테이션 유닛 => 선형 주소 => 페이징 유닛 => 물리 주소
+
+## Segmentation with Paging (Intel x86)
+* 세그멘테이션 : 메모리의 논리 주소
+    * 48 bit 논리 주소
+    * 16 bit : 세그먼트 셀렉터, segment identifier
+        * 13 bit : 인덱스
+        * 1 bit : GDT/LDT
+        * 2 bit : 권한
+    * 32 bit : 오프셋, 세그먼트에서의 상대 주소
+
+1. Global Descriptor Table (GDT, 또는 LDT)에서 Segment Descriptor 선택
+2. Segment Descriptor를 이용해서 선형 주소공간에서의 Segment 찾기
+3. Segment에서 Offset을 이용해서 선형 주소 얻기
+4. 나머지는 페이지 과정 참고
+
+## Segmentation in Linux
+* 리눅스는 세그멘테이션을 매우 제한된 방법으로만 사용
+    * 최소한의 접근법
+    * 세그멘테이션이 유명하지 않고 복잡하기 때문
+* 리눅스는 세그멘테이션 대신 페이징을 사용
+    * 간단한 메모리 관리
+        * 모든 프로세스가 같은 세그먼트 레지스터 값을 사용하면 메모리 관리가 간단한다
+        * 모든 프로세스가 선형 주소를 공유
+    * 이식성
+        * 리눅스는 많은 아키텍쳐에서 돌아갈 정도로 이식성이 좋아야한다
+        * 일부 RISC는 세그멘테이션을 제한적으로 지원
+* 리눅스는 세그멘테이션을 필요할때만 사용
+    * 모든 프로세스는 같은 논리 주소를 사용
+    * 따라서 세그먼트의 총 갯수는 제한됨
+    * 따라서 모든 세그먼트를 Global Descriptor Table(GDT)에 저장하는 것이 가능
+        * LDT는 커널에서 사용하지 않는다
+* 리눅스에서 쓰는 세그먼트
+    * 커널모드, 유저모드에 대해 같은 세그먼트 쌍을 이용
+    * `__KERNEL_CS`, `__KERNEL_DS`, `__USER_CS`, `__USER_DS`
+* etc
+    * 각각의 프로세서 별로 Task State Segment(TSS) 세그먼트
+        * 프로세스를 위해서 hardware context에 저장
+    * 기본 LDT 세그먼트는 모든 프로세스에서 공유
     
 ## Paging in Hardware (Intel x86)
+* 386 이상부터 지원
+* CR0 레지스터의 PG bit를 설정해서 활성화
+* 2-level 페이지 하드웨어
+    * 페이지 디렉토리 : 페이지 테이블의 물리주소 (CR3 레지스터)
+    * 페이지 테이블 : 페이지의 물리주소
 * 페이지유닛 (Paging unit)은 선형주소를 물리주소로 바꾼다.
     * 접근 권한 검사 (페이지에 접근할 권한이 있는가?)
     * 실패시 page fault exception 발생시킴
@@ -19,11 +71,6 @@ Date: 2014-11-26
     * 선형 주소는 고정 크기의 구간으로 그룹화 되어있다.
     * **페이지 안의 연속적인 선형주소는 연속적인 물리주소로 매핑된다.**
     * 페이지 프레임 (물리메모리)는 1페이지 크기
-* 386 이상부터 지원
-* CR0 레지스터의 PG bit를 설정해서 활성화
-* 2-level 페이지 하드웨어
-    * 페이지 디렉토리 : 페이지 테이블의 물리주소 (CR3 레지스터)
-    * 페이지 테이블 : 페이지의 물리주소
 
 ## Regular Paging (Intel x86)
 * Page Table

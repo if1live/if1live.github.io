@@ -46,7 +46,7 @@ Date: 2014-11-21
     * discrete time Tc
 * Hardware provides system timer
     * Kernel Timer
-    * PIT (Programmable Interrupt Timer)
+    * PIT (Programmable Interval Timer)
     * 일정 주기(tick rate)로 인터럽트를 발생
     * 리눅스 커널 인터럽트 핸들러가 처리
         * Tc ++
@@ -200,7 +200,7 @@ Date: 2014-11-21
     * task_struct.stime : 커널모드에서 실행된 tick 횟수
 * "Interval counting"은 실행 부하를 대충 계산 하는 방법
     * tick 기준점에 프로세스가 커널/유저 모드 였는지만 센다.
-    * 실제로는 1 tick의 시간동안 유저/커널 모드를 왔다갔다 할 수 있지만 그것은 무시
+    * 실제로는 1 tick의 시간동안 유저/커널 모드를 왔다갔다 할 수 있지만 그것은 무시. 실제와는 오차가 존재할 수 있다.
 
 ## Supporting "Software Timers"
 ### Software Timer
@@ -285,7 +285,7 @@ Date: 2014-11-21
     * ex: udelay(150); = 150 microseconds 대기
 * 시스템 부팅하는 동안 보정
     * CPU가 실행할수 있는 spinning loop 반복 횟수를 결정
-        * ```loops_per_fiffy```에 저장. BogoMIPS
+        * ```loops_per_jiffy```에 저장. BogoMIPS
     * delay function은 원하는 지연 시간동안 몇번 루프를 반복해야하는지 결정할때 이 값을 사용
     
 

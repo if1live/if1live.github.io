@@ -192,7 +192,7 @@ Date: 2014-12-04
 * include/linux/sched.h : `task_struct`
 * include/linux/fs_struct.h : `struct fs_struct *fs`
     * task가 돌아가고 있는 파일시스템 정보
-    * struct dentry *root, *pwd field
+    * struct dentry \*root, \*pwd field
 * include/linux/file.h : `struct file_struct *files`
     * task가 연 파일 목록
     * struct file **fd
@@ -276,4 +276,4 @@ Date: 2014-12-04
 * 다른 자료형
     * file\_system\_type : 다른 파일시스템 구현 정보
     * vfsmount : 마운트된 파일 시스템 인스턴스
-    * namidata : 경로이름 조회용 함수
+    * nameidata : 경로이름 조회용 함수
