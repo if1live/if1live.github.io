@@ -1,4 +1,4 @@
-Title: 파이썬 엑셀 쓰기 파이브러리 비교
+Title: 파이썬 엑셀 쓰기 라이브러리 비교
 Tags: python, library, excel, xlsx
 Slug: python-excel-library
 Author: if1live
