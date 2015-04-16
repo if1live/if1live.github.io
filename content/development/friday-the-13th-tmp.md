@@ -1,7 +1,7 @@
 Title: C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기
 Subtitle: 흑마법의 세계에 어서오세요!
 Tags: template metaprogramming, c++, cpp, TMP, 템플릿 메타프로그래밍
-Slug: friday-the-13th-tmp
+Slug: friday-the-13th-tmpㅊ
 Author: if1live
 Date: 2015-04-13
 
@@ -139,7 +139,7 @@ static_assert(ElementAt<2, 1, 2, 4>::value == 4, "");	//[1, 2, 4][2]
 인덱스로 접근가능한 배열(?)을 만들었으니 1월부터 12월이 각각 며칠로 구성되는지 알 수 있다.
 윤년과 평년 각각에 맞춰서 클래스를 준비한다.
 편의상 첫번째 인자를 0으로 두고 13개의 요소를 넣었다.
-이렇게 하면 1월을 얻고 싶으면 배열의 첫번째 요소를 얻으면 된다.
+이렇게 하면 1월을 얻고 싶을때 인덱스 1로 접근하면 된다.
 
 ```cpp
 template<int Month>
