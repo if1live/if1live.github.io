@@ -1,7 +1,7 @@
 Title: C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기
 Subtitle: 흑마법의 세계에 어서오세요!
 Tags: template metaprogramming, c++, cpp, TMP, 템플릿 메타프로그래밍
-Slug: friday-the-13th-tmpㅊ
+Slug: friday-the-13th-tmp
 Author: if1live
 Date: 2015-04-13
 
