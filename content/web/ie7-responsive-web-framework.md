@@ -11,7 +11,7 @@ Subtitle: 왜 우리는 IE 7,8때문에 고통받아야 하는가?
 
 그래서 반응형웹 디자인을 IE7,8에서도 별 문제없이 도입하기 위해서 사용할만한 웹 프레임웍을 정리해봤다.
 
-테스트한 반응형웹 프레임웍은 내가 평소에 알고있던 것과 [10 Best Responsive HTML5 Frameworks and Tools](10-responsive-framework)에 등장한 프레임웍이다.
+테스트한 반응형웹 프레임웍은 내가 평소에 알고있던 것과 [10 Best Responsive HTML5 Frameworks and Tools][10-responsive-framework]에 등장한 프레임웍이다.
 
 * [996 Grid][996grid]
 * [Bootstrap 2][bootstrap2]
