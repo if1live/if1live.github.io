@@ -53,6 +53,7 @@ help:
 	@echo '                                                                       '
 
 html:
+	rm -rf $(OUTPUTDIR)/theme
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
@@ -81,6 +82,7 @@ stopserver:
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
 publish:
+	rm -rf $(OUTPUTDIR)/theme
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 ssh_upload: publish
