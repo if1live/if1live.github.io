@@ -241,7 +241,7 @@ int main()
 	assert(my_strcmp("1", "1") == strcmp("1", "1"));
 	assert(my_strcmp("1", "2") == strcmp("1", "2"));
 	assert(my_strcmp("2", "1") == strcmp("2", "1"));
-  return 0;
+	return 0;
 }
 ```
 
