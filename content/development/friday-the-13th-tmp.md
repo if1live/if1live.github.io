@@ -385,8 +385,8 @@ int main()
 [code_60_quiz]: https://twitter.com/Code_60/status/577062012250796032
 [code_60_quiz_2]: https://twitter.com/Code_60/status/577062349867130880
 [wiki_algorithm]: http://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
-[wiki_tmp]: http://en.wikipedia.org/wiki/Template_metaprogramming]
-[wiki_variadic_template]: [http://en.wikipedia.org/wiki/Variadic_template]
+[wiki_tmp]: http://en.wikipedia.org/wiki/Template_metaprogramming
+[wiki_variadic_template]: http://en.wikipedia.org/wiki/Variadic_template
 [wiki_leap_year]: http://ko.wikipedia.org/wiki/%EC%9C%A4%EB%85%84
 [gist_code]: https://gist.github.com/if1live/d99645fc3e8932f9a9db
 [va_template_sample]: http://ideone.com/tlU734
