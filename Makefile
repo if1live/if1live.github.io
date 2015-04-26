@@ -52,8 +52,15 @@ help:
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html'
 	@echo '                                                                       '
 
-html:
+clean_theme:
 	rm -rf $(OUTPUTDIR)/theme
+
+copy_theme:
+	# 맥에서는 output/theme가 없으면 안돌아가더라. 근데 버그 찾기 귀찮아서 떔빵
+	mkdir -p $(OUTPUTDIR)/theme
+	cp -r theme-sora/static/css $(OUTPUTDIR)/theme
+
+html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
@@ -82,7 +89,6 @@ stopserver:
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
 publish:
-	rm -rf $(OUTPUTDIR)/theme
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 ssh_upload: publish

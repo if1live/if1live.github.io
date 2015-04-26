@@ -18,6 +18,7 @@ install:
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
+  - make clean_theme
   - make publish
 
 after_success:
