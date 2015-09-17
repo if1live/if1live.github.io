@@ -69,7 +69,7 @@ PLUGINS = [
     'tipue_search',
     'sitemap',
     'assets',
-    'code_include',
+    'code_include.code_include',
     'html_rst_directive',
     'pelican_youtube',
     'pelican_jsfiddle',
