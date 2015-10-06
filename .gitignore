@@ -65,3 +65,6 @@ cache/
 
 # ignore html inside content. may it is generated file
 content/*/*.html
+
+# c/c++
+a.out
