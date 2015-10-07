@@ -5,7 +5,8 @@ EXECUTE_CMD	= ./a.out
 all:
 	@make simple
 	@make inf_loop_bug
-	@make for_each
+	@make for_each_functor
+	@make for_each_lambda
 	@make enhanced_for_loop
 	@make use_vector
 	@make custom_array
@@ -22,10 +23,16 @@ inf_loop_bug:
 	clang inf_loop_bug.c $(C_FLAGS);	\
 	$(EXECUTE_CMD)
 
-for_each:
-	g++ for_each.cpp $(CXX_FLAGS);	\
+for_each_functor:
+	g++ for_each_functor.cpp $(CXX_FLAGS);	\
 	$(EXECUTE_CMD);	\
-	clang++ for_each.cpp $(CXX_FLAGS);	\
+	clang++ for_each_functor.cpp $(CXX_FLAGS);	\
+	$(EXECUTE_CMD)
+
+for_each_lambda:
+	g++ for_each_lambda.cpp $(CXX_FLAGS);	\
+	$(EXECUTE_CMD);	\
+	clang++ for_each_lambda.cpp $(CXX_FLAGS);	\
 	$(EXECUTE_CMD)
 
 enhanced_for_loop:
@@ -45,3 +52,6 @@ custom_array:
 	$(EXECUTE_CMD);	\
 	clang++ custom_array.cpp $(CXX_FLAGS);	\
 	$(EXECUTE_CMD)
+
+clean:
+	rm -rf a.out
