@@ -341,7 +341,7 @@ Sources
 -------
 본문의 테스트에 사용한 코드이다. 직접 받아서 테스트해볼수 있다.
 
-https://github.com/if1live/libsora.so/tree/master/content/stack-allocation-voodoo-magic
+https://github.com/if1live/libsora.so/tree/master/content/development/stack-allocation-voodoo-magic
 
 Environment
 -----------
