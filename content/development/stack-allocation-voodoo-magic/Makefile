@@ -12,39 +12,39 @@ all:
 	@make custom_array
 
 simple:
-	gcc simple.c $(C_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang simple.c $(C_FLAGS);	\
+	gcc simple.c $(C_FLAGS)
+	$(EXECUTE_CMD)
+	clang simple.c $(C_FLAGS)
 	$(EXECUTE_CMD)
 
 inf_loop_bug:
-	gcc inf_loop_bug.c $(C_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang inf_loop_bug.c $(C_FLAGS);	\
+	gcc inf_loop_bug.c $(C_FLAGS)
+	$(EXECUTE_CMD)
+	clang inf_loop_bug.c $(C_FLAGS) -Weverything
 	$(EXECUTE_CMD)
 
 for_each_functor:
-	g++ for_each_functor.cpp $(CXX_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang++ for_each_functor.cpp $(CXX_FLAGS);	\
+	g++ for_each_functor.cpp $(CXX_FLAGS)
+	$(EXECUTE_CMD)
+	clang++ for_each_functor.cpp $(CXX_FLAGS)
 	$(EXECUTE_CMD)
 
 for_each_lambda:
-	g++ for_each_lambda.cpp $(CXX_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang++ for_each_lambda.cpp $(CXX_FLAGS);	\
+	g++ for_each_lambda.cpp $(CXX_FLAGS)
+	$(EXECUTE_CMD)
+	clang++ for_each_lambda.cpp $(CXX_FLAGS)
 	$(EXECUTE_CMD)
 
 enhanced_for_loop:
-	g++ enhanced_for_loop.cpp $(CXX_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang++ enhanced_for_loop.cpp $(CXX_FLAGS);	\
+	g++ enhanced_for_loop.cpp $(CXX_FLAGS)
+	$(EXECUTE_CMD)
+	clang++ enhanced_for_loop.cpp $(CXX_FLAGS)
 	$(EXECUTE_CMD)
 
 use_vector:
-	g++ use_vector.cpp $(CXX_FLAGS);	\
-	$(EXECUTE_CMD);	\
-	clang++ use_vector.cpp $(CXX_FLAGS);	\
+	g++ use_vector.cpp $(CXX_FLAGS)
+	$(EXECUTE_CMD)
+	clang++ use_vector.cpp $(CXX_FLAGS)
 	$(EXECUTE_CMD)
 
 custom_array:
