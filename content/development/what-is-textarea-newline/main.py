@@ -14,14 +14,21 @@ question_html = """<html>
 <h1>textarea + newline + {method}</h1>
 <form action="." method="{method}">
 <pre>raw: {raw_text}</pre>
-<textarea name="content" rows="4" cols="20">{text}</textarea>
+<textarea name="content" rows="10" cols="20">{text}</textarea>
 <br/>
 <input type="submit"/>
 </form>
 </html>"""
 
 def render_question(method):
-    text = "foo\nbar\r\nspam"
+    text = "".join([
+        "only-LF\n",
+        "only-CR\r",
+        "many-LF\n\n",
+        "many-cr\r\r",
+        "CRLF\r\n",
+        "LFCR\n\r",
+    ])
     html = question_html.format(method=method, raw_text=repr(text), text=text)
     print("raw html : %r" % html)
     return d.HttpResponse(html)
