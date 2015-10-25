@@ -68,3 +68,7 @@ content/*/*.html
 
 # c/c++
 a.out
+
+# importd
+db.sqlite
+secret.txt
