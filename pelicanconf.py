@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
+
 from __future__ import unicode_literals
 import os
 
@@ -66,7 +67,6 @@ PLUGIN_PATHS = ['ext/pelican-plugins']
 THEME = 'theme-sora'
 
 PLUGINS = [
-    'tipue_search',
     'sitemap',
     'assets',
     'code_include.code_include',
