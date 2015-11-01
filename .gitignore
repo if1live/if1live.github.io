@@ -73,3 +73,6 @@ a.out
 # importd
 db.sqlite
 secret.txt
+
+# etc
+.env
