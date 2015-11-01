@@ -66,8 +66,9 @@ cache/
 # ignore html inside content. may it is generated file
 content/*/*.html
 
-# c/c++
+# c/c++/c#
 a.out
+*.exe
 
 # importd
 db.sqlite
