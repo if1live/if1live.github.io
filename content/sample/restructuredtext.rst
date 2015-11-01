@@ -69,7 +69,7 @@ this is local gif image
 
 this is local png image
 
-..  image:: {filename}/static/sample/sora-kasugano.png
+..  image:: {filename}../static/sample/sora-kasugano.png
 	:alt: kasugano sora
 
 this is remote gif image
