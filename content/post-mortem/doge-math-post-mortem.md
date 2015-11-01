@@ -24,7 +24,7 @@ Date: 2015-09-17
 
 이런식의 수열 관련 문제가 나오면 나는 [적절한 짤][original_meme]로 반응한다.
 
-![You do the math!]({filename}../static/doge-math-post-mortem/doge-math.jpg)
+![You do the math!]({filename}/static/doge-math-post-mortem/doge-math.jpg)
  
 등차수열을 엿먹이는 목적으로는 괜찮은 짤이지만 짤의 값이 고정되어있다.
 짤의 내용을 바꿀수 있으면 더 좋지 않을까? 이런 짤을 찍어낼수 있는걸 만들면 재밌지 않을까?
@@ -114,7 +114,7 @@ Doge Math를 사용해서 유저가 원하는 형태의 짤을 만든 다음, �
 같은 꿈과 희망은 역시 웹에 없었다. 
 크롬에서는 아무 문제가 없지만 파폭에서는 다음과 같은 에러가 나고 동작하지 않았다.
 
-![firefox 40 clipboard API error]({filename}../static/doge-math-post-mortem/firefox-clipboard-error.png)
+![firefox 40 clipboard API error]({filename}/static/doge-math-post-mortem/firefox-clipboard-error.png)
 
 찾아보니까 [firefox 41부터 Clipboard API를 지원할 예정][mozilla_clipboard_error]이라고 하더라.
 그리고 현재 파폭 안정버전은 40이다.
@@ -213,7 +213,7 @@ LaTeX로 작성된 다항식을 KaTeX를 이용해서 DOM으로 뽑아내로 이
 대표적인 브라우저를 이용하면 해당 페이지가 어떤식으로 보여지는지 그리고 어떤게 문제인지를 요약했다.
 
 #### Internet explorer
-![KaTeX with Canvas - IE]({filename}../static/doge-math-post-mortem/latex-ie.png)
+![KaTeX with Canvas - IE]({filename}/static/doge-math-post-mortem/latex-ie.png)
 
 역시 IE는 우리의 기대를 배신하지 않는다. 
 아무것도 안그려진다.
@@ -223,21 +223,21 @@ IE는 DOM을 SVG로 직접 그리는걸 지원하지 않는 것으로 보인다.
 최신 브라우저로 보면 좀 낫겠지?
 
 #### Microsoft Edge
-![KaTeX with Canvas - Edge]({filename}../static/doge-math-post-mortem/latex-edge-20.png)
+![KaTeX with Canvas - Edge]({filename}/static/doge-math-post-mortem/latex-edge-20.png)
 
 테스트한 Microsoft Edge의 버전은 20.10240.16384.0 이다.
 HTML5 Canvas에 그린 결과물을 보면 수식이 아니라 문자열이 보인다. 
 KaTeX를 이용해서 그린 DOM에서 스타일을 빼내서 렌더링하는 부분이 잘못되어 있는거 아닐까?
 
 #### Google Chrome
-![KaTeX with Canvas - Chrome 45]({filename}../static/doge-math-post-mortem/latex-chrome-45.png)
+![KaTeX with Canvas - Chrome 45]({filename}/static/doge-math-post-mortem/latex-chrome-45.png)
 
 테스트한 Google Chrome의 버전은 45.0.2454.93m 이다.
 Microsoft Edge와 마찬가지로 HTML5 Canvas에 수식이 아니라 문자열이 보인다.
 Edge와 Chrome 모두에서 제대로 렌더링 되지 않으니까 역시 DOM에서 스타일을 빼오는 코드가 잘못된 거 아닐까?
 
 #### Mozilla Firefox
-![KaTeX with Canvas - Firefox 40]({filename}../static/doge-math-post-mortem/latex-firefox-40.png)
+![KaTeX with Canvas - Firefox 40]({filename}/static/doge-math-post-mortem/latex-firefox-40.png)
 
 테스트한 Mozilla Firefox의 버전은 40.0.3 이다.
 Chrome, Edge와는 달리 HTML5 Canvas에 공식처럼 보이는 무언가가 보인다.

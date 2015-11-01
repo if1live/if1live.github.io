@@ -52,14 +52,14 @@ smarturls은 기존 django프로젝트에 끼워넣어도 문제가 생기지 �
 Debugger
 ########
 
-.. image:: {filename}../static/good-django-library/twdp_0804.png
+.. image:: {filename}/static/good-django-library/twdp_0804.png
   :alt: django debug
 
 Django 개발 도중에 에러가 발생하면 위와 같은 화면을 자주 볼 것이다.
 문제가 몇번째 줄에서 어떤식으로 발생했는지를 볼 수 있다. 이것만 있어도 php보다는 정신건강에 좋다.
 만약 에러난 지점에서 pdb가 돌아가서 변수값을 직접 확인해볼수 있으면 더 좋지 않을까?
 
-.. image:: {filename}../static/good-django-library/debug-screenshot.png
+.. image:: {filename}/static/good-django-library/debug-screenshot.png
   :alt: Werkzeug debug
 
 위의 화면은 werkzeug의 디버거이다.

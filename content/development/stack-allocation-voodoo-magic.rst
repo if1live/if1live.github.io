@@ -108,7 +108,7 @@ gcc와 clang에서 지역 변수를 스택에 할당하는 순서가 다른 점�
 (테스트를 위해서 적당히 루프를 돌다 종료시켰다)
 
 
-..  image:: {filename}../static/stack-allocation-voodoo-magic/bug-mem-addr-clang.png
+..  image:: {filename}/static/stack-allocation-voodoo-magic/bug-mem-addr-clang.png
 	:alt: gcc memory address
 
 왜 clang에서는 무한루프가 발생했는지 확인하기 위해서 메모리 구조를 간단하게 그려보았다.
@@ -327,7 +327,7 @@ cppcheck, splint는 이 버그를 잡아내지 못했다.
 실망하기는 이르다. 위의 버그를 잡아낼수 있는 정적 분석 도구가 세상에 없는건 아니다.
 `Gimpel Software <http://www.gimpel.com/>`_ 에서 개발한 ``FlexeLint for C/C++`` 를 이용하면 위의 버그를 잡아낸다.
 
-..  image:: {filename}../static/stack-allocation-voodoo-magic/static-analyzer.png
+..  image:: {filename}/static/stack-allocation-voodoo-magic/static-analyzer.png
 	:alt: C++ static analyzer sample
 
 

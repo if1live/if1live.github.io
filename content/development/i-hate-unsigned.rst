@@ -14,7 +14,7 @@
 그림 한장으로 설명하는 내가 unsigned를 싫어하는 이유
 ----------------------------------------------------
 
-.. image:: {filename}../static/i-hate-unsigned/temperature-underflow.jpg
+.. image:: {filename}/static/i-hate-unsigned/temperature-underflow.jpg
 	:alt: underflow의 예제
 
 https://twitter.com/yun1007com/status/540019367686070272

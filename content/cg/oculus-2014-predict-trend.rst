@@ -47,17 +47,17 @@ OculusRift에 맞게 렌더링하기 위해서는 일반적인 렌더링보다 �
 
 **No Stereo** 일반적인 게임에서 사용하는 카메라
 
-.. image:: {filename}../static/oculus-2014-predict-trend/oculus-sample-no-stereo.jpg
+.. image:: {filename}/static/oculus-2014-predict-trend/oculus-sample-no-stereo.jpg
 	:alt: sample - no stereo
 
 **Stereo without barrel distortion** 양쪽눈을 각각 렌더링. GPU 성능을 한쪽눈일 때보다 2배는 사용한다. 아래의 표에서는 **Stereo** 라고 썻다.
 
-.. image:: {filename}../static/oculus-2014-predict-trend/oculus-sample-stereo.jpg
+.. image:: {filename}/static/oculus-2014-predict-trend/oculus-sample-stereo.jpg
 	:alt: sample - stereo
 
 **Stereo with barrel distortion** 이렇게 렌더링을 해야 오큘러스 뒤집어 쓰고 적절히 보인다. 아래의 표에서는 **Oculus** 라고 썻다.
 
-.. image:: {filename}../static/oculus-2014-predict-trend/oculus-sample-oculus.jpg
+.. image:: {filename}/static/oculus-2014-predict-trend/oculus-sample-oculus.jpg
 	:alt: sample - oculus rift
 
 

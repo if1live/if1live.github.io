@@ -4,7 +4,7 @@ Slug: text-billboard
 Author: if1live
 Date: 2013-04-21
 
-![screen shot]({filename}../static/text-billboard/screenshot.png)
+![screen shot]({filename}/static/text-billboard/screenshot.png)
 
 디버깅 용도(예를 들면, 물체의 좌표값, 게임객체의 상태등을 표시)로 3차원 공간상에 2차원 객체(텍스트 포함)를 그냥 출력하고 싶다. 이렇게 사용하기 위해서는 세가지 조건을 만족해야한다.
 

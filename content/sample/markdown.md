@@ -58,9 +58,9 @@ this is *italic elem*.
 this is [link elem](/).  
 
 ## image test
-![sample gif]({filename}../static/sample/sidetail-sora.gif)
+![sample gif]({filename}/static/sample/sidetail-sora.gif)
 
-![sample png]({filename}../static/sample/sora-kasugano.png)
+![sample png]({filename}/static/sample/sora-kasugano.png)
 
 
 ## unordered list

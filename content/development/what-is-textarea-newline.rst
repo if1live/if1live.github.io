@@ -65,7 +65,7 @@ HTML textarea의 개행문자가 무엇인지 확인하려고 다음의 테스�
 POST, GET일때 기본적인 내용은 동일하더라.
 그래서 POST 일때만 정리했다.
 
-..  figure:: {filename}../static/what-is-textarea-newline/browser-input.png
+..  figure:: {filename}/static/what-is-textarea-newline/browser-input.png
 	:alt: POST Request in browser
 	:align: center
 	:figwidth: 100%
@@ -73,7 +73,7 @@ POST, GET일때 기본적인 내용은 동일하더라.
 	간단하게 구현한 POST 요청을 보내는 HTML이다.
 	겉보기에는 평범한 개행이 들어있는 textarea이지만 실제로는 각각의 줄은 다른 개행문자를 쓰고있다.
 
-..  figure:: {filename}../static/what-is-textarea-newline/wireshark-input.png
+..  figure:: {filename}/static/what-is-textarea-newline/wireshark-input.png
 	:alt: POST Response in browser
 	:align: center
 	:figwidth: 100%
@@ -81,7 +81,7 @@ POST, GET일때 기본적인 내용은 동일하더라.
 	서버에서 생성한 테스트용 개행문자가 섞인 HTML은 클라에 잘 도착했다.
 	나머지는 브라우저의 역할이다.
 
-..  figure:: {filename}../static/what-is-textarea-newline/browser-output.png
+..  figure:: {filename}/static/what-is-textarea-newline/browser-output.png
 	:alt: POST HTML in wireshark
 	:align: center
 	:figwidth: 100%
@@ -89,7 +89,7 @@ POST, GET일때 기본적인 내용은 동일하더라.
 	클라가 submit 한 결과를 그대로 출력했다. ``CRLF`` 만 보인다.
 	각각의 줄의 결과는 아래에서 분석한다.
 
-..  figure:: {filename}../static/what-is-textarea-newline/wireshark-output.png
+..  figure:: {filename}/static/what-is-textarea-newline/wireshark-output.png
 	:alt: POST Response in wireshark
 	:align: center
 	:figwidth: 100%
@@ -150,7 +150,7 @@ CR, LF에 대응되는 문자를 읽을수 있는 문자열로 바꾸는 함수�
   convertReadableString(node.value);
 
 
-..  figure:: {filename}../static/what-is-textarea-newline/textarea-js.png
+..  figure:: {filename}/static/what-is-textarea-newline/textarea-js.png
 	:alt: where is CR?
 	:align: center
 

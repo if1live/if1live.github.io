@@ -54,7 +54,7 @@ Desktop 18783
 Tablet  1283
 ======= ======
 
-.. image:: {filename}../static/trade-my-info-ga/mobile-desktop.png
+.. image:: {filename}/static/trade-my-info-ga/mobile-desktop.png
 	:alt: 모바일 vs 데스크탑 사용자 비율
 
 모바일의 숫자가 데탑보다 더 많다. 타블렛은 아직 5%정도 수준이다.
@@ -76,7 +76,7 @@ Firefox   1069
 Opera     116
 ========= =====
 
-.. image:: {filename}../static/trade-my-info-ga/desktop-browser.png
+.. image:: {filename}/static/trade-my-info-ga/desktop-browser.png
 	:alt: 데스크탑 브라우저 사용 비율
 
 
@@ -99,7 +99,7 @@ IE 사용자수	desktop 비율
 11 999      5.32
 == ======== ============
 
-.. image:: {filename}../static/trade-my-info-ga/ie.png
+.. image:: {filename}/static/trade-my-info-ga/ie.png
 	:alt: IE 버전별 사용 비율
 
 IE7, 8의 사용자가 제일 많다.
@@ -126,7 +126,7 @@ Naver    361
 Google+  243
 ======== =====
 
-.. image:: {filename}../static/trade-my-info-ga/social-chart.png
+.. image:: {filename}/static/trade-my-info-ga/social-chart.png
 	:alt: 소셜 획득 경로 비율
 
 페이스북의 사용자가 제일 많다. 역시 Facebook!

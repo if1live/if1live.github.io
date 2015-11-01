@@ -23,7 +23,7 @@ Date: 2015-04-27
 ## 반각/전각
 여기에서는 간단하게 설명한다. 자세한 설명은 [위키피디아][wiki]를 참고.
 
-![반각/전각]({filename}../static/deceiving-code-fullwidth-halfwidth/KoreanDOSPrompt.png)
+![반각/전각]({filename}/static/deceiving-code-fullwidth-halfwidth/KoreanDOSPrompt.png)
 
 1. 일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다. 
 2. 한글, 한자, 일본어는 가로폭 넓다.
