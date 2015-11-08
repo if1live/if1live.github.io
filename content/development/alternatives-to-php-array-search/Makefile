@@ -6,6 +6,7 @@ all:
 	make alternative_invalid_index
 	make alternative_zero_is_not_false
 	make alternative_iterator
+	make buggy_invalid_index
 
 php_buggy: buggy.php
 	php $^
@@ -28,6 +29,9 @@ alternative_zero_is_not_false: alternative_zero_is_not_false.rb
 alternative_iterator: alternative_iterator.cpp
 	clang++ $^ -W -Wall -std=c++11
 	./a.out
+
+buggy_invalid_index: buggy_invalid_index.js
+	node $^
 
 clean:
 	rm -rf a.out
