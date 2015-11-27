@@ -76,3 +76,11 @@ secret.txt
 
 # etc
 .env
+
+# build output
+content/development/refactoring-c-macro-constant/function
+content/development/refactoring-c-macro-constant/simple
+content/development/refactoring-c-macro-constant/variable
+
+# node
+npm-debug.log
