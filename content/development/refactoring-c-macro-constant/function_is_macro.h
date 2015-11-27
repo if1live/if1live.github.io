@@ -1,17 +1,9 @@
 #ifndef __FUNCTION_IS_MACRO_H__
 #define __FUNCTION_IS_MACRO_H__
 
-#define NAME CommonVariable::name()
-#define PROJ CommonVariable::proj()
-#define VERSION CommonVariable::version()
+#define FOO get_foo()
 
-class CommonVariable {
-public:
-  static const char *name();
-  static const char *proj();
-  static int version();
-
-  static void changeLanguage(int lang);
-};
+int get_foo();
+void change_env(int env);
 
 #endif

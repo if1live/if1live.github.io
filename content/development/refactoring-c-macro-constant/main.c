@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <stdio.h>
 
 #ifdef USE_SIMPLE_VER
 #include "simple_macro.h"
@@ -15,13 +15,11 @@
 
 int main()
 {
-  printf("proj: %s\n", PROJ);
-  printf("name: %s\n", NAME);
-  printf("version: %d\n", VERSION);
+  printf("%d\n", FOO + 123);
 
 #ifdef USE_FUNCTION_VER
-  CommonVariable::changeLanguage(1);
-  printf("name: %s\n", NAME);
+  change_env(1);
+  printf("%d\n", FOO + 123);
 #endif
   return 0;
 }

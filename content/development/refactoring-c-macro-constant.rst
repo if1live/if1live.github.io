@@ -6,12 +6,12 @@
 :author: if1live
 :date: 2015-11-27
 
-..  code-include:: refactoring-c-macro-constant/main.cpp
-	:lexer: cpp
+..  code-include:: refactoring-c-macro-constant/main.c
+	:lexer: c
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 15
-	:end-line: 20
+	:end-line: 18
 
 프로젝트를 진행하면 아무리 설계를 잘해도 여러 파일에서 사용되는 상수를 피할수 없다.
 이때는 보통 공유하는 상수/함수 등을 모아서 별도의 헤더 파일을 만들어서 관리한다.
@@ -19,15 +19,15 @@
 * `Quake2/game/g_local.h <https://github.com/id-Software/Quake-2/blob/master/game/g_local.h>`_
 * `DOOM3-BFG/doomclassic/doom/defs.h <https://github.com/id-Software/DOOM-3-BFG/blob/master/doomclassic/doom/defs.h>`_
 
-예를 들어 위의 코드에서는 ``PROJ``, ``NAME``, ``VERSION`` 이 상수이다.
+예를 들어 위의 코드에서는 ``FOO`` 이 상수이다.
 그리고 간단하게 매크로를 이용해서 상수를 구현했다.
 
 ..  code-include:: refactoring-c-macro-constant/simple_macro.h
-	:lexer: cpp
+	:lexer: c
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 3
-	:end-line: 6
+	:end-line: 4
 
 작은 규모에서는 이런식으로 상수를 사용해도 별 문제가 없다.
 하지만 프로젝트가 커지면 심각한 문제가 생긴다.
@@ -54,14 +54,14 @@
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 3
-	:end-line: 13
+	:end-line: 5
 
-..  code-include:: refactoring-c-macro-constant/variable_is_macro.cpp
-	:lexer: cpp
+..  code-include:: refactoring-c-macro-constant/variable_is_macro.c
+	:lexer: c
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 2
-	:end-line: 6
+	:end-line: 3
 
 상수를 헤더에 때려박아서 상수값을 바꿀때 헤더가 바뀌는게 문제다.
 그렇다면 헤더를 고정하고 소스파일에 값을 넣으면 되지 않을까?
@@ -90,39 +90,78 @@
 그런데 이제와서 코드를 다 뜯어고기치긴 귀찮다.
 이럴때는 **매크로==치환** 이라는 점을 이용해서 매크로를 함수에 연결하면 된다.
 
-..  code-include:: refactoring-c-macro-constant/main.cpp
-	:lexer: cpp
-	:encoding: utf-8
-	:tab-width: 2
-	:start-line: 15
-	:end-line: 27
-
-::
-
-	proj: use function and macro
-	name: 春日野 穹
-	version: 3
-	name: kasugano sora
-
-위의 예제에서 ``NAME`` 은 상수처럼 보이지만 설정값을 바꿔주면 값이 바뀐다.
-
 ..  code-include:: refactoring-c-macro-constant/function_is_macro.h
-	:lexer: cpp
+	:lexer: c
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 3
-	:end-line: 15
+	:end-line: 6
 
-..  code-include:: refactoring-c-macro-constant/function_is_macro.cpp
-	:lexer: cpp
+..  code-include:: refactoring-c-macro-constant/function_is_macro.c
+	:lexer: c
 	:encoding: utf-8
 	:tab-width: 2
-	:start-line: 2
-	:end-line: 29
+	:start-line: 3
+
+..  code-include:: refactoring-c-macro-constant/main.c
+	:lexer: c
+	:encoding: utf-8
+	:tab-width: 2
+	:start-line: 15
 
 1. 원하는 상수값을 얻을수 있는 전역함수, 싱글턴 등을 적절히 준비
-2. 매크로를 함수에 연결
-3. 상수를 사용하는 코드는 영향을 받지 않는다.
+2. 런타임에 상수를 조작할수 있는 함수를 심어둔다.
+3. 매크로를 함수에 연결
+4. 상수를 사용하는 코드는 영향을 받지 않는다.
+
+
+단점
+####
+
+이렇게만 쓰면 만능의 기법처럼 보이지만 세상에 장점만 있는 기법이 어디 있을까?
+상수가 숫자로 연결되는 것을 변수, 함수로 연결시켰기 때문에 최적화 측면에서는 불리할수 있다.
+어떻게 컴파일 되는지 확인하기 위해서 clang 3.4, ``-O3`` 옵션으로 최적화시킨 어셈블리를 확인해보자.
+
+매크로와 숫자를 연결
+--------------------
+..  code-include:: refactoring-c-macro-constant/simple_asm.s
+	:lexer: asm
+	:encoding: utf-8
+	:tab-width: 2
+	:start-line: 9
+	:end-line: 15
+
+실행하고자 하는 코드는 ``printf("%d\n", FOO + 123);`` 이다.
+전처리기를 거치면 FOO가 321로 바뀌어서 코드는 ``printf("%d\n", 321 + 123);`` 이 된다.
+컴파일러가 적절히 최적화 해서 ``321 + 123`` 를 계산해서 코드가 ``printf("%d\n", 444);`` 로 바뀐다.
+그래서 어셈블리어에는 444를 찍는 코드만 남아있다.
+
+
+매크로와 변수를 연결
+--------------------
+
+..  code-include:: refactoring-c-macro-constant/variable_asm.s
+	:lexer: asm
+	:encoding: utf-8
+	:tab-width: 2
+	:start-line: 9
+	:end-line: 16
+
+``movl  g_foo(%rip), %esi``, ``addl  $123, %esi`` 를 볼때
+변수를 읽어서 123을 더하는 작업을 수행한다.
+
+매크로와 함수를 연결
+--------------------
+
+..  code-include:: refactoring-c-macro-constant/function_asm.s
+	:lexer: asm
+	:encoding: utf-8
+	:tab-width: 2
+	:start-line: 9
+	:end-line: 18
+
+``callq get_foo``, ``leal  123(%rax), %esi`` 을 볼때
+함수를 호출해서 상수값을 가져온 다음에 덧셈을 수행한다.
 
 Sample Source
 #############

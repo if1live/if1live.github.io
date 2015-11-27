@@ -1,28 +1,41 @@
-CXX	= clang++
-CXXFLAGS	= -W -Wall -std=c++11
-SIMPLE_VER_FLAGS	= $(CXXFLAGS) -DUSE_SIMPLE_VER
-VARIABLE_VER_FLAGS	= $(CXXFLAGS) -DUSE_VARIABLE_VER
-FUNCTION_VER_FLAGS	= $(CXXFLAGS) -DUSE_FUNCTION_VER
+CC	= clang
+CCFLAGS	= -W -Wall -O3
+SIMPLE_VER_FLAGS	= $(CCFLAGS) -DUSE_SIMPLE_VER
+VARIABLE_VER_FLAGS	= $(CCFLAGS) -DUSE_VARIABLE_VER
+FUNCTION_VER_FLAGS	= $(CCFLAGS) -DUSE_FUNCTION_VER
 
 all:
 	make simple
 	make variable
 	make function
+	make simple_asm
+	make variable_asm
+	make function_asm
+
+
+simple_asm:
+	$(CC) -o $@.s -S main.c $(SIMPLE_VER_FLAGS)
 
 simple:
-	$(CXX) -o $@ main.cpp $(SIMPLE_VER_FLAGS)
+	$(CC) -o $@ main.c $(SIMPLE_VER_FLAGS)
 	./$@
+
+variable_asm:
+	$(CC) -o $@.s -S main.c $(VARIABLE_VER_FLAGS)
 
 variable:
-	$(CXX) -c variable_is_macro.cpp $(VARIABLE_VER_FLAGS)
-	$(CXX) -c main.cpp $(VARIABLE_VER_FLAGS)
-	$(CXX) -o $@ main.o variable_is_macro.o $(VARIABLE_VER_FLAGS)
+	$(CC) -c variable_is_macro.c $(VARIABLE_VER_FLAGS)
+	$(CC) -c main.c $(VARIABLE_VER_FLAGS)
+	$(CC) -o $@ main.o variable_is_macro.o $(VARIABLE_VER_FLAGS)
 	./$@
 
+function_asm:
+	$(CC) -o $@.s -S main.c $(FUNCTION_VER_FLAGS)
+
 function:
-	$(CXX) -c function_is_macro.cpp $(FUNCTION_VER_FLAGS)
-	$(CXX) -c main.cpp $(CXXFLAGS) $(FUNCTION_VER_FLAGS)
-	$(CXX) -o $@ main.o function_is_macro.o $(FUNCTION_VER_FLAGS)
+	$(CC) -c function_is_macro.c $(FUNCTION_VER_FLAGS)
+	$(CC) -c main.c $(CCFLAGS) $(FUNCTION_VER_FLAGS)
+	$(CC) -o $@ main.o function_is_macro.o $(FUNCTION_VER_FLAGS)
 	./$@
 
 clean:
@@ -30,3 +43,5 @@ clean:
 	rm -rf simple
 	rm -rf variable
 	rm -rf function
+	rm -rf *.s
+	rm -rf tmp.c
