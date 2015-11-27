@@ -95,7 +95,7 @@
 	:encoding: utf-8
 	:tab-width: 2
 	:start-line: 3
-	:end-line: 6
+	:end-line: 7
 
 ..  code-include:: refactoring-c-macro-constant/function_is_macro.c
 	:lexer: c
