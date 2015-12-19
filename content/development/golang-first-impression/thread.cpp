@@ -2,13 +2,11 @@
 #include <vector>
 #include <cstdio>
 
-void foo(int a)
-{
+void foo(int a) {
   printf("thread call : %d\n", a);
 }
 
-int main()
-{
+int main() {
   const int loop_count = 3;
   std::vector<std::thread> threads;
 

@@ -9,8 +9,7 @@ int called_from_async(int a) {
   return a * 10;
 }
 
-int main()
-{
+int main() {
   const int loop_count = 3;
   std::vector<std::future<int>> results;
 

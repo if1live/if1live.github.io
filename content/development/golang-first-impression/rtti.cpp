@@ -19,8 +19,7 @@ public:
   char b;
 };
 
-int main()
-{
+int main() {
   Sample s1;
   const std::type_info& info1 = typeid(s1);
   printf("%s\n", info1.name());
