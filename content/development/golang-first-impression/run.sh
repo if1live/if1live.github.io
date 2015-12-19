@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function thread_cpp {
+	echo "thread :: cpp"
+	clang++ -o thread thread.cpp -std=c++11 -lpthread -W -Wall
+	./thread
+}
+
 function worker_cpp {
 	echo "worker :: cpp"
 	clang++ -o worker worker.cpp -std=c++11 -lpthread -W -Wall
@@ -106,7 +112,9 @@ function broken_goroutine {
 }
 
 function clean {
+	rm -rf a.out
 	rm -rf worker
+	rm -rf thread
 	rm -rf *.class
 	rm -rf indent.exe
 	rm -rf rtti
@@ -114,6 +122,8 @@ function clean {
 	rm -rf call_by_xxx.exe
 	rm -rf data_structure.exe
 }
+
+thread_cpp
 
 broken_goroutine
 
