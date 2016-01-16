@@ -158,5 +158,13 @@ void ScriptEngine::parseLine(bool *has_next)
 void ScriptEngine::executeLine()
 {
   // add complex feature here
-  printf("%s %s %s.\n", name_, cmd_, text_);
+  if(std::string("play") == cmd_) {
+    printf("%s %s %s.\n", name_, cmd_, text_);
+
+  } else if(std::string("say") == cmd_) {
+    printf("%s %s \"%s\".\n", name_, cmd_, text_);
+
+  } else {
+    printf("Unknown: cmd=%s, name=%s, text=%s.\n", cmd_, name_, text_);
+  }
 }
