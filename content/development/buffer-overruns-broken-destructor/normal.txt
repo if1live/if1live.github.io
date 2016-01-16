@@ -1,0 +1,2 @@
+say 철수:hello
+play 영희:game

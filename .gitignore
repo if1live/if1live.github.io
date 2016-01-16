@@ -69,6 +69,7 @@ content/*/*.html
 # c/c++/c#
 a.out
 *.exe
+*.dSYM
 
 # importd
 db.sqlite
