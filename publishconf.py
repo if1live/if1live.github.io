@@ -10,8 +10,9 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = ''
-#SITEURL = 'https://libsora.so'
+#SITEURL = ''
+#https작동 확인후 돌리기
+SITEURL = 'http://libsora.so'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
