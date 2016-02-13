@@ -44,14 +44,14 @@ LESS_RUN_IN_DEBUG = True
 
 # Blogroll
 LINKS =  (
-#    ('shipduck', 'http://github.com/shipduck'),
+#    ('shipduck', '//github.com/shipduck'),
 )
 
 # Social widget
 SOCIAL = (
-    ('Twitter', 'http://twitter.com/if1live'),
-    ('GitHub', 'http://github.com/if1live'),
-    ('BitBucket', 'https://bitbucket.org/if1live'),
+    ('Twitter', '//twitter.com/if1live'),
+    ('GitHub', '//github.com/if1live'),
+    ('BitBucket', '//bitbucket.org/if1live'),
 )
 
 DEFAULT_PAGINATION = False
@@ -128,7 +128,7 @@ TWITTER_CARD_SITE = '@if1live'  # The site's Twitter handle like @my_blog
 TWITTER_CARD_SITE_ID = ''  # The site's Twitter ID
 TWITTER_CARD_CREATOR = ''  # Your twitter handle like @monkmartinez
 TWITTER_CARD_CREATOR_ID = ''  # The site creator's id
-GRAVATAR_URL = 'http://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'
+GRAVATAR_URL = 'https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'
 
 TEMPLATE_PAGES = {
     'about.html': 'about.html',

@@ -115,13 +115,13 @@
       <ul class="nav-link-list">
         {% for social, link in SOCIAL %}
         <li>
-          <!-- social link icon : http://fontawesome.io/icons/ -->
+          <!-- social link icon : //fontawesome.io/icons/ -->
           <a href="{{ link }}" title="{{ social }}"><i class="fa fa-{{ social|lower }}"> </i></a>
         </li>
         {% endfor %}
         {% if FEED_ALL_ATOM %}
         <li>
-          <!-- social link icon : http://fontawesome.io/icons/ -->
+          <!-- social link icon : //fontawesome.io/icons/ -->
           <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}"><i class="fa fa-rss"> </i></a>
         </li>
         {% endif %}
@@ -155,10 +155,18 @@ var require = {
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 
     <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="{{ SITEURL }}/theme/js/common.js"></script>
+
+    <script type="text/javascript">
+      var host = "libsora.so";
+      if ((host == window.location.host) && (window.location.protocol != "https:")) {
+        window.location.protocol = "https";
+      }
+    </script>
+
     {% block script %}
     {% endblock %}
     {% include "analytics.html" %}
