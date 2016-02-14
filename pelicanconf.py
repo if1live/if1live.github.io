@@ -7,10 +7,8 @@ import os
 AUTHOR = u'if1live'
 SITENAME = u'libsora.so'
 SITEURL = ''
-SITEURL_FULL = ""
+SITEURL_SHORT = ""
 SITEDOMAIN = ""
-
-FEED_DOMAIN = SITEURL_FULL
 
 TIMEZONE = u'Asia/Seoul'
 

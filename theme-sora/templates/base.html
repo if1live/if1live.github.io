@@ -33,14 +33,14 @@
 
     {% block head_links %}
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="{{ SITEURL }}/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ SITEURL_SHORT }}/favicon.ico" type="image/x-icon" />
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
     {% assets filters="less", output="css/style.css", "css/style.less" %}
-    <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
+    <link rel="stylesheet" href="{{ SITEURL_SHORT }}/{{ ASSET_URL }}">
     {% endassets %}
 
     {% endblock %}
@@ -52,33 +52,33 @@
   <body>
     <header class="base-header common-header-footer">
       <h1 class="monospace">
-        <a href="{{ SITEURL }}/">/usr/lib/libsora.so</a>
+        <a href="{{ SITEURL_SHORT }}/">/usr/lib/libsora.so</a>
       </h1>
       <nav>
         <h2 hidden>Navigation</h2>
         <ul class="nav-link-list">
           <li>
-            <a href="{{ SITEURL }}/about.html" {% if page_name == "about" %} class="active" {% endif %} title="about">
+            <a href="{{ SITEURL_SHORT }}/about.html" {% if page_name == "about" %} class="active" {% endif %} title="about">
               <i class="fa fa-info"><span hidden>about</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/project.html" {% if page_name == "project" %} class="active" {% endif %} title="project">
+            <a href="{{ SITEURL_SHORT }}/project.html" {% if page_name == "project" %} class="active" {% endif %} title="project">
               <i class="fa fa-code"><span hidden>project</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %} title="archives">
+            <a href="{{ SITEURL_SHORT }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %} title="archives">
               <i class="fa fa-archive"><span hidden>Archives</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/tags.html" {% if page_name == "tags" %} class="active" {% endif %} title="tags">
+            <a href="{{ SITEURL_SHORT }}/tags.html" {% if page_name == "tags" %} class="active" {% endif %} title="tags">
               <i class="fa fa-tags"><span hidden>Tags</span></i>
             </a>
           </li>
           <li>
-            <a href="{{ SITEURL }}/search.html" {% if page_name == "search" %} class="active" {% endif %} title="search">
+            <a href="{{ SITEURL_SHORT }}/search.html" {% if page_name == "search" %} class="active" {% endif %} title="search">
               <i class="fa fa-search"><span hidden>Search</span></i>
             </a>
           </li>
@@ -115,14 +115,14 @@
         Powered by <a href="//getpelican.com/" title="Pelican Home Page">Pelican</a>
         / <a href="//purecss.io/" title="Pure Home Page">Pure</a>
         {% if DNSEVER_BANNER %}
-        / <a href="//www.dnsever.com" target="dnsever"><img src="{{ SITEURL }}/theme/images/dnsever-banner_80x16.gif" border="0" alt="DNS Powered by DNSEver.com"></a>
+        / <a href="//www.dnsever.com" target="dnsever"><img src="{{ SITEURL_SHORT }}/theme/images/dnsever-banner_80x16.gif" border="0" alt="DNS Powered by DNSEver.com"></a>
         {% endif %}
       </p>
     </footer>
 
     <script>
 var require = {
-  baseUrl: '{{ SITEURL }}/themes/js',
+  baseUrl: '{{ SITEURL_SHORT }}/themes/js',
   paths: {
     'jquery': '//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min'
   }
@@ -135,7 +135,7 @@ var require = {
     <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 
-    <script src="{{ SITEURL }}/theme/js/common.js"></script>
+    <script src="{{ SITEURL_SHORT }}/theme/js/common.js"></script>
 
     {% block script %}
     {% endblock %}
