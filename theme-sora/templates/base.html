@@ -161,10 +161,10 @@ var require = {
     <script src="{{ SITEURL }}/theme/js/common.js"></script>
 
     <script type="text/javascript">
-      //var host = "libsora.so";
-      //if ((host == window.location.host) && (window.location.protocol != "https:")) {
-      //  window.location.protocol = "https";
-      //}
+      var host = "libsora.so";
+      if ((host == window.location.host) && (window.location.protocol != "https:")) {
+        window.location.protocol = "https";
+      }
     </script>
 
     {% block script %}
