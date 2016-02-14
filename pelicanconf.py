@@ -7,7 +7,7 @@ import os
 AUTHOR = u'if1live'
 SITENAME = u'libsora.so'
 SITEURL = ''
-#SITEURL = 'http://libsora.so'
+SITEURL_FULL = ""
 
 TIMEZONE = u'Asia/Seoul'
 
@@ -30,7 +30,7 @@ TWITTER_USERNAME = 'if1live'
 
 DISQUS_SITENAME = "libsora"
 GOOGLE_ANALYTICS = "UA-37862172-2"
-DNSEVER_BANNER = True
+DNSEVER_BANNER = False
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

@@ -14,10 +14,10 @@ cname_filepath = os.path.join(
     os.path.dirname(__file__),
     "content", "extra", "CNAME"
 )
-cname = open(cname_filepath).readline()
+cname = open(cname_filepath).readline().strip()
 
-#SITEURL = ''
-SITEURL = "https://" + cname
+SITEURL = "//" + cname
+SITEURL_FULL = "https://" + cname
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
