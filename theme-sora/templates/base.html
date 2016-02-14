@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="{{ DEFAULT_LANG }}" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="{{ DEFAULT_LANG }}" class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html class="no-js" lang="ko">
   <head>
     {% block head %}
     <meta charset="utf-8">
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"/>
 
     {% if article and article.author %}
@@ -37,17 +34,9 @@
     {% block head_links %}
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="{{ SITEURL }}/favicon.ico" type="image/x-icon" />
-    <!-- touch icon not exist now
-    <link rel="apple-touch-icon" href="{{ SITEURL }}/theme/images/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ SITEURL }}/theme/images/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ SITEURL }}/theme/images/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ SITEURL }}/theme/images/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
-    <link rel="icon" href="{{ SITEURL }}/theme/images/apple-touch-icon-144x144.png" />
-    -->
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
 
     {% assets filters="less", output="css/style.css", "css/style.less" %}
@@ -59,27 +48,9 @@
     {% include "feeds.html" %}
 
     {% endblock head %}
-
-    <!--[if lt IE 9]>
-    <script>
-    document.createElement('header');
-    document.createElement('nav');
-    document.createElement('section');
-    document.createElement('article');
-    document.createElement('aside');
-    document.createElement('footer');
-    document.createElement('hgroup');
-    </script>
-    <![endif]-->
-
-    <!--[if lt IE 8]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20130526/json2.min.js"></script>
-    <![endif]-->
-
-
   </head>
   <body>
-    <header class="base-header">
+    <header class="base-header common-header-footer">
       <h1 class="monospace">
         <a href="{{ SITEURL }}/">/usr/lib/libsora.so</a>
       </h1>
@@ -88,13 +59,13 @@
         <ul class="nav-link-list">
           <li>
             <a href="{{ SITEURL }}/about.html" {% if page_name == "about" %} class="active" {% endif %} title="about">
-	      <i class="fa fa-info"><span hidden>about</span></i>
-	    </a>
+              <i class="fa fa-info"><span hidden>about</span></i>
+            </a>
           </li>
           <li>
             <a href="{{ SITEURL }}/project.html" {% if page_name == "project" %} class="active" {% endif %} title="project">
-	      <i class="fa fa-code"><span hidden>project</span></i>
-	    </a>
+              <i class="fa fa-code"><span hidden>project</span></i>
+            </a>
           </li>
           <li>
             <a href="{{ SITEURL }}/archives.html" {% if page_name == "archives" %} class="active" {% endif %} title="archives">
@@ -121,7 +92,7 @@
     {% endblock %}
     </div>
 
-    <footer class="base-footer">
+    <footer class="base-footer common-header-footer">
       <ul class="nav-link-list">
         {% for social, link in SOCIAL %}
         <li>
@@ -153,20 +124,16 @@
 var require = {
   baseUrl: '{{ SITEURL }}/themes/js',
   paths: {
-    'jquery': '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'
+    'jquery': '//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min'
   }
 };
     </script>
 
     <!-- js area -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
     <script src="{{ SITEURL }}/theme/js/common.js"></script>
 

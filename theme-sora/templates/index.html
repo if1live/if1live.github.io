@@ -2,7 +2,7 @@
 {% import "_helpers.html" as helpers %}
 
 {% block content %}
-<div class="grid_12">
+<div>
 
 {% set article = articles_page.object_list[0] %}
 <section class="index-content">
@@ -34,19 +34,18 @@
 
 {% if articles %}
 {% for article in articles %}
-	{% if not RECENT_ARTICLES_COUNT %}
-		{% set RECENT_ARTICLES_COUNT = 10 %}
-	{% endif %}
-	{% if loop.index0 < RECENT_ARTICLES_COUNT %}
+  {% if not RECENT_ARTICLES_COUNT %}
+    {% set RECENT_ARTICLES_COUNT = 10 %}
+  {% endif %}
+  {% if loop.index0 < RECENT_ARTICLES_COUNT %}
   {{ helpers.render_article_summary(article) }}
-	{% endif %}
+  {% endif %}
 {% endfor %}
 {% endif %}
 
 </div>
 </section>
 
-</div> <!-- //grid_12 -->
-<div class="clear"></div>
+</div>
 
 {% endblock content %}

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block title -%}
 Project · {{ super() }}
-{% endblock title %}
+{%- endblock title %}
 
 {% block meta_tags_in_head %}
 {{ super() }}
@@ -11,7 +11,6 @@ Project · {{ super() }}
 {% endblock %}
 
 {% block content %}
-<div class="grid_12">
 <section class="basic-content">
 <h1>Project</h1>
 
@@ -21,7 +20,7 @@ Project · {{ super() }}
 <div class="github-card" data-user="shipduck"></div>
 </section>
 
-<section>
+<section class="entry-content">
 <h2>Repository</h2>
 <p>
   저장소에 벌인게 너무 많아서 그나마 그럴싸한거 몇개만 기록한다. 전체 내역은 github를 참고.
@@ -60,8 +59,6 @@ Project · {{ super() }}
 </section>
 
 </section>
-</div>  <!-- //.grid_12 -->
-<div class="clear"></div>
 {% endblock %}
 
 {% block script %}

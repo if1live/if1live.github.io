@@ -1,36 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block title -%}
 Search · {{ super() }}
-{% endblock title %}
+{%- endblock title %}
 
 {% block head_links %}
 {{ super() }}
 {% endblock head_links %}
 
-{% block head_description %}
+{% block head_description -%}
 Search results for {{ SITENAME|striptags }} blog.
-{% endblock head_description %}
+{%- endblock head_description %}
 
 
 {% block content_title %}
 {% endblock %}
 
 {% block content %}
-<section class="search-content basic-content grid_12">
-  <script>
-  (function() {
-    var cx = '007594917815977558869:0ylwgqo_h0y';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search>
+<section class="basic-content">
+<h1>Search</h1>
 </section>
-<div class="clear"></div>
+
+{% include "google_search.html" %}
 {% endblock content %}

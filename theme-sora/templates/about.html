@@ -2,15 +2,15 @@
 
 {% set ctx = ABOUT_CTX %}
 
-{% block title %}
+{% block title -%}
 About · {{ super() }}
-{% endblock title %}
+{%- endblock title %}
 
 {% block content %}
-<div class="grid_12">
 <section class="basic-content">
 <h1>Résumé</h1>
 
+<div class="entry-content">
 <section>
 <h2>about</h2>
 <ul>
@@ -38,8 +38,8 @@ current position : Seoul, South Korea.
 <h3>5minlab</h3>
 <ul>
   <li>Programmer, Jan. 2015 - Current</li>
-  <li>Web-based game server Developer</li>
-  <li>Ruby on Rails</li>
+  <li>Web-based game server Developer (Ruby on Rails)</li>
+  <li>cocos2d-x based game client Developer (cocos2d-x)</li>
 </ul>
 
 <h3>Move Incorporation</h3>
@@ -52,13 +52,13 @@ current position : Seoul, South Korea.
 <h3>Mobilehands</h3>
 <ul>
   <li>Programmer, Aug. 2010 - Oct. 2011</li>
-  <li>Mobile Game Developer (c++/cocos2d-x)</li>
+  <li>Mobile Game Developer (C++/cocos2d-x)</li>
 </ul>
 
 <h3>Wizet Corporation</h3>
 <ul>
   <li>Programmer, Jan. 2010 - Jul. 2010</li>
-  <li>Back-end Web Developer (php/etc)</li>
+  <li>Back-end Web Developer (PHP/etc)</li>
   <li>Front-end Web Developer</li>
 </ul>
 </section>
@@ -79,7 +79,5 @@ current position : Seoul, South Korea.
 <a href="/project.html">see detail page</a>
 </p>
 <section>
-
-</div>  <!-- // grid_12 -->
-<div class="clear"></clear>
+</div>
 {% endblock %}
