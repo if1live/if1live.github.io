@@ -1,4 +1,4 @@
-{% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+{% if DISQUS_SITENAME and SITEURL_FULL and article.status != "draft" %}
 <section class="disqus-section">
 <h1 hidden>Comment</h1>
 <div id="disqus_thread"></div>
@@ -7,9 +7,9 @@ var disqus_shortname = '{{ DISQUS_SITENAME }}';
 {% if article.disqus_identifier %}
 var disqus_identifier = '{{ article.disqus_identifier }}';
 {% else %}
-var disqus_identifier = '{{ SITEURL }}/{{ article.url }}';
+var disqus_identifier = '{{ SITEURL_FULL }}/{{ article.url }}';
 {% endif %}
-var disqus_url = '{{ SITEURL }}/{{ article.url }}';
+var disqus_url = '{{ SITEURL_FULL }}/{{ article.url }}';
 
 (function() {
 	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
