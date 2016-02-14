@@ -7,7 +7,7 @@ var disqus_shortname = '{{ DISQUS_SITENAME }}';
 {% if article.disqus_identifier %}
 var disqus_identifier = '{{ article.disqus_identifier }}';
 {% else %}
-var disqus_identifier = '{{ SITEURL_FULL }}/{{ article.url }}';
+var disqus_identifier = 'http://{{ SITEDOMAIN }}/{{ article.url }}';
 {% endif %}
 var disqus_url = '{{ SITEURL_FULL }}/{{ article.url }}';
 
