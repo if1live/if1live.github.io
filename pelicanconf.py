@@ -8,6 +8,7 @@ AUTHOR = u'if1live'
 SITENAME = u'libsora.so'
 SITEURL = ''
 SITEURL_FULL = ""
+SITEDOMAIN = ""
 
 TIMEZONE = u'Asia/Seoul'
 

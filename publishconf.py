@@ -18,6 +18,7 @@ cname = open(cname_filepath).readline().strip()
 
 SITEURL = "//" + cname
 SITEURL_FULL = "https://" + cname
+SITEDOMAIN = cname
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
