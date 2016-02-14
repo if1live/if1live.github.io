@@ -21,6 +21,8 @@ SITEURL_FULL = "https://" + cname
 SITEDOMAIN = cname
 RELATIVE_URLS = False
 
+FEED_DOMAIN = SITEURL_FULL
+
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 
 #DELETE_OUTPUT_DIRECTORY = True
