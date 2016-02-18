@@ -4,7 +4,7 @@
 :subtitle: Default Argument X (Python, Ruby)
 :slug: default-argument-python-and-ruby
 :date: 2016-02-18
-:slug: ruby, python, default argument, default paramter value, optional paramter
+:tags: ruby, python, default argument, default paramter value, optional paramter
 :author: if1live
 
 파이썬과 루비의 문법 차이로 인한 버그를 당한적은 자주 있었지만 글로 다룰 생각까진 (게을러서) 하지 않았다.
