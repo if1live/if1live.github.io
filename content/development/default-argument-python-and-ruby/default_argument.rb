@@ -2,10 +2,10 @@
 
 require 'time'
 
-def main(now = Time.now())
+def run(now = Time.now())
   puts now
-  sleep 2
 end
 
-main
-main
+run
+sleep 1
+run

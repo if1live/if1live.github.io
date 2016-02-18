@@ -7,5 +7,3 @@ end
 def bar(a = foo())
   puts "bar called"
 end
-
-puts "complete"

@@ -5,5 +5,3 @@ def foo():
 
 def bar(a = foo()):
     print("bar called")
-
-print("complete")
