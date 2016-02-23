@@ -88,3 +88,6 @@ npm-debug.log
 
 # pyenv
 .python-version
+
+# extra
+*.log
