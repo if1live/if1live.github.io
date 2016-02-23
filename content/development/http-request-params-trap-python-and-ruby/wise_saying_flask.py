@@ -12,7 +12,7 @@ app = fl.Flask(__name__)
 def wise_saying():
     try:
         idx = int(fl.request.args["idx"]) % msg_count
-    except KeyError:
+    except:
         idx = int(random.random() * msg_count)
     return messages[idx]
 
