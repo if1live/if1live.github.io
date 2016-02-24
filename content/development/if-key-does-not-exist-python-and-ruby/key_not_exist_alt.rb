@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 foo_list = [1, 2, 3]
 begin
   p foo_list.fetch(100)
@@ -9,7 +7,7 @@ end
 
 foo_dict = {foo: 2, bar: 4}
 begin
-  p foo_dict(:spam)
+  p foo_dict.fetch(:spam)
 rescue => ex
   p ex
 end

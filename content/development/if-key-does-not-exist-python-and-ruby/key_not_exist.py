@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 foo_list = [1, 2, 3]
 try:
     print(foo_list[100])

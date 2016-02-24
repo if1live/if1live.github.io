@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 foo_list = [1, 2, 3]
 begin
   p foo_list[100]
