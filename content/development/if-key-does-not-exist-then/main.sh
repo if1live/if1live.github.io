@@ -10,4 +10,7 @@ make key_not_exist_bracket
 make key_not_exist_find
 ./key_not_exist_find
 
+make key_not_exist_count
+./key_not_exist_count
+
 make clean

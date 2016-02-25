@@ -8,11 +8,10 @@ int main()
     {"foo", 2},
     {"bar", 4},
   };
-  printf("curr dict size : %lu\n", foo_dict.size());
 
   auto it = foo_dict.find("spam");
   if(it != foo_dict.end()) {
-    printf("found, find() => %d\n", 1);
+    printf("found, find() => %d\n", it->second);
   } else {
     printf("not found\n");
   }

@@ -8,7 +8,6 @@ int main()
     {"foo", 2},
     {"bar", 4},
   };
-  printf("curr dict size : %lu\n", foo_dict.size());
 
   auto val = foo_dict["spam"];
   printf("[] => %d\n", val);
