@@ -1,58 +1,51 @@
-KGC 2013 오큘러스 세션 구경 소감
-===================================
-
-:date: 2013-09-30
-:tags: oculus, kgc
-:slug: kgc2013-oculus-rift
-:author: if1live
-:summary: KGC 2013 오큘러스 세션 구경 소감
+Title: KGC 2013 오큘러스 세션 구경 소감
+Date: 2013-09-30
+Tags: oculus, kgc
+Slug: kgc2013-oculus-rift
+Author: if1live
+Summary: KGC 2013 오큘러스 세션 구경 소감
 
 2013년 9월 25일 Oculus Rift 하나 믿고 휴가지르고 KGC에 구경갔었다. 구경한 세션/키노트는 다른것도 있지만 그런건 내가 알바 아니다. 오큘러스 관련된 내용만 정리했다.
 
 오큘러스 관련 세션과 키노트를 각각 구경갔다. 상세 내용은 다음과 같다.
 
 Oculus Rift를 활용한 가상현실 게임제작의 유의점
-#####################################################
+-----------------------------------------------
 
-이름
-  안주형
-소속
-  오큘러스VR Korea
-강연 목차
-  - Oculus Rift와 가상현실
-  - Oculus Rift를 활용한 게임 개발 사례
-  - 기존의 개발 방식과는 어떻게 달라야 하는가
-  - 유저들에게 어떤 경험을 전달해야 하는가
-상제 정보
-  - `KGC 2013 강연정보 <http://www.kgconf.com/kor/html/conference_view.html?idx=1811>`_
-  - `this is game 참고 자료 <http://www.thisisgame.com/webzine/news/nboard/4/?page=3&n=49701>`_
-
-
+* 이름
+    * 안주형
+* 소속
+    오큘러스VR Korea
+* 강연 목차
+    * Oculus Rift와 가상현실
+    * Oculus Rift를 활용한 게임 개발 사례
+    * 기존의 개발 방식과는 어떻게 달라야 하는가
+    * 유저들에게 어떤 경험을 전달해야 하는가
+* 상제 정보
+    * [KGC 2013 강연정보](http://www.kgconf.com/kor/html/conference_view.html?idx=1811)
+    * [this is game 참고 자료](http://www.thisisgame.com/webzine/news/nboard/4/?page=3&n=49701)
 
 가상현실과 게임의 미래
-######################################
-이름
-  Brendan Iribe
-소속
-  Oculus VR Inc
+----------------------
 
-강연 목차
-  - 가상현실이란 무엇인가?
-  - 어떻게 VR게임이 우리의 게임 방식을 바꿀것인가?
-  - 게임시장에서 VR의 의미
-  - VR은 정말로 어려운가?
-  - 최근 VR의 발전 및 돌파구
-  - 가상현실의 미래와 변화될 미래
-상세 정보
-  - `KGC 2013 keynote <http://www.kgconf.com/kor/html/conference_view.html?idx=1747>`_
-
+* 이름
+    * Brendan Iribe
+* 소속
+    * Oculus VR Inc
+* 강연 목차
+    * 가상현실이란 무엇인가?
+    * 어떻게 VR게임이 우리의 게임 방식을 바꿀것인가?
+    * 게임시장에서 VR의 의미
+    * VR은 정말로 어려운가?
+    * 최근 VR의 발전 및 돌파구
+    * 가상현실의 미래와 변화될 미래
+* 상세 정보
+    * [KGC 2013 keynote](http://www.kgconf.com/kor/html/conference_view.html?idx=1747)
 
 내용 정리
-#########################################
-강연과 키노트를 둘다 들었는데 같은 ppt자료를 공유한 부분이 많더라. 게다가 중복된 이야기를 많이 했다.
-또한 강연 난이도가 생각보다 내가 이미 알고있는 내용이 많더라.
-오큘러스 개발자 킷 가지고 2달 가지고 놀면 몸으로 익힐수밖에 없는 내용이 꽤 많았다.
-그래서 강연 내용 정리한거에 내가 이미 알고있는 정보를 섞어써놧다.
+---------
+
+강연과 키노트를 둘다 들었는데 같은 ppt자료를 공유한 부분이 많더라. 게다가 중복된 이야기를 많이 했다. 또한 강연 난이도가 생각보다 내가 이미 알고있는 내용이 많더라. 오큘러스 개발자 킷 가지고 2달 가지고 놀면 몸으로 익힐수밖에 없는 내용이 꽤 많았다. 그래서 강연 내용 정리한거에 내가 이미 알고있는 정보를 섞어써놧다.
 
 오큘러스 대응 게임을 개발할때는 3가지 요소를 다른 게임에 비해서 신경써야한다. UI/Simulation sickness(멀미)/latency 이다.
 
@@ -60,23 +53,19 @@ Oculus Rift를 활용한 가상현실 게임제작의 유의점
 
 이를 해결하기 위한 방법이 여러가지가 있겠지만, 팀포트리스2의 경우는 그냥 UI를 가운데로 집어넣었다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/tf2-oculus.jpg
-  :alt: 오큘러스 + 팀포트리스2 UI
+![오큘러스 + 팀포트리스2 UI]({filename}/static/kgc2013-oculus-rift/tf2-oculus.jpg)
 
 **추가사항** UI에서 그래프라든가를 표현하기 위해서 직선을 사용할떄가 있다(예를 들면 스카이림의 체력) 일반 모니터로는 깔끔하게 렌더링된다. 하지만 오큘러스에서는 직선을 꺠끗하게 렌더링하는것이 불가능하다(barrel distortion) 스카이림의 체력바는 저해상도+깨끗하지 않은 직선덕분에 은근히 신경쓰이다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/skyrim-oculus.jpg
-  :alt: 오큘러스 + 스카이림 UI
+![오큘러스 + 스카이림 UI]({filename}/static/kgc2013-oculus-rift/skyrim-oculus.jpg)
 
 일반적인 UI를 사용하면 화면이 고정되서 머리를 움직이는데 UI가 따라 움직인다. 이경우 멀미를 발생시킬수 있다. (발표에서 예시로 사용한건 스팀의 Shift+Tab 같은거) UI에서 왼쪽위의 내용을 보기 위해서 고개를 움직이면 화면도 같이 움직여서 볼수가 없다. 고개움직이는것과 UI가 따로 움직이록 하는것이 좋을것이다.
 
-**추가 사항** 하하하! 머리랑 UI는 따로 움직여야된다는건 이미 몸으로 당해봐서 알고있었지! 그래서 `참참참 with ouclus rift + leap motion 의 점수판 <http://www.youtube.com/watch?v=MnjRdiOq26Q>`_ 은 그걸 고려하고 만들었었지.
+**추가 사항** 하하하! 머리랑 UI는 따로 움직여야된다는건 이미 몸으로 당해봐서 알고있었지! 그래서 [참참참 with ouclus rift + leap motion 의 점수판](http://www.youtube.com/watch?v=MnjRdiOq26Q) 은 그걸 고려하고 만들었었지.
 
+UI 자체에 깊이감이 존재하는 덕분에 게임의 요소를 바꿔야 될수 있다. 기존의 FPS게임의 경우는 화면 가운데 점 하나 찍고 크로스 헤어로 사용했다. 하지만 오큘러스에서는 크로스헤어조차 깊이를 가진다. 크로스헤어는 가까이에 있는데 플레이어가 멀리있는 객체를 바라보면 크로스헤어의 초점이 안맞는다. 반대로 크로스헤어에 초점을 맞추면 멀리있는것이 초점이 안맞는다(눈앞에 손가락 두면 배경이 잘 안보이는거같은 느낌) 크로스헤어가 ray-casting을 해서 크로스헤어의 깊이와 해당 방향의 깊이를 일치 시키면 해결할수 있다.
 
-UI 자체에 깊이감이 존재하는 덕분에 게임의 요소를 바꿔야 될수 있다. 기존의 FPS게임의 경우는 화면 가운데 점 하나 찍고 크로스 헤어로 사용했다. 하지만 오큘러스에서는 크로스헤어조차 깊이를 가진다. 크로스헤어는 가까이에 있는데 플레이어가 멀리있는 객체를 바라보면 크로스헤어의 초점이 안맞는다. 반대로 크로스헤어에 초점을 맞추면 멀리있는것이 초점이 안맞는다(눈앞에 손가락 두면 배경이 잘 안보이는거같은 느낌)
-크로스헤어가 ray-casting을 해서 크로스헤어의 깊이와 해당 방향의 깊이를 일치 시키면 해결할수 있다.
-
-**추가사항** `irrlicht 3d engine 의 tutorial 7: collision <http://irrlicht.sourceforge.net/docu/example007.html>`_ 같은 느낌으로 구현하면 될듯? 참고로 serious sam 1편의 경우 깊이에 따라서 크로스 헤어의 크기/위치 달라진다. 대충 이런 느낌으로 하면 될듯?
+**추가사항** [irrlicht 3d engine 의 tutorial 7: collision](http://irrlicht.sourceforge.net/docu/example007.html) 같은 느낌으로 구현하면 될듯? 참고로 serious sam 1편의 경우 깊이에 따라서 크로스 헤어의 크기/위치 달라진다. 대충 이런 느낌으로 하면 될듯?
 
 **추가사항** 크로스 헤어를 전방 2m에 그리도록 했다. 그리고 벽 바로앞에 선다. 크소르헤어 렌더링할떄 깊이 체크를 하지 않으면 크로스 헤어가 벽 2m 안쪽에 렌더링된다. 덕분에 말로 표현하기 애매한 기분을 맛볼 수 있다.
 
@@ -84,57 +73,43 @@ UI 자체에 깊이감이 존재하는 덕분에 게임의 요소를 바꿔야 �
 
 call of duty : black ops 메인메뉴. 의자에 앉은 상태로 고개를 움직이면 둘러볼수 있고 UI는 TV를 통해서 보여준다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/black-ops-menu.jpg
-  :alt: black ops 메인메뉴
+![black ops 메인메뉴]({filename}/static/kgc2013-oculus-rift/black-ops-menu.jpg)
 
 dead space. 등짝에 기본 UI가 표시되고 조준성이 레이저 같은 느낌으로 표시된다. HUD를 안넣은게 적절
 
-.. image:: {filename}/static/kgc2013-oculus-rift/dead-space-back.jpg
-  :alt: 데드스페이스 HUD
+![데드스페이스 HUD]({filename}/static/kgc2013-oculus-rift/dead-space-back.jpg)
 
 dead-space의 상점 UI. MMORPG 처럼 별도의 UI를 띄우는것보다 게임안에서 전부 처리할수 있다면 그쪽이 더 낫다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/dead-space-store.jpg
-  :alt: 데드스페이스 상점 UI
+![데드스페이스 상점 UI]({filename}/static/kgc2013-oculus-rift/dead-space-store.jpg)
 
-**추가사항**
-doom 3 : 개인적으로는 04년작주제에 UI 관련 연출은 08년작 데스스페이스보다 잘 만들었다고 생각하는 게임.
-게임내부에 UI만으로 여러가지 조작이 된다. 스위치 앞에 가서 E만 누르면 문이 열리는게 아니라 스위치에서 버튼을 직접 클릭해야한다. 얼마나 미친 물건이냐 하면 `Arkanoid <https://www.youtube.com/watch?feature=player_detailpage&v=IcnUkMGstNc#t=213>`_ 를 게임안에 구현해놨다(시간 이동 안되면 3분 30초 참고) 이 좋은 UI시스템이 퀘이크4로 가면 줄더니 RAGE로 가면서 완전히 사라진게 아쉽다. 이것과 관련해서는 `Fully Interactive Surfaces In DOOM3 <http://www.battleteam.net/tech/fis/docs/>`_ 를 읽어보자.
+**추가사항** doom 3 : 개인적으로는 04년작주제에 UI 관련 연출은 08년작 데스스페이스보다 잘 만들었다고 생각하는 게임. 게임내부에 UI만으로 여러가지 조작이 된다. 스위치 앞에 가서 E만 누르면 문이 열리는게 아니라 스위치에서 버튼을 직접 클릭해야한다. 얼마나 미친 물건이냐 하면 [Arkanoid](https://www.youtube.com/watch?feature=player_detailpage&v=IcnUkMGstNc#t=213) 를 게임안에 구현해놨다(시간 이동 안되면 3분 30초 참고) 이 좋은 UI시스템이 퀘이크4로 가면 줄더니 RAGE로 가면서 완전히 사라진게 아쉽다. 이것과 관련해서는 [Fully Interactive Surfaces In DOOM3](http://www.battleteam.net/tech/fis/docs/) 를 읽어보자.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/doom3-ui.png
-  :alt: doom3 UI
+![doom3 UI]({filename}/static/kgc2013-oculus-rift/doom3-ui.png)
 
 the division : UI로 표시할 내용을 게임안에서 layer 로 표기하는것도 괜찮은 방법일듯?
 
-.. image:: {filename}/static/kgc2013-oculus-rift/the-division-map.jpg
-  :alt: the division map ui
+![the division map ui]({filename}/static/kgc2013-oculus-rift/the-division-map.jpg)
 
-.. image:: {filename}/static/kgc2013-oculus-rift/the-division-menu.jpg
-  :alt: the division menu ui
+![the division menu ui]({filename}/static/kgc2013-oculus-rift/the-division-menu.jpg)
 
 H.A.W.K.E.N : 탑승물 기반의 게임이면 HUD도 적절할거다. 단, 이 경우 조준점과 물체 사이의 초첨조절이 어색할수 있으니 HUD를 반투명으로 하는것도 고려하기
 
-.. image:: {filename}/static/kgc2013-oculus-rift/hawken.jpg
-  :alt: hawken hud
+![hawken hud]({filename}/static/kgc2013-oculus-rift/hawken.jpg)
 
-**추가사항**
-wing commander의 경우 탑승자 시점의 HUD를 제공했엇다. 요즘세상에 와서 저 UI를 다시 보면 중요한 내용(실제 게임화면)이 스크린의 절반만 차지하고 나머지 절반이 그다지 중요하지 않은 HUD이다. Dirt3 운전자 시점을 보자. 이것 역시 탑승자 시점이다. 중요하지 않은 내용(차체)를 렌더링하는라고 중요한 부분(게임 화면)이 매우 줄어들었다. Dirt3 3인칭 시점에 비해서 게임에 중요한 내용(시야)이 많이 보이질 않는다.
+**추가사항** wing commander의 경우 탑승자 시점의 HUD를 제공했엇다. 요즘세상에 와서 저 UI를 다시 보면 중요한 내용(실제 게임화면)이 스크린의 절반만 차지하고 나머지 절반이 그다지 중요하지 않은 HUD이다. Dirt3 운전자 시점을 보자. 이것 역시 탑승자 시점이다. 중요하지 않은 내용(차체)를 렌더링하는라고 중요한 부분(게임 화면)이 매우 줄어들었다. Dirt3 3인칭 시점에 비해서 게임에 중요한 내용(시야)이 많이 보이질 않는다.
 
 탑승자 시점+HUD의 도입으로 현실감을 줄수있지만 그 대가로 사용가능한 게임 화면이 줄어드는것도 생각해 봐야할거다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/wing-commander.jpg
-  :alt: wing commander HUD
+![wing commander HUD]({filename}/static/kgc2013-oculus-rift/wing-commander.jpg)
 
-.. image:: {filename}/static/kgc2013-oculus-rift/dirt3.png
-  :alt: dirt3 ui
-.. image:: {filename}/static/kgc2013-oculus-rift/dirt3-2.jpg
-  :alt: dirt3 ui
+![dirt3 ui]({filename}/static/kgc2013-oculus-rift/dirt3.png)
+
+![dirt3 ui]({filename}/static/kgc2013-oculus-rift/dirt3-2.jpg)
 
 iron man : HUD 시점. 깊이를 잘못 조절하면 유저는 멀리있는곳(게임)을 보다가 가까운곳(HUD)를 보는 일을 반복해서 눈이 쉽게 피곤해질수 있다.
 
-.. image:: {filename}/static/kgc2013-oculus-rift/iron_man.jpg
-  :alt: iron man HUD
-
+![iron man HUD]({filename}/static/kgc2013-oculus-rift/iron_man.jpg)
 
 현재 oculus rift의 해상도가 그렇게 높지 않기 떄문에 많은 UI요소가 들어가면 망하는 지름길이다. 글자만 하더라도 많이 집어넣으면 폰트크기가 작아질텐데 이 경우 해상도 문제로 읽을수가 없다.
 
@@ -160,15 +135,13 @@ latency의 목표는 7~20ms이하로 유지하는거다. 이정도면 뇌가 인
 
 게임은 최소한 60fps로 작동하게. 90~120fps면 더 좋다.
 
-super-sampling은 반드시 써라. oculus rift 자체의 해상도가 낮다보니까 이거없으면 많이 티난다. (Oculus rift demo를 몸으로 직접 체엄해보면 안다 -_-)
+super-sampling은 반드시 써라. oculus rift 자체의 해상도가 낮다보니까 이거없으면 많이 티난다. (Oculus rift demo를 몸으로 직접 체엄해보면 안다 -\_-)
 
 vertical sync는 켜라. tearing은 막아야한다 (일부 유니티 기반의 데모가 vsync를 신경쓰지 않아서 tearing 발생하더라.. 일루젼의 데모라던가 일루젼의 데모라던가...)
 
-.. image:: {filename}/static/kgc2013-oculus-rift/vsync.jpg
-  :alt: tearing
+![tearing]({filename}/static/kgc2013-oculus-rift/vsync.jpg)
 
 렌더링/로직 쓰레드 분리하기. 렌더링 성능 올릴떄는 역시 이게 낫겟지. (근데 난 아직 안해봣잖아? 삽질 하겟네...)
-
 
 또 다른 게임 만들떄 신경 쓸 사항은 현장감이다.
 
