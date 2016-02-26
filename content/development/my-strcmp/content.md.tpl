@@ -1,9 +1,9 @@
-Title: 사람 낚는 strcmp()의 리턴타입 재설계하기
-Subtitle: 연산자 오버로딩의 입문
-Slug: my-strcmp
-Tags: strcmp
-Date: 2015-04-21
-Author: if1live
+title: 사람 낚는 strcmp()의 리턴타입 재설계하기
+subtitle: 연산자 오버로딩의 입문
+tags: strcmp
+slug: my-strcmp
+author: if1live
+date: 2015-04-21
 
 ## strcmp()로 낚시하기
 
@@ -14,19 +14,7 @@ Author: if1live
 모든 사람이 공감할수 있는 후진 함수가 존재하지 않을까?
 이런 생각을 하다 [strcmp()로 간단한 코드][problem_twitter]를 작성했다.
 
-```cpp
-#include <string.h>
-#include <stdio.h>
-
-int main() {
-  if(strcmp("foo", "foo") == true) {
-    printf("same\n");
-  } else {
-    printf("different\n");
-  }
-  return 0;
-}
-```
+{{view:file=trap_strcmp.cpp}}
 
 출력 결과가 무엇일까? `different`이다.
 strcmp 함수는 두 문자열이 같을때 0을 반환한다.
@@ -101,62 +89,7 @@ typedef enum {
 
 enum과 연산자 오버로딩을 이용해서 my_strcmp()의 대안 함수인 my_strcmp_enum()을 구현하면 다음과 같다.
 
-```cpp
-#include <cstdio>
-#include <cstring>
-#include <cassert>
-
-typedef enum {
-  MyOrderedAscending = -1,
-  MyOrderSame,
-  MyOrderedDescending
-} MyComparisonResult;
-
-MyComparisonResult my_strcmp_enum(const char * str1, const char * str2) {
-  int val = strcmp(str1, str2);
-  if(val < 0) {
-    return MyOrderedAscending;
-  } else if(val > 0) {
-    return MyOrderedDescending;
-  } else {
-    return MyOrderSame;
-  }
-}
-
-bool operator==(MyComparisonResult a, int b) {
-  return ((int)a == b);
-}
-
-bool operator==(MyComparisonResult a, bool b) {
-  return !((bool)a == b);
-}
-
-bool operator!=(MyComparisonResult a, int b) { return !(a == b); }
-bool operator!=(MyComparisonResult a, bool b) { return !(a == b); }
-
-// compile error
-// error: conversion function must be a non-static member function
-// operator bool(MyComparisonResult a) { return true; }
-
-int main()
-{
-  assert(my_strcmp_enum("foo", "foo") == 0);
-  assert(my_strcmp_enum("foo", "foo") == true);
-
-  assert(my_strcmp_enum("foo", "bar") != 0);
-  assert(my_strcmp_enum("foo", "bar") != true);
-
-  // compatible with strcmp
-  assert(my_strcmp_enum("1", "1") == strcmp("1", "1"));
-  assert(my_strcmp_enum("1", "2") == strcmp("1", "2"));
-  assert(my_strcmp_enum("2", "1") == strcmp("2", "1"));
-
-  // if(my_strcmp...)
-  printf("same : %d\n", my_strcmp_enum("foo", "foo"));
-  printf("different : %d\n", !my_strcmp_enum("foo", "foo"));
-  return 0;
-}
-```
+{{view:file=enum_version.cpp,lang=cpp}}
 
 ```
 same : 0
@@ -179,72 +112,7 @@ C++에서는 class를 이용해서 새로운 타입을 만들 수 있다.
 enum 대신 클래스를 이용해서 구현하자.
 클래스의 멤버함수로 conversion function을 만들면 enum 버전에서 구현하지 못한 것도 할 수 있다.
 
-```cpp
-#include <cstdio>
-#include <cstring>
-#include <cassert>
-
-class ComparisonResult {
-public:
-  enum {
-    ASC = -1,
-    EQUAL,
-    DESC
-  };
-
-  ComparisonResult(int val) : val(val) {}
-
-  bool operator==(int x) {
-    return ((int)val == x);
-  }
-
-  bool operator==(bool x) {
-    return !((bool)val == x);
-  }
-
-  bool operator!=(int x) { return !(*this == x); }
-  bool operator!=(bool x) { return !(*this == x); }
-
-  operator bool() {
-    return (val == EQUAL);
-  }
-
-  static ComparisonResult strcmp(const char *str1, const char *str2) {
-    int raw = ::strcmp(str1, str2);
-    if(raw < 0) {
-      return ComparisonResult(ASC);
-    } else if(raw > 0) {
-      return ComparisonResult(DESC);
-    } else {
-      return ComparisonResult(EQUAL);
-    }
-  }
-private:
-  int val;
-};
-
-ComparisonResult my_strcmp(const char *str1, const char *str2)
-{
-  return ComparisonResult::strcmp(str1, str2);
-}
-
-int main()
-{
-  assert(my_strcmp("foo", "foo") == 0);
-  assert(my_strcmp("foo", "foo") == true);
-  assert(my_strcmp("foo", "foo"));
-
-  assert(my_strcmp("foo", "bar") != 0);
-  assert(my_strcmp("foo", "bar") != true);
-  assert(!my_strcmp("foo", "bar"));
-
-  // compatible with strcmp
-  assert(my_strcmp("1", "1") == strcmp("1", "1"));
-  assert(my_strcmp("1", "2") == strcmp("1", "2"));
-  assert(my_strcmp("2", "1") == strcmp("2", "1"));
-  return 0;
-}
-```
+{{view:file=class_version.cpp,lang=cpp}}
 
 ## 정리
 * strcmp() 쓸때 조심하자.
