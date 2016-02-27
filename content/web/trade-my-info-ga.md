@@ -52,7 +52,7 @@ battlepage 등을 통해서 유입된 인원이 30%라는것을 기반으로 예
 | Desktop | 18783 |
 | Tablet  | 1283  |
 
-![모바일 vs 데스크탑 사용자 비율]({filename}/static/trade-my-info-ga/mobile-desktop.png)
+![모바일 vs 데스크탑 사용자 비율]({attach}trade-my-info-ga/mobile-desktop.png)
 
 모바일의 숫자가 데탑보다 더 많다. 타블렛은 아직 5%정도 수준이다.
 모바일을 모바일+타블렛으로 취급하면 모바일:데스크탑은 55:45 정도이다.
@@ -70,7 +70,7 @@ battlepage 등을 통해서 유입된 인원이 30%라는것을 기반으로 예
 |Firefox | 1069  |
 |Opera   | 116   |
 
-![데스크탑 브라우저 사용 비율]({filename}/static/trade-my-info-ga/desktop-browser.png)
+![데스크탑 브라우저 사용 비율]({attach}trade-my-info-ga/desktop-browser.png)
 
 크롬이 생각이상으로 잘 나간다. 크롬이 너무 높아서 모바일 크롬과 데스크탑
 크롬이 섞여 나오는거같은 기분이 들지만 저거 맞다. (크롬 전체 사용자는
@@ -91,7 +91,7 @@ IE의 사용 비율은 약 30%이다. 역시 IE는 쉽게 쓰러지지 않는다
 | 10 | 1168      | 6.22 |
 | 11 | 999       | 5.32 |
 
-![IE 버전별 사용 비율]({filename}/static/trade-my-info-ga/ie.png)
+![IE 버전별 사용 비율]({attach}trade-my-info-ga/ie.png)
 
 IE7, 8의 사용자가 제일 많다. 분명히 마소에서 IE7 강제업데이트를
 시켰음에도 IE7의 비율이 제일 높다. 내 예상에는 윈도우즈 자동 업데이트가
@@ -119,7 +119,7 @@ IE7 이상부터는 강제업데이트가 없어서 그런지 대충 비슷한 �
 | Naver    | 361 |
 | Google+  | 243 |
 
-![소셜 획득 경로 비율]({filename}/static/trade-my-info-ga/social-chart.png)
+![소셜 획득 경로 비율]({attach}trade-my-info-ga/social-chart.png)
 
 페이스북의 사용자가 제일 많다. 역시 Facebook! Twitter를 통한 유입도 꽤
 많다. 최초 유포경로가 트위터인게 한몫했겠지만 그래도 트위터 유저수는

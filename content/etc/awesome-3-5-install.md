@@ -7,7 +7,7 @@ Date: 2014-03-22
 ## Why not 3.4?
 On Ubuntu 13.10, current stable version is 3.4.15-1. [awesome][awesome] 3.4 doesn't support different wallpeper on each screen. awesome 3.5 support it. I want this feature.
 
-![step1]({filename}/static/awesome-3-5-install/multiple-wallpaper.jpg)
+![step1]({attach}awesome-3-5-install/multiple-wallpaper.jpg)
 
 ## Object
 Install awesome 3.5.3(current stable) on ubuntu 13.10
