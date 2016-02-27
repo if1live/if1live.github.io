@@ -20,9 +20,9 @@ Author: if1live
 
 예를 들어 현재 작업하고 있는 프로젝트를 전체 다시 빌드하면 10분 걸린다고 가정하자. 위의 프로젝트 전체에서 쓰이는 헤더파일에서 상수값 하나를 바꿔야될 일이 생겼다. 상수를 고치면 헤더파일이 바뀌었기때문에 의존성이 걸린 소스파일을 전부 다시 빌드해야된다. 상수값 하나 바꿨다고 10분이 사라진다. 상수를 바꾸고 테스트해봤는데 아무래도 잘못고친거 같은면 다시 10분을 기다려야한다.
 
-![COMPILING]({filename}/static/refactoring-c-macro-constant/compiling.png)
+![COMPILING]({attach}refactoring-c-macro-constant/compiling.png)
 
-[![COMPILING]({filename}/static/refactoring-c-macro-constant/compiling.png)](https://xkcd.com/303/)
+[![COMPILING]({attach}refactoring-c-macro-constant/compiling.png)](https://xkcd.com/303/)
 
 상수값을 바꿔도 전체 빌드하는걸 피할수 있도록 코드를 고쳐보자.
 

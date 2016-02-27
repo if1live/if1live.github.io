@@ -97,7 +97,7 @@ ERROR: Infinitely Loop!!!
 배열의 크기가 2일때 clang에서는 무한루프가 발생한다. (테스트를 위해서
 적당히 루프를 돌다 종료시켰다)
 
-![gcc memory address]({filename}/static/stack-allocation-voodoo-magic/bug-mem-addr-clang.png)
+![gcc memory address]({attach}stack-allocation-voodoo-magic/bug-mem-addr-clang.png)
 
 왜 clang에서는 무한루프가 발생했는지 확인하기 위해서 메모리 구조를
 간단하게 그려보았다. (나 그림 못그리는거 아니까 알아서 이해하자)
@@ -305,7 +305,7 @@ clang은 코드의 문제점을 찾아내지 못했다. 간단한 잠재적 위�
 없는건 아니다. [Gimpel Software](http://www.gimpel.com/) 에서 개발한
 `FlexeLint for C/C++` 를 이용하면 위의 버그를 잡아낸다.
 
-![C++ static analyzer sample]({filename}/static/stack-allocation-voodoo-magic/static-analyzer.png)
+![C++ static analyzer sample]({attach}stack-allocation-voodoo-magic/static-analyzer.png)
 
 Links
 -----

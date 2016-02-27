@@ -12,7 +12,7 @@ Date: 2013-07-20
 Preview
 -------
 
-![controller for raspberry pi + mpd]({filename}/static/rpi-mpd-controller/image.jpg)]
+![controller for raspberry pi + mpd]({attach}rpi-mpd-controller/image.jpg)]
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/TRn8TviiMe0" frameborder="0" allowfullscreen></iframe>
 

@@ -64,19 +64,19 @@ POST, GET일때 기본적인 내용은 동일하더라. 그래서 POST 일때만
 
 ![간단하게 구현한 POST 요청을 보내는 HTML이다. 겉보기에는 평범한 개행이
 들어있는 textarea이지만 실제로는 각각의 줄은 다른 개행문자를
-쓰고있다.]({filename}/static/what-is-textarea-newline/browser-input.png)
+쓰고있다.]({attach}what-is-textarea-newline/browser-input.png)
 
 ![서버에서 생성한 테스트용 개행문자가 섞인 HTML은 클라에 잘 도착했다.
 나머지는 브라우저의
-역할이다.]({filename}/static/what-is-textarea-newline/wireshark-input.png)
+역할이다.]({attach}what-is-textarea-newline/wireshark-input.png)
 
 ![클라가 submit 한 결과를 그대로 출력했다. `CRLF` 만 보인다. 각각의 줄의
 결과는 아래에서
-분석한다.]({filename}/static/what-is-textarea-newline/browser-output.png)
+분석한다.]({attach}what-is-textarea-newline/browser-output.png)
 
 ![클라가 보낸 요청을 wireshark 로 열어본 것이다. form의 내용을 열어보면
 `CRLF` 만
-보인다.]({filename}/static/what-is-textarea-newline/wireshark-output.png)
+보인다.]({attach}what-is-textarea-newline/wireshark-output.png)
 
 ### Result
 
@@ -131,7 +131,7 @@ var node = document.getElementsByTagName('textarea')[0];
 convertReadableString(node.value);
 ```
 
-![output]({filename}/static/what-is-textarea-newline/textarea-js.png)
+![output]({attach}what-is-textarea-newline/textarea-js.png)
 
 **CR이 전부 사라졌다!!!** 게다가 **LF만 있는데 어떻게 클라의 요청에는
 CRLF가 있던거지???**

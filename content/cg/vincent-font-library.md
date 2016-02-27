@@ -15,11 +15,11 @@ Public Domain 8x8 Bitmap Font인 [Vincent Font][vincent]를 적절하게 사용�
 데모 스크린샷. 8x8폰트는 상당히 작다.
 텍스트라벨의 원점은 왼쪽아래가 0,0이니까 사용할때 참고할 것
 
-![screen shot]({filename}/static/vincent-font-library/screenshot.png)
+![screen shot]({attach}vincent-font-library/screenshot.png)
 
 vincent font 2배 확대한거. 8x8폰트는 그냥보면 상당히 작다.
 
-![vincent]({filename}/static/vincent-font-library/vincent.png)
+![vincent]({attach}vincent-font-library/vincent.png)
 
 ## 사용 예제 코드
 ```

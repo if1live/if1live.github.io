@@ -30,17 +30,17 @@ glut에는 Cube / Sphere / Cone / Teapot...등을 렌더링할 수 있는 함수
 
 실행하고 1~6을 누르면 아래중에서 적절히 하나가 렌더링된다.
 
-![solid cube]({filename}/static/simple-mesh/solid_cube.png)
+![solid cube]({attach}simple-mesh/solid_cube.png)
 
-![solid sphere]({filename}/static/simple-mesh/solid_sphere.png)
+![solid sphere]({attach}simple-mesh/solid_sphere.png)
 
-![solid teapot]({filename}/static/simple-mesh/solid_teapot.png)
+![solid teapot]({attach}simple-mesh/solid_teapot.png)
 
-![wire cube]({filename}/static/simple-mesh/wire_cube.png)
+![wire cube]({attach}simple-mesh/wire_cube.png)
 
-![wire sphere]({filename}/static/simple-mesh/wire_sphere.png)
+![wire sphere]({attach}simple-mesh/wire_sphere.png)
 
-![wire teapot]({filename}/static/simple-mesh/wire_teapot.png)
+![wire teapot]({attach}simple-mesh/wire_teapot.png)
 
 ## 사용 예제 코드
 
