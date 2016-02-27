@@ -5,7 +5,11 @@ python:
 
 sudo: false
 
-cache: pip
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - node_modules
+    - content_cached
 
 env:
   global:
