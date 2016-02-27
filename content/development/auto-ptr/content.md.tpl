@@ -1,65 +1,23 @@
-Title: auto_ptr을 썻는데 소멸자가 불리지 않는다?
-Slug: auto-ptr
-Tags: cpp
-Date: 2013-01-25
-Author: if1live
+title: auto_ptr을 썻는데 소멸자가 불리지 않는다?
+tags: cpp
+slug: auto-ptr
+author: if1live
+date: 2013-01-25
 
 auto_ptr은 아주 간단한 스마트 포인터의 일정으로 동적할당된 객체를 자동으로 delete하는데 쓰인다. 하지만 잘못된 코딩을 하면 소멸자가 호출되지 않는다. 소멸자를 호출시키지 않는 auto_ptr의 예제이다
 
 ## 문제의 소스
 ### main.cpp
 
-```cpp
-// Ŭnicode please
-#include <memory>
-#include <cstdio>
-#include "example.h"
-
-using namespace std;
-
-class SampleObj {
-public:
-  ~SampleObj() { printf("dtor\n"); }
-};
-
-int main() {
-  Example *ex = new Example(new SampleObj());
-  delete(ex);
-  getchar();
-  return 0;
-}
-```
+{{view:file=main.cpp}}
 
 ### example.h
 
-```cpp
-// Ŭnicode please
-#pragma once
-#include <memory>
-
-class SampleObj;
-class Example {
-public:
-  Example(SampleObj *obj);
-  ~Example();
-  std::auto_ptr<SampleObj> ptr_obj;
-};
-```
+{{view:file=example.h,lang=cpp}}
 
 ### example.cpp
 
-```cpp
-// Ŭnicode please
-#include "example.h"
-#include <cstdio>
-
-Example::Example(SampleObj *obj)
-  : ptr_obj(obj) {}
-
-Example::~Example() {
-  printf("example dtor called\n");
-}
-```
+{{view:file=example.cpp}}
 
 ## 실행 결과
 ```cpp

@@ -35,13 +35,13 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 
 [gorilla](http://www.ogre3d.org/tikiwiki/Gorilla) 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 때문이다.
 
-![gorilla normal screenshot]({attach}oculus-interactive-surface-1/screenshot-normal.jpg)]
+![gorilla normal screenshot]({attach}oculus-interactive-surface-1/screenshot-normal.jpg)
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/e78Hfo5rIyU" frameborder="0" allowfullscreen></iframe>
 
 샘플를 적절히 손봐서 만들어봤다.
 
-![gorilla oculus screenshot]({attach}oculus-interactive-surface-1/screenshot-oculus.jpg)]
+![gorilla oculus screenshot]({attach}oculus-interactive-surface-1/screenshot-oculus.jpg)
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/-8AOYWkNz1Y" frameborder="0" allowfullscreen></iframe>
 

@@ -1,9 +1,9 @@
-Title: 코드에 반각/전각문자 넣어서 낚시하기
-Subtitle: 반각/전각 문자로 알아보는 고난도 낚시
-Slug: deceiving-code-fullwidth-halfwidth
-Tags: 전각, 반각, halfwidth, fullwidth, 낚시
-Date: 2015-04-27
-Author: if1live
+title: 코드에 반각/전각문자 넣어서 낚시하기
+subtitle: 반각/전각 문자로 알아보는 고난도 낚시
+tags: 전각, 반각, halfwidth, fullwidth, 낚시
+slug: deceiving-code-fullwidth-halfwidth
+author: if1live
+date: 2015-04-27
 
 ## 개요
 
@@ -95,50 +95,9 @@ DB에 등록된 키사라기 치하야의 이름은 `如月千早 (きさらぎ�
 아스키 코드에서 0x20(space)부터 0x7E(~)는 유니코드의 U+FF00(　)부터 U+FF5E(～)에 같은 순서로 배치되어있다.
 즉, 코드값만 바꾸면 순서대로 1:1 대응시킬수 있다. 다음은 이를 구현한 간단한 파이썬 코드이다.
 
-```python
-#-*- coding: utf-8 -*-
+{{view:file=convert.py,lang=python}}
 
-from __future__ import unicode_literals
-from __future__ import print_function
-
-def convert_full_to_half_char(ch):
-    codeval = ord(ch)
-    if 0xFF00 <= codeval <= 0xFF5E:
-        ascii = codeval - 0xFF00 + 0x20;
-        return unichr(ascii)
-    else:
-        return ch
-
-def convert_full_to_half_string(line):
-    output_list = [convert_full_to_half_char(x) for x in line]
-    return ''.join(output_list)
-
-input_str = """！＂＃＄％＆＇（）＊＋，－．／
-０１２３４５６７８９：；＜＝＞？
-＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
-ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
-｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
-ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～"""
-output_str = convert_full_to_half_string(input_str)
-print(input_str)
-print(output_str)
-```
-
-```
-$ python convert.py
-！＂＃＄％＆＇（）＊＋，－．／
-０１２３４５６７８９：；＜＝＞？
-＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
-ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
-｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
-ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～
-!"#$%&'()*+,-./
-0123456789:;<=>?
-@ABCDEFGHIJKLMNO
-PQRSTUVWXYZ[\]^_
-`abcdefghijklmno
-pqrstuvwxyz{|}~
-```
+{{execute:cmd=python convert.py,attach_cmd=true}}
 
 [C#의 경우는 전각문자열을 반각문자열로 바꿔주는 함수][stackoverflow_cs]가 있다고 한다.
 자신이 사용하는 언어에 유사한 함수가 있는지 먼저 찾아보자.

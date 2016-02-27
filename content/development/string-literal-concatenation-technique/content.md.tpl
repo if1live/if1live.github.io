@@ -1,20 +1,15 @@
-Title: "foo" "bar" == "foobar"
-Subtitle: String literal concatenation을 이용한 기법
-Slug: string-literal-concatenation-technique
-Tags: string literal
-Date: 2015-04-20
-Author: if1live
+title: "foo" "bar" == "foobar"
+subtitle: String literal concatenation을 이용한 기법
+tags: string literal
+slug: string-literal-concatenation-technique
+author: if1live
+date: 2015-04-20
 
 ## 개요
 
-```python
-print("foo" "bar" == "foobar")
-```
+{{view:file=intro.py,lang=python}}
 
-```
-$ python intro.py
-True
-```
+{{execute:cmd=python intro.py,attach_cmd=true}}
 
 C에는 문자열과 문자열 사이에 공백문자가 존재할때 두 문자열을 붙여서 하나의 문자열로 취급하는 문법이 있다.
 이것을 [String literal concatenation][wiki]라고 부른다.
@@ -32,33 +27,7 @@ C에는 문자열과 문자열 사이에 공백문자가 존재할때 두 문자
 * URL은 바뀔 필요 없다
 * 각각의 URL 길이를 알아야 한다
 
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-
-#if _DEBUG
-  #define HOST "127.0.0.1"
-#else
-  #define HOST "libsora.so"
-#endif
-
-
-#define URL_A_FORMAT "http://%s/kasugano"
-#define URL_B_FORMAT "http://%s/kasugano/sora"
-
-char url_a[1024];
-char url_b[1024];
-
-int length_url_a = sprintf(url_a, URL_A_FORMAT, HOST);
-int length_url_b = sprintf(url_b, URL_B_FORMAT, HOST);
-
-int main()
-{
-  printf("%s %d\n", url_a, length_url_a);
-  printf("%s %d\n", url_b, length_url_b);
-  return 0;
-}
-```
+{{view:file=url_generate.cpp}}
 
 디버그/릴리즈 환경에 따라 hostname이 다르기 때문에 전처리기를 이용한 분기를 넣었다.
 그리고 전처리기 구역 안에서 HOST라는 매크로 상수를 지정했다.
@@ -75,31 +44,7 @@ C에서는 전역변수의 값을 함수의 리턴값으로 할당할 수 없다
 
 String literal concatenation을 이용하면 개선할 수 있다.
 
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
-
-#if _DEBUG
-  #define HOST "127.0.0.1"
-#else
-  #define HOST "libsora.so"
-#endif
-
-
-#define URL_A "http://" HOST "/kasugano"
-#define URL_B "http://" HOST "/kasugano/sora"
-
-// -1 => last '\0'
-#define LENGTH_URL_A (sizeof(URL_A) - 1)
-#define LENGTH_URL_B (sizeof(URL_B) - 1)
-
-int main()
-{
-  printf("%s %d\n", URL_A, LENGTH_URL_A);
-  printf("%s %d\n", URL_B, LENGTH_URL_B);
-  return 0;
-}
-```
+{{view:file=url_generate_alt.cpp}}
 
 `#define URL_B "http://" HOST "/kasugano/sora"` 와 같은 식으로 매크로를 만들면 간단한 템플릿 엔진처럼 사용할 수 있다.
 
@@ -109,36 +54,12 @@ printf()를 이용해서 여러줄로 구성된 문자열을 출력하고 싶다
 printf()를 각각의 줄마다 호출할 수도 있지만 printf()를 한번만 쓴다고 가정하자.
 String literal concatenation을 모르면 이런식으로 짤 것이다.
 
-```c
-#include <stdio.h>
-int main()
-{
-  // 한줄에 출력할 내용을 전부 넣기
-  printf("== Help ==\n* option 1\n* option 2\n");
-
-  // 변수에 문자열을 넣은 다음에 출력
-  char msg[] = \
-    "== Help ==\n"\
-    "* option 1\n"\
-    "* option 2\n";
-  printf("%s", msg);
-  return 0;
-}
-```
+{{view:file=multiline.c}}
 
 한줄로 쓰면 문자열이 뭔지 파악하기 어렵고 그렇다고 여러줄로 쪼개면 매 줄의 끝에 `\`를 추가하는게 귀찮다.
 이럴때 String literal concatenation을 사용하면 좋다.
 
-```c
-#include <stdio.h>
-int main()
-{
-  printf("== Help ==\n"
-         "* option 1\n"
-         "* option 2\n");
-  return 0;
-}
-```
+{{view:file=multiline_alt.c}}
 
 ### Formatting
 
@@ -151,19 +72,7 @@ int main()
 | bar  | 12.4  | 5    |
 | spam | 89.2  |  8   |
 
-```c
-#include <stdio.h>
-int main()
-{
-  printf("%6s%6s%6s\n", "name", "score", "code");
-
-  #define LINE_FORMAT "%6s%6.1f%6d\n"
-  printf(LINE_FORMAT, "foo", 24.5, 10);
-  printf(LINE_FORMAT, "bar", 12.4, 5);
-  printf(LINE_FORMAT, "spam", 89.2, 8);
-  return 0;
-}
-```
+{{view:file=format.c}}
 
 ```
   name score  code
@@ -176,28 +85,7 @@ int main()
 테이블의 필드가 많아지면 몇번째 필드를 파악하기 어려워진다.
 String literal concatenation을 사용하면 각각의 포맷팅을 문자열로 분리하는게 가능하다.
 
-```c
-#include <stdio.h>
-int main()
-{
-  #define NAME_COLUMN_FMT "%6s"
-  #define NAME_VAL_FMT "%6s"
-  #define SCORE_COLUMN_FMT "%6s"
-  #define SCORE_VAL_FMT "%6.1f"
-  #define CODE_COLUMN_FMT "%6s"
-  #define CODE_VAL_FMT "%6d"
-
-  printf(NAME_COLUMN_FMT
-         SCORE_COLUMN_FMT
-         CODE_COLUMN_FMT "\n", "name", "score", "code");
-
-  #define LINE_FORMAT NAME_VAL_FMT SCORE_VAL_FMT CODE_VAL_FMT "\n"
-  printf(LINE_FORMAT, "foo", 24.5, 10);
-  printf(LINE_FORMAT, "bar", 12.4, 5);
-  printf(LINE_FORMAT, "spam", 89.2, 8);
-  return 0;
-}
-```
+{{view:file=format_alt.c}}
 
 다음은 이전에 과제로 작성했던 코드이다.
 String literal concatenation가 없었다면 어떤 코드가 되었을지 직접 상상해보자.
@@ -256,19 +144,9 @@ void display_process_field(struct seq_file *m)
 String literal concatenation이 뭔지 모르는 사람이라도 의도하지 않게 사용해본 적이 있을거다.
 아마도 여려줄의 문자열을 복붙해서 배열로 만드는 과정일거다.
 
-```python
-data = [
-    "foo"
-    "bar",
-    "spam"
-]
-print(data)
-```
+{{view:file=copy_and_paste_trap.py,lang=python}}
 
-```
-$ python copy_and_paste_trap.py
-['foobar', 'spam']
-```
+{{execute:cmd=python copy_and_paste_trap.py,attach_cmd=true}}
 
 의도한 출력은 `['foo', 'bar', 'spam']` 겠지만 comma 하나를 뺴먹어서 String literal concatenation가 발동했다.
 
