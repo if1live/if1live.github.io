@@ -52,29 +52,29 @@ if __name__ == '__main__':
 ```
 
 ## inline test
-this is ```code elem```.  
-this is **bold elem**.  
-this is *italic elem*.  
-this is [link elem](/).  
+this is ```code elem```.
+this is **bold elem**.
+this is *italic elem*.
+this is [link elem](/).
 
 ## image test
-![sample gif]({filename}/static/sample/sidetail-sora.gif)
+![sample gif]({attach}markdown-test/sidetail-sora.gif)
 
-![sample png]({filename}/static/sample/sora-kasugano.png)
+![sample png]({filename}markdown-test/sora-kasugano.png)
 
 
 ## unordered list
 * unordered list 1
 * unordered list 2
-	* unordered list 1
-	* unordered list 2
+    * unordered list 1
+    * unordered list 2
 * unordered list 3
 
 ## ordered list
 1.  ordered list 1
 1.  ordered list 2
-	1.  ordered list 1
-	1.  ordered list 2
+    1.  ordered list 1
+    1.  ordered list 2
 1.  ordered list 3
 
 ## blockquotes
@@ -89,9 +89,9 @@ id sem consectetuer libero luctus adipiscing.
 ##Table
 
 
-|  A  |  B    |A or B | 
+|  A  |  B    |A or B |
 |-----|-------|-------|
-|False| False | False | 
-|True | False | True  | 
-|False| True  | True  | 
-|True | True  | True  | 
+|False| False | False |
+|True | False | True  |
+|False| True  | True  |
+|True | True  | True  |

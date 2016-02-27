@@ -70,12 +70,9 @@ THEME = 'theme-sora'
 PLUGINS = [
     'sitemap',
     'assets',
-    'code_include.code_include',
     'html_rst_directive',
-    'pelican_youtube',
     'pelican_jsfiddle',
-    'better_figures_and_images',
-    'code_include',
+    #'better_figures_and_images',
     'pelican_gist',
     # enable w3c validate if py_w3c is fixed
     #'w3c_validate',
@@ -84,7 +81,17 @@ PLUGINS = [
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
 
-STATIC_PATHS = ['static', 'extra']
+STATIC_PATHS = [
+    'static', 'extra',
+    'sample',
+    'cg',
+    'development',
+    'emacs',
+    'etc',
+    'post-mortem',
+    'study',
+    'web',
+]
 PAGE_DIRS = ('pages',)
 ARTICLE_EXCLUDES = ('pages',)
 IGNORE_FILES = ['.#*', '*.html']
