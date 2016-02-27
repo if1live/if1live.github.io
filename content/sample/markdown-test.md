@@ -60,7 +60,7 @@ this is [link elem](/).
 ## image test
 ![sample gif]({attach}markdown-test/sidetail-sora.gif)
 
-![sample png]({filename}markdown-test/sora-kasugano.png)
+![sample png]({attach}markdown-test/sora-kasugano.png)
 
 
 ## unordered list
