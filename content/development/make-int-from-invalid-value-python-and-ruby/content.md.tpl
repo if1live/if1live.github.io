@@ -1,10 +1,11 @@
++++
 title: 올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비
 subtitle: 같은 목적, 다른 언어, 다른 결과
 slug: make-int-from-invalid-value-python-and-ruby
-tags: python, ruby, integer, int, exception
+tags: [python, ruby, integer, int, exception]
 date: 2016-02-24
 author: if1live
-
++++
 올바르지 않은 값을 정수로 바꾸는 일은 웹을 포함한 여러가지 개발에서 자주하는 작업 중 하나이다.
 예를 들어서 `/articles/?id={int}` 를 구현한 서버가 있다고 가정하자.
 `/articles/?id=1234`와 같이 id에 정수 문자열이 들어갈수도 있다.
@@ -18,26 +19,46 @@ author: if1live
 ### Success
 `"123"`과 같이 딱봐도 정수처럼 보이는 문자열을 정수로 바꿔보았다.
 
-{{view:file=str_to_int_success.py,lang=python}}
+~~~maya:view
+file=str_to_int_success.py
+~~~
 
-{{execute:cmd=python str_to_int_success.py,attach_cmd=true}}
+~~~maya:execute
+cmd=python str_to_int_success.py
+attach_cmd=true
+~~~
 
-{{view:file=str_to_int_success.rb,lang=ruby}}
+~~~maya:view
+file=str_to_int_success.rb
+~~~
 
-{{execute:cmd=ruby str_to_int_success.rb,attach_cmd=true}}
+~~~maya:execute
+cmd=ruby str_to_int_success.rb
+attach_cmd=true
+~~~
 
 파이썬과 루비 모두 정상적으로 작동한다.
 
 ### Fail
 `"fail"`과 같이 정수처럼 보이지 않는 문자열을 정수로 바꿔보면 어떨까?
 
-{{view:file=str_to_int_fail.py,lang=python}}
+~~~maya:view
+file=str_to_int_fail.py
+~~~
 
-{{execute:cmd=python str_to_int_fail.py,attach_cmd=true}}
+~~~maya:execute
+cmd=python str_to_int_fail.py
+attach_cmd=true
+~~~
 
-{{view:file=str_to_int_fail.rb,lang=ruby}}
+~~~maya:view
+file=str_to_int_fail.rb
+~~~
 
-{{execute:cmd=ruby str_to_int_fail.rb,attach_cmd=true}}
+~~~maya:execute
+cmd=ruby str_to_int_fail.rb
+attach_cmd=true
+~~~
 
 파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.
 
@@ -49,13 +70,23 @@ author: if1live
 파이썬에서는 None, 루비에서는 nil이라고 부르지만 둘은 비슷한 개념이다.
 이것을 정수로 변환하면 어떤 결과가 나올까?
 
-{{view:file=null_to_int.py,lang=python}}
+~~~maya:view
+file=null_to_int.py
+~~~
 
-{{execute:cmd=python null_to_int.py,attach_cmd=true}}
+~~~maya:execute
+cmd=python null_to_int.py
+attach_cmd=true
+~~~
 
-{{view:file=null_to_int.rb,lang=ruby}}
+~~~maya:view
+file=null_to_int.rb
+~~~
 
-{{execute:cmd=ruby null_to_int.rb,attach_cmd=true}}
+~~~maya:execute
+cmd=ruby null_to_int.rb
+attach_cmd=true
+~~~
 
 파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.
 
@@ -75,13 +106,23 @@ author: if1live
 
 [Kernel#Integer](http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Integer)를 사용하면 된다.
 
-{{view:file=str_to_int_fail_alt.rb,lang=ruby}}
+~~~maya:view
+file=str_to_int_fail_alt.rb
+~~~
 
-{{execute:cmd=ruby str_to_int_fail_alt.rb,attach_cmd=true}}
+~~~maya:execute
+cmd=ruby str_to_int_fail_alt.rb
+attach_cmd=true
+~~~
 
-{{view:file=null_to_int_alt.rb,lang=ruby}}
+~~~maya:view
+file=null_to_int_alt.rb
+~~~
 
-{{execute:cmd=ruby null_to_int_alt.rb,attach_cmd=true}}
+~~~maya:execute
+cmd=ruby null_to_int_alt.rb
+attach_cmd=true
+~~~
 
 비슷한 목적으로 [Kernel#Float](http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Float)도 있다.
 Kernel 클래스에는 유용한 기능이 많으니 한번쯤 읽어두면 나중에 도움이 될거다.
