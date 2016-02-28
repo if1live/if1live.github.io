@@ -1,10 +1,11 @@
-Title: 예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment
-Subtitle: Multiple Assignment with (Python 2.x, Python 3.x, Ruby)
-Tags: python, ruby, multiple assignment
-Slug: multiple-assignment-python-and-ruby
-Author: if1live
-Date: 2016-02-14
-
++++
+title: 예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment
+subtitle: Multiple Assignment with (Python 2.x, Python 3.x, Ruby)
+tags: [python, ruby, multiple assignment]
+slug: multiple-assignment-python-and-ruby
+author: if1live
+date: 2016-02-14
++++
 파이썬과 루비는 겉보기에는 비슷해보이면서 완전히 다르게 행동하는 문법이 있다.
 그래서 파이썬을 생각하면서 루비 코드를 짜면 어처구니 없는 버그가 생긴다.
 이런 일을 방지하고자 지금까지 당해본 파이썬과 루비의 문법 차이를 정리하려고 한다.
@@ -210,9 +211,10 @@ c = 2
 
 ## 응용 뻘짓
 
-<div class="maya-gist">
-<script src="https://gist.github.com/5ec0e00d0b27c6feaee9.js?file=solar_system_and_pluto.rb"></script>
-</div>
+~~~maya:gist
+id=5ec0e00d0b27c6feaee9
+file=solar_system_and_pluto.rb
+~~~
 
 할당할 변수는 10개지만 Array에 들어있는 요소는 9개이다.
 그래서 마지막 요소인 Pluto에는 nil이 들어간다.
