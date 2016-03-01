@@ -3,8 +3,8 @@
 # Usage : ./<script> <example_filename>
 
 function kill_wise_saying_server() {
-	rb_pids=$(ps -o pid,command|grep -E "^\d+ .*ruby ./wise_saying_.+\.rb$"|awk '{print $1}')
-	py_pids=$(ps -o pid,command|grep -E "^\d+ .*python ./wise_saying_.+\.py$"|awk '{print $1}')
+	rb_pids=$(ps -o pid,command|grep -E "^\s*\d+ .*ruby ./wise_saying_.+\.rb$"|awk '{print $1}')
+	py_pids=$(ps -o pid,command|grep -E "^\s*\d+ .*python ./wise_saying_.+\.py$"|awk '{print $1}')
 
 	for pid in ${rb_pids[@]}; do
 		kill $pid
