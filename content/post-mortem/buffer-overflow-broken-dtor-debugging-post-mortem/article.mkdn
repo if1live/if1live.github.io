@@ -1,7 +1,7 @@
 +++
 title: 디버깅 포스트모템 - 박살난 소멸자
 subtitle: LLDB를 이용해서 버퍼 오버플로우 찾기
-tags: lldb, buffer overflow, buffer overrun, memory bug, debug, debugging, destructor, post-mortem
+tags: [lldb, buffer overflow, buffer overrun, memory bug, debug, debugging, destructor, post-mortem]
 slug: buffer-overflow-broken-dtor-debugging-post-mortem
 author: if1live
 date: 2016-01-17

@@ -1,8 +1,8 @@
 +++
 title: Django용 적절한 라이브러리 소개
 subtitle: 쉽게 붙일 수 있는 적절한 라이브러리
-tags: django, library
-slug: [good-django-library]
+tags: [django, library]
+slug: good-django-library
 author: if1live
 date: 2014-08-10
 +++
