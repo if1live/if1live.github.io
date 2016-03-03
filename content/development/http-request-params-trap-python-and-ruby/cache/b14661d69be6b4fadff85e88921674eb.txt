@@ -1,0 +1,2 @@
+# ./test_server.sh wise_saying_flask.py idx=asdf
+query_string : idx=asdf => 5

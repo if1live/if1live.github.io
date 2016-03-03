@@ -1,0 +1,2 @@
+# ./test_server.sh wise_saying_flask.py
+query_string :  => 5

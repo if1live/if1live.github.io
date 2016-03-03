@@ -22,9 +22,11 @@ before_install:
 install:
   - pip install -r requirements.txt -q
   - npm install -g less
+  - go install github.com/if1live/maya
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
+  - ./bin/build_articles.sh
   - make clean_theme
   - make publish
 

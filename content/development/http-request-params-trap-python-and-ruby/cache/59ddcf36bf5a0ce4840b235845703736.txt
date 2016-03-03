@@ -1,0 +1,2 @@
+# ./test_server.sh wise_saying_sinatra_alt.rb
+query_string :  => 6

@@ -7,7 +7,6 @@ dist
 build
 eggs
 parts
-bin
 var
 sdist
 develop-eggs
@@ -61,7 +60,6 @@ ipch
 *.swp
 *.*~
 .idea
-cache/
 
 # ignore html inside content. may it is generated file
 content/*/*.html

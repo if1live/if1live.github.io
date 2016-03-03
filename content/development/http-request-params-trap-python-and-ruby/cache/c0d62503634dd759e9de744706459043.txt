@@ -1,0 +1,2 @@
+# ./test_server.sh wise_saying_sinatra.rb
+query_string :  => 1

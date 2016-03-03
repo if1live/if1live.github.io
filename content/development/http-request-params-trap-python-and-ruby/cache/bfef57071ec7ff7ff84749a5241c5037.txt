@@ -1,0 +1,2 @@
+# ./test_server.sh wise_saying_sinatra.rb idx=asdf
+query_string : idx=asdf => 1
