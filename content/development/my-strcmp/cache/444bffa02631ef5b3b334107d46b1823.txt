@@ -1,0 +1,4 @@
+# make enum_version.exe && ./enum_version.exe
+make: `enum_version.exe' is up to date.
+same : 0
+different : 1

@@ -1,0 +1,7 @@
+# go run call_by_xxx.go
+before call by value :  0
+in function :  1
+after call by value :  0
+before call by reference :  0
+in function :  1
+after call by reference :  1

@@ -1,0 +1,3 @@
+# go run unused.go
+# command-line-arguments
+./unused.go:6: unusedVariable declared and not used

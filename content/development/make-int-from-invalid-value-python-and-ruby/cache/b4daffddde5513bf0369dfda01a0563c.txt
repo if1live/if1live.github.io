@@ -1,0 +1,2 @@
+# ruby str_to_int_fail.rb
+0

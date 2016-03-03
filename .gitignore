@@ -69,6 +69,9 @@ a.out
 *.exe
 *.dSYM
 
+# java
+*.class
+
 # importd
 db.sqlite
 secret.txt
@@ -94,4 +97,4 @@ key_not_exist_find
 key_not_exist_bracket
 
 # maya generated file
-*.markdown
+*.md

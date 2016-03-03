@@ -1,0 +1,3 @@
+# python ./key_not_exist.py
+IndexError('list index out of range',)
+KeyError('spam',)

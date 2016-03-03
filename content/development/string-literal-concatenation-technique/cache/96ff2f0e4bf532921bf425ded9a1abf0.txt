@@ -1,0 +1,6 @@
+# make format.exe && ./format.exe
+make: `format.exe' is up to date.
+  name score  code
+   foo  24.5    10
+   bar  12.4     5
+  spam  89.2     8

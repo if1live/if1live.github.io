@@ -1,0 +1,7 @@
+# mcs call_by_xxx.cs && mono ./call_by_xxx.exe
+before call by value : 0
+in function : 1
+after call by value : 0
+before call by reference : 0
+in function : 1
+after call by reference : 1

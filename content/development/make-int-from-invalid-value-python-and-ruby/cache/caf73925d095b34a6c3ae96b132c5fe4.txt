@@ -1,0 +1,2 @@
+# python str_to_int_success.py
+123

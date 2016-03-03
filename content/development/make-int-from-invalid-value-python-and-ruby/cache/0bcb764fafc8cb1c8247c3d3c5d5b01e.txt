@@ -1,0 +1,2 @@
+# python str_to_int_fail.py
+ValueError("invalid literal for int() with base 10: 'fail'",)

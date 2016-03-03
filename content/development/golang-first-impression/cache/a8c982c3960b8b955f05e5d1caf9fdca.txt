@@ -1,0 +1,4 @@
+# python private.py
+this is public
+this is private
+cannot access private in this scope

@@ -1,0 +1,3 @@
+# ruby ./key_not_exist_alt.rb
+#<IndexError: index 100 outside of array bounds: -3...3>
+#<KeyError: key not found: :spam>

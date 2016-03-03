@@ -1,0 +1,44 @@
+# make buggy > /dev/null
+buggy.c:11:33: warning: self-comparison always evaluates to true [-Wtautological-compare]
+  if(mode & WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
+                                ^
+buggy.c:11:11: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]
+  if(mode & WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+buggy.c:11:11: note: place parentheses around the '==' expression to silence this warning
+  if(mode & WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
+          ^
+            (                                         )
+buggy.c:11:11: note: place parentheses around the & expression to evaluate it first
+  if(mode & WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
+          ^
+     (                         )
+buggy.c:14:30: warning: self-comparison always evaluates to true [-Wtautological-compare]
+  if(mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
+                             ^
+buggy.c:14:11: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]
+  if(mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+buggy.c:14:11: note: place parentheses around the '==' expression to silence this warning
+  if(mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
+          ^
+            (                                   )
+buggy.c:14:11: note: place parentheses around the & expression to evaluate it first
+  if(mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
+          ^
+     (                      )
+buggy.c:17:36: warning: self-comparison always evaluates to true [-Wtautological-compare]
+  if(mode & WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
+                                   ^
+buggy.c:17:11: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]
+  if(mode & WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+buggy.c:17:11: note: place parentheses around the '==' expression to silence this warning
+  if(mode & WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
+          ^
+            (                                               )
+buggy.c:17:11: note: place parentheses around the & expression to evaluate it first
+  if(mode & WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
+          ^
+     (                            )
+6 warnings generated.

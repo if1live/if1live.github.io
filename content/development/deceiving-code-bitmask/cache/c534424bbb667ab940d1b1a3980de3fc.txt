@@ -1,0 +1,5 @@
+# mcs alternative_strongly_typed.cs
+alternative_strongly_typed.cs(9,12): error CS0019: Operator `&' cannot be applied to operands of type `int' and `bool'
+alternative_strongly_typed.cs(12,12): error CS0019: Operator `&' cannot be applied to operands of type `int' and `bool'
+alternative_strongly_typed.cs(15,12): error CS0019: Operator `&' cannot be applied to operands of type `int' and `bool'
+Compilation failed: 3 error(s), 0 warnings

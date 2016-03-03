@@ -1,0 +1,4 @@
+# ruby private.rb
+this is public
+this is private
+Error: private method `private_method' called for #<Sample:0x007ffc931622a8>

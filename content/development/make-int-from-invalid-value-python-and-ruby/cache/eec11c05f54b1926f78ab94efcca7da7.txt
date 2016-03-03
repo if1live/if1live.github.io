@@ -1,0 +1,2 @@
+# python null_to_int.py
+TypeError("int() argument must be a string or a number, not 'NoneType'",)

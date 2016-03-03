@@ -1,0 +1,3 @@
+# make key_not_exist_bracket > /dev/null && ./key_not_exist_bracket
+[] => 0
+after using [], size : 3

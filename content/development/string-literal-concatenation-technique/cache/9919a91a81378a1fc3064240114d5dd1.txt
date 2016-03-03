@@ -1,0 +1,2 @@
+# python copy_and_paste_trap.py
+['foobar', 'spam']

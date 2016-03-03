@@ -1,0 +1,5 @@
+# clang -o unused unused.c -W -Wall
+unused.c:3:7: warning: unused variable 'unused_variable' [-Wunused-variable]
+  int unused_variable = 0;
+      ^
+1 warning generated.

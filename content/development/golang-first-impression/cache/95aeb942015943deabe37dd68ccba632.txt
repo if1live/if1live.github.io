@@ -1,0 +1,9 @@
+# go run rtti.go
+%T  : main.Sample
+%t  : {%!t(int=1) %!t(uint8=97)}
+%v  : {1 97}
+%#v : main.Sample{a:1, b:0x61}
+%T  : *main.Sample
+%t  : &{%!t(int=1) %!t(uint8=97)}
+%v  : &{1 97}
+%#v : &main.Sample{a:1, b:0x61}

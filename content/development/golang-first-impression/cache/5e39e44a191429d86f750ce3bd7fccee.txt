@@ -1,0 +1,4 @@
+# javac call_by_xxx.java && java CallByXXX
+before call by reference : 0
+in function : 1
+after call by reference : 1

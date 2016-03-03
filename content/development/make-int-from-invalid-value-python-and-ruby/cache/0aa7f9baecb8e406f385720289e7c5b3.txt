@@ -1,0 +1,2 @@
+# ruby str_to_int_fail_alt.rb
+#<ArgumentError: invalid value for Integer(): "fail">

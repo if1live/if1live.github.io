@@ -1,0 +1,2 @@
+# ruby null_to_int.rb
+0

@@ -1,0 +1,2 @@
+# python initial.py
+foo called

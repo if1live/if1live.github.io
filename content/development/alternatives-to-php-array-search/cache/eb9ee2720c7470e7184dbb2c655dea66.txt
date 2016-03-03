@@ -1,0 +1,4 @@
+# php buggy.php
+5 is prime number, index=2
+2 is not prime number
+-1 is not prime number

@@ -1,0 +1,2 @@
+# ruby str_to_int_success.rb
+123

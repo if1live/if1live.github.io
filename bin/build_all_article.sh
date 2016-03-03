@@ -10,5 +10,6 @@ for filepath in $(find ./content -name "*.mkdn"); do
 	echo "$category : $dirname : $filename"
 
 	cd ./content/$category/$dirname
-	maya -mode=pelican -file=$filename > ../$dirname.markdown
+	maya -mode=pelican -file=$filename > ../$dirname.md
+    cd -
 done

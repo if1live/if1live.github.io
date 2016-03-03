@@ -1,0 +1,4 @@
+# php correct.php
+5 is prime number, index=2
+2 is prime number, index=0
+-1 is not prime number

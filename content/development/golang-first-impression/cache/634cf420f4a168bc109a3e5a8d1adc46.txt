@@ -1,0 +1,9 @@
+# go run broken_goroutine.go
+Call by Value + go routine
+3
+1
+2
+Call by Reference + go routine
+3
+3
+3
