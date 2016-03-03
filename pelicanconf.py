@@ -72,10 +72,6 @@ PLUGINS = [
     'assets',
     'html_rst_directive',
     'pelican_jsfiddle',
-    #'better_figures_and_images',
-    'pelican_gist',
-    # enable w3c validate if py_w3c is fixed
-    #'w3c_validate',
 ]
 
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
