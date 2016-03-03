@@ -16,11 +16,15 @@ date: 2014-08-11
 
 **importd Hello World**
 
-{{view:file=sample_importd.py,lang=python}}
+~~~maya:view
+file=sample_importd.py
+~~~
 
 **flask Hello World**
 
-{{view:file=sample_flask.py,lang=python}}
+~~~maya:view
+file=sample_flask.py
+~~~
 
 위의 코드는 importd와 [flask](http://flask.pocoo.org/) 로 작성한 hello world이다. 소스파일 하나로 서버를 띄울 수 있다.
 크고 아름다운 django에 비하면 매우 단순하다.

@@ -1,0 +1,4 @@
+# node buggy_invalid_index.js
+5 is prime number, index=2
+2 is not prime number
+-1 is prime number, index=-1

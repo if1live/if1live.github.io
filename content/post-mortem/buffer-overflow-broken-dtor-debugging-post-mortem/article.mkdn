@@ -414,7 +414,7 @@ long.txt의 첫줄의 text에 해당하는 `abcdefghijklmnopqrstuvwxyz123456` �
 `text_` 로 복사할때 버퍼 오버플로우가 발생했습니다. 왜 문제가 되는지
 코드를 읽어봅시다.
 
-~~~maay:view
+~~~maya:view
 file=main.cpp
 start_line=30
 end_line=34

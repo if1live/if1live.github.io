@@ -126,11 +126,11 @@ file=alternative_invalid_index.js
 하지만 `if(found)` 같이 암묵적으로 비교하다 사고칠 가능성에서 완전히
 자유롭진 않다. `-1` 은 if 안에서 true로 취급되기 때문이다.
 
-~~~maay:view
+~~~maya:view
 file=buggy_invalid_index.js
 ~~~
 
-~~~maay:execute
+~~~maya:execute
 cmd=node buggy_invalid_index.js
 attach_cmd=true
 ~~~
