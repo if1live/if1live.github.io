@@ -22,6 +22,7 @@ before_install:
   - export PATH=$HOME/gopath/bin:$PATH
 
 install:
+  - go get -u github.com/if1live/maya
   - go install github.com/if1live/maya
   - pip install -r requirements.txt -q
   - npm install -g less
