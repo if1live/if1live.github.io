@@ -97,6 +97,7 @@ EXTRA_PATH_METADATA = {
     os.sep.join(['extra', 'CNAME']): {'path': 'CNAME'},
     os.sep.join(['extra', 'favicon.ico']): {'path': 'favicon.ico'},
     os.sep.join(['extra', 'robots.txt']): {'path': 'robots.txt'},
+    os.sep.join(['extra', 'keybase.txt']): {'path': 'keybase.txt'},
 }
 
 SITEMAP_SAVE_AS = 'sitemap.xml'
