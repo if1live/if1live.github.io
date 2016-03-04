@@ -1,0 +1,56 @@
++++
+title: memset로 클래스 초기화 쉽게 하기
+tags: [cpp]
+slug: class-init-with-memset
+author: if1live
+date: 2013-01-25
++++
+
+일반적으로 C++에서는 멤버변수 초기화를 다음과 같은 문법으로 한다.
+
+```cpp
+class SomeClass {
+public:
+  SomeClass() : a(0), b(0) {}
+private:
+  int a;
+  float b;
+};
+```
+
+만약 클래스안에 멤버변수가 많다면 위와 같은 문법으로 코딩하는게 심히 귀찮다.(예를 들면 파티클 클래스 같은 경우)
+```cpp
+class ParticleParamter {
+public:
+  ParticleParamter()
+  : pos_x(0), pos_y(0), pos_z(0), vel_x(0), vel_y(0), vel_z(0),.......
+  
+  float pos_x, pos_y, pos_z;
+  float vel_x, vel_y, vel_z;
+  float begin_r, begin_g, begin_b, begin_a;
+  ....
+};
+```
+
+어차피 내부의 멤버변수가 0으로 초기화되어야한다면 좀더 쉽게 할수 있는 방법이 있지 않을까? 
+memset을 사용하면 좀더 쉽게 할수잇다. memset을 사용해서 클래스를 초기화하는것은 호랑이 담배피던 시절 C에서 자주 쓰이던 기법이다
+```cpp
+class ParticleParamter {
+public:
+  ParticleParamter() { memset(this, 0, sizeof(*this)); }
+  float pos_x, pos_y, pos_z;
+  ....
+};
+```
+
+객체의 크기만큼 0으로 채워버리는 좋은 기법이다. 
+하지만 이 기법에는 큰 문제가 있다. 기법 자체가 C시절에 나온거다보니까 C++의 문법적인 특성과 충돌한다
+
+첫번째는 가상함수와 조합할 경우이다. memset으로 객체를 초기화하면 가상함수테이블(vtable)정보까지 같이 날라가버린다.
+그래서 가상함수를 호출할라고하면 프로그램이 뒤진다. (C시절에는 가상함수라는 개념이 없었으니 아무런 문제도 없었겟지...)
+
+두번째로는 초기화하는 객체안에 객체가 포함된 경우이다. memset이 호출되는 시점은 클래스의 멤버변수의 생성자가 불려진 다음이다.
+멤버변수로 std::string같은것이 있엇을경우, memset로 전부 덮어써버리니까 프로그램이 죽는다(이것역시 C시절에는 생성자라는게 없엇으니까 문제가 없었겟지)
+
+## 결론
+필요한 지점에만 적절히 써서 대형사고를 피하면서 귀찮은 타자연습을 줄이자

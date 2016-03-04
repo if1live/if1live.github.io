@@ -1,0 +1,11 @@
++++
+title: assert()로 사람 낚는 함수 짜기 
+subtitle: assert()로 공부하는 Command-query separation
+tags: [command-query separation, cqs]
+slug: deceiving-code-assert-cqs
+author: if1live
+date: 2015-04-27
+status: draft
++++
+
+http://en.wikipedia.org/wiki/Command%E2%80%93query_separation

@@ -29,7 +29,7 @@ install:
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
-  - ./bin/build_all_article.sh
+  - ./bin/build_all_article.sh > /dev/null
   - make clean_theme
   - make publish
 

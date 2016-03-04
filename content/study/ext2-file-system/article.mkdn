@@ -1,0 +1,224 @@
++++
+title: Ext2 File System
+subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
+tags: [linux, system-programming, filesystem, ext2]
+slug: system-programming-ext2-file-system
+author: if1live
+date: 2014-12-03
++++
+
+시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
+
+## Abstract View of VFS Objects
+* In kernel memory
+    * super block
+    * dentry
+    * inode
+    * file
+    * VFS, 어떤 FS를 쓰더라도 동일
+    * File System 문서 참고
+* On disk
+    * Ext2 Filesystem
+    * FS에 따라서 구조가 다르다
+
+## The Ext2 Filesystem
+### 역사
+* 최초의 리눅스는 Minix 파일시스템을 사용함
+* Extended Filesystem 등장. 이전보다 개선되었지만 불만족스러운 성능
+* 1994년 Second Extended Filesystem (Ext2)
+* 현재 Ext3, Ext4 존재
+
+### 특징
+* 1024~4096 byte까지 설정 가능한 블럭 크기
+* inode 의 갯수 설정가능
+* 디스크 블럭을 그룹으로 나눈다. 그룹에는 데이터 블럭과 inode가 저장된다
+* 일반 파일용 데이터 블럭을 파일을 사용하기전에 미리 할당
+* 빠른 심볼릭 링크 지원
+* 시스템 크래시의 충격을 최소화하는 파일 갱신 구현
+* 부팅할때 파일시스템 상태의 무결성 자동으로 확인
+* 변경 불가능한 파일(immutable), 추가만 가능한 파일 지원(append-only)
+
+
+## Ext2 Disk Data Structures
+* 포맷
+    * 파일 시스템 구조를 디스크에 적절히 기록하는 과정
+    * mke2fs - create an ext2/ext3/ext4 filesystem
+* Boot Block
+    * Ext2 파티션의 첫번째 블럭
+    * 부트 섹터용으로 항상 예약
+* Block Group 0...N
+    * boot block을 제외한 나머지 파티션은 block group으로 나눈다
+    * 모든 블럭 그룹은 같은 크기이며 디스크에 연속적으로 저장됨
+    * 커널은 하나의 파일이 하나의 블럭 그룹에 속하도록 시도해서 파일 파편화를 최소화
+* Super Block
+    * 크기 : 1 block
+* Group Descriptors
+    * 크기 : Ng blocks
+* Data block Bitmap
+    * 크기 : 1 block
+    * 특정 데이터 블럭이 사용중인 추적
+    * 데이터 블럭이 사용중이면 1, 아니면 0
+* Inode Bitmap
+    * 크기 : 1 block
+    * 특정 inode가 사용중인지 추적
+* Inode Table
+    * 크기 : Ni blocks
+* Data Blocks
+    * 크기 : Nd blocks
+
+### 'Block Group' Disk Data Structure
+* superblock과 group descriptor는 모든 block group에 중복해서 저장한다. 하지만 커널은 **block group 0 (main block group)**만 사용한다.
+    * block group 1~N 에 저장된 중복된 내용은 복구용으로 사용
+* block group의 갯수는 파티션과 블럭 크기에 영향받음
+    * 제약사항 : 블럭 bitmap은 단일 블럭에 저장되어야한다.
+    * 예 : 8GB 파티션 + 4KB 블럭. 4KB 블럭 = 32K bit. 32K bitmap * 4KB 블럭 = 128MB 블럭 그룹. 8G / 128MB = 64개의 블럭 그룹이 필요
+
+### superblock Disk Data Structure
+* superblock은 `ext2_super_block` 구조체에 저장된다.
+* 파일시스템/파티션마다 1개
+* superblock의 크기 == 1개 블럭
+* include/linux/ext2_fs.h
+
+### Group Descriptor Disk Data Structure
+* 각각의 블럭 그룹은 블럭 디스크립터를 가진다.
+* include/linux/ext2_fs.h : `ext2_group_desc`
+* 각각의 블럭 그룹마다 파일시스템 안에서 Ng개의 연속된 블럭을 차지하는 형태로 저장된다.
+
+### inode Table Disk Data Structure
+* 연속된 블럭을 차지한다. Ni개의 블럭을 차지.
+* include/linux/ext2_fs.h : `ext2_inode`
+* 모든 inode는 동일한 크기. 128 byte
+    * 4KB = 4096 byte = inode 128 byte * 32개
+    * 4KB 블럭당 32개의 inode
+
+### inode File Types
+* 일반 파일
+    * 데이터가 시작되려면 데이터 블럭이 필요
+    * file type = 1
+* 장치 파일, 파이프, 소켓
+    * 데이터 블럭이 필요없다.
+    * inode안에 필요한 모든 정보가 저장된다.
+    * CHRDEV, (character device) = file type 3
+    * BLKDEV, (block device) = file type 4
+    * 파이프 = file type 5
+    * 소켓 = file type 6
+* 심볼릭 링크
+    * 60 (15 * 4) 글자까지는 데이터 블럭 포인터 배열에 저장(`ext2_inode`안의 `i_block`필드)
+        * 빠른 심볼릭 링크
+    * 60자 초과시 데이터 블럭 필요
+    * file type = 7
+* 디렉토리 파일
+    * 해당 파일의 데이터 블럭에 파일이름과 대응되는 inode번호를 저장하는 특별한 종류의 파일
+    * `ext2_dir_entry_2`
+    * 각각의 디렉토리 구조체는 inode번호, 디렉토리 엔트리 크기, 이름 길이, 파일 타입, 파일 이름을 포함
+    * file type = 2
+
+## Ext2 Memory Data Structures
+* 효율성
+    * 대부분의 디스크 자료구조에 저장된 모든 정보는 마운트 할때 램으로 복사한다.
+* 얼마나 데이터 구조가 자주 바뀌는지 고려
+    * 새로운 파일이 생성될때
+    * 파일이 더 많은 디스크 블럭을 필요로 할때
+    * 접근 시간이 갱신되어야 할 떄
+* 페이지 캐시 사용
+    * 일부 메모리상의 자료 구조는 디스크상의 자료 구조와 다르다. (저장 지연)
+    
+### Ext2 자료구조의 VFS 이미지
+| Type | 디스크 구조체 | 메모리 구조체 | 캐싱 모드 |
+|------|---------------|---------------|-----------|
+|superblock | ext2\_super\_block | ext2\_sb\_info | 항상 캐시 |
+|group descriptor | ext2\_group\_desc | ext2\_group\_desc | 항상 캐시 |
+|block bitmap | 블럭안의 비트배열 | 버퍼안의 비트배열 | 동적 |
+|inode bitmap | 블럭안의 비트배열 | 버퍼안의 비트배열 | 동적 |
+|inode | ext2\_inode | ext2\_inode\_info | 동적 |
+|data block | 바이트 배열 | VFS 버퍼 | 동적 |
+|free inode | ext2\_inode | 없음 | 안함 |
+|free block | 바이트 배열 | 없음 | 안함 |
+
+
+### Ext2 superblock Object
+* include/linux/ext2\_fs\_sb.h : `ext2_sb_info`
+    * ext2 파일시스템이 마운트되면 VFS 슈퍼 블럭의 `s_fs_info`는 `ext2_sb_info`를 가리킨다.
+    * ext2 파일시스템만 특화 정보가 저장되어 있다.
+    * 이 메모리 자료 구조는 Ext2 superblock 디스크 자료 구조에서 가져온 대부분의 정보를 포함
+    * 마운트 상태, 옵션과 같은 정보 포함
+
+### Ext2 inode object
+* VFS가 ext2 디스크 inode에 접근하면 inode 디스크립터인 `ext2_inode_info`가 생성된다
+* fs/ext2/ext2.h : `ext2_inode_info`
+    * **VFS inode 객체 (struct inode)**
+    * VFS inode에는 없지만 디스크 inode에는 있는 대부분의 내용이 포함됨
+
+
+## Ext2 Operations
+* VFS와 특정 파일 시스템이 연관됨
+    * `ext2_...` + `generic+...` => 함수 포인터로 이루어진 구조체에 연결
+* file_operations : 파일의 내용 다루는 함수 
+* inode_operations : file 객체용 함수
+* super_operations  : super block과 상호작용하는 함수
+* address\_space\_operations : 일반화된 주소 공간용 함수
+    * 파일시스템과 블럭 에이어가 여기에서 연결됨
+    * 페이지 캐시
+
+## Managing Ext2 Disk Space
+* 디스크 공간 관리
+    * **inode**와 **data block**의 할당/해제
+* 디스크 공간 관리의 목표
+    1. 파일 파편화 최소화
+        * 파일 파편화는 파일 연산의 평균 시간을 늘린다
+        * 메모리 할당과 비슷한 문제
+    2. 시간 효율
+        * 파일 오프셋과 논리 블럭 번호의 변환이 커널에서 빨리 처리되어야 한다.
+        * 디스크 자료 구조에 접근하는 것을 제한
+### inode 할당
+* `ext2_new_inode()`
+* 새로운 node를 포함하기에 적절한 block group를 선택해서 ext2 디스크 inode 생성
+* 블럭 그룹 안의 일반파일과 디렉토리의 갯수를 균형 맞춤
+    * 관계없는 디렉토리를 다른 그룹에 퍼뜨리기
+    * 부모 디렉토리가 같은 파일은 같은 그룹에 넣기
+* inode 비트맵 갱신, inode 카운터 감소, inode를 superblock의 dirty list에 넣기
+
+### inode 해제
+* `ext2_free_inode()`
+* inode 객체가 가리키는 디스크 inode 삭제
+* 이런 경우에도 호출된다
+    * inode가 inode 해시 테이블에서 지워진 이후
+    * 마지막 하드 링크가 삭제된 이후
+    * 파일이 0으로 truncated된 이후
+* inode 비트맵 갱신, inode 카운터 증가, inode를 superblock의 dirty list에 추가
+
+### 데이터 블럭 어드레싱
+* 비어있지 않은 일반 파일은 여러개의 데이터 블럭으로 구성된다
+    * 블럭은 파일에서의 상대 위치(file block number)나 디스크 파티션에서의 위치(logical block number)로 조회 가능
+* 파일 안에서의 오프셋을 논리 블럭 번호로 유도하는 과정은 2단계를 거친다
+    1. file block number를 오프셋에서 유도
+        * file block number = (int)(offset / 블럭 크기). 간단하다
+    2. file block number를 logical block number로 변환
+        * ext2 파일의 데이터 블럭이 디스크에서 인접하지 않을수도 있기 때문에 쉽진 않다
+        * 파일 시스템은 각각의 file block number와 대등되는 디스크상의 logical block number를 저장할수 있는 방법을 제공해야 한다.
+
+### 데이터 블럭 어드세링 상세
+* inode안에는 크기 15의 블럭 포인터 배열이 있다.
+* 12개 항목 : 실제 데이터 블럭을 가리킨다.
+    * 예 : 8KB = 4KB 블럭 * 2, 실제 블럭 가리키는 포인터 2개로 끝
+* 13번째 항목 : 1-레벨 참조용으로 쓴다. 데이터 블럭 포인터가 있는 디스크 블럭(index block)을 가리킨다
+    * 1024 entry(4KB 블럭 / 4byte) * 4KB 블럭 = 4MB 지원
+* 14번째 항목 : 2-레벨 참조용으로 사용
+    * 1024 entry(4KB 블럭 / 4byte) * 1024 * 4KB 블럭 = 4GB 지원
+* 15번째 항목 : 3-레벨 참조용으로 사용
+* Index based file access
+
+### 데이터 블럭 할당
+* fs/ext2/inode.c : `ext2_get_block()`
+* 파편화를 최소화하려고 ext2는 파일이 마지막으로 할당한 블럭 가까이에 있는 새로운 블럭을 주려고 한다.
+    * 실패시 파일의 inode가 속해있는 블럭 그룹에서 새로운 블럭을 찾는다.
+    * 최후의 수단으로 다른 블럭 그룹의 비어있는 블럭을 사용
+* 블럭 미리 할당 수행
+* 다양한 bookkeeping 기록 갱신
+
+### 데이터 블럭 해제
+* fs/ext2/inode.c : `ext2_truncate()`
+* 파일을 삭제하려면 inode가 필요
+* struct `ext2_inode` 안의 `i_block` 추적해서 모든 데이터 블럭을 해제
+* 다양한 bookkeeping 기록 갱신 
+
