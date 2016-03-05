@@ -67,13 +67,6 @@ PLUGIN_PATHS = ['../ext/pelican-plugins']
 
 THEME = '../theme-sora'
 
-PLUGINS = [
-    'sitemap',
-    'assets',
-    'html_rst_directive',
-    'pelican_jsfiddle',
-]
-
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
 

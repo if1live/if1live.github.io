@@ -101,3 +101,4 @@ key_not_exist_bracket
 
 # site generator
 pelican/content
+style-gen.css
