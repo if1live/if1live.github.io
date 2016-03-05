@@ -7,4 +7,8 @@ ln -s ../content content
 
 make clean_theme
 make publish
+status=$?
+
 cd -
+
+exit $status
