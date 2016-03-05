@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Usage (at root path)
-# ./bin/build_all_articles.sh
+# ./bin/build_all_articles.sh <mode>
+
+mode=$1
 
 for filepath in $(find ./content -name "*.mkdn"); do
 	category=$(echo $filepath | awk -F "/" '{print $3}')
@@ -10,6 +12,6 @@ for filepath in $(find ./content -name "*.mkdn"); do
 	echo "$category : $dirname : $filename"
 
 	cd ./content/$category/$dirname
-	maya -mode=pelican -file=$filename > ../$dirname.md
+	maya -mode=$mode -file=$filename > ../$dirname.md
     cd -
 done

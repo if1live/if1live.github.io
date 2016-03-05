@@ -98,3 +98,6 @@ key_not_exist_bracket
 
 # maya generated file
 *.md
+
+# site generator
+pelican/content

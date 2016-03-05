@@ -62,10 +62,10 @@ DEFAULT_PAGINATION = False
 RELATIVE_URLS = True
 
 # for pelican 3.4.0
-PLUGIN_PATHS = ['ext/pelican-plugins']
+PLUGIN_PATHS = ['../ext/pelican-plugins']
 
 
-THEME = 'theme-sora'
+THEME = '../theme-sora'
 
 PLUGINS = [
     'sitemap',

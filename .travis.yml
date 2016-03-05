@@ -24,20 +24,15 @@ before_install:
 install:
   - go get -u github.com/if1live/maya
   - go install github.com/if1live/maya
-  - pip install -r requirements.txt -q
+  - pip install -r pelican/requirements.txt -q
   - npm install -g less
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
-  - ./bin/build_all_article.sh > /dev/null
-  - make clean_theme
-  - make publish
+  - ./bin/publish_pelican.sh
 
 after_success:
-  - cd output
-  - git add -f .
-  - git commit -a -m "add new site content"
-  - git push https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git master --quiet
+  - ./bin/push_output.sh
 
 branches:
   only:
