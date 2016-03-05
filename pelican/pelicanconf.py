@@ -61,10 +61,6 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-# for pelican 3.4.0
-PLUGIN_PATHS = ['../ext/pelican-plugins']
-
-
 THEME = '../theme-sora'
 
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
