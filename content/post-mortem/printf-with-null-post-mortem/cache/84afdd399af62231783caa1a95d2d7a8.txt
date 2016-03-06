@@ -1,0 +1,4 @@
+# clang printf_prec.c && ./a.out
+(null)
+
+(nu
