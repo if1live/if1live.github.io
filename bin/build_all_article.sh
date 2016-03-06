@@ -13,5 +13,5 @@ for filepath in $(find ./content -name "*.mkdn"); do
 
 	cd ./content/$category/$dirname
 	maya -mode=$mode -file=$filename > ../$dirname.md
-    cd -
+	cd -
 done
