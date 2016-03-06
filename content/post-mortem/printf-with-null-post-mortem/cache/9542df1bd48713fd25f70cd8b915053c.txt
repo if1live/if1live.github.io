@@ -1,0 +1,4 @@
+# clang trap_fake_null_alt.c && ./a.out
+Assertion failed: (name != NULL), function hello, file trap_fake_null_alt.c, line 5.
+Hello, (null)
+/var/folders/mt/f4mnd72x2_526m85rvxhg3bc0000gn/T/maya264151972: line 1:  1788 Abort trap: 6           ./a.out

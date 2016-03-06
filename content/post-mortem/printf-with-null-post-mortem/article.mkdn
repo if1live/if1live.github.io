@@ -151,11 +151,41 @@ clang만 쓰다보니까 gcc의 동작은 테스트를 제대로 안해봤는데
 참고: 2005년도에 작성된 글이라 gcc 최신버전인 5.3.0에서는 파일, 함수이름이 다르다. `gimple_fold_builtin_printf()`
 [gcc/gimple-fold.c](https://github.com/gcc-mirror/gcc/blob/gcc_5_3_0_release/gcc/gimple-fold.c#L2691-L2851)
 
+## 흑마법사를 위한 가이드
+새로운 undefined behavior를 배웠으면 이를 이용해서 어떻게 사람을 엿먹일지를 생각해봐야한다. 그래야 내가 엿먹기 전에 남을 엿먹일수 있다. (선빵필승!)
+몇가지 알려진 편법을 응용해보자.
+
+* 회원가입을 할때 생일을 `1970년 1월 1일`로 입력한다. 개발자는 날짜가 제대로 입력되지 않는 버그가 있는줄 알고 디버깅을 할 것이다.
+* 회원가입을 할때 이름을 `NULL`로 입력한다. 개발자는 어딘가에 버그가 있다고 생각하고 디버깅을 할 것이다.
+
+~~~maya:view
+file=trap_fake_null.c
+~~~
+
+~~~maya:execute
+cmd=clang trap_fake_null.c && ./a.out
+attach_cmd=true
+~~~
+
+진짜로 `(null)`을 출력하고자한 경우와 실수로 `NULL`이 들어간 경우를 구분할수 없다.
+함정을 밟지 않으려면 `NULL` 확인을 앞에 배치하는게 좋을거다.
+
+~~~maya:view
+file=trap_fake_null_alt.c
+~~~
+
+~~~maya:execute
+cmd=clang trap_fake_null_alt.c && ./a.out
+attach_cmd=true
+~~~
+
+
 ## 요약
 * `printf("%s\n", NULL)`은 undefined behavior이다.
 * `vsprintf()` 계열의 함수에서 undefined behavior부분은 구현체에 따라 다르다.
 * 최적화를 위해 컴파일러가 호출하는 함수를 바꿔버리는 경우도 있다.
 * <s>잘 모르겠으면 일단 구현체 소스를 까보자</s>
+
 
 ## 도전 과제
 그렇다면 윈도우에서는 어떻게 작동할까?

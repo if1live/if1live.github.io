@@ -1,0 +1,3 @@
+# clang trap_fake_null.c && ./a.out
+Hello, (null)
+Hello, (null)
