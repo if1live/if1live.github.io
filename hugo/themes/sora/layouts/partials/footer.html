@@ -1,0 +1,28 @@
+<footer class="base-footer common-header-footer">
+  <ul class="nav-link-list">
+    {{ range .Site.Params.socials }}
+    {{ $name := index . 0 }}
+    {{ $url := index . 1 }}
+    <li>
+      <!-- social link icon : //fontawesome.io/icons/ -->
+      <a href="{{ $url }}" title="{{ $name }}"><i class="fa fa-{{ lower $name }}"> </i></a>
+    </li>
+    {{ end }}
+
+    <li>
+      <!-- social link icon : //fontawesome.io/icons/ -->
+      <a href="{{ .Site.RSSLink }}"><i class="fa fa-rss"> </i></a>
+    </li>
+
+    {{ range .Site.Params.links }}
+    {{ $name := index . 0 }}
+    {{ $url := index . 1 }}
+    <li><a href="{{ $url }}" title="{{ $name }}">{{ $name }}</a></li>
+    {{ end }}
+  </ul>
+
+  <p>
+    Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>
+    / <a href="http://purecss.io/" title="Pure Home Page">Pure</a>
+  </p>
+</footer>

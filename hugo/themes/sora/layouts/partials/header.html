@@ -1,0 +1,35 @@
+<header class="base-header common-header-footer">
+  <h1 class="monospace">
+    <a href="{{ .Site.BaseURL }}">/usr/lib/libsora.so</a>
+  </h1>
+  <nav>
+    <h2 hidden>Navigation</h2>
+    <ul class="nav-link-list">
+      <li>
+        <a href="{{ .Site.BaseURL }}about.html" {{ if eq .Title "about" }} class="active" {{ end }} title="about">
+          <i class="fa fa-info"><span hidden>about</span></i>
+        </a>
+      </li>
+      <li>
+        <a href="{{ .Site.BaseURL }}project.html" {{ if eq .Title "project" }} class="active" {{ end }} title="project">
+          <i class="fa fa-code"><span hidden>project</span></i>
+        </a>
+      </li>
+      <li>
+        <a href="{{ .Site.BaseURL }}archives.html" {{ if eq .Title "archives" }} class="active" {{ end }} title="archives">
+          <i class="fa fa-archive"><span hidden>Archives</span></i>
+        </a>
+      </li>
+      <li>
+        <a href="{{ .Site.BaseURL }}tags.html" {{ if eq .Title "tags" }} class="active" {{ end }} title="tags">
+          <i class="fa fa-tags"><span hidden>Tags</span></i>
+        </a>
+      </li>
+      <li>
+        <a href="{{ .Site.BaseURL }}search.html" {{ if eq .Title "search" }} class="active" {{ end }} title="search">
+          <i class="fa fa-search"><span hidden>Search</span></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

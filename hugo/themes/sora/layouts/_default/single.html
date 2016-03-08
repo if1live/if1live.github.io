@@ -1,0 +1,83 @@
+{{ partial "head.html" . }}
+<body>
+  {{ partial "header.html" . }}
+
+  <div class="container">
+    <article class="basic-content article-content">
+      <header>
+        <hgroup class="entry-title">
+          <a href="{{ .RelPermalink }}" rel="bookmark"
+            title="Permalink to {{ .Title }}">
+            <h1>{{ .Title }}</h1>
+            <h2>{{ .Params.subtitle }}</h2>
+          </a>
+        </hgroup>
+      </header>
+
+      <div class="entry-content">
+        {{ .Content }}
+
+        {{ if and (isset .Site.Params "disqusShortname") (ne .Site.Params.disqusShortname "") }}
+        {{ partial "disqus.html" . }}
+        {{ end }}
+      </div><!-- /.entry-content -->
+
+      <ul class="articles-timeline">
+        {{ if .Prev }}
+        <li class="previous-article pull-left">
+          «
+          <a href="{{ .Prev.Permalink }}" title="Previous: {{ .Prev.Title }}">
+            {{ .Prev.Title }}
+          </a>
+        </li>
+        {{ end }}
+
+        {{ if .Next }}
+        <li class="next-article  pull-right">
+          <a href="{{ .Next.Permalink }}" title="Next: {{ .Next.Title }}">
+            {{ .Next.Title }}
+          </a>
+          »
+        </li>
+        {{ end }}
+      </ul>
+
+      <footer class="post-info">
+        <!-- TODO github link? -->
+        <abbr class="published" title="{{ .Date }}">
+          {{ .Date }}
+        </abbr>
+
+        {{ if isset .Params "author" }}
+        <address class="vcard author">
+          By <a href="//twitter.com/{{ .Site.Params.twitterUsername }}">@{{ .Params.author }}</a>
+        </address>
+        {{ end }}
+
+        {{/*
+        <!-- tags -->
+        {% if article.tags %}
+        <ul class="list-of-tags tags-in-article">
+          {% for tag in article.tags|sort %}
+          <a href="/tags.html#{{ tag|replace(' ', '-')|e }}-ref">
+            #{{ tag }}
+          </a>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- related posts -->
+        {% for related_post in article.related_posts %}
+        <li><a href="{{ SITEURL_SHORT }}/{{ related_post.url }}" class="pretty-link">{{ related_post.title }}</a></li>
+        {% endfor %}
+        */}}
+      </footer><!-- /.post-info -->
+    </article>
+  </div>
+
+  {{ partial "footer.html" . }}
+
+  {{ partial "tail.html" . }}
+  {{ partial "analytics.html" . }}
+</body>
+</html>

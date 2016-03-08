@@ -1,0 +1,17 @@
+baseurl = "https://libsora.so/"
+languageCode = "ko-kr"
+title = "/usr/lib/libsora.so"
+
+[params]
+  hostName = "libsora.so"
+  googleAnalytics = "UA-37862172-2"
+  disqusShortname = "libsora"
+  twitterUsername = "if1live"
+
+  socials = [
+    ['Twitter', '//twitter.com/if1live'],
+    ['GitHub', '//github.com/if1live'],
+    ['BitBucket', '//bitbucket.org/if1live']
+  ]
+
+  links = []

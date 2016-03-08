@@ -1,0 +1,32 @@
+<!doctype html>
+<html class="no-js" lang="ko">
+<head>
+  <meta charset="utf-8">
+  {{ .Hugo.Generator }}
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"/>
+
+  <title> {{ .Title }} &middot; {{ .Site.Title }} </title>
+
+  <!-- css -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style-gen.css?1">
+
+  <!-- icons -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+  <!-- feed -->
+  <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+
+  <!-- http로 접속시 https로 돌리는걸 앞에 배치해서 빨리 빠져나갈수 있도록함 -->
+  <!--
+  <script type="text/javascript">
+    var host = "{{ .Site.Params.hostName }}";
+    if ((host == window.location.host) && (window.location.protocol != "https:")) {
+      window.location.protocol = "https";
+    }
+  </script>
+  -->
+</head>
