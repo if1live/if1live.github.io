@@ -2,7 +2,6 @@
 @import "mixins.scss";
 @import "mixins-custom.scss";
 @import "reset.scss";
-@import "code.scss";
 @import "utilities.scss";
 
 .container {
@@ -145,7 +144,9 @@
     @include code-block-mixin;
   }
 
-  > code, > tt {
+  > code,
+  > tt,
+  p > code {
     @include code-inline-mixin;
   }
 

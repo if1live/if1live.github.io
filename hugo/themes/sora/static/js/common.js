@@ -34,3 +34,5 @@ var tables = document.querySelectorAll('.article-content table');
 for(var i = 0 ; i < tables.length ; i++) {
   tables[i].classList.add('pure-table');
 }
+
+hljs.initHighlightingOnLoad();
