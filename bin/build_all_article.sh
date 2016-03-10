@@ -23,9 +23,16 @@ done
 
 # post-process - for hugo
 for target in $(find ./content -name "*.md"); do
-	has_cjk_lang=$(grep "isCJKLanguage = true" $target|wc -l)
+	line=$(grep -n "^+++$" $target|sed -n 2p|awk -F ":" '{print $1}')
+
+	has_cjk_lang=$(grep "isCJKLanguage = true" $target; echo $?)
 	if [[ $has_cjk_lang == "1" ]]; then
-		line=$(grep -n "^+++$" $target|sed -n 2p|awk -F ":" '{print $1}')
 		ed -s $target <<< $line$'i\nisCJKLanguage = true\n.\nwq'
+	fi
+
+	has_url=$(grep "url =" $target; echo $?)
+	if [[ $has_url == "1" ]]; then
+		slug=$(grep "slug = " $target|head -n 1|awk -F "\"" '{print $2}')
+		ed -s $target <<< $line$'i\nurl = "/posts/'$slug$'/"\n.\nwq'
 	fi
 done

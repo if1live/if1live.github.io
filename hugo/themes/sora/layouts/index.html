@@ -3,7 +3,13 @@
   {{ partial "header.html" . }}
 
   <div class="container">
-    TODO content
+    {{ range first 5 .Data.Pages }}
+    {{ .Render "summary"}}
+    {{ end }}
+
+    <div>
+      TODO - list page
+    </div>
   </div>
 
   {{ partial "footer.html" . }}

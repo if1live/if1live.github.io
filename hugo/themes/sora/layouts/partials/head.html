@@ -4,10 +4,26 @@
   <meta charset="utf-8">
   {{ .Hugo.Generator }}
 
+  <title> {{ .Title }} &middot; {{ .Site.Title }} </title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"/>
 
-  <title> {{ .Title }} &middot; {{ .Site.Title }} </title>
+  {{ if and (isset .Params "author") (ne .Params.author "") }}
+  <meta name="author" content="{{ .Params.author }}" />
+  {{ end }}
+
+  {{ if ne .Title "" }}
+  <meta name="description" content="{{ .Title }}" />
+  {{ end }}
+
+  {{ if (isset .Params "tags") }}
+  <meta name="keywords" content="{{ delimit .Params.tags ", " }}" />
+  {{ end }}
+
+  {{ if .IsPage }}
+  {{ partial "twitter_card.html" . }}
+  {{ end }}
 
   <!-- css -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">

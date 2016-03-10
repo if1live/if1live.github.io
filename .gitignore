@@ -101,4 +101,8 @@ key_not_exist_bracket
 
 # site generator
 pelican/content
+hugo/content
+hugo/static
 style-gen.css
+.sass-cache/
+*.map

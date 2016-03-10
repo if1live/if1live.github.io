@@ -1,0 +1,244 @@
+@import "variables.scss";
+@import "mixins.scss";
+@import "mixins-custom.scss";
+@import "reset.scss";
+@import "code.scss";
+@import "utilities.scss";
+
+.container {
+  /*960은 1열로 쓰기에는 너무 넓은듯*/
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.nav-link-list {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    margin: 0.5em 0.5em;
+    border: 1px solid #fff;
+    background-color: $sky-btn-color;
+
+    color: #fff;
+    &:hover, &.active {
+      background-color: $sky-btn-hover-color;
+    }
+  }
+}
+
+.base-header {
+  @include gradient-vertical($sky-bg-color-top, $sky-bg-color-bottom, 0%);
+
+  padding: 1em 0 0.5em 0;
+  margin-bottom: 10px;
+}
+
+.base-footer {
+  background-color: $sky-bg-color-bottom;
+  box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
+
+  padding: 0.5em 0 1em 0;
+  margin-top: 10px;
+}
+
+.basic-content {
+  @include core-anchor-mixin;
+
+  h1 {
+    padding-bottom: 0.5em;
+    color: $gray-darker;
+    border-bottom: 1px solid $gray;
+  }
+}
+
+.tags-content {
+  ul {
+    list-style: none;
+  }
+
+  .tag-article-list-section {
+    display: none;
+    padding: 10px 0;
+    ul {
+      padding: 0;
+    }
+    li {
+      padding: 5px 0;
+    }
+  }
+
+  .list-of-tags {
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+    }
+
+    .tag-link {
+      display: inline-block;
+      padding: 4px 4px;
+      // border 추가되면서 밀리는 효과 없애려고 가짜 경계 추가
+      border: 1px solid #fff;
+
+      &.active {
+        border: 1px solid #f00;
+        @include border-radius(2px);
+        color: $gray-darker;
+      }
+    }
+
+    @include core-anchor-mixin;
+  }
+}
+
+.recent-content {
+  @include clearfix;
+
+  .archives-link {
+    font-size: 80%;
+    color: $gray-dark;
+  }
+}
+
+.article-summary-list {
+  article {
+    @include clearfix;
+    padding: 0.5em 0;
+  }
+  .article-name {
+    float: left;
+  }
+
+  .article-title {
+    font-size: 18px;
+    margin: 0;
+  }
+  .article-subtitle {
+    font-size: 16px;
+    margin: 0;
+    text-indent: 1em;
+    font-weight: normal;
+  }
+  .article-date {
+    float: right;
+    text-align: right;
+  }
+}
+
+
+.entry-content {
+  word-wrap: break-word;
+  line-height: 2.0em;
+
+  .highlight,
+  .code.literal-block {
+    @include code-block-mixin;
+  }
+
+  > code, > tt {
+    @include code-inline-mixin;
+  }
+
+  pre {
+    @include code-block-mixin;
+  }
+
+  blockquote, .literal-block {
+    @include literal-block-mixin;
+  }
+
+  ul, ol {
+    padding-left: 30px;
+  }
+  ul, ol {
+    margin: 0.2em 0;
+    > li > p {
+      margin: 0;
+    }
+  }
+  dl {
+    dd {
+      padding-left: 30px;
+      margin: 0;
+    }
+  }
+
+
+  // rst로 작성시 ul-ul 겹쳐쓰면 dl로 한번 감싸진다
+  // 이를 무시하기 위한 편법
+  dl.first, dl.second {
+    margin: 0;
+    padding: 0;
+    > dd {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .maya-youtube {
+    text-align: center;
+  }
+
+  img {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+  }
+  .youtube {
+    text-align: center;
+  }
+}
+
+.article-content {
+  .entry-title {
+    h1, h2 {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    h1 {
+      color: $gray-dark;
+    }
+    h2 {
+      color: $gray;
+      text-indent: 1em;
+    }
+    a {
+      text-decoration: none;
+    }
+    padding: 15px 0;
+    border-bottom: 1px solid $gray;
+  }
+
+  .articles-timeline {
+    @include clearfix;
+    border-top: 1px solid $gray;
+    padding: 15px 0;
+    list-style: none;
+  }
+
+  .disqus-section {
+    padding: 1em 0;
+  }
+
+  .post-info {
+    .published, .author {
+      display: inline-block;
+    }
+
+    .list-of-tags {
+      padding: 0.5em 0 0 0;
+      font-weight: bold;
+    }
+  }
+}

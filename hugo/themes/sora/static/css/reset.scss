@@ -1,0 +1,21 @@
+@import "mixins-custom.scss";
+
+body {
+  @extend .font-normal;
+}
+
+code, kbd, pre, samp {
+  @extend .font-monospace;
+}
+
+
+header
+,nav
+,section
+,article
+,aside
+,footer
+,hgroup
+{
+  display: block;
+}

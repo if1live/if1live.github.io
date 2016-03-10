@@ -15,3 +15,15 @@ title = "/usr/lib/libsora.so"
   ]
 
   links = []
+
+  #=============
+  # Twitter Card
+  #=============
+  # https://dev.twitter.com/cards
+  # http://michaelmartinez.in/twitter-card-plugin-for-pelican.html
+  twitterCardUse = true # (False)
+  twitterCardSite = '@if1live'  # The site's Twitter handle like @my_blog
+  twitterCardSiteId = ''  # The site's Twitter ID
+  twitterCardCreator = ''  # Your twitter handle like @monkmartinez
+  twitterCardCreatorId = ''  # The site creator's id
+  gravatarUrl = 'https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'

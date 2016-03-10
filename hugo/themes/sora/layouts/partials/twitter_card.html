@@ -1,0 +1,19 @@
+{{ if .Site.Params.twitterCardUse }}
+<meta name="twitter:card" content="summary">
+<meta name="og:url" content="{{ .Permalink }}">
+{{ if .Site.Params.twitterCardSiteId }}
+<meta name="twitter:site:id" content="{{ .Site.Params.twitterCardSiteId }}">
+{{ else if .Site.Params.twitterCardSite }}
+<meta name="twitter:site" content="{{ .Site.Params.twitterCardSite }}">
+{{ end }}
+{{ if .Site.Params.twitterCardCreatorId }}
+<meta name="twitter:creator:id" content="{{ .Site.Params.twitterCardCreatorId }}">
+{{ else if .Site.Params.twitterCardCreator }}
+<meta name="twitter:creator" content="{{ .Site.Params.twitterCardCreator }}">
+{{ end }}
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ substr .Summary 0 200}}">
+{{ if .Site.Params.gravatarUrl }}
+<meta name="twitter:image:src" content="{{ .Site.Params.gravatarUrl }}">
+{{ end }}
+{{ end }}

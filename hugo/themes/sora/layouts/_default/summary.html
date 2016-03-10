@@ -1,0 +1,14 @@
+<article class="basic-content article-content">
+  <header>
+    <hgroup class="entry-title">
+      <a href="{{ .Permalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
+        <h1>{{ .Title }}</h1>
+        <h2>{{ .Params.subtitle }}</h2>
+      </a>
+    </hgroup>
+  </header>
+
+  <section class="entry-content">
+    {{ .Summary }}
+  </section>
+</article>

@@ -61,7 +61,7 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
-THEME = '../theme-sora'
+THEME = 'theme-sora'
 
 DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']

@@ -7,10 +7,8 @@ function sanitize_hugo_markdown() {
 }
 
 function copy_hugo_markdown() {
-	mkdir -p ./hugo/content/posts
-	rm -rf ./hugo/content/posts/*.md
-	#hugo doesn't support sym link. use hard link
-	find $PWD/content -name "*.md" | xargs -I{} ln {} ./hugo/content/posts/
+	rm -rf ./hugo/content/
+	cp -r ./content hugo
 }
 
 function copy_hugo_simple_static() {
