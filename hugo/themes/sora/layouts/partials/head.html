@@ -37,12 +37,12 @@
   <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
 
   <!-- http로 접속시 https로 돌리는걸 앞에 배치해서 빨리 빠져나갈수 있도록함 -->
-  <!--
   <script type="text/javascript">
     var host = "{{ .Site.Params.hostName }}";
     if ((host == window.location.host) && (window.location.protocol != "https:")) {
       window.location.protocol = "https";
+    } else {
+      console.log("skip https redirect");
     }
   </script>
-  -->
 </head>
