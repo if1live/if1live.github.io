@@ -23,16 +23,28 @@
 
 // Place any jQuery/helper plugins in here.
 
-///////////
-if(typeof window.addEventListener !== 'undefined') {
-  window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-  }, false);
-}
-
 var tables = document.querySelectorAll('.article-content table');
 for(var i = 0 ; i < tables.length ; i++) {
   tables[i].classList.add('pure-table');
 }
 
-hljs.initHighlightingOnLoad();
+var pres = document.querySelectorAll("pre");
+for(var i = 0 ; i < pres.length ; i++) {
+  var pre = pres[i];
+  // 줄번호 활성화
+  pre.classList.add("line-numbers");
+
+  // 언어를 모르겠으면 기본값이라도 넣어주기
+  var code = pre.firstChild;
+  var found = false;
+  for(var j = 0 ; j < code.classList.length ; j++) {
+    var classname = code.classList.item(j);
+    if(classname.startsWith("language-")) {
+      found = true;
+      break;
+    }
+  }
+  if(!found) {
+    code.classList.add("language-none");
+  }
+}

@@ -1,13 +1,10 @@
-@import "mixins-custom.scss";
-
 body {
-  @extend .font-normal;
+  @include font-normal;
 }
 
 code, kbd, pre, samp {
-  @extend .font-monospace;
+  @include font-monospace;
 }
-
 
 header
 ,nav
