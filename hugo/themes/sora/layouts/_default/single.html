@@ -7,7 +7,9 @@
       <hgroup class="entry-title">
         <a href="{{ .RelPermalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
           <h1>{{ .Title }}</h1>
+          {{ if and (isset .Params "subtitle") (ne .Params.subtitle "") }}
           <h2>{{ .Params.subtitle }}</h2>
+          {{end}}
         </a>
       </hgroup>
     </header>

@@ -22,8 +22,10 @@
   </ul>
 
   <p>
-    Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>
-    / <a href="http://purecss.io/" title="Pure Home Page">Pure</a>
+    <a href="//gohugo.io/" title="Hugo">Hugo</a> |
+    {{ with .Site.Params.twitterUsername }}
+    <a href="//twitter.com/{{ . }}/" title="@{{ . }}">@{{ . }}</a>
+    {{ end }}
   </p>
 </footer>
 

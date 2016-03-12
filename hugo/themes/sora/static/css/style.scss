@@ -117,7 +117,7 @@ body {
     h2 {
       padding: 0;
       margin: 10px 0;
-      font-size: 1.4em;
+      font-size: 1.2em;
       color: $gray-dark;
     }
   }
@@ -236,4 +236,36 @@ body {
 
 .article-summary {
   padding: 0 0 10px 0;
+}
+
+.pagination {
+  text-align: center;
+  li {
+    display: inline-block;
+  }
+  a {
+    display: inline-block;
+    font-size: 1.2em;
+    padding: 5px;
+    color: $base-a-tag-color;
+    border-bottom: 1px dotted #fff;
+  }
+  a:hover {
+    color: $base-a-tag-hover-color;
+    border-bottom: 1px dotted $base-a-tag-hover-color;
+  }
+  a, a:hover, a:visited {
+    text-decoration: none;
+  }
+  .active {
+    > a {
+      color: $gray-darker;
+      font-weight: bold;
+    }
+  }
+  .disabled {
+    > a {
+      color: $gray-lighter;
+    }
+  }
 }

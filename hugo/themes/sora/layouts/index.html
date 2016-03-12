@@ -3,14 +3,12 @@
 
 <div class="container">
   <div class="basic-content article-content">
-    {{ range first 5 .Data.Pages }}
-    {{ .Render "summary"}}
+    {{ range .Paginator.Pages }}
+    {{ .Render "title"}}
     {{ end }}
   </div>
 
-  <div>
-    TODO - list page
-  </div>
+  {{ template "_internal/pagination.html" . }}
 </div>
 
 {{ partial "footer.html" . }}

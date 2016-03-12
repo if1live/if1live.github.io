@@ -4,13 +4,19 @@
 <div class="container">
   <div class="basic-content article-content">
     <ul class="list-of-tags tags-in-article">
-      <li><a href="/tags/{{ .Title | urlize }}">#{{ .Title }}</a></li>
+      <li><a href="/tags/{{ .Title | urlize }}">#{{ lower .Title }}</a></li>
     </ul>
 
     {{ range .Data.Pages }}
-    {{ .Render "summary"}}
+    {{ .Render "title"}}
     {{ end }}
   </div>
 </div>
+
+{{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
+{{ template "_internal/pagination.html" . }}
+{{ range $paginator.Pages }}
+{{ .Title }}
+{{ end }}
 
 {{ partial "footer.html" . }}

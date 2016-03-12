@@ -21,7 +21,7 @@
         </a>
       </li>
       <li>
-        <a href="{{ .Site.BaseURL }}tags/" {{ if eq (lower .Title) "tags" }} class="active" {{ end }} title="tags">
+        <a href="{{ .Site.BaseURL }}tags/" {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
           <i class="fa fa-tags"><span hidden>Tags</span></i>
         </a>
       </li>

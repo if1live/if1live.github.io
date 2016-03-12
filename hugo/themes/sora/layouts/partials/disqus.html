@@ -1,11 +1,10 @@
-{{ if and (isset .Site.Params "disqusShortname") (ne .Site.Params.disqusShortname "") }}
 <section class="disqus-section">
 <h1 hidden>Comment</h1>
 <div id="disqus_thread"></div>
 <script type="text/javascript">
   var host = "{{ .Site.Params.hostName }}";
   if (host == window.location.host) {
-    var disqus_shortname = '{{ .Site.Params.disqusShortname }}';
+    var disqus_shortname = '{{ .Site.DisqusShortname }}';
     var disqus_identifier = 'http://{{ .Site.Params.hostName }}{{ .RelPermalink }}';
 
     (function() {
@@ -22,4 +21,3 @@
 <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="//disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </section>
-{{ end }}

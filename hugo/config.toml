@@ -2,15 +2,17 @@ baseurl = "https://libsora.so/"
 languageCode = "ko-kr"
 title = "/usr/lib/libsora.so"
 
+disqusShortname = "libsora"
+googleAnalytics = "UA-37862172-2"
+
+Paginate = 10
+PaginatePath = "page"
+
 [taxonomies]
   tag = "tags"
-  category = "categories"
-  series = "series"
 
 [params]
   hostName = "libsora.so"
-  googleAnalytics = "UA-37862172-2"
-  disqusShortname = "libsora"
   twitterUsername = "if1live"
 
   socials = [
@@ -32,3 +34,7 @@ title = "/usr/lib/libsora.so"
   twitterCardCreator = ''  # Your twitter handle like @monkmartinez
   twitterCardCreatorId = ''  # The site creator's id
   gravatarUrl = 'https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
