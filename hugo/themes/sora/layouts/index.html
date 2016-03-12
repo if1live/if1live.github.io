@@ -4,7 +4,9 @@
 <div class="container">
   <div class="basic-content article-content">
     {{ range .Paginator.Pages }}
+    {{ if ne .Slug "_index" }}
     {{ .Render "title"}}
+    {{ end }}
     {{ end }}
   </div>
 
