@@ -12,7 +12,7 @@ from pelicanconf import *
 
 cname_filepath = os.path.join(
     os.path.dirname(__file__),
-    "content", "extra", "CNAME"
+    "..", "extra", "CNAME"
 )
 cname = open(cname_filepath).readline().strip()
 

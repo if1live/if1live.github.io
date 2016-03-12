@@ -7,7 +7,9 @@ function sanitize_hugo_markdown() {
 }
 
 function copy_hugo_markdown() {
-	rm -rf ./hugo/content/
+	for name in $(ls ./content/); do
+		rm -rf ./hugo/content/$name
+	done
 	cp -r ./content hugo
 }
 

@@ -67,7 +67,6 @@ DIRECT_TEMPLATES = ('index', 'tags', 'archives', '404', 'search')
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'headerid']
 
 STATIC_PATHS = [
-    'static', 'extra',
     'sample',
     'cg',
     'development',
@@ -83,10 +82,10 @@ IGNORE_FILES = ['.#*', '*.html']
 
 # 뻐킹 윈도 때문에 extra/CNAME하면 망한다
 EXTRA_PATH_METADATA = {
-    os.sep.join(['extra', 'CNAME']): {'path': 'CNAME'},
-    os.sep.join(['extra', 'favicon.ico']): {'path': 'favicon.ico'},
-    os.sep.join(['extra', 'robots.txt']): {'path': 'robots.txt'},
-    os.sep.join(['extra', 'keybase.txt']): {'path': 'keybase.txt'},
+    os.sep.join(['..', 'extra', 'CNAME']): {'path': 'CNAME'},
+    os.sep.join(['..', 'extra', 'favicon.ico']): {'path': 'favicon.ico'},
+    os.sep.join(['..', 'extra', 'robots.txt']): {'path': 'robots.txt'},
+    os.sep.join(['..', 'extra', 'keybase.txt']): {'path': 'keybase.txt'},
 }
 
 SITEMAP_SAVE_AS = 'sitemap.xml'
