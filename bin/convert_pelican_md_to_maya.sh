@@ -4,16 +4,16 @@
 # find . -name "*.md" | xargs -I{} ../bin/convert_pelican_md_to_maya.sh {}
 
 # single value
-gsed -i -r -- 's/^Title: (.+)$/title: \1/Ig' $1
-gsed -i -r -- 's/^Subtitle: (.+)$/subtitle: \1/Ig' $1
-gsed -i -r -- 's/^Slug: (.+)$/slug: \1/Ig' $1
-gsed -i -r -- 's/^Author: (.+)$/author: \1/Ig' $1
-gsed -i -r -- 's/^Date: (.+)$/date: \1/Ig' $1
-gsed -i -r -- 's/^Status: (.+)$/status: \1/Ig' $1
-gsed -i -r -- 's/^Summary: (.+)$/summary: \1/Ig' $1
+sed -i -r -- 's/^Title: (.+)$/title: \1/Ig' $1
+sed -i -r -- 's/^Subtitle: (.+)$/subtitle: \1/Ig' $1
+sed -i -r -- 's/^Slug: (.+)$/slug: \1/Ig' $1
+sed -i -r -- 's/^Author: (.+)$/author: \1/Ig' $1
+sed -i -r -- 's/^Date: (.+)$/date: \1/Ig' $1
+sed -i -r -- 's/^Status: (.+)$/status: \1/Ig' $1
+sed -i -r -- 's/^Summary: (.+)$/summary: \1/Ig' $1
 
 # multiple value
-gsed -i -r -- 's/^Tags: (.+)$/tags: [\1]/Ig' $1
+sed -i -r -- 's/^Tags: (.+)$/tags: [\1]/Ig' $1
 
 # metadata head
 ed -s $1 <<< $'1i\n+++\n.\nwq'
