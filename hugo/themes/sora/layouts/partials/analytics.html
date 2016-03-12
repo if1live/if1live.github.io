@@ -2,7 +2,7 @@
   var host = "{{ .Site.Params.hostName }}";
   if (host == window.location.host) {
     window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-    ga('create','{{ .Site.Params.googleAnalytics }}','auto');ga('send','pageview')
+    ga('create','{{ .Site.GoogleAnalytics }}','auto');ga('send','pageview')
   } else {
     console.log("skip google analytics");
   }
