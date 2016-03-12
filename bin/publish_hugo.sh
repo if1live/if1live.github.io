@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function sanitize_hugo_markdown() {
-	find ./content -name "*.md" | xargs -I{} gsed -i -e  's/{attach}/\/posts\//g' {}
-	find ./content -name "*.md" | xargs -I{} gsed -i -e  's/{filename}/\/posts\//g' {}
-	find ./content -name "*.md" | xargs -I{} gsed -i -e  's/\.md//g' {}
+	find ./content -name "*.md" | xargs -I{} sed -i -e  's/{attach}/\/posts\//g' {}
+	find ./content -name "*.md" | xargs -I{} sed -i -e  's/{filename}/\/posts\//g' {}
+	find ./content -name "*.md" | xargs -I{} sed -i -e  's/\.md//g' {}
 }
 
 function copy_hugo_markdown() {
