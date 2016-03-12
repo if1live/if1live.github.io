@@ -1,12 +1,9 @@
 <article class="article-summary">
-  <header>
-    <hgroup class="entry-title">
-      <a href="{{ .Permalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
-        <h1>{{ .Title }}</h1>
-        {{ if and (isset .Params "subtitle") (ne .Params.subtitle "") }}
-        <h2>{{ .Params.subtitle }}</h2>
-        {{end}}
-      </a>
-    </hgroup>
-  </header>
+  <a href="{{ .Permalink }}"  rel="bookmark" title="Permalink to {{ .Title }}" class="article-name">
+    <h2 class="article-title">{{ .Title }}</h2>
+    <h3 class="article-subtitle">{{ .Params.subtitle }}</h3>
+  </a>
+  <span class="article-date">
+    {{ .Date.Format "2006/01/02" }}
+  </span>
 </article>

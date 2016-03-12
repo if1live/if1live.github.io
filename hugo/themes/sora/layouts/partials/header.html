@@ -6,18 +6,18 @@
     <h2 hidden>Navigation</h2>
     <ul class="nav-link-list">
       <li>
-        <a href="{{ .Site.BaseURL }}about.html" {{ if eq (lower .Title) "about" }} class="active" {{ end }} title="about">
+        <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
           <i class="fa fa-info"><span hidden>about</span></i>
         </a>
       </li>
       <li>
-        <a href="{{ .Site.BaseURL }}project.html" {{ if eq (lower .Title) "project" }} class="active" {{ end }} title="project">
-          <i class="fa fa-code"><span hidden>project</span></i>
+        <a href="{{ .Site.BaseURL }}projects/" {{ if eq (lower .Title) "projects" }} class="active" {{ end }} title="projects">
+          <i class="fa fa-code"><span hidden>projects</span></i>
         </a>
       </li>
       <li>
-        <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }} title="posts">
-          <i class="fa fa-archive"><span hidden>Posts</span></i>
+        <a href="{{ .Site.BaseURL }}archives/" {{ if eq (lower .Title) "archives" }} class="active" {{ end }} title="archives">
+          <i class="fa fa-archive"><span hidden>Archives</span></i>
         </a>
       </li>
       <li>
@@ -26,7 +26,7 @@
         </a>
       </li>
       <li>
-        <a href="{{ .Site.BaseURL }}search.html" {{ if eq (lower .Title) "search" }} class="active" {{ end }} title="search">
+        <a href="{{ .Site.BaseURL }}search/" {{ if eq (lower .Title) "searches" }} class="active" {{ end }} title="search">
           <i class="fa fa-search"><span hidden>Search</span></i>
         </a>
       </li>

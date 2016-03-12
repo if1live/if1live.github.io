@@ -31,7 +31,7 @@ body {
   //960은 1열로 쓰기에는 너무 넓은듯
   max-width: 720px;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
 }
 
 @mixin common-header-footer {
@@ -235,7 +235,36 @@ body {
 }
 
 .article-summary {
-  padding: 0 0 10px 0;
+  @include clearfix();
+  padding: 10px 0;
+
+  a, a:hover, a:visited {
+    border-bottom: 0;
+  }
+  a:hover * {
+    color: $base-a-tag-hover-color;
+  }
+
+  .article-name {
+    float: left;
+  }
+
+  .article-title {
+    font-size: 1.2em;
+    margin: 0;
+    color: $gray-darker;
+  }
+  .article-subtitle {
+    font-size: 1.0em;
+    margin: 0;
+    text-indent: 1em;
+    font-weight: normal;
+    color: $gray-dark;
+  }
+  .article-date {
+    float: right;
+    text-align: right;
+  }
 }
 
 .pagination {
