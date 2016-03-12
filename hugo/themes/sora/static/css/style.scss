@@ -31,7 +31,7 @@ body {
   //960은 1열로 쓰기에는 너무 넓은듯
   max-width: 720px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0;
 }
 
 @mixin common-header-footer {
@@ -94,16 +94,16 @@ body {
 
 .basic-content {
   @include core-anchor-mixin;
+  padding: 10px 0;
 
   word-wrap: break-word;
   line-height: 1.6em;
 
   @mixin common-h1 {
     padding: 0;
-    margin: 0;
-    font-size: 2.0em;
-    line-height: 2.0em;
-    color: $gray-dark;
+    margin: 10px 0;
+    font-size: 1.6em;
+    color: $gray-darker;
   }
 
   h1 {
@@ -116,8 +116,9 @@ body {
     }
     h2 {
       padding: 0;
-      margin: 0;
-      color: $gray;
+      margin: 10px 0;
+      font-size: 1.4em;
+      color: $gray-dark;
     }
   }
 
@@ -233,78 +234,6 @@ body {
   }
 }
 
-/*
-.tags-content {
-  ul {
-    list-style: none;
-  }
-
-  .tag-article-list-section {
-    display: none;
-    padding: 10px 0;
-    ul {
-      padding: 0;
-    }
-    li {
-      padding: 5px 0;
-    }
-  }
-
-  .list-of-tags {
-    margin: 0;
-    padding: 0;
-    li {
-      display: inline;
-    }
-
-    .tag-link {
-      display: inline-block;
-      padding: 4px 4px;
-      // border 추가되면서 밀리는 효과 없애려고 가짜 경계 추가
-      border: 1px solid #fff;
-
-      &.active {
-        border: 1px solid #f00;
-        @include border-radius(2px);
-        color: $gray-darker;
-      }
-    }
-
-    @include core-anchor-mixin;
-  }
+.article-summary {
+  padding: 0 0 10px 0;
 }
-
-.recent-content {
-  @include clearfix;
-
-  .archives-link {
-    font-size: 80%;
-    color: $gray-dark;
-  }
-}
-
-.article-summary-list {
-  article {
-    @include clearfix;
-    padding: 0.5em 0;
-  }
-  .article-name {
-    float: left;
-  }
-
-  .article-title {
-    font-size: 18px;
-    margin: 0;
-  }
-  .article-subtitle {
-    font-size: 16px;
-    margin: 0;
-    text-indent: 1em;
-    font-weight: normal;
-  }
-  .article-date {
-    float: right;
-    text-align: right;
-  }
-}
-*/

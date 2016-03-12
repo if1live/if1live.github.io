@@ -25,10 +25,11 @@ done
 for target in $(find ./content -name "*.md"); do
 	line=$(grep -n "^+++$" $target|sed -n 2p|awk -F ":" '{print $1}')
 
-	has_cjk_lang=$(grep "isCJKLanguage = true" $target; echo $?)
-	if [[ $has_cjk_lang == "1" ]]; then
-		ed -s $target <<< $line$'i\nisCJKLanguage = true\n.\nwq'
-	fi
+	#cjk 있으니까 단어수 세는게 반대로 돌아가는 느낌
+	#has_cjk_lang=$(grep "isCJKLanguage = true" $target; echo $?)
+	#if [[ $has_cjk_lang == "1" ]]; then
+	#	ed -s $target <<< $line$'i\nisCJKLanguage = true\n.\nwq'
+	#fi
 
 	has_url=$(grep "url =" $target; echo $?)
 	if [[ $has_url == "1" ]]; then

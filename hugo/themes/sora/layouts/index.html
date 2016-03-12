@@ -2,9 +2,11 @@
 {{ partial "header.html" . }}
 
 <div class="container">
-  {{ range first 5 .Data.Pages }}
-  {{ .Render "summary"}}
-  {{ end }}
+  <div class="basic-content article-content">
+    {{ range first 5 .Data.Pages }}
+    {{ .Render "summary"}}
+    {{ end }}
+  </div>
 
   <div>
     TODO - list page
