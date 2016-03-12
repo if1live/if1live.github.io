@@ -2,6 +2,11 @@ baseurl = "https://libsora.so/"
 languageCode = "ko-kr"
 title = "/usr/lib/libsora.so"
 
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
 [params]
   hostName = "libsora.so"
   googleAnalytics = "UA-37862172-2"

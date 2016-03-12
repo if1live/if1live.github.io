@@ -1,7 +1,7 @@
 +++
 title: Timing Measurements
 subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
-tags: [linux, system-programming, timing]
+tags: [linux, system programming, timing]
 slug: system-prog-timing-measurements
 author: if1live
 date: 2014-11-21

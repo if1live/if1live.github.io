@@ -3,7 +3,7 @@ title: 삽질로 알아보는 파이썬과 루비의 기본 매개변수
 subtitle: Default Argument X (Python, Ruby)
 slug: default-argument-python-and-ruby
 date: 2016-02-18
-tags: [ruby, python, default argument, default paramter value, optional paramter]
+tags: [ruby, python, default argument, default parameter value, optional parameter]
 author: if1live
 +++
 파이썬과 루비의 문법 차이로 인한 버그를 당한적은 자주 있었지만 글로 다룰

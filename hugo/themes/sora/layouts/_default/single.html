@@ -1,77 +1,68 @@
 {{ partial "head.html" . }}
-<body>
-  {{ partial "header.html" . }}
+{{ partial "header.html" . }}
 
-  <div class="container">
-    <article class="basic-content article-content">
-      <header>
-        <hgroup class="entry-title">
-          <a href="{{ .RelPermalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
-            <h1>{{ .Title }}</h1>
-            <h2>{{ .Params.subtitle }}</h2>
-          </a>
-        </hgroup>
-      </header>
+<div class="container">
+  <article class="basic-content article-content">
+    <header>
+      <hgroup class="entry-title">
+        <a href="{{ .RelPermalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
+          <h1>{{ .Title }}</h1>
+          <h2>{{ .Params.subtitle }}</h2>
+        </a>
+      </hgroup>
+    </header>
 
-      <footer class="post-info">
-        <abbr class="published" title='{{ .Date.Format "2006/01/02" }}'>
-          {{ .Date.Format "2006/01/02" }}
-        </abbr>
-        {{ if .Params.author }}
-        <address class="vcard author">
-          By <a href="//twitter.com/{{ .Site.Params.twitterUsername }}">@{{ .Params.author }}</a>
-        </address>
+    <footer class="post-info">
+      <abbr class="published" title='{{ .Date.Format "2006/01/02" }}'>
+        {{ .Date.Format "2006/01/02" }}
+      </abbr>
+      {{ if .Params.author }}
+      <address class="vcard author">
+        By <a href="//twitter.com/{{ .Site.Params.twitterUsername }}">@{{ .Params.author }}</a>
+      </address>
+      {{ end }}
+
+      <ul class="list-of-tags tags-in-article">
+        {{ range .Params.tags }}
+        <li>
+          <a href="/tags/{{ . | urlize }}">#{{ . }}</a>
+        </li>
         {{ end }}
-
-        <ul class="list-of-tags tags-in-article">
-          {{ range .Params.tags }}
-          {{ $tag := . }}
-          <li>
-            <a href="/tags.html#{{ $tag | urlize }}-ref">
-              #{{ $tag }}
-            </a>
-          </li>
-          {{ end }}
-        </ul>
-      </footer>
-
-      <section class="entry-content">
-        {{ .Content }}
-      </section>
-
-      <section class="entry-content">
-        {{ partial "disqus.html" . }}
-      </section>
-
-      <ul class="articles-timeline">
-        <li class="previous-article">
-          {{ if .Next }}
-          <a href="{{ .Next.Permalink }}" title="Next: {{ .Next.Title }}">
-            {{ .Next.Title }}
-            {{ if and (isset .Next.Params "subtitle") (ne .Next.Params.subtitle "") }}
-            <br/><small>{{ .Next.Params.subtitle }}</small>
-            {{ end }}
-          </a>
-          {{ end }}
-        </li>
-
-        <li class="next-article">
-          {{ if .Prev }}
-          <a href="{{ .Prev.Permalink }}" title="Previous: {{ .Prev.Title }}">
-            {{ .Prev.Title }}
-            {{ if and (isset .Prev.Params "subtitle") (ne .Prev.Params.subtitle "") }}
-            <br/><small>{{ .Prev.Params.subtitle }}</small>
-            {{ end }}
-          </a>
-          {{ end }}
-        </li>
-
       </ul>
-    </article>
-  </div>
+    </footer>
 
-  {{ partial "footer.html" . }}
+    <section class="entry-content">
+      {{ .Content }}
+    </section>
 
-  {{ partial "tail.html" . }}
-</body>
-</html>
+    <ul class="articles-timeline">
+      <li class="previous-article">
+        {{ if .Next }}
+        <a href="{{ .Next.Permalink }}" title="Next: {{ .Next.Title }}">
+          {{ .Next.Title }}
+          {{ if and (isset .Next.Params "subtitle") (ne .Next.Params.subtitle "") }}
+          <br/><small>{{ .Next.Params.subtitle }}</small>
+          {{ end }}
+        </a>
+        {{ end }}
+      </li>
+
+      <li class="next-article">
+        {{ if .Prev }}
+        <a href="{{ .Prev.Permalink }}" title="Previous: {{ .Prev.Title }}">
+          {{ .Prev.Title }}
+          {{ if and (isset .Prev.Params "subtitle") (ne .Prev.Params.subtitle "") }}
+          <br/><small>{{ .Prev.Params.subtitle }}</small>
+          {{ end }}
+        </a>
+        {{ end }}
+      </li>
+    </ul>
+
+    <section class="entry-content">
+      {{ partial "disqus.html" . }}
+    </section>
+  </article>
+</div>
+
+{{ partial "footer.html" . }}

@@ -31,7 +31,7 @@ body {
   //960은 1열로 쓰기에는 너무 넓은듯
   max-width: 720px;
   margin: 0 auto;
-  padding: 0;
+  padding: 10px;
 }
 
 @mixin common-header-footer {
@@ -103,7 +103,7 @@ body {
     margin: 0;
     font-size: 2.0em;
     line-height: 2.0em;
-    color: $gray-darker;
+    color: $gray-dark;
   }
 
   h1 {
@@ -221,6 +221,17 @@ body {
   text-align: center;
 }
 
+.tags-content {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    padding: 5px;
+  }
+}
 
 /*
 .tags-content {

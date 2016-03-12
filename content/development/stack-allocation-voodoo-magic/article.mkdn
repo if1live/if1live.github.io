@@ -1,7 +1,7 @@
 +++
 title: 스택 지역 변수의 주소값을 이용한 버그
 subtitle: Off-By-One Error를 이용한 무한루프 구현(?)
-tags: [cpp, stack allocation, bug, loca-variable, voodoo-magic, off-by-one]
+tags: [cpp, stack allocation, bug, local variable, voodoo magic, off-by-one]
 slug: stack-allocation-voodoo-magic
 author: if1live
 date: 2015-10-07

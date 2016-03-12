@@ -1,7 +1,7 @@
 +++
 title: Ext2 File System
 subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
-tags: [linux, system-programming, filesystem, ext2]
+tags: [linux, system programming, filesystem, ext2]
 slug: system-programming-ext2-file-system
 author: if1live
 date: 2014-12-03
@@ -122,7 +122,7 @@ date: 2014-12-03
     * 접근 시간이 갱신되어야 할 떄
 * 페이지 캐시 사용
     * 일부 메모리상의 자료 구조는 디스크상의 자료 구조와 다르다. (저장 지연)
-    
+
 ### Ext2 자료구조의 VFS 이미지
 | Type | 디스크 구조체 | 메모리 구조체 | 캐싱 모드 |
 |------|---------------|---------------|-----------|
@@ -153,7 +153,7 @@ date: 2014-12-03
 ## Ext2 Operations
 * VFS와 특정 파일 시스템이 연관됨
     * `ext2_...` + `generic+...` => 함수 포인터로 이루어진 구조체에 연결
-* file_operations : 파일의 내용 다루는 함수 
+* file_operations : 파일의 내용 다루는 함수
 * inode_operations : file 객체용 함수
 * super_operations  : super block과 상호작용하는 함수
 * address\_space\_operations : 일반화된 주소 공간용 함수
@@ -220,5 +220,4 @@ date: 2014-12-03
 * fs/ext2/inode.c : `ext2_truncate()`
 * 파일을 삭제하려면 inode가 필요
 * struct `ext2_inode` 안의 `i_block` 추적해서 모든 데이터 블럭을 해제
-* 다양한 bookkeeping 기록 갱신 
-
+* 다양한 bookkeeping 기록 갱신
