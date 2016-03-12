@@ -15,7 +15,7 @@ function copy_hugo_markdown() {
 
 function copy_hugo_simple_static() {
 	mkdir -p ./hugo/static/
-	cp -r ./content/extra/* ./hugo/static
+	cp -r ./extra/* ./hugo/static
 }
 
 function copy_hugo_article_static() {
@@ -36,6 +36,7 @@ copy_hugo_simple_static
 copy_hugo_article_static
 
 cd hugo
+hugo -t sora --destination=output
 status=$?
 cd -
 exit $status

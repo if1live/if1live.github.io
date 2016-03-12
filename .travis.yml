@@ -1,15 +1,6 @@
-language: python
-
-python:
-  - "2.7"
+language: go
 
 sudo: false
-
-cache:
-  directories:
-    - $HOME/.cache/pip
-    - node_modules
-    - content_cached
 
 env:
   global:
@@ -18,22 +9,19 @@ env:
 before_install:
   - git config --global user.email "libsora25@gmail.com"
   - git config --global user.name "Travis"
-  - export GOPATH=$HOME/gopath
-  - export PATH=$HOME/gopath/bin:$PATH
 
 install:
   - go get -u github.com/if1live/maya
-  - go install github.com/if1live/maya
-  - pip install -r pelican/requirements.txt -q
-  - npm install -g less
+  - go get -u -v github.com/spf13/hugo
+  - go get github.com/wellington/wellington/wt
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
-  - ./bin/build_theme.sh
-  - ./bin/publish_pelican.sh
+  - ./bin/build_theme_hugo.sh
+  - ./bin/publish_hugo.sh
 
 after_success:
-  - ./bin/push_output.sh
+  - ./bin/push_output.sh hugo
 
 branches:
   only:

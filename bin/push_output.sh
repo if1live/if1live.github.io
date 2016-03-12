@@ -2,7 +2,7 @@
 cd output
 rm -rf *
 
-cp -r ../pelican/output/* .
+cp -r ../$1/output/* .
 
 git add -f .
 git commit -a -m "add new site content"
