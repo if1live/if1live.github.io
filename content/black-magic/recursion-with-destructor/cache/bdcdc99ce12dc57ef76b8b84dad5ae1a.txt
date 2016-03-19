@@ -1,0 +1,16 @@
+# clang++ member_var_dtor_recursion.cpp -std=c++14 && ./a.out
+constructor	: 7fff5c817be8
+copy constructor: 7ffe99d00010
+destructor	: 7fff5c817be8
+*
+**
+***
+end of recusion destructor: 7ffe99d00000
+destructor	: 7ffe99d00010
+operator delete -> memory free
+end of recusion destructor: 7ffe99d00000
+destructor	: 7ffe99d00010
+end of recusion destructor: 7ffe99d00000
+destructor	: 7ffe99d00010
+end of recusion destructor: 7ffe99d00000
+destructor	: 7ffe99d00010

@@ -1,0 +1,5 @@
+# clang++ safe_destructor_recursion.cpp -std=c++14 && ./a.out
+*
+**
+***
+operator delete -> memory free
