@@ -1,0 +1,6 @@
+# clang++ diamond_no_loop.cpp && ./a.out
+  *
+ ***
+*****
+ ***
+  *

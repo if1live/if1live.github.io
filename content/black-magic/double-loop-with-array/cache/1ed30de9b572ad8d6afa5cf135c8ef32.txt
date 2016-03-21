@@ -1,0 +1,4 @@
+# clang++ upper_triangle_one_loop.cpp && ./a.out
+  *
+ ***
+*****
