@@ -1,0 +1,40 @@
++++
+title: 고정소수점 관련 자료
+subtitle: Fixed point related Links, References, etc
+date: 2016-05-05
+tags: [fixed point]
+slug: fixed-point-intro
+author: if1live
++++
+
+## How to use Fixed Point (16.16) Math - by Night Stalker
+C에서 고정소수점 라이브러리 구현하기
+
+* [Part 1 of 2](http://netwinder.osuosl.org/pub/netwinder/docs/nw/fix1FAQ.html)
+* [Part 2 of 2](http://netwinder.osuosl.org/pub/netwinder/docs/nw/fix2FAQ.html)
+
+
+## libfixmath
+
+* [C](https://code.google.com/archive/p/libfixmath/)
+* [C#](https://bitbucket.org/se5a/fixmath.net)
+
+## Links
+
+* [Doing It Fast - Fixed point arithmetic, loop unrolling, fast 3D transforms](http://gameprogrammer.com/4-fixed.html)
+
+## Slides
+
+* [The neglected art of Fixed Point arithmetic](http://jet.ro/files/The_neglected_art_of_Fixed_Point_arithmetic_20060913.pdf)
+
+## [DOOM Source](https://github.com/id-Software/DOOM)
+[Wikipedia - Fixed-point arithmetic](https://en.wikipedia.org/wiki/Fixed-point_arithmetic)
+
+> Doom was the last first-person shooter title by id Software
+> to use a 16.16 fixed point representation for all of its non-integer computations,
+> including map system, geometry, rendering, player movement etc.
+> This was done in order for the game to be playable on 386 and 486SX CPUs without an FPU.
+> For compatibility reasons, this representation is still used in modern Doom source ports.
+
+* `typedef fixed_t` 고정 소수점 표현
+* `tables.h` 에 삼각함수 구현
