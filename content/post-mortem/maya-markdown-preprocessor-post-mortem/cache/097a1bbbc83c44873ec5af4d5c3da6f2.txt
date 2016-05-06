@@ -1,0 +1,2 @@
+# clang main.c && ./a.out
+hello world, maya!
