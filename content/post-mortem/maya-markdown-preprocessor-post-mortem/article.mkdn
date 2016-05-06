@@ -164,27 +164,27 @@ trailing comma, 문자열을 따옴표로 표시하기, 여러줄에 걸쳐있�
 생각보다 괜찮더라
 
 ```
-첫줄의 \는 실제로 사용할때는 무시
+\는 실제로 사용할때는 무시
 
 \~~~maya:view
 file=main.c
 start_line=1
 end_line=2
-~~~
+\~~~
 
 \~~~maya:execute
 cmd=clang main.c && ./a.out
 attach_cmd=true
-~~~
+\~~~
 
 \~~~maya:gist
 id=3ee77ed16a900b74922b
 file=fibonacci_with_signal.c
-~~~
+\~~~
 
 \~~~maya:youtube
 video_id=cNG2TCmUCQc
-~~~
+\~~~
 ```
 
 ## 개발/사용 소감
