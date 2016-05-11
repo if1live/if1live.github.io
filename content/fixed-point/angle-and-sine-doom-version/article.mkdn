@@ -55,7 +55,7 @@ public static Fix16 Sin(Fix16 inAngle) {
     * 예: int(0) == int(360) == int(720) ...
     * 예: float(0) == float(2PI) == float(4PI) ...
 
-DOOM에서는 Binary Angle Measurement (BAM)이라는 기법을 이용해서 위의 문제를 해결했다.
+DOOM에서는 [Binary Angle Measurement (BAM)][wiki_binary_scaling] 이라는 기법을 이용해서 위의 문제를 해결했다.
 [코드][doom_table_h]는 다음과 같다.
 
 ```c
@@ -149,7 +149,9 @@ fixed_t*		finecosine = &finesine[FINEANGLES/4];
 
 ## Reference
 * [DOOM ENGINE CODE REVIEW](http://fabiensanglard.net/doomIphone/doomClassicRenderer.php)
+* [Binary scaling][wiki_binary_scaling]
 
 [wiki_fixed_point]: https://en.wikipedia.org/wiki/Fixed-point_arithmetic
+[wiki_binary_scaling]: https://en.wikipedia.org/wiki/Binary_scaling
 [namu_lost_tech]: https://namu.wiki/w/%EB%A1%9C%EC%8A%A4%ED%8A%B8%20%ED%85%8C%ED%81%AC%EB%86%80%EB%9F%AC%EC%A7%80
-[doom_table_h]: https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/tables.hœ
+[doom_table_h]: https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/tables.h
