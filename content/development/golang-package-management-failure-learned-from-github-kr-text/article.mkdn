@@ -1,7 +1,7 @@
 +++
 title : golang 패키지 관리의 약점과 대응책
 subtitle : left-pad, 그것의 npm만의 문제인가? 그리고 golang의 해결법
-date: 2016-05-12
+date: 2016-05-14
 tags: [golang, package management]
 slug: golang-package-management-failure-learned-from-github-kr-text
 author: if1live
