@@ -1,0 +1,211 @@
++++
+title : golang 패키지 관리의 약점과 대응책
+subtitle : left-pad, 그것의 npm만의 문제인가? 그리고 golang의 해결법
+date: 2016-05-12
+tags: [golang, package management]
+slug: golang-package-management-failure-learned-from-github-kr-text
+author: if1live
++++
+
+## 개요
+2016년 3월 22일, [npm에서 left-pad가 사라지면서 node.js를 사용하는 수많은 사람들이 혼돈의 카오스][npm_left_pad]에 빠졌다.
+그리고 2016년 5월 5일, [hugo][hugo]를 쓰던 나도 비슷한 경험을 했다.
+그날, hugo에서는 어떤 문제가 있었는지를 살펴봄으로써 golang 패키지 관리 기법의 문제점을 이해하고 golang은 어떤식의 해결책을 제시했는지 정리해보았다.
+
+## github.com/kr/text 사태 (가칭) 문제 발생
+### 2016/05/05 00:48 +0900 : 정상
+[hugo에 의존하는 블로그 빌드][libsora_build_success]가 정상적으로 작동했다.
+특별한 문제는 없다
+
+### 2016/05/05 15:34 +0900 : 빌드 실패!
+
+[hugo에 의존하는 블로그 빌드][libsora_build_fail]가 깨졌다.
+실패한 빌드의 로그는 다음과 같은 내용을 담고 있다.
+
+```bash
+$ go get -u github.com/spf13/hugo
+# cd /home/travis/gopath/src/github.com/kr/text; git checkout master
+error: pathspec 'master' did not match any file(s) known to git.
+package github.com/spf13/hugo
+imports github.com/BurntSushi/toml
+imports github.com/PuerkitoBio/purell
+…
+imports github.com/kr/pretty
+imports github.com/kr/text: exit status 1
+```
+
+### 2015/05/05 : 나만 문제 생긴게 아니다
+
+github에 이슈가 등록되고 같은 문제를 겪는 사람들이 나오기 시작했다.
+
+* https://github.com/kr/text/issues/6
+* https://github.com/spf13/hugo/issues/2124
+
+### 2015/05/08 : 문제 해결됨
+
+문제가 발생한지 3~4일 만에 모든 문제가 해결되었다.
+어떤식으로 해결되었는지는 아래에서 다시 다룬다.
+
+## 왜 문제가 발생했는가?
+
+### 왜 hugo를 깔았는데 github.com/kr/text 를 받는가?
+
+Hugo 내부에서 `github.com/kr/pretty` 라이브러리를 사용하고 있었다.
+`github.com/kr/pretty` 는 golang 변수를 예쁘게 출력해주는 라이브러리로 hugo는 로그 출력할때 이를 이용했다. 문제는 `github.com/kr/pretty` 내부에 `github.com/kr/text`로의
+[의존성](https://github.com/kr/pretty/blob/5feda8d406801dae804b9773a257cc5592ef88ab/formatter.go#L10)이 숨겨져있었다.
+npm left-pad 사태와 마찬가지로 별 생각없이 갖다쓴 라이브러리가 뒤통수 친거로 보인다.
+
+
+### 왜 `go get github.com/kr/text` 를 하지 못하는가?
+
+에러 로그의 내용 그대로 master 브렌치가 사라졌기 때문이다.
+
+
+### 왜 golang 1.6에서는 문제가 없는데 golang 1.5에서는 문제가 생겼는가?
+
+[Hugo 빌드 로그][hugo_build_fail]를 보면 go 1.5.4에서는 빌드가 실패했지만 go 1.6.1에서는 빌드가 성공한걸 발견할 수 있다. 로그를 볼때 Go 1.6 으로 넘어가면서 `go get` 내부의 구현이 바뀐거같다. Go 1.5까지는 go get을 하면 master 브렌치를 받고 go 1.6부터는 적절한 브렌치를 받는 것처럼 보이다. 이를 코드에서 확인해보자.
+
+#### Go 1.4
+
+[cmd/go/vcs.go][go_vcs_14]
+master 브렌치가 하드코딩 되어있다.
+
+```go
+tagSyncDefault: "checkout master",
+```
+
+#### Go 1.5
+
+[cmd/go/vcs.go][go_vcs_15]
+
+```go
+// both createCmd and downloadCmd update the working dir.
+// No need to do more here. We used to 'checkout master'
+// but that doesn't work if the default branch is not named master.
+// See golang.org/issue/9032.
+tagSyncDefault: []string{"checkout master", "submodule update --init --recursive"},
+ ```
+ Master 브렌치가 없는것과 관련된 [cmd/go: "go get" ignores github default branch](https://golang.org/issue/9032) 이슈가 주석에 적혀있지만 하드코딩된 master 브렌치가 사라지진 않았다.
+
+#### Go 1.6
+
+[cmd/go/vcs.go][go_vcs_16]
+
+하드코딩된 master 브렌치가 사라졌다.
+
+```go
+tagSyncDefault: []string{"submodule update --init --recursive"},
+```
+
+### 왜 내가 go 1.6을 쓰지 않고 있었는가?
+Travis-ci 설정파일에 golang을 딱히 명시하지 않았다.
+Golang 버전은 시간이 지나면 계속 올라갈텐데 이를 하드코딩해둬다가 수정하는게 귀찮잖아?
+그래서 버전을 명시하지 않고 travis-ci가 적절히 기본값을 쓰도록 했다.
+문제는 travis-ci가 기본값으로 골라서 쓰던 go의 버전이 1.4.1 이었다.
+
+```bash
+$ go version
+go version go1.4.1 linux/amd64
+```
+
+### 왜 특정 버전의 `github.com/kr/text` 를 쓰지 않았는가?
+
+golang이 어떻게 굴러가는지를 이야기하기전에 다른 언어는 어떻게 하는지 보자.
+
+첫번째는 파이썬이다.
+당신이 새로운 오픈소스 라이브러리 `LibHelloWorld` 를 개발했다고 가정하자.
+라이브러리에 version 0.1.0 이라고 적어서 릴리즈할거다.
+그리고 LibHelloWorld v0.1.0을 PyPI에 등록할거다.
+다른 사람을든 requirements.txt 안에 `LibHelloWorld==0.1.0` 이라고 적으면 릴리즈한 소스를 갖다쓸거다.
+
+다은은 Node.js이다
+당신이 새로운 오픈소스 라이브러리 `LibHelloWorld` 를 개발했다고 가정하자.
+라이브러리에 version 0.1.0 이라고 적어서 릴리즈할거다.
+그리고 LibHelloWorld v0.1.0을 NPM에 등록할거다.
+다른 사람을든 package.json 안에 `"LibHelloWorld": "0.1.0"` 같은것을 적어서 릴리즈한 소스를 갖다쓸거다.
+
+파이썬과 Node.js에는 공통점이 있다.
+
+1. 중앙 패키지 저장소가 있다 (PyPI, NPM)
+2. 라이브러리 개발자는 적절한 시점에 릴리즈를 만든다
+3. 릴리즈를 중앙 패키지 저장소에 등록한다. 이때 버전을 명시한다.
+4. 다른 사람들은 라이브러리 이름, 버전을 알고있으면 해당 릴리즈를 가져다쓸 수 있다.
+
+
+그렇다면 golang은 어떻게 굴러갈까?
+
+1. **중앙 패키지 저장소? 그런거 없다.**
+`import github.com/foo/bar` 라고 쓰면 저장소에서 소스를 받는다
+2. **릴리즈? 그런거 없다.**
+저장소에 tag v0.1.0 을 붙여놔봤자 `import github.com/foo/bar@v0.1.0` 같은 문법이 없다.
+`import github.com/foo/bar` 로는 저장소 주소만 명시할수 있다.
+git 저장소에 붙는 tag는 사람보기 좋은거지 golang한테는 의미가 없다.
+
+중앙 패키지 저장소가 없는건 npm 뒤졌다고 nodejs 세상이 멈추는 꼴을 보기 싫어서 그렇게 했다고 이해는 할 수 있다.
+
+근데 릴리즈라는 개념이 없는건 무슨 생각인지 모르겠다.
+버전 달고 릴리즈된 신뢰할수 있는 코드가 아니라 저장소의 소스를 바로 가져다 쓴다고?
+릴리즈가 있으면 릴리즈 버전별로 대조해서 뭐가 변경되었는지 알수있다.
+근데 저장소에서 바로 땡겨쓰면 내가 뭘 받을지 모르니 얼마나 개발된 라이브러리인지도 모르고 이게 안정버전인지도 모른다.
+게다가 라이브러리 개발자가 실수로 master 브렌치의 빌드를 깨먹는다면?
+릴리즈 개념이 없는건 제정신이 아니다.
+
+
+## 어떻게 문제가 해결되었는가?
+hugo에서 github.com/kr/pretty 의존성이 사라졌다.
+[Remove kr/pretty dependency](https://github.com/spf13/hugo/commit/608cfe62cfcc2de8cf952e88b75436d064a6af7f)
+
+[github.com/kr/text](https://github.com/kr/text)에서 없어졌던 master 브렌치가 다시 생겼다.
+
+나는 `.travis.yml` 에다가 go1.6.2 를 쓰도록 명시했다.
+
+golang 1.5부터는 실험적으로 vendor 기능이 추가되었고 1.6부터는 기본 지원한다.
+
+
+## Vendoring
+
+golang 만든 사람들도 그렇게 등신은 아니다.
+Golang 패키지 시스템에 문제가 있다는건 알고있어서 golang 1.5에 experimental support for vendoring가 추가되었고 golang 1.6부터는 기본적으로 지원한다.
+
+자세한 설명은 다른 링크로 대신한다.
+
+* https://golang.org/s/go15vendor
+* https://medium.com/@freeformz/go-1-5-s-vendor-experiment-fd3e830f52c3#.6mhduztrl
+* http://engineeredweb.com/blog/2015/go-1.5-vendor-handling/
+* https://blog.gopheracademy.com/advent-2015/vendor-folder/
+
+그렇다고 Vendoring 에 대해 한마디 설명도 없이 넘어가면 허전하니까 몇자라도 적는다.
+
+원래 golang에서 외부 라이브러리를 사용하는 방법은 `go get github.com/foo/bar` 뿐이었다.
+go1.6 부터는 `vendor/` 디렉토리 밑에 `github.com/foo/bar`의 코드를 넣어두면 `go get`으로 소스를 받지 않고 넣어둔 코드를 갖다쓸 수 있다.
+
+실제 예시는 docker에서 찾을수 있다.
+
+docker는 `github.com/Sirupsen/logrus` 라는 라이브러리를 [사용](https://github.com/docker/docker/blob/master/registry/registry.go#L17)한다.
+옛날 golang이었으면 [github.com/Sirupsen/logrus](https://github.com/Sirupsen/logrus)의 소스를 받아서 사용할거다.
+그런데 docker는 `github.com/Sirupsen/logrus`의 내용을 [vendor/src/github.com/Sirupsen/logrus/](https://github.com/docker/docker/tree/master/vendor/src/github.com/Sirupsen/logrus) 에다 때려박았다. vendoring 덕분에 외부 저장소에서 소스를 받지 않고 `vendor/` 밑에 있는 소스를 사용한다.
+
+특정 버전의 라이브러리를 내 저장소에 때려박으면 라이브러리 개발자가 저장소를 말아먹어도 내 코드는 잘 돌아갈거다. (그런면에서 npm left-pad보다 안전하다) 근데 이건 좀 무식하잖아? 라이브러리 코드를 전부 저장소에 때려박는 대신에 git tag, commit hash만 알고있으면 특정 시점의 소스를 받을수 있잖아? [govendor][govendor] 는 이런 느낌으로 돌아간다.
+
+
+다만 Vendoring 기능이 너무 늦게 추가되었다는게 불만이다.
+go1.5 (released 2015/08/19), go1.6 (released 2016/02/17)
+golang의 기본기능으로 Vendor가 들어간진 3개월밖에 되지 않았다는거다. (작성일 기준)
+(이렇게 중요한 기능이 왜 이제서야 들어갔는지 모르겠다.)
+대부분의 사람들이 vendor를 사용할때까지는 시간이 걸릴거같다.
+
+## Summary
+* Golang의 패키지 관리 정책은 등신같다. 그래도 go1.6 부터는 제정신을 찾았다.
+* [govendor][govendor]는 좋은 물건이다.
+* 남의 라이브러리 쓰기전에 의존성 한번쯤은 검토하자.
+
+
+[govendor]: https://github.com/kardianos/govendor
+[npm_left_pad]: http://www.bloter.net/archives/253447
+[hugo]: https://gohugo.io/
+[libsora_build_success]: https://travis-ci.org/if1live/libsora.so/builds/127831488
+[libsora_build_fail]: https://travis-ci.org/if1live/libsora.so/builds/127988451
+[go_vcs_14]: https://github.com/golang/go/blob/release-branch.go1.4/src/cmd/go/vcs.go#L117
+[go_vcs_15]: https://github.com/golang/go/blob/release-branch.go1.5/src/cmd/go/vcs.go#L137-L141
+[go_vcs_16]: https://github.com/golang/go/blob/release-branch.go1.6/src/cmd/go/vcs.go#L137-L142
+[hugo_build_fail]: https://travis-ci.org/spf13/hugo/builds/128242103
