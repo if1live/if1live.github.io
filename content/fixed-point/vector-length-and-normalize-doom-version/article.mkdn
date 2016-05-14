@@ -85,6 +85,22 @@ R_PointToDist
 벡터의 크기를 직접 구하는게 아니라 벡터에서 X축 성분만 이용했다.
 충분히 빠르고 안에 루프문이 없는 `atan2(y, x)`, `sin()`를 구현했으니까 이것을 이용한 함수도 충분히 빠르지 않겠어?
 
+### divied by zero?
+vector.length() 구현에는 다음 코드에 들어있다.
+```c
+dist = FixedDiv (dx, finesine[angle] );
+```
+
+각도가 0이면 `sin(0) = 0`, divided by zero 버그가 발생할수 있다.
+DOOM에서는 이를 어떻게 피했는가? `sin(0) != 0`으로 만들었다.
+DOOM의 sine lookup table에서는 0, -1, 1에 대응하는 값은 없다.
+`sin(90deg)=1 `처럼 sine은 0이 아니더라도 `cos(90deg)=0` 이 될 수 있기 때문에 일부러 피한것으로 보인다.
+
+```
+// finesine[0] != 0
+int finesine[10240] = { 25,75,125,175,226,276,326,376, ...}
+```
+
 ## fast vector.length()
 
 요즘 세상에서는 벡터의 길이를 구하는 함수는 하나면 충분하다.
