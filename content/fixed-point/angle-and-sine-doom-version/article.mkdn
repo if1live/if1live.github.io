@@ -1,5 +1,5 @@
 +++
-title: DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법
+title: DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법
 subtitle: 386, 486 에서도 돌아가는 sin, cos
 date: 2016-05-06
 tags: [fixed point, sine, angle]
@@ -11,7 +11,7 @@ author: if1live
 
 최근 고정 소수점 기반으로 게임을 만들고 있다.
 요즘에서는 고정 소수점이 일종의 [잃어버린 기술][namu_lost_tech]가 되어서 참고할 자료가 많지 않더라.
-[Fixed-point arithmetic][wiki_fixed_point]를 읽어보다 DOOM이 보여서 둠은 어떤식으로 구현했나 코드를 뒤져봤다.
+[Fixed-point arithmetic][wiki_fixed_point]를 읽어보다 DOOM이 보여서 둠은 어떤식으로 구현했나 코드를 뒤져봤다.
 
 > Doom was the last first-person shooter title by id Software
 > to use a 16.16 fixed point representation for all of its non-integer computations,
@@ -80,10 +80,10 @@ BAM 기법을 이용하면 각도가 일정 범위에서 벗어나지 않도록 
 
 ## sin()
 
-look-up table을 이용하면 sine을 구현할수 있다. 그런데 look-up table은 어떻게 만들것인가?
-DOOM의 BAM은 잊고 360도 세상에서 sine look-up table을 구현해보자.
+lookup table을 이용하면 sine을 구현할수 있다. 그런데 lookup table은 어떻게 만들것인가?
+DOOM의 BAM은 잊고 360도 세상에서 sine lookup table을 구현해보자.
 
-가장 간단한 방법은 크기 360의 배열을 만들어서 sine을 저장하는 것이다.
+가장 간단한 방법은 크기 360의 배열을 만들어서 sine을 저장하는 것이다.
 룩업 테이블에서의 인덱스는 `(int)(degree * 1)`이다.
 
 * 0 ~ 0.9999도 = sine_table[0]
@@ -106,8 +106,8 @@ DOOM의 BAM은 잊고 360도 세상에서 sine look-up table을 구현해보자.
 이 방법을 그대로 Binary Angle Measurement 적용해보자.
 32bit unsigned int를 13bit + 19bit로 나눈다.
 상위 13bit를 룩업 테이블에서의 인덱스로 사용한다.
-sine look-up table의 크기는 8192(2 ** 13)이다.
-만약 더 정밀한 sine look-up table을 얻고싶으면 13비트 대신 14bit를 쓰면 되는거다.
+sine lookup table의 크기는 8192(2 ** 13)이다.
+만약 더 정밀한 sine lookup table을 얻고싶으면 13비트 대신 14bit를 쓰면 되는거다.
 
 ```c
 // table.h
@@ -121,7 +121,7 @@ sine look-up table의 크기는 8192(2 ** 13)이다.
 extern  fixed_t		finesine[5*FINEANGLES/4];
 ```
 
-look-up table에서 sine을 계산하고 싶은 각도 앞뒤의 sine값을 얻은 다음 적절히 보간하는 방법도 있겠지만 486에서는 그런 사치를 부리지 못하나보다.
+lookup table에서 sine을 계산하고 싶은 각도 앞뒤의 sine값을 얻은 다음 적절히 보간하는 방법도 있겠지만 486에서는 그런 사치를 부리지 못하나보다.
 DOOM에서 sine이 사용된 코드를 보면 BAM에 shift 연산을 적용한 다음 룩업 테이블을 조회한다. 추가 계산? 보간? 그런거 없더라.
 
 ```c
@@ -132,10 +132,10 @@ sineval = finesine[offsetangle >>ANGLETOFINESHIFT];
 ## cos()
 sin() 이 있으면 cos()는 간단히 구현할 수 있다.
 `cos(x)`를 구하고 싶으면 `sin(x + 90도)` 를 계산하면 된다.
-그런데 DOOM은 sine계산에는 look-up table 조회 한번이면 충분한데 cosine 계산에는 덧셈도 필요한게 성능을 까먹는다고 생각했는지 재밌는 기법을 이용했다.
+그런데 DOOM은 sine계산에는 lookup table 조회 한번이면 충분한데 cosine 계산에는 덧셈도 필요한게 성능을 까먹는다고 생각했는지 재밌는 기법을 이용했다.
 
-1. sine look-up table은 0~360도 구간이 아니라 90도를 더 계산해서 450도까지 계산한다. `finesine[5*FINEANGLES/4]`
-2. cosine look-up table의 주소값은 sine look-up table보다 90도 만큼 뒤를 가르킨다.
+1. sine lookup table은 0~360도 구간이 아니라 90도를 더 계산해서 450도까지 계산한다. `finesine[5*FINEANGLES/4]`
+2. cosine lookup table의 주소값은 sine lookup table보다 90도 만큼 뒤를 가르킨다.
 3. sine 쓰듯이 cosine을 쓰면 된다.
 
 ```c
