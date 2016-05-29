@@ -116,7 +116,7 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Ar
 이 정도면 이걸 직접 꺼낼일이 없을거 같지만 가끔씩 필요할때가 있다.
 예를 들면 리눅스 GUI를 사용하는데 한글 입력기가 뻑나서 영어밖에 못칠때,
 누군가 한글 입력이 안되서 영어로 써놓은걸 한글로 바꿔보고 싶을때,
-그리고 [지금 당장 한글 입력이 급한 사람들][twitter_search]
+그리고 [지금 당장 한글 입력이 필요한 사람들][twitter_search]
 
 ## 좋은점
 
