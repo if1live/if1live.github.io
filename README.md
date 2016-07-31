@@ -47,6 +47,8 @@ http-server -S
 # shell 2
 cd hugo
 hugo server --theme=sora
+or
+hugo server --theme=sora --bind 0.0.0.0 --baseURL=192.168.200.106:1313
 ```
 
 ### Run Local Dev Server - pelican
