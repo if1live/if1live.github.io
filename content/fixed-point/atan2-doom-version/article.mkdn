@@ -5,6 +5,7 @@ date: 2016-05-15
 tags: [fixed point, atan2]
 slug: atan2-doom-version
 author: if1live
+url: /posts/atan2-doom-version
 +++
 
 ## 개요

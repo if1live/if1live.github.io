@@ -4,6 +4,7 @@ tags: [cpp, property]
 slug: charp-like-property
 author: if1live
 date: 2013-01-25
+url: /posts/charp-like-property
 +++
 
 본문을 읽기전에 아래의 2개의 페이지를 읽어보면 이해에 도움이 될것이다. 사실상 내가 만든 코드는 위의 2개를 내 방식대로 묶은것뿐이다

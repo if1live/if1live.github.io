@@ -5,6 +5,7 @@ tags: [go, golang]
 slug: golang-first-impression
 author: if1live
 date: 2015-12-20
+url: /posts/golang-first-impression
 +++
 
 개요

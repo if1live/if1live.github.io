@@ -5,6 +5,7 @@ slug: make-int-from-invalid-value-python-and-ruby
 tags: [python, ruby, integer, int, exception]
 date: 2016-02-24
 author: if1live
+url: /posts/make-int-from-invalid-value-python-and-ruby
 +++
 올바르지 않은 값을 정수로 바꾸는 일은 웹을 포함한 여러가지 개발에서 자주하는 작업 중 하나이다.
 예를 들어서 `/articles/?id={int}` 를 구현한 서버가 있다고 가정하자.

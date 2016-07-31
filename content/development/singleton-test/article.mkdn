@@ -4,6 +4,7 @@ tags: [singleton, unittest, test, testing]
 slug: singleton-test
 author: if1live
 date: 2013-06-18
+url: /posts/singleton-test
 +++
 
 

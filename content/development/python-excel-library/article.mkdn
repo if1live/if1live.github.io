@@ -4,6 +4,7 @@ tags: [python, library, excel, xlsx]
 slug: python-excel-library
 author: if1live
 date: 2014-02-23
+url: /posts/python-excel-library
 +++
 subtitle: 무엇을 골라야 후회하지 않는가?
 

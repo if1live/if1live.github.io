@@ -5,6 +5,7 @@ tags: [black magic, array, loop]
 slug: double-loop-with-array
 author: if1live
 date: 2016-03-21
+url: /posts/double-loop-with-array
 +++
 
 ## 간단한 문제

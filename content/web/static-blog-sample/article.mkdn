@@ -5,6 +5,7 @@ slug: static-blog-sample
 author: if1live
 subtitle: github pages + travis-ci + etc
 date: 2014-02-01
+url: /posts/static-blog-sample
 +++
 
 * 이 블로그에 travis-ci를 붙인 기념

@@ -4,6 +4,7 @@ tags: [cpp]
 slug: class-init-with-memset
 author: if1live
 date: 2013-01-25
+url: /posts/class-init-with-memset
 +++
 
 일반적으로 C++에서는 멤버변수 초기화를 다음과 같은 문법으로 한다.

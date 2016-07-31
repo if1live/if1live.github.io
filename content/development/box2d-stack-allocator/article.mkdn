@@ -4,6 +4,7 @@ tags: [box2d, allocator, cpp]
 slug: box2d-stack-allocator
 author: if1live
 date: 2013-01-25
+url: /posts/box2d-stack-allocator
 +++
 
 ## 구조 

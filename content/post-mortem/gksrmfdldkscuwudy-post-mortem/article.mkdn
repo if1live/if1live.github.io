@@ -5,6 +5,7 @@ tags: [post mortem]
 slug: gksrmfdldkscuwudy-post-mortem
 author: if1live
 date: 2016-05-29
+url: /posts/gksrmfdldkscuwudy-post-mortem
 +++
 ## 개요
 

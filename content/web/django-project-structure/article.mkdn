@@ -4,6 +4,7 @@ tags: [django, project, python]
 slug: django-project-structure
 author: if1live
 date: 2013-01-30
+url: /posts/django-project-structure
 +++
 
 최근에 Django로 코딩한적이 있다. django는 기본적으로 프로젝트 트리에 적절한 제약이 걸려있기 떄문에 굳이 신경안쓰고 django 가이드라인에서 제공하는대로 짜도 별 문제는 없을것이다. django 에서 제시하는 가이드라인에 일부 참고자료를 덧붙여서 내 나름대로 사용했던 프로젝트 구조를 정리해봤다. 일단 목표한 요구사항은 다음과 같다.

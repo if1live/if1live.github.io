@@ -5,6 +5,7 @@ slug: namespace-indent
 author: if1live
 summary: C++ namespace 들여쓰기 방지하는 편법
 date: 2012-11-28
+url: /posts/namespace-indent
 +++
 
 ## 개요

@@ -5,6 +5,7 @@ tags: [markdown, post mortem]
 slug: maya-markdown-preprocessor-post-mortem
 author: if1live
 date: 2016-05-06
+url: /posts/maya-markdown-preprocessor-post-mortem
 +++
 
 ## Why?

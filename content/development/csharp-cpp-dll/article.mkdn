@@ -4,6 +4,7 @@ tags: [csharp, cpp, dll, pinvoke]
 slug: csharp-cpp-dll
 date: 2013-02-12
 author: if1live
+url: /posts/csharp-cpp-dll
 +++
 
 ## 개요

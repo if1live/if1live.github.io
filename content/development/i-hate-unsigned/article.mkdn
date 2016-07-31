@@ -5,6 +5,7 @@ date: 2014-12-04
 tags: [unsigned, overflow]
 slug: i-hate-unsigned
 author: if1live
+url: /posts/i-hate-unsigned
 +++
 
 개요

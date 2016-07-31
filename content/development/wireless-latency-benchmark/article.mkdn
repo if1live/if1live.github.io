@@ -5,6 +5,7 @@ tags: [latency, wireless]
 slug: wireless-latency-benchmark
 author: if1live
 date: 2013-12-12
+url: /posts/wireless-latency-benchmark
 +++
 
 요즘에 스마트폰을 게임 컨트롤러로 쓰는걸 만들고있다.

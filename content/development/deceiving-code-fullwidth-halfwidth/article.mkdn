@@ -5,6 +5,7 @@ tags: [전각, 반각, halfwidth, fullwidth, 낚시]
 slug: deceiving-code-fullwidth-halfwidth
 author: if1live
 date: 2015-04-27
+url: /posts/deceiving-code-fullwidth-halfwidth
 +++
 ## 개요
 

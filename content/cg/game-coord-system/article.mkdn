@@ -4,6 +4,7 @@ tags: [axis, gamedev]
 slug: game-coord-system
 author: if1live
 date: 2013-01-25
+url: /posts/game-coord-system
 +++
 ## 좌표계에 대한 고찰
 

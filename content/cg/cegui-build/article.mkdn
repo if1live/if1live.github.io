@@ -5,6 +5,7 @@ date: 2013-10-09
 tags: [cegui, ogre, build, windows]
 slug: cegui-build
 author: if1live
+url: /posts/cegui-build
 +++
 
 

@@ -4,6 +4,7 @@ tags: [otp, ez430, chronos]
 slug: ez430-chronos-google-otp
 author: if1live
 date: 2013-05-25
+url: /posts/ez430-chronos-google-otp
 +++
 몇달전에 손목시계가 필요했다 + 개발가능이면 더 좋겠지 해서 [eZ430-Chronos][wiki_ez430_chronos]를 충동적으로 샀다.
 막상 질러놓고 이걸 어따 쓸까 하다가 마땅한 방법이 생각이 안나서 방치해놧다가 [Google OTP][base_ez430_otp]로 쓰는 걸 보고 나도 저거로 써야지해서 삽질했다.

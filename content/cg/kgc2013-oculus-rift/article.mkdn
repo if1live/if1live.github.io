@@ -5,6 +5,7 @@ tags: [oculus, kgc]
 slug: kgc2013-oculus-rift
 author: if1live
 summary: KGC 2013 오큘러스 세션 구경 소감
+url: /posts/kgc2013-oculus-rift
 +++
 
 2013년 9월 25일 Oculus Rift 하나 믿고 휴가지르고 KGC에 구경갔었다. 구경한 세션/키노트는 다른것도 있지만 그런건 내가 알바 아니다. 오큘러스 관련된 내용만 정리했다.

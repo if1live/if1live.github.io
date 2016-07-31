@@ -4,6 +4,7 @@ tags: [cg, shader]
 slug: uber-shader
 author: if1live
 date: 2013-01-27
+url: /posts/uber-shader
 +++
 
 기본 개념은 한 개의 쉐이더 소스를 짜고 ifdef/ifndef 질을 해서 쉐이더 코드를 여러 형태로 변화시키는 것이다.

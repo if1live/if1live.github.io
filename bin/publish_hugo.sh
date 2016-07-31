@@ -3,6 +3,7 @@
 function sanitize_hugo_markdown() {
 	find ./content -name "*.md" | xargs -I{} sed -i -e  's/{attach}/\/posts\//g' {}
 	find ./content -name "*.md" | xargs -I{} sed -i -e  's/{filename}/\/posts\//g' {}
+	find ./content -name "*.md" | xargs -I{} sed -i -e  's/{article}/\/posts\//g' {}
 	find ./content -name "*.md" | xargs -I{} sed -i -e  's/\.md//g' {}
 }
 

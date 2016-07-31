@@ -4,6 +4,7 @@ tags: [opengl, gl, cg, text, library]
 slug: vincent-font-library
 author: if1live
 date: 2013-04-19
+url: /posts/vincent-font-library
 +++
 Public Domain 8x8 Bitmap Font인 [Vincent Font][vincent]를 적절하게 사용하기 위해서 만든 코드를 정리했다.
 앞으로는 새로운 [OpenGL Text Library]({filename}opengl-text-library.md)를 주로 사용하겠지만 왠지 아까워서...

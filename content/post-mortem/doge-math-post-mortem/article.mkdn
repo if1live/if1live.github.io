@@ -5,6 +5,7 @@ tags: [post-mortem, postmortem, post mortem, doge math]
 slug: doge-math-post-mortem
 author: if1live
 date: 2015-09-17
+url: /posts/doge-math-post-mortem
 +++
 ## 개요
 2015/09/07 ~ 2015/09/12 동안 뻘짓 개발한 개인 플젝을 정리하기로 했다.
