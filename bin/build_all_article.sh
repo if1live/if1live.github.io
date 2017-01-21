@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Usage (at root path)
 # ./bin/build_all_articles.sh <mode>
+# mode : hugo, pelican
 
 mode=$1
 

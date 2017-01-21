@@ -5,4 +5,4 @@
 
 curr_dir=${PWD##*/}
 filename=$(find . -name "*.mkdn" | head)
-maya -mode=pelican -file=$filename > ../$curr_dir.md
+maya -mode=hugo -file=$filename > ../$curr_dir.md

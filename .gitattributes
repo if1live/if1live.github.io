@@ -1,7 +1,11 @@
 # Set default behaviour, in case users don't have core.autocrlf set.
 * text=auto
 
-# Explicitly declare text files we want to always be normalized and converted 
+# 윈도, 리눅스 양쪽에서 돌아가게 만드려고
+# CR이 있으면 bash에서 돌리기 귀찮다
+.sh text eol=lf
+
+# Explicitly declare text files we want to always be normalized and converted
 # to native line endings on checkout.
 *.c text
 *.h text

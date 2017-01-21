@@ -21,10 +21,10 @@ install:
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
   - ./bin/build_theme_hugo.sh
-  - ./bin/publish_hugo.sh
+  - ./bin/deploy/publish_hugo.sh
 
 after_success:
-  - ./bin/push_output.sh hugo
+  - ./bin/deploy/push_output.sh
 
 branches:
   only:

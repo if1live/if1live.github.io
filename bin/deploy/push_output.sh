@@ -2,7 +2,8 @@
 cd output
 rm -rf *
 
-cp -r ../$1/output/* .
+GENERATOR_NAME="hugo"
+cp -r ../$GENERATOR_NAME/output/* .
 
 git add -f .
 git commit -a -m "add new site content"
