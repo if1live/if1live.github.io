@@ -5,6 +5,10 @@
 # mode : hugo, pelican
 
 mode=$1
+if [[ $mode == "" ]]; then
+	echo "mode not defined!"
+	exit -1
+fi
 
 pids=()
 for filepath in $(find ./content -name "*.mkdn"); do
@@ -21,3 +25,4 @@ done
 for pid in ${pids[@]}; do
 	wait $pid
 done
+
