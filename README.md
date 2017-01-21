@@ -8,22 +8,12 @@
 
 ## Local development
 
-### Install - hugo
+### Install
 
 ```
 go get -u github.com/if1live/maya
 go get -u -v github.com/spf13/hugo
 go get github.com/wellington/wellington/wt
-```
-
-### Install - pelican
-
-``` bash
-virtualenv .venv
-. ./.venv/bin/activate
-pip install -r requirements.txt
-
-npm install -g http-server lessc
 ```
 
 ### Create https certificate
@@ -37,7 +27,7 @@ cd ..
 
 * http://blog.saltfactory.net/node/implements-nodejs-based-https-server.html
 
-### Run Local Dev Server - pelican
+### Run Local Dev Server
 
 ``` bash
 # shell 1
@@ -47,15 +37,4 @@ http-server -S
 # shell 2
 cd hugo
 hugo server --theme=sora
-```
-
-### Run Local Dev Server - pelican
-``` bash
-# shell 1
-cd output
-http-server -S
-
-# shell 2
-cd pelican
-make devserver
 ```
