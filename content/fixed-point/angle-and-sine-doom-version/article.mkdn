@@ -5,6 +5,7 @@ date: 2016-05-06
 tags: [fixed point, sine, angle]
 slug: angle-and-sine-doom-version
 author: if1live
+url: /posts/angle-and-sine-doom-version
 +++
 
 ## 개요

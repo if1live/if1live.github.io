@@ -4,6 +4,7 @@ date: 2014-11-10
 tags: [cpp]
 slug: with-statement-cpp
 author: if1live
+url: /posts/with-statement-cpp
 +++
 
 파이썬에는 객체의 생성과 소멸의 범위를 확실하게 정하는 목적으로 with

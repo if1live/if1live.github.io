@@ -4,6 +4,7 @@ tags: [cpp]
 slug: auto-ptr
 author: if1live
 date: 2013-01-25
+url: /posts/auto-ptr
 +++
 auto_ptr은 아주 간단한 스마트 포인터의 일정으로 동적할당된 객체를 자동으로 delete하는데 쓰인다. 하지만 잘못된 코딩을 하면 소멸자가 호출되지 않는다. 소멸자를 호출시키지 않는 auto_ptr의 예제이다
 

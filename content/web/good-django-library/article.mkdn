@@ -5,6 +5,7 @@ tags: [django, library]
 slug: good-django-library
 author: if1live
 date: 2014-08-10
+url: /posts/good-django-library
 +++
 
 2년 전, 신규 웹 프로젝트를 django로 시작했지만 django의 몇가지 문제

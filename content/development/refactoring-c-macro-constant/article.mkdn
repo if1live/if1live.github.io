@@ -5,6 +5,7 @@ tags: [define, constant, macro, refactoring]
 slug: refactoring-c-macro-constant
 author: if1live
 date: 2015-11-27
+url: /posts/refactoring-c-macro-constant
 +++
 
 ~~~maya:view

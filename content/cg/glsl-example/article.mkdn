@@ -4,6 +4,7 @@ tags: [glsl, cg, shader]
 slug: glsl-example
 author: if1live
 date: 2013-04-27
+url: /posts/glsl-example
 +++
 포프님의 **[셰이더 프로그래밍 입문][pope_book]**을 읽으면서 이거 GLSL로 구현하면서 공부해보자 하면서 만든게 있는데 귀찮아서 방치해놧다가 지금서야 정리했다. 책은 DX 기준으로 작성되어 있지만 GL과 DX는 수학상으로도(또한 구현상으로도) 다른게 많아서 좀 고쳤다.
 

@@ -5,6 +5,7 @@ date: 2016-05-16
 tags: [noto sans, noto sans thai, font, harfbuzz, freetype2]
 slug: how-to-render-noto-sans-thai-correctly
 author: if1live
+url: /posts/how-to-render-noto-sans-thai-correctly
 +++
 
 ## 개요

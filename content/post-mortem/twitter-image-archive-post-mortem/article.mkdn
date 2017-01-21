@@ -5,6 +5,7 @@ tags: [twitter, post mortem]
 slug: twitter-image-archive-post-mortem
 author: if1live
 date: 2016-03-17
+url: /posts/twitter-image-archive-post-mortem
 +++
 ## 개요
 트윗을 싹 지우고 싶다는 생각이 들었다.

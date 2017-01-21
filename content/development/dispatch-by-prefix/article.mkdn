@@ -5,6 +5,7 @@ tags: [techinque, prefix]
 slug: dispatch-by-prefix
 author: if1live
 date: 2016-06-05
+url: /posts/dispatch-by-prefix
 +++
 ## MAX_PATH
 

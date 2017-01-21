@@ -5,6 +5,7 @@ date: 2016-05-16
 tags: [fixed point, vector, vector length, normalized vector]
 slug: vector-length-and-normalize-doom-version
 author: if1live
+url: /posts/vector-length-and-normalize-doom-version
 +++
 
 ## 개요

@@ -5,6 +5,7 @@ tags: [template metaprogramming, c++, cpp, TMP, 템플릿 메타프로그래밍]
 slug: friday-the-13th-tmp
 author: if1live
 date: 2015-04-13
+url: /posts/friday-the-13th-tmp
 +++
 
 ## 개요

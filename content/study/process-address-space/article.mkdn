@@ -5,6 +5,7 @@ tags: [linux, system programming, memory]
 slug: system-programming-process-address-space
 author: if1live
 date: 2014-12-08
+url: /posts/system-programming-process-address-space
 +++
 
 시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.

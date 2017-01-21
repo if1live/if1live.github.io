@@ -4,6 +4,7 @@ tags: [gl, cg, oculus]
 slug: oculus-rift-artifacts
 author: if1live
 date: 2013-08-21
+url: /posts/oculus-rift-artifacts
 +++
 최근에 오큘러스 리프트 잡고 개발한게 있다. (프로젝트는 망했지만) 개발하면서 일반 CG에서는 절대로 볼수없고 오직 오큘러스 리프트에서만 구경할수 있는 이상 렌더링 몇개 발견해서 스샷 찍어놓은걸 간단히 정리했다.
 

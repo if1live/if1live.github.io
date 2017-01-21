@@ -5,6 +5,7 @@ tags: [string literal]
 slug: string-literal-concatenation-technique
 author: if1live
 date: 2015-04-20
+url: /posts/string-literal-concatenation-technique
 +++
 ## 개요
 

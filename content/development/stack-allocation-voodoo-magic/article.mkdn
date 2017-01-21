@@ -5,6 +5,7 @@ tags: [cpp, stack allocation, bug, local variable, voodoo magic, off-by-one]
 slug: stack-allocation-voodoo-magic
 author: if1live
 date: 2015-10-07
+url: /posts/stack-allocation-voodoo-magic
 +++
 얼마전에 gcc와 clang이 정렬되지 않은 구조체(예를 들어 구조체의 크기가
 7바이트) 를 어떤식으로 메모리에 배치하는지 테스트하다가 재밌는 현상을

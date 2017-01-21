@@ -1,0 +1,90 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r80/three.min.js"></script>
+<div id="demo-container"></div>
+<script>
+
+  // global variables
+  var camera, scene, renderer;
+
+  function findByUserData(node, key, value) {
+    if(node.userData && node.userData[key] == value) {
+      return node;
+    }
+    for(var i = 0 ; i < node.children.length ; i++) {
+      var child = node.children[i];
+      var found = findByUserData(child, key, value);
+      if(found != null) {
+        return found;
+      }
+    }
+    return undefined;
+  }
+
+  function setupScene(result) {
+    scene = result;
+    // find main camera by tag
+    camera = findByUserData(scene, "tag", "MainCamera");
+    // calculate aspect. use window size.
+    var winsize = renderer.getSize();
+    camera.aspect = winsize.width / winsize.height;
+    camera.updateProjectionMatrix();
+  }
+
+
+  function init() {
+    // three.js renderer
+    var container = document.getElementById('demo-container');
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setClearColor( 0x333333 );
+    renderer.setSize( container.offsetWidth, container.offsetWidth * (10.0 / 16));
+    console.log(container.offsetWidth);
+    console.log(container.offset * (10.0 / 16));
+    console.log("todo");
+    renderer.setPixelRatio( window.devicePixelRatio );
+    container.appendChild( renderer.domElement );
+
+    window.addEventListener( 'resize', onWindowResize, false );
+
+    // Load scene - Begin
+    var loader = new THREE.ObjectLoader();
+    // TODO : input yout exported json file
+    var url = '/posts/unity-scene-web-exporter-post-mortem/scene.json';
+    loader.load(url, function(obj) {
+      setupScene(obj);
+    });
+    // Load scene - End
+  };
+
+  function onWindowResize() {
+    var container = document.getElementById('demo-container');
+    var width = container.offsetWidth;
+    var height = width * (10.0 / 16);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  }
+
+  var tickcount = 1;
+  function animate() {
+    if(scene && camera) {
+      tickcount += 1;
+      // 적당히 카메라가 움직이면 볼만하지 않을까?
+      var campos = camera.position;
+      var height = campos.y;
+      var radius = Math.sqrt(campos.x * campos.x + campos.z * campos.z);
+      var diff = 1.0 * (Math.PI * 2) / 360.0;
+      var rad = tickcount * diff;
+      var rad2 = Math.sin(rad) * 40 * (Math.PI * 2 / 360.0);
+      var x = Math.sin(rad2) * radius;
+      var z = Math.cos(rad2) * radius;
+      camera.position.set(x, height, z);
+      camera.lookAt(new THREE.Vector3(0, height, 0));
+
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(animate);
+  }
+
+
+  init();
+  requestAnimationFrame(animate);
+</script>

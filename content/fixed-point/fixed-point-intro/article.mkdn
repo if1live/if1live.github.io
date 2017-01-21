@@ -5,6 +5,7 @@ date: 2016-05-05
 tags: [fixed point]
 slug: fixed-point-intro
 author: if1live
+url: /posts/fixed-point-intro
 +++
 
 ## How to use Fixed Point (16.16) Math - by Night Stalker

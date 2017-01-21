@@ -5,6 +5,7 @@ tags: [bitmask, 비트마스트, 낚시]
 slug: deceiving-code-bitmask
 author: if1live
 date: 2015-11-01
+url: /posts/deceiving-code-bitmask
 +++
 낚시 코드
 ---------

@@ -5,6 +5,7 @@ tags: [bug, html, textarea, newline]
 slug: what-is-textarea-newline
 author: if1live
 date: 2015-10-25
+url: /posts/what-is-textarea-newline
 +++
 개요
 ----

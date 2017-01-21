@@ -5,6 +5,7 @@ tags: [c, c++, printf, undefined behavior, gcc]
 slug: printf-with-null-post-mortem
 date: 2016-03-06
 author: if1live
+url: /posts/printf-with-null-post-mortem
 +++
 
 ## 떡밥의 시작

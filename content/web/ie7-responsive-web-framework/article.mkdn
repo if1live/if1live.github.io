@@ -5,6 +5,7 @@ slug: ie7-responsive-web-framework
 author: if1live
 date: 2014-02-05
 subtitle: 왜 우리는 IE 7,8때문에 고통받아야 하는가?
+url: /posts/ie7-responsive-web-framework
 +++
 [Trade My Info의 GA 통계]({filename}trade-my-info-ga.md)에서 볼 수 있듯이 2014년 2월 기준 우리나라에서 IE 7,8의 사용비율은 데탑유저 중 15%이다. 이를 버리고 차세대 웹으로 가고싶은 마음은 있지만 어쩔수 없이 IE 7,8을 지원해야 하는게 현실이다.
 

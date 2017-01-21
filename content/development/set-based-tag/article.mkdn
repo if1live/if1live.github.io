@@ -5,6 +5,7 @@ slug: set-based-tag
 author: if1live
 summary: 집합 기반 태그 시스템 설계
 date: 2012-12-18
+url: /posts/set-based-tag
 +++
 
 ## 문서 개요 

@@ -4,6 +4,7 @@ tags: [opengl, gl, cg, text, billboard]
 slug: text-billboard
 author: if1live
 date: 2013-04-21
+url: /posts/text-billboard
 +++
 ![screen shot]({attach}text-billboard/screenshot.png)
 

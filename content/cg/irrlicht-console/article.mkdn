@@ -4,6 +4,7 @@ tags: [irrlicht, console]
 slug: irrlicht-console
 author: if1live
 date: 2013-07-28
+url: /posts/irrlicht-console
 +++
 
 irrlicht engine에서 quake console같은걸 쓰고싶어서 하나 만들었다. 

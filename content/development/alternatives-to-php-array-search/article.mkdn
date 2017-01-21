@@ -5,6 +5,7 @@ tags: [array_search, api, api-design]
 slug: alternatives-to-php-array-search
 author: if1live
 date: 2015-11-08
+url: /posts/alternatives-to-php-array-search
 +++
 개요
 ----

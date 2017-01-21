@@ -5,6 +5,7 @@ date: 2013-10-27
 tags: [oculus]
 slug: oculus-2014-predict-trend
 author: if1live
+url: /posts/oculus-2014-predict-trend
 +++
 ## 개요
 

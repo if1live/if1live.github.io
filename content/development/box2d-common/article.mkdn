@@ -4,6 +4,7 @@ tags: [box2d]
 slug: box2d-common
 author: if1live
 date: 2013-02-12
+url: /posts/box2d-common
 +++
 
 ## Math

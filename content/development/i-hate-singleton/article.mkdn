@@ -4,6 +4,7 @@ tags: [singleton]
 slug: i-hate-singleton
 author: if1live
 date: 2013-05-19
+url: /posts/i-hate-singleton
 +++
 
 

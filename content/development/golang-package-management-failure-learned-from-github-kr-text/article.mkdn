@@ -5,6 +5,7 @@ date: 2016-05-14
 tags: [golang, package management]
 slug: golang-package-management-failure-learned-from-github-kr-text
 author: if1live
+url: /posts/golang-package-management-failure-learned-from-github-kr-text
 +++
 
 ## 개요

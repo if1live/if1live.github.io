@@ -5,6 +5,7 @@ tags: [python, ruby, bug]
 date: 2016-03-01
 author: if1live
 slug: http-request-params-trap-python-and-ruby
+url: /posts/http-request-params-trap-python-and-ruby
 +++
 간단한 명언 API 서버를 만들보자. 필요한 기능은 다음과 같다.
 

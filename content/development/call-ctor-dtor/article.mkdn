@@ -5,6 +5,7 @@ slug: call-ctor-dtor
 author: if1live
 subtitle: C++에서 생성자/소멸자 강제로 호출하는 방법
 date: 2012-11-26
+url: /posts/call-ctor-dtor
 +++
 
 ## 개요 

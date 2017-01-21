@@ -5,6 +5,7 @@ tags: [black magic, destructor, delete, recursion]
 slug: recursion-with-destructor
 author: if1live
 date: 2016-03-19
+url: /posts/recursion-with-destructor
 +++
 
 어제 회사에서 `delete this` 에 대해 이것저것 이야기를 했었다.

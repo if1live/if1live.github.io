@@ -4,6 +4,7 @@ tags: [python, hangul, encoding]
 slug: python-hangul
 author: if1live
 date: 2013-02-03
+url: /posts/python-hangul
 +++
 
 ## 개요
