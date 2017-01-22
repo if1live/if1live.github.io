@@ -9,12 +9,13 @@ maya -mode=hugo -file=$filename > ../$curr_dir.md
 
 dirname=$(pwd | rev | cut -d '/' -f 1 | rev)
 category=$(pwd | rev | cut -d '/' -f 2 | rev)
-md_filename=$(ls ..|grep ".md")
+md_filename=$(ls ..|grep "$dirname.md")
 md_filepath="../$md_filename"
 hugo_path="../../../hugo"
 
 echo "category : $category"
 echo "dirname : $dirname"
+echo "md filepath : $md_filepath"
 
 function sanitize_hugo_markdown() {
 	sed -i -e  's/{attach}/\/posts\//g' $md_filepath
