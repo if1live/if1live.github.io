@@ -1,0 +1,4 @@
+STRUCT_BEGIN(Date)
+    STRUCT_INT(month, 1, "M: ")
+    STRUCT_INT(day, 1, "D: ")
+STRUCT_END()

@@ -1,0 +1,5 @@
+# g++ -o main_xmcaro.exe main_xmacro.cpp -std=c++14 && ./main_xmcaro.exe
+M: 2
+D: 5
+M: 1
+D: 1
