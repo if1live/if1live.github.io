@@ -1,0 +1,102 @@
++++
+title: [#if UNITY_EDITOR] 줄이는 편법
+tag: [unity, tip]
+slug: unity-tip-remove-if-unity-editor
+author: if1live
+date: 2017-02-13
+url: /posts/unity-tip-remove-if-unity-editor
++++
+
+내 경우 유니티 에디터 확장을 따로 짜기 귀찮아서 MonoBehaviour 대신 [VFW][repo_vfw]의 BaseBehaviour를 자주 사용한다.
+그래서 에디터에서만 쓸수있는 클래스가 스크립트에서 자주 등장한다.
+대표적인 예로 `UnityEditor.AssetDatabase`가 있다.
+
+```csharp
+using UnityEditor;
+
+class AssetFindDemo : BaseBehaviour {
+    [Show]
+    void Find_AssetDB() {
+        var founds = AssetDatabase.FindAssets("AssetFindDemo");
+        foreach (var found in founds) {
+            var x = AssetDatabase.GUIDToAssetPath(found);
+            Debug.LogFormat("found : {0}", x);
+        }
+    }
+}
+```
+
+겉보기에는 멀정해보이지만 이 코드로는 빌드를 뽑을수 없다.
+`UnityEditor` 네임스페이스는 빌드에서는 못쓰기 떄문이다.
+그래서 빌드를 뽑고 싶으면 전처리기를 이용해야한다.
+
+
+```csharp
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+class AssetFindDemo : BaseBehaviour {
+    [Show]
+    void Find_AssetDB() {
+#if UNITY_EDITOR
+        var founds = AssetDatabase.FindAssets("AssetFindDemo");
+        foreach (var found in founds) {
+            var x = AssetDatabase.GUIDToAssetPath(found);
+            Debug.LogFormat("found : {0}", x);
+        }
+#endif
+    }
+}
+```
+
+`#if UNITY_EDITOR`, `#endif` 를 직접 치다보니까 짜증나더라.
+함수에서 문제있는 구역을 전처리기로 감싸는 작업은 익숙해졌지만 `using UnityEditor;`를 전처리기로 감싸는건 자주 잊어버렸다.
+그래서 접근법을 바꾸기로 했다.
+
+`UnityEditor.AssetDatabase`를 통째로 감싸는거다.
+아래 같은 느낌으로 AssetDatabase를 감싸는 새로운 클래스 CustomAssetDatabase를 만들었다.
+
+```csharp
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
+class CustomAssetDatabase {
+    public static string GUIDToAssetPath(string guid) {
+#if UNITY_EDITOR
+        return AssetDatabase.GUIDToAssetPath(guid);
+#else
+        return null;
+#endif
+    }
+      
+    public static string[] FindAssets(string filter) {
+#if UNITY_EDITOR
+        return AssetDatabase.FindAssets(filter);
+#else
+        return null;
+#endif
+    }
+}
+```
+
+그리고 AssetDatabase가 필요한 상황에서는 CustomAssetDatabase를 쓴다.
+
+```csharp
+class AssetFindDemo : BaseBehaviour {
+    [Show]
+    void Find_CustomAssetDB() {
+        var founds = CustomAssetDatabase.FindAssets("AssetFindDemo");
+        foreach(var found in founds) {
+            var x = CustomAssetDatabase.GUIDToAssetPath(found);
+            Debug.LogFormat("found : {0}", x);
+        }
+    }
+}
+```
+
+`#if UNITY_EDITOR`, `#endif` 를 CustomAssetDatabase에 전부 몰아넣었기 때문에 다른 곳에서는 전처리기를 안써도 된다.
+
+[repo_vfw]: https://github.com/vexe/VFW
