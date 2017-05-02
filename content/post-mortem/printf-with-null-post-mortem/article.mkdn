@@ -1,7 +1,7 @@
 +++
 title: printf("%s\n", NULL)의 출력 결과는?
 subtitle: undefined behavior과 compiler
-tags: [c, c++, printf, undefined behavior, gcc]
+tags: [c, c++, printf, undefined behavior, gcc, postmortem]
 slug: printf-with-null-post-mortem
 date: 2016-03-06
 author: if1live

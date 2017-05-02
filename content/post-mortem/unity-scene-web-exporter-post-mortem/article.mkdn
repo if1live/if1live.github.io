@@ -1,7 +1,7 @@
 +++
 title: Unity Scene Web Exporter 개발 포스트모템
 subtitle: WebVR로 가는 또 다른길
-tags: [webvr, post mortem]
+tags: [webvr, postmortem]
 slug: unity-scene-web-exporter-post-mortem
 author: if1live
 date: 2016-08-28

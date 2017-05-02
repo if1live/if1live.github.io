@@ -1,7 +1,7 @@
 +++
 title: Maya (Markdown 전처리기) 포스트모템
 subtitle: Template -> Markdown Preprocessor -> Markdown
-tags: [markdown, post mortem]
+tags: [markdown, postmortem]
 slug: maya-markdown-preprocessor-post-mortem
 author: if1live
 date: 2016-05-06
