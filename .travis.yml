@@ -8,7 +8,7 @@ sudo: false
 
 env:
   global:
-    - secure: "m/oUuSPEErNy5L7aL4nL3eq0cJhCeBmODOdO9ChCWappu5SyhdxLbysYbIl5UP6D/DwldB5nU1Y27XrbZIx0xdjgwehClZLiCosKK8cq6N/wG9m5QeCNuZtm0n5r2WmEY68I2yWYNa8/UBRlEdeQ6bsFQHNYmCWjc67Cpa4zfLk="
+    - secure: "fP5qN5KZCnR5/mlwnIFpiaKKbm6Athe6G/EgGVRQJIVbVxrGpDCNSTsJIUIsBYsMFDahKrjZpnksx+yZ4eTrpccZI4Kg5WnuBd3W2je3poJoIULNlHc8f98lLvuKoqQK4sugowGwj0pyj2ughvHKgr6wHZ8wNAlKgl5u+sSh5bQ="
 
 before_install:
   - git config --global user.email "libsora25@gmail.com"
