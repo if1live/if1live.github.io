@@ -1,0 +1,82 @@
++++
+title: 유니티에서 Switch Platform 안쓰고 크로스 플랫폼 지원하기
+tags: [unity, technique]
+slug: unity-cross-platform-without-platform-switch
+author: if1live
+date: 2017-08-06
+url: /posts/unity-cross-platform-without-platform-switch
++++
+
+## switch platform?
+
+ios, android를 동시에 지원하는 게임을 유니티로 만든다고 가정해보자. 안드로이드 빌드, iOS 빌드를 만들때마다 Switch Platform을 하면 시간이 오래 걸린다. 에셋이 많아지면 많아질수록 시간이 길어져서 수십분이 걸릴수 있다. 이 글에서는 switch platform을 매번 누르지 않고 여러 플랫폼을 동시에 다루는 방법을 다룬다.
+
+## Solution 1. 프로젝트 복제
+
+가장 간단한 방법은 프로젝트 폴더를 2개 만드는 것이다.
+
+1. 유니티 프로젝트가 있는 git 저장소가 있다
+2. git clone 받아서 `game_ios` 폴더로 만든다.
+3. git clone 받아서 `game_anriod` 폴더를 만든다.
+4. `game_ios`를 유니티로 열어서 타겟을 iOS로 platform switch
+5. `game_android`를 유니티로 열어서 타겟을 Android로 platform switch
+
+간단하고 무식한 방법인 만큼 명확하지만 문제가 있다.
+
+첫번째 문제는 프로젝트 폴더 자체가 2개로 분리되었기 때문에 수정사항이 실시간으로 적용되지 않는다는 것이다. `game_ios`의 내용을 고친게 즉시 `game_android`에는 반영되지 않는다. `game_android`를 똑같이 고치거나 `game_ios`를 올리고 `game_android`에서 다시 받아야한다.
+
+두번째 문제는 프로젝트를 두번 받았으니 용량이 두배라는것이다. 프로젝트가 매우 크지 않은 이상 치명적인 문제는 아닐거다.
+
+## Solution 2. Symbolic link
+
+유니티 프로젝트에서 데이터에 해당되는 것은 2개의 폴더, `Assets`, `ProjectSettings`에 들어있다. `Temp`, `Library` 는 유니티에 의해 자동생성되는 폴더이다. 그리고 switch platform의 영향을 받는 폴더는 `Temp`, `Library` 이다. switch platform을 해도 데이터는 바뀌지 않는다.
+
+`Assets`, `ProjectSettings`만 있어도 유니티 프로젝트라는 점을 이용한 편법이다. 새로운 폴더를 만든후 원본의 `Assets`, `ProejectSettings`를 심볼릭 링크로 연결한다.
+자세한 내용은 [Fast Platform Switching in Unity](http://www.cliffordroche.ca/fast-platform-switching-in-unity/)를 읽어보면 된다. 나는 프로젝트를 생성할 일이 자주 있어서 위의 글을 참고해서 스크립트를 만들었다. 
+
+setup_proj_skeleton.bat
+
+```sh
+@rem usage
+@rem .\setup_proj_skeleton.bat CaptureTheBase_Android
+
+@set BIN_DIR=%~dp0
+@set BASE_DIR=%BIN_DIR%..\
+@set BASE_PROJ_DIR=%BASE_DIR%\CaptureTheBase
+@set TARGET_PROJ_DIR=%BASE_DIR%\%1
+
+mkdir %TARGET_PROJ_DIR%
+mklink /j %TARGET_PROJ_DIR%\Assets %BASE_PROJ_DIR%\Assets
+mklink /j %TARGET_PROJ_DIR%\ProjectSettings %BASE_PROJ_DIR%\ProjectSettings
+```
+
+이런 식으로 필요한 상황에 따라서 프로젝트를 생성해서 쓴다.
+
+* `setup_proj_skeleton.bat Game_Trailer`
+* `setup_proj_skeleton.bat Game_Build_Steam`
+* `setup_proj_skeleton.bat Game_GearVR`
+
+## 내가 쓰는 방법
+
+내 경우 두가지 방법을 섞어서 쓰고있다.
+
+master 브렌치를 클론받은 폴더를 준비한다. 이를 `clone-master` 라고 부르자. 그리고 clone-master를 개발 플랫폼 별로 복제해서 사용한다. 대부분의 개발은 여기에서 이루어진다.
+
+* `clone-master`를 복제한 clone-master-android : 타겟을 Android로 switch platform 적용한 유니티 프로젝트
+* `clone-master`를 복제한 clone-master-windows : 타겟을 windows로 switch platform 적용한 유니티 프로젝트
+
+저장소를 한번 더 복제한다. 이를 `clone-extra`라고 부른다. 프로젝트를 과거 특정 시점으로 되돌려야할때 이용한다. 두가지 이유로 별도 저장소가 필요했다.
+
+첫번쨰 이유, 프로젝트가 커지면 다른 커밋으로 이동하는게 오래 걸린다. 클론받은게 하나밖에 없으면 master -> commit_A -> master-> commit_B -> master로 옮겨다니면서 작업해야한다. 그리고 커밋을 옮겨다닐 때마다 오래 기다려야한다. 그럴바에 저장소를 하나 더 받은후 master는 그대로 두고 다른 폴더에서 commit_A -> commit_B로 옮겨다니는게 빠르더라.
+
+두번째 이유, 구버전 소스는 구버전 유니티를 사용할 확률이 높다. 그리고 유니티 버전이 바뀌면 프로젝트를 열때 Asset reimport가 발생할 수 있다. 저장소 하나에서 master, old commit을 건너다니다보면 git이 old commit을 가리키는 상태에서 master 열었던 프로젝트를 잘못 열면 쓸데없이 시간을 버릴수 있다.
+
+1. master에서는 유니티 5.6을 사용하고있다
+2. `Project_Master`를 유니티 5.6으로 열었다.
+3. commit_A에서 할일이 생김. commit_A 시절에는 유니티 5.5 썻더라.
+4. `Project_Master`를 유니티 5.6으로 다시 열었다.
+5. 유니티 프로젝트 폴더에 기록된 버전과 실행된 유니티 버전이 다름!
+5. 실수로 enter를 치면 reimport 발생 
+
+이런 문제가 생기는걸 근본적으로 막으려고 저장소를 2번 클론받았다.
+
