@@ -20,7 +20,14 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
+## Footnote
+
+this is footnote[^1]
+and this is footnote[^2]
+
+
 ## code block
+
 ```python
 import unittest
 def median(pool):
@@ -87,7 +94,6 @@ Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
 
-
 ## Table
 
 
@@ -97,3 +103,8 @@ id sem consectetuer libero luctus adipiscing.
 |True | False | True  |
 |False| True  | True  |
 |True | True  | True  |
+
+
+[^1]: foo
+[^2]: bar
+
