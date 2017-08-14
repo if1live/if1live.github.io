@@ -107,3 +107,7 @@ hugo/static
 style-gen.css
 .sass-cache/
 *.map
+
+# unity sample
+Library
+Temp
