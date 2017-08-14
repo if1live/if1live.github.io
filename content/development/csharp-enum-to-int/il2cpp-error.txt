@@ -1,0 +1,9 @@
+NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.enumarray
+  at System.Reflection.Emit.DynamicMethod.CreateDynMethod () [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at System.Reflection.Emit.DynamicMethod.CreateDelegate (System.Type delegateType, System.Object target) [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at System.Linq.Expressions.Expression`1[TDelegate].Compile () [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at CastTo`1+Cache`1[T,S]..cctor () [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at CastTo`1[T].From[S] (.S s) [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at EnumArray`2[TEnum,TValue].set_Item (.TEnum key, .TValue value) [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+  at Main_EnumArray.Start () [0x00000] in <filename unknown>:0 : so.libsora.enumarray
+Rethrow as TypeInitializationException: The type initializer for 'CastTo.Cache<System.Int32,States>' threw an excep: so.libsora.enumarray
