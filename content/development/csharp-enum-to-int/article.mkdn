@@ -1,0 +1,109 @@
++++
+title: C#에서 enum을 int로 변환하기
+tags: [csharp, unity]
+slug: csharp-enum-to-int
+author: if1live
+date: 2017-08-17
+url: /posts/csharp-enum-to-int
++++
+
+## 시나리오: enum으로 상태 관리
+
+간단한 예제를 생각해보자.
+`IState`를 구현한 클래스가 있다고 가정하자.
+그리고 클래스를 enum으로 관리하려고한다.
+`IState`를 구현한 클래스가 몇개로 늘어날지 모르니 배열을 사용했다.
+
+~~~maya:view
+file=enum-array/Assets/IState.cs
+~~~
+
+~~~maya:view
+file=enum-array/Assets/Main_SimpleArray.cs
+lang=csharp
+~~~
+
+배열에 접근하기 위해서는 enum을 int로 바꿔야한다.
+매번 `states[(int)States.Run]`과 같이 `(int)`를 붙여서 캐스팅하는게 생각보다 귀찮더라. 
+그래서 새로운 클래스를 만들어서 배열을 추상화시켜봤다.
+제네릭을 이용해서 여러종류의 enum에 대해서도 작동할수 있도록 구현했다.
+
+~~~maya:view
+file=enum-array/Assets/Main_EnumArrayGarbage.cs
+start_line=3
+end_line=21
+lang=csharp
+~~~
+
+
+~~~maya:view
+file=enum-array/Assets/Main_EnumArrayGarbage.cs
+start_line=23
+end_line=35
+lang=csharp
+~~~
+
+
+`EnumArrayGarbage`를 사용하면 캐스팅 없이 쓸 수 있으니까 좋다.
+
+
+로 끝날거면 이런 글은 안쓴다.
+유니티 프로파일러를 띄워보자.
+
+![profilter]({attach}csharp-enum-to-int/profiler.png)
+
+`Main_EnumArrayGarbage.Update()`에서 60Byte씩 GC Alloc가 발생하고 있다.
+`Main_SimpleArray.Update()`에서는 GC Alloc가 없었는데 고작 int 캐스팅 없애겠다고 고친 코드에서 GC가 발생하니 쓰고싶지 않더라. int 캐스팅도 없으면서 GC Alloc도 없었으면 좋겠다.
+
+GC Alloc가 발생하는 지점을 따라가보면 문제를 찾을수 있다.
+`ConvertToInt()`에서 사용한 `Convert.ChangeType()`에서 GC Alloc가 발생하고있다.
+`Convert.ChangeType()`의 첫번째 인자의 타입이 Object라서 boxing때문에 GC Alloc가 발생한다.
+
+C++ 같았으면 무식하게 캐스팅 붙여서 enum을 int로 바꿀수 있었을 것이다.
+
+```csharp
+int ConvertToIndex<TEnum>(TEnum key) {
+    var i = (int)key;
+    return i;
+}
+```
+
+하지만 C#의 제네릭은 C++의 템플릿과 다르다.
+그래서 C#에서의 위의 코드가 컴파일되지 않는다.
+다른 방법을 써야한다.
+
+인터넷을 뒤지면 이런 문제는 누군가 해결해놨으니 갖다쓰면 된다.
+[C# non-boxing conversion of generic enum to int?][sb]을 참고해서 `EnumArray`를 다시 구현했다. 이렇게하면 GC Alloc가 발생하지 않는다.
+
+~~~maya:view
+file=enum-array/Assets/Main_EnumArray.cs
+start_line=4
+end_line=49
+lang=csharp
+~~~
+
+~~~maya:view
+file=enum-array/Assets/Main_EnumArray.cs
+start_line=50
+end_line=62
+lang=csharp
+~~~
+
+## IL2CPP
+
+유니티에서 모바일 개발을 하면 IL2CPP는 피할수 없다.
+iOS 11 부터는 64비트 어플리케이션만 굴러간다.
+그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.
+
+
+IL2CPP 옵션을 켜고 빌드하면 아래과 같이 에러가 난다.
+
+~~~maya:view
+file=il2cpp-error.txt
+~~~
+
+IL2CPP를 쓰면 답이 없다. 캐스팅 노가다를 하자.
+
+
+
+[sb]: https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int
