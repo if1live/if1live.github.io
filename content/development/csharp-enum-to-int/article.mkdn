@@ -96,14 +96,18 @@ iOS 11 부터는 64비트 어플리케이션만 굴러간다.
 그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.
 
 
-IL2CPP 옵션을 켜고 빌드하면 아래과 같이 에러가 난다.
+IL2CPP 옵션을 켜고 빌드한후 실행하면 에러가 난다.
 
 ~~~maya:view
 file=il2cpp-error.txt
 ~~~
 
-IL2CPP를 쓰면 답이 없다. 캐스팅 노가다를 하자.
+`CastTo<T>`를 구현하는 과정에서 create dynamic method가 사용되었다.
+말 그대로 런타임에 함수를 생성하는 것이다.
+하지만 iOS에서는 런타임에 함수 생성하는게 금지되어 있다.
+그래서 IL2CPP에서도 관련 기능은 구현한거같지 않더라.
 
+즉, IL2CPP를 쓰면 답이 없다. 캐스팅 노가다를 하자.
 
 
 [sb]: https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int
