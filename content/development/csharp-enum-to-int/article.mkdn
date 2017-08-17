@@ -1,5 +1,5 @@
 +++
-title: C#에서 enum을 int로 변환하기
+title: C#에서 GC없이 enum을 int로 변환하기
 tags: [csharp, unity]
 slug: csharp-enum-to-int
 author: if1live
