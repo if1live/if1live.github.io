@@ -1,0 +1,9 @@
+NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.dictionaryenumkey
+  at System.Reflection.Emit.DynamicMethod.CreateDynMethod () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+  at System.Reflection.Emit.DynamicMethod.CreateDelegate (System.Type delegateType, System.Object target) [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+  at System.Linq.Expressions.Expression`1[TDelegate].Compile () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+  at SitraUtils.EnumComparer`1[TEnum]..cctor () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+  at SitraUtils.EnumComparer.For[TEnum] () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+  at Main_Generic.Start () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
+Rethrow as TypeInitializationException: The type initializer for 'SitraUtils.EnumComparer<States>' threw an exception.: so.libsora.dictionaryenumkey
+  at SitraUtils.EnumComparer.For[TEnum] () [0x00000] in <filename unknown>:0 : so.libsora.dictionaryenumkey
