@@ -1,0 +1,23 @@
+I Unity   : this is log: com.fiveminlab.sagiri
+I Unity   :  : com.fiveminlab.sagiri
+I Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
+W Unity   : this is warning: com.fiveminlab.sagiri
+W Unity   :  : com.fiveminlab.sagiri
+W Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+W Unity   : : com.fiveminlab.sagiri
+E Unity   : this is error: com.fiveminlab.sagiri
+E Unity   :  : com.fiveminlab.sagiri
+E Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+E Unity   : : com.fiveminlab.sagiri
+I Unity   : NullReferenceException: this is exception: com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
+I Unity   : UnityEngine.DebugLogHandler:Internal_LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.DebugLogHandler:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.Logger:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.Debug:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : Assets.Sagiri.Examples.Main:PrintLog(): com.fiveminlab.sagiri
+I Unity   : Assets.Sagiri.Examples.Main:Update(): com.fiveminlab.sagiri
+I Unity   :  : com.fiveminlab.sagiri
+I Unity   : (Filename:  Line: -1): com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
