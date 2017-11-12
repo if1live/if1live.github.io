@@ -15,7 +15,6 @@ current position : Seoul, South Korea.
 * [<i class="fa fa-bitbucket"></i> if1live](//bitbucket.org/if1live/)
 * [<i class="fa fa-steam"></i> if1live](//steamcommunity.com/id/if1live/)
 * [<i class="fa fa-linkedin"></i> if1live](//www.linkedin.com/in/if1live)
-* [<i class="fa fa-btc"></i> 1GL7LEmYs5HXgAcc9dmRUMkTmYvmv3kJnE](//www.coinbase.com/if1live)
 * [<i class="fa fa-keybase"></i>keybase : if1live](//keybase.io/if1live)
 
 ## career
