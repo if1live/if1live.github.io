@@ -25,7 +25,10 @@ Programmer, Jan. 2015 - Current
 * Web-based game server Developer (Ruby on Rails)
 * cocos2d-x based game client Developer (cocos2d-x)
 * VR Game Developer (unity)
-    * [Toy Clash](//www.oculus.com/experiences/gear-vr/1407846952568081/)
+    * [Toy Clash](//www.oculus.com/experiences/gear-vr/1407846952568081/) : Samsung GearVR
+    * [Toy Clash](//store.steampowered.com/app/620360/Toy_Clash/) : SteamVR
+    * [Toy Clash](//play.google.com/store/apps/details?id=com.fiveminlab.toyclash.daydream): Google Daydream
+    * [Toy Clash AR](//itunes.apple.com/app/toy-clash-ar/id1274066398) : iOS
 
 ### Move Incorporation
 
