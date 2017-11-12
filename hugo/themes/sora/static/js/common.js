@@ -28,6 +28,20 @@ for(var i = 0 ; i < tables.length ; i++) {
   tables[i].classList.add('pure-table');
 }
 
+// 본문 이미지를 모바일에서도 크게 볼 방법이 있으면 좋겠다
+var imgs = document.querySelectorAll('.article-content img')
+for(var i = 0 ; i < imgs.length ; i++) {
+  var img = imgs[i];
+
+  var link = document.createElement('a');
+  link.href = img.src;
+  link.target = '_blank';
+
+  img.parentNode.insertBefore(link, img);
+  link.parentNode.removeChild(img);
+  link.appendChild(img);
+}
+
 var pres = document.querySelectorAll("pre");
 for(var i = 0 ; i < pres.length ; i++) {
   var pre = pres[i];
