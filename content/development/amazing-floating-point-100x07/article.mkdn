@@ -3,16 +3,16 @@ title: 100 * 0.7 = ?
 subtitle: 남들과는 조금 다른 부동소수점 이야기
 date: 2017-11-24
 tags: [floating-point]
-slug: amazing-floating-point-100x0.7
+slug: amazing-floating-point-100x07
 author: if1live
-url: /posts/amazing-floating-point-100x0.7
+url: /posts/amazing-floating-point-100x07
 +++
 
 ## 100 * 0.7 = 69
 
 [Toy Clash][toyclash]는 10단계로 조절할 수 있는 막대 그래프를 이용해서 BGM 조절을 구현했다.
 
-![toy clash option menu]({attach}amazing-floating-point-100x0.7/option.png)
+![toy clash option menu]({attach}amazing-floating-point-100x07/option.png)
 
 옵션을 저장하는 방식으로는 디버깅이 편한 XML을 사용했다.
 
@@ -48,7 +48,7 @@ https://godbolt.org/g/4m8F4S
 ## 시작하며
 
 
-![0.1+0.2]({attach}amazing-floating-point-100x0.7/0.1+0.2.png)
+![0.1+0.2]({attach}amazing-floating-point-100x07/0.1+0.2.png)
 
 0.1 + 0.2 같은 부동소수점 문제에 대해서는 정리가 잘 된 글이 많다. 
 나보다 글도 잘 쓰는 사람들이 정리도 잘해놨는데 내가 이제와서 글 써봐야 의미가 있을까?
@@ -92,7 +92,7 @@ ILSpy를 이용해서 코드를 뜯어보면 왜 계산 결과가 다른지 알�
 
 상수를 사용한 코드를 뜯으면 다음과 같다.
 
-![constant-dotnet-70-ilspy-debug]({attach}amazing-floating-point-100x0.7/constant-dotnet-70-ilspy-debug.png)
+![constant-dotnet-70-ilspy-debug]({attach}amazing-floating-point-100x07/constant-dotnet-70-ilspy-debug.png)
 
 곱셈은 사라지고 `70`만 남아있다. 컴파일러가 `100 * 0.7f`를 적절히 최적화해서 상수로 바꿔놨나보다.
 세상에는 [GNU Multiple Precision Arithmetic Library (GMP)][wiki-gmp]와 같이 무한한 정밀도로 부동소수점을 계산하는 라이브러리가 있다.
@@ -100,7 +100,7 @@ Visual C#은 이런 라이브러리를 사용했나보다.
 
 한편 변수를 사용한 코드를 뜯으면 다음과 같다.
 
-![variable-dotnet-69-ilspy-debug]({attach}amazing-floating-point-100x0.7/variable-dotnet-69-ilspy-debug.png)
+![variable-dotnet-69-ilspy-debug]({attach}amazing-floating-point-100x07/variable-dotnet-69-ilspy-debug.png)
 
 곱셈이 바이너리에 그대로 남아있다.
 런타임 중에 FPU를 이용해서 부동소수점을 계산할것이다.
@@ -119,12 +119,12 @@ file=dotnet-optimize-6970-or-6969.cs
 디버그 빌드를 하면 69, 70이 나온다.
 생성된 함수 a(), b()가 다르니 결과가 다른것도 이해는 된다.
 
-![dotnet-optimize-6970-debug]({attach}amazing-floating-point-100x0.7/dotnet-optimize-6970-debug.png)
+![dotnet-optimize-6970-debug]({attach}amazing-floating-point-100x07/dotnet-optimize-6970-debug.png)
 
 릴리즈 빌드를 하면 69, 69가 나온다.
 컴파일러가 재주껏 최적화한 결과 생성된 함수 a(), b()가 똑같다.
 
-![dotnet-optimize-6969-release.png]({attach}amazing-floating-point-100x0.7/dotnet-optimize-6969-release.png)
+![dotnet-optimize-6969-release.png]({attach}amazing-floating-point-100x07/dotnet-optimize-6969-release.png)
 
 ## 임시변수
 
@@ -160,7 +160,7 @@ file=dotnet-6970.cs
 Visual C#에서도 임시 변수를 사용했는가에 따라서 계산 결과가 다르게 만드는게 가능하다.
 그렇다면 이건 왜 그럴까? IL을 뜯으면 답을 찾을 수 있다.
 
-![dotnet-6970-ilspy-guide]({attach}amazing-floating-point-100x0.7/dotnet-6970-ilspy-guide.png)
+![dotnet-6970-ilspy-guide]({attach}amazing-floating-point-100x07/dotnet-6970-ilspy-guide.png)
 
 생성된 함수 a(), b()의 IL이 다르다.
 함수 b()에는 `stloc.2`, `ldloc.2`가 있지만 함수 a()에는 없다.
@@ -170,7 +170,7 @@ Visual C#에서도 임시 변수를 사용했는가에 따라서 계산 결과�
 함수 b()의 경우 `fld`, `fstp`를 한번 더 사용한다.
 임시변수를 쓰면서 추가된 어셈블리로 보인다.
 
-![dotnet-6970-disasm-guide]({attach}amazing-floating-point-100x0.7/dotnet-6970-disasm-guide.png)
+![dotnet-6970-disasm-guide]({attach}amazing-floating-point-100x07/dotnet-6970-disasm-guide.png)
 
 내가 조사한 부분은 여기까지다.
 여기부터는 [@summerlight00][twitter-summerlight00]님의 해설을 들어보자.
