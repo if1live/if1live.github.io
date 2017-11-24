@@ -1,14 +1,13 @@
 class Program {
+    static readonly int A = 100;
+    static readonly float B = 0.7f;
+
     static int a() {
-        int a = 100;
-        float b = 0.7f;
-        int x = (int)((float)a * b);
+        int x = (int)((float)A * B);
         return x;
     }
     static int b() {
-        int a = 100;
-        float b = 0.7f;
-        float c = (float)a * b;
+        float c = (float)A * B;
         int x = (int)c;
         return x;
     }
@@ -20,5 +19,9 @@ class Program {
 }
 
 // Visual Studio 2017, .Net Framework 4.6.1
+// Debug
 // 69
 // 70
+// Debug
+// 69
+// 69
