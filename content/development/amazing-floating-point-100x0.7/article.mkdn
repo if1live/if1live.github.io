@@ -12,8 +12,7 @@ url: /posts/amazing-floating-point-100x0.7
 
 [Toy Clash][toyclash]는 10단계로 조절할 수 있는 막대 그래프를 이용해서 BGM 조절을 구현했다.
 
-![toy clash option menu]({attach}amazing-floating-point-100x0.7
-/option.png)
+![toy clash option menu]({attach}amazing-floating-point-100x0.7/option.png)
 
 옵션을 저장하는 방식으로는 디버깅이 편한 XML을 사용했다.
 
