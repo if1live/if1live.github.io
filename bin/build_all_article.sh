@@ -18,7 +18,7 @@ for filepath in $(find ./content -name "*.mkdn"); do
 	echo "$category : $dirname : $filename"
 
 	cd ./content/$category/$dirname
-	maya -mode=$mode -file=$filename > ../$dirname.md &
+	maya-cli -mode=$mode -file=$filename > ../$dirname.md &
 	pids+=($!)
 	cd -
 done

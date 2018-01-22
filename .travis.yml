@@ -15,6 +15,7 @@ before_install:
 
 install:
   - go get -u github.com/if1live/maya
+  - go get -u github.com/if1live/maya/maya-cli
   - go get -u github.com/spf13/hugo
   - go get -u github.com/wellington/wellington/wt
 

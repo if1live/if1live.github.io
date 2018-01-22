@@ -5,7 +5,7 @@
 
 curr_dir=${PWD##*/}
 filename=$(find . -name "*.mkdn" | head)
-maya -mode=hugo -file=$filename > ../$curr_dir.md
+maya-cli -mode=hugo -file=$filename > ../$curr_dir.md
 
 dirname=$(pwd | rev | cut -d '/' -f 1 | rev)
 category=$(pwd | rev | cut -d '/' -f 2 | rev)
