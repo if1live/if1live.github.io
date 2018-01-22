@@ -261,15 +261,7 @@ func (c *ArticleCommand) writeDocument() {
 	// write article
 	output := modifyMarkdown(article.OutputString())
 	data := []byte(output)
-
-	outfile, err := os.Create(c.pathinfo.outputFilePath())
-	if err != nil {
-		panic(err)
-	}
-	defer outfile.Close()
-	writer := bufio.NewWriter(outfile)
-	writer.Write(data)
-	writer.Flush()
+	ioutil.WriteFile(c.pathinfo.outputFilePath(), data, 0644)
 }
 
 func modifyMarkdown(text string) string {

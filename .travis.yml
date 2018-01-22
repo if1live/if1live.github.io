@@ -20,7 +20,7 @@ install:
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
-  - bash ./bin/build_theme_hugo.sh
+  - bash ./bin/build_theme.sh
   - bash ./bin/deploy/publish_hugo.sh
 
 after_success:
