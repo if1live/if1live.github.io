@@ -269,6 +269,7 @@ func (c *ArticleCommand) writeDocument() {
 	defer outfile.Close()
 	writer := bufio.NewWriter(outfile)
 	writer.Write(data)
+	writer.Flush()
 }
 
 func modifyMarkdown(text string) string {
