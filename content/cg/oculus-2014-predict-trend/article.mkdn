@@ -1,4 +1,4 @@
-+++
+---
 title: 2014년 오큘러스 트렌트 예측
 subtitle: 내 멋대로 생각한 OculusRift 2014년 트렌드
 date: 2013-10-27
@@ -6,7 +6,7 @@ tags: [oculus]
 slug: oculus-2014-predict-trend
 author: if1live
 url: /posts/oculus-2014-predict-trend
-+++
+---
 ## 개요
 
 오큘러스 대응해서 뭔가를 계속 개발하고 있는데 내가 가고 있는 길이 맞는

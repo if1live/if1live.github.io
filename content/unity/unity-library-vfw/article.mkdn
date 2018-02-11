@@ -1,4 +1,4 @@
-+++
+---
 title: MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW
 subtitle : MonoBehaviour -> BaseBehaviour
 tags: [unity, library]
@@ -6,7 +6,7 @@ slug: unity-library-vfw
 author: if1live
 date: 2017-01-22
 url: /posts/unity-library-vfw
-+++
+---
 
 유니티로 개발하던 [게임][toy-clash]을 얼마전에 출시했다. 덕분에 몇달만에 여유가 생겼다.
 그동안 바뻐서 블로그를 방치했었는데 다시 운영해볼까한다.

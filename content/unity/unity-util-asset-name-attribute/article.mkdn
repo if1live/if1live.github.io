@@ -1,4 +1,4 @@
-+++
+---
 title: 유니티에서 에셋을 파일이름 기반으로 관리하는 편법
 subtitle: C# Attribute와 Reflection을 써서 노가다 줄이기
 tag: [unity, util]
@@ -6,7 +6,7 @@ slug: unity-util-asset-name-attribute
 author: if1live
 date: 2017-02-20
 url: /posts/unity-util-asset-name-attribute
-+++
+---
 
 ## 문제 : 오디오 파일과 함수를 어떻게 연결할것인가?
 

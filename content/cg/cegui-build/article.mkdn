@@ -1,4 +1,4 @@
-+++
+---
 title: Build CEGUI 0.8.2 on Windows + OGRE
 subtitle: CEGUI 윈도우에서 컴파일하기
 date: 2013-10-09
@@ -6,7 +6,7 @@ tags: [cegui, ogre, build, windows]
 slug: cegui-build
 author: if1live
 url: /posts/cegui-build
-+++
+---
 
 
 [CEGUI](http://cegui.org.uk/) 빌드 하느라 삽질좀 해서 공유용 문서를

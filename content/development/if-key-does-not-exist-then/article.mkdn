@@ -1,4 +1,4 @@
-+++
+---
 title: 존재하지 않는 키로 테이블에 접근하면?
 subtitle: 파이썬 vs 루비 vs C++
 slug: if-key-does-not-exist-then
@@ -6,7 +6,7 @@ tags: [python, ruby, cpp, hash, dictionary, map, table, key]
 date: 2016-02-25
 author: if1live
 url: /posts/if-key-does-not-exist-then
-+++
+---
 존재하지 않은 키로 테이블에 접근했을때 각각의 언어는 어떤 식으로 행동할까?
 올바르지 않은 인덱스로 리스트에 접근하면 각각의 언어는 어떤 식으로 행동할까?
 파이썬, 루비, C++를 통해서 알아보자.

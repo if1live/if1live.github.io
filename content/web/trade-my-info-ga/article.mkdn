@@ -1,4 +1,4 @@
-+++
+---
 title: Trade My Info의 GA 통계
 subtitle: 통계로 알아보는 국내 웹
 date: 2014-02-02
@@ -6,7 +6,7 @@ tags: [web, fucking ie, trade my info, ga]
 slug: trade-my-info-ga
 author: if1live
 url: /posts/trade-my-info-ga
-+++
+---
 "Trade My Info No.1 온라인 개인정보거래소"
 [trade-my-info](http://trademyinfo.libsora.so/) 를 만들때 그냥 GA를
 달아놨었다. 그런데 생각보다 사이트가 흥해서 쓸만한 통계가 모였길래

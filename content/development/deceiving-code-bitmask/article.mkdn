@@ -1,4 +1,4 @@
-+++
+---
 title: bit mask로 사람 낚기. (flags & MASK == MASK)
 subtitle: 연산자 우선순위로 낚시하기. 그리고 회피법
 tags: [bitmask, 비트마스트, 낚시]
@@ -6,7 +6,7 @@ slug: deceiving-code-bitmask
 author: if1live
 date: 2015-11-01
 url: /posts/deceiving-code-bitmask
-+++
+---
 낚시 코드
 ---------
 

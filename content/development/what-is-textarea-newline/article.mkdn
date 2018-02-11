@@ -1,4 +1,4 @@
-+++
+---
 title: HTML textarea의 개행문자는 무엇일까?
 subtitle: LF vs CRLF vs 상황에 따라 다르다 vs 충격과 공포
 tags: [bug, html, textarea, newline]
@@ -6,7 +6,7 @@ slug: what-is-textarea-newline
 author: if1live
 date: 2015-10-25
 url: /posts/what-is-textarea-newline
-+++
+---
 개요
 ----
 

@@ -1,4 +1,4 @@
-+++
+---
 title: 나는 unsigned가 싫어요
 subtitle: Youtube 강남스타일 MV 조회수가 32bit signed integer를 넘어간 시점에 다시 보는 unsigned의 가치
 date: 2014-12-04
@@ -6,7 +6,7 @@ tags: [unsigned, overflow]
 slug: i-hate-unsigned
 author: if1live
 url: /posts/i-hate-unsigned
-+++
+---
 
 개요
 ----

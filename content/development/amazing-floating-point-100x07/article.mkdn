@@ -1,4 +1,4 @@
-+++
+---
 title: 100 * 0.7 = ?
 subtitle: 남들과는 조금 다른 부동소수점 이야기
 date: 2017-11-24
@@ -6,7 +6,7 @@ tags: [floating-point]
 slug: amazing-floating-point-100x07
 author: if1live
 url: /posts/amazing-floating-point-100x07
-+++
+---
 
 ## 100 * 0.7 = 69
 

@@ -1,11 +1,11 @@
-+++
+---
 title: 유니티에서 Switch Platform 안쓰고 크로스 플랫폼 지원하기
 tags: [unity, technique]
 slug: unity-cross-platform-without-platform-switch
 author: if1live
 date: 2017-08-06
 url: /posts/unity-cross-platform-without-platform-switch
-+++
+---
 
 ## switch platform?
 

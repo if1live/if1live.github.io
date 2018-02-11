@@ -1,4 +1,4 @@
-+++
+---
 title: 블로그를 Pelican에서 Hugo로 이사하기
 subtitle: 파이썬 탈주 포스트모템 #1
 tags: [pelican, hugo, static site generator, postmortem]
@@ -6,7 +6,7 @@ slug: migration-from-pelican-to-hugo-post-mortem
 author: if1live
 date: 2016-08-20
 url: /posts/migration-from-pelican-to-hugo-post-mortem
-+++
+---
 
 # 개요
 

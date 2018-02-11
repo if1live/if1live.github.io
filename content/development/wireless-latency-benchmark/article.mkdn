@@ -1,4 +1,4 @@
-+++
+---
 title: Wireless Latency Benchmark
 subtitle: Socket/Bluetooth의 지연시간 비교
 tags: [latency, wireless]
@@ -6,7 +6,7 @@ slug: wireless-latency-benchmark
 author: if1live
 date: 2013-12-12
 url: /posts/wireless-latency-benchmark
-+++
+---
 
 요즘에 스마트폰을 게임 컨트롤러로 쓰는걸 만들고있다.
 처음에는 소켓으로 구현해봤는데 latency가 못쓸물건이더라.

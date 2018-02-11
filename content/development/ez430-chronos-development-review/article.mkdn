@@ -1,4 +1,4 @@
-+++
+---
 title: EZ430-Chronos 개발 후기
 subtitle: EZ430-Chronos 펌웨어 손보면서 배운것
 tags: [ez430]
@@ -6,7 +6,7 @@ slug: ez430-chronos-development-review
 author: if1live
 date: 2014-05-06
 url: /posts/ez430-chronos-development-review
-+++
+---
 
 최근에 [ez430-chronos](http://processors.wiki.ti.com/index.php/EZ430-Chronos) 를 가지고 놀면서 [나만의 펌웨어](my-openchronos-ng_) 를 만들었다. ez430-chronos 갖고 노는걸 끝내기 전에 그동안 삽질했던 경험+교훈을 정리해봤다. (별거 없지만)
 

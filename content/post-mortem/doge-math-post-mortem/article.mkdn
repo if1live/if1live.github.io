@@ -1,4 +1,4 @@
-+++
+---
 title: Doge Math 개발 포스트모템
 subtitle: You do the math! You do the code!
 tags: [postmortem, doge math]
@@ -6,7 +6,7 @@ slug: doge-math-post-mortem
 author: if1live
 date: 2015-09-17
 url: /posts/doge-math-post-mortem
-+++
+---
 ## 개요
 2015/09/07 ~ 2015/09/12 동안 뻘짓 개발한 개인 플젝을 정리하기로 했다.
 지금까지는 개인 프로젝트에 대해서 기록을 남기지 않았지만 이번에는 몇가지 이유로 기록을 남겨볼까한다.

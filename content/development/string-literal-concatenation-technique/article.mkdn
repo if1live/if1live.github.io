@@ -1,12 +1,12 @@
-+++
-title: "foo" "bar" == "foobar"
+---
+title: '"foo" "bar" == "foobar"'
 subtitle: String literal concatenation을 이용한 기법
 tags: [string literal]
 slug: string-literal-concatenation-technique
 author: if1live
 date: 2015-04-20
 url: /posts/string-literal-concatenation-technique
-+++
+---
 ## 개요
 
 ~~~maya:view

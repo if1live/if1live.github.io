@@ -1,4 +1,4 @@
-+++
+---
 title: Twitter Image Archive 개발 포스트모템
 subtitle: 트위터 계정 폭파시키기 전에 짤 백업하기
 tags: [twitter, postmortem]
@@ -6,7 +6,7 @@ slug: twitter-image-archive-post-mortem
 author: if1live
 date: 2016-03-17
 url: /posts/twitter-image-archive-post-mortem
-+++
+---
 ## 개요
 트윗을 싹 지우고 싶다는 생각이 들었다.
 트위터에는 개소리만 싸질렀지만 그래도 쓸만한 데이터를 얻을수 있지 않을까해서 백업을 하고 트윗을 지우기로 마음먹었다.

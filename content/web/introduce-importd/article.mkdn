@@ -1,4 +1,4 @@
-+++
+---
 title: importd - Django as a micro-framework
 subtitle: d is for django
 tags: [importd, django, web]
@@ -6,7 +6,7 @@ slug: introduce-importd
 author: if1live
 date: 2014-08-11
 url: /posts/introduce-importd
-+++
+---
 
 ## What is importd?
 

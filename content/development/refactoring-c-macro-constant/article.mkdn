@@ -1,4 +1,4 @@
-+++
+---
 title: 매크로 상수를 변경하기 쉽게 바꾸는 편법
 subtitle: globals.h 고쳐도 전체 빌드 안하기
 tags: [define, constant, macro, refactoring]
@@ -6,7 +6,7 @@ slug: refactoring-c-macro-constant
 author: if1live
 date: 2015-11-27
 url: /posts/refactoring-c-macro-constant
-+++
+---
 
 ~~~maya:view
 file=main.c

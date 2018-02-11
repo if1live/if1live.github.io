@@ -1,11 +1,11 @@
-+++
+---
 title: 나는 싱글턴이 싫어요
 tags: [singleton]
 slug: i-hate-singleton
 author: if1live
 date: 2013-05-19
 url: /posts/i-hate-singleton
-+++
+---
 
 
 옛날에는 싱글턴을 자주 썼는데 요즘에는 안쓴다. 내가 싱글턴을 안쓰게 된 몇가지 이유가 있는데 다음과 같다

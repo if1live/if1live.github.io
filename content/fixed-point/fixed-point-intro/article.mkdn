@@ -1,4 +1,4 @@
-+++
+---
 title: 고정소수점 관련 자료
 subtitle: Fixed point related Links, References, etc
 date: 2016-05-05
@@ -6,7 +6,7 @@ tags: [fixed point]
 slug: fixed-point-intro
 author: if1live
 url: /posts/fixed-point-intro
-+++
+---
 
 ## How to use Fixed Point (16.16) Math - by Night Stalker
 C에서 고정소수점 라이브러리 구현하기

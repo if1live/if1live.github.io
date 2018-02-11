@@ -1,11 +1,11 @@
-+++
+---
 title: C#에서 GC없이 enum을 int로 변환하기
 tags: [csharp, unity, c#, optimize]
 slug: csharp-enum-to-int
 author: if1live
 date: 2017-08-17
 url: /posts/csharp-enum-to-int
-+++
+---
 
 ## 시나리오: enum으로 상태 관리
 

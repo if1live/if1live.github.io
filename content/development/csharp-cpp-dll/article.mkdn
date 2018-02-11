@@ -1,11 +1,11 @@
-+++
+---
 title: C#에서 C++ DLL 사용하기
 tags: [csharp, cpp, dll, pinvoke]
 slug: csharp-cpp-dll
 date: 2013-02-12
 author: if1live
 url: /posts/csharp-cpp-dll
-+++
+---
 
 ## 개요
 C#에서 C++ dll을 사용하기 위해서는 pinvoke(platform invoke)를 사용하면 된다. 아래의 내용은 사용법에 대한 간단한 정리이다. 내용 생략하고 [Sample]({attach}csharp-cpp-dll/glcombinesample.zip) 를 받아도 된다.

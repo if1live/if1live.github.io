@@ -1,4 +1,4 @@
-+++
+---
 title: gksrmfdldkscuwudy 포스트모템
 subtitle: 한글이 안쳐져요 (알파벳-두벌식 변환기)
 tags: [postmortem]
@@ -6,7 +6,7 @@ slug: gksrmfdldkscuwudy-post-mortem
 author: if1live
 date: 2016-05-29
 url: /posts/gksrmfdldkscuwudy-post-mortem
-+++
+---
 ## 개요
 
 * 개요: 알파벳-두벌식 변환기

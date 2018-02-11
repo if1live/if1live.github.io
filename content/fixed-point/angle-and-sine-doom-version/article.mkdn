@@ -1,4 +1,4 @@
-+++
+---
 title: DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법
 subtitle: 386, 486 에서도 돌아가는 sin, cos
 date: 2016-05-06
@@ -6,7 +6,7 @@ tags: [fixed point, sine, angle]
 slug: angle-and-sine-doom-version
 author: if1live
 url: /posts/angle-and-sine-doom-version
-+++
+---
 
 ## 개요
 

@@ -1,11 +1,11 @@
-+++
+---
 title: 게임 좌표계에 대한 고찰
 tags: [axis, gamedev]
 slug: game-coord-system
 author: if1live
 date: 2013-01-25
 url: /posts/game-coord-system
-+++
+---
 ## 좌표계에 대한 고찰
 
 3D 그래픽스 좌표계에는 크게 2가지(왼손 좌표계/오른손 좌표계)가 있다.

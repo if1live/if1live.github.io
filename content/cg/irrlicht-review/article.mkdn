@@ -1,11 +1,11 @@
-+++
+---
 title: irrlicht engine 사용기
 tags: [irrlicht]
 slug: irrlight-engine-review
 author: if1live
 date: 2013-08-26
 url: /posts/irrlight-engine-review
-+++
+---
 subtitle : 2달 정도 만져보고 간단한 프로젝트를 완료후의 irrlicht 사용 소감
 
 ## 장점

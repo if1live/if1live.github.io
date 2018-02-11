@@ -1,4 +1,4 @@
-+++
+---
 title: 윈도우 환경에서 emacs HOME 디렉토리 변경하기
 tags: [emacs]
 slug: emacs-home-dir
@@ -6,7 +6,7 @@ author: if1live
 subtitle: 윈도우 환경에서 emacs HOME 디렉토리 변경하기
 date: 2012-12-31
 url: /posts/emacs-home-dir
-+++
+---
 
 유닉스 환경의 경우 이맥스 설정파일은 `/home/user_name/.emacs`에 위치한다. 그런데 윈도우라면 저런 경로가 존재할리가 없잖아? 윈도우의 경우는 `C:/Users/user_name/blabla....` 어딘가에 적절히 위치한다. (볼때마다 까먹어서 기억도 안난다..)
 

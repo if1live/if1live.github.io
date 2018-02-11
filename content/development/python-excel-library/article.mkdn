@@ -1,11 +1,11 @@
-+++
+---
 title: 파이썬 엑셀 쓰기 라이브러리 비교
 tags: [python, library, excel, xlsx]
 slug: python-excel-library
 author: if1live
 date: 2014-02-23
 url: /posts/python-excel-library
-+++
+---
 subtitle: 무엇을 골라야 후회하지 않는가?
 
 리눅스에서 굴러가는 파이썬 기반의 통계 도구를 만든적이 있다. 리눅스에서도 굴러가는 엑셀 라이브러리를 몇개 찾아봤고 직접 써본 다음에 정리했다.

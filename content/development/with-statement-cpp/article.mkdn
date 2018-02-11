@@ -1,11 +1,11 @@
-+++
+---
 title: C++에서 Python의 with statment 구현하기
 date: 2014-11-10
 tags: [cpp]
 slug: with-statement-cpp
 author: if1live
 url: /posts/with-statement-cpp
-+++
+---
 
 파이썬에는 객체의 생성과 소멸의 범위를 확실하게 정하는 목적으로 with
 문법이 존재한다. 파이썬은 C와 달리 블럭 스코프를 이용해서 객체의

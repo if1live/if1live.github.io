@@ -1,4 +1,4 @@
-+++
+---
 title: Markdown Test Page
 subtitle: Simple Markdown Test
 tags: [markdown]
@@ -6,7 +6,7 @@ slug: markdown-test
 author: if1live
 date: 2010-01-01
 url: /posts/markdown-test
-+++
+---
 [markdown syntax](http://daringfireball.net/projects/markdown/syntax)
 
 ## h2 heading

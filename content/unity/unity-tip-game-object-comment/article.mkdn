@@ -1,11 +1,11 @@
-+++
+---
 title: 유니티 게임객체, 프리팹에 주석 붙이는 편법
 tag: [unity, tip]
 slug: unity-tip-game-object-comment
 author: if1live
 date: 2017-01-22
 url: /posts/unity-tip-game-object-comment
-+++
+---
 
 코딩을 하다보면 코드에 여러가지 설명을 넣고 싶을때가 있다.
 어떤 알고리즘을 사용했는지, 어떤 웹페이지에서 긁어온 소스인지, 어떤 인자를 함수에 넣어야하는지....

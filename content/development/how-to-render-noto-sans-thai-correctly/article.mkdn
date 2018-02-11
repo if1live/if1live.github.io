@@ -1,12 +1,12 @@
-+++
+---
 title: Noto Sans Thai 올바르게 렌더링하는 방법
-subtitle: Mission: 크롬하고 똑같이 보이게 하라!
+subtitle: "Mission: 크롬하고 똑같이 보이게 하라!"
 date: 2016-05-16
 tags: [noto sans, noto sans thai, font, harfbuzz, freetype2]
 slug: how-to-render-noto-sans-thai-correctly
 author: if1live
 url: /posts/how-to-render-noto-sans-thai-correctly
-+++
+---
 
 ## 개요
 

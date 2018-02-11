@@ -1,11 +1,11 @@
-+++
+---
 title: Python 2.x 한글 인코딩 관련 정리
 tags: [python, hangul, encoding]
 slug: python-hangul
 author: if1live
 date: 2013-02-03
 url: /posts/python-hangul
-+++
+---
 
 ## 개요
 파이썬은 **양놈**이 만든 언어라서 한글을 쓸때 골치아프다 (아니, 한글만 골치아픈게 지옥의 언어 **CJK**(chiness, japanese, korean)를 포함한 멀티바이트 언어는 전부 그렇겠지). 영어만 사용하면 별로 신경쓸게 없지만 한글은 ```euc-kr```, ```utf-8```이 공존하지 않는가?

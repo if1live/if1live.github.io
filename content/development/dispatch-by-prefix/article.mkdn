@@ -1,4 +1,4 @@
-+++
+---
 title: 윈도우에서 길고 아름다운 경로명을 사용하는 방법
 subtitle: prefix를 이용한 기법
 tags: [techinque, prefix]
@@ -6,7 +6,7 @@ slug: dispatch-by-prefix
 author: if1live
 date: 2016-06-05
 url: /posts/dispatch-by-prefix
-+++
+---
 ## MAX_PATH
 
 윈도우는 경로 최대길이가 제한되어 있다. `MAX_PATH`라는 상수로 260이다.

@@ -1,4 +1,4 @@
-+++
+---
 title: 사람 낚는 strcmp()의 리턴타입 재설계하기
 subtitle: 연산자 오버로딩의 입문
 tags: [strcmp]
@@ -6,7 +6,7 @@ slug: my-strcmp
 author: if1live
 date: 2015-04-21
 url: /posts/my-strcmp
-+++
+---
 ## strcmp()로 낚시하기
 
 "좋은 함수 함수의 예를 쓰시오."

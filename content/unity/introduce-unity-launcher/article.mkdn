@@ -1,4 +1,4 @@
-+++
+---
 title: Unity Launcher 소개
 subtitle: 유니티 프로젝트에 대응하는 버전의 유니티를 실행하는 런처
 tag: [untiy, tip]
@@ -6,7 +6,7 @@ slug: introduce-unity-launcher
 author: if1live
 date: 2017-07-29
 url: /posts/introduce-unity-launcher
-+++
+---
 
 유니티 프로젝트를 진행하다보면 여러 버전의 유니티와 여러개의 프로젝트 폴더가 필요한 일이 생기게 된다. 간단한 예시를 만들어보자. 과거의 특정 시점에서 브렌치를 따서 트레일러용 빌드를 개발한다고 가정해보자. (이를 trailer 브렌치라고 부르자)
 

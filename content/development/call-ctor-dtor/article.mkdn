@@ -1,4 +1,4 @@
-+++
+---
 title: 생성자,소멸자 강제호출 
 tags: [cpp]
 slug: call-ctor-dtor
@@ -6,7 +6,7 @@ author: if1live
 subtitle: C++에서 생성자/소멸자 강제로 호출하는 방법
 date: 2012-11-26
 url: /posts/call-ctor-dtor
-+++
+---
 
 ## 개요 
 성능, 혹은 디버깅을 위해서 커스텀 malloc/free를 쓰는 일이 잇다. 문제는 malloc/free로 사용하면 소멸자/생성자가 호출되지 않기 떄문에 C++에 그냥 통합할수는 없다. 편법으로 delete/new를 오버라이딩해서 쓸수도 잇지만 이경우 클래스에 하나에 대해서 2가지 이상의 malloc함수를 사용할수 없다. 

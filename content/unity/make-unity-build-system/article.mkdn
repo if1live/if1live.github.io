@@ -1,4 +1,4 @@
-+++
+---
 title: 유니티 프로젝트 빌드 시스템 구축하기
 subtitle: 크로스 플랫폼을 지탱하는 빌드 시스템 만들기
 tags: [unity, build]
@@ -6,7 +6,7 @@ slug: make-unity-build-system
 author: if1live
 date: 2017-11-12
 url: /posts/make-unity-build-system
-+++
+---
 
 
 ## 개요

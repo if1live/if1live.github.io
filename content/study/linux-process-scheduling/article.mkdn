@@ -1,4 +1,4 @@
-+++
+---
 title: Linux Process Scheduling
 subtitle: 2014년 2학기 시스템 프로그래밍 시험 공부
 tags: [linux, system programming, schdeuling, scheduler, study]
@@ -6,7 +6,7 @@ slug: system-prog-linux-process-schduling
 author: if1live
 date: 2014-10-17
 url: /posts/system-prog-linux-process-schduling
-+++
+---
 
 시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 

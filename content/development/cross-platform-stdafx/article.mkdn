@@ -1,4 +1,4 @@
-+++
+---
 title: 윈도/ios/안드로이드를 커버할수 있는 PCH 구조 잡기
 tags: [cpp, pch]
 slug: cross-platform-stdafx
@@ -6,7 +6,7 @@ author: if1live
 summary: 윈도/ios/안드로이드를 커버할수 있는 PCH 구조 잡기
 date: 2012-12-08
 url: /posts/cross-platform-stdafx
-+++
+---
 
 미리 컴파일된 헤더(PreCompiled Header, 이하 PCH라고 지칭한다)는 컴파일시간을 줄이는데 적절한 기능이다. (PCH가 무엇인지에 대한 설명은 지금 관심없기 때문에 일단은 건너뛴다. 알아서 검색하자. 어쨋든 좋은거다) 다만 PCH라는 개념은 대부분의 컴파일러(그래봣자 내가 쓰는 컴파일러라고 해봐야 msvc, llvm, gcc)에서 지원하긴하지만 표준은 아니다(마치 ```#pragma once```같은 느낌) 덕분에 윈도우/아이폰/안드로이드에서 PCH를 사용하는 방법이 달라서 하나의 소스에서 3가지를 동시에 지원하기 위해서는 약간의 편법을 부려야한다. 일단 각각의 플랫폼에서의 PCH를 사용하기 위한 방법/제약은 다음과 같다
 

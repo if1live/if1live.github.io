@@ -1,11 +1,11 @@
-+++
+---
 title: GC없이 C# Dictionary에서 enum을 key로 쓰기
 tags: [csharp, unity, c#]
 slug: csharp-dictionary-enum-key-without-gc
 author: if1live
 date: 2017-08-20
 url: /posts/csharp-dictionary-enum-key-without-gc
-+++
+---
 
 ## C# Dictionary + enum
 

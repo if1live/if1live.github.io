@@ -1,12 +1,12 @@
-+++
+---
 title: 유니티 로그 뷰어, Sagiri
 subtitle: Web browser based Realtime Untiy3D Log viewer 
-date:2017-10-15
+date: 2017-10-15
 tags: [unity, log]
 slug: introduce-sagiri
 author: if1live
 url: /posts/introduce-sagiri
-+++
+---
 
 ## 개요
 

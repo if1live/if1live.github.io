@@ -1,4 +1,4 @@
-+++
+---
 title: Maya (Markdown 전처리기) 포스트모템
 subtitle: Template -> Markdown Preprocessor -> Markdown
 tags: [markdown, postmortem]
@@ -6,7 +6,7 @@ slug: maya-markdown-preprocessor-post-mortem
 author: if1live
 date: 2016-05-06
 url: /posts/maya-markdown-preprocessor-post-mortem
-+++
+---
 
 ## Why?
 
@@ -44,11 +44,11 @@ hugo의 메타데이터는 다음과 같이 생겼다.
 (TOML이라는 문법을 기본값으로 사용하지만 YAML, JSON을 선택할수도 있다)
 
 ```
-+++
+---
 date = "2016-02-14T16:11:58+05:30"
 draft = true
 title = "this is title"
-+++
+---
 
 TODO - write content
 ```

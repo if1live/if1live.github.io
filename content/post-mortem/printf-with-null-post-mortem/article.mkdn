@@ -1,4 +1,4 @@
-+++
+---
 title: printf("%s\n", NULL)의 출력 결과는?
 subtitle: undefined behavior과 compiler
 tags: [c, c++, printf, undefined behavior, gcc, postmortem]
@@ -6,7 +6,7 @@ slug: printf-with-null-post-mortem
 date: 2016-03-06
 author: if1live
 url: /posts/printf-with-null-post-mortem
-+++
+---
 
 ## 떡밥의 시작
 오늘도 평소와 똑같이 [트위터는 인생의 낭비](https://namu.wiki/w/%ED%8A%B8%EC%9C%84%ED%84%B0%EB%8A%94%20%EC%9D%B8%EC%83%9D%EC%9D%98%20%EB%82%AD%EB%B9%84)를 라는 명언대로 행동하다 재밌는 트윗을 봤다.

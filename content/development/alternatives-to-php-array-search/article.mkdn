@@ -1,4 +1,4 @@
-+++
+---
 title: 아름다운 PHP array_search()
 subtitle: 잘못된 API 설계를 통해 알아보는 여러가지 대안
 tags: [array_search, api, api-design]
@@ -6,7 +6,7 @@ slug: alternatives-to-php-array-search
 author: if1live
 date: 2015-11-08
 url: /posts/alternatives-to-php-array-search
-+++
+---
 개요
 ----
 

@@ -1,4 +1,4 @@
-+++
+---
 title: 버그 삽질기 - 파이썬으로 구현한 API 서버 루비로 포팅하기
 subtitle: HTTP 요청 parameters를 이용하다 밟을수 있는 함정
 tags: [python, ruby, bug]
@@ -6,7 +6,7 @@ date: 2016-03-01
 author: if1live
 slug: http-request-params-trap-python-and-ruby
 url: /posts/http-request-params-trap-python-and-ruby
-+++
+---
 간단한 명언 API 서버를 만들보자. 필요한 기능은 다음과 같다.
 
 1. 명언 목록을 데이터로 분리한다. 나중에 목록을 쉽게 갱신할수 있어야한다.

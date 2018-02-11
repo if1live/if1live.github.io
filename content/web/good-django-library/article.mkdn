@@ -1,4 +1,4 @@
-+++
+---
 title: Django용 적절한 라이브러리 소개
 subtitle: 쉽게 붙일 수 있는 적절한 라이브러리
 tags: [django, library]
@@ -6,7 +6,7 @@ slug: good-django-library
 author: if1live
 date: 2014-08-10
 url: /posts/good-django-library
-+++
+---
 
 2년 전, 신규 웹 프로젝트를 django로 시작했지만 django의 몇가지 문제
 때문에 flask로 갈아탔다. 프로젝트 시작한지 얼마되지 않은 시점이어서

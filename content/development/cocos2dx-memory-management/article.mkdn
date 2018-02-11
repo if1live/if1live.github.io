@@ -1,11 +1,11 @@
-+++
+---
 title: cocos2d-x 메모리 관리에 대한 간단한 정리 #1
 tags: [cpp, cocos2dx]
 slug: cocos2dx-memory-management
 author: if1live
 date: 2013-01-25
 url: /posts/cocos2dx-memory-management
-+++
+---
 
 cocos2d-x는 cocos2d를 거의 그대로 포팅한 2d게임 엔진이다. 
 원작이 objc 기반인 cocos2d를 C++로 옮겼으니 완전히 똑같지는 않다. 

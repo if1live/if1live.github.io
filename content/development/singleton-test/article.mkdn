@@ -1,11 +1,11 @@
-+++
+---
 title: 완벽한 싱글턴을 찾아서 - 테스트
 tags: [singleton, unittest, test, testing]
 slug: singleton-test
 author: if1live
 date: 2013-06-18
 url: /posts/singleton-test
-+++
+---
 
 
 [이전에 사람들이 많이 사용하는 방식의 싱글턴을 까는 글을 쓰고 그것을 해결책을 정리했었다]({filename}i-hate-singleton.md).(사실은 복붙에 더 가깝지만...) 최근에 조금 더 생각해보니 그거보다 더 좋은 방법(특히 **테스트**측면에서)이 생각나서 똑같은 주제를 재탕하기로 했다.

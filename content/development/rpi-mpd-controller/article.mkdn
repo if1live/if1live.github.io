@@ -1,4 +1,4 @@
-+++
+---
 title: Controller for Raspberry Pi + MPD
 tags: [rpi, mpd, raspberry pi]
 slug: rpi-mpd-controller
@@ -6,7 +6,7 @@ author: if1live
 summary: Controller for Raspberry Pi + MPD
 date: 2013-07-20
 url: /posts/rpi-mpd-controller
-+++
+---
 눈수술하면 그동안 아무것도 못하고 심심하잖아? 음악이라도 있어야될거같은데 눈못뜨면 mp3플레이어고 나발이고 제대로 쓰기 어렵잖아? 눈감고도 쓸수있도록 뭐 하나 만들어야될거같은데...해서 만든 프로젝트이다.
 
 * [Project Repo](https://github.com/if1live/rpi-mpd-controller)

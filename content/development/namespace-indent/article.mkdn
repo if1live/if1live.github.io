@@ -1,4 +1,4 @@
-+++
+---
 title: C++ namespace 들여쓰기 방지하는 편법
 tags: [cpp, namespace, indent]
 slug: namespace-indent
@@ -6,7 +6,7 @@ author: if1live
 summary: C++ namespace 들여쓰기 방지하는 편법
 date: 2012-11-28
 url: /posts/namespace-indent
-+++
+---
 
 ## 개요
 C++에는 C에는 없는 namespace라는 문법이 있다.(C가 구식이라서 없는거지 요즘 언어는 어지간하면 다 namespace와 유사한 문법이 있다.) 네임스페이스는 문법이 블럭과 동일하기때문에 내부 영역이 적절히 들여쓰기가 된다

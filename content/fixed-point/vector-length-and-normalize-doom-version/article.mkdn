@@ -1,4 +1,4 @@
-+++
+---
 title: 고정소수점에서 2차원 벡터의 크기, 정규화된 벡터 계산하는 방법
 subtitle: DOOM에서 배우는 vector.length(), vector.normalize()
 date: 2016-05-16
@@ -6,7 +6,7 @@ tags: [fixed point, vector, vector length, normalized vector]
 slug: vector-length-and-normalize-doom-version
 author: if1live
 url: /posts/vector-length-and-normalize-doom-version
-+++
+---
 
 ## 개요
 

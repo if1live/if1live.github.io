@@ -1,4 +1,4 @@
-+++
+---
 title: 나의 warning.or.kr 검열기
 subtitle: No.1 온라인 개인정보거래소 Trade My Info, 검열당하다
 date: 2017-04-29
@@ -6,7 +6,7 @@ tags: [trade my info, warning.or.kr]
 slug: trade-my-info-warning-or-kr
 author: if1live
 url: /posts/trade-my-info-warning-or-kr
-+++
+---
 
 대한민국에는 악명높은 warning.or.kr가 있다.
 나는 warning.or.kr을 국가에서 수행하는 검열이라고 생각하지만 이를 직접 비판하기는 어렵다.

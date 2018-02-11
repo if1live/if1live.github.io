@@ -1,12 +1,12 @@
-+++
-title: int main() { #include "data.txt" return 0; }
+---
+title: 'int main() { #include "data.txt" return 0; }'
 subtitle: 다시 보는 include와 define, 그리고 X-Macro
 tags: [black magic, x-macro, define, include, c, preprocessor]
 slug: x-macro-is-useful
 author: if1live
 date: 2017-01-30
 url: /posts/x-macro-is-useful
-+++
+---
 
 > 흑마법은 많이 짜봤지만
 > 

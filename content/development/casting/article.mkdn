@@ -1,4 +1,4 @@
-+++
+---
 title: C++ 다중상속(interface) 관련 삽질 자료
 tags: [cpp, interface, casting]
 slug: cpp-casting
@@ -6,7 +6,7 @@ author: if1live
 summary: C++ 다중상속(interface) 관련 삽질 자료
 date: 2012-11-27
 url: /posts/cpp-casting
-+++
+---
 
 나는 다중상속을 쓰는것을 싫어한다. 왜냐하면 다중상속을 써서 구현했다는것은 그 소스를 자바나 C#으로 똑같이 구현하는것이 불가능하다는 뜻이기 떄문이다. 
 하지만 자바나 C#처럼 interface라는것은 설계를하다보면 자주 쓰게되는데 C++의 경우는 interface같은것이 문법차원으로 지원되지 않는다. 순수가상함수로만 채워진 함수를 상속받으면 그것이 interface처럼 동작하는것뿐이다. 그래서 실제 구현결과는 다중상속이나 마찬가지다

@@ -1,4 +1,4 @@
-+++
+---
 title: Project Fumika, 중고책 처분 프로세스 개발기
 subtitle: 중고책 팔아요
 tags: [development note]
@@ -6,7 +6,7 @@ slug: fumika-development-note
 author: if1live
 date: 2017-05-02
 url: /posts/fumika-development-note
-+++
+---
 
 ## 개요
 * 개발 기간 : 2017/04/15 - 2017/05/30

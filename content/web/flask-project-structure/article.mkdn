@@ -1,11 +1,11 @@
-+++
+---
 title: Flask Project 구조 예제
 tags: [flask, project, python]
 slug: flask-project-structure
 author: if1live
 date: 2013-01-31
 url: /posts/flask-project-structure
-+++
+---
 
 요즘에는 Flask를 주력으로 사용하고 있다. Flask는 가볍게 쓰는것을 목표로 설계된 라이브러리다 보니까 프로젝트 구조를 어떻게 잡을지에 대한 가이드라인조차 딱히 제시하지 않는다.(django에서는 프로젝트 트리를 미리 제시하기 떄문에 이런 고민을 굳이 깊게할 필요가 없다) 그래서 내가 요즘 사용하는 구조를 정리해봤다
 

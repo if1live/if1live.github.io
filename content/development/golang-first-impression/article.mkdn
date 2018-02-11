@@ -1,4 +1,4 @@
-+++
+---
 title: Go language 첫인상
 subtitle: Go language 입갤
 tags: [go, golang]
@@ -6,7 +6,7 @@ slug: golang-first-impression
 author: if1live
 date: 2015-12-20
 url: /posts/golang-first-impression
-+++
+---
 
 개요
 ----

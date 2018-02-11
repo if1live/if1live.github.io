@@ -1,4 +1,4 @@
-+++
+---
 title: 반복문, 재귀없이 터미널에 다이아 그리기
 subtitle: 배열을 이용한 흑마법
 tags: [black magic, array, loop]
@@ -6,7 +6,7 @@ slug: double-loop-with-array
 author: if1live
 date: 2016-03-21
 url: /posts/double-loop-with-array
-+++
+---
 
 ## 간단한 문제
 

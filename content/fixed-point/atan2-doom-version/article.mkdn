@@ -1,4 +1,4 @@
-+++
+---
 title: DOOM에서 배우는 atan2(y, x) 구현
 subtitle: 386, 486 에서도 돌아가는 atan2
 date: 2016-05-15
@@ -6,7 +6,7 @@ tags: [fixed point, atan2]
 slug: atan2-doom-version
 author: if1live
 url: /posts/atan2-doom-version
-+++
+---
 
 ## 개요
 

@@ -1,11 +1,11 @@
-+++
+---
 title: NDC 2017 <로보리콜> 포스트모템 정리
 tags: [ndc]
 slug: ndc-2017-robo-recall
 author: if1live
 date: 2017-05-11
 url: /posts/ndc-2017-robo-recall
-+++
+---
 
 2017년 4월 26일에 NDC 2017을 갔다왔다.
 잊어버리기전에 기억나는 내용을 정리해본다.

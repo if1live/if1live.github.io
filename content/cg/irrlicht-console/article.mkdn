@@ -1,11 +1,11 @@
-+++
+---
 title: irrlicht-console sample
 tags: [irrlicht, console]
 slug: irrlicht-console
 author: if1live
 date: 2013-07-28
 url: /posts/irrlicht-console
-+++
+---
 
 irrlicht engine에서 quake console같은걸 쓰고싶어서 하나 만들었다. 
 옛날부터 알고있었던 [GLConsole][glconsole]와 이번에 새로 찾은 [IrrConsole][irrconsole]를 조합해서 만들었다.

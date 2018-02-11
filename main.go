@@ -198,8 +198,10 @@ func NewArticleCommand(pathinfo *PathInfo) *ArticleCommand {
 }
 
 func (c *ArticleCommand) execute() {
+	fmt.Printf("execute start : %s\n", c.pathinfo.sourceFilePath)
 	c.writeDocument()
 	c.copyStatic()
+	fmt.Printf("execute finish : %s\n", c.pathinfo.sourceFilePath)
 }
 
 func (c *ArticleCommand) copyStatic() {
