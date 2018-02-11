@@ -218,7 +218,7 @@ sudo apt-get install locales
 sudo dpkg-reconfigure locales
 ```
 
-`ko_KR.UTF_8`만 있어도 된다.
+`ko_KR.UTF-8`만 있어도 된다.
 
 로케일 설정후 crouton을 로그아웃 했다가 다시 crouton을 실행하자.
 
