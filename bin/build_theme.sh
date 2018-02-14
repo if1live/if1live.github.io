@@ -17,5 +17,11 @@ if [ -x "$(command -v wt)" ]; then
     exit
 fi
 
+if [ -x "$(command -v node-sass)" ]; then
+    echo "node-sass found"
+    node-sass $INPUT_SASS $OUTPUT_CSS
+    exit
+fi
+
 echo "not found any sass preprocessor"
 exit 1
