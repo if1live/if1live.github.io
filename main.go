@@ -214,7 +214,7 @@ func (c *ArticleCommand) copyStatic() {
 	srcDir := c.pathinfo.sourceDir
 
 	// prepare static directory
-	err := os.MkdirAll(dstDir, 0644)
+	err := os.MkdirAll(dstDir, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -255,7 +255,7 @@ func (c *ArticleCommand) writeDocument() {
 	article := maya.NewArticleFromReader(reader, maya.ModeHugo)
 
 	// prepare output directory
-	err = os.MkdirAll(c.pathinfo.outputDir(), 0644)
+	err = os.MkdirAll(c.pathinfo.outputDir(), 0755)
 	if err != nil {
 		panic(err)
 	}
