@@ -26,6 +26,9 @@ func main() {
 
 	for _, src := range srcs {
 		pathinfo := NewPathInfo(src)
+		if !pathinfo.isUpdated() {
+			continue
+		}
 		cmd := NewArticleCommand(pathinfo)
 		cmd.execute()
 	}
@@ -104,6 +107,22 @@ func NewPathInfo(fp string) *PathInfo {
 		rootPath:   rootPath,
 		targetFile: fmt.Sprintf("%s.md", slug),
 	}
+}
+
+func (pi *PathInfo) isUpdated() bool {
+	target, err := os.Stat(pi.outputFilePath())
+	if err != nil {
+		fmt.Println(err)
+		return true
+	}
+	source, err := os.Stat(pi.sourceFilePath)
+	if err != nil {
+		panic(err)
+	}
+	if target.ModTime().UnixNano() < source.ModTime().UnixNano() {
+		return true
+	}
+	return false
 }
 
 // todo use abs path
