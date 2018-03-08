@@ -282,13 +282,6 @@ func (c *ArticleCommand) writeDocument() {
 
 	// write article
 	output := modifyMarkdown(article.OutputString())
-
-	// post-processing
-	// \\-> \\{space}
-	// to render LaTeX
-	re := regexp.MustCompile("\\\\\n")
-	output = re.ReplaceAllString(output, "\\\\ \n")
-
 	data := []byte(output)
 	ioutil.WriteFile(c.pathinfo.outputFilePath(), data, 0644)
 }
@@ -298,5 +291,12 @@ func modifyMarkdown(text string) string {
 	text = strings.Replace(text, "{filename}", "/posts/", -1)
 	text = strings.Replace(text, "{article}", "/posts/", -1)
 	text = strings.Replace(text, ".md", "", -1)
+
+	// post-processing
+	// \\-> \\{space}
+	// to render LaTeX
+	re := regexp.MustCompile("\\\\\n")
+	text = re.ReplaceAllString(text, "\\\\ \n")
+
 	return text
 }
