@@ -9,6 +9,7 @@ url: /posts/markdown-test
 ---
 [markdown syntax](http://daringfireball.net/projects/markdown/syntax)
 
+# h1 heading
 ## h2 heading
 ### h3 heading
 #### h4 heading
@@ -66,10 +67,26 @@ this is **bold elem**.
 this is *italic elem*.
 this is [link elem](/).
 
+## emphasis
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+## links
+
+[this is google](https://google.com)
+
+[this is google][google]
+
 ## image test
 ![sample gif]({attach}markdown-test/sidetail-sora.gif)
 
-![sample png]({attach}markdown-test/sora-kasugano.png)
+![sample png][sora-png]
 
 
 ## unordered list
@@ -94,17 +111,54 @@ Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 > Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
 
+## indent
+
+    hello
+    world
+    foo
+    bar
+    spam
+
 ## Table
 
+style 1
 
-|  A  |  B    |A or B |
-|-----|-------|-------|
-|False| False | False |
-|True | False | True  |
-|False| True  | True  |
-|True | True  | True  |
+|  A  |  B    | A or B |
+|-----|-------|--------|
+|False| False | False  |
+|True | False | True   |
+|False| True  | True   |
+|True | True  | True   |
+
+style 2
+
+  A  |  B    | A or B 
+-----|-------|--------
+False| False | False
+True | False | True
+False| True  | True
+True | True  | True
+
+
+## horizontal bar
+
+foo
+
+---
+
+bar
+
+## latex
+
+expression, $e^{i\pi} + 1 = 0$ is here.
+
+this is block.
+
+$$e^x=\sum_{i=0}^\infty \frac{1}{i!}x^i$$
 
 
 [^1]: foo
 [^2]: bar
 
+[sora-png]: {attach}markdown-test/sora-kasugano.png
+[google]: https://google.com
