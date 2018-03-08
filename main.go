@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -281,6 +282,13 @@ func (c *ArticleCommand) writeDocument() {
 
 	// write article
 	output := modifyMarkdown(article.OutputString())
+
+	// post-processing
+	// \\-> \\{space}
+	// to render LaTeX
+	re := regexp.MustCompile("\\\\\n")
+	output = re.ReplaceAllString(output, "\\\\ \n")
+
 	data := []byte(output)
 	ioutil.WriteFile(c.pathinfo.outputFilePath(), data, 0644)
 }
