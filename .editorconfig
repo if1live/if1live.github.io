@@ -19,3 +19,7 @@ trim_trailing_whitespace = false
 
 [*.mkdn]
 trim_trailing_whitespace = false
+
+[*.html]
+indent_style = space
+indent_size =  2
