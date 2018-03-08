@@ -84,9 +84,12 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 [this is google][google]
 
 ## image test
+
 ![sample gif]({attach}markdown-test/sidetail-sora.gif)
 
 ![sample png][sora-png]
+
+![sample filename](sora-kasugano-1.jpg)
 
 
 ## unordered list
