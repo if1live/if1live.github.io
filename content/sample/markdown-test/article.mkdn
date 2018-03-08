@@ -156,6 +156,18 @@ this is block.
 
 $$e^x=\sum_{i=0}^\infty \frac{1}{i!}x^i$$
 
+$\begin{bmatrix}
+  1. & 1. & 1. \\
+  1. & 1. & 1. \\
+\end{bmatrix} +
+\begin{bmatrix}
+  1. & 2. & 3. \\
+  4. & 5. & 6. \\
+\end{bmatrix} =
+\begin{bmatrix}
+  2. & 3. & 4. \\
+  5. & 6. & 7. \\
+\end{bmatrix}$
 
 [^1]: foo
 [^2]: bar
