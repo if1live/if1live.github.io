@@ -15,9 +15,9 @@ before_install:
   - go get -u github.com/golang/dep/cmd/dep
 
 install:
-  - dep ensure
-  - go get -u github.com/spf13/hugo
+  - go get -u github.com/gohugoio/hugo
   - go get -u github.com/wellington/wellington/wt
+  - dep ensure
 
 script:
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
