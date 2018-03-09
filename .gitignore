@@ -62,6 +62,9 @@ ipch
 *.*~
 .idea
 
+# golang
+vendor/
+
 # ignore html inside content. may it is generated file
 content/*/*.html
 
