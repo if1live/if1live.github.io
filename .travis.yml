@@ -5,6 +5,13 @@ go:
 
 sudo: false
 
+cache:
+  directories:
+    - $GOPATH/pkg
+    - $GOPATH/bin
+    - $GOPATH/src
+    - $GOPATH/src/github.com/if1live/libsora.so
+
 env:
   global:
     - secure: "fP5qN5KZCnR5/mlwnIFpiaKKbm6Athe6G/EgGVRQJIVbVxrGpDCNSTsJIUIsBYsMFDahKrjZpnksx+yZ4eTrpccZI4Kg5WnuBd3W2je3poJoIULNlHc8f98lLvuKoqQK4sugowGwj0pyj2ughvHKgr6wHZ8wNAlKgl5u+sSh5bQ="
