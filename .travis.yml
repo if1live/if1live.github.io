@@ -10,7 +10,7 @@ cache:
     - $GOPATH/pkg
     - $GOPATH/bin
     - $GOPATH/src
-    - $GOPATH/src/github.com/if1live/libsora.so
+    - $GOPATH/src/github.com/if1live/libsora.so/vendor
 
 env:
   global:
@@ -27,16 +27,13 @@ install:
   - dep ensure
 
 script:
+  - rm -rf output
   - git clone --depth 1 --quiet https://${GH_TOKEN}@github.com/if1live/if1live.github.io.git output
   - bash ./bin/build_theme.sh
   - bash ./bin/deploy/publish_hugo.sh
 
-deploy:
+after_success:
   - bash ./bin/deploy/push_output.sh
-
-after_script:
-  # delete un-cache dirs
-  - rm -rf output
 
 branches:
   only:
