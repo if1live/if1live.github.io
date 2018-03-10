@@ -1,13 +1,3 @@
----
-author: if1live
-date: 2018-03-10
-slug: golang-hugo-is-down
-title: "go get {command-line-tool} FAILED"
-subtitle: "dep가 나와도 해결되지 않는 golang의 문제"
-tags: [golang, "package management"]
-url: /posts/golang-hugo-is-down
-
----
 
 ## go get -u github.com/gohugoio/hugo : FAIL
 

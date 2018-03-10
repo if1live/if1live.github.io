@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -19,8 +20,54 @@ func main() {
 	startTime := time.Now()
 
 	logging.SetLevel(logging.CRITICAL, "maya")
+	mergeArticleAndMetadata()
+	buildMayaArticles()
+	//deleteTempFiles()
 
-	srcs, err := findArticles("content")
+	endTime := time.Now()
+	elapsedTime := endTime.Sub(startTime)
+	fmt.Println("elapsed time:", elapsedTime.String())
+}
+
+func mergeArticleAndMetadata() {
+	srcs, err := findArticles("content", func(file string) bool {
+		return strings.HasSuffix(file, "metadata.yml")
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	for _, src := range srcs {
+		pathinfo := NewMetadataPathInfo(src)
+		if !pathinfo.isUpdated() {
+			continue
+		}
+		cmd := NewMergeCommand(pathinfo)
+		cmd.execute()
+	}
+}
+func deleteTempFiles() {
+	srcs, err := findArticles("content", func(file string) bool {
+		return strings.HasSuffix(file, "metadata.yml")
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	for _, src := range srcs {
+		pathinfo := NewMetadataPathInfo(src)
+		cmd := NewDeleteTempCommand(pathinfo)
+		cmd.execute()
+	}
+}
+
+func buildMayaArticles() {
+	srcs, err := findArticles("content", func(file string) bool {
+		return strings.HasSuffix(file, ".mkdn")
+	})
+
 	if err != nil {
 		panic(err)
 	}
@@ -33,14 +80,10 @@ func main() {
 		cmd := NewArticleCommand(pathinfo)
 		cmd.execute()
 	}
-
-	endTime := time.Now()
-	elapsedTime := endTime.Sub(startTime)
-	fmt.Println("elapsed time:", elapsedTime.String())
 }
 
 // https://gist.github.com/francoishill/a5aca2a7bd598ef5b563
-func findArticles(searchDir string) ([]string, error) {
+func findArticles(searchDir string, fn func(string) bool) ([]string, error) {
 	fileList := []string{}
 	err := filepath.Walk(searchDir, func(path string, f os.FileInfo, err error) error {
 		fileList = append(fileList, path)
@@ -49,12 +92,65 @@ func findArticles(searchDir string) ([]string, error) {
 
 	articleFiles := []string{}
 	for _, file := range fileList {
-		if strings.HasSuffix(file, ".mkdn") {
+		if fn(file) {
 			articleFiles = append(articleFiles, file)
 		}
 	}
 
 	return articleFiles, err
+}
+
+type MetadataPathInfo struct {
+	metadataFilePath string
+	sourceDir        string
+	sourceFile       string
+}
+
+func NewMetadataPathInfo(fp string) *MetadataPathInfo {
+	absfp, err := filepath.Abs(fp)
+	if err != nil {
+		panic(err)
+	}
+	absfp = strings.Replace(absfp, `\`, "/", -1)
+	sourceDir, sourceFile := path.Split(absfp)
+
+	return &MetadataPathInfo{
+		metadataFilePath: absfp,
+		sourceDir:        sourceDir,
+		sourceFile:       sourceFile,
+	}
+}
+
+func (pi *MetadataPathInfo) documentFilePath() string {
+	return path.Join(pi.sourceDir, "document.mkdown")
+}
+func (pi *MetadataPathInfo) mayaFilePath() string {
+	return path.Join(pi.sourceDir, "article.mkdn")
+}
+
+func (pi *MetadataPathInfo) isUpdated() bool {
+	target, err := os.Stat(pi.mayaFilePath())
+	if err != nil {
+		return true
+	}
+
+	metadata, err := os.Stat(pi.metadataFilePath)
+	if err != nil {
+		panic(err)
+	}
+	if target.ModTime().UnixNano() < metadata.ModTime().UnixNano() {
+		return true
+	}
+
+	document, err := os.Stat(pi.documentFilePath())
+	if err != nil {
+		panic(err)
+	}
+	if target.ModTime().UnixNano() < document.ModTime().UnixNano() {
+		return true
+	}
+
+	return true
 }
 
 type PathInfo struct {
@@ -162,11 +258,13 @@ func (pi *PathInfo) staticFiles() []string {
 func (pi *PathInfo) isIgnorableStaticFileName(name string) bool {
 	names := []string{
 		"article.mkdn",
+		"document.mkdown",
 		"cache",
 		"Makefile",
 		"requirements.txt",
 		"Gemfile",
 		"Gemfile.lock",
+		"metadata.yml",
 	}
 	prefixs := []string{}
 	suffixs := []string{
@@ -205,6 +303,46 @@ func (pi *PathInfo) isIgnorableStaticFileName(name string) bool {
 		}
 	}
 	return false
+}
+
+type MergeCommand struct {
+	pathinfo *MetadataPathInfo
+}
+
+func NewMergeCommand(pi *MetadataPathInfo) *MergeCommand {
+	return &MergeCommand{pi}
+}
+
+func (c *MergeCommand) execute() {
+	metadata, err := ioutil.ReadFile(c.pathinfo.metadataFilePath)
+	if err != nil {
+		panic(err)
+	}
+
+	document, err := ioutil.ReadFile(c.pathinfo.documentFilePath())
+	if err != nil {
+		panic(err)
+	}
+
+	var buffer bytes.Buffer
+	buffer.WriteString("---\n")
+	buffer.Write(metadata)
+	buffer.WriteString("---\n")
+	buffer.Write(document)
+
+	ioutil.WriteFile(c.pathinfo.mayaFilePath(), buffer.Bytes(), 0644)
+}
+
+type DeleteTempCommand struct {
+	pathinfo *MetadataPathInfo
+}
+
+func NewDeleteTempCommand(pathinfo *MetadataPathInfo) *DeleteTempCommand {
+	return &DeleteTempCommand{pathinfo}
+}
+
+func (c *DeleteTempCommand) execute() {
+	os.Remove(c.pathinfo.mayaFilePath())
 }
 
 type ArticleCommand struct {
