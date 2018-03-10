@@ -31,8 +31,12 @@ script:
   - bash ./bin/build_theme.sh
   - bash ./bin/deploy/publish_hugo.sh
 
-after_success:
+deploy:
   - bash ./bin/deploy/push_output.sh
+
+after_script:
+  # delete un-cache dirs
+  - rm -rf output
 
 branches:
   only:
