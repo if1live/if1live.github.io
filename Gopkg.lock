@@ -5,13 +5,7 @@
   branch = "master"
   name = "github.com/if1live/maya"
   packages = ["."]
-  revision = "ec8012e5f0e36c4acc182c6c3d85829955dc7411"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/kardianos/osext"
-  packages = ["."]
-  revision = "ae77be60afb1dcacde03767a8c37337fad28ac14"
+  revision = "f45b5f8d9c4d572c3fdd787c6782226ad9b1731d"
 
 [[projects]]
   name = "github.com/op/go-logging"
