@@ -1,0 +1,54 @@
+---
+title: Maya Test Page
+subtitle: Simple Maya Test
+tags: [maya]
+slug: maya-test
+author: if1live
+date: 2010-01-03
+url: /posts/maya-test
+---
+
+[maya](https://github.com/if1live/maya) is markdown preprocessor for static site generator.
+
+## view
+
+embed file.
+
+~~~maya:view
+file=sample.py
+lang=python
+~~~
+
+embed with line range.
+
+~~~maya:view
+file=sample.py
+start_line=1
+end_line=5
+lang=python
+~~~
+
+## execute
+
+~~~maya:execute
+attach_cmd=true
+cmd=python sample.py
+~~~
+
+## gist
+
+~~~maya:gist
+id=000ad3a34cb25c3386dd
+file=trigraphs.c
+~~~
+
+## youtube
+
+~~~maya:youtube
+video_id=awfptUKbWEo
+width=720
+height=480
+~~~
+
+
+
