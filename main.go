@@ -150,7 +150,7 @@ func (pi *MetadataPathInfo) isUpdated() bool {
 		return true
 	}
 
-	return true
+	return false
 }
 
 type PathInfo struct {
