@@ -1,7 +1,7 @@
 ---
 title: Maya Test Page
 subtitle: Simple Maya Test
-tags: [maya]
+tags: [maya, sample-article]
 slug: maya-test
 author: if1live
 date: 2010-01-03
