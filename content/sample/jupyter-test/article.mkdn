@@ -1,4 +1,15 @@
 
+---
+title: Jupyter Test Page
+subtitle: Simple Jupyter Test
+tags: [jupyter, sample-article]
+slug: jupyter-test
+author: if1live
+date: 2010-01-02
+url: /posts/jupyter-test
+
+---
+
  ## Colaboratory에 오신 것을 환영합니다!
 
 Colaboratory는 텍스트, 코드, 코드 출력을 하나의 공동작업 문서로 통합해 주는 데이터 분석 도구입니다.
@@ -56,7 +67,7 @@ plt.plot(x, y, 'o', np.arange(20), a*np.arange(20)+b, '-');
 ```
 
 
-![png](./document_5_0.png)
+![png](./article_6_0.png)
 
 
  Colaboratory는 Google Cloud BigQuery와 함께 사용할 수 있습니다.

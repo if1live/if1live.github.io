@@ -20,9 +20,7 @@ func main() {
 	startTime := time.Now()
 
 	logging.SetLevel(logging.CRITICAL, "maya")
-	mergeArticleAndMetadata()
 	buildMayaArticles()
-	//deleteTempFiles()
 
 	endTime := time.Now()
 	elapsedTime := endTime.Sub(startTime)
@@ -431,10 +429,10 @@ func modifyMarkdown(text string) string {
 	text = strings.Replace(text, ".md", "", -1)
 
 	// post-processing
-	// \\-> \\{space}
+	// \\-> \\\{space}
 	// to render LaTeX
-	re := regexp.MustCompile("\\\\\n")
-	text = re.ReplaceAllString(text, "\\\\ \n")
+	re := regexp.MustCompile(`\\\\\n`)
+	text = re.ReplaceAllString(text, `\\\ `+"\n")
 
 	return text
 }
