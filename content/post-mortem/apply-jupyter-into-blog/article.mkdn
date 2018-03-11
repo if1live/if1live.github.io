@@ -122,7 +122,7 @@ $\begin{bmatrix}
 
 생각을 비우고 남들 한걸 따라하면 웬만해서는 잘 돌아간다.
 [Hugo meets kramdown + KaTeX](https://takuti.me/note/hugo-kramdown-and-katex/) 라는 글이 있더라.
-[KaTeX[repo-katex]를 붙였다.
+[KaTeX][repo-katex]를 붙였다.
 
 하지만 남들이 코드 짠거 그대로 복붙한게 항상 잘 돌아간다면 프로그래머라는 쓸모없는 존재일거다.
 한줄짜리 LaTeX에서는 문제가 없지만 2차원 행렬이 그려지지 않더라.
