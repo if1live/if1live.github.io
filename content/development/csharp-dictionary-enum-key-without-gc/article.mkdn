@@ -83,8 +83,21 @@ IL2CPP에서는 dynamic method를 사용할 수 없다.
 그래서 Generic EnumComparer는 쓸수 없다.
 IL2CPP를 사용할 경우 수동으로 EnumComparer를 구현해야 된다.
 
+관련 내용은 유니티 문서 [Scripting restrictions][unity-scripting-restrictions]에서 찾을 수 있다.
+iOS IL2CPP, android IL2CPP는 `Ahead-of-time compile`의 제약에 걸려있다.
+AOT의 제약에서 다음을 찾을수 있다.
+
+> System.Reflection.Emit
+> 
+> An AOT platform cannot implement any of the methods in the System.Reflection.Emit namespace.
+> Note that the rest of System.Reflection is acceptable,
+> as long as the compiler can infer that the code used via reflection needs to exist at runtime.
+
+
 [repo]: https://github.com/OmerMor/EnumComparer
 
 [codeproject-detail]: https://www.codeproject.com/Articles/33528/Accelerating-Enum-Based-Dictionaries-with-Generic
 
 [ios-no-code-gen]: http://ronniej.sfuh.tk/%EC%9C%A0%EB%8B%88%ED%8B%B0-ios-%EC%A0%9C%EC%95%BD%EC%82%AC%ED%95%AD/
+
+[unity-scripting-restrictions]: [https://docs.unity3d.com/Manual/ScriptingRestrictions.html]
