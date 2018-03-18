@@ -1,7 +1,8 @@
-+++
-title = "projects"
-slug = "_index"
-+++
+---
+title: projects
+slug: _index
+---
+
 
 ## User
 

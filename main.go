@@ -181,6 +181,12 @@ func NewPathInfo(fp string) *PathInfo {
 	slug := tokens[len(tokens)-2]
 	category := tokens[len(tokens)-3]
 
+	// 실제 문서가 아니지만 사이트 생성에 사용되는 계열은
+	// _ 를 붙여서 구분하고싶다
+	if strings.HasPrefix(category, "_") {
+		category = category[1:]
+	}
+
 	rootPath := ""
 	for len(tokens) > 0 {
 		remain, last := tokens[:len(tokens)-1], tokens[len(tokens)-1]

@@ -1,7 +1,8 @@
-+++
-title = "about"
-slug = "_index"
-+++
+---
+title: about
+slug: _index
+---
+
 
 * if1live
 * libsora.so
