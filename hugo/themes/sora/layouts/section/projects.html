@@ -4,9 +4,7 @@
 <div class="container">
   <section class="basic-content">
     <h1>Projects</h1>
-    {{ range first 1 (where .Data.Pages "Section" "projects") }}
     {{ .Content }}
-    {{ end }}
   </section>
 </div>
 
