@@ -262,7 +262,15 @@ attach_cmd=true
 ~~~
 
 
-C#의 경우는 class와 struct가 있다. C++의 class, sturct와는 다르게 C#에서의 그것은 동작이 완전히 다르다. class는 heap 영역에 객체가 생기고 struct는 stack 영역에 객체가 생긴다는 것 이외에도 다른게 있다. 함수 인자로 넘어갈때 정책이 다르다. class는 call by reference로 넘어가지만 struct는 call by value로 넘어간다. 자바와는 달리 call by value가 가능하다는건 좋지만 개념 자체가 간단하진 않다. class/struct라는 서로 다른 2개의 시스템이 공존하고 있고 함수만 보고 이것이 call by value로 작동할지 call by referece로 작동할지 알기 어렵다. (예제에서는 보기쉽게 SampleStruct, SampleClass라고 했지만 현실에서는 한눈에 class인지 struct 보일까?)
+C#의 경우는 class와 struct가 있다.
+C++의 class, sturct와는 다르게 C#에서의 그것은 동작이 완전히 다르다.
+class는 heap 영역에 객체가 생기고 struct는 stack 영역에 객체가 생긴다는 것 이외에도 다른게 있다.
+함수 인자로 넘어갈때 정책이 다르다.
+class는 call by reference로 넘어가지만 struct는 call by value로 넘어간다.
+자바와는 달리 call by value가 가능하다는건 좋지만 개념 자체가 간단하진 않다.
+class/struct라는 서로 다른 2개의 시스템이 공존하고 있고 함수만 보고 이것이 call by value로 작동할지 call by referece로 작동할지 알기 어렵다.
+(예제에서는 보기쉽게 SampleStruct, SampleClass라고 했지만 현실에서는 한눈에 class인지 struct 보일까?)
+
 
 ~~~maya:view
 file=call_by_xxx.cs
@@ -273,7 +281,9 @@ cmd=mcs call_by_xxx.cs && mono ./call_by_xxx.exe
 attach_cmd=true
 ~~~
 
-Go language의 경우는 C++과 유사하다. 포인터가 있다. object를 그냥 넘기면 call by value로 작동하고 포인터를 넘기면 call by referece로 작동한다. C++을 하루이틀 한게 아니니까 포인터라는 개념이 익숙해서 Go language의 방식이 마음에 들더라.
+Go language의 경우는 C++과 유사하다. 포인터가 있다.
+object를 그냥 넘기면 call by value로 작동하고 포인터를 넘기면 call by referece로 작동한다.
+C++을 하루이틀 한게 아니니까 포인터라는 개념이 익숙해서 Go language의 방식이 마음에 들더라.
 
 ~~~maya:view
 file=call_by_xxx.go
@@ -283,6 +293,26 @@ file=call_by_xxx.go
 cmd=go run call_by_xxx.go
 attach_cmd=true
 ~~~
+
+### java는 call by reference일까?
+
+(2018/04/19 추가)
+
+엄밀하게 말해서 자바는 call by reference, call by value도 아니다. 
+[call by sharing](https://en.wikipedia.org/wiki/Evaluation_strategy#Call_by_sharing) 또는 call by object 로 분류하더라.
+(wikipedia를 보면 파이썬, 자바, 자바스크립트, 루비 등등의 언어가 이쪽으로 분류되더라)
+
+하지만 나는 그런 내용까지는 여기에서 다루고 싶지 않다.
+이정도 수준의 내용으로 글을 썼다.
+
+![pass by reference vs pass by value]({attach}/golang-first-impression/pass-by-reference-vs-pass-by-value-animation.gif)
+
+call by reference가 아님에도 call by reference로 취급받는 다른 예로 C가 있다.
+C에는 call by reference가 없다.
+C에는 call by value밖에 없다.
+C에서는 포인터를 value로써 넘겨서 call by reference를 흉내낼 뿐이다.
+어쨋든 C에서 위의 그림 수준의 call by reference를 흉내낼수 있으니 call by reference라고 불러줘도 되지 않을까?
+
 
 손쉬운 병행성
 -------------
