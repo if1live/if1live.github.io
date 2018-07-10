@@ -40,3 +40,10 @@ hugo server
 or
 hugo server --bind 0.0.0.0 --baseURL=192.168.200.106:1313
 ```
+
+### build theme - windows
+wt is not working in windows. use node-sass
+
+```
+yarn global add node-sass
+```
