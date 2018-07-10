@@ -1,4 +1,5 @@
 baseurl = "https://libsora.so/"
+theme = "sora"
 languageCode = "ko-kr"
 title = "/usr/lib/libsora.so"
 
