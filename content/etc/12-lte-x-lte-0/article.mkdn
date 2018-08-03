@@ -1,5 +1,6 @@
 ---
 title: "12 ≦ x ≦ 0, 12 ≦ x ≦ 7"
+subtitle: 즐거운 C언어
 tags: [c, useless]
 slug: 12-lte-x-lte-0
 author: if1live
@@ -34,29 +35,9 @@ true/false는 1/0이 들어가니까 `(1 or 0) <= 7` 이다.
 
 https://ideone.com/F7HW2U
 
-```c++
-#include <cstdio>
-#include <cassert>
-
-bool check(int x) {
-  auto a = (12 <= x <= 0);
-  auto b = (12 <= x <= 7);
-  return a && b;
-}
-
-int main(void) {
-  // invalid
-  assert(check(12) == false);
-  
-  // valid
-  assert(check(11));
-  assert(check(10));
-  assert(check(0));
-  assert(check(1));
-  
-  return 0;
-}
-```
+~~~maya:view
+file=main.cpp
+~~~
 
 ## 연습 문제
 
