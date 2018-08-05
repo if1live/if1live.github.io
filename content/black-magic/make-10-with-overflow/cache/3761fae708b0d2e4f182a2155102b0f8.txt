@@ -1,0 +1,2 @@
+# clang foo.c 2> /dev/null && ./a.out
+10
