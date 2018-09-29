@@ -96,7 +96,6 @@ body {
   @include core-anchor-mixin;
   padding: 10px 0;
 
-  word-wrap: break-word;
   line-height: 1.6em;
 
   @mixin common-h1 {
