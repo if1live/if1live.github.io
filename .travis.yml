@@ -22,7 +22,13 @@ before_install:
   - go get -u github.com/golang/dep/cmd/dep
 
 install:
-  - go get -u github.com/gohugoio/hugo
+  - mkdir ${TRAVIS_HOME}/src
+  - cd ${TRAVIS_HOME}/src
+  - git clone https://github.com/gohugoio/hugo.git
+  - cd hugo
+  - go install --tags extended
+  - cd ${TRAVIS_HOME}/gopath/src/github.com/if1live/libsora.so
+
   - go get -u github.com/wellington/wellington/wt
   - dep ensure
 
