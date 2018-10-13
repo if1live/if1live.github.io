@@ -1,0 +1,3 @@
+# npx tslint --project tsconfig.json -t verbose
+ERROR: (strict-boolean-expressions) D:/blog/libsora.so/src/libsora.so/content/development/prevent-bug-by-if-and-promise/bug.ts[4, 7]: This type is not allowed in the 'if' condition because it is always truthy. Only booleans are allowed.
+

@@ -1,0 +1,2 @@
+# npx ts-node bug.ts
+ready
