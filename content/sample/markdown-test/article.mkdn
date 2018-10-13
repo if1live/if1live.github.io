@@ -29,36 +29,131 @@ and this is footnote[^2]
 
 ## code block
 
-```python
-import unittest
-def median(pool):
-    copy = sorted(pool)
-    size = len(copy)
-    if size % 2 == 1:
-        return copy[(size - 1) / 2]
-    else:
-        return (copy[size/2 - 1] + copy[size/2]) / 2
-class TestMedian(unittest.TestCase):
-    def testMedian(self):
-        self.failUnlessEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7)
-if __name__ == '__main__':
-    unittest.main()
+```c
+// c
+#include<stdio.h>
+int main(int argc, char * argv[])
+{
+    printf("Hello World!\n");
+    return 0;
+}
+```
+
+```cpp
+// cpp
+#include<stdio.h>
+int main(int argc, char * argv[])
+{
+    printf("Hello World!\n");
+    return 0;
+}
+```
+
+```ts
+// ts
+console.log('hello');
+```
+
+```js
+// js
+console.log('hello');
 ```
 
 ```python
-import unittest
-def median(pool):
-    copy = sorted(pool)
-    size = len(copy)
-    if size % 2 == 1:
-        return copy[(size - 1) / 2]
-    else:
-        return (copy[size/2 - 1] + copy[size/2]) / 2
-class TestMedian(unittest.TestCase):
-    def testMedian(self):
-        self.failUnlessEqual(median([2, 9, 9, 7, 9, 2, 4, 5, 8]), 7)
-if __name__ == '__main__':
-    unittest.main()
+# python
+print([1,'2'])
+```
+
+```csharp
+// csharp
+using System;
+namespace HelloWorld
+{
+    class Hello 
+    {
+        static void Main() 
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
+```
+
+
+```bash
+# bash
+if [ $var -eq 0 ];then
+  echo "\$var is 0";
+else
+  echo "\$var is not 0";
+fi
+```
+
+```ruby
+# ruby
+puts "hello"
+```
+
+```html
+<!-- html -->
+<p>sample</p>
+```
+
+```xml
+<!-- xml -->
+<volume-bgm>70</volume-bgm>
+```
+
+```go
+// go
+func main() {
+    fmt.Println("hello");
+}
+```
+
+```lisp
+; lisp
+(prefer-coding-system 'utf-8)
+```
+
+```java
+// java
+credential = GoogleAccountCredential.usingOAuth2(activity)
+```
+
+```scss
+/* scss */
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+```
+
+```less
+/* less */
+.border-radius(@radius) {
+  border-radius: @radius;
+}
+```
+
+```json
+{
+    "key": "json"
+}
+```
+
+```batch
+rem batch
+C:\program files\Unity\Editor\Unity.exe -quit -batchmode -executeMethod BuildScript.BuildGame
+```
+
+```yaml
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+```
+
+```css
+/* css */
+.container .grid_1 {width: 57px;}
 ```
 
 ## inline test

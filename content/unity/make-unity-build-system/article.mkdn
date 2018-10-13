@@ -41,7 +41,7 @@ public class BuildScript {
 }
 ```
 
-```bat
+```batch
 C:\program files\Unity\Editor\Unity.exe -quit -batchmode -executeMethod BuildScript.BuildGame
 ```
 

@@ -36,7 +36,7 @@ ios, android를 동시에 지원하는 게임을 유니티로 만든다고 가�
 
 setup_proj_skeleton.bat
 
-```sh
+```batch
 @rem usage
 @rem .\setup_proj_skeleton.bat CaptureTheBase_Android
 

@@ -79,7 +79,7 @@ django 내장 템플릿 엔진보다 훨씬 좋다. 내가 django 템플릿을 �
 jinja2로 갈아타도록 만든 특징은 템플릿에서 함수 호출이 가능하다는 것과
 필터에 인자를 여러개 넘기는 것이 가능하다는 점이다.
 
-```htmlB
+```html
 <p>{{ foo.bar(1, 'asd') }}</p>
 <p>{{ "Hello World"|replace("Hello", "Goodbye") }}</p>
 ```

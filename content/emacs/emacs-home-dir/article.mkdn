@@ -18,7 +18,7 @@ url: /posts/emacs-home-dir
 ### emacs 한정 HOME 환경변수 추가
 이맥스에서만 HOME 변수를 새로 만들어서 쓰는 방법이다. 윈도우용 이맥스를 설치한 경로에 가서 `site-lisp`라는 디렉토이에 `site-start.el`이라는 파일을 만들고 내용을 다음과 같이 한다.
 
-```cl
+```lisp
 (defvar %~dp0 (substring data-directory 0 3)) (defvar home-dir (concat %~dp0 "home/"))
 (setenv "HOME" home-dir)
 ```
