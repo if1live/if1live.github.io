@@ -90,6 +90,8 @@ content/development/refactoring-c-macro-constant/variable
 
 # node
 npm-debug.log
+node_modules
+
 
 # pyenv
 .python-version
