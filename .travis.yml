@@ -5,12 +5,11 @@ go:
 
 sudo: false
 
-#cache:
-#  directories:
-#    - $GOPATH/pkg
-#    - $GOPATH/bin
-#    - $GOPATH/src
-#    - $GOPATH/src/github.com/if1live/libsora.so/vendor
+# https://restic.net/blog/2018-09-02/travis-build-cache
+cache:
+  directories:
+    - $HOME/.cache/go-build
+    - $HOME/gopath/pkg/mod
 
 env:
   global:
@@ -19,7 +18,7 @@ env:
 before_install:
   - git config --global user.email "libsora25@gmail.com"
   - git config --global user.name "Travis"
-  - go get -u github.com/golang/dep/cmd/dep
+  - go get github.com/golang/dep/cmd/dep
 
 install:
   - mkdir ${TRAVIS_HOME}/src
@@ -29,7 +28,7 @@ install:
   - go install --tags extended
   - cd ${TRAVIS_HOME}/gopath/src/github.com/if1live/libsora.so
 
-  - go get -u github.com/wellington/wellington/wt
+  - go get github.com/wellington/wellington/wt
   - dep ensure
 
 script:
