@@ -3,25 +3,34 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:332d290b151f1fef998e397b989c79106f7a1214bc42603e3f20ac3dbfce5194"
   name = "github.com/if1live/maya"
   packages = ["."]
+  pruneopts = "UT"
   revision = "758bd00fba0265e2431599a8f9d9a09b1c629951"
 
 [[projects]]
+  digest = "1:5b3b29ce0e569f62935d9541dff2e16cc09df981ebde48e82259076a73a3d0c7"
   name = "github.com/op/go-logging"
   packages = ["."]
+  pruneopts = "UT"
   revision = "b2cb9fa56473e98db8caba80237377e83fe44db5"
   version = "v1"
 
 [[projects]]
+  branch = "v2"
+  digest = "1:4d2e5a73dc1500038e504a8d78b986630e3626dc027bc030ba5c75da257cdb96"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
-  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
-  version = "v2.1.1"
+  pruneopts = "UT"
+  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d24f42ab96320a49e0ab77ff2f52e2f5b42e5d58bfc0f74b227ff42ed3abde78"
+  input-imports = [
+    "github.com/if1live/maya",
+    "github.com/op/go-logging",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

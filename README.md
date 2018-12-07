@@ -1,21 +1,31 @@
 # libsora.so
 
 [![Build Status](https://travis-ci.org/if1live/libsora.so.png?branch=master)](https://travis-ci.org/if1live/libsora.so)
-[![Stories in Ready](https://badge.waffle.io/if1live/libsora.so.png?label=ready)](https://waffle.io/if1live/libsora.so)
-[![Requirements Status](https://requires.io/github/if1live/libsora.so/requirements.png?branch=master)](https://requires.io/github/if1live/libsora.so/requirements/?branch=master)
 
 [libsora.so](https://libsora.so) blog content
 
-## Local development
+## Install - windows
 
-### Install
+* [node-sass](https://www.npmjs.com/package/node-sass)
+* [hugo](https://gohugo.io/getting-started/installing/)
+
+## build
 
 ```
-go get -u github.com/if1live/maya
-go get -u -v github.com/spf13/hugo
-go get github.com/wellington/wellington/wt
+# build template
+bash ./bin/build_theme_win.sh
+
+# build document
+# set GOPATH before execute command
+go run main.go
+
+# serve hugo
+cd hugo
+hugo serve 
+
 ```
 
+## note
 ### Create https certificate
 ``` bash
 mkdir -p output
@@ -26,24 +36,3 @@ cd ..
 ```
 
 * http://blog.saltfactory.net/node/implements-nodejs-based-https-server.html
-
-### Run Local Dev Server
-
-``` bash
-# shell 1
-cd output
-http-server -S
-
-# shell 2
-cd hugo
-hugo server
-or
-hugo server --bind 0.0.0.0 --baseURL=192.168.200.106:1313
-```
-
-### build theme - windows
-wt is not working in windows. use node-sass
-
-```
-yarn global add node-sass
-```
