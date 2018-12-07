@@ -39,22 +39,22 @@
 
     <ul class="articles-timeline">
       <li class="previous-article">
-        {{ if .Next }}
-        <a href="{{ .Next.Permalink }}" title="Next: {{ .Next.Title }}">
-          {{ .Next.Title }}
-          {{ if and (isset .Next.Params "subtitle") (ne .Next.Params.subtitle "") }}
-          <br/><small>{{ .Next.Params.subtitle }}</small>
+        {{ if .PrevPage }}
+        <a href="{{ .PrevPage.Permalink }}" title="Next: {{ .PrevPage.Title }}">
+          {{ .PrevPage.Title }}
+          {{ if and (isset .PrevPage.Params "subtitle") (ne .PrevPage.Params.subtitle "") }}
+          <br/><small>{{ .PrevPage.Params.subtitle }}</small>
           {{ end }}
         </a>
         {{ end }}
       </li>
 
       <li class="next-article">
-        {{ if .Prev }}
-        <a href="{{ .Prev.Permalink }}" title="Previous: {{ .Prev.Title }}">
-          {{ .Prev.Title }}
-          {{ if and (isset .Prev.Params "subtitle") (ne .Prev.Params.subtitle "") }}
-          <br/><small>{{ .Prev.Params.subtitle }}</small>
+        {{ if .NextPage }}
+        <a href="{{ .NextPage.Permalink }}" title="Previous: {{ .NextPage.Title }}">
+          {{ .NextPage.Title }}
+          {{ if and (isset .NextPage.Params "subtitle") (ne .NextPage.Params.subtitle "") }}
+          <br/><small>{{ .NextPage.Params.subtitle }}</small>
           {{ end }}
         </a>
         {{ end }}
