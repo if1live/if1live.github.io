@@ -8,6 +8,23 @@
 
 * [node-sass](https://www.npmjs.com/package/node-sass)
 * [hugo](https://gohugo.io/getting-started/installing/)
+* dep: `go get github.com/golang/dep/cmd/dep`
+
+### clone project + GOPATH
+
+example
+* GOPATH: `<root>/blog`
+* libsora.so path: `<root>/blog/src/libsora.so`
+
+```
+export GOPATH=<blog root>
+mkdir -p blog/src
+cd blog/src
+git clone https://github.com/if1live/libsora.so.git
+cd libsora.so
+
+dep ensure
+```
 
 ## build
 
