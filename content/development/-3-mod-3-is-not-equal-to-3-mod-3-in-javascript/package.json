@@ -1,0 +1,14 @@
+{
+  "name": "-3-mod-3-is-not-equal-to-3-mod-3-in-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^23.6.0"
+  }
+}
