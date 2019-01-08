@@ -45,8 +45,6 @@ TEST_F(PackageManagerTest, bar)
 ```
 위의 유닛테스트는 대충 보기에는 그럴듯해보인다. 하지만 유닛테스트로 쓰기에는 치명적인 문제가 2가지 존재한다.
 
-<!--adsense-->
-
 ### 싱글턴 객체를 공유한다니!
 ```gFileSystem``` 전역변수는 foo, bar 유닛테스트 함수에서 공유한다.
 ```gFileSystem.setUp()``` 또는 ```gFileSystem.shutDown()```의 구현에 문제가 있어서 ```gFileSystem```이 **깨끗한 상태**로 유지되지 않으면, foo->bar 순서로 테스트를 실행할 때와 bar->foo 순서로 테스트를 실행할 때 다른 결과를 보여줄 수 있다. 즉, foo와 bar가 완전히 독립된 테스트라고 부를 수 없다.

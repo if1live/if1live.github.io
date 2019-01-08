@@ -27,8 +27,6 @@ url: /posts/float-divide-without-divide
 코드를 공유할때는 [ideone](http://ideone.com)같은게 편하더라.
 그래서 코드를 넣고 돌렸다. 그리고 재밌는 결과가 나오기 시작하는데....
 
-<!--adsense-->
-
 ## code
 
 ~~~maya:view

@@ -43,7 +43,6 @@ end_line=35
 lang=csharp
 ~~~
 
-<!--adsense-->
 
 `EnumArrayGarbage`를 사용하면 캐스팅 없이 쓸 수 있으니까 좋다.
 

@@ -39,8 +39,6 @@ const item = playlistItems[convertToIndex(cursor)];
 expect(-3 % 3).toEqual(3 % 3);
 ```
 
-<!--adsense-->
-
 ## -4 % 3 = 2 vs -1
 
 자바스크립트에서 `-4 % 3`의 값은 2일까 -1일까?

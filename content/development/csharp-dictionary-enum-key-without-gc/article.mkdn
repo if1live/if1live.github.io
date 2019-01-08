@@ -32,8 +32,6 @@ file=DictionaryEnumKey/Assets/Main_Simple.cs
 lang=csharp
 ~~~
 
-<!--adsense-->
-
 유니티 프로파일러 띄워서 성능 이슈가 있는지 살펴보자.
 
 ![profiler]({attach}csharp-dictionary-enum-key-without-gc/profiler.png)

@@ -8,8 +8,6 @@ url: /posts/simple-mesh
 ---
 glut에는 Cube / Sphere / Cone / Teapot...등을 렌더링할 수 있는 함수가 존재한다. 하지만 glut를 안쓰고 glfw를 쓰거나 GLES환경에서는 그런거 없다. 간단한 테스트/디버깅용으로 Cube / Sphere 등을 렌더링할수 있으면 유용하긴한데... 이거 하겟다고 본격적인 Model Loader를 추가하는것은 괜히 규모가 큰거 같아서 간단하게 사용할 수 있는 메시 라이브러리를 만들었던걸 정리해봣다.
 
-<!--adsense-->
-
 ## 세부 기능
 
 * 지원하는 형태

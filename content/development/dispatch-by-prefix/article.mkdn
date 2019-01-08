@@ -45,8 +45,6 @@ MAX_PATH가 260라니 윈도우에 실망했습니다. 윈도우 팬 그만둡�
 * `C:\short path` : 기존 방식으로 작동. MAX_PATH 의 제약을 벗어나지 못한다.
 * `\\?\D:\very long path` : `\\?\` prefix를 사용하면 32767글자까지 사용 가능하다.
 
-<!--adsense-->
-
 ### Example
 
 MSDN에 있는 내용을 참고해서 간단한 예제를 짯다.

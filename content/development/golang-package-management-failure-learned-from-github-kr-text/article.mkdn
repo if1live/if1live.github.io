@@ -35,8 +35,6 @@ imports github.com/kr/pretty
 imports github.com/kr/text: exit status 1
 ```
 
-<!--adsense-->
-
 ### 2015/05/05 : 나만 문제 생긴게 아니다
 
 github에 이슈가 등록되고 같은 문제를 겪는 사람들이 나오기 시작했다.

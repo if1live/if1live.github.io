@@ -51,8 +51,6 @@ scene.add(mesh);
 > 유니티에서 배치를 하고 객체에 ID를 지정하는거야. 그리고 몇가지 정보를 객체에 같이 저장해두는거야.
 > three.js에서는 ID로 객체에 접근해서 미리 저장해둔 값을 이용해서 로직을 짜는거야.
 
-<!--adsense-->
-
 ## 어떤 기능을 만들까?
 
 쓸만한 exporter가 있나 뒤져보다가 [J3D][repo_j3d]와 [Three.js JSON Exporter][unity_threejs_exporter]를 발견했다.

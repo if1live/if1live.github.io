@@ -25,8 +25,6 @@ url: /posts/golang-first-impression
 
 갈아타고자 마음먹고 Go language 공부를 시작해서 간단한 사이트 정적 생성기를 짯다. <https://github.com/shipduck/umi> 그리고 처음 Go language를 공부하면서 느꼈던걸 정리했다.
 
-<!--adsense-->
-
 ### History
 
 -   2015/11/30 2300 : <https://go-tour-kr.appspot.com/> 읽기 시작

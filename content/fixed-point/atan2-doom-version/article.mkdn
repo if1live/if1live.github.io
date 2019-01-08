@@ -23,8 +23,6 @@ DOOM에서 `atan2(y, x)`는 몇단계에 걸쳐서 계산된다.
 2. `atan2(y, x)`를 lookup table의 인덱스로 변환하는 함수를 만든다. 0~45도만 지원하면 된다.
 3. 0~45도에서만 돌아가는 `atan2(y, x)`를 이용해서 나머지 각도에서도 돌아가도록 만든다.
 
-<!--adsense-->
-
 ## In DOOM Source
 ### lookup table
 https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/tables.h#L74-L84

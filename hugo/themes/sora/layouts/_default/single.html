@@ -34,7 +34,7 @@
     </footer>
 
     <section class="entry-content">
-      {{ replace .Content "<!--adsense-->" (partial "adsense-inarticle.html" .) | safeHTML }}
+      {{ .Content }}
     </section>
 
     <ul class="articles-timeline">

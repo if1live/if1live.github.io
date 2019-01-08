@@ -20,8 +20,6 @@ C에서 고정소수점 라이브러리 구현하기
 * [C](https://code.google.com/archive/p/libfixmath/)
 * [C#](https://bitbucket.org/se5a/fixmath.net)
 
-<!--adsense-->
-
 ## Links
 
 * [Doing It Fast - Fixed point arithmetic, loop unrolling, fast 3D transforms](http://gameprogrammer.com/4-fixed.html)

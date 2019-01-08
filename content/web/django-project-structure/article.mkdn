@@ -49,8 +49,6 @@ ROOT
 └── requirements.txt
 ```
 
-<!--adsense-->
-
 ## 기본 설명
 ### apps
 내가 만든 Application은 여기에 집어넣는다. apps 자체를 하나의 모듈로 만들어서 다른 프로젝트에서도 갖다쓸수있도록 했다. (그래서 ```ROOT/apps/__init__.py``` 가 존재한다) 프로젝트 내부에서 apps안의 모듈을 참고할때는 다음과 같이 썻다.

@@ -37,5 +37,3 @@ url: /posts/platform-macro
 #endif
 
 ```
-
-<!--adsense-->

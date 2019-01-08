@@ -34,7 +34,6 @@ google colabratory가 등장하면서 기존보다 좋아졌다.
 [site-colab]: https://colab.research.google.com
 [site-jupyter]: http://jupyter.org
 
-<!--adsense-->
 
 ## hugo-jupyter
 

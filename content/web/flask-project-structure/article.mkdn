@@ -44,8 +44,6 @@ ROOT
 └── requirements.txt
 ```
 
-<!--adsense-->
-
 ## 설명
 
 ### settings.py

@@ -10,8 +10,6 @@ url: /posts/system-prog-kernel-synchronization
 
 시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 앞으로 없다.
 
-<!--adsense-->
-
 # Kernel Synchronization
 ## Kernel Control Paths
 * 커널 함수는 다음 요청에 따라서 실행된다

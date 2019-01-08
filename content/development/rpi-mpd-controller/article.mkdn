@@ -22,8 +22,6 @@ width=480
 height=320
 ~~~
 
-<!--adsense-->
-
 소감
 ----
 

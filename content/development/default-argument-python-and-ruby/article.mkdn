@@ -46,8 +46,6 @@ cmd=ruby default_argument.rb
 attach_cmd=true
 ~~~
 
-<!--adsense-->
-
 파이썬에서는 같은 시간이 2번 찍혔다. 루비에서는 1초 차이나는 시간이
 찍혔다. 파이썬에서는 default argument는 미리 계산된 값을 사용하고
 루비에서는 함수 호출할때 계산하는거같다.

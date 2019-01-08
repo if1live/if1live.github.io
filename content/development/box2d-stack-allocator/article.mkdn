@@ -27,8 +27,6 @@ Stack Allocator안에는 100kb의 고정크기배열이 내장되어잇다. 사�
 
 Stack Allocator한개로 b2_maxStackEntries(32)개의 할당을 처리할수 잇다. 구조를 단순하게 하기위해서 이렇게 제한한듯하다
 
-<!--adsense-->
-
 ## Malloc
 ```cpp
 b2StackEntry* entry = m_entries + m_entryCount;

@@ -15,5 +15,3 @@ url: /posts/static-blog-sample
 그래서 github pages와 travis-ci 연동하는 방법을 정리했다.
 
 자세한건 [static blog sample](http://static-blog-sample.libsora.so) 를 참고.
-
-<!--adsense-->

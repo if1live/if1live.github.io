@@ -26,8 +26,6 @@ url: /posts/twitter-image-archive-post-mortem
 해당 파일을 열어보면 자바스크립트 객체로 각각의 트윗 정보가 기록되어있다.
 쭉 읽어보니까 이미지와 관련된 URL은 `media_url`, `media_url_https`, `profile_image_url_https` 가 있더라.
 
-<!--adsense-->
-
 ```json
 {
   "source" : "\u003Ca href=\"https:\/\/about.twitter.com\/products\/....",

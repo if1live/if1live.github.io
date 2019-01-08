@@ -31,8 +31,6 @@ url: /posts/how-to-open-multiple-webapp-window-in-chrome-os
 
 ![창으로 열기][img-webapp-window]
 
-<!--adsense-->
-
 이것을 알고 있으면 유용하게 쓸 수 있다.
 나는 멍청해서 이 기능을 몰랐다.
 그래서 chrome app의 webview를 이용해서 사이트를 래핑하는 크롬앱을 짰었다.

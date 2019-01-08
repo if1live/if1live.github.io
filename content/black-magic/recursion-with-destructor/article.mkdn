@@ -21,8 +21,6 @@ url: /posts/recursion-with-destructor
 ***
 ```
 
-<!--adsense-->
-
 ## 기본 구현
 
 `delete`를 쓰면 메모리를 해제하고 소멸자를 호출한다.

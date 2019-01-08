@@ -35,8 +35,6 @@ attach_cmd=true
 안죽네? 게다가 `(null)`은 어디서 튀어나온거지?
 왜 그런지 이유를 찾아보자.
 
-<!--adsense-->
-
 ## 스펙...스펙을 보자!
 [printf reference](http://en.cppreference.com/w/c/io/fprintf)를 읽어봤는데 "(null)"과 관련된 내용이 안보이더라.
 `%s`에다가 `NULL`을 넣는게 undefined behavior일거같다는 생각이 들었는데 좀더 깊이 파보기로 했다.

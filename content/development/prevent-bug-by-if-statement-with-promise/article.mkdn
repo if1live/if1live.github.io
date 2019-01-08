@@ -39,8 +39,6 @@ attach_cmd=true
 async/await의 리턴타입은 Promise이다.
 그리고 Promise는 if문 안에서 true로 취급된다.
 
-<!--adsense-->
-
 ## fix bug
 
 버그를 고치는 방법은 간단하다.

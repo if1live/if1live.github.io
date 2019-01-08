@@ -16,8 +16,6 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 
 3D GUI 를 적절히 돌려보자. 목표는 DOOM3 같은 느낌의 UI 만드는거다. 왜 자꾸 DOOM3 같이 만들고 싶어하는가?
 
-<!--adsense-->
-
 다음은 스플린터 셀에서 문 비밀번호를 찍는 UI이다. 뒤에 게임화면이 있고 새로운 HUD로 비밀번호를 찍는게 나온다.
 
 ![splinter cell numpad UI]({attach}oculus-interactive-surface-1/splinter-cell-number-pad.jpg)

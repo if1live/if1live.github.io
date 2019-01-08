@@ -22,8 +22,6 @@ url: /posts/unity-library-vfw
 VFW에는 MonoBehaviour를 상속받아서 만든 BaseBehaviour라는 클래스가 있다.
 MonoBehaviour를 상속받을 자리에 BaseBehaviour를 넣음으로써 큰 수정없이 인스펙터를 개선할수 있는 라이브러리이다.
 
-<!--adsense-->
-
 ## 장점
 
 VFW에는 많은 기능이 포함되어있지만 내가 그 기능을 전부 써본건 아니다.

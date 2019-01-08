@@ -26,8 +26,6 @@ url: /posts/fizz-buzz-01
 Fizz Buzz 테스트는 오래되고 쉬운 문제인 만큼 뻔한 풀이법도 많고 뻔한 해설도 많다.
 하지만 나는 뻔한 길은 가지 않는다. 재밌는 풀이가 생각나서 구현해봤다.
 
-<!--adsense-->
-
 ## code
 
 ~~~maya:view

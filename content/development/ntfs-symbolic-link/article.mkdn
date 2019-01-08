@@ -40,8 +40,6 @@ url: /posts/ntfs-symbolic-link
 디렉토리에 대한 심볼릭 링크, 파일에 대한 심볼릭 링크를 만들수 있다면 게임 세이브 파일을 git으로 관리하는게 가능해질거다.
 방향은 잡았으니 삽질을 해보자.
 
-<!--adsense-->
-
 ## NTFS symbolic link
 윈도우 비스타 이후부터는 NTFS 파일 시스템에서 심볼릭 링크를 지원한다.
 하지만 심볼릭 링크를 만들기 위해서는 administrator 권한이 필요하다.

@@ -35,8 +35,6 @@ url: /posts/i-hate-unsigned
 
 signed와 unsigned를 섞어서 계산하는 로직이 있다고 가정하자. `(signed)(-1) + (unsigned)(255)` 를 계산하자. signed와 unsigned를 같이 계산하면 음수가 발생할 가능성이 있기 때문에 계산 결과는 signed로 취급하는것이 맞을 것이다. `signed = signed + unsigned` 라고 생각하자. 계산 결과가 `-1 + 255 = (signed)(254)` 라고 생각하면 틀렸다. 254는 8-bit signed로는 표현 불가능하다. 8-bit signed로는 127까지밖에 표현하지 못한다. -1과 더해서 signed의 범위에 들어갈수 있는 unsigned는 128 이하의 숫자뿐이다. unsigned의 표현범위가 signed의 2배이지만 실제로 안전하게 쓸 수 있는 범위는 signed랑 별 차이 없다. **범위가 signed의 2배인 unsigned를 썻음에도 불구하고 실제로 사용 가능한 범위가 signed랑 별 차이가 없으면 unsigned를 사용할 필요가 있는가?**
 
-<!--adsense-->
-
 ### unsigned >= 0
 
 std::vector의 내용을 뒤에서부터 반복하는 루프를 짯다고 치자. size_t는 unsigned이고 v.size()의 타입은 unsigned이다.

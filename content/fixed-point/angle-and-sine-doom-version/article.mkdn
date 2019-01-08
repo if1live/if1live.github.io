@@ -20,8 +20,6 @@ url: /posts/angle-and-sine-doom-version
 > This was done in order for the game to be playable on 386 and 486SX CPUs without an FPU.
 > For compatibility reasons, this representation is still used in modern Doom source ports.
 
-<!--adsense-->
-
 ## Binary Angle Measurement (BAM)
 
 각도는 일반적인 정수/부동소수 연산과 다르다. 가장 큰 차이점이라면 주기가 있다는 점이다.

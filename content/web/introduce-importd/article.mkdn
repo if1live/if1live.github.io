@@ -30,8 +30,6 @@ file=sample_flask.py
 위의 코드는 importd와 [flask](http://flask.pocoo.org/) 로 작성한 hello world이다. 소스파일 하나로 서버를 띄울 수 있다.
 크고 아름다운 django에 비하면 매우 단순하다.
 
-<!--adsense-->
-
 ### Full compatibility with django
 
 django 기반으로 만들었기 때문에 django의 기능과 django용 수많은 라이브러리를 거의 그대로 사용할 수 있다.

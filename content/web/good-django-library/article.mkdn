@@ -50,9 +50,6 @@ urlpatterns = patterns('',
 smarturls은 기존 django프로젝트에 끼워넣어도 문제가 생기지 않는다는 점이
 좋다.
 
-
-<!--adsense-->
-
 ## Debugger
 
 ![image]({attach}good-django-library/twdp_0804.png)

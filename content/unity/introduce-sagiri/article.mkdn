@@ -30,8 +30,6 @@ url: /posts/introduce-sagiri
 ![mlogcat]({attach}introduce-sagiri/mlogcat.png)
 내 경우는 안드로이드 로그를 볼때 [mLogcat][site-mlogcat]을 쓰는데 이런 식으로 보인다.
 
-<!--adsense-->
-
 ### logcat 없이 로그를 보고 싶다
 안드로이드에서는 logcat을 통해서 로그를 볼수있다고 했다.
 하지만 몇가지 단점이 있다.
