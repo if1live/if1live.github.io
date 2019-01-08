@@ -30,6 +30,8 @@ class AssetFindDemo : BaseBehaviour {
 `UnityEditor` 네임스페이스는 빌드에서는 못쓰기 떄문이다.
 그래서 빌드를 뽑고 싶으면 전처리기를 이용해야한다.
 
+<!--adsense-->
+
 
 ```csharp
 #if UNITY_EDITOR

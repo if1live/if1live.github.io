@@ -10,6 +10,8 @@ url: /posts/sytem-prog-study-interrupt-and-exceptions
 
 시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 
+<!--adsense-->
+
 # Interrupt and Exceptions
 ## Interrupt vs Exception
 ### Interrupt
@@ -23,7 +25,6 @@ url: /posts/sytem-prog-study-interrupt-and-exceptions
 * Synchronous Interrupt
 * CPU에서 명령어 실행도중 발생
 	* ex: 0으로 나누기
-
 
 ## Interrupt Signal
 * Interrupt Signal 받으면 하는 행동

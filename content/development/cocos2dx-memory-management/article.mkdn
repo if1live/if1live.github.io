@@ -24,6 +24,8 @@ cocos2dx는 그런거 없이 자체 구현되어있으니까 일단 신경쓰지
 
 하지만 cocos2dx는 cocos2d를 거의 비슷하게 베끼려보니까 cocos2dx를 보면 CCObject라는 클래스로 objc에 있는 메모리 모델을 비슷하게 만들어놧다.
 
+<!--adsense-->
+
 ```cpp
 CCObject::CCObject(void)
 {

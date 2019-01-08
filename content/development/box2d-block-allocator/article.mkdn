@@ -18,6 +18,7 @@ Chunk, Block의 2가지 개념으로 나누어서 메모리를 관리한다. Chu
 
 s_blockSizeLookup에는 바이트별로 m_freeLists, s_blockSizes에 대응되는 인덱스를 가진다. 예를 들어서 3byte의 메모리를 요청하면 block allocator는 16byte의 메모리를 반환한다. 그렇다면 '3'을 값으로 넣으면 16byte에 대응되는 인덱스값이 '0'을 바로 얻을수 잇으면 여러모로 편할것이다. 그래서 이 변수가 생겻다. s_blockSizeLookup는 b2_maxBlockSize+1 크기의 배열이라서 0byte~b2_maxBlockSize byte에 1:1로 대응되는 블럭크기 인덱스를 저장한다.
 
+<!--adsense-->
 
 ```cpp
 struct b2Chunk

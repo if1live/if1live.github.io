@@ -24,6 +24,8 @@ url: /posts/make-unity-build-system
 
 ![manual build]({attach}make-unity-build-system/manual-build.png)
 
+<!--adsense-->
+
 ## 간단한 빌드 스크립트
 
 유니티에는 커맨드 라인을 통해 스크립트의 특정 함수를 호출하는 기능이 있다.

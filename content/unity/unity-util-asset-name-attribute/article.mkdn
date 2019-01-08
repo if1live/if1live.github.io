@@ -51,6 +51,8 @@ public class AssetNameConnectorEditor : UnityEditor.Editor {
 }
 ```
 
+<!--adsense-->
+
 하지만 이 방법도 마음에 들지 않았다.
 `public AudioClip clickA`에 연결될 에셋 이름은 `Click_Heavy_00.mp3`인데 둘이 멀이 떨어져있어서 한눈에 읽기 어렵더라.
 

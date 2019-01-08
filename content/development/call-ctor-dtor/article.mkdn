@@ -25,6 +25,8 @@ void CallDestructor(T *ptr) {
 }
 ```
 
+<!--adsense-->
+
 ### 사용법 ###
 ```
 struct CtorDtorSample {

@@ -39,6 +39,8 @@ golang은 사용하지 않는 import가 있으면 컴파일 에러로 취급한�
 
 hugo를 git master branch가 아닌 안정버전에서 받아서 설치하는게 가능하다면 문제를 해결할 수 있을것이다.
 
+<!--adsense-->
+
 
 ## dep -> FAIL
 

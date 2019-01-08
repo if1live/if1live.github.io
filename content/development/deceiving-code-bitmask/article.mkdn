@@ -32,6 +32,8 @@ double buffer를 사용했는데 의도하지 않은 stencil 이 출력되었다
 [C Operator
 Precedence](http://en.cppreference.com/w/c/language/operator_precedence)
 
+<!--adsense-->
+
 `==` 연산자의 우선순위는 7인데 `&` 연산자의 우선순위는 8이다. 그래서
 `mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL` 의 진짜 의미는
 `(mode & WIN_MODE_STENCIL) == WIN_MODE_STENCIL` 가 아니라

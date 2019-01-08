@@ -37,6 +37,8 @@ url: /posts/fumika-development-note
 이런저런 생각을 하다보니 손으로 직접 하긴 귀찮고 자동화시켜서 처리하고싶더라.
 그래서 프로젝트 fumika를 시작했다
 
+<!--adsense-->
+
 ## 중고책 매입가 검색하는 API 만들자
 
 [알라딘][bookstore-aladin], [Yes24][bookstore-yes24]에서 중고책을 매입해주더라.

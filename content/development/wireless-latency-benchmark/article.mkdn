@@ -13,3 +13,5 @@ url: /posts/wireless-latency-benchmark
 PS3 컨트롤러는 블투투스를 쓴다길래 블투를 쓰면 latency가 얼마나 개선되는지 한번 테스트해봤다.
 
 자세한건 [repo](https://github.com/if1live/wireless-latency-benchmark) 를 참고.
+
+<!--adsense-->

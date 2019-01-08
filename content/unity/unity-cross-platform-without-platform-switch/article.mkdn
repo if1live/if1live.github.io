@@ -27,6 +27,8 @@ ios, android를 동시에 지원하는 게임을 유니티로 만든다고 가�
 
 두번째 문제는 프로젝트를 두번 받았으니 용량이 두배라는것이다. 프로젝트가 매우 크지 않은 이상 치명적인 문제는 아닐거다.
 
+<!--adsense-->
+
 ## Solution 2. Symbolic link
 
 유니티 프로젝트에서 데이터에 해당되는 것은 2개의 폴더, `Assets`, `ProjectSettings`에 들어있다. `Temp`, `Library` 는 유니티에 의해 자동생성되는 폴더이다. 그리고 switch platform의 영향을 받는 폴더는 `Temp`, `Library` 이다. switch platform을 해도 데이터는 바뀌지 않는다.

@@ -28,6 +28,8 @@ end_line=5
 lang=python
 ~~~
 
+<!--adsense-->
+
 ## execute
 
 ~~~maya:execute

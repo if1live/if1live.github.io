@@ -23,6 +23,8 @@ I'm lazy, so I like package rather than compile. I try using PPA.
 After install awesome 3.5, I execute awesome, But crash occur.
 I decide to install awesome 3.5 from source.
 
+<!--adsense-->
+
 ## Install Dependencies
 
 Install default package.

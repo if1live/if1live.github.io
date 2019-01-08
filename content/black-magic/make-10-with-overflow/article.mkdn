@@ -18,6 +18,8 @@ url: /posts/make-10-with-overflow
 > 0722 #10을만들자
 > https://twitter.com/MathQ_kr/status/888413492465639425
 
+<!--adsense-->
+
 며칠동안 지속된 해시였고 며칠동안 재밌는 풀이를 만들기 위해서 고민했었다.
 나의 풀이법 중에 가장 기억에 남는걸 뒤늦게라도 정리해보았다.
 

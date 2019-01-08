@@ -22,6 +22,8 @@ trailer branch에서 작업해야 할때는 unity 5.6.0f3를 실행 후 `game-tr
 
 ![version mismatch]({attach}introduce-unity-launcher/version-mismatch.png)
 
+<!--adsense-->
+
 팝업이 뜨고 실수로 continue를 눌렀을때 asset import를 다시 할지 모른다.
 프로젝트에 에셋이 많이 들어있는 경우 수십분이 걸려서 낮잠을 자고와도 될수있다.
 

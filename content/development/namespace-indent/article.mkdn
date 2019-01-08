@@ -54,6 +54,8 @@ namespace irr
         //....
 ```
 
+<!--adsense-->
+
 들여쓰기 없는 다음과 같은 네임스페이스를 쓰기 위해서는 어떻게 짜야 하는가?
 ```cpp
 namespace sora {

@@ -29,6 +29,8 @@ OpenPyXL       | o
 XlsxWriter     | o
 PyExcelerate   | o
 
+<!--adsense-->
+
 xlwt만 지원하지 않는다. python excel 이라고 치면 제일 먼저 나오고 도메인도 python-excel.org를 갖고있는 라이브러리지만 낚이지 말자.
 
 ## 문서화

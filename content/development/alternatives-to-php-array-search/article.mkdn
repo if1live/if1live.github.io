@@ -40,6 +40,8 @@ cmd=php buggy.php
 attach_cmd=true
 ~~~
 
+<!--adsense-->
+
 2는 소수 목록에 있는데도 소수가 아닌거로 처리되었다. 원인은 php
 `array_search()` 함수의 잘못된 설계에 있다. 함수의 설명을 뒤지면 다음과
 같은 항목이 있다.

@@ -39,6 +39,8 @@ url: /posts/buffer-overflow-broken-dtor-debugging-post-mortem
 file=normal.txt
 ~~~
 
+<!--adsense-->
+
 스크립트 엔진과 스크립트 파일을 같이 실행하면 아래와 같은 출력이
 나옵니다. 현재는 콘솔로만 출력하지만 GUI, 게임 엔진을 붙여서 확장하면
 간단한 텍스트 어드벤쳐는 만들수 있을겁니다.

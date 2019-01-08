@@ -34,6 +34,8 @@ target     prot opt source               destination
 ```
 iptables 정보를 부팅시에 불러오는게 제대로 되어있지 않은 상태에서 그냥 재부팅을 하면 iptables 정보가 날라가니까 ```iptbales -L```을 통해서 제대로 설정되어있나 확인해보자.
 
+<!--adsense-->
+
 ## 부팅시 iptables 설정을 불러오지 못한다?
 문서에서는 ```/etc/network/interface```에다가 ```up iptables-restore < /etc/iptables.ipv4.nat```를 넣으라고 되어있지만 내 경우, 이를 넣어놓고 재부팅을 하면 iptables 정보를 불러오지 못하더라. 그래서 [IptablesHowTo][iptables]을 참고해서 ```pre-up iptables-restore < /etc/iptables.ipv4.nat```로 고쳤다.
 

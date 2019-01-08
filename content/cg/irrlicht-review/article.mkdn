@@ -1,12 +1,12 @@
 ---
 title: irrlicht engine 사용기
+subtitle : 2달 정도 만져보고 간단한 프로젝트를 완료후의 irrlicht 사용 소감
 tags: [irrlicht]
 slug: irrlight-engine-review
 author: if1live
 date: 2013-08-26
 url: /posts/irrlight-engine-review
 ---
-subtitle : 2달 정도 만져보고 간단한 프로젝트를 완료후의 irrlicht 사용 소감
 
 ## 장점
 
@@ -15,6 +15,8 @@ subtitle : 2달 정도 만져보고 간단한 프로젝트를 완료후의 irrli
 
 ### 아직도 살아있는 오픈소스 게임엔진
 오픈소스 엔진중에서 포럼이 활성화되어있는거 찾아보면 irrlicht, ogre 정도 뿐인거같더라.
+
+<!--adsense-->
 
 ### 크로스플랫폼
 프로젝트에서 사용한 플랫폼은 맥, 윈도우인데 양쪽에서 적절히 굴러간다. 그래서 신경안쓰고 윈도우 유저와 맥 유저가 섞여서 팀을 구성했다.

@@ -10,6 +10,8 @@ url: /posts/system-programming-linux-file-system
 
 시스템 프로그래밍 시험 공부하면서 정리한 내용이다. 내용 갱신은 없을 예정이다.
 
+<!--adsense-->
+
 ## Linux File System
 * File System
     * 커널 및 외부 메모리안의 파일 시스템의 디렉토리를 관리하는 커널 서브 시스템

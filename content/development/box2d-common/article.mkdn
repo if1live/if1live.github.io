@@ -31,7 +31,7 @@ inline float32 b2InvSqrt(float32 x)
 quake3 이후로 계속 많이 쓰인다는 [Fast Inverse square root](http://en.wikipedia.org/wiki/Fast_inverse_square_root) 함수.
 처다보기만해도 정신이 우주로 가능 magic number가 내장되어잇다. box2d는 zlib니까 적절히 갖다쓰면 될듯하다.
 
-
+<!--adsense-->
 
 ### IsValid
 ```cpp

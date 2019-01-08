@@ -18,6 +18,8 @@ url: /posts/text-billboard
 
 이를 적절히 구현한 예제소스를 정리해서 공개한다.
 
+<!--adsense-->
+
 ## Repo
 * [Repo][repo]
 

@@ -26,6 +26,8 @@ pelican으로 만들어진 블로그를 hugo로 엎는거니까 pelican을 쓰�
 ### 2013년 2월 28일
 libsora.so 도메인을 등록했다. 블로그와 위키를 동시에 필요했기 때문에 dokuwiki를 사용했다.
 
+<!--adsense-->
+
 ### 2013년 5월 19일
 기존에 사용하던 정책을 버리고 정적 사이트 생성기로 이사했다. 서버를 직접 굴리는게 귀찮더라.
 [if1live.github.io](https://github.com/if1live/if1live.github.io) 저장소에 최초로 의미있는 커밋이 등장한다.

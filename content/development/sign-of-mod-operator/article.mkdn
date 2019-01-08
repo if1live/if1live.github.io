@@ -28,6 +28,8 @@ Type "copyright", "credits" or "license()" for more information.
 * -4 % 3 = 2
 * 4 % -3 = -2
 
+<!--adsense-->
+
 ## javascript
 
 ```

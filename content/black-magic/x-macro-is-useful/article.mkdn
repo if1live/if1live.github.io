@@ -20,6 +20,8 @@ url: /posts/x-macro-is-useful
 C, C++ 많이 해본 사람은 다 알고있을 뻔한 주제다.
 하지만 처음하는 사람은 글을 읽고 include, define에 대한 새로운 관점을 배울 수 있을거다.
 
+<!--adsense-->
+
 ## 다시 보는 include
 
 C컴파일러는 하나의 소스만 읽고 컴파일할 수 있다.
