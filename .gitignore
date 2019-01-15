@@ -116,3 +116,10 @@ style-gen.css
 # unity sample
 Library
 Temp
+Assembly-CSharp.csproj
+*.sln
+.gradle
+
+# .net core
+obj
+bin
