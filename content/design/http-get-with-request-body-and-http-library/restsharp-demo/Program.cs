@@ -25,10 +25,10 @@ class Program
     }
     static void Main(string[] args)
     {
-        var taskGET = RequestCommon(Method.GET);
-        taskGET.Wait();
-
         var taskPOST = RequestCommon(Method.POST);
         taskPOST.Wait();
+
+        var taskGET = RequestCommon(Method.GET);
+        taskGET.Wait();
     }
 }

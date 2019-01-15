@@ -1,0 +1,2 @@
+{"method":"POST","body":{"foo":1}}
+ProtocolViolationException: Cannot send data when method is: GET

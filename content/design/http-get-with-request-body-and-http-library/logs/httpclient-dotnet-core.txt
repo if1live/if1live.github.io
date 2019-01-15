@@ -1,0 +1,4 @@
+$ cd httpclient-dotnet-core
+$ dotnet run
+{"method":"POST","body":{"foo":1}}
+{"method":"GET","body":{"foo":1}}

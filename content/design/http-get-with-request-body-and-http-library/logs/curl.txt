@@ -1,0 +1,3 @@
+$ bash curl-demo.sh
+{"method":"POST","body":{"foo":1}}
+{"method":"GET","body":{"foo":1}}

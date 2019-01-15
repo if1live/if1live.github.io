@@ -1,0 +1,4 @@
+$ cd restsharp-demo
+$ dotnet run
+{"method":"POST","body":{"foo":1}}
+{"method":"GET","body":{}}
