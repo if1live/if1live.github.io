@@ -36,8 +36,24 @@ public class Demo {
     }
 
     public static void main(String[] args) throws Exception {
-        requestCommon("GET");
-        requestCommon("POST");
-        requestCommon("DELETE");
+        String[] methods = {
+            "GET",
+            // "HEAD",
+            "POST",
+            "PUT",
+            "DELETE",
+            // "CONNECT",
+            "OPTIONS",
+            "TRACE",
+            "PATCH",
+        };
+        for(String method : methods) {
+            System.out.print(method + " => ");
+            try {
+                requestCommon(method);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

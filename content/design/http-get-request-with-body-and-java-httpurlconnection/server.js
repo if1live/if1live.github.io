@@ -4,14 +4,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({ method: 'GET', body: req.body });
-});
-app.post('/', (req, res) => {
-  res.json({ method: 'POST', body: req.body });
-});
-app.delete('/', (req, res) => {
-  res.json({ method: 'DELETE', body: req.body });
+app.all('/', (req, res) => {
+  res.json({ method: req.method, body: req.body });
 });
 
 const port = 3100;
