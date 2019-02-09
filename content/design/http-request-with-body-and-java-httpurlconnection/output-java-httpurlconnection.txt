@@ -1,0 +1,7 @@
+GET => {"method":"POST","body":{"key":1}}
+POST => {"method":"POST","body":{"key":1}}
+PUT => {"method":"PUT","body":{"key":1}}
+DELETE => {"method":"DELETE","body":{"key":1}}
+OPTIONS => {"method":"OPTIONS","body":{"key":1}}
+TRACE => HTTP method TRACE doesn't support output
+PATCH => Invalid HTTP method: PATCH

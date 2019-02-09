@@ -1,0 +1,8 @@
+$ bash curl-demo.sh
+GET => {"method":"GET","body":{"foo":1}}
+POST => {"method":"POST","body":{"foo":1}}
+PUT => {"method":"PUT","body":{"foo":1}}
+DELETE => {"method":"DELETE","body":{"foo":1}}
+OPTIONS => {"method":"OPTIONS","body":{"foo":1}}
+TRACE => {"method":"TRACE","body":{"foo":1}}
+PATCH => {"method":"PATCH","body":{"foo":1}}
