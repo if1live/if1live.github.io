@@ -55,10 +55,10 @@ export const foo = () => {
 ├── src
 │   ├── index.ts
 │   ├── foo
-│   |   └── a
-|   |       └── b
-|   |           └── c
-|   |               └── index.ts
+│   │   └── a
+│   │       └── b
+│   │           └── c
+│   │               └── index.ts
 │   └── bar
 │       └── index.ts
 └── test
