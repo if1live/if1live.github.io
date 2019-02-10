@@ -1,0 +1,21 @@
+유니티에는 UnityWebRequest라는 라이브러리가 내장되어있다.
+[매뉴얼][unitywebrequest-manual]을 읽어보면 재밌는 내용이 있다.
+
+> Set HTTP verb (such as GET, POST, HEAD - custom verbs are permitted on all platforms except for Android)
+
+그냥 안드로이드만 안된다.
+
+[UnityWebRequest][unitywebrequest-reference]의 문서를 보자.
+
+-----|----
+kHttpVerbCREATE | The string "CREATE", commonly used as the verb for an HTTP CREATE request.
+kHttpVerbDELETE | The string "DELETE", commonly used as the verb for an HTTP DELETE request.
+kHttpVerbGET | The string "GET", commonly used as the verb for an HTTP GET request.
+kHttpVerbHEAD | The string "HEAD", commonly used as the verb for an HTTP HEAD request.
+kHttpVerbPOST | The string "POST", commonly used as the verb for an HTTP POST request.
+kHttpVerbPUT | The string "PUT", commonly used as the verb for an HTTP PUT request.
+
+HTTP CREATE request....?
+
+[unitywebrequest-reference]: https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html
+[unitywebrequest-manual]: https://docs.unity3d.com/Manual/UnityWebRequest.html
