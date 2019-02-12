@@ -4,8 +4,8 @@ subtitle: todo
 tags: [function]
 slug: what-is-function
 author: if1live
-date: 2019-02-11
 url: /posts/what-is-function
+status: draft
 ---
 TODO 함수 정의?
 
