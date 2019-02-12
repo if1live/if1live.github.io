@@ -1,0 +1,61 @@
+---
+title: 함수란 무엇인가?
+subtitle: todo
+tags: [function]
+slug: what-is-function
+author: if1live
+date: 2019-02-11
+url: /posts/what-is-function
+---
+TODO 함수 정의?
+
+TODO 알고리즘 정의
+
+![function]({attach}what-is-function/800px-Function_machine2.svg.png)
+
+![problem]({attach}what-is-function/problem.jpg)
+
+~~~maya:view
+file=output.txt
+~~~
+
+## 알고리즘
+
+![flowchart]({attach}what-is-function/800px-LampFlowchart.svg.png)
+
+algorithm
+https://ideone.com/O5kYsE
+
+~~~maya:view
+file=src-algorithm.c
+lang=c
+~~~
+
+## 관계
+집합론
+
+![relation]({attach}what-is-function/800px-Injection_keine_Injektion_2a.svg.png)
+TODO 수학에서의 함수 정의
+
+pattern matching
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b588f7e0b026361c48a92d53ea2b98db
+
+~~~maya:view
+file=src-pattern-matching.rs
+lang=rust
+~~~
+
+## 수학 공식
+선형회귀
+
+![graph]({attach}what-is-function/800px-Parabola2.svg.png)
+
+math
+https://ideone.com/ArmMQ6
+
+~~~maya:view
+file=src-math.c
+lang=c
+~~~
+
+
