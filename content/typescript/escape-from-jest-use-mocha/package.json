@@ -1,0 +1,17 @@
+{
+  "name": "escape-from-jest-use-mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "jest": "jest sample",
+    "mocha": "mocha  -r bootload sample.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "expect": "^24.8.0",
+    "jest": "^24.8.0",
+    "mocha": "^6.1.4"
+  }
+}
