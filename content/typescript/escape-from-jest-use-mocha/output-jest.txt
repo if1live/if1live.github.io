@@ -1,0 +1,15 @@
+before all - global : 1
+before all - local : 2
+before each - global : 3
+before each - local : 4
+ok : 5
+after each - local : 6
+after each - global : 7
+before each - global : 8
+before each - local : 9
+ok2 : 10
+after each - local : 11
+after each - global : 12
+after all - local : 13
+after all - global : 14
+
