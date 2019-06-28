@@ -1,0 +1,29 @@
+{
+  "name": "escape-from-jest-mocha-with-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "ts-node": "mocha -r node_modules/ts-node/register/transpile-only -r node_modules/tsconfig-paths/register -r bootload",
+    "ts-node:example": "npm run ts-node src/__tests__/sample.test.ts",
+    "check:watch": "tsc -w --skipLibCheck",
+    "mocha": "mocha -r babel-core/register -r bootload",
+    "mocha:example": "npm run mocha dist/__tests__/sample.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/expect": "^1.20.4",
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.10",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "expect": "^24.8.0",
+    "jest": "^24.8.0",
+    "mocha": "^6.1.4",
+    "ts-node": "^8.3.0",
+    "tsconfig-paths": "^3.8.0",
+    "typescript": "^3.5.2"
+  }
+}
