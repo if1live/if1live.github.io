@@ -1,0 +1,23 @@
+PASS test/a.test.js
+  ● Console
+
+    console.log test/a.test.js:8
+      first load: 0.216 pid=15604
+    console.log test/a.test.js:9
+      second load: 0 pid=15604
+
+PASS test/c.test.js
+  ● Console
+
+    console.log test/c.test.js:8
+      first load: 0.021 pid=15604
+    console.log test/c.test.js:9
+      second load: 0 pid=15604
+
+PASS test/b.test.js
+  ● Console
+
+    console.log test/b.test.js:8
+      first load: 0.021 pid=15604
+    console.log test/b.test.js:9
+      second load: 0 pid=15604
