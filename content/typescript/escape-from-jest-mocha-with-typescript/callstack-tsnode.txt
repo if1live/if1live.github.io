@@ -1,0 +1,6 @@
+at Test.<anonymous> (src\server\__tests__\app.test.ts:19:18)
+at Test.assert (node_modules\supertest\lib\test.js:181:6)
+at Server.localAssert (node_modules\supertest\lib\test.js:131:12)
+at Server.EventEmitter.emit (domain.js:442:20)
+at emitCloseNT (net.js:1618:8)
+at process._tickCallback (internal/process/next_tick.js:63:19)
