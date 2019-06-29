@@ -1,0 +1,15 @@
+{
+  "name": "bug-of-monday-webpack-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
