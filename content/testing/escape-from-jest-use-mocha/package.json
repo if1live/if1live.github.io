@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "jest": "jest sample",
-    "mocha": "mocha  -r bootload sample.test.js"
+    "mocha": "mocha -r bootload sample.test.js"
   },
   "author": "",
   "license": "ISC",

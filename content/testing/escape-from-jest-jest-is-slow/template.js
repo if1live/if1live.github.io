@@ -10,7 +10,5 @@ console.log(`second load: ${(a3 - a2) / 1000} pid=${pid}`);
 
 const expect = require('expect');
 
-// for mocha
-if (!global.test) { global.test = it; }
-test(__filename, () => expect(1).toBe(1));
+it(__filename, () => expect(1).toBe(1));
 

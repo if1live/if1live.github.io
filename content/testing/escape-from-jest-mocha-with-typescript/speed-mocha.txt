@@ -1,7 +1,0 @@
-cross-env NODE_ENV=test mocha \
-    -r babel-core/register \
-    -r src/scripts/bootload
-
-....(....)....
-
-155 passing (5s)

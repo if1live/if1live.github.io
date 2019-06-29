@@ -1,9 +1,0 @@
-cross-env NODE_ENV=test mocha \
-    -r node_modules/ts-node/register/transpile-only \
-    -r node_modules/tsconfig-paths/register \
-    -r src/scripts/bootload \
-    --config .mocharc.ts.json
-
-....(....)....
-
-155 passing (11s)
