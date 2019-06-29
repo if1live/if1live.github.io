@@ -5,7 +5,7 @@ tags: [c++, cpp, tr1, 낚시]
 slug: deceiving-code-tr1-header-class
 author: if1live
 date: 2015-04-27
-status: draft
+draft: true
 ---
 
 tr1 헤더/std::tr1::shared_ptr 같은 클래스 이름으로 사람 낚기 => 테이블 정리한번 해보면 좋을듯

@@ -5,7 +5,7 @@ tags: [function]
 slug: what-is-function
 author: if1live
 url: /posts/what-is-function
-status: draft
+draft: true
 ---
 TODO 함수 정의?
 
