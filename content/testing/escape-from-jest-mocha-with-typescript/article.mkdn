@@ -4,9 +4,8 @@ subtitle: ts-node, tsc
 tags: [testing, jest, mocha]
 slug: escape-from-jest-mocha-with-typescript
 author: if1live
-date: 2019-07-03
+date: 2019-07-03T01:00:00+09:00
 url: /posts/escape-from-jest-mocha-with-typescript
-draft: true
 ---
 
 ## 개요
