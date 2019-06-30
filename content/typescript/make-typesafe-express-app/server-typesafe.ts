@@ -1,9 +1,6 @@
 import express from 'express';
 import * as yup from 'yup';
 
-// https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html
-type ThenArg<T> = T extends Promise<infer U> ? U : T;
-
 const app = express();
 
 export interface Req {
@@ -16,6 +13,8 @@ const schema = yup.object().shape<Req>({
   b: yup.number().required(),
 });
 
+type YupArg<T> = T extends yup.ObjectSchema<yup.Shape<any, infer Y>> ? Y : never;
+type ReqGenereated = YupArg<typeof schema>;
 
 const handleSum = async (req: express.Request) => {
   const ctx = await schema.validate(req.query);
@@ -28,6 +27,8 @@ app.get('/sum', async (req, res) => {
   const resp = await handleSum(req);
   res.json(resp);
 });
+
+type ThenArg<T> = T extends Promise<infer U> ? U : T;
 
 export type Resp = ThenArg<ReturnType<typeof handleSum>>;
 
