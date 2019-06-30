@@ -1,0 +1,25 @@
+{
+  "name": "make-express-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server:simple": "ts-node server-simple.ts",
+    "server:typesafe": "ts-node server-typesafe.ts",
+    "client": "ts-node client.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node-fetch": "^2.3.7",
+    "@types/qs": "^6.5.3",
+    "@types/yup": "^0.26.18",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "qs": "^6.7.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2",
+    "yup": "^0.27.0"
+  }
+}
