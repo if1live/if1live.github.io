@@ -4,7 +4,7 @@ subtitle: jest는 왜 mocha보다 느린가?
 tags: [testing, jest, mocha]
 slug: escape-from-jest-jest-is-slow
 author: if1live
-date: 2019-06-29
+date: 2019-07-01
 url: /posts/escape-from-jest-jest-is-slow
 draft: true
 ---
