@@ -1,0 +1,157 @@
+---
+title: express에서 에러로 HTTP status code 통제하기
+subtitle: throw new createError.BadRequest()
+tags: [express, javascript, http, web]
+slug: express-error-and-http-status-code
+author: if1live
+date: 2019-08-12
+---
+
+## throw new Error('BadRequest')
+
+자바스크립트에서 Error를 던져서 에러 처리하는 것은 쉽고 간단한 방법이다.
+express에서도 마찬가지이다.
+Error를 던지면 200 OK가 아닌 500 Internal Server Error를 발생시킬 수 있다.
+
+
+~~~maya:view
+lang=js
+file=main-error.js
+~~~
+
+요즘 세상에 에러났다고 무조건 500을 던지면 멍청한 REST API처럼 보인다.
+상황에 맞춰서 4xx, 5xx를 던져야한다.
+500 아닌 상태 코드를 보내고 싶으면 `res.status()`를 사용하면 된다.
+
+~~~maya:view
+lang=js
+file=main-manual-400.js
+~~~
+
+나는 둘을 합치고 싶다.
+`BadRequest`라는 에러를 던지면 400,
+`NotFound`라는 에러를 던지면 404가 HTTP status code로 찍히게 만들고 싶다.
+
+## 짧은 방법
+
+[http-errors][npm-http-errors]를 사용하면 간단하다.
+바퀴는 새로 발명하는게 아니다.
+
+~~~maya:view
+lang=js
+file=main-http-errors.js
+~~~
+
+## 알아봐서 별 쓸모없는 정보
+
+심심한 사람만 읽어보자.
+당장 눈 앞의 문제 해결에는 도움이 되지 않는 내용이다.
+하지만 알고있으면 자신의 문제에 응용할 수 있을 것이다.
+
+### 왜 `throw new Error()`를 쓰면 안되는가?
+
+`throw new Error()`는 편한 도구이다.
+`http-errors`를 깔고 import하지 않아도 에러를 만들어서 던질 수 있지 않는가?
+게다가 에러가 던져지면 200이 뜨진 않는다.
+REST API라고 부르기에는 멍청하지만 대충 쓸만하다.
+
+하지만 sentry가 붙으면 문제가 커진다.
+
+https://github.com/getsentry/sentry-javascript/blob/v3.27.2/packages/node/src/handlers.ts#L270
+
+```js
+export function errorHandler(): (
+  error: MiddlewareError,
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  next: (error: MiddlewareError) => void,
+) => void {
+  return function sentryErrorMiddleware(
+    error: MiddlewareError,
+    _req: http.IncomingMessage,
+    _res: http.ServerResponse,
+    next: (error: MiddlewareError) => void,
+  ): void {
+    const status = getStatusCodeFromResponse(error);
+    if (status < 500) {
+      next(error);
+      return;
+    }
+    const eventId = captureException(error);
+    (_res as any).sentry = eventId;
+    next(error);
+  };
+}
+```
+
+[Official Sentry SDKs for JavaScript][github-sentry]의 경우 HTTP 상태 코드가 5xx이면 에러 리포팅 올리는게 기본값이다.
+`throw new Error`로 던진 에러가 전부 sentry에 등록된다.
+이는 당신이 의도한 동작이 아닐 것이다. 
+
+### 왜 기본값이 500인가?
+
+express는 finalhandler를 기본 에러 핸들러도 사용한다.
+[application.js](https://github.com/expressjs/express/blob/4.17.1/lib/application.js)
+
+```js
+app.handle = function handle(req, res, callback) {
+  var router = this._router;
+
+  // final handler
+  var done = callback || finalhandler(req, res, {
+    env: this.get('env'),
+    onerror: logerror.bind(this)
+  });
+  ...
+```
+
+[finalhandler][github-finalhandler]의 README를 참고하면 500이 되는 이유를 알 수 있다.
+
+> The res.statusCode is set from err.status (or err.statusCode).
+> If this value is outside the 4xx or 5xx range, it will be set to 500.
+
+### 4xx, 5xx는 어떻게 던질수 있는가?
+
+`http-errors` 쓰는 대신 에러 클래스를 직접 구현하고 싶은 생각이 들지 모른다.
+`http-errors`를 직접 만들어보자.
+위에서 언급한 finalhandler의 README를 보면 구현할 수 있다.
+에러 객체에 `status` 또는 `statusCode`로 원하는 상태 코드를 넣어준다.
+
+~~~maya:view
+lang=js
+file=main-custom-error.js
+~~~
+
+### 라이브러리에서 던져진 에러는 어떻게 제어할 수 있는가?
+
+Error에 status, statusCode 넣는건 자바스크립트 세상의 표준이 아니다.
+그래서 많은 라이브러리의 에러 클래스에는 status, statusCode 속성이 없다.
+
+[yup/ValidationError](https://github.com/jquense/yup/blob/v0.27.0/src/ValidationError.js)
+
+~~~maya:view
+lang=js
+file=ValidationError.js
+~~~
+
+[jsonwebtoken/JsonWebTokenError](https://github.com/auth0/node-jsonwebtoken/blob/master/lib/JsonWebTokenError.js)
+~~~maya:view
+lang=js
+file=JsonWebTokenError.js
+~~~
+
+위와 같은 라이브러리를 사용하는데 에러가 던져지면 어떻게 대응할까?
+`catch`를 통해서 라이브러리에서 던져진 에러를 잡은 후 `http-errors`로 다시 던지는 것도 방법이다.
+하지만 기존 코드를 전부 `catch`로 감싸는건 너무 무식하다.
+express middleware를 사용하면 조금 우아하게 처리할 수 있다.
+에러 핸들러에서 `err.name`를 확인하고 원하는 에러를 대신 던지는 식으로 처리할 수 있다.
+
+~~~maya:view
+lang=js
+file=main-error-handler.js
+~~~
+
+
+[npm-http-errors]: https://www.npmjs.com/package/http-errors
+[github-sentry]: https://github.com/getsentry/sentry-javascript/
+[github-finalhandler]: https://github.com/pillarjs/finalhandler

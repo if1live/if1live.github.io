@@ -1,0 +1,17 @@
+{
+  "name": "express-error-and-http-status-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "yup": "^0.27.0"
+  }
+}
