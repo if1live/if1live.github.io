@@ -21,13 +21,8 @@ before_install:
   - go get github.com/golang/dep/cmd/dep
 
 install:
-  - mkdir ${TRAVIS_HOME}/src
-  - cd ${TRAVIS_HOME}/src
-  - git clone https://github.com/gohugoio/hugo.git
-  - cd hugo
-  - go install --tags extended
-  - cd ${TRAVIS_HOME}/gopath/src/github.com/if1live/libsora.so
-
+  - wget -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.58.3/hugo_0.58.3_Linux-64bit.deb
+  - sudo dpkg -i /tmp/hugo.deb
   - go get github.com/wellington/wellington/wt
   - dep ensure
 
