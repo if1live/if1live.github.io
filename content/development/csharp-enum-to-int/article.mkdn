@@ -109,5 +109,11 @@ file=il2cpp-error.txt
 
 즉, IL2CPP를 쓰면 답이 없다. 캐스팅 노가다를 하자.
 
+## Updated: 더 좋은 방법
+
+나는 iOS 개발을 주력으로 하지 않아서 여기까지 만지고 삽질을 관뒀다.
+나중에 iOS까지 대응하는 더 좋은 방법이 있다고 들어서 링크를 남겨둔다.
+
+[NDC 이놈의 enum의 박싱을 어찌할꼬](https://www.youtube.com/watch?v=pP9R58fQo_k)
 
 [sb]: https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int
