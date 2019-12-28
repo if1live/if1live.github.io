@@ -1,0 +1,17 @@
+{
+  "name": "circular-deps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "const": "npx ts-node ./src/const/index.ts",
+    "class-ok": "npx ts-node ./src/class-ok/index.ts",
+    "class-fail": "npx ts-node ./src/class-fail/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
