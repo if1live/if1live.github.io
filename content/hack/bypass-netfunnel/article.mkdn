@@ -5,7 +5,7 @@ tags: [hack, netfunnel]
 slug: bypass-netfunnel
 author: if1live
 date: 2019-09-21
-url: /post/bypass-netfunnel
+url: /posts/bypass-netfunnel
 ---
 
 ## 개요
