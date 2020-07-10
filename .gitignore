@@ -123,3 +123,5 @@ Assembly-CSharp.csproj
 # .net core
 obj
 bin
+
+*.sqlite
