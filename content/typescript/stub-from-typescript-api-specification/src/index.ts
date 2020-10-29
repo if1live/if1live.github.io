@@ -29,22 +29,24 @@ const counterSpec = {
 };
 
 type ControllerFunction<T> = T extends Specification<infer Req, infer Resp>
-  ? (body: Req) => Promise<Resp>
+  ? (body: Req) => Resp
   : never;
 
 type Controller<T> = { [P in keyof T]: ControllerFunction<T[P]> };
 
-class CounterController implements Controller<typeof counterSpec> {
+type CounterStub = Controller<typeof counterSpec>;
+
+class CounterController implements CounterStub {
   private readonly map = new Map<string, number>();
 
-  public inc: Controller<typeof counterSpec>['inc'] = async (body) => {
+  public inc: CounterStub['inc'] = body => {
     const { id } = body;
     const value = (this.map.get(id) ?? 0) + 1;
     this.map.set(id, value);
     return { id, value };
   }
 
-  public reset: Controller<typeof counterSpec>['reset'] = async (body) => {
+  public reset: CounterStub['reset'] = body => {
     const { id } = body;
     this.map.set(id, 0);
     return { id, value: 0 };
@@ -60,8 +62,10 @@ type Client<T> = { [P in keyof T]: ClientFunction<T[P]> };
 class BaseClient {
   constructor(protected readonly host: string) { }
 
-  protected handle<Req, Resp>(spec: Specification<Req, Resp>) {
-    const fn: ClientFunction<Specification<Req, Resp>> = async (req) => {
+  protected handle<Req, Resp>(
+    spec: Specification<Req, Resp>,
+  ): ClientFunction<Specification<Req, Resp>> {
+    return async (req) => {
       const { method, endpoint } = spec;
       const url = `${this.host}${endpoint}`;
 
@@ -72,7 +76,6 @@ class BaseClient {
       });
       return await resp.json();
     };
-    return fn;
   }
 }
 
@@ -125,6 +128,3 @@ app.listen(PORT, async () => {
   console.log('inc', await client.inc({ id }));
   process.exit();
 });
-
-
-
