@@ -156,6 +156,25 @@ MonoBehaviour:
 .container .grid_1 {width: 57px;}
 ```
 
+## mermaid
+
+```mermaid
+graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[노트북]
+    C -->|Two| E[아이폰]
+    C -->|Three| F[fa:fa-car Car]
+```
+
+```mermaid
+sequenceDiagram
+    Alice->>+John: Hello John, how are you?
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    John-->>-Alice: I feel great!
+```
+
 ## inline test
 this is ```code elem```.
 this is **bold elem**.

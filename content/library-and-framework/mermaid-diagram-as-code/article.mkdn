@@ -1,0 +1,68 @@
+---
+title: "mermaid: diagram as code"
+subtitle: 텍스트로 그림 그리기
+tags: [uml, diagram]
+slug: mermaid-diagram-as-code
+author: if1live
+date: 2020-11-05
+url: /posts/mermaid-diagram-as-code
+---
+
+## 개요
+
+UML 사용하면 글로만 이야기하는 것보다 편리하다.
+하지만 UML을 마우스로 그리는건 매우 피곤하고 유지보수 하기 어렵다.
+마우스로 그림 그리는 도구는 나중에 변경되어도 뭐가 바뀌었는지 찾기 어렵다.
+
+IaC(Infrastructure as Code)처럼 UML as Code, Diagram as Code 같은거로 문서를 그리고 싶었다. 한동안은 [SequenceDiagram.org](https://sequencediagram.org/)를 찾아서 잘 썼다. 하지만 구글 문서에 UML 넣는 목적으로는 좋지 않다. png로 export해서 구글 문서에 끼워넣는걸 반복하는게 너무 귀찮았다.
+
+더 좋은 도구를 뒤지다 [mermaid][mermaid-docs]를 찾았다.
+
+## 내가 생각하는 장점
+
+mermaid는 [오픈소스][mermaid-repo]이다.
+[SequenceDiagram.org](https://sequencediagram.org/)는 좋은 도구인데 소스가 공개되어있지 않다. 웹에서만 접근할 수 있다. 다른 환경에 통합할때는 적합하지 않았다.
+
+mermaid는 자바스크립트로 구현되었고 결과물이 svg이다.
+구글 문서에 UML을 끼워넣으려고 [PlantUML Gizmo](https://gsuite.google.com/marketplace/app/plantuml_gizmo/950520042571)도 잠깐 만져봤다.
+이거는 출력물이 이미지 파일이고 외부에서 생성하는 방식이라서 편집한것이 반영되는 속도가 느렸다. mermaid는 자바스크립트로 만들어져서 [온라인 에디터][mermaid-online]도 잘 굴러가고 결과물이 svg라서 수정한걸 빨리 볼 수 있다.
+
+mermaid는 구글 문서에 끼워넣을수 있다.
+[Mermaid][mermaid-plugin]을 설치하면 구글 문서에도 다이어그램을 그릴 수 있다.
+
+mermaid는 visual studio code에서도 잘 돌아간다.
+온라인 에디터가 있어도 익숙한 에디터에서 그리고 싶었다.
+[Markdown Preview Mermaid Support][vs-mermaid] 깔면 vsocde에서 그린게 바로 보인다.
+
+## 예제
+
+[Markdown Preview Mermaid Support][vs-mermaid]의 아이디어를 베껴서 블로그에 적용해봤다.
+
+한글 넣어도 SVG로 잘 나온다.
+
+```mermaid
+graph TD
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[노트북]
+    C -->|Two| E[아이폰]
+    C -->|Three| F[fa:fa-car Car]
+```
+
+sequence diagram도 자주 쓰는데 잘 돌아간다
+
+```mermaid
+sequenceDiagram
+    Alice->>+John: Hello John, how are you?
+    Alice->>+John: John, can you hear me?
+    John-->>-Alice: Hi Alice, I can hear you!
+    John-->>-Alice: I feel great!
+```
+
+앞으로 자주 쓸거같다.
+
+[mermaid-plugin]: https://gsuite.google.com/marketplace/app/mermaid/636321283856
+[mermaid-docs]: https://mermaid-js.github.io/mermaid/
+[mermaid-repo]: https://github.com/mermaid-js/mermaid
+[mermaid-online]: https://mermaid-js.github.io/mermaid-live-editor
+[vs-mermaid]: https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
