@@ -32,7 +32,7 @@ mermaid는 구글 문서에 끼워넣을수 있다.
 
 mermaid는 visual studio code에서도 잘 돌아간다.
 온라인 에디터가 있어도 익숙한 에디터에서 그리고 싶었다.
-[Markdown Preview Mermaid Support][vs-mermaid] 깔면 vsocde에서 그린게 바로 보인다.
+[Markdown Preview Mermaid Support][vs-mermaid] 깔면 vscode에서 그린게 바로 보인다.
 
 ## 예제
 
