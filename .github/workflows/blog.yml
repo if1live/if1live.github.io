@@ -29,7 +29,7 @@ jobs:
           ./bin/deploy/publish_hugo.sh
 
       - name: Push directory to another repository
-        uses: cpina/github-action-push-to-another-repository@v1.1
+        uses: cpina/github-action-push-to-another-repository@master
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
