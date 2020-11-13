@@ -37,3 +37,4 @@ jobs:
           destination-github-username: if1live
           destination-repository-name: if1live.github.io
           user-email: libsora25@gmail.com
+          target-branch: docs
