@@ -45,3 +45,6 @@ PaginatePath = "page"
     # hugo 내장 markdown highlight 비활성화
     # 생성된 HTML은 가볍게 유지하고 js로 syntax highlight 다루고 싶다
     codeFences = false
+
+  [markup.goldmark.renderer]
+    unsafe = true
