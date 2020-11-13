@@ -276,17 +276,20 @@ $$e^x=\sum_{i=0}^\infty \frac{1}{i!}x^i$$
 multi line LaTeX
 
 $\begin{bmatrix}
-  1. & 1. & 1. \\
-  1. & 1. & 1. \\
+  1 & 1. & 1. \\
+  1 & 1. & 1. \\
 \end{bmatrix} +
 \begin{bmatrix}
-  1. & 2. & 3. \\
-  4. & 5. & 6. \\
+  1 & 2. & 3. \\
+  4 & 5. & 6. \\
 \end{bmatrix} =
 \begin{bmatrix}
-  2. & 3. & 4. \\
-  5. & 6. & 7. \\
+  2 & 3. & 4. \\
+  5 & 6. & 7. \\
 \end{bmatrix}$
+
+`1.` 같은 형태로 들어가지 않도록 주의한다.
+markdown 문법으로 인식되면 제대로 작동하지 않는다.
 
 ## todo
 
