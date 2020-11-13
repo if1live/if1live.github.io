@@ -1,6 +1,6 @@
 #!/bin/bash
 
-go run main.go
+./cli/libsora.so
 if [ $? != 0 ]; then
     exit -1
 fi

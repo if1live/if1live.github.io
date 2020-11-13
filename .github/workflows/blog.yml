@@ -15,14 +15,25 @@ jobs:
         with:
           go-version: 1.15
 
-      - name: setup git
-        run: |
-          git config --global user.email "libsora25@gmail.com"
-          git config --global user.name "git action"
-
       - name: install
-        run: ./scripts/ci_install.sh
+        run:
+          ./scripts/ci_install.sh
 
       - name: cli
         run: |
           cd cli && go build && cd ..
+
+      - name: build
+        run: |
+          ./bin/build_theme.sh
+          ./bin/deploy/publish_hugo.sh
+
+      - name: Push directory to another repository
+        uses: cpina/github-action-push-to-another-repository@v1.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: hugo/output
+          destination-github-username: if1live
+          destination-repository-name: if1live.github.io
+          user-email: libsora25@gmail.com
