@@ -1,0 +1,7 @@
+github.com/if1live/maya v0.0.0-20180310165255-758bd00fba02 h1:ifE9vy5Gb69pzMsASWxVTqg2Ft9inInKVbf5kUu0RP8=
+github.com/if1live/maya v0.0.0-20180310165255-758bd00fba02/go.mod h1:enVCyPQ+aMundBug/14zTEvibpz9M028hFrr4UQxBuQ=
+github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 h1:lDH9UUVJtmYCjyT0CI4q8xvlXPxeZ0gYCVvWbmPlp88=
+github.com/op/go-logging v0.0.0-20160315200505-970db520ece7/go.mod h1:HzydrMdWErDVzsI23lYNej1Htcns9BCg93Dk0bBINWk=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
+gopkg.in/yaml.v2 v2.3.0 h1:clyUAQHOM3G0M3f5vQj7LuJrETvjVot3Z5el9nffUtU=
+gopkg.in/yaml.v2 v2.3.0/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

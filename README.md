@@ -4,46 +4,32 @@
 
 [libsora.so](https://libsora.so) blog content
 
-## Install - windows
+## dependency
 
-* [node-sass](https://www.npmjs.com/package/node-sass)
 * [hugo](https://gohugo.io/getting-started/installing/)
-* dep: `go get github.com/golang/dep/cmd/dep`
-
-### clone project + GOPATH
-
-example
-* GOPATH: `<root>/blog`
-* libsora.so path: `<root>/blog/src/libsora.so`
-
-```
-export GOPATH=<blog root>
-mkdir -p blog/src
-cd blog/src
-git clone https://github.com/if1live/libsora.so.git
-cd libsora.so
-
-dep ensure
-```
+* sass
+    - windows: [node-sass](https://www.npmjs.com/package/node-sass)
+    - linux: [wellington](https://github.com/wellington/wellington)
 
 ## build
 
-```
+``` sh
 # build template
 bash ./bin/build_theme_win.sh
 
 # build document
-# set GOPATH before execute command
-go run main.go
+cd cli && go build && cd ..
+./cli/libsora.so
 
 # serve hugo
 cd hugo
 hugo serve 
-
 ```
 
 ## note
+
 ### Create https certificate
+
 ``` bash
 mkdir -p output
 cd output

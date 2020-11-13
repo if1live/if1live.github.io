@@ -13,10 +13,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
-          go-version: 1.12
-
-      - name: golang action
-        uses: cedrickring/golang-action/go1.12@1.6.0
+          go-version: 1.15
 
       - name: setup git
         run: |
@@ -26,5 +23,6 @@ jobs:
       - name: install
         run: ./scripts/ci_install.sh
 
-      - name: dep
-        run: dep ensure
+      - name: cli
+        run: |
+          cd cli && go build && cd ..

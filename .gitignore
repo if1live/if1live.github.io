@@ -125,3 +125,6 @@ obj
 bin
 
 *.sqlite
+
+# go build
+cli/pkg
