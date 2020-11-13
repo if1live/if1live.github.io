@@ -293,8 +293,8 @@ markdown 문법으로 인식되면 제대로 작동하지 않는다.
 
 ## todo
 
-- [ ] foo
-- [x] bar
+- [ ] first
+- [x] second
 
 [^1]: foo
 [^2]: bar
