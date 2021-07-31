@@ -13,7 +13,7 @@ PaginatePath = "page"
   tag = "tags"
 
 [params]
-  hostName = "libsora.so"
+  hostName = "if1live.github.io"
   twitterUsername = "if1live"
 
   socials = [
