@@ -1,0 +1,23 @@
+service: pnpm-with-script
+
+frameworkVersion: '2'
+
+package:
+  artifact: artifact.zip
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+
+  memorySize: 128
+  logRetentionInDays: 1
+  versionFunctions: false
+
+  region: ap-northeast-1
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - httpApi: '*'
