@@ -42,6 +42,6 @@ module.exports = {
   },
   plugins: [],
   optimization: {
-		minimize: false
+    minimize: false,
   },
 };
