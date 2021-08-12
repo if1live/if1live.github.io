@@ -1,5 +1,6 @@
 ---
 title: serverless 배포하기 (1) serverless-webpack 초급
+subtitle: serverless-webpack으로 타입스크립트 프로젝트를 쉽게 배포하기
 tags: [serverless]
 slug: deploying-serverless-1-serverless-webpack-beginning
 author: if1live
