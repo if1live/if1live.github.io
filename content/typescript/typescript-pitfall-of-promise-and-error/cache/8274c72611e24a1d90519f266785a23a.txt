@@ -1,0 +1,3 @@
+# pnpx ts-node try_catch_without_await/main_ok.ts
+catch
+undefined

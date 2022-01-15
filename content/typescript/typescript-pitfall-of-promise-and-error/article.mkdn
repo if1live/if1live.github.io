@@ -1,0 +1,51 @@
+---
+title: TODO
+subtitle: TODO
+tags: [typescript, javascript, promise, exception, error]
+slug: typescript-pitfall-of-promise-and-error
+author: if1live
+date: 2022-01-15
+url: /posts/typescript-pitfall-of-promise-and-error
+---
+
+### 1
+~~~maya:view
+file=outbound_promise/main_delay_off.ts
+~~~
+
+~~~maya:execute
+cmd=pnpx ts-node outbound_promise/main_delay_off.ts
+attach_cmd=true
+~~~
+
+### 2
+~~~maya:view
+file=outbound_promise/main_delay_on.ts
+~~~
+
+~~~maya:execute
+cmd=pnpx ts-node outbound_promise/main_delay_on.ts
+attach_cmd=true
+~~~
+
+
+### 3
+~~~maya:view
+file=try_catch_without_await/main_err.ts
+~~~
+
+~~~maya:execute
+cmd=pnpx ts-node try_catch_without_await/main_err.ts
+attach_cmd=true
+~~~
+
+### 4
+~~~maya:view
+file=try_catch_without_await/main_ok.ts
+~~~
+
+
+~~~maya:execute
+cmd=pnpx ts-node try_catch_without_await/main_ok.ts
+attach_cmd=true
+~~~

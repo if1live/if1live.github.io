@@ -1,0 +1,18 @@
+# pnpx ts-node outbound_promise/main_delay_on.ts
+(node:11376) UnhandledPromiseRejectionWarning: Error: 
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:17:9
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:4:12)
+    at func_throw (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:27:12)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:4:14
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:8:71
+    at new Promise (<anonymous>)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11376) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:11376) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+catch
+undefined
+(node:11376) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 1)

@@ -1,0 +1,3 @@
+# pnpx ts-node outbound_promise/main_delay_off.ts
+catch
+undefined

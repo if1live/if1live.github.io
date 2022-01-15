@@ -1,0 +1,12 @@
+# pnpx ts-node try_catch_without_await/main_err.ts
+Error: 
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:4:9
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:4:12)
+    at func_throw (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:14:12)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:9:12
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:8:71
+    at new Promise (<anonymous>)
