@@ -1,4 +1,4 @@
-service: pnpm-with-script
+service: hello-pnpm-with-script
 
 frameworkVersion: '2'
 
