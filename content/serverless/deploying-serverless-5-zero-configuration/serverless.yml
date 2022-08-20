@@ -1,0 +1,28 @@
+service: hello-zero-configuration
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ap-northeast-1
+
+package:
+  patterns:
+    - "!**"
+    - "!node_modules/**"
+    - output/*.js
+    - output/*.json
+
+functions:
+  hello:
+    handler: output/index.hello
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-scriptable-plugin
+
+custom:
+  scriptHooks:
+    before:package:createDeploymentArtifacts: ncc build ./handler.ts -o output
