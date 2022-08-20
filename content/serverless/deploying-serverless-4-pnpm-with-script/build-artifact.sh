@@ -40,4 +40,4 @@ function archive_artifact {
 
 prepare
 install_package
-# archive_artifact
+archive_artifact
