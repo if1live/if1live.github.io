@@ -23,6 +23,7 @@ trim_trailing_whitespace = false
 
 [*.mkdn]
 trim_trailing_whitespace = false
+indent_style = tab
 
 [*.html]
 indent_style = space

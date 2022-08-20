@@ -3,7 +3,7 @@ title: serverless 배포하기 (4) 플러그인 안쓰고 타입스크립트 함
 tags: [serverless]
 slug: deploying-serverless-4-pnpm-with-script
 author: if1live
-date: 2022-08-20
+date: 2022-08-20T20:00:00+09:00
 url: /posts/deploying-serverless-4-pnpm-with-script
 ---
 
