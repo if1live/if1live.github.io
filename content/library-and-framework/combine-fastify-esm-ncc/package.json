@@ -1,0 +1,21 @@
+{
+  "name": "combine-fastify-esm-ncc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:node": "node app1.js",
+    "start:ncc": "ncc run app1.js",
+    "start:fixed": "ncc run app2.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.5.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.34.0"
+  }
+}
