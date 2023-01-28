@@ -6,6 +6,7 @@ slug: markdown-test
 author: if1live
 date: 2010-01-01
 url: /posts/markdown-test
+math: true
 ---
 [markdown syntax](http://daringfireball.net/projects/markdown/syntax)
 
@@ -199,7 +200,7 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 
 ## image test
 
-![sample gif]({attach}markdown-test/sidetail-sora.gif)
+![sample gif](sidetail-sora.gif)
 
 ![sample png][sora-png]
 
@@ -299,5 +300,5 @@ markdown 문법으로 인식되면 제대로 작동하지 않는다.
 [^1]: foo
 [^2]: bar
 
-[sora-png]: {attach}markdown-test/sora-kasugano.png
+[sora-png]: sora-kasugano.png
 [google]: https://google.com
