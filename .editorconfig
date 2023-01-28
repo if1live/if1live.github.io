@@ -10,10 +10,6 @@ indent_style = tab
 # windows bash를 이용하려면 cr이 없어야
 end_of_line = lf
 
-[{.travis.yml}]
-indent_style = space
-indent_size = 2
-
 [*.json]
 indent_style = space
 indent_size = 2
