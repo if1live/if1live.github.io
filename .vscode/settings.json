@@ -1,7 +1,25 @@
-// 설정을 이 파일에 넣어서 기본 설정과 사용자 설정을 덮어씁니다.
 {
-    "files.associations": {
-        "*.mkdn": "markdown"
-    },
-    "python.pythonPath": "C:\\Users\\libso\\.virtualenvs\\memebox-6mB7Nso1\\Scripts\\python.exe"
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "files.associations": {
+    "*.mkdn": "markdown"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#372B1A",
+    "titleBar.activeBackground": "#4E3D25",
+    "titleBar.activeForeground": "#FCFAF8"
+  }
 }
