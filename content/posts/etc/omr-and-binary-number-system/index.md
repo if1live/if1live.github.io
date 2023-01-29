@@ -15,7 +15,7 @@ url: /posts/omr-and-binary-number-system
 
 이를 잘 이용하면 다음과 같은게 가능하다.
 
-![dobby is free]({attach}omr-and-binary-number-system/i15537933717.jpg)
+![dobby is free](i15537933717.jpg)
 
 [시험 오답코드로 만들어낸](http://www.inven.co.kr/board/webzine/2097/1103750?category=%EA%B8%B0%ED%83%80) 
 (트위터 원본은 계정이 플텍이 되어서 링크를 걸 수 없었다)
