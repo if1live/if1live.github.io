@@ -1,11 +1,8 @@
-{{ partial "head.html" . }}
-{{ partial "header.html" . }}
+{{ define "main" }}
 
-<div class="container">
-  <section class="basic-content">
-    <h1>404 Not Found</h1>
-  </section>
+<section class="theme-section">
+  <h1>404 Not Found</h1>
   {{ partial "google_search.html" . }}
-</div>
+</section>
 
-{{ partial "footer.html" . }}
+{{ end }}
