@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" integrity="{{ $style.Data.Integrity }}" />
 
   {{ partial "prism_style.html" . }}
+  {{ partial "math_style.html" . }}
   {{ partial "google_adsense_head.html" . }}
 </head>
 
@@ -26,7 +27,7 @@
 
   {{ partial "prism_script.html" . }}
   {{ partial "mermaid_script.html" . }}
-  {{/* TODO: 남들꺼 보고 베끼기 {{ partial "latex_script.html" . }} */}}
+  {{ partial "math_script.html" . }}
   {{ partial "google_analytics.html" . }}
 </body>
 
