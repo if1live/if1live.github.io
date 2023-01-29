@@ -48,3 +48,12 @@ PaginatePath = "page"
 
   [markup.goldmark.renderer]
     unsafe = true
+
+[module]
+[[module.mounts]]
+excludeFiles = [
+  "posts/**/maya/**",
+  "posts/**/examples/**",
+]
+source = "content"
+target = "content"
