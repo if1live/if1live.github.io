@@ -17,9 +17,14 @@
   "files.associations": {
     "*.mkdn": "markdown"
   },
-  "workbench.colorCustomizations": {
-    "activityBar.background": "#372B1A",
-    "titleBar.activeBackground": "#4E3D25",
-    "titleBar.activeForeground": "#FCFAF8"
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "public": true,
+    ".hugo_build.lock": true,
   }
 }
