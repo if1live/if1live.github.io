@@ -8,14 +8,18 @@ description = ""
 homepage = "http://siteforthistheme.com/"
 tags = ["", ""]
 features = ["", ""]
-min_version = 0.14
+
+[module]
+[module.hugoVersion]
+extended = true
+min = "0.110.0"
 
 [author]
-  name = ""
-  homepage = ""
+name = ""
+homepage = ""
 
 # If porting an existing theme
 [original]
-  name = ""
-  homepage = ""
-  repo = ""
+name = ""
+homepage = ""
+repo = ""
