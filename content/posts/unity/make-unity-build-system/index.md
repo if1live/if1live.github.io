@@ -22,7 +22,7 @@ url: /posts/make-unity-build-system
 빌드를 뽑아서 보여줄 사람이 없는데 뭣하러 빌드에 공을 들이나?
 유니티에서 직접 빌드했다.
 
-![manual build]({attach}make-unity-build-system/manual-build.png)
+![manual build](manual-build.png)
 
 ## 간단한 빌드 스크립트
 
@@ -107,7 +107,7 @@ Universal Windows Platform 빌드를 뽑으면 visual studio 프로젝트가 생
 플랫폼과 빌드설정의 가짓수가 늘어나다보니 이를 유지보수하는게 귀찮더라.
 더 좋은 방법이 뭐가 있나 찾아보니 [SuperUnityBuild][repo-super-unity-build] 라는게 있더라.
 
-![SuperUnityBuild]({attach}make-unity-build-system/super-unity-build.png)
+![SuperUnityBuild](super-unity-build.png)
 
 하지만 나는 SuperUnityBuild를 사용하지 않았다.
 두가지 부분이 마음에 들지 않았다.

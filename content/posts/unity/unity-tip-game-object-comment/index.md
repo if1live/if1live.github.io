@@ -34,7 +34,7 @@ public class Comment : MonoBehaviour {
 }
 ```
 
-![comment]({attach}unity-tip-game-object-comment/unity-comment.png)
+![comment](unity-comment.png)
 
 ## 단점
 

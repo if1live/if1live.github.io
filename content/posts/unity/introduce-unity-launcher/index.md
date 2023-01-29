@@ -20,7 +20,7 @@ master branch에서 작업해야 할때는 unity 5.6.2p3을 실행 후 `game-mas
 trailer branch에서 작업해야 할때는 unity 5.6.0f3를 실행 후 `game-trailer` 프로젝트를 열어야한다.
 만약 unity 5.6.2p3을 실행 후 `game-trailer` 프로젝트를 연다면?
 
-![version mismatch]({attach}introduce-unity-launcher/version-mismatch.png)
+![version mismatch](version-mismatch.png)
 
 팝업이 뜨고 실수로 continue를 눌렀을때 asset import를 다시 할지 모른다.
 프로젝트에 에셋이 많이 들어있는 경우 수십분이 걸려서 낮잠을 자고와도 될수있다.
@@ -38,7 +38,7 @@ trailer branch에서 작업해야 할때는 unity 5.6.0f3를 실행 후 `game-tr
 그리고 직접 만들기전에 github를 찾아보면 남이 만들어둔게 있을것이다.
 [unity-launcher][repo]는 내가 원하는 기능이 구현된 프로그램이다.
 
-![comment]({attach}introduce-unity-launcher/screenshot.png)
+![comment](screenshot.png)
 
 몇가지 사소한 부분을 고친후 써봤는데 편하더라.
 (내가 수정한 부분은 이미 master에 포함되어있다)

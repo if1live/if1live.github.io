@@ -103,7 +103,7 @@ class DummyBaseBehaviour : BaseBehaviour {
 }
 ```
 
-![inspector]({attach}unity-library-vfw/unity-inspector-show.png)
+![inspector](unity-inspector-show.png)
 
 
 ### 디버그 로그 On/Off
@@ -139,7 +139,7 @@ protected void dLog(object obj)
 }
 ```
 
-![debug log on/off]({attach}unity-library-vfw/vfw-log-flag.png)
+![debug log on/off](vfw-log-flag.png)
 
 ### Interface도 보인다
 
@@ -150,7 +150,7 @@ public IDummyContainer foo_interface = null;
 스크립트 안에 인터페이스가 멤버변수로 있는 경우 유니티 기본 인스펙터에서는 보이지 않는다.
 하지만 BaseBehaviour에서는 보인다.
 
-![inspector]({attach}unity-library-vfw/unity-inspector-interface.png)
+![inspector](unity-inspector-interface.png)
 
 ## 단점
 

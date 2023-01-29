@@ -105,9 +105,9 @@ public class AssetNameConnectorEditor : UnityEditor.Editor {
 
 이제 적절한 곳에서 쓰면 된다.
 
-![before connect]({attach}unity-util-asset-name-attribute/screenshot-before.png)
+![before connect](screenshot-before.png)
 
-![after connect]({attach}unity-util-asset-name-attribute/screenshot-after.png)
+![after connect](screenshot-after.png)
 
 ## Source code
 * [Repository](https://github.com/if1live/unity-utility/)
