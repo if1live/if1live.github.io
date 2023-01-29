@@ -1,13 +1,18 @@
 baseurl = "https://if1live.github.io/"
 theme = "sora"
 languageCode = "ko-kr"
-title = "/usr/lib/libsora.so"
+title = "if1live space"
 
 disqusShortname = "libsora"
 googleAnalytics = "UA-37862172-2"
 
+hasCJKLanguage = true
+
 Paginate = 10
 PaginatePath = "page"
+
+[permalinks]
+posts = "/posts/:slug/"
 
 [taxonomies]
   tag = "tags"
