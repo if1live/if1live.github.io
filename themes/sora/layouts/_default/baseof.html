@@ -9,6 +9,7 @@
   {{ $style := $sass | resources.ToCSS $options | resources.Fingerprint "sha512" }}
   <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" integrity="{{ $style.Data.Integrity }}" />
 
+  {{ partial "prism_style.html" . }}
   {{ partial "google_adsense_head.html" . }}
 </head>
 

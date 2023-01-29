@@ -1,57 +1,46 @@
-<!doctype html>
-<html class="no-js" lang="ko">
-<head>
-  <meta charset="utf-8">
-  {{ hugo.Generator }}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title> {{ .Title }} &middot; {{ .Site.Title }} </title>
+{{ hugo.Generator }}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"/>
-  <meta name="google-site-verification" content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA" />
+{{/* 개선 없이 기존꺼 일단 넣음 */}}
+<title> {{ .Title }} &middot; {{ .Site.Title }} </title>
 
-  <meta name="gc:client-id" content="785d47c81cbc2fd42b65">
-  <meta name="gc:client-secret" content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7">
+{{ if and (isset .Params "author") (ne .Params.author "") }}
+<meta name="author" content="{{ .Params.author }}" />
+{{ end }}
 
-  {{ if and (isset .Params "author") (ne .Params.author "") }}
-  <meta name="author" content="{{ .Params.author }}" />
-  {{ end }}
+{{ if ne .Title "" }}
+<meta name="description" content="{{ .Title }}" />
+{{ end }}
 
-  {{ if ne .Title "" }}
-  <meta name="description" content="{{ .Title }}" />
-  {{ end }}
+{{ if (isset .Params "tags") }}
+<meta name="keywords" content="{{ delimit .Params.tags " , " }}" />
+{{ end }}
 
-  {{ if (isset .Params "tags") }}
-  <meta name="keywords" content="{{ delimit .Params.tags ", " }}" />
-  {{ end }}
+<meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502" />
+<meta name="google-site-verification" content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA" />
 
-  {{ if .IsPage }}
-  {{ partial "twitter_card.html" . }}
-  {{ end }}
+<meta name="gc:client-id" content="785d47c81cbc2fd42b65">
+<meta name="gc:client-secret" content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7">
 
-  <!-- css -->
-  <!-- TODO css cache expire -->
-  <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style-gen.css?2">
+<!-- icons -->
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-  <!-- icons -->
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+{{ if .OutputFormats.Get "RSS" }}
+{{ with .OutputFormats.Get "RSS" }}
+<link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+<link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+{{ end }}
 
-  <!-- feed -->
-  <link href="{{ .Site.RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
-
-  {{ partial "highlight_style.html" . }}
-  {{ partial "latex_style.html" . }}
-
-  <!-- http로 접속시 https로 돌리는걸 앞에 배치해서 빨리 빠져나갈수 있도록함 -->
-  <script type="text/javascript">
-    var host = "{{ .Site.Params.hostName }}";
-    if ((host == window.location.host) && (window.location.protocol != "https:")) {
-      window.location.protocol = "https";
-    } else {
-      console.log("skip https redirect");
-    }
-  </script>
-
-  {{ partial "adsense_head.html" . }}
-</head>
-<body>
+<!-- http로 접속시 https로 돌리는걸 앞에 배치해서 빨리 빠져나갈수 있도록함 -->
+<script type="text/javascript">
+  var host = "{{ .Site.Params.hostName }}";
+  if ((host == window.location.host) && (window.location.protocol != "https:")) {
+    window.location.protocol = "https";
+  } else {
+    console.log("skip https redirect");
+  }
+</script>
