@@ -1,0 +1,270 @@
+---
+title: "타입스크립트 + Promise + async/await + Error = ???"
+subtitle: 컴파일은 되지만 런타임 동작을 보장하는건 아니라구요
+tags: [typescript, javascript, promise, exception, error]
+slug: typescript-pitfall-of-promise-and-error
+author: if1live
+date: 2022-01-15
+url: /posts/typescript-pitfall-of-promise-and-error
+---
+
+## 개요
+
+타입스크립트는 좋은 언어다. 
+자바스크립트 짜듯이 코드를 짜도 되니까 쉽게 적응할 수 있다.
+자바스크립트에서 실수하기 쉬운 타입 관련 문제를 타입스크립트 컴파일러를 통해서 잡아낼 수 있다.
+
+Promise는 좋은 기능이다.
+Promise 이전에는 자바스크립트에서 비동기 프로그래밍을 하면 콜백 지옥을 피할 수 없었다.
+then/catch를 사용해서 Promise를 이어붙이면 콜백시절보다는 멀쩡한 코드가 나온다.
+
+Promise에 async/await까지 붙이면 더 좋아진다.
+then/catch 쓸때는 비동기 프로그래밍에 대한 생각을 해야되지만 async/await를 쓰면 동기처럼 생각해도 된다.
+대충 짜도 대충 돌아가주니까 고민하게 줄어들고 생산성이 올라간다.
+
+Error는 많은 언어에서 선택된 예외의 자바스크립트 구현이다.
+HTTP API를 구현하는 경우에는 로직에서는 `NotFoundError`, `ForbiddenError`같은 에러를 던지고 에러 응답은 다른 레이어에서만 신경써도 된다.
+깊은 콜스택의 아래에서 에러가 발생했을때 return을 통해서 한단계씩 위쪽으로 던잘하는것보다 throw로 한번에 위로 전달하면 편하다.
+
+타입스크립트, Promise, async/await, Error는 좋은 기능이니까 엮으면 정말 좋은게 나오겠네?
+
+## try...catch에서 await가 붙지 않은 비동기 함수
+
+try...catch에서 에러를 던지는 비동기 함수를 호출한다.
+에러를 잡으면 콘솔 로그를 찍는 단순한 예제이다.
+node.js의 `fs.promises`와 비슷하다.
+`fs.promises.stat()`의 경우 해당 위치에 파일이 없으면 에러를 던진다.
+
+```typescript
+export { };
+
+export async function func_throw(): Promise<number> {
+  throw new Error();
+}
+
+async function main() {
+  try {
+    return await func_throw()
+  } catch (e) {
+    console.log('catch');
+  }
+}
+
+main().then(console.log).catch(console.error);
+```
+
+```bash
+$ pnpx ts-node try_catch_without_await/main_ok.ts
+catch
+undefined
+```
+
+에러가 try...catch에서 잘 잡힌다.
+
+잘 돌아가는 코드에서 한줄만 고치고 돌려보자.
+`func_throw()` 호출할때 실수로 `return await func_throw();` 대신 `return func_throw();`를 입력했다고 치자.
+컴파일에서 터지면 이런 실수를 안할텐데 await를 고쳐도 문제없이 컴파일된다.
+
+```typescript
+export { };
+
+export async function func_throw(): Promise<number> {
+  throw new Error();
+}
+
+async function main() {
+  try {
+    return func_throw();
+  } catch (e) {
+    console.log('catch');
+  }
+}
+
+main().then(console.log).catch(console.error);
+```
+
+```bash
+$ pnpx ts-node try_catch_without_await/main_err.ts
+Error: 
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:4:9
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:4:12)
+    at func_throw (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:14:12)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:9:12
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:8:71
+    at new Promise (<anonymous>)
+```
+
+try...catch에서 에러를 잡지 못하고 `main()`을 호출한 시점에서 에러를 잡았다.
+`await` 하나 뺀거 치고는 동작이 많이 바뀐다.
+그래도 main의 catch에서 잡히기라도 했으니 운이 좋은 상황이다.
+
+## 미리 생성한 Promise
+
+여러 Promise가 전부 끝날때까지 기다릴때는 `Promise.all()`을 쓰면 된다.
+Promise 만드는 함수가 `async function executeTask()`같은 형태면 `Promise.all()`에서 그대로 호출해도 코드가 볼만할거다.
+하지만 Promise 만드는 과정이 복잡하거나 중복코드가 생기기 시작하면 잔머리를 굴리기 시작한다.
+
+```ts
+Promise.all([
+    new CharacterService(some_options).execute({ id: 1 }),
+    new CharacterService(some_options).execute({ id: 2 }),
+    new ShopService(some_options).execute(),
+    ...
+]);
+```
+
+위와 같이 쓰는대신 아래와 같이 쓰면 `Promise.all()`이 어떤 작업을 할지 간단하게 보일 것이다.
+
+```ts
+const characterService = new CharacterService(some_options);
+const shopService = new ShopService(some_options);
+
+const p_character_1 = characterService.execute({ id: 1 });
+const p_character_2 = characterService.execute({ id: 2 });
+const p_shop = shopService.execute();
+
+Promise.all([
+    p_character_1,
+    p_character_2,
+    p_shop,
+    ...
+]);
+```
+
+위의 개념을 적용해서 간단한 코드를 작성했다.
+`Promise.all()`로 2개의 promise를 처리하는데 하나는 성공하고 하나는 실패한다.
+try...catch 로 묶어서 실패가 잡히는걸 기대한다.
+
+```typescript
+export { };
+
+async function main() {
+  const p1 = func_throw();
+  const p2 = func_simple();
+
+  try {
+    await Promise.all([p1, p2]);
+  } catch (e) {
+    console.log('catch');
+  }
+}
+
+main().then(console.log).catch(console.error);
+
+async function func_throw(): Promise<number> {
+  throw new Error();
+}
+
+async function func_simple(): Promise<number> {
+  return 1;
+}
+```
+
+```bash
+$ pnpx ts-node outbound_promise/main_delay_off.ts
+catch
+undefined
+```
+
+예상대로 `func_throw()`에서 던진 에러가 try...catch에서 잡혀서 콘솔 로그가 찍히는걸 볼 수 있다.
+
+위의 성공적인 코드에서 한줄만 바꾸자.
+Promise 객체를 생성한 지점과 `Promise.all()`사이에 `delay()`를 추가했다.
+async/await로 delay에서 약간 기다렸다가 `Promise.all()`를 호출했다. 
+
+```typescript
+export { };
+
+async function main() {
+  const p1 = func_throw();
+  const p2 = func_simple();
+  await delay(10);
+  try {
+    await Promise.all([p1, p2]);
+  } catch (e) {
+    console.log('catch');
+  }
+}
+
+main().then(console.log).catch(console.error);
+
+async function func_throw(): Promise<number> {
+  throw new Error();
+}
+
+async function func_simple(): Promise<number> {
+  return 1;
+}
+
+async function delay(millis: number): Promise<void> {
+  return new Promise(resolve => {
+    setTimeout(resolve, millis);
+  });
+}
+```
+
+```bash
+$ pnpx ts-node outbound_promise/main_delay_on.ts
+(node:11376) UnhandledPromiseRejectionWarning: Error: 
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:17:9
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:4:12)
+    at func_throw (D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:27:12)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:4:14
+    at Generator.next (<anonymous>)
+    at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:8:71
+    at new Promise (<anonymous>)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11376) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:11376) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+catch
+undefined
+(node:11376) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 1)
+```
+
+`UnhandledPromiseRejectionWarning`가 발생한다.
+`main()`에 붙인 catch로도 잡지 못했다.
+최상위에 붙은 에러 핸들러로 잡지 못했으니 Sentry가 붙어있어도 에러를 잡지 못했을 것이다.,
+한줄의 수정으로 컴파일은 통과하지만 런타임에 터지는 프로그램으로 바꿀 수 있다.
+
+## 우회
+
+Promise, async/await, Error가 합쳐지면 컴파일되는 올바른 타입스크립트 코드지만 의도한대로 동작하지 않을 수 있다.
+이런 상황을 피하는 몇가지 방법이 있을 것이다.
+
+사람이 스스로 잘 짜는게 노력하는것도 방법이다.
+코드리뷰, 페어프로그래밍, 테스트 커버리지 올리기, ...과 같은 방법을 통해서 문제를 어느정도는 잡을 수 있을것이다
+
+사람 손으로 하기 귀찮을때는 lint의 도움을 받는다.
+[TypeScript ESLint](https://typescript-eslint.io/)의 경우 Promise 관련 규칙이 존재한다.
+함정을 밟을때마다 lint 규칙을 강화하면 똑같은 문제를 다시 밟는건 피할 수 있을 것이다.
+내장 규칙으로만 모든 문제를 잡을수 없다면 다른 lint rule이나 rule 플러그인을 짤 수 있다.
+
+에러를 던지지 않는 방향으로 코딩하는 것도 방법이 될수 있다.
+rust의 Result, fp-ts의 Either를 따라할 수 있다.
+```ts
+type Result<T, E> = (
+    | { ok: true; value: T }
+    | { ok: false; error: E }
+)
+type MyResult = Result<number, Error>;
+```
+
+golang처럼 에러를 리턴하게 바꿀수도 있다. https://github.com/xobotyi/await-of
+```ts
+async function foo(): Promise<[T, Error]>
+```
+
+언어의 근본적인 문제라고 생각하면 에러가 없는 언어로 도망치는것도 방법이 되지 않을까?
+rust의 경우는 에러를 던지지 않는다.
+
+그래서 2022년에는 rust로 삽질해보려고 한다.
+rust 마지막으로 하던게 2018년이었는데 그 사이에 얼마나 바뀌었으려나.
+
+

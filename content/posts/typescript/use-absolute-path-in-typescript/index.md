@@ -165,11 +165,11 @@ C를 컴파일하면 object 파일이 생성된다.
 webpack은 모듈 번들러이다.
 webpack을 쓰면 분리되어있는 자바스크립트 소스 파일을 하나로 파일로 묶어줄 수 있다.
 
-![webpack]({attach}use-absolute-path-in-typescript/toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png)
+![webpack](toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png)
 
 생각해보면 linker와 하는 짓이 유사하다.
 
-![linker]({attach}use-absolute-path-in-typescript/COMPILE.gif)
+![linker](COMPILE.gif)
 
 linking 하듯이 webpack을 이용해서 분리된 자바스크립트 파일을 합칠때 `@src`를 멀쩡한 이름으로 바꿀 수 있으면 프로그램이 돌아갈거다.
 webpack이 `@src`를 알아듣게 만드는 방법은 남들이 간 길을 찾으니 나오더라.

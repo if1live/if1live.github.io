@@ -20,7 +20,7 @@ DBML로 검색했을때 문서에 visual studio, LINQ, XML이 같이 보이면 �
 
 ## 내가 생각하는 장점
 
-![dbml demo]({attach}dbml-entity-relation-diagram-as-code/dbdiagram-demo.gif)
+![dbml demo](dbdiagram-demo.gif)
 
 DBML은 코드로 ERD를 그릴 수 있다.
 기존에도 ERD를 그릴수 있는 도구는 많이 있었다.
