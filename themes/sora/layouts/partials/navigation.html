@@ -2,29 +2,29 @@
   <ul class="nav-link-list">
     <li>
       <a href="{{ .Site.BaseURL }}" title="home">
-        <i class="fa fa-root"><span>home</span></i>
+        <i class="fa-solid fa-house"><span>home</span></i>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}archives/" {{ if eq (lower .Title) "archives" }} class="active" {{ end }}
         title="archives">
-        <i class="fa fa-archive"><span>archives</span></i>
+        <i class="fa-solid fa-box-archive"><span>archives</span></i>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
-        <i class="fa fa-info"><span>about</span></i>
+        <i class="fa-solid fa-info"><span>about</span></i>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}tags/" {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
-        <i class="fa fa-tags"><span>tags</span></i>
+        <i class="fa-solid fa-tags"><span>tags</span></i>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}search/" {{ if eq (lower .Title) "searches" }} class="active" {{ end }}
         title="search">
-        <i class="fa fa-search"><span>search</span></i>
+        <i class="fa-solid fa-magnifying-glass"><span>search</span></i>
       </a>
     </li>
   </ul>

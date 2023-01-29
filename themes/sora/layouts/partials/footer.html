@@ -5,13 +5,13 @@
     {{ $url := index . 1 }}
     <li>
       <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ $url }}" title="{{ $name }}"><i class="fa fa-{{ lower $name }}"><span>{{ $name }}</span></i></a>
+      <a href="{{ $url }}" title="{{ $name }}"><i class="fa-brands fa-{{ lower $name }}"><span>{{ $name }}</span></i></a>
     </li>
     {{ end }}
 
     <li>
       <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ .Site.RSSLink }}"><i class="fa fa-rss"><span>rss</span></i></a>
+      <a href="{{ .Site.RSSLink }}"><i class="fa-solid fa-rss"><span>rss</span></i></a>
     </li>
 
     {{ range .Site.Params.links }}
