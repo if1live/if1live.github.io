@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-INPUT_SASS="hugo/themes/sora/static/css/style.scss"
-OUTPUT_CSS="hugo/themes/sora/static/css/style-gen.css"
+INPUT_SASS="themes/sora/static/css/style.scss"
+OUTPUT_CSS="themes/sora/static/css/style-gen.css"
 
 # default sass
 if [ -x "$(command -v sass)" ]; then
