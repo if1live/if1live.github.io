@@ -8,11 +8,7 @@ description = ""
 homepage = "http://siteforthistheme.com/"
 tags = ["", ""]
 features = ["", ""]
-
-[module]
-[module.hugoVersion]
-extended = true
-min = "0.110.0"
+min_version = "0.110.0"
 
 [author]
 name = ""
