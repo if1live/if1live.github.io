@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode }}">
+
+<head>
+  {{ partial "head.html" . }}
+
+  {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" (not hugo.IsProduction)) }}
+  {{ $sass := resources.Get "css/style.scss" }}
+  {{ $style := $sass | resources.ToCSS $options | resources.Fingerprint "sha512" }}
+  <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" integrity="{{ $style.Data.Integrity }}" />
+</head>
+
+<body>
+  {{ partial "navigation.html" . }}
+
+  <main class="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+
+  <script src="/js/main.js"></script>
+
+  {{ partial "prism_script.html" . }}
+  {{ partial "mermaid_script.html" . }}
+  {{/* TODO: 남들꺼 보고 베끼기 {{ partial "latex_script.html" . }} */}}
+  {{ partial "google_analytics.html" . }}
+</body>
+
+</html>
