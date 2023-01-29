@@ -115,6 +115,6 @@ GraphQL은 endpoint가 하나뿐이다. 게다가 200 OK만 사용한다.
 각각의 요청을 눌러보지 않으면 의미있는 내용이 보이지 않는다.
 (확장 프로그램을 뒤져보면 쓸만한게 있을거같은데 직접 찾아보진 않아서 모르겠다)
 
-![inspector]({attach}graphql-http-status-code/chrome-inspector.png)
+![inspector](chrome-inspector.png)
 
 [github-supertest]: https://github.com/visionmedia/supertest
