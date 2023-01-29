@@ -7,7 +7,7 @@ date: 2019-02-12
 url: /posts/in-ten-years-strong-mountains-will-change-and-javascript
 ---
 
-얼마전에 구버전 IE에서만 돌아가는 코드를 밟아서 [글]({attach}generous-code-breaks-easily)을 썼다.
+얼마전에 구버전 IE에서만 돌아가는 코드를 밟아서 [글]({{< ref "generous-code-breaks-easily">}})을 썼다.
 글을 쓰다가가 옛날에 밟은 IE 구버전과 관련된 재밌는 코드가 생각났다.
 그래서 옛날 이야기를 하나 더 써봤다.
 
