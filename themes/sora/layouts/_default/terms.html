@@ -1,18 +1,16 @@
 {{ define "main" }}
 
-<div class="container">
-  <div class="basic-content tags-content">
-    <h1 id="title">{{ .Title }}</h1>
-    <ul>
-      {{ $data := .Data }}
-      {{ range $key, $value := .Data.Terms.Alphabetical }}
-      <li>
-        <a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}">{{ $value.Name }}</a>
-        <sup>{{ $value.Count }}</sup>
-      </li>
-      {{ end }}
-    </ul>
-  </div>
+<div class="basic-content tags-content">
+  <h1 id="title">{{ .Title }}</h1>
+  <ul>
+    {{ $data := .Data }}
+    {{ range $key, $value := .Data.Terms.Alphabetical }}
+    <li>
+      <a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}">{{ $value.Name }}</a>
+      <sup>{{ $value.Count }}</sup>
+    </li>
+    {{ end }}
+  </ul>
 </div>
 
 {{ end }}
