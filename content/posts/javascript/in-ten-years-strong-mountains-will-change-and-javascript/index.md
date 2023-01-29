@@ -26,7 +26,7 @@ a['if']
 
 재밌게도 위의 문법은 IE 구버전에서는 안돌아간다. 
 
-![ie]({attach}in-ten-years-strong-mountains-will-change-and-javascript/ie-legacy-property.png)
+![ie](ie-legacy-property.png)
 
 IE 구버전에서는 키워드를 프로퍼티로 쓸 수 없다. 객체에 `a['if']` 로 접근할순 있지만 `a.if` 로 접근할 순 없다.
 황당해서 찾아본 적이 있는데 자바스크립트 스펙이 변했더라.
