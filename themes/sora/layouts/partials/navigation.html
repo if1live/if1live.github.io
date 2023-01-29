@@ -1,30 +1,33 @@
 <nav class="theme-navigation">
+  <a href="{{ .Site.BaseURL }}" title="home">
+    <h1>if1live space</h1>
+  </a>
   <ul class="nav-link-list">
+
     <li>
-      <a href="{{ .Site.BaseURL }}" title="home">
-        <i class="fa-solid fa-house"><span>home</span></i>
+      <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
+        <i class="fa-solid fa-info"></i>
+        <span hidden>about</span>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}archives/" {{ if eq (lower .Title) "archives" }} class="active" {{ end }}
         title="archives">
-        <i class="fa-solid fa-box-archive"><span>archives</span></i>
-      </a>
-    </li>
-    <li>
-      <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
-        <i class="fa-solid fa-info"><span>about</span></i>
+        <i class="fa-solid fa-box-archive"></i>
+        <span hidden>archives</span>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}tags/" {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
-        <i class="fa-solid fa-tags"><span>tags</span></i>
+        <i class="fa-solid fa-tags"></i>
+        <span hidden>tags</span>
       </a>
     </li>
     <li>
       <a href="{{ .Site.BaseURL }}search/" {{ if eq (lower .Title) "searches" }} class="active" {{ end }}
         title="search">
-        <i class="fa-solid fa-magnifying-glass"><span>search</span></i>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span hidden>search</span>
       </a>
     </li>
   </ul>

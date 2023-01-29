@@ -40,7 +40,7 @@ body {
   }
 }
 
-.header {
+.theme-navigation {
   @include common-header-footer;
   @include gradient-y($sky-bg-color-top, $sky-bg-color-bottom, 0%);
   padding: 1em 0 0.5em 0;
@@ -52,7 +52,7 @@ body {
   }
 }
 
-.footer {
+.theme-footer {
   @include common-header-footer;
   background-color: $sky-bg-color-bottom;
   box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
