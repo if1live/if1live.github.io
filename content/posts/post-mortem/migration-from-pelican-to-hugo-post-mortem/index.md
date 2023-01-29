@@ -99,7 +99,7 @@ node 기반을 물건을 쓰면 3년안에 빌드 스크립트 엎을일이 생�
 * markdown을 지원하지 않는 정적 사이트 생성기가 설마 있겠어?
 * golang의 [html/template](https://golang.org/pkg/html/template/)를 직접 써봤다. jinja2급은 아니지만 못쓸 물건은 아니었다.
 * golang 정도면 언어가 폭망하는 일이 당분간 없지 않을까? 몇년된 언어니까 설마 생태계 측면에서 통수 치겠어?
-  * 하지만 나중에 [통수치는 일이 발생했다]({filename}golang-package-management-failure-learned-from-github-kr-text.md)
+  * 하지만 나중에 [통수치는 일이 발생했다]({{< ref golang-package-management-failure-learned-from-github-kr-text >}})
 
 ## 과정
 pelican에서 hugo로 갈아탈 생각을 한 김에 미뤄놨던 작업도 같이 하기로했다.
@@ -140,7 +140,7 @@ A문법으로 작성된 문서를 B문법으로 변환해주는 프로그램인 
 전처리기의 출력물이 markdown이기 때문에 hugo가 아니라 다른 사이트 생성기를 쓸때도 그대로 이용할수 있다.
 몇년뒤에 hugo 대신 다른 정적 사이트 생성기로 갈아타더라도 markdown만 유지한다면 그대로 쓸수있다는 점이 좋더라.
 
-자세한 내용은 [Maya (Markdown 전처리기) 포스트모템]({filename}maya-markdown-preprocessor-post-mortem.md)에서 다룬다.
+자세한 내용은 [Maya (Markdown 전처리기) 포스트모템]({{< ref maya-markdown-preprocessor-post-mortem >}})에서 다룬다.
 
 ### Less -> Sass
 

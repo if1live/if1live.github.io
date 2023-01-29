@@ -17,7 +17,7 @@ url: /posts/unity-scene-web-exporter-post-mortem
 
 **Unity3D / Three.js screenshot**
 
-![screenshot]({attach}unity-scene-web-exporter-post-mortem/manual-mini-threejs-viewer.jpg)
+![screenshot](manual-mini-threejs-viewer.jpg)
 
 **Live Demo : Three.js**
 
@@ -170,7 +170,7 @@ string filepath = lightmapPath + "Lightmap-" + "0" + "_comp_light.exr";
 
 라이트맵에 접근해도 이를 읽을수 없는건 라이트맵 텍스쳐의 Read/Write Enabled 플래그가 꺼져있기 때문이다.
 
-![Read/Write Enabled]({attach}/unity-scene-web-exporter-post-mortem/lightmap-texture-readable.png)
+![Read/Write Enabled](lightmap-texture-readable.png)
 
 이를 수동으로 바꾸면 라이트맵에 접근할수 있지만 라이트맵을 다시 구우면 속성이 사라진다.
 그래서 라이트맵의 Read/Write Enabled를 스크립트상에서 건드렸다.

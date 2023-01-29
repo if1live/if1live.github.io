@@ -10,7 +10,7 @@ url: /posts/shiroko-kfcc-post-mortem
 
 ## 개요
 
-![shiroko]({attach}/shiroko-kfcc-post-mortem/shiroko-square.jpg)
+![shiroko](shiroko-square.jpg)
 
 [shiroko-kfcc][shiroko-kfcc-site]는 새마을금고의 예금, 적금 금리를 보려고 만든 서비스이다.
 저장소 주소는 [if1live/shiroko-kfcc][shiroko-kfcc-repo]이다.

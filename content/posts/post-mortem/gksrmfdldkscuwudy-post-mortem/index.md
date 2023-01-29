@@ -15,7 +15,7 @@ url: /posts/gksrmfdldkscuwudy-post-mortem
 * 저장소: https://github.com/if1live/gksrmfdldkscuwudy
 * 써보기: http://libsora.so/gksrmfdldkscuwudy/
 
-![왜 만들었을까?]({attach}/gksrmfdldkscuwudy-post-mortem/why-i-dev-it.png)
+![왜 만들었을까?](why-i-dev-it.png)
 
 집에서 뒹굴고 있다가 떡밥이 나와서 자기전에 만들었다. (...)
 
@@ -110,7 +110,7 @@ https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Ar
 
 한글이 안쳐질때 구글에서 검색하면 웬만한건 자동완성이 된다.
 
-![Google]({attach}/gksrmfdldkscuwudy-post-mortem/google-convert.png)
+![Google](google-convert.png)
 
 그리고 윈도우에서 한글 입력에 제대로 작동하지 않을때 cftmon.exe를 직접 실행하면 된다고카더라.
 

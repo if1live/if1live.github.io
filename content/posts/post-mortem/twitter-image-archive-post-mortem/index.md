@@ -76,7 +76,7 @@ url: /posts/twitter-image-archive-post-mortem
 
 트위터 아카이브에 포함된 뷰어의 경우는 해당 JSON을 읽어서 적절히 보여주는 방식으로 작동하더라.
 
-![not-offline mode]({attach}/twitter-image-archive-post-mortem/external-image-link.png)
+![not-offline mode](external-image-link.png)
 
 만약 트윗 데이터 파일을 조작해서
 `"media_url" : "https:\/\/pbs.twimg.com\/media\/sample.png"`
@@ -149,4 +149,4 @@ function SyncFunction(){
 ## 개발 소감
 백업된 이미지를 보면 평소에 어떤 이미지를 올리고 어떤걸 리트윗하면서 살았나 반성하게 된다.
 
-![result]({attach}/twitter-image-archive-post-mortem/media-sample.png)
+![result](media-sample.png)
