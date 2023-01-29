@@ -114,7 +114,7 @@ custom:
 배포 패키지 zip 파일을 직접 뜯어보면 크기를 줄일 수 있는 힌트를 찾을 수 있다.
 figlet 라이브러리가 압축된 크기 1.26MB 씩이나 차지하고 있는게 보인다.
 
-![figlet]({attach}deploying-serverless-2-serverless-webpack-advance/artifact-figlet.png)
+![figlet](artifact-figlet.png)
 
 figlet 같이 거대한 패키지가 대체 어떻게 끌려들어간건가? 이걸 제거할 방법이 있나?
 뜯으면 답이 나온다.
