@@ -1,11 +1,8 @@
-{{ partial "head.html" . }}
-{{ partial "header.html" . }}
+{{ define "main" }}
 
-<div class="container">
-  <section class="basic-content">
-    <h1>About</h1>
-    {{ .Content }}
-  </section>
-</div>
+<section class="theme-section">
+  <h1>About</h1>
+  {{ .Content }}
+</section>
 
-{{ partial "footer.html" . }}
+{{ end }}
