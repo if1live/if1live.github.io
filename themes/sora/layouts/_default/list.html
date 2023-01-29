@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+<section id="archive">
+  {{ range .Data.Pages.GroupByDate "2006" }}
+  <div class="group">
+    <h3 class="key">
+      {{ .Key }}
+    </h3>
+
+    {{ range .Pages }}
+    {{ .Render "article_summary" }}
+    {{ end }}
+  {{ end }}
+</section>
+
+
+{{ end }}

@@ -11,10 +11,9 @@
       </a>
     </li>
     <li>
-      <a href="{{ .Site.BaseURL }}archives/" {{ if eq (lower .Title) "archives" }} class="active" {{ end }}
-        title="archives">
+      <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }}>
         <i class="fa-solid fa-box-archive"></i>
-        <span hidden>archives</span>
+        <span hidden>archive</span>
       </a>
     </li>
     <li>
