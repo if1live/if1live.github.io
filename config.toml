@@ -50,6 +50,10 @@ PaginatePath = "page"
     unsafe = true
 
 [module]
+[module.hugoVersion]
+extended = true
+min = "0.110.0"
+
 [[module.mounts]]
 excludeFiles = [
   "posts/**/maya/**",
