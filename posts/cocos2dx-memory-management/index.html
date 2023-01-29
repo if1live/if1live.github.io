@@ -1,0 +1,181 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>cocos2d-x 메모리 관리에 대한 간단한 정리 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="cocos2d-x 메모리 관리에 대한 간단한 정리"><meta name=keywords content="cpp,cocos2dx"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/cocos2dx-memory-management/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="cocos2d-x 메모리 관리에 대한 간단한 정리"><meta name=twitter:description content="cocos2d-x는 cocos2d를 거의 그대로 포팅한 2d게임 엔진이다. 원작이 objc 기반인 cocos2d를 C++로 옮겼으니 완전히 똑같지는 않다. 특히 메모리 모델의 경우는 언어상의 차이로 다를수밖에 없다.
+objc의 메모리 관리는 기본적으로 레퍼런스 카운팅 방식이다. 모든 objc의 클래스는 NSObject를 상속받는다. retain, relea"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/cocos2dx-memory-management/ rel=bookmark title="Permalink to cocos2d-x 메모리 관리에 대한 간단한 정리"><h1>cocos2d-x 메모리 관리에 대한 간단한 정리</h1></a></hgroup></header><footer class=post-info><abbr class=published title=2013-01-25T00:00:00Z>2013/01/25</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/cpp>#cpp</a></li><li><a href=/tags/cocos2dx>#cocos2dx</a></li></ul></footer><section class=entry-content><p>cocos2d-x는 cocos2d를 거의 그대로 포팅한 2d게임 엔진이다.
+원작이 objc 기반인 cocos2d를 C++로 옮겼으니 완전히 똑같지는 않다.
+특히 메모리 모델의 경우는 언어상의 차이로 다를수밖에 없다.</p><p>objc의 메모리 관리는 기본적으로 레퍼런스 카운팅 방식이다. 모든 objc의 클래스는 NSObject를 상속받는다.
+retain, release를 적절히 써서 레러런서 카운팅 쌍을 맞춰주면 적절히 메모리가 관리된다.
+autorelease를 사용하면 NSAutoreleasePool에 생성된 객체가 등록된다.
+이후 NSAutoreleasePool이 해제되면 풀에 등록된 모든 객체에 대해서 release를 수행한다.</p><p>하지만 C++에는 기본적으로는 저런기능이 존재하지 않는다. new로 객체를 생성하고 delete로 객체를 해제한다.
+autorelase? 그딴건 니가 만들어야함ㅋ
+(물론 이제는 표준이된 std::shared_ptr,
+일부컴파일러에서는 std::tr1::shared_ptr라는 이름으로 레퍼런스 카운팅이 되긴 한다.
+cocos2dx는 그런거 없이 자체 구현되어있으니까 일단 신경쓰지 않는다)</p><p>하지만 cocos2dx는 cocos2d를 거의 비슷하게 베끼려보니까 cocos2dx를 보면 CCObject라는 클래스로 objc에 있는 메모리 모델을 비슷하게 만들어놧다.</p><pre><code class=language-cpp>CCObject::CCObject(void)
+{
+    static unsigned int uObjectCount = 0;
+
+    m_uID = ++uObjectCount;
+    m_nLuaID = 0;
+
+    // when the object is created, the refrence count of it is 1
+    m_uReference = 1;		// &lt;--- CCObject를 상속받은 클래스는 객체가 생성될때 카운터가 1
+    m_bManaged = false;
+}
+CCObject::~CCObject(void)
+{
+    // if the object is managed, we should remove it
+    // from pool manager
+    if (m_bManaged)		//autorelease를 햇던 경우에 플래그 올라감
+    {
+        CCPoolManager::sharedPoolManager()-&gt;removeObject(this);	//풀에서 제거
+    }
+	//적절히 생략
+}
+void CCObject::release(void)
+{
+    CCAssert(m_uReference &gt; 0, &quot;reference count should greater than 0&quot;);
+    --m_uReference;		//release는 레퍼런스 카운터 내리기
+
+	//레퍼런스 카운터 0되면 클래스 자ㅋ폭ㅋ
+	//그래서 release후에 delete를 수동으로 하면 망한다
+    if (m_uReference == 0)	
+    {
+        delete this;
+    }
+}
+
+void CCObject::retain(void)
+{
+    CCAssert(m_uReference &gt; 0, &quot;reference count should greater than 0&quot;);
+    ++m_uReference;		//retain은 레퍼런스 카운터 올리기
+}
+
+CCObject* CCObject::autorelease(void)
+{
+	//autorelase를 하는 경우, 적절히 autorlease pool에 등록하고 플래그를 올린다
+    CCPoolManager::sharedPoolManager()-&gt;addObject(this);
+    m_bManaged = true;
+    return this;
+}
+</code></pre><p>위와 같이 CCObject를 구현해서 objc의 retain,release,autorelase와 동일한 API를 유지할수 있도록 되어잇다.
+다음으로 진짜 cocos2dx 사용 예제 소스에서 어떻게 메모리가 돌아가나 보자</p><p>수동으로 레퍼런스 카운팅을 하도록 짜면 다음과 같다. 레퍼런스 카운팅의 변화는 주석으로 달아놧다</p><pre><code class=language-cpp>bool SimpleLayer::init() {
+	if(!CCLayer::init()) {
+		return false;
+	}
+	CCSprite *sprite = new CCSprite();	//ref : 1
+	sprite-&gt;initWithFile(&quot;asdf.png&quot;);	//레퍼런스 변화없음
+	this-&gt;addChild(sprite);		//CCArray같은 cocoa의 자료구조를 베낀것에 집어넣으면 1증가. ref : 2
+	sprite-&gt;release();	//수동으로 내려서 ref : 1
+	//이후 이 레이어가 해제될때
+	//children으로 등록되어잇는 sprite에 대해서 release가 적절히 수행되서 ref : 0, 누수없이 객체 삭제
+	return true;
+}
+</code></pre><p>위의 코드는 평범한 objc코드를 c++로 바로 변환한거니까 별로 중요하지 않다.
+autorelease를 쓰는 예제는 다음과 같다. C++에는 원래 존재하지 않던 autoreleae를 적절히 만들어낸
+cocos2dx의 신묘한 메모리 관리정책을 볼수잇다</p><pre><code class=language-cpp>bool SimpleLayer::init() {
+	if(!CCLayer::init()) {
+		return false;
+	}
+	CCSprite *sprite = CCSprite::spriteWithFile(&quot;asdf.png&quot;);	//ref:1, autorelease pool에 등록
+	this-&gt;addChild(sprite);	//children등록되면서 +1, ref:1
+	//이후 이 레이어가 해제될때
+	//children으로 등록되어잇는 sprite에 대해서 release가 적절히 수행되서 ref : 1
+	//ANG? ref=1이 남앗다고? 이건 그렇다면 언제 해제되는거지?
+	return true;
+}
+</code></pre><p>예제의 코드만을 보면 ref=1이 남아있고 autorelase pool에 등록되어있는 상태이다.
+그렇다면 레이어가 소멸햇지만 sprite는 해제되지 않고 남아잇는 상태라니 이게 무슨소리인가?</p><p>는 게임내부 소스를 까보면 신묘한 구현을 볼수있다.</p><pre><code class=language-cpp>void CCDisplayLinkDirector::mainLoop(void)
+{
+    if (m_bPurgeDirecotorInNextLoop)
+    {
+        m_bPurgeDirecotorInNextLoop = false;
+        purgeDirector();
+    }
+    else if (! m_bInvalid)
+     {
+         drawScene();
+     
+         // release the objects
+         CCPoolManager::sharedPoolManager()-&gt;pop();     //&lt;--- 
+     }
+}
+</code></pre><pre><code class=language-cpp>void CCPoolManager::pop()
+{
+    if (! m_pCurReleasePool)
+    {
+        return;
+    }
+	int nCount = m_pReleasePoolStack-&gt;count();
+    m_pCurReleasePool-&gt;clear();	//&lt;--
+	.....
+}
+</code></pre><pre><code class=language-cpp>void CCAutoreleasePool::clear()
+{
+    if(m_pManagedObjectArray-&gt;count() &gt; 0)
+    {
+        CCObject* pObj = NULL;
+        CCARRAY_FOREACH_REVERSE(m_pManagedObjectArray, pObj)
+        {
+            if(!pObj)
+                break;
+
+            pObj-&gt;m_bManaged = false;
+            //(*it)-&gt;release();
+            //delete (*it);
+       }
+        m_pManagedObjectArray-&gt;removeAllObjects();
+    }
+}
+void CCAutoreleasePool::addObject(CCObject* pObject)
+{
+    m_pManagedObjectArray-&gt;addObject(pObject);
+    CCAssert(pObject-&gt;m_uReference &gt; 1, &quot;reference count should be greater than 1&quot;);
+    pObject-&gt;release(); // no ref count, in this case autorelease pool added.
+}
+</code></pre><p>CCDirector::mainLoop는 매 프레임마다 호출되는 함수이다. 이 함수 안에는 autorelease pool을 해제하는 함수를 호출한다.
+CCPoolManager::pop을 거쳐서 CCAutoreleasePool::clear가 호출되서 공용 autorelease pool에 등록된 객체를 전부 해제한다.</p><p>autorelease pool을 clear하는 함수의 구현을 보면
+모든 객체에 대해서
+객체를 강제로 autorelease pool로 등록하지 않앗다고 플래그를 바꾸고
+배열을 통째로 날린다. (배열을 비우면 배열안의 요소에 대해서 release가 호출된다)</p><p>autorelease pool에 객체를 등록하는 코드를 보면 레퍼런스 카운터를 원래상태로 유지하기 위해서 배열에 넣고 release를 수행한다</p><p>코드를 까봄으로써 알게된 추가사항을 다시 예제에 적용하면 다음과 같다</p><pre><code class=language-cpp>//객체 생성되서 ref=1
+//autorelease pool에 등록해도 ref count는 변하지 않는다. ref=1
+CCSprite *sprite = CCSprite::spriteWithFile(&quot;asdf.png&quot;);
+this-&gt;addChild(sprite);	//children등록되면서 +1, ref:2
+//이후 이 레이어가 해제될때
+//children으로 등록되어잇는 sprite에 대해서 release가 적절히 수행되서 ref : 1
+
+/*** 프레임 종료, mainLoop의 끝 ***/
+//autorelase pool에 등록된 객체에 대해서 전부 relase를 호출해서 카운터 -1
+
+//위에서 생성된 객체가 layer같은곳에 등록되어있어서 ref count=2인 상태이면 ref=1로 변함. 
+//layer같은거에서 제거될때 레퍼런스 카운터가 1 줄어서 적절히 객체 해제됨
+
+//autorelase로 객체를 생성하고 어디 등록하지 않고 냅둔경우(ref=1)
+//autorelase가 적절히 release를 해제해서 카운터 1 줄어서 메모리 해제됨. 누수없음
+</code></pre><p>좋은 메모리 관리 모델이다.
+개발자는 initXXX을 써서 수동으로 관리하건 spriteXXX를 써서 자동으로 맡기건 어쨋든 잘 짜면 메모리 누수는 없다</p><p>하지만 이걸로 끝나지 않는다. 몇가지 문제점이 존재한다</p><ul><li>retain, release는 락이 존재하지 않는다. 멀티 쓰레드로 가면 아마 사고칠거다</li><li>autorelase pool을 중첩해서 사용할수없다<ul><li>mainLoop에서 처리하는 autorelase pool은 공용 autorelase pool 하나뿐이다</li></ul></li></ul><p>물론 <a href=http://cocos2d-x.org/projects/cocos2d-x/wiki/Memory_Management_in_Cocos2d-x>위키</a>에도 언급된 사항이다.<br>위의 개념과 엮여서 발생가능한 문제도 있는데 이는 위키를 적절히 참고하자.
+(하지만 나는 영어가 딸려서 결국 코드를 까봣지&mldr;-_- 차라리 C++이 더 쉬워)</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/class-init-with-memset/ title="Next: memset로 클래스 초기화 쉽게 하기">memset로 클래스 초기화 쉽게 하기</a></li><li class=next-article><a href=https://if1live.github.io/posts/charp-like-property/ title="Previous: C#의 프로퍼티 C++에서 쓰기">C#의 프로퍼티 C++에서 쓰기</a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/cocos2dx-memory-management/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

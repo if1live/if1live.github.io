@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>include on /usr/lib/libsora.so</title><link>https://if1live.github.io/tags/include/</link><description>Recent content in include on /usr/lib/libsora.so</description><generator>Hugo -- gohugo.io</generator><language>ko-kr</language><lastBuildDate>Mon, 30 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://if1live.github.io/tags/include/index.xml" rel="self" type="application/rss+xml"/><item><title>int main() { #include "data.txt" return 0; }</title><link>https://if1live.github.io/posts/x-macro-is-useful/</link><pubDate>Mon, 30 Jan 2017 00:00:00 +0000</pubDate><guid>https://if1live.github.io/posts/x-macro-is-useful/</guid><description>흑마법은 많이 짜봤지만
+int foo() { #include &amp;ldquo;data.txt&amp;rdquo; }
+를 이길 물건은 아직 짜지 못했다. 내 명작 흑마법이었는데 리펙토링 하려다 c++ 접어서 방치
+트위터에서 남들의 흑마법 코드를 보다가 5년전에 짠 흑마법 코드가 생각나서 글을 써본다. C, C++ 많이 해본 사람은 다 알고있을 뻔한 주제다. 하지만 처음하는 사람은 글을 읽고 include, define에 대한 새로운 관점을 배울 수 있을거다.
+다시 보는 include C컴파일러는 하나의 소스만 읽고 컴파일할 수 있다. 근데 우리는 stdio.</description></item></channel></rss>

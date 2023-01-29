@@ -1,0 +1,145 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>printf("%s\n", NULL)의 출력 결과는? &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="printf(&#34;%s\n&#34;, NULL)의 출력 결과는?"><meta name=keywords content="c,c++,printf,undefined behavior,gcc,postmortem"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/printf-with-null-post-mortem/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="printf(&#34;%s\n&#34;, NULL)의 출력 결과는?"><meta name=twitter:description content="떡밥의 시작 오늘도 평소와 똑같이 트위터는 인생의 낭비를 라는 명언대로 행동하다 재밌는 트윗을 봤다.
+New Tweet &amp;ldquo;트위터만 보고 있지 말고 %s 해야지&amp;rdquo; @_Yous
+트윗을 보자마자 %s에다가 NULL을 넣어보았다.
+New Tweet &amp;ldquo;트위터만 보고 있지 말고 %s 해야지&amp;rdquo;, NULL @if1live
+트윗을"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/printf-with-null-post-mortem/ rel=bookmark title='Permalink to printf("%s\n", NULL)의 출력 결과는?'><h1>printf("%s\n", NULL)의 출력 결과는?</h1><h2>undefined behavior과 compiler</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2016-03-06T00:00:00Z>2016/03/06</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/c>#c</a></li><li><a href=/tags/c++>#c++</a></li><li><a href=/tags/printf>#printf</a></li><li><a href=/tags/undefined-behavior>#undefined behavior</a></li><li><a href=/tags/gcc>#gcc</a></li><li><a href=/tags/postmortem>#postmortem</a></li></ul></footer><section class=entry-content><h2 id=떡밥의-시작>떡밥의 시작</h2><p>오늘도 평소와 똑같이 <a href=https://namu.wiki/w/%ED%8A%B8%EC%9C%84%ED%84%B0%EB%8A%94%20%EC%9D%B8%EC%83%9D%EC%9D%98%20%EB%82%AD%EB%B9%84>트위터는 인생의 낭비</a>를 라는 명언대로 행동하다 재밌는 트윗을 봤다.</p><blockquote><p>New Tweet &ldquo;트위터만 보고 있지 말고 %s 해야지&rdquo;
+<a href=https://twitter.com/_Yous/status/706349364965289985>@_Yous</a></p></blockquote><p>트윗을 보자마자 <code>%s</code>에다가 <code>NULL</code>을 넣어보았다.</p><blockquote><p>New Tweet &ldquo;트위터만 보고 있지 말고 %s 해야지&rdquo;, NULL
+<a href=https://twitter.com/if1live/status/706350121651339265>@if1live</a></p></blockquote><p>트윗을 쓰고 나니 옛날에 비슷한걸 해본적이 생각났다.
+<strong>그러고보니 printf(%s”, NULL) 해도 프로그램이 안뒤졌던거같은 기분이 드는데?</strong>
+그래서 직접 돌려봤다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+int main()
+{
+  printf(&quot;string = %s\n&quot;, NULL);
+  return 0;
+}
+</code></pre><pre><code class=language-bash>$ clang simple.c &amp;&amp; ./a.out
+string = (null)
+</code></pre><p>안죽네? 게다가 <code>(null)</code>은 어디서 튀어나온거지?
+왜 그런지 이유를 찾아보자.</p><h2 id=스펙스펙을-보자>스펙&mldr;스펙을 보자!</h2><p><a href=http://en.cppreference.com/w/c/io/fprintf>printf reference</a>를 읽어봤는데 &ldquo;(null)&ldquo;과 관련된 내용이 안보이더라.
+<code>%s</code>에다가 <code>NULL</code>을 넣는게 undefined behavior일거같다는 생각이 들었는데 좀더 깊이 파보기로 했다.
+까막눈이라 영어 읽는게 어려우니 차라리 코드를 뒤져보자.
+코드가 어떻게 행동하는지를 보고 이 동작이 스펙인지 아닌지를 유추해보자.</p><h2 id=glibc>glibc</h2><p>glibc의 printf 구현은 다음 파일에서 찾을수 있다.
+<a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=stdio-common/vfprintf.c;h=6829d4dc8e7fe7c066a06f1857ee926e0f48c379">stdio-common/vfprintf.c</a>
+printf 코드는 크고 아름다우니 <code>printf("%s\n", NULL)</code> 의 행동과 관련된 코드만 찾아보자.</p><pre><code class=language-c>REF (precision), /* for '.' */
+</code></pre><p>printf의 경우 포매팅에서 <code>.</code>를 정밀도(precision)으로 사용한다.</p><pre><code class=language-c>int prec = -1;	/* Precision of output; -1 means none specified.  */
+</code></pre><p>정밀도(prec)의 기본값은 -1이다. 나중에 이 값을 쓰게 된다.</p><pre><code class=language-c>REF (form_string), /* for 's', 'S' */
+</code></pre><p>확인하고 싶은건 <code>%s</code>의 행동이다. <code>form_string</code> 으로 연결된 것만 나중에 확인하면 된다.</p><pre><code class=language-c>/* Global constants.  */
+static const CHAR_T null[] = L_(&quot;(null)&quot;);
+</code></pre><p><code>(null)</code>를 찾았다. 문자열 <code>null</code>이 어디에서 쓰이는지를 찾아보면 될거다.</p><pre><code class=language-c>LABEL (form_string):
+  {
+    ...
+    if (string == NULL)
+    {
+      /* Write &quot;(null)&quot; if there's space.  */
+      if (prec == -1 || prec &gt;= (int) sizeof (null) - 1)
+        {
+          string = (char *) null;
+          len = sizeof (null) - 1;
+        }
+      else
+        {
+          string = (char *) &quot;&quot;;
+          len = 0;
+        }
+    }
+    ...
+</code></pre><ol><li><code>string</code>가 <code>NULL</code>인 경우&mldr;</li><li>정밀도(prec)가 기본값이거나 <code>(null)</code>의 길이보다 큰 경우<ol><li><code>(null)</code>를 출력</li></ol></li><li>그렇지 않으면(올바른 범위의 정밀도를 사용한다면)<ol><li>아무것도 출력하지 않는다.</li></ol></li></ol><p><code>%s</code>에서 정밀도를 쓸 수 있는건 처음 알았다. 배웠으니 한번 써보자.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+int main()
+{
+  printf(&quot;%s\n&quot;, NULL);
+  printf(&quot;%.0s\n&quot;, NULL);
+  printf(&quot;%.3s\n&quot;, NULL);
+  return 0;
+}
+</code></pre><pre><code class=language-bash>$ clang printf_prec.c &amp;&amp; ./a.out
+(null)
+
+(nu
+</code></pre><p>내가 OSX를 쓰는데 glibc의 코드에서 확인한 행동과 osx에서의 행동이 다르다.
+glibc였다면 마지막 출력은 <code>(nu</code>가 아니라 공백이어야 한다.
+여기에서 두가지 사실을 유추할수 있다.</p><ol><li>OSX에서는 glibc를 쓰지 않는다. 다른 C 라이브러리를 쓰고있다.</li><li>glibc와 OSX에서 사용하는 C 라이브러리의 출력이 다르니 이것은 undefined behavior이다.</li></ol><h2 id=libc>libc</h2><p>여기까지 온 이상 OSX의 C 라이브러리에서는 어떻게 구현했는지도 확인해보자.
+<a href=https://twitter.com/sairion/status/706360731562672128>‏@sairion</a>님의 도움을 받아서 OSX에서는 <a href=http://www.opensource.apple.com/source/Libc/>libc</a>를 사용한다는걸 알았다.</p><p>libc에서는 <a href=http://www.opensource.apple.com/source/Libc/Libc-1082.20.4/stdio/FreeBSD/vfprintf.c>stdio/FreeBSD/vfprintf.c</a>에 printf의 구현체가 있다.
+glibc와 마찬가지로 코드를 살펴보자.</p><pre><code class=language-c>case 's':
+  if (flags &amp; LONGINT) {
+    ...
+    if ((wcp = GETARG(wchar_t *)) == NULL)
+      cp = &quot;(null)&quot;;
+    ...
+  } else if ((cp = GETARG(char *)) == NULL)
+    cp = &quot;(null)&quot;;
+  size = (prec &gt;= 0) ? strnlen(cp, prec) : strlen(cp);
+  sign = '\0';
+  break;
+</code></pre><ol><li>출력할 대상이 <code>NULL</code>이면 <code>(null)</code>을 출력 후보로 바꾼다.</li><li>정밀도가 있으면 정밀도만큼 size를 잡는다. 정밀도가 없으면 문자열 <code>(null)</code>의 길이를 size로 쓴다.</li></ol><p>그래서 libc에서는 <code>NULL</code>과 정밀도를 같이 쓰면 문자열이 잘려서 출력된다.</p><h2 id=번외편--gcc--printfsn-null>번외편 : gcc + printf("%s\n&rdquo;, NULL)</h2><blockquote><p>gcc 에서 printf("%s\n&rdquo;, NULL); 하면 segfault 나고 printf(&ldquo;Test %s\n&rdquo;,NULL) 하면 Test (null) 나옴
+<a href=https://twitter.com/mega_kina/status/706357586090598400>@mega_kina</a></p></blockquote><p>clang만 쓰다보니까 gcc의 동작은 테스트를 제대로 안해봤는데 진짜로 저렇게 행동한다.
+뒤져보니 gcc의 최적화에 대해서 정리한 글이 있더라. 자세한 내용은 아래의 글을 참고하기 바란다.
+<a href=http://www.ciselant.de/projects/gcc_printf/gcc_printf.html>About GCC printf optimization</a></p><p>영어 읽기 싫은 사람을 위해서 간단하게 요약했다.
+<strong>gcc는 특정 조건에서 <code>printf()</code>를 <code>puts()</code>로 바꾼다. 코드에서 <code>printf()</code>를 호출해도 <code>puts()</code>가 대신 호출된다는거다.</strong></p><p>참고: 2005년도에 작성된 글이라 gcc 최신버전인 5.3.0에서는 파일, 함수이름이 다르다. <code>gimple_fold_builtin_printf()</code>
+<a href=https://github.com/gcc-mirror/gcc/blob/gcc_5_3_0_release/gcc/gimple-fold.c#L2691-L2851>gcc/gimple-fold.c</a></p><h2 id=흑마법사를-위한-가이드>흑마법사를 위한 가이드</h2><p>새로운 undefined behavior를 배웠으면 이를 이용해서 어떻게 사람을 엿먹일지를 생각해봐야한다. 그래야 내가 엿먹기 전에 남을 엿먹일수 있다. (선빵필승!)
+몇가지 알려진 편법을 응용해보자.</p><ul><li>회원가입을 할때 생일을 <code>1970년 1월 1일</code>로 입력한다. 개발자는 날짜가 제대로 입력되지 않는 버그가 있는줄 알고 디버깅을 할 것이다.</li><li>회원가입을 할때 이름을 <code>NULL</code>로 입력한다. 개발자는 어딘가에 버그가 있다고 생각하고 디버깅을 할 것이다.</li></ul><pre><code class=language-c>#include &lt;stdio.h&gt;
+const char *hello(const char *name)
+{
+  static char msg[256];
+  sprintf(msg, &quot;Hello, %s&quot;, name);
+  return msg;
+}
+
+int main()
+{
+  printf(&quot;%s\n&quot;, hello(&quot;(null)&quot;));
+  printf(&quot;%s\n&quot;, hello(NULL));
+  return 0;
+}
+</code></pre><pre><code class=language-bash>$ clang trap_fake_null.c &amp;&amp; ./a.out
+Hello, (null)
+Hello, (null)
+</code></pre><p>진짜로 <code>(null)</code>을 출력하고자한 경우와 실수로 <code>NULL</code>이 들어간 경우를 구분할수 없다.
+함정을 밟지 않으려면 <code>NULL</code> 확인을 앞에 배치하는게 좋을거다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+#include &lt;assert.h&gt;
+const char *hello(const char *name)
+{
+  assert(name != NULL);
+  static char msg[256];
+  sprintf(msg, &quot;Hello, %s&quot;, name);
+  return msg;
+}
+
+int main()
+{
+  printf(&quot;%s\n&quot;, hello(&quot;(null)&quot;));
+  printf(&quot;%s\n&quot;, hello(NULL));
+  return 0;
+}
+</code></pre><pre><code class=language-bash>$ clang trap_fake_null_alt.c &amp;&amp; ./a.out
+Assertion failed: (name != NULL), function hello, file trap_fake_null_alt.c, line 5.
+Hello, (null)
+/var/folders/mt/f4mnd72x2_526m85rvxhg3bc0000gn/T/maya264151972: line 1:  1788 Abort trap: 6           ./a.out
+</code></pre><h2 id=요약>요약</h2><ul><li><code>printf("%s\n", NULL)</code>은 undefined behavior이다.</li><li><code>vsprintf()</code> 계열의 함수에서 undefined behavior부분은 구현체에 따라 다르다.</li><li>최적화를 위해 컴파일러가 호출하는 함수를 바꿔버리는 경우도 있다.</li><li><s>잘 모르겠으면 일단 구현체 소스를 까보자</s></li></ul><h2 id=도전-과제>도전 과제</h2><p>그렇다면 윈도우에서는 어떻게 작동할까?
+내가 컴맹이라서 윈도우는 잘 모르니 참고용 트윗만 기록해둔다.</p><p><a href=https://twitter.com/summerlight00/status/706358610528329728>왜냐하면 널이 인자로 넘어가는 경우는 undefined behavior라 컴파일러 벤더 맘대로 구현해도 되서 그렇습니다..</a></p><p><a href=https://twitter.com/summerlight00/status/706360559063576576>msvc 같은 경우는 최근 오픈 소스 라이브러리의 윈도우 이식을 쉽게 하려고 c99 함수들 구현하는 김에 c 표준 라이브러리를 새로 재구현했는데요, 이런 맥락이라면 gcc 동작을 그대로 베끼는게 이해는 갑니다.</a></p><p><a href=https://twitter.com/sokcuri/status/706366233583595520>Microsoft Visual Studio 14.0\VC\crt\src\i386 경로에 있네요</a></p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/http-request-params-trap-python-and-ruby/ title="Next: 버그 삽질기 - 파이썬으로 구현한 API 서버 루비로 포팅하기">버그 삽질기 - 파이썬으로 구현한 API 서버 루비로 포팅하기<br><small>HTTP 요청 parameters를 이용하다 밟을수 있는 함정</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/twitter-image-archive-post-mortem/ title="Previous: Twitter Image Archive 개발 포스트모템">Twitter Image Archive 개발 포스트모템<br><small>트위터 계정 폭파시키기 전에 짤 백업하기</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/printf-with-null-post-mortem/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

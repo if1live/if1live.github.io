@@ -1,0 +1,303 @@
+// external library
+@import "font-awesome-4.5.0/font-awesome";
+
+// custom
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+@import "reset";
+
+@mixin core-anchor-mixin {
+  a, a:visited {
+    text-decoration: none;
+    color: $base-a-tag-color;
+    border-bottom: 1px dotted $base-a-tag-color;
+  }
+  a:hover {
+    color: $base-a-tag-hover-color;
+    border-bottom: 1px dotted $base-a-tag-hover-color;
+  }
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+@mixin common-header-footer {
+  color: #eee;
+  text-align: center;
+
+  a,
+  a:hover,
+  a:visited {
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+  }
+}
+
+.header {
+  @include common-header-footer;
+  @include gradient-y($sky-bg-color-top, $sky-bg-color-bottom, 0%);
+  padding: 1em 0 0.5em 0;
+
+  h1 {
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 1.5em;
+  }
+}
+
+.footer {
+  @include common-header-footer;
+  background-color: $sky-bg-color-bottom;
+  box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
+  padding: 0.5em 0 1em 0;
+}
+
+.nav-link-list {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    $length: 1.8em;
+    display: inline-block;
+    @include square($length);
+    line-height: $length;
+    border: 1px solid #fff;
+    margin: 0.5em 0.5em;
+    background-color: $sky-btn-color;
+
+    color: #fff;
+    &:hover, &.active {
+      background-color: $sky-btn-hover-color;
+    }
+  }
+}
+
+.basic-content {
+  @include core-anchor-mixin;
+  padding: 10px 0;
+
+  line-height: 1.6em;
+
+  @mixin common-h1 {
+    padding: 0;
+    margin: 10px 0;
+    font-size: 1.6em;
+    color: $gray-darker;
+  }
+
+  h1 {
+    @include common-h1
+  }
+
+  header {
+    h1 {
+      @include common-h1
+    }
+    h2 {
+      padding: 0;
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: $gray-dark;
+    }
+  }
+
+  code:not([class*="language-"]) {
+    padding: 2px 4px;
+    margin: 0 2px;
+    color: #d14;
+    background-color: #f3e9e0;
+    //white-space: nowrap;
+    white-space: pre;
+    @include border-radius(5px);
+  }
+
+  blockquote {
+    border-left: 5px solid $gray-light;
+    padding-left: 1em;
+    margin: 1em 0em 1em 5px;
+  }
+
+  img {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+  }
+
+  video {
+    margin: 0 auto;
+    display: block;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: $gray;
+  }
+  tr:nth-child(even) {
+    background-color: $gray-light;
+  }
+}
+
+.entry-content {
+  ul, ol {
+    padding-left: 1em;
+    margin: 0.2em 0;
+    > li > p {
+      margin: 0;
+    }
+  }
+  dl {
+    dd {
+      padding-left: 1em;
+      margin: 0;
+    }
+  }
+}
+
+.articles-timeline {
+  @include clearfix;
+  padding: 0.5em 0;
+  margin: 0;
+  list-style: none;
+
+  .previous-article {
+    @include pull-left;
+    width: 50%;
+  }
+  .next-article {
+    @include pull-right;
+    @extend .text-right;
+    width: 50%;
+  }
+}
+
+.post-info {
+  padding: 0.5em 0;
+  .published,
+  .author {
+    display: inline-block;
+    font-style: normal;
+    text-decoration: none;
+  }
+}
+
+.list-of-tags {
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+
+  li {
+    display: inline-block;
+    padding: 0 0.5em 0 0;
+  }
+}
+
+.disqus-section {
+  padding: 1em 0;
+}
+
+// maya
+.maya-youtube {
+  text-align: center;
+}
+
+.tags-content {
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    padding: 5px;
+  }
+}
+
+.article-summary {
+  @include clearfix();
+  padding: 10px 0;
+
+  a, a:hover, a:visited {
+    border-bottom: 0;
+  }
+  a:hover * {
+    color: $base-a-tag-hover-color;
+  }
+
+  .article-name {
+    float: left;
+  }
+
+  .article-title {
+    font-size: 1.2em;
+    margin: 0;
+    color: $gray-darker;
+  }
+  .article-subtitle {
+    font-size: 1.0em;
+    margin: 0;
+    text-indent: 1em;
+    font-weight: normal;
+    color: $gray-dark;
+  }
+  .article-date {
+    float: right;
+    text-align: right;
+  }
+}
+
+.pagination {
+  text-align: center;
+  li {
+    display: inline-block;
+  }
+  a {
+    display: inline-block;
+    font-size: 1.2em;
+    padding: 5px;
+    color: $base-a-tag-color;
+    border-bottom: 1px dotted #fff;
+  }
+  a:hover {
+    color: $base-a-tag-hover-color;
+    border-bottom: 1px dotted $base-a-tag-hover-color;
+  }
+  a, a:hover, a:visited {
+    text-decoration: none;
+  }
+  .active {
+    > a {
+      color: $gray-darker;
+      font-weight: bold;
+    }
+  }
+  .disabled {
+    > a {
+      color: $gray-lighter;
+    }
+  }
+}

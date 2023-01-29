@@ -1,0 +1,163 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>C#의 프로퍼티 C++에서 쓰기 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="C#의 프로퍼티 C++에서 쓰기"><meta name=keywords content="cpp,property"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/charp-like-property/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="C#의 프로퍼티 C++에서 쓰기"><meta name=twitter:description content="본문을 읽기전에 아래의 2개의 페이지를 읽어보면 이해에 도움이 될것이다. 사실상 내가 만든 코드는 위의 2개를 내 방식대로 묶은것뿐이다
+[Property(programming)][1] [C++에서 속성 구현하기][2] [1]: http://en.wikipedia.org/wiki/Property_(programming)#C.2B.2B [2]: http://w"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/charp-like-property/ rel=bookmark title="Permalink to C#의 프로퍼티 C++에서 쓰기"><h1>C#의 프로퍼티 C++에서 쓰기</h1></a></hgroup></header><footer class=post-info><abbr class=published title=2013-01-25T00:00:00Z>2013/01/25</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/cpp>#cpp</a></li><li><a href=/tags/property>#property</a></li></ul></footer><section class=entry-content><p>본문을 읽기전에 아래의 2개의 페이지를 읽어보면 이해에 도움이 될것이다. 사실상 내가 만든 코드는 위의 2개를 내 방식대로 묶은것뿐이다</p><ul><li>[Property(programming)][1]</li><li>[C++에서 속성 구현하기][2]
+[1]: <a href=http://en.wikipedia.org/wiki/Property_(programming)#C.2B.2B>http://en.wikipedia.org/wiki/Property_(programming)#C.2B.2B</a>
+[2]: <a href="http://www.gpgstudy.com/forum/viewtopic.php?t=3504">http://www.gpgstudy.com/forum/viewtopic.php?t=3504</a></li></ul><h2 id=step-1-c-느낌의-프로퍼티를-c에서-왜-쓰고-싶은가>Step 1. C# 느낌의 프로퍼티를 C++에서 왜 쓰고 싶은가?</h2><p>단계별로 코드를 안드로보내기 위해서 처음에는 간단한것부터 시작하자.</p><pre><code class=language-cpp>class Obj {
+public:
+	int a;
+};
+
+Obj obj;
+obj.a = 1;
+printf(&quot;%d\n&quot;, obj.a);
+</code></pre><p>위의 코드처럼 클래스에 있는 멤버변수가 public이라면 그냥 .찍는것으로 변수를 얻을수있다. 하지만 개인적으로 public변수의 떡칠을 싫어한다. 첫번쨰 이유는 내가 컴맹이라서 브레이크 포인트를 변수에 거는 방법을 모른다. 두번째는 public으로 설정하면 readonly, const같은 통제를 하는것이 불가능하다.</p><p>그래서 멤버변수를 private로 하면 getter/setter를 쓰는것이 귀찮다. 왠지모르게 쓸데없이 코드가 길어지는 느낌이다. 이때 C#의 프로퍼티가 출동하면 좋지만 C++은 언어가 쓰레기라서 편법으로 구현해야한다.</p><h2 id=step-2-간단한-구현>Step 2. 간단한 구현</h2><p>일단 간단한 편법으로 property를 구현해보자</p><pre><code class=language-cpp>class PropertySample {
+public:
+	class {
+	public:
+		float &amp;operator=(const float &amp;i) { return value = i; }
+		operator float() const { return value; }
+		float value;
+	} b;
+};
+
+int main() {
+	PropertySample p1;
+	p1.b = 2;
+	int a = p1.b;
+	return 0;
+}
+</code></pre><p>모든것의 시작이 되는 코드이다. 연산자오버로딩을 통해서 적절히 멤버변수값을 얻을수있다. 하지만 문제가 있다.
+getter/setter를 위한 함수가 property sample클래스에 있는것이 아니라서 함수가 흩어지게 된다.
+또한 위의 클래스 존재하는 int a는 class b의 영역이 아니라서 getter에서 접근이 불가능하다. Step3에서 문제를 해결하자</p><h2 id=step-3-gettersetter-함수-연결하기>Step 3. Getter/Setter 함수 연결하기</h2><p>위의 문제를 해결하기 위한 중간과정으로 다음과 같은 방식으로 짤수있다</p><pre><code class=language-cpp>class PropertySample {
+public:
+  int get_a() {
+    return a.value * 2;
+  }
+  int set_a(const int &amp;a) {
+    return a * 2;
+  }
+public:
+  //normal form
+  class {
+  public:
+    int &amp;operator=(const int &amp;i) {
+      unsigned int offset = offsetof(PropertySample, a);
+      PropertySample *parent = (PropertySample*)((unsigned int)(this) - offset);
+      value = parent-&gt;set_a(i);
+      return value;
+    }
+    operator int() const {
+      unsigned int offset = offsetof(PropertySample, a);
+      PropertySample *parent = (PropertySample*)((unsigned int)(this) - offset);
+      return parent-&gt;get_a();
+    }
+    int value;
+  } a;
+  int c;
+};
+int main() {
+  PropertySample p1;
+  p1.a = 1;   //set하면 2배가 저장
+  return p1.a;   //get할때 다시 2배
+}
+</code></pre><p>offsetof를 적절히 이용해서 getter/setter 함수를 외부로 분리했다. 또한 getter/setter함수를 클래스로 둠으로써 클래스 멤버변수 int c에도 접근이 가능할수있다. 근데 저걸 일일이 치는것은 귀찮다. 적절한 수준으로 매크로와 템플릿의 도움을 받으면 참고자료2번째의 소스코드가 나온다. 하지만 그것과 똑같으면 재미 없잖아? 해서 생성자를 조금 고치니 템플릿의 한계로 인해 매크로로 템플릿을 찍어내고 그것으로 멤버변수를 찍어내는 괴상한 코드가 나왔다. 어쨋든 소스 올림</p><h2 id=source>Source</h2><pre><code class=language-cpp>#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;cstddef&gt;
+
+#define SR_PROPERTY(TYPE, CLASS_NAME, GETTER, SETTER, NAME)  \
+  template&lt; \
+  typename T, \
+  typename ConType, \
+  T (ConType::*GetFunc)(),  \
+  T (ConType::*SetFunc)(const T &amp;) \
+  &gt; \
+class Property_##CLASS_NAME##_##NAME {  \
+public: \
+  Property_##CLASS_NAME##_##NAME() {} \
+  Property_##CLASS_NAME##_##NAME(const T i) : value(i) {} \
+  T &amp;operator=(const T &amp;i) {  \
+    unsigned long offset = offsetof(CLASS_NAME, NAME); \
+    ConType *parent = (ConType*)((unsigned long)(this) - offset);  \
+    value = (parent-&gt;*SetFunc)(i);  \
+    return value; \
+  } \
+  operator T() const {  \
+    unsigned long offset = offsetof(CLASS_NAME, NAME); \
+    ConType *parent = (ConType*)((unsigned long)(this) - offset);  \
+    T result = (parent-&gt;*GetFunc)(); \
+    return result;  \
+  } \
+  T value;  \
+};  \
+  Property_##CLASS_NAME##_##NAME &lt;TYPE, CLASS_NAME, &amp;CLASS_NAME::GETTER, &amp;CLASS_NAME::SETTER&gt; NAME
+  
+
+class PropertySample {
+public:
+  PropertySample() : c(0) {}
+
+  int get_c() {
+    int result = c.value * 3;
+    return result;
+  }
+  int set_c(const int &amp;c) {
+    return c * 3;
+  }
+  
+  std::string get_str() {
+    return std::string(&quot;a&quot;);
+  }
+  std::string set_str(const std::string &amp;str) {
+    return str + &quot;a&quot;;
+  }
+
+  SR_PROPERTY(int, PropertySample, get_c, set_c, c);
+  SR_PROPERTY(std::string, PropertySample, get_str, set_str, d);
+};
+
+int main() {
+  PropertySample p1;
+  
+  printf(&quot;default value. %d\n&quot;, p1.c);
+  p1.c = 1;
+  std::cout &lt;&lt; &quot;use cout. &quot; &lt;&lt; p1.c &lt;&lt; std::endl;
+  printf(&quot;use printf. %d\n&quot;, p1.c);
+
+  
+  p1.d = &quot;msg&quot;;
+  std::string tmp = p1.d;
+  printf(&quot;%s\n&quot;, tmp.c_str());
+  getchar();
+}
+</code></pre><p>우왕 이제 위쪽 코드가 더럽긴 하지만 프로퍼티를 찍어낼수있어요! 하고 좋아하기에는 이르다. 출력결과를 보자.</p><pre><code class=language-cpp>default value. 0
+use cout. 9
+use printf. 3
+</code></pre><p>use cout. 9, use printf. 3은 같은 값이 나오길 기대했으나 완전히 다른값이 나왔다. 이는 printf로 넘어가는것이 객체이지 int가 아니기때문이다(이는 위에서 지적하지 않았지만 모든 예제코드에서 공통적으로 발생한다)</p><blockquote><p>( format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘PropertySample::Property_PropertySample_c&lt;int, PropertySample, &PropertySample::get_c, &PropertySample::set_c>’)</p></blockquote><p>이부분을 주의하면 제한된 용도로 쓸수있을거같다</p><h2 id=최종-코드의-권장되는-용도>최종 코드의 권장되는 용도</h2><p>pubilc member variable로 막 작업을 하고있었는데 함수를 거쳐서 추가작업을 수행해야되는경우, public멤버변수 때려박은곳을 전부 getter로 바꾸는건 미친짓이니까 그럴때는 이거라도 쓰면 좋을듯</p><h2 id=결론>결론</h2><p><strong>C++은 쓰레기</strong></p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/cocos2dx-memory-management/ title="Next: cocos2d-x 메모리 관리에 대한 간단한 정리">cocos2d-x 메모리 관리에 대한 간단한 정리</a></li><li class=next-article><a href=https://if1live.github.io/posts/box2d-stack-allocator/ title="Previous: Box2d Stack Allocator">Box2d Stack Allocator</a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/charp-like-property/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

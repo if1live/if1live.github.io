@@ -1,0 +1,136 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>유니티 프로젝트 빌드 시스템 구축하기 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="유니티 프로젝트 빌드 시스템 구축하기"><meta name=keywords content="unity,build"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/make-unity-build-system/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="유니티 프로젝트 빌드 시스템 구축하기"><meta name=twitter:description content="개요 내가 만든 Toy Clash는 Samsung GearVR, Google Daydream, SteamVR, iOS를 지원한다. 이걸로 끝이 아니라 조만간 Windows Store도 추가될 예정이다.
+내가 개발해보니까 이정도 갯수의 플랫폼을 지원하기 위해서는 빌드 시스템 수준에서도 크로스 플랫폼을 고려해야 하더라. 게임을 개발하면서 빌드시스템이 어떻게 변"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/make-unity-build-system/ rel=bookmark title="Permalink to 유니티 프로젝트 빌드 시스템 구축하기"><h1>유니티 프로젝트 빌드 시스템 구축하기</h1><h2>크로스 플랫폼을 지탱하는 빌드 시스템 만들기</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2017-11-12T00:00:00Z>2017/11/12</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/unity>#unity</a></li><li><a href=/tags/build>#build</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p>내가 만든 Toy Clash는 <a href=//www.oculus.com/experiences/gear-vr/1407846952568081/>Samsung GearVR</a>, <a href="//play.google.com/store/apps/details?id=com.fiveminlab.toyclash.daydream">Google Daydream</a>, <a href=//store.steampowered.com/app/620360/Toy_Clash/>SteamVR</a>, <a href=//itunes.apple.com/app/toy-clash-ar/id1274066398>iOS</a>를 지원한다.
+이걸로 끝이 아니라 조만간 Windows Store도 추가될 예정이다.</p><p>내가 개발해보니까 이정도 갯수의 플랫폼을 지원하기 위해서는 빌드 시스템 수준에서도 크로스 플랫폼을 고려해야 하더라.
+게임을 개발하면서 빌드시스템이 어떻게 변화되어서 최종 형태를 갖추었는지 정리해봤다.</p><h2 id=수동-빌드>수동 빌드</h2><p>초기에는 빌드시스템이고 뭐고 없었다.
+빌드를 뽑아서 보여줄 사람이 없는데 뭣하러 빌드에 공을 들이나?
+유니티에서 직접 빌드했다.</p><p><img src=manual-build.png alt="manual build"></p><h2 id=간단한-빌드-스크립트>간단한 빌드 스크립트</h2><p>유니티에는 커맨드 라인을 통해 스크립트의 특정 함수를 호출하는 기능이 있다.
+<a href=https://docs.unity3d.com/Manual/CommandLineArguments.html>Command line arguments</a>
+빌드를 뽑는 함수를 만들고 이를 커맨드 라인에서 호출한다.
+그러면 빌드가 짠!</p><pre><code class=language-csharp>public class BuildScript {
+    public static void BuildGame() {
+        var scenes = new string[] { &quot;Assets/main.unity&quot; };
+        var flags = BuildOptions.Development;
+        BuildPipeline.BuildPlayer(scenes, &quot;sample.apk&quot;, BuildTarget.Android, flags);
+    }
+}
+</code></pre><pre><code class=language-batch>C:\program files\Unity\Editor\Unity.exe -quit -batchmode -executeMethod BuildScript.BuildGame
+</code></pre><h2 id=buildbot>buildbot</h2><p>스크립트를 통해 유니티 빌드하는게 가능해졌으니 지속적 통합(continuous integration, CI)을 도입했다.
+<a href=https://buildbot.net/>buildbot</a>을 이용했다. CI는 좋은 것이니 다들 도입하자.</p><p>(CI에 대해서 설명한 글은 많으니 여기에서는 다루지 않는다.)</p><h2 id=복잡해지는-빌드-스크립트>복잡해지는 빌드 스크립트</h2><p>커맨드라인을 통해서 호출할수 있는 유니티 함수는 한번에 한개 뿐이다.
+toy clash는 기어VR, 구글 데이드림, 스팀VR을 동시에 지원했다.
+각각의 플랫폼마다 디버그용 빌드와 릴리즈용 빌드를 뽑을 필요가 있었다.
+플랫폼과 빌드 옵션의 조합마다 빌드용 함수를 만드니 빌드 스크립트가 점점 복잡해졌다.</p><pre><code class=language-csharp>public class BuildScript {
+    public static void BuildGearVR_Dev() {
+        SetManifest_GearVR();
+        SetXRDevice_GearVR();
+        var scenes = GetScenes_GearVR();
+        var flags = BuildOptions.Development;
+        BuildPipeline.BuildPlayer(scenes, &quot;sample_dev.apk&quot;, BuildTarget.Android, flags);
+    }
+
+    public static void BuildAndroid_Release() {
+        SetManifest_GearVR();
+        SetXRDevice_GearVR();
+        var scenes = GetScenes_GearVR();
+        var flags = BuildOptions.None;
+        BuildPipeline.BuildPlayer(scenes, &quot;sample_release.apk&quot;, BuildTarget.Android, flags);
+    }
+
+    public static void BuildStandalone_Dev() { ... }
+    public static void BuildStandalone_Release() { ... }
+
+    public static void BuildGoogleDaydream_Dev() { ... }
+    public static void BuildGoogleDaydream_Release() { ... }
+}
+</code></pre><h2 id=빌드-후처리>빌드 후처리</h2><p>생성된 빌드를 그냥 쓸수도 있겠지만 몇가지 후처리를 하면 재밌는걸 할 수 있다.
+다음은 내가 적용한 몇가지 사례이다.</p><p>오큘러스에서는 생성된 APK를 기어VR로 출시하는데 문제없는지 확인하는 툴을 제공한다.
+빌드를 생성한후 알아서 검증툴에 집어넣는다.</p><p>윈도우 빌드를 뽑으면 여러개의 파일로 구성된 빌드가 나온다.
+이를 zip으로 압축한다.
+그러면 뽑은 빌드를 다른 사람에게 배포할때 편하다.</p><p>Universal Windows Platform 빌드를 뽑으면 visual studio 프로젝트가 생성된다.
+다국어 지원 설정을 하려면 visual studio 프로젝트를 연후 몇가지 설정을 수정해야한다.
+근데 visual stdio 프로젝트는 텍스트 파일이잖아? 수정 전후에 어떤 내용이 바뀌었는지 볼수있잖아?
+그렇다면 빌드한 다음에 visual studio 프로젝트를 열어서 고치는 것까지 자동화시킬 수 있다.</p><h2 id=superunitybuild>SuperUnityBuild</h2><p>플랫폼과 빌드설정의 가짓수가 늘어나다보니 이를 유지보수하는게 귀찮더라.
+더 좋은 방법이 뭐가 있나 찾아보니 <a href=https://github.com/Chaser324/unity-build>SuperUnityBuild</a> 라는게 있더라.</p><p><img src=super-unity-build.png alt=SuperUnityBuild></p><p>하지만 나는 SuperUnityBuild를 사용하지 않았다.
+두가지 부분이 마음에 들지 않았다.</p><p>첫번째, 내가 필요로하는 기능이 모두 있는게 아니었다.
+VR게임을 빌드하려면 VR관련 몇가지 설정을 바꿔줘야한다. 하지만 SuperUnityBuild는 VR게임을 위해서 만들어지지 않았다.
+구글 데이드림과 기어VR은 서로 다른 AndroidManifest.xml을 사용해야한다. 하지만 SuperUnityBuild에는 그런 기능이 보이지 않았다.
+이런 기능들 때문에 SuperUnityBuild를 고쳐써야 하는데 고치기 귀찮았다.</p><p>두번째, 레거시 빌드 시스템을 갖다 버리기 싫었다.
+기존 빌드 시스템은 플랫폼, 빌드 설정에 따라서 함수가 늘어나는게 문제이다.
+하지만 각각의 빌드 함수는 문제없이 작동한다.
+멀쩡하게 작동하는 함수를 갖다버리고 SuperUnityBuild에 다시 끼워맞출라니 귀찮더라.</p><h2 id=minamo-설정-파일-기반-빌드-시스템>Minamo, 설정 파일 기반 빌드 시스템</h2><p>레거시 빌드 시스템을 그대로 유지하면서 그것의 복잡도만 줄이는걸 목표로 잡았다.
+그리고 생각해낸 개념은 설정 파일 기반의 빌드 시스템이다.
+<a href=https://github.com/5minlab/minamo>Minamo</a>는 위의 개념으로 구현되었다.
+minamo는 다음과 같은 방식으로 작동한다.</p><p>빌드를 어떻게할지 설정 파일로 서술한다.
+설정 파일에는 다음과 같은 정보가 들어간다.</p><ul><li>유니티가 있는 경로</li><li>프로젝트의 경로</li><li>빌드의 출력물이 나오는 경로</li><li>빌드에 사용할 스크립트</li><li>타겟 플랫폼</li><li>빌드 옵션</li><li>전처리기 매크로</li><li>안드로이드 패키지 이름, 버전명</li><li>유니티 player settings에 보이는 여러가지 설정값</li><li>&mldr;</li></ul><pre><code class=language-json>{
+  &quot;unityPath&quot;: &quot;/Applications/Unity/Unity.app&quot;,
+  &quot;projectPath&quot;: &quot;./UnityProject_Minamo&quot;,
+
+  &quot;buildBasePath&quot;: &quot;./output&quot;,
+  &quot;buildPath&quot;: &quot;{{.ConfigName}}-{{.Year}}-{{.Month}}-{{.Day}}-{{.Platform}}/{{.ShortRevision}}.exe&quot;,
+
+  &quot;method&quot;: &quot;BuildScript.WindowsMR&quot;,
+
+  &quot;build&quot;: {
+    &quot;targetGroup&quot;: &quot;standalone&quot;,
+    &quot;target&quot;: &quot;windows&quot;,
+
+    &quot;options&quot;: {
+      &quot;development&quot;: true,
+      &quot;allowDebugging&quot;: true
+    }
+  },
+
+  &quot;defines&quot;: [
+    &quot;HELLO_WORLD&quot;,
+    &quot;PLATFORM_WIN32_STEAMVR&quot;
+  ],
+  
+  &quot;resolutionAndPresentation&quot;: {
+    &quot;runInBackground&quot;: true
+  },
+
+  &quot;xr&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;devices&quot;: [
+      &quot;OpenVR&quot;
+    ],
+	&quot;stereoRenderingPath&quot;: &quot;multi-pass&quot;
+  }
+}
+</code></pre><p>Minamo를 실행할때 설정파일을 꽂아준다.
+Minamo는 설정파일이 올바른지 검사한후 유니티를 실행켜서 설정파일에 명시한 함수를 호출한다.</p><pre><code class=language-bash>./minamo -cmd=dump -config=./configs/standalone_win_dev.json
+</code></pre><p>빌드용 함수에서는 <code>BuildPipeline.BuildPlayer()</code> 대신 <code>Assets.Minamo.Editor.EntryPoint.Build()</code>를 사용한다.
+Minamo가 설정 파일대로 프로젝트의 설정을 바꾼후 빌드를 대신 해준다.</p><pre><code class=language-csharp>public class BuildScript {
+    static void WindowsMR() {
+        PreBuild_WindowsMR();
+        Assets.Minamo.Editor.EntryPoint.Build();
+    }
+}
+</code></pre><p>빌드시스템의 패러다임을 바꾸면서 얻은 이득이다.</p><ul><li>빌드용 함수의 복잡도를 설정파일과 minamo가 나눠가지게 되면서 빌드용 함수는 간단해졌다.<ul><li>릴리즈, 디버그 빌드는 설정파일로 때울수 있으니 빌드용 함수가 반으로 줄었다.</li><li>프로젝트 설정을 건드리는 함수(VR기기 설정, keystore 설정, &mldr;)를 minamo로 떠넘겨서 빌드용 함수가 간단해졌다.</li></ul></li><li>안드로이드 빌드시의 패키지 이름, 버전 이름을 설정파일로 관리할 수 있게 되었다.<ul><li>안드로이드 빌드의 버전 관리가 편하다.</li><li>버전만 올려서 빌드를 다시할때의 버전관리? 설정파일에서 버전 고친 커밋을 하면 되잖아</li></ul></li><li>전처리기 매크로를 설정파일로 관리할수 있게 되었다.<ul><li>시연용 빌드를 뽑을때 편리하다.</li></ul></li><li>&mldr;</li></ul><p>유니티가 지원하는 플랫폼 중에서 Android, Standalone, UWP에서는 작동을 보장한다.
+지금 시점에 내가 대응하는 플랫폼이다.</p><h2 id=summary>summary</h2><p>현재 Toy clash는 다음의 요소로 빌드 시스템이 구축되었다.</p><ul><li><a href=https://github.com/5minlab/minamo>Minamo</a></li><li>플랫폼별 빌드용 함수</li><li>수많은 빌드용 설정 파일</li><li><a href=https://buildbot.net/>Buildbot</a></li><li>빌드 후처리 스크립트</li></ul><p>오늘은 글쓰기 귀찮아진 관계로 Minamo의 개발 방향과 설계에 대해서는 나중에 다루도록 한다.</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/introduce-sagiri/ title="Next: 유니티 로그 뷰어, Sagiri">유니티 로그 뷰어, Sagiri<br><small>Web browser based Realtime Untiy3D Log viewer</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/amazing-floating-point-100x07/ title="Previous: 100 * 0.7 = ?">100 * 0.7 = ?<br><small>남들과는 조금 다른 부동소수점 이야기</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/make-unity-build-system/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

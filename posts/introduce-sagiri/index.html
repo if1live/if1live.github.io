@@ -1,0 +1,104 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>유니티 로그 뷰어, Sagiri &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="유니티 로그 뷰어, Sagiri"><meta name=keywords content="unity,log"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/introduce-sagiri/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="유니티 로그 뷰어, Sagiri"><meta name=twitter:description content="개요 게임 개발하다보면 로그를 계속 보게 된다. 유니티의 경우 에디터 환경에서는 console창을 이용해서 로그를 볼수있다. 하지만 윈도우, 안드로이드, iOS 환경으로 빌드한 이후에는 로그를 보는게 쉽지 않다. 그래도 에디터에서는 정상적으로 돌아가지만 실제 기기에서는 문제가 생기는 경우가 있기때문에 로그를 보는 기능은 빌드에서도 필요하다.
+sagiri는 "><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/introduce-sagiri/ rel=bookmark title="Permalink to 유니티 로그 뷰어, Sagiri"><h1>유니티 로그 뷰어, Sagiri</h1><h2>Web browser based Realtime Untiy3D Log viewer</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2017-10-15T00:00:00Z>2017/10/15</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/unity>#unity</a></li><li><a href=/tags/log>#log</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p>게임 개발하다보면 로그를 계속 보게 된다.
+유니티의 경우 에디터 환경에서는 console창을 이용해서 로그를 볼수있다.
+하지만 윈도우, 안드로이드, iOS 환경으로 빌드한 이후에는 로그를 보는게 쉽지 않다.
+그래도 에디터에서는 정상적으로 돌아가지만 실제 기기에서는 문제가 생기는 경우가 있기때문에 로그를 보는 기능은 빌드에서도 필요하다.</p><p><a href=https://github.com/5minlab/sagiri>sagiri</a>는 유니티 로그를 웹브라우저에서 보기 위해서 개발된 라이브러리이다.
+<a href=https://github.com/proletariatgames/CUDLR>CUDLR</a>과 <a href=https://github.com/Sacred-Seed-Studio/Unity-File-Debug>Unity-File-Debug</a>를 섞어서 만들었다.
+개발이 대강 끝났으니 <a href=https://github.com/5minlab/sagiri>sagiri</a>를 개발하게 된 과정을 정리해보기로 했다.</p><h2 id=왜-로그-뷰어를-새로-짰는가>왜 로그 뷰어를 새로 짰는가?</h2><h3 id=로그를-찍자>로그를 찍자</h3><p>빌드된 게임에서 로그를 찍으면 플랫폼에 따라서 적절히 처리된다.
+윈도우 빌드의 경우는 게임 폴더 안의 텍스트 파일에 저장된다.
+안드로이드의 경우는 adb logcat을 통해 로그를 볼 수 있다.</p><p><img src=mlogcat.png alt=mlogcat>
+내 경우는 안드로이드 로그를 볼때 <a href=http://mlogcat.tistory.com/>mLogcat</a>을 쓰는데 이런 식으로 보인다.</p><h3 id=logcat-없이-로그를-보고-싶다>logcat 없이 로그를 보고 싶다</h3><p>안드로이드에서는 logcat을 통해서 로그를 볼수있다고 했다.
+하지만 몇가지 단점이 있다.</p><p>첫번째 단점은 adb로 기기와 컴퓨터가 연결되어야 한다는 점이다.
+유선으로 연결하거나 wifi로 연결해야한다.
+유선 연결은 모든 상황에서 쓸수있는게 아니다.
+내 경우 기어VR 플랫폼으로 개발했는데 기어VR에 폰을 꽂을때 마이크로USB을 쓴다.
+남는 USB가 없으니 유선으로는 연결할수 없다.
+wifi로 연결해야되는데 wifi로 adb 연결하는건 설정이 귀찮다.</p><p>두번째 문제는 콜스택이 그대로 출력되서 로그를 읽기 어렵다는 점이다.
+나는 로그 한줄을 찍었을뿐인데 logcat에서는 콜스택까지 같이 출력된다.
+덕분에 로그가 한눈에 보이지 않는다.</p><pre><code class=language-log>I Unity   : this is log: com.fiveminlab.sagiri
+I Unity   :  : com.fiveminlab.sagiri
+I Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
+W Unity   : this is warning: com.fiveminlab.sagiri
+W Unity   :  : com.fiveminlab.sagiri
+W Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+W Unity   : : com.fiveminlab.sagiri
+E Unity   : this is error: com.fiveminlab.sagiri
+E Unity   :  : com.fiveminlab.sagiri
+E Unity   : (Filename: ./artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51): com.fiveminlab.sagiri
+E Unity   : : com.fiveminlab.sagiri
+I Unity   : NullReferenceException: this is exception: com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
+I Unity   : UnityEngine.DebugLogHandler:Internal_LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.DebugLogHandler:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.Logger:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : UnityEngine.Debug:LogException(Exception, Object): com.fiveminlab.sagiri
+I Unity   : Assets.Sagiri.Examples.Main:PrintLog(): com.fiveminlab.sagiri
+I Unity   : Assets.Sagiri.Examples.Main:Update(): com.fiveminlab.sagiri
+I Unity   :  : com.fiveminlab.sagiri
+I Unity   : (Filename:  Line: -1): com.fiveminlab.sagiri
+I Unity   : : com.fiveminlab.sagiri
+</code></pre><p>위의 로그의 경우 내가 찍고자한건 4줄 뿐이다.</p><ul><li><code>this is log</code></li><li><code>this is warning</code></li><li><code>this is error</code></li><li><code>NullReferenceException: this is exception</code></li></ul><p>나머지 로그는 친절한 유니티 로그 함수가 추가 정보를 찍은 것이다.
+너무 친절한 나머지 나한테 필요없는 정보까지 보여준다.</p><h3 id=게임-화면에서-로그를-보여주면-어떨까>게임 화면에서 로그를 보여주면 어떨까?</h3><p><img src=UberConsoleGame.png alt="uber logger"></p><p><a href=https://github.com/bbbscarter/UberLogger>UberLogger</a>를 이용하면 유니티 로그를 게임 화면에서 볼 수 있다.
+이걸 이용하면 logcat 없이 로그를 볼 수 있다.
+또한 로그를 한줄만 보여준다. 로그 콜스택은 해당 로그를 선택해야만 볼수있다.</p><p>편할거 같아서 넣었는데 함정이 있었다.
+스마트폰의 화면은 너무 좁아서 로그를 읽기도 어렵고 조작하기도 어렵다.
+로그를 눌러서 콜스택 보는것도 어렵고 스크롤바를 선택하는 것도 어렵더라.
+빌드 타겟이 PC였다면 문제가 없지만 나한테는 안드로이드에서도 잘 보이는게 필요했다.</p><h3 id=웹브라우저를-로그-뷰어로-쓸수있지-않을까>웹브라우저를 로그 뷰어로 쓸수있지 않을까?</h3><p>게임 안에 유니티 로그를 보여줄수 있는 웹서버를 때려박는다.
+그리고 웹브라우저로 게임에 접속했을때 로그를 보여주면 어떨까?</p><p>뒤져보니까 <a href=https://github.com/proletariatgames/CUDLR>CUDLR</a>이라는 라이브러리가 이미 있더라.
+이걸 써보기로 했다.</p><p><img src=cudlr.jpg alt=CUDLR></p><p>웹브라우저를 이용해서 로그를 보니까 화면 문제는 사라졌다.
+빌드에서 웹서버를 굴리니까 불필요하게 성능을 쓰지만 어차피 디버그 빌드에서만 쓸거니 문제가 없다.
+하지만 남이 짠 라이브러리가 항상 그렇듯이 100% 내가 원하는 수준이 구현되어있지 않았다.
+CUDLR은 로그를 이쁘게 보여주지 않는다.
+콜스택까지 그대로 출력한다.
+mLogcat에서는 로그 레벨에 따라서 다른 색으로 보여줬는데 CUDLR은 로그가 전부 같은색이라서 중요한 로그와 중요하지 않은 로그를 구분하기 어렵다.</p><p>그래서 CUDLR과 로그를 이쁘게 보여주는 무언가를 섞으면 되지 않을까? 같은 생각을 했다.</p><h3 id=이쁜-유니티-로그-뷰어>이쁜 유니티 로그 뷰어</h3><p>이제 추가 기능은 관심없고 로그만 이쁘게 보여주는 라이브러리만 있으면 된다.
+뒤지다보니 <a href=https://github.com/Sacred-Seed-Studio/Unity-File-Debug>Unity-File-Debug</a>라는게 있더라.
+유니티 로그를 json으로 export해두면 export된 json을 이쁘게 보여주더라.
+내가 원하는 수준의 디자인이더라. (이거보다 잘 만들기에는 자신이 없었다)
+json을 읽는 부분만 CUDLR에서 데이터를 읽는식으로 바꾸면 되겠더라</p><h3 id=sagiri>Sagiri</h3><p>CUDLR을 로그 서버로, Unity-File-Debug를 뷰어로 쓰는 Sagiri가 완성되었다.
+접힌 로그를 펴면 콜스택을 볼 수 있다.
+log, error, warning, exception 같은 레벨별로 모아서 로그를 볼수있다.</p><p><img src=sagiri-log-1.png alt="log viewer"></p><p><img src=sagiri-log-2.png alt="log viewer"></p><h2 id=shell>shell</h2><p><img src=sagiri-shell.png alt=shell></p><pre><code class=language-csharp>[CUDLR.Command(&quot;object list&quot;, &quot;lists all the game objects in the scene&quot;)]
+public static void ListGameObjects() {
+    ...    
+}
+</code></pre><p>CUDLR에는 재미있는 기능이 내장되어 있다.
+함수를 CUDLR Command로 등록해두면 브라우저에서 해당 함수를 호출할수 있다.
+디버깅 또는 개발용으로 쓸 수 있을거 같아서 해당 기능을 지우진 않았다.
+치트키같은걸 게임에 UI 넣어서 구현하기 귀찮을때 쓸 수 있을것이다.</p><h2 id=문제점>문제점</h2><p>sagiri가 있다고 기본 로그가 쓸모없는건 아니다.
+sagiri가 초기화되기 전에 발생하는 로그는 sagiri로 볼 수 없다.
+유니티 엔진을 거치지 않는 로그도 sagiri로 볼 수 없다.
+(예: 유니티 엔진 초기화 로그. 서드파티 플러그인에서 직접 찍는 시스템 로그)</p><p>유니티 에디터 환경에서는 Project settings 수정 없이 sagiri를 쓸 수 없다.
+<code>Run in background</code> 이 꺼져있으면 유니티가 실행되어 있는 컴퓨터의 브라우저로는 로그를 볼 수 없다.
+에디터에서 게임을 실행시키고 웹브라우저를 띄우면 에디터가 백그라운드로 넘어간거로 인식해서 sagiri가 꺼진다.
+Project settings의 <code>Run in background</code> 옵션을 켜주면 된다.</p><p>UWP 환경에서는 사용할 수 없다.
+CUDLR은 <code>System.Net.HttpListener</code>을 이용해서 구현되었다.
+근데 HttpListener은 .Net Core에는 내장되어 있지 않다.
+<a href=https://github.com/robertsundstrom/HttpListener>HttpListener를 .Net Core로 포팅한 라이브러리</a>를 붙이든지 해야 되는데 나는 그런거 하기 귀찮다.
+UWP 환경에서는 컴파일만 되도록 했다.</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/csharp-dictionary-enum-key-without-gc/ title="Next: GC없이 C# Dictionary에서 enum을 key로 쓰기">GC없이 C# Dictionary에서 enum을 key로 쓰기</a></li><li class=next-article><a href=https://if1live.github.io/posts/make-unity-build-system/ title="Previous: 유니티 프로젝트 빌드 시스템 구축하기">유니티 프로젝트 빌드 시스템 구축하기<br><small>크로스 플랫폼을 지탱하는 빌드 시스템 만들기</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/introduce-sagiri/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

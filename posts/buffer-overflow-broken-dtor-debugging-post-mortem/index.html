@@ -1,0 +1,382 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>디버깅 포스트모템 - 박살난 소멸자 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="디버깅 포스트모템 - 박살난 소멸자"><meta name=keywords content="lldb,buffer overflow,buffer overrun,memory bug,debug,debugging,destructor,postmortem"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/buffer-overflow-broken-dtor-debugging-post-mortem/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="디버깅 포스트모템 - 박살난 소멸자"><meta name=twitter:description content="개요 최근에 레거시 코드에 숨겨진 버퍼 오버플로우 버그를 잡느라고 하루를 날렸습니다. 찾고나니 간단한 버그였지만 하루씩이나 걸렸습니다. 버그를 잡은 다음에 생각하니 여러가지 요소가 결합되어서 디버깅이 오래 걸린거 같았습니다.
+콜스택이 이상하게 나와서 버퍼 오버플로우 버그인지 감을 잡는데 오래 걸림 step in, step out, continue, next"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/buffer-overflow-broken-dtor-debugging-post-mortem/ rel=bookmark title="Permalink to 디버깅 포스트모템 - 박살난 소멸자"><h1>디버깅 포스트모템 - 박살난 소멸자</h1><h2>LLDB를 이용해서 버퍼 오버플로우 찾기</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2016-01-17T00:00:00Z>2016/01/17</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/lldb>#lldb</a></li><li><a href=/tags/buffer-overflow>#buffer overflow</a></li><li><a href=/tags/buffer-overrun>#buffer overrun</a></li><li><a href=/tags/memory-bug>#memory bug</a></li><li><a href=/tags/debug>#debug</a></li><li><a href=/tags/debugging>#debugging</a></li><li><a href=/tags/destructor>#destructor</a></li><li><a href=/tags/postmortem>#postmortem</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p>최근에 레거시 코드에 숨겨진 버퍼 오버플로우 버그를 잡느라고 하루를
+날렸습니다. 찾고나니 간단한 버그였지만 하루씩이나 걸렸습니다. 버그를
+잡은 다음에 생각하니 여러가지 요소가 결합되어서 디버깅이 오래 걸린거
+같았습니다.</p><ul><li>콜스택이 이상하게 나와서 버퍼 오버플로우 버그인지 감을 잡는데 오래 걸림</li><li>step in, step out, continue, next 이외의 디버거 기능을 안써봤다.</li><li>말로만 듣고 한번도 안써본 watchpoint 사용법을 찾아보는데 오래 걸림</li><li>gdb만 쓰다가 lldb를 처음 써봄. gdb와 lldb의 명령어는 다르다</li></ul><p>버퍼 오버플로우 문제가 발생하는 가상 시나리오를 작성하고 이를
+디버깅함으로써 나중에 같은 버그를 만났을때 빠르게 대응하는걸 목표로
+디버깅 포스트모템을 작성해보았습니다.</p><ul><li>버퍼 오버플로우이 발생하는 예제 코드를 작성한다.</li><li>LLDB의 간단한 사용법을 익힌다.</li><li>watchpoint를 이용해서 버퍼 오버플로우를 찾는다.</li></ul><h2 id=간단한-스크립트-엔진을-만들자>간단한 스크립트 엔진을 만들자</h2><p>간단한 스크립트 엔진을 만들어 봅시다. 스크립트 엔진은 텍스트 파일을
+읽을수 있습니다. 스크립트 문법 형태는 <code>&lt;command> &lt;name>:&lt;text></code> 입니다.
+모든 명령은 한줄 단위로 처리됩니다.</p><pre><code class=language-txt>say 철수:hello
+play 영희:game
+??? 민수:dummy text
+</code></pre><p>스크립트 엔진과 스크립트 파일을 같이 실행하면 아래와 같은 출력이
+나옵니다. 현재는 콘솔로만 출력하지만 GUI, 게임 엔진을 붙여서 확장하면
+간단한 텍스트 어드벤쳐는 만들수 있을겁니다.</p><pre><code>$ clang++ main.cpp -g -W -Wall -std=c++11
+$ ./a.out normal.txt
+철수 say &quot;hello&quot;.
+영희 play game.
+Unknown: cmd=???, name=민수, text=dummy text.
+</code></pre><p>어떤걸 만들어야하는지 알았으니 구현해보았습니다.</p><h2 id=코드>코드</h2><pre><code class=language-cpp>class ScriptEngine {
+public:
+  ScriptEngine(const char *filename);
+  ~ScriptEngine();
+
+  void parseLine(bool *has_next);
+  void executeLine();
+
+private:
+  void open();
+  void close();
+
+private:
+  // state
+  int curr_pos_;
+  char cmd_[8];
+  char name_[8];
+  char text_[8];
+
+  // raw script content
+  std::string filename_;
+  const char *data_;
+  int length_;
+  int fd_;
+};
+</code></pre><p>스크립트 엔진의 헤더입니다. 생성자로 스크립트 파일 이름을 받습니다.
+한줄씩 읽어서 명령을 실행합니다. 읽은 명령을 임시로 저장하기 위해 문자열
+배열 <code>cmd_</code>, <code>name_</code>, <code>text_</code> 을 이용합니다. 열어놓은 스크립트 파일을
+관리하는 목적의 변수도 멤버 변수로 포함되어 있습니다.</p><pre><code class=language-cpp>int main(int argc, char *argv[0])
+{
+  if(argc != 2) {
+    printf(&quot;Usage: %s &lt;script filepath&gt;\n&quot;, argv[0]);
+    exit(0);
+  }
+
+  ScriptEngine script_engine(argv[1]);
+
+  bool has_next = true;
+  while(has_next) {
+    script_engine.parseLine(&amp;has_next);
+    script_engine.executeLine();
+  }
+  return 0;
+}
+</code></pre><p><code>main()</code> 입니다. 명령줄 인수로 실행할 스크립트 파일명을 받습니다.
+스크립트 엔진은 다음 명령이 없을때까지 한줄씩 읽고 처리합니다.</p><pre><code class=language-cpp>ScriptEngine::ScriptEngine(const char *filename)
+  : curr_pos_(0), filename_(filename), data_(nullptr), length_(-1), fd_(-1)
+{
+  std::fill(cmd_, cmd_ + sizeof(cmd_), 0);
+  std::fill(name_, name_ + sizeof(name_), 0);
+  std::fill(text_, text_ + sizeof(text_), 0);
+
+  open();
+}
+
+ScriptEngine::~ScriptEngine()
+{
+  close();
+}
+</code></pre><p>생성자에서는 멤버 변수를 초기화하고 스크립트 파일을 엽니다. 소멸자에서는
+스크립트 파일을 닫습니다. 파일을 열고 닫는 상세 과정은 별도의 함수에
+구현했습니다.</p><pre><code class=language-cpp>void ScriptEngine::open()
+{
+  // open
+  fd_ = ::open(filename_.data(), O_RDONLY, 0);
+  if(fd_ == -1) {
+    err(1, &quot;open&quot;);
+  }
+
+  // get file size
+  struct stat sb;
+  if(fstat(fd_, &amp;sb) &lt; 0) {
+    err(1, &quot;fstat&quot;);
+  }
+  length_ = sb.st_size;
+
+  //memory map
+  data_ = (char *)mmap(NULL, length_, PROT_READ, MAP_SHARED, fd_, 0);
+  if(data_ == MAP_FAILED) {
+    err(1, &quot;mmap&quot;);
+  }
+}
+
+void ScriptEngine::close()
+{
+  if(fd_ != -1) {
+    munmap((void*)data_, length_);
+    ::close(fd_);
+
+    fd_ = -1;
+  }
+}
+</code></pre><p><code>ScriptEngine::open()</code>, <code>ScriptEngine::close()</code> 는
+<a href=https://en.wikipedia.org/wiki/Mmap>mmap</a> 을 이용해서 구현했습니다.
+파일을 열어서 <code>data_</code> 에 연결하고 파일의 크기는 <code>length_</code> 에
+저장해둡니다. 스크립트 파일을 한줄씩 읽어서 처리할때 위의 두 변수를
+이용하게 됩니다.</p><pre><code class=language-cpp>void ScriptEngine::parseLine(bool *has_next)
+{
+</code></pre><p>스크립트 파일로부터 명령을 한줄씩 읽는 함수입니다. 읽은 내용은 <code>cmd_</code>,
+<code>name_</code>, <code>text_</code> 에 저장합니다.</p><pre><code class=language-cpp>  // syntax
+  // &lt;cmd&gt; &lt;name&gt;:&lt;text&gt;
+  enum ParseState {
+    STATE_CMD,
+    STATE_NAME,
+    STATE_TEXT,
+    STATE_FINISH,
+  };
+
+  struct ParseCommand {
+    ParseState curr_state;
+    ParseState next_state;
+    char delim;
+    char *buffer;
+    int buffer_size;
+  };
+
+  ParseCommand cmds[] = {
+    { STATE_CMD, STATE_NAME, ' ', cmd_, sizeof(cmd_) },
+    { STATE_NAME, STATE_TEXT, ':', name_, sizeof(name_) },
+    { STATE_TEXT, STATE_FINISH, '\n', text_, sizeof(text_) },
+  };
+
+  ParseState parse_state = STATE_CMD;
+</code></pre><p>FSM을 이용해서 명령줄 파싱을 구현했습니다. 상태는 <code>STATE_CMD</code> ->
+<code>STATE_NAME</code> -> <code>STATE_TEXT</code> -> <code>STATE_FINISH</code> 로 바뀌면서 각각의
+내용을 읽습니다. 특별한 문자열(delim)을 만나면 다음 상태로 전이합니다.
+각각의 상태에서 읽은 내용을 저장하기 위한 버퍼의 주소, 크기도 상태에
+포함시킵니다.</p><pre><code class=language-cpp>  char buffer[1024];
+  int len = 0;
+
+  while((curr_pos_ &lt; length_) &amp;&amp; (parse_state != STATE_FINISH)) {
+    char ch = data_[curr_pos_++];
+
+    for(const ParseCommand &amp;cmd : cmds) {
+      if(cmd.curr_state == parse_state) {
+        if(cmd.delim == ch) {
+          memset(cmd.buffer, 0, cmd.buffer_size);
+          memcpy(cmd.buffer, buffer, len);
+
+          parse_state = cmd.next_state;
+          len = 0;
+        } else {
+          buffer[len++] = ch;
+        }
+        break;
+      }
+    }
+  }
+</code></pre><p>스크립트 파일의 끝이나 <code>STATE_FINISH</code> 를 만나기 전까지 한 글자씩
+읽습니다. delim을 만나서 상태를 바꿔야되는 상황이 오면 지역 변수
+<code>buffer</code> 에 저장된 내용을 결과 버퍼에 복사합니다. 이때 <code>memset()</code>,
+<code>memcpy()</code> 를 이용합니다.</p><pre><code class=language-cpp>  *has_next = (curr_pos_ &lt; length_);
+}
+</code></pre><p>더이상 파싱할수 없으면 스크립트가 끝났다는걸 알려줍니다.</p><pre><code class=language-cpp>void ScriptEngine::executeLine()
+{
+  // add complex feature here
+  if(std::string(&quot;play&quot;) == cmd_) {
+    printf(&quot;%s %s %s.\n&quot;, name_, cmd_, text_);
+
+  } else if(std::string(&quot;say&quot;) == cmd_) {
+    printf(&quot;%s %s \&quot;%s\&quot;.\n&quot;, name_, cmd_, text_);
+
+  } else {
+    printf(&quot;Unknown: cmd=%s, name=%s, text=%s.\n&quot;, cmd_, name_, text_);
+  }
+}
+</code></pre><p><code>parseLine()</code> 에서 읽어둔 내용을 이용해서 명령을 실행합니다. 스크립트가
+어떤 작업을 수행할지는 여기에 적절히 구현합니다.</p><h2 id=epic-fail>EPIC FAIL</h2><p>최초에 예제로 정한 파일에 대해서는 잘 돌아가지만 다음 스크립트 파일
+앞에서는 망합니다.</p><pre><code class=language-txt>say 철수:abcdefghijklmnopqrstuvwxyz123456
+play 영희:game
+</code></pre><pre><code>$ clang++ main.cpp -g -W -Wall -std=c++11
+$ ./a.out long.txt
+철수 say &quot;abcdefghijklmnopqrstuvwxyz123456&quot;.
+영희 play game.
+a.out(6937,0x7f...) malloc: *** error for object 0x36353433: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
+make: *** [run] Abort trap: 6
+</code></pre><p>??? new, alloc과 같은 동적할당을 직접 수행한적이 없는데 프로그램은
+malloc와 관련된 문제로 죽습니다. 왜 죽었나 디버깅을 합시다.</p><h2 id=lldb와-함께하는-디버깅>LLDB와 함께하는 디버깅</h2><p><a href=https://en.wikipedia.org/wiki/LLDB_%28debugger%29>LLDB</a> 는 Clang에
+붙어있는 디버거입니다. Max OSX에서 xcode를 설치했더니 gdb대신 lldb밖에
+없어서 이거로 디버깅해봅니다. (주의: lldb와 gdb는 명령이 다릅니다)</p><h3 id=어디서-죽었나-찾아내기>어디서 죽었나 찾아내기</h3><p>콘솔에 찍힌 정보만으로는 어디서 죽었나 잘 모르겠으니 일단 죽여봅시다.
+main.cpp 를 <code>-g</code> 옵션으로 컴파일해서 디버그 정보를 넣어둡니다. 그리고
+lldb를 실행합니다.</p><pre><code>$ clang++ main.cpp -g -W -Wall -std=c++11
+$ lldb a.out
+(lldb) target create &quot;a.out&quot;
+Current executable set to 'a.out' (x86_64).
+</code></pre><p>일단 돌려보고 어디서 죽나 봅시다. process launch 를 이용해서 프로그램을
+실행할 수 있습니다. 다음과 같은 형태로 명령줄 인수를 같이 넘길수
+있습니다. <code>process launch -- long.txt</code></p><pre><code>(lldb) process launch -- long.txt
+Process 7611 launched: '..../a.out' (x86_64)
+철수 say &quot;abcdefghijklmnopqrstuvwxyz123456&quot;.
+영희 play game.
+a.out(7611,0x7f...) malloc: *** error for object 0x36353433: pointer being freed was not allocated
+*** set a breakpoint in malloc_error_break to debug
+Process 7611 stopped
+* thread #1: tid = 0x13ca2, 0x00007fff869280ae libsystem_kernel.dylib`__pthread_kill + 10,...
+    frame #0: 0x00007fff869280ae libsystem_kernel.dylib`__pthread_kill + 10
+    libsystem_kernel.dylib`__pthread_kill:
+-&gt;  0x7fff869280ae &lt;+10&gt;: jae    0x7fff869280b8            ; &lt;+20&gt;
+    0x7fff869280b0 &lt;+12&gt;: movq   %rax, %rdi
+    0x7fff869280b3 &lt;+15&gt;: jmp    0x7fff869233ef            ; cerror_nocancel
+    0x7fff869280b8 &lt;+20&gt;: retq
+</code></pre><p>죽는걸 확인했으니 어디에서 죽었나 콜스택을 찍어봅시다.
+<code>thread backtrace</code> 를 이용하면 볼수 있습니다. 줄여서 <code>bt</code> 를 쓸수도
+있습니다. 대부분의 lldb 명령어는 줄여서 쓰는게 가능합니다.</p><pre><code>(lldb) bt
+* thread #1: tid = 0x13ca2, 0x00007fff869280ae libsystem_kernel.dylib`__pthread_kill + 10,...
+  * frame #0: 0x00007f... libsystem_kernel.dylib`__pthread_kill + 10
+    frame #1: 0x00007f... libsystem_pthread.dylib`pthread_kill + 90
+    frame #2: 0x00007f... libsystem_c.dylib`abort + 129
+    frame #3: 0x00007f... libsystem_malloc.dylib`free + 425
+    frame #4: 0x000000... a.out`ScriptEngine::~ScriptEngine(this=0x00007f...) + 47 at main.cpp:72
+    frame #5: 0x000000... a.out`ScriptEngine::~ScriptEngine(this=0x00007f...) + 21 at main.cpp:70
+    frame #6: 0x000000... a.out`main(argc=2, argv=0x00007fff5fbff1c8) + 197 at main.cpp:55
+    frame #7: 0x00007f... libdyld.dylib`start + 1
+    frame #8: 0x00007f... libdyld.dylib`start + 1
+(lldb)
+</code></pre><p>콜스택을 찍어보니 frame #4에 <code>ScriptEngine::~ScriptEngine()</code> 가
+들어있습니다. 소멸자 안에서 프로그램이 죽었습니다.</p><p>???</p><h3 id=소멸자에서-죽는다>소멸자에서 죽는다?</h3><p>소멸자에서 죽는 경우는 그렇게 많지 않습니다. 어디에선가 vtable (가상
+함수 테이블)을 건드려서 죽는 경우도 있습니다만 예제 코드에는 virtual이
+없기 때문에 vtable 로 인한 문제는 없을겁니다.</p><p>그렇다면 어떤 문제가 남아있을까요? 죽은 지점을 조금더 자세히 봅시다.
+읽을 수 있는 코드 중에서 <code>main.cpp:72</code> 가 가장 위에 있습니다. 72번째 줄
+코드의 내용은 소멸자의 <code>}</code> 입니다. 소멸자의 가장 마지막에서 문제가
+생긴것으로 보입니다. 객체가 소멸될때 멤버 변수를 정리하는 것도 소멸자의
+역할중 하나입니다. 이 과정중에 문제가 생긴거 아닐까요?</p><h3 id=소멸자에서-죽는-지점-분석>소멸자에서 죽는 지점 분석</h3><p>ScriptEngine에서 객체로 된 멤버 변수가 <code>filename_</code> 하나뿐입니다.
+나머지는 멤버 변수는 primitive data type이기 때문에 소멸자로 문제가 생길
+여지가 없습니다.</p><p>죽은 시점의 <code>filename_</code> 의 값을 확인해봅시다. bt로 보았을때 현재 스택
+프레임은 0입니다. <code>filename_</code> 로 접근하기 위해서 4번 스택 프레임으로
+바꾸고 값을 확인해봅시다. <code>frame select 4</code> 로 프레임을 선택할수 있고
+<code>p filename_</code> 로 변수를 볼 수 있습니다.</p><pre><code>(lldb) frame select 4
+frame #4: 0x000000010... a.out`ScriptEngine::~ScriptEngine(this=0x00007f...) + 47 at main.cpp:72
+   69   ScriptEngine::~ScriptEngine()
+   70  {
+   71     close();
+-&gt; 72   }
+   73
+   74   void ScriptEngine::open()
+   75   {
+(lldb) p filename_
+(std::__1::string) $0 = &quot;&quot;
+</code></pre><p>???</p><p><code>filename_</code> 의 값은 생성자에서 스크립트 파일 이름을 저장한 이후
+건드린적이 없는데 바뀌어있습니다. 코드에서도 <code>filename_</code> 를 건드린적은
+없습니다. 버퍼 오버플로우(buffer overflow), 버퍼 오버런(buffer
+overrun)이 발생해서 의도하지 않게 <code>filename_</code> 가 바뀐 것으로 보입니다.
+문제의 원인은 찾은거 같으니 어디에서 누가 버퍼 오버플로우를 일으켰는지
+확인해봅시다.</p><h3 id=watchpoint-이용해서-버퍼-오버플로우-찾기>watchpoint 이용해서 버퍼 오버플로우 찾기</h3><p><code>filename_</code> 의 값이 바뀌는 순간을 찾을 수 있으면 버퍼 오버플로우가
+발생한 시점을 알 수 있을겁니다. watchpoint 명령을 이용하면 특정 주소값을
+감시하고 있다 값이 바뀌는 상황에 브레이크 포인트가 걸립니다.</p><p>생성자에 브레이크 포인트를 걸어두고 프로그램을 다시 실행합니다. 브레이크
+포인트는 <code>b main.cpp:62</code> 로 걸수 있습니다. 예제에서는 파일이 하나뿐이기
+때문에 <code>b 62</code> 로도 가능합니다.</p><pre><code>(lldb) b 62
+Breakpoint 1: where = a.out`ScriptEngine::ScriptEngine(char const*) + 275 at main.cpp:62,...
+(lldb) process launch -- long.txt
+There is a running process, kill it and restart?: [Y/n] y
+Process 7611 exited with status = 9 (0x00000009)
+Process 7625 launched: '.../a.out' (x86_64)
+Process 7625 stopped
+* thread #1: tid = 0x.... a.out`ScriptEngine::ScriptEngine(...) + 275 at main.cpp:62..
+    frame #0: 0x000... a.out`ScriptEngine::ScriptEngine(...) + 275 at main.cpp:62
+   59   ScriptEngine::ScriptEngine(const char *filename)
+   60     : curr_pos_(0), filename_(filename), data_(nullptr), length_(-1), fd_(-1)
+   61   {
+-&gt; 62     std::fill(cmd_, cmd_ + sizeof(cmd_), 0);
+   63     std::fill(name_, name_ + sizeof(name_), 0);
+   64     std::fill(text_, text_ + sizeof(text_), 0);
+   65
+(lldb)
+</code></pre><p>lldb에서는 <code>watchpoint set variable this->length_</code> 와 같은 방식으로 멤버
+변수에 watchpoint를 걸수 있습니다.</p><pre><code>(lldb) watchpoint set variable this-&gt;length_
+Watchpoint created: Watchpoint 1: addr = 0x7f... size = 4 state = enabled type = w
+    watchpoint spec = 'this-&gt;length_'
+    new value: -1
+</code></pre><p>그렇다면 <code>watchpoint set variable this->filename_</code> 로 <code>filename_</code> 에
+watchpoint를 걸면 되겠군요!</p><pre><code>(lldb) watchpoint set variable this-&gt;filename_
+error: Watchpoint creation failed (addr=0x7f..., size=24, variable expression='this-&gt;filename_').
+error: watch size of 24 is not supported
+</code></pre><p>는 안됩니다. 그래도 다른 방법으로 watchpoint를 걸수 있습니다. 멤버
+변수에 watchpoint를 거는게 안된다면 멤버 변수의 주소에 watchpoint를
+걸면됩니다. 주소값으로 watchpoint를 추가할때는 variable대신 expression가
+들어갑니다.</p><pre><code>(lldb) watchpoint set expression -- (void*)(&amp;(this-&gt;filename_))
+Watchpoint created: Watchpoint 3: addr = 0x7f... size = 8 state = enabled type = w
+new value: 0x78742e676e6f6c10
+</code></pre><p>watchpoint를 걸었으니 프로그램을 진행시키고 어디에서 메모리 침범했는지
+확인해봅시다.</p><pre><code>(lldb) c
+Process 7661 resuming
+Process 7661 stopped
+* thread #1: tid = 0x175d8, 0x00007fff8e20efb1 libsystem_platform.dylib`_platform_memmove$VARI...
+    frame #0: 0x00007fff8e20efb1 libsystem_platform.dylib`_platform_memmove$VARIANT$Haswell + 145
+libsystem_platform.dylib`_platform_memmove$VARIANT$Haswell:
+-&gt;  0x7fff8e20efb1 &lt;+145&gt;: movups %xmm4, (%rdi,%rdx)
+    0x7fff8e20efb5 &lt;+149&gt;: popq   %rbp
+    0x7fff8e20efb6 &lt;+150&gt;: retq
+    0x7fff8e20efb7 &lt;+151&gt;: subq   $0x8, %rdx
+
+Watchpoint 1 hit:
+old value: 0x78742e676e6f6c10
+new value: 0x78742e67706f6e6d
+</code></pre><p>watchpoint가 메모리 침범하는 순간을 잡았습니다. 스택 프레임을 봅시다.</p><pre><code>(lldb) bt
+* thread #1: tid = 0x175d8, 0x00007fff8e20efb1 libsystem_platform.dylib`_platform_memm...
+  * frame #0: 0x.. libsystem_platform.dylib`_platform_memmove$VARIANT$Haswell + 145
+    frame #1: 0x.. a.out`ScriptEngine::parseLine(this=0x0.., has_next=0x0..) + 495 at main.cpp:143
+    frame #2: 0x.. a.out`main(argc=2, argv=0x00007fff5fbff1c8) + 127 at main.cpp:52
+    frame #3: 0x.. libdyld.dylib`start + 1
+    frame #4: 0x.. libdyld.dylib`start + 1
+</code></pre><p>frame #1, <code>ScriptEngine::parseLine()</code>, 143번째 줄이 사고쳤습니다.
+이지점에 뭐가 있을까요? <code>l 143</code> 을 이용해서 코드를 볼 수 있습니다.</p><pre><code>(lldb) l 143
+143            memcpy(cmd.buffer, buffer, len);
+...
+</code></pre><p>memcpy가 문제를 일으켰습니다.</p><h3 id=정확히-어떤-상황에서-문제가-발생했는가>정확히 어떤 상황에서 문제가 발생했는가?</h3><p>어떤값이 memcpy로 들어갔을때 버퍼 오버플로우를 일으켰을까요? memcpy가
+호출되기 직전에 브레이크 포인트를 걸어두고 <code>buffer</code> 에 따라서
+<code>filename_</code> 가 어떻게 바뀌나 확인해봅시다.</p><pre><code>(lldb) b 143
+Breakpoint 3: where = a.out`ScriptEngine::parseLine(bool*) + 462 at main.cpp:143, ...
+....
+(lldb) c
+...
+   142            memset(cmd.buffer, 0, cmd.buffer_size);
+-&gt; 143            memcpy(cmd.buffer, buffer, len);
+...
+(lldb) p buffer
+(char [1024]) $5 = &quot;abcdefghijklmnopqrstuvwxyz123456&quot;
+(lldb) p this-&gt;filename_
+(std::__1::string) $6 = &quot;long.txt&quot;
+(lldb) n
+...
+-&gt; 145            parse_state = cmd.next_state;
+...
+(lldb) p this-&gt;filename_
+(std::__1::string) $7 = &quot;&quot;
+</code></pre><p>long.txt의 첫줄의 text에 해당하는 <code>abcdefghijklmnopqrstuvwxyz123456</code> 를
+<code>text_</code> 로 복사할때 버퍼 오버플로우가 발생했습니다. 왜 문제가 되는지
+코드를 읽어봅시다.</p><pre><code class=language-cpp>  char text_[8];
+
+  // raw script content
+  std::string filename_;
+</code></pre><p><code>text_</code> 의 크기는 8입니다. 하지만 복사하려는 text의 크기는 이보다 훨씬
+큽니다. 그래서 <code>text_</code> 의 다음에 있는 멤버변수 <code>filename_</code> 의 내용을
+덮어써버렸습니다.</p><h2 id=해결책회피>해결책/회피</h2><p>버퍼 오버플로우, 버퍼 오버런은 많이 알려진 버그인 동시에 찾기 어려운
+버그입니다. 이를 방지하는 방법은 많이 알려져있기 때문에 여기에서는 직접
+다루지 않습니다.</p><ul><li><a href=https://en.wikipedia.org/wiki/Buffer_overflow#Protective_countermeasures>Buffer overflow :: Protective countermeasures</a></li><li><a href=https://www.microsoft.com/korea/msdn/columns/contents/CodeSecure/secure05202002/default.aspx>버퍼 오버런 해결!</a></li><li><a href="https://msdn.microsoft.com/ko-kr/library/windows/desktop/ms717795%28v=vs.85%29.aspx">Avoiding Buffer Overruns</a></li><li><a href=http://maintainablecode.logdown.com/posts/159916-memcpy-memmove-and-memset-are-deprecated>memcpy, memmove, and memset are obsolete!</a></li></ul></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/golang-first-impression/ title="Next: Go language 첫인상">Go language 첫인상<br><small>Go language 입갤</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/multiple-assignment-python-and-ruby/ title="Previous: 예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment">예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment<br><small>Multiple Assignment with (Python 2.x, Python 3.x, Ruby)</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/buffer-overflow-broken-dtor-debugging-post-mortem/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

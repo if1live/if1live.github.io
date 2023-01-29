@@ -1,0 +1,25 @@
+---
+title: projects
+slug: _index
+---
+
+
+## User
+
+<div class="github-card" data-user="if1live"></div>
+
+## Repository
+
+저장소에 벌인게 너무 많아서 그나마 그럴싸한거 몇개만 기록한다. 전체 내역은 github를 참고.
+
+* [importd](//github.com/amitu/importd)
+    * django based mini framework inspired from sinatra. fully compatible with django.
+* [irrlicht-console](//github.com/if1live/irrlicht-console)
+    * Quake like console for changing program variables or call function at runtime.
+* [trade my info](//github.com/if1live/trade-my-info)
+    * No.1 온라인 개인정보거래소
+* [GLSL example](//github.com/if1live/glsl_example)
+    * 셰이더 프로그래밍 입문 for GLSL
+* [참참참 with Oculus Rift + Leap Motion](//github.com/shipduck/cham-cham-cham)
+
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>

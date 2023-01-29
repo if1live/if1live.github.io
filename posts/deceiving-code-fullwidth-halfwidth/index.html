@@ -1,0 +1,97 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>코드에 반각/전각문자 넣어서 낚시하기 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="코드에 반각/전각문자 넣어서 낚시하기"><meta name=keywords content="전각,반각,halfwidth,fullwidth,낚시"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/deceiving-code-fullwidth-halfwidth/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="코드에 반각/전각문자 넣어서 낚시하기"><meta name=twitter:description content="개요 프로그래머 머리 터지게 하는 방법 작업중인 코드를 몰래 열어 세미콜론(;) 하나를 그리스어 물음표(;)로 바꾼다 tweet
+세미콜론(;) 하나를 그리스어 물음표(;)로 바꾼다면 트윗대로 프로그래머를 엿먹일수 있다. 하지만 그리스어 물음표를 볼 일이 얼마나 있을까? 우리는 그리스어를 쓰지 않고 그리스 근처의 나라도 아닌데? 악의를 가지고 코드를 수정하지"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/deceiving-code-fullwidth-halfwidth/ rel=bookmark title="Permalink to 코드에 반각/전각문자 넣어서 낚시하기"><h1>코드에 반각/전각문자 넣어서 낚시하기</h1><h2>반각/전각 문자로 알아보는 고난도 낚시</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2015-04-27T00:00:00Z>2015/04/27</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/%EC%A0%84%EA%B0%81>#전각</a></li><li><a href=/tags/%EB%B0%98%EA%B0%81>#반각</a></li><li><a href=/tags/halfwidth>#halfwidth</a></li><li><a href=/tags/fullwidth>#fullwidth</a></li><li><a href=/tags/%EB%82%9A%EC%8B%9C>#낚시</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><blockquote><p>프로그래머 머리 터지게 하는 방법
+작업중인 코드를 몰래 열어 세미콜론(;) 하나를 그리스어 물음표(;)로 바꾼다
+<a href=https://twitter.com/hyekkim/status/591110501288968192>tweet</a></p></blockquote><p>세미콜론(;) 하나를 그리스어 물음표(;)로 바꾼다면 트윗대로 프로그래머를 엿먹일수 있다.
+하지만 그리스어 물음표를 볼 일이 얼마나 있을까? 우리는 그리스어를 쓰지 않고 그리스 근처의 나라도 아닌데?
+악의를 가지고 코드를 수정하지 않는 이상 위의 코드를 볼 일은 없다.
+그렇다면 이건 어떨까?</p><blockquote><p>프로그래머 머리 터지게 하는 방법
+작업중인 코드의 정규식을 몰래 열어 반각 공백문자 2개( )를 전각 공백문자 1개(　)로 바꾼다
+<a href=https://twitter.com/if1live/status/591252041479008256>tweet</a></p></blockquote><h2 id=반각전각>반각/전각</h2><p>여기에서는 간단하게 설명한다. 자세한 설명은 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>위키피디아</a>를 참고.</p><p><img src=KoreanDOSPrompt.png alt=반각/전각></p><ol><li>일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다.</li><li>한글, 한자, 일본어는 가로폭 넓다.</li><li>고정폭 폰트를 사용하면 화면에 보이는 글자가 격자에 딱 맞게 들어가야한다.</li><li>한글 한글자의 가로폭을 알파벳 2글자 크기가 맞추면 되지 않을까?</li></ol><h2 id=실제-사례로-보는-버그>실제 사례로 보는 버그</h2><h3 id=버그>버그</h3><p><a href=http://birthday.libsora.so/>Happy Birthday, Waifu</a>를 만들때 낚인 사례이다.
+레일즈를 공부할겸 캐릭터 생일을 보여주는 간단한 웹서비스를 만들었다.
+개발 당시 캐릭터의 생일DB가 깨끗하게 정리된 곳을 찾지 못했다.
+그래서 DB는 <a href=http://www.animecharactersdatabase.com/>Anime Characters Database</a>를 크롤링하기로 했다.
+크롤러는 캐릭터 페이지를 파싱해서 필요한 정보(영어 이름, 일본어 이름, 생일 등)을 읽는다.</p><p>최초 개발시에 샘플 HTML로 <a href="http://www.animecharactersdatabase.com/character.php?id=13162">카스가노 소라 정보</a>를 이용했다.
+Anime Characters Database에 등록된 카스가노 소라의 일본어 이름은 <code>春日野 穹 （かすがの そら）</code>이다.</p><p>샘플 HTML이 한개쯤 더 있으면 좋을거 같아서 임의로 하나의 페이지를 선택했다.
+<a href="http://www.animecharactersdatabase.com/character.php?id=62894">시라쿠사 이부키</a>가 선택되었다.
+DB에 등록된 시라쿠사 이부키의 일본어 이름은 <code>白草 いぶき （しらくさ いぶき）</code>이다.</p><p>DB에 등록된 카스가노 소라와 시라쿠사 이부키의 이름을 보니 다음과 같은 형식으로 DB에서 관리하는거 같더라.
+<code>[한자 이름][공백][（][히라가나 이름][）]</code>
+전각 문자를 어떻게 입력하는지 몰라서 카스가노 소라의 이름을 복사한 다음에 살짝 고쳐서 정규식을 만들었다.</p><pre><code class=language-ruby>regexp = /(?&lt;kanji&gt;.+)（(?&lt;kana&gt;.+)）/
+</code></pre><p>이후 가끔씩 시간나면 수동으로 크롤러 돌려보고 문제없는지 확인하고 캐릭터를 추가했다.
+4월 3일까지 아이마스의 아마미 하루카를 추가해달라는 요청이 있어서 아이마스 캐릭터를 넣어보기로 했다.
+그런데 파서가 뭔가 이상하게 작동했다. 이름 파싱이 제대로 안되더라.
+파싱 문제가 발생한건 <a href="http://www.animecharactersdatabase.com/character.php?id=70886">키사라기 치하야</a>였다.
+DB에 등록된 키사라기 치하야의 이름은 <code>如月千早 (きさらぎ　ちはや)</code> 였다.</p><p>겉보기에는 같은 형식처럼 생겼는데 정규식이 돌아가지 않는걸까?</p><h3 id=원인>원인</h3><ul><li>카스가노 소라의 일본 이름 <code>春日野 穹 （かすがの そら）</code></li><li>시라쿠사 이부키의 일본 이름 : <code>白草 いぶき （しらくさ いぶき）</code></li><li>키사라기 치하야의 일본 이름 : <code>如月千早 (きさらぎ　ちはや)</code></li></ul><table><thead><tr><th>소라</th><th>반각/전각</th><th>이부키</th><th>반각/전각</th><th>치하야</th><th>반각/전각</th></tr></thead><tbody><tr><td>春日野 穹</td><td>전각+공백</td><td>白草 いぶき</td><td>전각+공백</td><td>如月千早</td><td>전각(+공백)</td></tr><tr><td>(space)</td><td>반각</td><td>(space)</td><td>반각</td><td>(space)</td><td>반각</td></tr><tr><td>（</td><td><strong>전각</strong></td><td>（</td><td><strong>전각</strong></td><td>(</td><td><strong>반각</strong></td></tr><tr><td>かすがの</td><td>전각</td><td>しらくさ</td><td>전각</td><td>きさらぎ</td><td>전각</td></tr><tr><td>(space)</td><td><strong>반각</strong></td><td>(space)</td><td><strong>반각</strong></td><td>(space=&rsquo;　&lsquo;)</td><td><strong>전각</strong></td></tr><tr><td>そら</td><td>전각</td><td>いぶき</td><td>전각</td><td>ちはや</td><td>전각</td></tr><tr><td>）</td><td><strong>전각</strong></td><td>）</td><td><strong>전각</strong></td><td>)</td><td><strong>반각</strong></td></tr></tbody></table><ul><li>카스가노 소라와 시라쿠사 이부키의 규격은 같다. 적당히 고른 시라쿠사 이부키의 규격이 같을 줄이야.</li><li>소라의 괄호는 전각문자[（）]인데 치하야는 괄호가 반각문자[()]</li><li>소라의 히라가나 이름에는 반각 공백문자<input disabled type=checkbox> 가 들어가는데 치하야의 히라가나 이름에는 전각 공백문자[　]가 들어감</li><li>겉보기에는 같은 규격처럼 보이지만 반각/전각 문자가 똑같지 않다.</li></ul><h2 id=fullwidth-to-halfwidth>fullwidth to halfwidth</h2><p>현실에서는 모든 전각문자를 반각문자로 바꿀 필요가 없다.
+자주 쓰기는 특수문자(공백, [, ], +, -,&mldr;)가 전각문자일때 이를 반각문자로 바꿔도 위와 같은 버그는 피할 수 있을 것이다.
+아스키 코드에 있을 정도로 뻔한 문자 한정으로 전각문자를 반각문자로 바꿔보자.</p><p><a href=http://www.asciitable.com/>ASCII Code</a>와 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>전각문자 유니코드</a>를 비교하면 어떤식으로 전각문자를 반각문자로 교체할수 있는지 확인할 수 있다.
+아스키 코드에서 0x20(space)부터 0x7E(~)는 유니코드의 U+FF00(　)부터 U+FF5E(～)에 같은 순서로 배치되어있다.
+즉, 코드값만 바꾸면 순서대로 1:1 대응시킬수 있다. 다음은 이를 구현한 간단한 파이썬 코드이다.</p><pre><code class=language-python>#-*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from __future__ import print_function
+
+def convert_full_to_half_char(ch):
+    codeval = ord(ch)
+    if 0xFF00 &lt;= codeval &lt;= 0xFF5E:
+        ascii = codeval - 0xFF00 + 0x20;
+        return unichr(ascii)
+    else:
+        return ch
+
+def convert_full_to_half_string(line):
+    output_list = [convert_full_to_half_char(x) for x in line]
+    return ''.join(output_list)
+
+input_str = &quot;&quot;&quot;！＂＃＄％＆＇（）＊＋，－．／
+０１２３４５６７８９：；＜＝＞？
+＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
+ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
+｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
+ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～&quot;&quot;&quot;
+output_str = convert_full_to_half_string(input_str)
+print(input_str)
+print(output_str)
+</code></pre><pre><code class=language-bash>$ python convert.py
+！＂＃＄％＆＇（）＊＋，－．／
+０１２３４５６７８９：；＜＝＞？
+＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
+ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
+｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
+ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～
+!&quot;#$%&amp;'()*+,-./
+0123456789:;&lt;=&gt;?
+@ABCDEFGHIJKLMNO
+PQRSTUVWXYZ[\]^_
+`abcdefghijklmno
+pqrstuvwxyz{|}~
+</code></pre><p><a href=http://stackoverflow.com/questions/25149458/convert-fullwidth-to-halfwidth>C#의 경우는 전각문자열을 반각문자열로 바꿔주는 함수</a>가 있다고 한다.
+자신이 사용하는 언어에 유사한 함수가 있는지 먼저 찾아보자.</p><h2 id=추가>추가</h2><p>일본에서는 전각문자를 상당히 많이 사용한다.
+일본 사이트를 돌아다니면서 자세히 보면 우리와 다른 특수문자를 쓰는걸 볼 수 있다.
+나처럼 일본 사이트 또는 일본과 관련된 자료를 파싱할 때는 낚이지 않게 조심하자.</p><ul><li><code>!</code> != <code>！</code></li><li><code>?</code> != <code>？</code></li></ul><p>일본에서는 반각/전각문자를 섞어쓰는게 일상이다보니 게임 금지어도 영향을 받았다.
+예를 들어 반각문자 <code>sex</code>와 전각문자 <code>ｓｅｘ</code> 각각을 금지어로 추가하기도 한다.</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/my-strcmp/ title="Next: 사람 낚는 strcmp()의 리턴타입 재설계하기">사람 낚는 strcmp()의 리턴타입 재설계하기<br><small>연산자 오버로딩의 입문</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/doge-math-post-mortem/ title="Previous: Doge Math 개발 포스트모템">Doge Math 개발 포스트모템<br><small>You do the math! You do the code!</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/deceiving-code-fullwidth-halfwidth/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

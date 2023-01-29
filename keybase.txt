@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/if1live
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://libsora.so
+  * I am if1live (https://keybase.io/if1live) on keybase.
+  * I have a public key with fingerprint 24A1 67F1 AD41 EC41 1938  CEE8 FE22 879B 7E79 AFE3
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01205b3ee530859b9f2f16b4397860af24bd229393d07f81e7c25baa23e6dc51616d0a",
+            "fingerprint": "24a167f1ad41ec411938cee8fe22879b7e79afe3",
+            "host": "keybase.io",
+            "key_id": "fe22879b7e79afe3",
+            "kid": "0101b427930cfea21b8408d5a6960975a08082abbdeaa7b4f2b95b739b5406e667980a",
+            "uid": "9121f2ee6a5beee2108c8a4e1a75a319",
+            "username": "if1live"
+        },
+        "service": {
+            "hostname": "libsora.so",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1457102616,
+    "expire_in": 157680000,
+    "prev": "7526411f061a63386d6ff653f2d566cebc14a3b2ffce84684c63db27760edc2a",
+    "seqno": 16,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.51
+Comment: https://keybase.io/crypto
+
+yMNxAnicbZJtUFRVGMd3XUnEkQF0shkYXq5mL6De13PvXSJA+JAmFTYCM75s59x7
+LlxYdpe9y8ouAuVqlEq+tpUEOkgjUio7NToaNC7QaBEUKA3Q4FSA4+TUaDUGylJ3
+Gf3W+XLmPPN/fs//+c/pXWoyRBnniPrGWs/5CWNf8P1KQ8HoiaeqCWSXPYS5mijD
+8xe2ylhzWcpUmTATJEWTHGIw5hhS4EQkKrRCAcQyIi8AEio0i2SaFhmRkUleESjM
+SzSHIKQZDGSJowAFZBISaYSi2oqx0+FUbS4dS7OQArxCQZmlsMRSlMgIEsaCgmla
+4EXEY16ECmb0xhK7Fu7QzSGo4bWqXa/pD8u8vf/RP/ZNUoileZEhJQVDmkICSwoy
+B4EISJHnICmQAg0RkjGEPGIVGokc4hkRcSwJMAC8KMz7rpzHiRRNKTTGAHIIY0xT
+pCAJkMUU1FEMJYaFGnbaYDnW1apCWVU3JmrSCL3oViUczjW8yCOBVUWa3QnXauFl
+HE67yy7ZrXq9xOVyaOZwn8vjCAt3YmR5hLAg1SbrIeodbuzUVLuNMFO6UnKpYSbF
+cjxF0nreaQSucqhObFHDCo4HAqmf8Bzs1pE8RwM9cIUEFAQMIwAZKArgGIWWOQAk
+jCSKhQyiFUXCAgsEVgKMjGieBySWJTqciYYrbHadrY9ywWKdqanFNuiqdOordwe3
+LTQYowxPRCwI/y5D1OKYx3+urS3GcHFTKPb49prxozmt0GELvdfyxqoFK+fYe4NT
+IVDb9m58aXA6xUJ/HrHOn3D61oEqx1uhWm/6z1t3fTFpDPiZDlPGl7ORHydOXA8g
+R8Hm1Olff0z4qTylHA+1rzEbG08NsV+tMmXu6fdei+5NMPRpZRcOH1g23FXW/2Ta
+7b+S4ydb73SsfmhruvH798HZDZlHOqdT337uLI6wWDr+PDfWG/jjYlXGmUm10DD8
+oNo/2tCUmBghyKVLG8/jq74i38itHu9iczD09aJAqv92i4d/WHG0Y+7y8pmn69f9
+UjvbdfDI4DMLNroKz1wyD+Qv813ZmJP3prKSqqmb3RGTdN2UnWuxvVOSZoz+7O+Z
+qvT22Eu+VnYkLivD2jM60tBx6DDhzCtdsu2BcOP+yb3N8NX9L15JyPd6tfqhzg/y
+BgyZg3Gb72T40+9XDC+Znlqxt2H72IZgb1f+6p1cTkJB0cx+6w9jOOAXbiZEViY3
+brqXUZNdJ5/qOcZN9hv+8XCJx3dNnc3r3m3fHTKce+mFrvh9c8Ve3zfaQLTfl/x8
+qulE4YpPE/tHv40cPLn1Jmep25LkzqqNKzTE5q1pu5qb0jc+MTG2g88GnR8uuvvb
+KwVJOUntl+0XvtviXn/t4LPkvkMRzVm5n+yxdjcvLAyMj6yvy3z9tClg+QgV3y2K
+/bd1suU1efnLx+KbPPn/ATBjvjY=
+=gWI2
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/if1live
+
+==================================================================

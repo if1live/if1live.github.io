@@ -1,0 +1,159 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>callbackWaitsForEmptyEventLoop와 AWS Lambda의 함정 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="callbackWaitsForEmptyEventLoop와 AWS Lambda의 함정"><meta name=keywords content="aws lambda,serverless"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/trap-callback-waits-for-empty-event-loop/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="callbackWaitsForEmptyEventLoop와 AWS Lambda의 함정"><meta name=twitter:description content="개요 요새 typescript + express 백엔드를 짠다. 운영에 대해서는 조금도 생각하기 싫어서 AWS Lambda로 배포한다. serverless-http라는 좋은 물건을 쓰면 express를 AWS Lambda에서 돌릴 수 있다. express의 생산성을 유지하면서 AWS Lambda의 안정적인 운영을 챙길 수 있으니 좋은 구성이다. 하지만 개발"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/trap-callback-waits-for-empty-event-loop/ rel=bookmark title="Permalink to callbackWaitsForEmptyEventLoop와 AWS Lambda의 함정"><h1>callbackWaitsForEmptyEventLoop와 AWS Lambda의 함정</h1><h2>즐거운 serverless의 세계</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2020-10-30T00:00:00Z>2020/10/30</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/aws-lambda>#aws lambda</a></li><li><a href=/tags/serverless>#serverless</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p>요새 typescript + express 백엔드를 짠다.
+운영에 대해서는 조금도 생각하기 싫어서 AWS Lambda로 배포한다.
+<a href=https://github.com/dougmoscrop/serverless-http>serverless-http</a>라는 좋은 물건을 쓰면 express를 AWS Lambda에서 돌릴 수 있다.
+express의 생산성을 유지하면서 AWS Lambda의 안정적인 운영을 챙길 수 있으니 좋은 구성이다.
+하지만 개발 환경과 배포 환경이 근본적으로 달라서 여러가지 함정을 밟고 있다.
+인상적이었던 함정 하나를 정리했다.</p><h2 id=sentry-전송-실패>sentry 전송 실패</h2><p>그냥 express를 사용하는 경우 <a href=https://sentry.io/welcome/>sentry</a> 에러 전송은 생각할 필요없다.
+서버가 데몬처럼 돌아가니까 에러 리포트가 잘 보내진다.
+하지만 AWS Lambda는 데몬이 아니다.
+<a href=https://github.com/getsentry/sentry-docs/blob/1146223d0912b60538b0142728cb73be59ebff81/src/collections/_documentation/platforms/node/serverless.md>옛날 sentry AWS Lambda 연동 문서</a>를 보면 명시적으로 보낸다.</p><pre><code class=language-ts>function sentryHandler(lambdaHandler) {
+  return async event =&gt; {
+    try {
+      return await lambdaHandler(event);
+    } catch (error) {
+      Sentry.captureException(error);
+      await Sentry.flush(2000);
+      return error;
+    }
+  };
+}
+</code></pre><p>sentry에는 에러 리포팅만 있는게 아니다.
+<code>Sentry.captureMessage()</code>는 에러가 아닌 일반 메세지를 보내는 목적으로 쓰인다.
+<code>Sentry.flush()</code>는 핸들러의 성공, 실패와 관계없이 항상 호출되는게 합리적이다.
+try&mldr;catch&mldr;finally라는 좋은 문법을 쓰면 성공, 실패와 관계없이 항상 호출되는 코드를 짤 수 있다.</p><pre><code class=language-ts>try {
+  return handle();
+
+} catch (error) {
+  Sentry.captureException(error);
+  throw error;
+
+} finally {
+  await Sentry.flush(2000);
+}
+</code></pre><p>하지만 위의 코드를 AWS Lambda 위에 올리니 돌아가지 않았다!
+에러가 발생했음에도 sentry에는 아무것도 도착하지 않았다.
+finally를 지우고 <code>Sentry.flush()</code>를 try, catch에 따로 넣으면 에러 리포팅이 작동했다.</p><pre><code class=language-ts>try {
+  const resp = handle();
+  await Sentry.flush(2000);
+  return resp;
+
+} catch (error) {
+  Sentry.captureException(error);
+  await Sentry.flush(2000);
+  throw error;
+}
+</code></pre><p>finally가 실행되지 않을때가 있다니 이게 무슨 개소리야?</p><h2 id=간단한-예제>간단한 예제</h2><p><a href=https://console.aws.amazon.com/lambda/home>AWS Lambda console</a>에서 돌릴 수 있는 간단한 코드를 짰다.
+try&mldr;catch&mldr;finally 문법을 사용했다.
+비동기 핸들러를 사용했고 finally 안에서 비동기 함수를 호출했다.</p><pre><code class=language-js>const delay = (millis) =&gt; new Promise(resolve =&gt; setTimeout(resolve, millis));
+
+exports.handler = async (event, context) =&gt; {
+  try {
+    return { statusCode: 200, body: 'a' };
+  } catch (e) {
+    return { statusCode: 200, body: 'b' };
+
+  } finally {
+    console.log('finally 1');
+    await delay(1);
+    console.log('finally 2');
+  }
+};
+</code></pre><p>코드를 실행시키면 아래와 같은 응답을 볼 수 있다.</p><pre><code>Response:
+{
+  &quot;statusCode&quot;: 200,
+  &quot;body&quot;: &quot;a&quot;
+}
+
+Request ID:
+&quot;d9da2098-c9e6-437d-9fd2-315576f153b9&quot;
+
+Function logs:
+START RequestId: d9da2098-c9e6-437d-9fd2-315576f153b9 Version: $LATEST
+2020-10-30T13:07:15.582Z	d9da2098-c9e6-437d-9fd2-315576f153b9	INFO	try
+2020-10-30T13:07:15.600Z	d9da2098-c9e6-437d-9fd2-315576f153b9	INFO	finally 1
+2020-10-30T13:07:15.602Z	d9da2098-c9e6-437d-9fd2-315576f153b9	INFO	finally 2
+END RequestId: d9da2098-c9e6-437d-9fd2-315576f153b9
+REPORT RequestId: d9da2098-c9e6-437d-9fd2-315576f153b9	Duration: 39.39 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 64 MB	Init Duration: 125.59 ms	
+</code></pre><p>콘솔에 찍은 <code>try</code>, <code>finally 1</code>, <code>finally 2</code>가 보인다.</p><h2 id=contextcallbackwaitsforemptyeventloop>context.callbackWaitsForEmptyEventLoop</h2><p>백엔드에 데이터베이스가 빠질리 없다. AWS Lambda 내부에서 mysql, redis 같은걸 쓴다고 치자.
+그러면 람다 핸들러에서 응답을 보냈음에도 함수가 끝나지 않고 timeout 당하는걸 보게된다.
+흔한 문제라서 <strong>AWS Lambda + timeout</strong>을 검색하면 해결책을 바로 찾을 수 있다.</p><p><a href=https://stackoverflow.com/questions/42605093/aws-lambda-rds-connection-timeout>https://stackoverflow.com/questions/42605093/aws-lambda-rds-connection-timeout</a>
+<code>context.callbackWaitsForEmptyEventLoop = false</code>을 설정하면 된다.</p><p><a href=https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/nodejs-context.html>AWS Lambda 컨텍스트 객체(Node.js)</a></p><blockquote><p>callbackWaitsForEmptyEventLoop – Node.js 이벤트 루프가 빌 때까지 대기하는 대신, 콜백이 실행될 때 즉시 응답을 보내려면 false로 설정합니다. 이것이 false인 경우, 대기 중인 이벤트는 다음 번 호출 중에 계속 실행됩니다.</p></blockquote><p>핸들러 생긴건 <code>async (event, context) => {...}</code>인데 왜 callback이 튀어나오는건가?</p><p><a href=https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/nodejs-handler.html#nodejs-handler-sync>AWS Lambda 함수 핸들러(Node.js)</a>에 답이 있다.</p><blockquote><p>세 번째 인수 callback은 응답을 전송하기 위해 비동기 이외의 핸들러에서 호출할 수 있는 함수입니다. 콜백 함수는 두 개의 인수, Error 및 응답을 사용합니다. 호출하면 Lambda는 이벤트 루프가 비워질 때까지 기다린 다음 응답이나 오류를 호출자에게 반환합니다. 응답 객체는 JSON.stringify와 호환되어야 합니다.</p></blockquote><p>또한 함수 핸들러 문서는 <code>context.callbackWaitsForEmptyEventLoop</code>를 <code>false</code>로 설정해야되는 이유를 자세히 설명했다.</p><blockquote><p>비동기 이외의 핸들러의 경우, 이벤트 루프가 비어 있거나 함수 제한 시간을 초과할 때까지 함수 실행이 계속됩니다. 응답은 모든 이벤트 루프 작업이 완료될 때까지 호출자에게 전송되지 않습니다. 함수 제한 시간을 초과하면, 대신 오류가 반환됩니다. context.callbackWaitsForEmptyEventLoop를 false로 설정하여 즉시 응답을 전송하도록 런타임을 구성할 수 있습니다.</p></blockquote><h2 id=변경된-예제>변경된 예제</h2><p><code>context.callbackWaitsForEmptyEventLoop = false</code>로 설정하고 <code>callback</code>을 수동으로 호출해보자.
+callback 사용 방법은 <a href=https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html>API Gateway에서 Lambda 프록시 통합 설정</a>를 적당히 베끼면 된다.</p><blockquote><p>Node.js에서 Lambda 함수의 응답을 반환하려면 다음과 같은 명령어를 사용할 수 있습니다.
+성공 결과를 반환하려면 callback(null, {&ldquo;statusCode&rdquo;: 200, &ldquo;body&rdquo;: &ldquo;results&rdquo;})을 호출합니다.</p></blockquote><pre><code class=language-js>const delay = (millis) =&gt; new Promise(resolve =&gt; setTimeout(resolve, millis));
+
+exports.handler = async (event, context, callback) =&gt; {
+  context.callbackWaitsForEmptyEventLoop = false;
+
+  try {
+    callback(null, { statusCode: 200, body: 'a' });
+  } catch (e) {
+    return { statusCode: 200, body: 'b' };
+
+  } finally {
+    console.log('finally 1');
+    await delay(1);
+    console.log('finally 2');
+  }
+};
+</code></pre><pre><code>Response:
+{
+  &quot;statusCode&quot;: 200,
+  &quot;body&quot;: &quot;a&quot;
+}
+
+Request ID:
+&quot;e6262512-05c0-4d38-98f9-ab9f79c381d6&quot;
+
+Function logs:
+START RequestId: e6262512-05c0-4d38-98f9-ab9f79c381d6 Version: $LATEST
+2020-10-30T13:07:27.997Z	e6262512-05c0-4d38-98f9-ab9f79c381d6	INFO	try
+2020-10-30T13:07:27.999Z	e6262512-05c0-4d38-98f9-ab9f79c381d6	INFO	finally 1
+END RequestId: e6262512-05c0-4d38-98f9-ab9f79c381d6
+REPORT RequestId: e6262512-05c0-4d38-98f9-ab9f79c381d6	Duration: 3.82 ms	Billed Duration: 100 ms	Memory Size: 128 MB	Max Memory Used: 65 MB	Init Duration: 136.45 ms
+</code></pre><p>콘솔에 찍은 <code>try</code>, <code>finally 1</code>는 보이지만 <code>finally 2</code>는 없다.
+응답을 콜백으로 보내니까 finally 실행 도중 async/await를 만나고 람다가 꺼졌다.</p><h2 id=문제-상황>문제 상황</h2><h3 id=sentry-전송-실패-1>sentry 전송 실패</h3><pre><code class=language-ts>try {
+  return handle();
+
+} catch (error) {
+  Sentry.captureException(error);
+  throw error;
+  
+} finally {
+  await Sentry.flush(2000);
+}
+</code></pre><p>처음 나왔던 문제의 코드를 다시 보자.
+finally가 실행되지 않은게 아니라 finally 내부가 실행되지마자 <code>async/await</code>라서 람다가 꺼진거였다.</p><h3 id=response-cache>response cache</h3><p>HTTP API 요청마다 request id를 붙이고 응답 결과를 redis에 저장하는걸 구현하려고 했다.
+같은 request id로 요청을 다시 보내면 캐싱된 응답을 던져줘서 같은 로직이 여러번 실행되는걸 피할수 있다.
+express에서 응답 보내고 핸들러 호출하는 식으로 구현하려고 했다.</p><pre><code class=language-ts>// https://stackoverflow.com/a/38057516
+res.on('finish', () =&gt; { /* do stuff here */ });
+</code></pre><p>물론 실패했다. finish 핸들러는 한박자 늦게 실행되었다.
+A 요청을 보내고 A 응답을 받을때 핸들러가 돌지 않았다.
+이어서 B 요청을 보내면 A 요청의 핸들러가 실행되었다.
+이것 역시 <code>context.callbackWaitsForEmptyEventLoop = false</code>에 의해 발생하는 현상이다.</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/stub-from-typescript-api-specification/ title="Next: 타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기">타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기<br><small>Mapped Types와 Type inference in conditional types</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/mermaid-diagram-as-code/ title="Previous: mermaid: diagram as code">mermaid: diagram as code<br><small>텍스트로 그림 그리기</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/trap-callback-waits-for-empty-event-loop/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

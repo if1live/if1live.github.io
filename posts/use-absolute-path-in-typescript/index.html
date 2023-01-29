@@ -1,0 +1,215 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>타입스크립트에서 절대경로 쓰기 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="타입스크립트에서 절대경로 쓰기"><meta name=keywords content="typescript,ts-node,jest,webpack,alias"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/use-absolute-path-in-typescript/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="타입스크립트에서 절대경로 쓰기"><meta name=twitter:description content="개요 요새 타입스크립트를 쓰고있다. 100줄짜리 프로그램 짜는게 아니니 소스파일이 수십개로 나뉘어져있다. 파일에 접근하기 위해서는 디렉토리 구조도 몇단계로 내려가야 한다. 소스 파일간의 import하는 일이 많은데 타입스크립트에서는 기본적으로 상대경로 쓰더라. 그래서 import에 들어가는 경로가 깨끗하지 않다. ../../..가 자주 등장하더라.
+impo"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/use-absolute-path-in-typescript/ rel=bookmark title="Permalink to 타입스크립트에서 절대경로 쓰기"><h1>타입스크립트에서 절대경로 쓰기</h1><h2>typescript, absolute path, webpack, ts-node, jest</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2019-02-10T00:00:00Z>2019/02/10</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/typescript>#typescript</a></li><li><a href=/tags/ts-node>#ts-node</a></li><li><a href=/tags/jest>#jest</a></li><li><a href=/tags/webpack>#webpack</a></li><li><a href=/tags/alias>#alias</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p>요새 타입스크립트를 쓰고있다.
+100줄짜리 프로그램 짜는게 아니니 소스파일이 수십개로 나뉘어져있다.
+파일에 접근하기 위해서는 디렉토리 구조도 몇단계로 내려가야 한다.
+소스 파일간의 import하는 일이 많은데 타입스크립트에서는 기본적으로 상대경로 쓰더라.
+그래서 import에 들어가는 경로가 깨끗하지 않다.
+<code>../../..</code>가 자주 등장하더라.</p><pre><code class=language-typescript>import { bar } from '../../../../bar';
+
+export const foo = () =&gt; {
+  console.log(bar());
+};
+</code></pre><p>설계에 따라서는 상대경로로 밑에서 경로를 접근하는것보다 위에서 내려가는게 빠를 수 있다.
+그리고 import 경로로 깔끔하게 만들 수 있다.</p><pre><code class=language-typescript>import { bar } from '@src/bar';
+
+export const foo = () =&gt; {
+  console.log(bar());
+};
+</code></pre><p>절대경로라고 표현하긴 했지만 <code>c:\repo\sample\src\bar\index.ts</code>같은 진짜 절대경로는 쓰지 않을 것이다.
+진짜 절대경로는 다른 컴퓨터에서 안돌아간다.
+프로젝트 디렉토리를 루트 디렉토리로 취급하는 것을 절대경로라고 표현할거다.
+유사-절대경로라고 부를 수 있다.</p><p>이 글에서는 타입스크립트에서 절대경로를 쓰는 방법을 정리했다.
+그리고 내가 자주 쓰는 도구인 webpack, ts-node, jest가 제대로 동작하게 설정하는 방법도 정리했다.</p><h2 id=샘플-프로젝트-구조>샘플 프로젝트 구조</h2><p>절대경로가 잘 돌아가는지 확인하기 위한 <a href=https://github.com/if1live/libsora.so/tree/master/content/typescript/use-absolute-path-in-typescript>샘플 프로젝트</a>를 만들었다.
+디렉토리 구조는 다음과 같다.</p><pre><code>.
+├── src
+│   ├── index.ts
+│   ├── foo
+│   │   └── a
+│   │       └── b
+│   │           └── c
+│   │               └── index.ts
+│   └── bar
+│       └── index.ts
+└── test
+    └── bar
+        └── index.test.ts
+</code></pre><p>src/index.ts가 프로젝트의 진입점이다.
+src/index.ts는 foo/a/b/c/index.ts를 갖다쓴다.
+src/foo/a/b/c/index.ts에서 src/bar/index.ts를 갖다쓴다.
+유닛테스트는 별도 디렉토리로 분리했다.
+테스트는 jest를 사용해서 돌릴거다.</p><p>해당 프로젝트에서는 상대경로를 쓰지 않는다.
+절대경로만으로 돌아가게 만들 것이다.</p><h2 id=tsc>tsc</h2><p>src/foo/a/b/c/index.ts 내용은 다음과 같다.
+상대경로를 썻으면 import가 얼마나 길어지는지 비교할 수 있다.</p><pre><code class=language-typescript>// import { bar } from '../../../../bar';
+import { bar } from '@src/bar';
+
+export const foo = () =&gt; {
+  console.log(bar());
+};
+</code></pre><p>이 코드는 컴파일 되지 않는다.
+타입스크립트는 <code>@src</code>가 어디인지 모르기 때문이다.
+나는 <code>@src</code>가 프로젝트 디렉토리의 <code>/src</code>라고 알고있다.
+타입스크립트 설정파일을 고치자.
+타입스크립트 컴파일러가 <code>@src</code>가 무엇인지 알면 제대로 컴파일할 수 있다.</p><p>타입스크립트 문서에서 <a href=https://www.typescriptlang.org/docs/handbook/module-resolution.html>Module Resolution</a>를 찾아보자.
+Path mapping 항목을 tsconfig.json에 적용하자.
+paths와 baseUrl을 적절히 설정해주 컴파일러가 <code>@src</code>를 이해할 수 있다.</p><p>tsconfig.json</p><pre><code class=language-json>{
+  &quot;compilerOptions&quot;: {
+    ...
+    &quot;baseUrl&quot;: &quot;.&quot;,
+    &quot;paths&quot;: {
+      &quot;@src/*&quot;: [
+        &quot;src/*&quot;
+      ]
+    }
+  }
+}
+</code></pre><p>이제 컴파일이 된다.</p><h2 id=node>node</h2><p>컴파일된 코드를 node로 돌려보자.</p><pre><code>$ node .\dist\src\index.js
+internal/modules/cjs/loader.js:582
+    throw err;
+    ^
+
+Error: Cannot find module '@src/bar'
+    .....
+</code></pre><p>안돌아간다.
+컴파일만 되었을뿐이다.</p><p>tsc에 의해서 생성된 파일을 열어보면 원인을 알 수 있다.
+소스를 보면 <code>require(@src/bar)</code>가 있다.
+하지만 node는 <code>@src/bar</code>가 어떤 경로인지 모른다.</p><pre><code class=language-javascript>&quot;use strict&quot;;
+Object.defineProperty(exports, &quot;__esModule&quot;, { value: true });
+// import { bar } from '../../../../bar';
+var bar_1 = require(&quot;@src/bar&quot;);
+exports.foo = function () {
+    console.log(bar_1.bar());
+};
+</code></pre><p>비슷한 문제는 다들 한번씩 겪었을것이다.
+C, C++ 쓰다보면 컴파일은 성공했지만 링킹(linking)이 되지 않는 문제를 당했을 것이다.
+비주얼 C++ 쓰다보면 보는 LNK???? 에러.</p><p>C를 컴파일하면 object 파일이 생성된다.
+여러 파일로 구성된 C 프로젝트면 object 파일도 여러개가 생성된다.
+이것을 하나로 합쳐야 실행 가능한 파일이 만들어진다.</p><p>타입스크립트 소스 파일들이 컴파일되어 자바스크립트 파일이 생성되었다.
+하지만 자바스크립트 파일간에는 연결이 없다.
+<code>@src</code>를 node도 알아먹을수 있는 형태로 바꿔야한다.</p><h2 id=webpack>webpack</h2><p>webpack은 모듈 번들러이다.
+webpack을 쓰면 분리되어있는 자바스크립트 소스 파일을 하나로 파일로 묶어줄 수 있다.</p><p><img src=toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png alt=webpack></p><p>생각해보면 linker와 하는 짓이 유사하다.</p><p><img src=COMPILE.gif alt=linker></p><p>linking 하듯이 webpack을 이용해서 분리된 자바스크립트 파일을 합칠때 <code>@src</code>를 멀쩡한 이름으로 바꿀 수 있으면 프로그램이 돌아갈거다.
+webpack이 <code>@src</code>를 알아듣게 만드는 방법은 남들이 간 길을 찾으니 나오더라.
+<a href=https://robferguson.org/blog/2017/11/22/working-with-typescript-webpack-and-ionic-3/>Working with TypeScript, webpack and Ionic 3</a> 를 참고했다.
+webpack 설정파일에 alias 를 설정하면 된다더라.
+나는 절대경로라고 불렀는데 webpack에서는 이것을 alias라고 부르나보다.</p><p>webpack.config.js</p><pre><code class=language-javascript>...
+module.exports = {
+  ....
+  resolve: {
+    extensions: [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.json',
+    ],
+    // -----
+    'alias': {
+      '@src': path.resolve(__dirname, 'src'),
+    },
+    // ----
+  },
+};
+</code></pre><p>이제 webpack으로 뽑은 파일은 잘 실행된다.</p><h2 id=ts-node>ts-node</h2><p><a href=https://github.com/TypeStrong/ts-node>ts-node</a>는 내가 좋아하는 도구다.
+프로젝트의 설명을 보면 TypeScript execution and REPL for node.js 라고 되어있다.
+타입스크립트는 node에서 바로 돌릴 수 없다.
+tsc로 컴파일한후 생성된 자바스크립트 파일을 node로 돌려야한다.
+하지만 이짓을 하는건 너무 귀찮잖아?
+ts-node를 설치하면 <code>node xxx.js</code> 실행하는 느낌으로 <code>ts-node xxx.ts</code>를 실행할 수 있다.</p><p>절대경로가 들어간 타입스크립트를 ts-node로 실행하면 안돌아간다.
+아래와 같은 에러가 튀어나온다.</p><pre><code>$ npx ts-node src/index.ts
+Cannot find module '@src/bar'
+</code></pre><p>ts-node가 <code>@src</code>를 못 알아먹는다.
+tsconfig.json 에 <code>@src</code>가 있지만 ts-node가 tsconfig.json의 내용을 전부 쓰지 않나보다.
+ts-node의 문서를 뒤져보면 tsconfig-paths를 설치해서 문제를 해결할 수 있다고한다.
+이제 절대경로 들어간 타입스크립트도 ts-node로 돌릴 수 있다.</p><pre><code>$ npx ts-node -r tsconfig-paths/register --files src/index.ts
+bar
+</code></pre><p>ts-node를 쓸때마다 tsconfig-paths 관련 설정을 치는것은 매우 귀찮다.
+package.json를 고치면 노가다가 조금 줄어든다.</p><p>package.json</p><pre><code class=language-json>{
+  ...
+  &quot;scripts&quot;: {
+    &quot;ts-node&quot;: &quot;ts-node -r tsconfig-paths/register --files&quot;
+  },
+  ...
+}
+</code></pre><pre><code>$ npm run ts-node src/index.ts
+
+&gt; use-relative-path-in-typescript@1.0.0 ts-node ...
+&gt; ts-node -r tsconfig-paths/register --files &quot;.\src\index.ts&quot;
+
+bar
+</code></pre><h2 id=jest>jest</h2><p>나는 jest를 이용해서 유닛테스트를 돌린다.
+jest는 기본적으로 자바스크립트만 지원한다.
+하지만 ts-jest를 설치하면 타입스크립트도 지원한다.
+ts-jest를 설치하고 jest돌릴때 타입스크립트 파일은 ts-jest를 거치도록 설정하면 된다.</p><p>package.json</p><pre><code class=language-json>{
+  ...
+  &quot;jest&quot;: {
+    ...
+    &quot;transform&quot;: {
+      &quot;^.+\\.tsx?$&quot;: &quot;ts-jest&quot;
+    },
+    &quot;testRegex&quot;: &quot;(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$&quot;,
+    ...
+  }
+}
+</code></pre><p>잘 설정하면 아래와 같은 유닛테스트를 돌릴 수 있다.</p><pre><code class=language-typescript>import { bar } from '../../src/bar';
+
+test('bar', () =&gt; {
+  expect(bar()).toEqual('bar');
+})
+</code></pre><p>그렇다면 절대경로를 사용한 유닛테스트도 돌아갈까?</p><pre><code class=language-typescript>import { bar } from '@src/bar';
+
+test('bar', () =&gt; {
+  expect(bar()).toEqual('bar');
+})
+</code></pre><pre><code> FAIL  test/bar/index.test.ts
+  ● Test suite failed to run
+
+    Cannot find module '@src/bar' from 'index.test.ts'
+
+    &gt; 1 | import { bar } from '@src/bar';
+        | ^
+      2 |
+      3 | test('bar', () =&gt; {
+      4 |   expect(bar()).toEqual('bar');
+
+      at Resolver.resolveModule (node_modules/jest-resolve/build/index.js:221:17)
+      at Object.&lt;anonymous&gt; (test/bar/index.test.ts:1:1)
+</code></pre><p><code>@src</code>가 들어간 유닛테스트는 돌릴 수 없다.
+jest가 타입스크립트를 위한 물건이 아니다보니 tsconfig.json을 못알아먹는다.
+webpack과 마찬가지로 별도 설정이 필요하다.
+webpack때와 마찬가지로 남들이 삽질한거 베끼자.
+ts-jest의 <a href=https://kulshekhar.github.io/ts-jest/user/config/>Configuration</a>을 참고하면 된다.
+<code>moduleNameMapper</code>를 설정하면 된다.</p><pre><code class=language-json>{
+  ...
+  &quot;jest&quot;: {
+    ...
+    &quot;moduleNameMapper&quot;: {
+      &quot;@src/(.*)&quot;: &quot;&lt;rootDir&gt;/src/$1&quot;
+    }
+  }
+}
+</code></pre></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/http-request-with-body-and-java-httpurlconnection/ title="Next: HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2">HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2<br><small>Java HttpURLConnection의 경우</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/generous-code-breaks-easily/ title="Previous: 관대한 코드는 쉽게 망가진다">관대한 코드는 쉽게 망가진다<br><small>신기한 IE 구버전의 세계</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/use-absolute-path-in-typescript/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

@@ -1,0 +1,230 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>int main() { #include "data.txt" return 0; } &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="int main() { #include &#34;data.txt&#34; return 0; }"><meta name=keywords content="black magic,x-macro,define,include,c,preprocessor"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/x-macro-is-useful/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="int main() { #include &#34;data.txt&#34; return 0; }"><meta name=twitter:description content="흑마법은 많이 짜봤지만
+int foo() { #include &amp;ldquo;data.txt&amp;rdquo; }
+를 이길 물건은 아직 짜지 못했다. 내 명작 흑마법이었는데 리펙토링 하려다 c++ 접어서 방치
+트위터에서 남들의 흑마법 코드를 보다가 5년전에 짠 흑마법 코드가 생각나서 글을 써본다. C, C++ 많이 해본 사람은 다 알고있을 뻔한 주제다. 하지만 처음"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/x-macro-is-useful/ rel=bookmark title='Permalink to int main() { #include "data.txt" return 0; }'><h1>int main() { #include "data.txt" return 0; }</h1><h2>다시 보는 include와 define, 그리고 X-Macro</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2017-01-30T00:00:00Z>2017/01/30</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/black-magic>#black magic</a></li><li><a href=/tags/x-macro>#x-macro</a></li><li><a href=/tags/define>#define</a></li><li><a href=/tags/include>#include</a></li><li><a href=/tags/c>#c</a></li><li><a href=/tags/preprocessor>#preprocessor</a></li></ul></footer><section class=entry-content><blockquote><p>흑마법은 많이 짜봤지만</p><p>int foo() {
+#include &ldquo;data.txt&rdquo;
+}</p><p>를 이길 물건은 아직 짜지 못했다. 내 명작 흑마법이었는데 리펙토링 하려다 c++ 접어서 방치</p></blockquote><p>트위터에서 남들의 흑마법 코드를 보다가 5년전에 짠 흑마법 코드가 생각나서 글을 써본다.
+C, C++ 많이 해본 사람은 다 알고있을 뻔한 주제다.
+하지만 처음하는 사람은 글을 읽고 include, define에 대한 새로운 관점을 배울 수 있을거다.</p><h2 id=다시-보는-include>다시 보는 include</h2><p>C컴파일러는 하나의 소스만 읽고 컴파일할 수 있다.
+근데 우리는 stdio.h 같은 파일을 main.c에서 쓰잖아?
+C전처리기가 <code>#include &lt;stdio.h></code>를 찾아서 stdio.h의 내용을 main.c에 복사-붙여넣기해서 하나의 파일로 만든후, 이를 컴파일러에게 전달하기때문에 컴파일이 되는거다.
+즉, include의 역할은 <strong>복붙</strong>이다.</p><h2 id=다시-보는-define>다시 보는 define</h2><p>C 전처리기의 명령어 중에는 define이 있다.
+초급 C 학습서에서는 define을 매크로 상수, 매크로 함수를 만들때 사용한다고 설명한다.
+이 설명은 define로 가능한것을 설명한거지 define의 진짜 기능을 말한게 아니다.
+define의 진짜 기능은 <strong>치환</strong>이다.</p><p>그래서 아래와 같은 코드가 가능하다.
+cocos2d-x에 있는 코드인데 네임스페이스 열고 닫는 코드를 직접 쓰지 않고 매크로로 만들어서 사용한다.</p><pre><code class=language-cpp>#ifdef __cplusplus
+    #define NS_CC_BEGIN  namespace cocos2d {
+    #define NS_CC_END    }
+    #define USING_NS_CC  using namespace cocos2d
+    #define NS_CC        ::cocos2d
+#else
+    #define NS_CC_BEGIN 
+    #define NS_CC_END 
+    #define USING_NS_CC 
+    #define NS_CC
+#endif 
+</code></pre><h2 id=x-macro>X-Macro</h2><p><a href=https://en.wikipedia.org/wiki/X_Macro>X-Macro</a>는 매크로로 리스트를 만든후 다양한 매크로를 적용해서 코드를 찍어내는 기법이다.
+이를 이용하면 노가다 코딩을 줄이는게 가능하다.
+말로 설명하는것보다 코드를 보는게 이해하기 쉬울거다.
+wikipedia의 예제코드를 그대로 가져왔다.</p><pre><code class=language-cpp>#define LIST_OF_VARIABLES \
+    X(value1) \
+    X(value2) \
+    X(value3)
+
+#define X(name) int name;
+LIST_OF_VARIABLES
+#undef X
+
+void print_variables()
+{
+#define X(name) printf(&quot;%s = %d\n&quot;, #name, name);
+LIST_OF_VARIABLES
+#undef X
+}
+</code></pre><pre><code class=language-cpp>int value1;
+int value2;
+int value3;
+
+void print_variables()
+{
+    printf(&quot;%s = %d\n&quot;, &quot;value1&quot;, value1);
+    printf(&quot;%s = %d\n&quot;, &quot;value2&quot;, value2);
+    printf(&quot;%s = %d\n&quot;, &quot;value3&quot;, value3);
+}
+</code></pre><h2 id=예제>예제</h2><p>간단한 예제 코드를 만들어봤다. 필요한 기능은 다음과 같다.</p><ul><li>클래스에는 month, day 멤버 변수가 있어야한다.</li><li>빈 객체를 생성하면 1, 1로 초기화 되어야한다.</li><li>month, day를 1, 1로 초기화하는 <code>reset_date()</code> 함수가 필요하다</li><li>멤버변수의 값을 출력하는 <code>print_date()</code> 함수가 필요하다.</li></ul><pre><code class=language-cpp>#include &lt;cstdio&gt;
+
+struct DateSimple {
+    int month = 1;
+    int day = 1;
+};
+
+void reset_date(DateSimple &amp;obj) {
+    obj.month = 1;
+    obj.day = 1;
+}
+
+void print_date(DateSimple &amp;obj) {
+    printf(&quot;M: %d\n&quot;, obj.month);
+    printf(&quot;D: %d\n&quot;, obj.day);
+}
+
+int main() {
+    DateSimple d = {2, 5};
+    print_date(d);
+
+    reset_date(d);
+    print_date(d);
+    return 0;
+}
+</code></pre><pre><code class=language-bash>$ g++ -o main_simple.exe main_simple.cpp -std=c++14 &amp;&amp; ./main_simple.exe
+M: 2
+D: 5
+M: 1
+D: 1
+</code></pre><p>코드를 잘 보면 중복된 부분이 있다.</p><ul><li>클래스의 기본값인 1,1이 클래스 안에도 있지만 reset_date에도 있다.</li><li>month, day 변수는 총 3번 등장한다. 클래스, reset_date, print_date</li></ul><p>예제는 변수가 고작 2개밖에 없으니까 중복이 심각한 문제는 아니다.
+하지만 변수의 갯수가 많아지만 이런 사소한 중복도 유지보수를 귀찮게 만든다.</p><p>여기에 X-Macro를 끼얹어보자.</p><p>일단은 매크로로 간단한 메타 언어를 만들자.
+그리고 메타 언어를 이용해서 클래스를 정의해보자.
+이런 느낌이면 될거다.</p><pre><code class=language-txt>STRUCT_BEGIN(Date)
+    STRUCT_INT(month, 1, &quot;M: &quot;)
+    STRUCT_INT(day, 1, &quot;D: &quot;)
+STRUCT_END()
+</code></pre><p>코드 중복이 등장하던 부분에 X-Macro를 끼워넣자.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+
+#undef STRUCT_BEGIN
+#undef STRUCT_INT
+#undef STRUCT_END
+
+#define STRUCT_BEGIN(NAME) struct NAME {
+#define STRUCT_INT(NAME, VALUE, LABEL) int NAME = VALUE;
+#define STRUCT_END() };
+
+#include &quot;struct_data.txt&quot;
+
+void reset_date(Date &amp;obj) {
+    #undef STRUCT_BEGIN
+    #undef STRUCT_INT
+    #undef STRUCT_END
+
+    #define STRUCT_BEGIN(NAME)
+    #define STRUCT_INT(NAME, VALUE, LABEL) obj.NAME = VALUE;
+    #define STRUCT_END()
+
+    #include &quot;struct_data.txt&quot;
+}
+
+
+void print_date(Date &amp;obj) {
+    #undef STRUCT_BEGIN
+    #undef STRUCT_INT
+    #undef STRUCT_END
+
+    #define STRUCT_BEGIN(NAME)
+    #define STRUCT_INT(NAME, VALUE, LABEL) printf(LABEL &quot;%d\n&quot;, obj.NAME);
+    #define STRUCT_END()
+
+    #include &quot;struct_data.txt&quot;
+}
+
+int main() {
+    Date d = {2, 5};
+    print_date(d);
+
+    reset_date(d);
+    print_date(d);
+    return 0;
+}
+</code></pre><pre><code class=language-bash>$ g++ -o main_xmcaro.exe main_xmacro.cpp -std=c++14 &amp;&amp; ./main_xmcaro.exe
+M: 2
+D: 5
+M: 1
+D: 1
+</code></pre><p>이제 클래스에 멤버변수가 수십개가 되어도 중복으로 고칠 부분은 없다.
+메타 언어로 선언된 클래스만 고치면 된다.</p><h2 id=응용>응용</h2><ul><li>매크로를 잘 이용하면 메타 언어를 만들 수 있을거같은데?</li><li>매크로를 교체하면 여러 종류의 코드를 찍어낼 수 있을거같은데?</li></ul><p>이를 이용해서 5년전에 재밌는 코드를 짠적이 있다.</p><ul><li>매크로로 표현 가능한 메타 언어를 설계. 이 언어로는 구조체를 표현할수 있다.</li><li>매크로를 잘 이용해서 구조체 코드를 찍어낸다.</li><li>매크로를 잘 이용해서 RTTI(Run-Time Type Information)를 구현한다.</li><li>RTTI 정보를 잘 이용해서 구조체를 XML로 직렬화, 역직렬화한다.</li></ul><p><a href=https://github.com/if1live/hikaru>hikaru</a> : Simple C++ RTTI library</p><p>옛날옛적 코드에서 매크로를 이용한 부분을 뜯어낸 라이브러리이다.
+X-Macro 가 어떤 물건인지 복습하면서 돌아가도록 만들었다.
+(5년 묵은 코드 살려둔거라서 쓰는걸 권장하진 않는다)
+대강 이런 느낌으로 쓴다.</p><p>매크로 위에서 돌아갈수 있는 메타 언어를 정의한다.
+그리고 이 메타 언어를 이용해서 이용해서 클래스의 구조를 명시한다.
+클래스 이름은 HKDemoStruct, 버전은 1이다.
+(같은 이름의 버전이 다른 클래스의 경우 migration 구현하는게 가능하도록 설계)
+이 클래스에는 float 타입의 변수 <code>float_val</code>과 int 타입의 변수 <code>int_val</code>이 포함된다.</p><pre><code class=language-cpp>HK_STRUCT_BEGIN(HKDemoStruct, 1)
+    HK_STRUCT_VAR_FLOAT(float_val)
+    HK_STRUCT_VAR_INT(int_val)
+HK_STRUCT_END()
+</code></pre><p>선언용 매크로를 이용해서 메타 언어를 클래스를 만든다.</p><pre><code class=language-cpp>#define HK_STRUCT_BEGIN(BASE, VERSION)  \
+    struct BASE##_##VERSION : public hikaru::BaseStruct {   \
+    ....
+#define HK_STRUCT_VAR_INT(NAME) int NAME;
+#define HK_STRUCT_VAR_FLOAT(NAME) float NAME;
+#define HK_STRUCT_END() };
+</code></pre><p>정의용 매크로를 이용해서 메타 언어로 만들어진 클래스 정보를 RTTI 시스템에 등록한다.</p><pre><code class=language-cpp>#define HK_STRUCT_BEGIN(BASE, VERSION)  {   \
+    typedef BASE##_##VERSION cls;   \
+    hikaru::ClassAttribute class_attr(#BASE, #BASE &quot;_&quot; #VERSION, VERSION);
+#define HK_STRUCT_VAR_INT(NAME) \
+    class_attr.add(hikaru::FieldAttribute::createInt(#NAME, hikaru::offsetOf(&amp;cls::NAME)));
+#define HK_STRUCT_VAR_FLOAT(NAME)   \
+    class_attr.add(hikaru::FieldAttribute::createFloat(#NAME, hikaru::offsetOf(&amp;cls::NAME)));
+#define HK_STRUCT_END() \
+    hikaru::ClassDict::getInstance().add(class_attr);   \
+}
+</code></pre><p>선언용 매크로와 메타 언어를 인클루드해서 클래스를 선언한다.
+정의용 매크로와 메타 언어를 인클루드해서 클래스를 RTTI 시스템에 등록하는 함수를 만든다.
+그러면 클래스의 멤버변수 정보에 접근할 수 있다.
+여기에서 함수안에 include 집어넣는 흑마법 코드가 등장한다.</p><pre><code class=language-cpp>
+#include &quot;hikaru.h&quot;
+#include &quot;hk_declaration.h&quot;
+#include &quot;struct_data.txt&quot;
+
+int init_hikaru() {
+    #include &quot;hk_definition.h&quot;
+    #include &quot;struct_data.txt&quot;
+    return 0;
+}
+static int initialized_hikaru = init_hikaru();
+
+void demo_rtti() {
+    auto dict = hikaru::ClassDict::getInstance();
+    auto classname = dict.getClassName(&quot;HKDemoStruct&quot;, 1);
+    auto classattr = dict.get(classname);
+
+    printf(&quot;class name : %s\n&quot;, classattr-&gt;class_name().data());
+    printf(&quot;base name : %s\n&quot;, classattr-&gt;base_name().data());
+    printf(&quot;class version : %d\n&quot;, classattr-&gt;version());
+    for (auto it = classattr-&gt;begin(); it != classattr-&gt;end(); it++) {
+        printf(&quot;field : name=%s type=%d offset=%d\n&quot;, it-&gt;name().data(), it-&gt;type(), it-&gt;offset());
+    }
+}
+</code></pre><h2 id=단점>단점</h2><p>이렇게 좋은 기술이 있는데 많이 쓰이지 않는건 이유가 있다.
+매크로는 컴파일러의 통제범위 밖이다. 전처리기의 영역이다.
+그래서 잘못 짜면 알아보기 힘든 컴파일 에러가 뜬다.
+또한 유지보수가 쉬운 물건도 아니다.
+코드 찍어내는 목적으로 매크로를 쓰면 줄끝에 <code>\</code>를 넣어야하는데 빼먹기 쉽다.
+매크로까지 syntax highlighting이 잘 되는 IDE는 별로 없다.</p><p>그래도 단점을 각오하더라도 X-Macro를 쓰면 좋을때가 가끔씩 있다.
+RTTI가 그런 사례이다.</p><h2 id=더-보기>더 보기</h2><p>이 글에서는 X-Macro 위주로 다뤘다.
+이를 이용해서 RTTI를 어떻게 구현할때는 아래의 글이 도움이 될거다.</p><ul><li><a href=http://lacti.me/2011/09/30/using-rtti-at-cpp/>c++ 에서 구조체 RTTI 정보 남기기</a></li><li><a href=http://lacti.me/2012/06/03/using-reflection-at-cpp-1/>c++에서 reflection 사용하기 1</a></li></ul></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/unity-library-vfw/ title="Next: MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW">MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW<br><small>MonoBehaviour -> BaseBehaviour</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/unity-tip-remove-if-unity-editor/ title="Previous: [#if UNITY_EDITOR] 줄이는 편법">[#if UNITY_EDITOR] 줄이는 편법</a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/x-macro-is-useful/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

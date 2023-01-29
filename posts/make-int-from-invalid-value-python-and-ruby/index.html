@@ -1,0 +1,90 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비"><meta name=keywords content="python,ruby,integer,int,exception"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/make-int-from-invalid-value-python-and-ruby/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비"><meta name=twitter:description content="올바르지 않은 값을 정수로 바꾸는 일은 웹을 포함한 여러가지 개발에서 자주하는 작업 중 하나이다. 예를 들어서 /articles/?id={int} 를 구현한 서버가 있다고 가정하자. /articles/?id=1234와 같이 id에 정수 문자열이 들어갈수도 있다. 하지만 /articles/?id=test와 같이 숫자가 아닌 문자열이 들어갈수도 있고 /arti"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/make-int-from-invalid-value-python-and-ruby/ rel=bookmark title="Permalink to 올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비"><h1>올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비</h1><h2>같은 목적, 다른 언어, 다른 결과</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2016-02-24T00:00:00Z>2016/02/24</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/python>#python</a></li><li><a href=/tags/ruby>#ruby</a></li><li><a href=/tags/integer>#integer</a></li><li><a href=/tags/int>#int</a></li><li><a href=/tags/exception>#exception</a></li></ul></footer><section class=entry-content><p>올바르지 않은 값을 정수로 바꾸는 일은 웹을 포함한 여러가지 개발에서 자주하는 작업 중 하나이다.
+예를 들어서 <code>/articles/?id={int}</code> 를 구현한 서버가 있다고 가정하자.
+<code>/articles/?id=1234</code>와 같이 id에 정수 문자열이 들어갈수도 있다.
+하지만 <code>/articles/?id=test</code>와 같이 숫자가 아닌 문자열이 들어갈수도 있고 <code>/articles/</code>처럼 id가 없을수도 있다.
+개발자는 이런 예외 상황을 잘 처리해야된다.</p><p>이 글에서는 파이썬과 루비에서 문자열을 숫자로 변환할때의 차이점을 간단하게 정리했다.</p><h2 id=string-to-int>String to int</h2><h3 id=success>Success</h3><p><code>"123"</code>과 같이 딱봐도 정수처럼 보이는 문자열을 정수로 바꿔보았다.</p><pre><code class=language-python>print(int(&quot;123&quot;))
+</code></pre><pre><code class=language-bash>$ python str_to_int_success.py
+123
+</code></pre><pre><code class=language-ruby>puts &quot;123&quot;.to_i
+</code></pre><pre><code class=language-bash>$ ruby str_to_int_success.rb
+123
+</code></pre><p>파이썬과 루비 모두 정상적으로 작동한다.</p><h3 id=fail>Fail</h3><p><code>"fail"</code>과 같이 정수처럼 보이지 않는 문자열을 정수로 바꿔보면 어떨까?</p><pre><code class=language-python>try:
+    print(int(&quot;fail&quot;))
+except Exception as e:
+    print(repr(e))
+</code></pre><pre><code class=language-bash>$ python str_to_int_fail.py
+ValueError(&quot;invalid literal for int() with base 10: 'fail'&quot;,)
+</code></pre><pre><code class=language-ruby>begin
+  p &quot;fail&quot;.to_i
+rescue =&gt; ex
+  p ex
+end
+</code></pre><pre><code class=language-bash>$ ruby str_to_int_fail.rb
+0
+</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Python: <a href=https://docs.python.org/3.5/library/functions.html#int>int()</a></li><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/String.html#method-i-to_i>String#to_i</a></li></ul><h2 id=none-to-int-nil-to-integer>None to int, nil to Integer</h2><p>파이썬에서는 None, 루비에서는 nil이라고 부르지만 둘은 비슷한 개념이다.
+이것을 정수로 변환하면 어떤 결과가 나올까?</p><pre><code class=language-python>try:
+    print(int(None))
+except Exception as e:
+    print(repr(e))
+</code></pre><pre><code class=language-bash>$ python null_to_int.py
+TypeError(&quot;int() argument must be a string or a number, not 'NoneType'&quot;,)
+</code></pre><pre><code class=language-ruby>begin
+  p nil.to_i
+rescue =&gt; ex
+  p ex
+end
+</code></pre><pre><code class=language-bash>$ ruby null_to_int.rb
+0
+</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/NilClass.html#method-i-to_i>NilClass#to_i</a></li></ul><h2 id=동일한-동작을-하게-만드려면>동일한 동작을 하게 만드려면?</h2><p>&ldquo;파이썬에서는 예외가 나는게 정상이고 루비에서는 0으로 변환되는게 정상입니다"로 끝내기에는 간단한 문제가 아니다.
+파이썬으로 작성된 코드가 있고 이것을 루비로 그대로 옮겨서 사용하고 싶다고 가정하자.
+만약 파이썬 코드안에 문자열을 숫자로 바꾸는 코드가 있다면 루비로 그대로 옮겼을때 동일하게 동작한다는 보장이 없다.
+예외를 던지는 것과 0으로 변환되는 것은 다른 행동이기 때문에 코드를 옮기면서 로직을 수정해야될지 모른다.
+만약 파이썬처럼 루비에서도 문자열을 정수로 변환하려다 실패한 경우 예외를 던지면 포팅 작업이 더 편하지 않을까?</p><p>루비에서 파이썬처럼 예외를 던지려면 어떻게 해야될까?
+<code>#to_i</code>를 이용해서 정수로 변환해보고 만약 0이 나온 경우 문자열이 <code>"0"</code>, <code>"0.00"</code>등과 같은지 확인한 다음에 예외를 던지는 식으로 구현할수 있다.
+하지만 좋은 방법처럼 보이진 않는다. 더 쉬운 방법 없을까?</p><p><a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Integer>Kernel#Integer</a>를 사용하면 된다.</p><pre><code class=language-ruby>begin
+  puts Integer(&quot;fail&quot;)
+rescue =&gt; ex
+  p ex
+end
+</code></pre><pre><code class=language-bash>$ ruby str_to_int_fail_alt.rb
+#&lt;ArgumentError: invalid value for Integer(): &quot;fail&quot;&gt;
+</code></pre><pre><code class=language-ruby>begin
+  p Integer(nil)
+rescue =&gt; ex
+  p ex
+end
+</code></pre><pre><code class=language-bash>$ ruby null_to_int_alt.rb
+#&lt;TypeError: can't convert nil into Integer&gt;
+</code></pre><p>비슷한 목적으로 <a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Float>Kernel#Float</a>도 있다.
+Kernel 클래스에는 유용한 기능이 많으니 한번쯤 읽어두면 나중에 도움이 될거다.
+(sprintf, rand, sleep 조차 Kernel 클래스에 포함되어있다!)</p><p>반대로 파이썬에서 루비처럼 예외없이 정수로 바꾸고 싶으면 예외처리를 포함한 간단한 함수를 만들면 된다.
+자세한 설명은 생략한다.</p><h2 id=summary>Summary</h2><p>문자열을 숫자로 바꾸는 작업은 단순한 기능이다.
+하지만 모든 언어에서 같은 행동을 하도록 구현되진 않았다.
+나중에 삽질하고 싶지 않다면 자신이 쓰는 언어에서는 어떤식으로 행동하는지 기억하자.</p><h2 id=test-code>Test Code</h2><ul><li><a href=https://github.com/if1live/libsora.so/tree/master/content/development/make-int-from-invalid-value-python-and-ruby>repo</a></li></ul></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/default-argument-python-and-ruby/ title="Next: 삽질로 알아보는 파이썬과 루비의 기본 매개변수">삽질로 알아보는 파이썬과 루비의 기본 매개변수<br><small>Default Argument X (Python, Ruby)</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/if-key-does-not-exist-then/ title="Previous: 존재하지 않는 키로 테이블에 접근하면?">존재하지 않는 키로 테이블에 접근하면?<br><small>파이썬 vs 루비 vs C++</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/make-int-from-invalid-value-python-and-ruby/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

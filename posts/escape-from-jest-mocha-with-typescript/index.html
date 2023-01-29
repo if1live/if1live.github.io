@@ -1,0 +1,112 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>Jest 탈출기 - 타입스크립트 + Mocha &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="Jest 탈출기 - 타입스크립트 + Mocha"><meta name=keywords content="testing,jest,mocha"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/escape-from-jest-mocha-with-typescript/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="Jest 탈출기 - 타입스크립트 + Mocha"><meta name=twitter:description content="개요 Jest 탈출기 - Jest는 느리다, Jest 탈출기 - Mocha를 쓰자에서는 자바스크립트 기준으로 예제를 작성했다. 하지만 실제로 내가 쓰는 언어는 타입스크립트이다.
+이 글에서는 타입스크립트에서 mocha 굴리는 방법을 다룬다.
+목표: 타입스크립트로 작성된 테스트 돌리기 아래의 테스트는 타입스크립트로 작성되었다. 이것을 mocha로 돌리는게 목표"><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/escape-from-jest-mocha-with-typescript/ rel=bookmark title="Permalink to Jest 탈출기 - 타입스크립트 + Mocha"><h1>Jest 탈출기 - 타입스크립트 + Mocha</h1><h2>ts-node, tsc</h2></a></hgroup></header><footer class=post-info><abbr class=published title=2019-07-03T01:00:00+09:00>2019/07/03</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/testing>#testing</a></li><li><a href=/tags/jest>#jest</a></li><li><a href=/tags/mocha>#mocha</a></li></ul></footer><section class=entry-content><h2 id=개요>개요</h2><p><a href=https://if1live.github.io/posts/escape-from-jest-jest-is-slow/>Jest 탈출기 - Jest는 느리다</a>,
+<a href=https://if1live.github.io/posts/escape-from-jest-use-mocha/>Jest 탈출기 - Mocha를 쓰자</a>에서는 자바스크립트 기준으로 예제를 작성했다.
+하지만 실제로 내가 쓰는 언어는 타입스크립트이다.</p><p>이 글에서는 타입스크립트에서 mocha 굴리는 방법을 다룬다.</p><h2 id=목표-타입스크립트로-작성된-테스트-돌리기>목표: 타입스크립트로 작성된 테스트 돌리기</h2><p>아래의 테스트는 타입스크립트로 작성되었다.
+이것을 mocha로 돌리는게 목표이다.</p><pre><code class=language-js>import { Sample } from '@src/sample';
+
+test('ok', () =&gt; {
+  const x = new Sample();
+  expect(x.foo()).toBe(1);
+});
+</code></pre><p><code>@src</code>는 <code>tsconfig.json</code>에 설정한 paths이다.
+<a href=https://if1live.github.io/posts/use-absolute-path-in-typescript/>타입스크립트에서 절대경로 쓰기</a>에서 다뤘다.
+여기에서는 다루지 않는다.</p><p><code>test()</code>를 mocha에서도 쓸 수 있게 만드는 방법은 <a href=https://if1live.github.io/posts/escape-from-jest-use-mocha/>Jest 탈출기 - Mocha를 쓰자</a>에서 다뤘다.
+여기에서는 다루지 않는다.</p><h2 id=ts-node--typescript>ts-node + typescript</h2><p><a href=https://www.npmjs.com/package/ts-node>ts-node</a> 설명에서도 mocha 사용법이 나온다.
+적당히 붙여넣고 tsconfig-paths만 맞춰주면 잘 돌아간다.</p><pre><code class=language-sh>mocha \
+    -r node_modules/ts-node/register/transpile-only \
+    -r node_modules/tsconfig-paths/register \
+    -r bootload \
+    src/__tests__/sample.test.ts
+</code></pre><h2 id=tsc--mocha--javascript>tsc + mocha + javascript</h2><p>ts-node + mocha를 쓰면 jest보다 빠르게 테스트 돌아간다.
+하지만 더 빠르게 만드는게 가능할거같다.
+어려운 문제를 해체해서 쉬운 문제 여러 개로 만들면 된다.
+타입스크립트를 자바스크립트로 컴파일하는 과정와 mocha 돌리는 과정을 분리한다.</p><p><code>tsc</code> 를 실행하면 타입스크립트를 자바스크립트로 컴파일 할 수 있다.
+<code>--skipLibCheck</code> 옵션을 쓰면 더 효율적으로 컴파일 할 수 있다.</p><pre><code>$ time npx tsc
+
+real    0m8.804s
+user    0m0.015s
+sys     0m0.150s
+
+
+$ time npx tsc --skipLibCheck
+
+real    0m4.665s
+user    0m0.015s
+sys     0m0.121s
+</code></pre><p>이제 컴파일된 자바스크립트를 mocha로 굴려야한다.
+mocha를 그냥 쓰면 안돌아간다. <code>@src</code>는 자바스크립트가 처리하지 못한다.
+webpack을 잘 쓰면 될거같은데 webpack 출력물을 그대로 mocha에 넣어도 굴러갈지 모르겠더라.
+삽질하기 귀찮아서 쉬운 방법을 선택했다.
+bable을 쓰자.</p><p>아래와 같은 <code>.bablerc</code>를 넣어주면 자바스크립트에서 <code>@src</code>를 처리할 수 있다.</p><pre><code class=language-json>{
+  &quot;plugins&quot;: [
+    [
+      &quot;module-resolver&quot;,
+      {
+        &quot;root&quot;: [
+          &quot;./dist&quot;
+        ],
+        &quot;alias&quot;: {
+          &quot;@src&quot;: &quot;./dist/&quot;
+        }
+      }
+    ]
+  ]
+}
+</code></pre><p><code>-r babel-core/register</code>을 넣어주면 mocha에서 babel을 사용한다.</p><pre><code class=language-sh>mocha \
+    -r babel-core/register \
+    -r bootload \
+    dist/__tests__/sample.test.js
+</code></pre><h2 id=성능>성능</h2><p>tsc + mocha 조합으로 테스트 돌리는게 ts-node + mocha보다 빠르다.
+ts-node는 간단하게 쓰기 좋은거지 성능 생각하면서 쓸 물건이 아닌가보다.</p><p>내 경우 타입스크립트 컴파일 할라고 <code>tsc -w --skipLibCheck</code>를 켜둔다.
+간단한 수정의 경우는 1초안에 컴파일이 끝난다.
+mocha가 전체 테스트하는데는 4-5초 정도 걸린다.</p><p>ts-node는 10초 이상 걸린다.
+체감상 2-3배는 느린거같다.</p><h2 id=ts-node에-의미가-있는가>ts-node에 의미가 있는가?</h2><p>ts-node + mocha 조합은 느리지만 그렇다고 쓸모없는건 아니다.
+테스트 실패시 콜스택이 멀쩡하게 나온다.</p><p>tsc + mocha 조합은 타입스크립트 파일을 테스트에 쓰는게 아니다.
+컴파일된 자바스크립트 파일을 테스트하는 것이다.
+그래서 테스트 실패시 콜스택에는 자바스크립트 파일의 좌표가 나온다.</p><pre><code class=language-txt>at Test.&lt;anonymous&gt; (&lt;hidden&gt;/src/server/__tests__/app.test.js:20:26)
+at Test.assert (node_modules\supertest\lib\test.js:181:6)
+at Server.localAssert (node_modules\supertest\lib\test.js:131:12)
+at Server.EventEmitter.emit (domain.js:442:20)
+at emitCloseNT (net.js:1618:8)
+at process._tickCallback (internal/process/next_tick.js:63:19)
+</code></pre><p>ts-node + mocha 조합에서는 타입스크립트 파일의 좌표가 제대로 나온다.</p><pre><code class=language-txt>at Test.&lt;anonymous&gt; (src\server\__tests__\app.test.ts:19:18)
+at Test.assert (node_modules\supertest\lib\test.js:181:6)
+at Server.localAssert (node_modules\supertest\lib\test.js:131:12)
+at Server.EventEmitter.emit (domain.js:442:20)
+at emitCloseNT (net.js:1618:8)
+at process._tickCallback (internal/process/next_tick.js:63:19)
+</code></pre><h2 id=결론>결론</h2><p>이것이 Jest 탈출기의 마지막 글이다.</p><p>jest 탈출 이전에는 유닛테스트 한번 돌리는데 1분이 걸려서 테스트 이터레이션을 자주 돌리지 못했다.
+watch 걸어두는건 생각도 못했다.
+테스트 결과를 보는데 1분이 걸리니 watch를 왜 띄우지?
+그 시간에 코딩을 하고말지.</p><p>tsc + mocha + babel로 탈출한 이후에는 watch를 켜고 작업한다.
+<code>tsc -w --skipLibCheck</code>는 매우 빠르게 돌아간다. 간단한 수정은 1초 안에 끝난다.
+mocha로 테스트 전체 돌아가는데도 5초면 충분하다.
+저장하고 5-6초면 전체 테스트가 끝난다. 그것도 통합 테스트가!</p><p>이제 TDD 하는 기분을 낼 수 있다.</p></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/escape-from-jest-use-mocha/ title="Next: Jest 탈출기 - Mocha를 쓰자">Jest 탈출기 - Mocha를 쓰자<br><small>Jest/Mocha 동시에 지원하기</small></a></li><li class=next-article><a href=https://if1live.github.io/posts/graphql/graphql-http-status-code/ title="Previous: GraphQL에서는 어떤 HTTP status code를 사용할까?">GraphQL에서는 어떤 HTTP status code를 사용할까?<br><small>아무도 관심갖지 않는 GraphQL 이야기 - part 1</small></a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/escape-from-jest-mocha-with-typescript/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>

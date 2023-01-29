@@ -1,0 +1,105 @@
+<!doctype html><html class=no-js lang=ko><head><meta charset=utf-8><meta name=generator content="Hugo 0.110.0"><title>나는 싱글턴이 싫어요 &#183; /usr/lib/libsora.so</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><meta name=author content="if1live"><meta name=description content="나는 싱글턴이 싫어요"><meta name=keywords content="singleton"><meta name=twitter:card content="summary"><meta name=og:url content="https://if1live.github.io/posts/i-hate-singleton/"><meta name=twitter:site content="@if1live"><meta name=twitter:title content="나는 싱글턴이 싫어요"><meta name=twitter:description content="옛날에는 싱글턴을 자주 썼는데 요즘에는 안쓴다. 내가 싱글턴을 안쓰게 된 몇가지 이유가 있는데 다음과 같다
+소멸 시점이 있긴한가? static을 이용해서 구현한 싱글턴 설계에서 존재하는 문제점이다.
+class Singleton { private: Singleton() {} Singleton(const Singleton&amp;amp; other); public: "><meta name=twitter:image:src content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07"><link rel=stylesheet href=https://if1live.github.io/css/style-gen.css?2><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link href=https://if1live.github.io/index.xml rel=alternate type=application/rss+xml title=/usr/lib/libsora.so><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script></head><body><header class=header><h1 class=font-monospace><a href=https://if1live.github.io/>/usr/lib/libsora.so</a></h1><nav><h2 hidden>Navigation</h2><ul class=nav-link-list><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa fa-tags"><span hidden>Tags</span></i></a></li><li><a href=https://if1live.github.io/search/ title=search><i class="fa fa-search"><span hidden>Search</span></i></a></li></ul></nav></header><div class=container><article class="basic-content article-content"><header><hgroup class=entry-title><a href=/posts/i-hate-singleton/ rel=bookmark title="Permalink to 나는 싱글턴이 싫어요"><h1>나는 싱글턴이 싫어요</h1></a></hgroup></header><footer class=post-info><abbr class=published title=2013-05-19T00:00:00Z>2013/05/19</abbr><address class="vcard author">By <a href=//twitter.com/if1live>@if1live</a></address><ul class="list-of-tags tags-in-article"><li><a href=/tags/singleton>#singleton</a></li></ul></footer><section class=entry-content><p>옛날에는 싱글턴을 자주 썼는데 요즘에는 안쓴다. 내가 싱글턴을 안쓰게 된 몇가지 이유가 있는데 다음과 같다</p><h2 id=소멸-시점이-있긴한가>소멸 시점이 있긴한가?</h2><p>static을 이용해서 구현한 싱글턴 설계에서 존재하는 문제점이다.</p><pre><code class=language-cpp>class Singleton {
+private:
+    Singleton() {}
+    Singleton(const Singleton&amp; other);
+public:
+    static Singleton&amp; getInstance() { 
+        static Singleton ctx;
+        return ctx; 
+    }
+};
+</code></pre><p><code>Singleton::getInstance()</code>함수를 호출하면 싱글턴을 적절히 사용할수있다. 하지만 소멸은&mldr;? 싱글턴의 소멸은 OS님께서 알아서 해주시는거 외에는 기대할 방법이 없다. 싱글턴 A/B/C가 있는데 의존성 문제로 각각이 일정한 순서로 소멸되어야한다면? 위의 설계로는 처리할 방법이 없다.</p><h2 id=lazy-initialization의-함정>lazy initialization의 함정</h2><p>lazy initialization을 사용한 싱글턴은 대충 아래같은 느낌이다.</p><pre><code class=language-cpp>template&lt;typename T&gt;
+class Singleton {
+public:
+    static T&amp; GetInstance() {
+        if (ctx_ == NULL) { 
+            ctx_ = new T();
+        }
+        return *ctx_;
+    }
+
+}
+</code></pre><p>싱글턴이 필요한곳에서 <code>SomeSingleton::GetInstance()</code>를 호출하면 싱글턴을 적절히 사용할 수 있습니다&mldr;. 로 끝날리가있나! 아래의 2개의 조건이 조합된 상황에서는 이 싱글턴은 문제가 된다.</p><ol><li>lazy initialization는 실제로 객체가 필요해지기 전까지는 객체를 만들지 않는다. 그래서 자원을 아낄수있습니다</li><li>싱글턴에 크고 아름다워서 초기화에 3초가 걸린다.</li><li>게임과 같은 실시간성이 중요한 프로그램이다.</li></ol><p>위의 내용이 조합되서 어떤 문제를 발생시키는가? 게임 로딩시간으로 3초가 추가되는건 심각한 문제는 아니다. 하지만 게임중에 싱글턴 객체가 필요해져서 <code>SomeSingleton::GetInstance()</code>함수를 호출하고 3초간 게임이 멈추면 이건 심각한 문제다. lazy initialization만 믿고 언제 초기화를 할지에 대해서는 신경쓰지 않는다는건 말이 안된다.</p><p>또한 싱글턴이 여러개 존재할 경우, 각각의 싱글턴이 어떤 순서로 초기화되는지 코드를 전부 까보지 않는 이상 알아낼 방법이 없다. <code>SomeSingleton::GetInstance()</code> 함수를 전부 찾아낸다고 하더라도, GetInstance() 함수가 객체 생성/그냥 반환하는 기능을 동시에 수행하니까 코드를 보는것만으로는 초기화 순서를 파악하기 매우 어렵다.</p><h2 id=단위-테스트-불가능>단위 테스트 불가능</h2><p>단위테스트를 할 경우, 각각의 테스트 함수는 다른 테스트 함수와는 독립적이어야한다. test_foo(), test_bar() 라는 단위테스트 함수가 있는데 test_foo()의 성공/실패 여부가 test_bar()의 결과에는 영향을 주면 안된다. 근데 싱글턴은 프로그램안에 단 1개 존재하는 물건이다. 그렇다면 싱글턴과 단위테스트를 조합하면 무엇이 문제인가?</p><p>단위테스트의 SetUp/TearDown 함수에 Singleton의 생성/소멸 함수를 일일이 넣어줘야한다. 왜냐하면 싱글턴은 시스템상에 1개만 존재하는 객체이기 떄문에 테스트 함수 안에서 그냥 객체 생성하듯이 만드는게 불가능하기 떄문이다.</p><p>게다가 테스트함수 안에서 호출되는 실제 기능의 함수 중 일부가 <code>OtherSingleton::GetInstance()</code>를 호출해버리면 나는 A싱글턴을 테스트하고 있는데 뜬금없이 B싱글턴이 생성되어버려서 이후의 테스트에 어떤영향을 끼칠지 알 수 없다. 내 경우에 이를 다음과 같이 싱글턴을 일반 객체로 만들고 싱글턴과 관련된 내용을 미리 초기화해서 유닛테스트를 수행했다.</p><pre><code class=language-cpp>class DebugDrawManagerTest : public ::testing::Test {
+protected:
+    virtual void SetUp()
+    {
+        FS_Init();
+        RenderState_Init(640, 480);
+    }
+    virtual void TearDown()
+    {
+        RenderState_Deinit();
+        FS_Deinit();
+    }
+};
+
+TEST_F(DebugDrawManagerTest, Update) 
+{
+    // 실제 싱글턴으로 사용할 객체. 평범한 객체처럼 지역변수로 생성가능
+    DebugDrawManager mgr;
+    EXPECT_EQ(0, mgr.CmdCount());
+
+    mgr.AddAxis(mat4(1.0f), 1);            // without duration
+    mgr.AddAxis(mat4(1.0f), 1, 1.0f);    // with duration
+    EXPECT_EQ(2, mgr.CmdCount());
+
+    mgr.Update(0.5f);
+    EXPECT_EQ(1, mgr.CmdCount());
+
+    mgr.Update(1.0f);
+    EXPECT_EQ(0, mgr.CmdCount());
+
+    mgr.Update(1.0f);
+    EXPECT_EQ(0, mgr.CmdCount());
+}
+</code></pre><h2 id=결론>결론</h2><p>&ldquo;Game Engine Architecture 5.1.2 A Simple Approach That Works&rdquo; 에서는 다음과 같은 방법을 제시한다.</p><ul><li>singleton의 용도로 사용할 객체를 전역변수로 만든다.</li><li>싱글턴 목적의 클래스에 초기화/소멸용 함수를 만든다</li><li>싱글턴 초기화/소멸용 함수를 수동으로 호출한다</li></ul><pre><code class=language-cpp>
+// step 1. 싱글턴으로 사용할 전역변수
+RenderManager gRenderManager;
+VideoManager gVideoManager;
+TextureManager gTextureManager;
+
+int main()
+{
+    // step 2. 수동 초기화. 싱글턴간의 의존성을 고려해서 적절한 순서로 호출
+    gVideoManager.startUp();
+    gTextureManager.startUp();
+    gRenderManager.startUp();
+
+    // step 3. 적절히 구현하기. 싱글턴 갖다써도 문제없다
+    runLogin();
+
+    // step 4. 수동 소멸. 초기화와 반대 순서로 쓰기
+    gRenderManager.shutDown();
+    gTextureManager.shutDown();
+    gVideoManager.shutDown();
+}
+</code></pre><h2 id=reference>Reference</h2><ul><li>Game Engine Architecture 5.1. Subsystem Start-Up and Shut-Down</li><li><a href=http://en.wikipedia.org/wiki/Singleton_pattern>Singleton Pattern</a></li></ul></section><ul class=articles-timeline><li class=previous-article><a href=https://if1live.github.io/posts/glsl-example/ title="Next: 셰이더 프로그래밍 입문 for GLSL">셰이더 프로그래밍 입문 for GLSL</a></li><li class=next-article><a href=https://if1live.github.io/posts/ez430-chronos-google-otp/ title="Previous: eZ430-Chronos Google OTP 삽질기">eZ430-Chronos Google OTP 삽질기</a></li></ul><section class=entry-content><section class=disqus-section><h1 hidden>Comment</h1><div id=disqus_thread></div><script type=text/javascript>var host="if1live.github.io",disqus_shortname,disqus_identifier;host==window.location.host?(disqus_shortname="libsora",disqus_identifier="http://if1live.github.io/posts/i-hate-singleton/",function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()):console.log("skip disqus")</script><noscript>Please enable JavaScript to view the <a href=//disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=//disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section></section></article></div><footer class=footer><ul class=nav-link-list><li><a href=//twitter.com/if1live title=Twitter><i class="fa fa-twitter"></i></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa fa-github"></i></a></li><li><a href=//bitbucket.org/if1live title=BitBucket><i class="fa fa-bitbucket"></i></a></li><li><a href=https://if1live.github.io/index.xml><i class="fa fa-rss"></i></a></li></ul><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/common.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js integrity="sha512-pSVqGtpGygQlhN8ZTHXx1kqkjQr30eM+S6OoSzhHGTjh6DKdfy7WZlo1DNO9bhtM0Imf6xNLznZ7iVC2YUMwJQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-cpp.min.js integrity="sha512-UYkJiZs5kymKJMPLLVBpexawnvmoh9jMW9H10z96GF8ldp6SDS8FI4BhBMa2rbHoCyc8mc8gSAMgqIj6NXtmYg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-javascript.min.js integrity="sha512-VO0P6Z9Sapwza0d0oiGt76iOVbaJYeLEDQPVJV7N8T+TOPzeAhz4wGtqFa8Pv/mYpgD1Hm3jU4NslIDVlijyDg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-java.min.js integrity="sha512-Ofz52khK2GpJagclW2MrjJ8eum/j47Tllh7HiIyB+IpDNRhr98LNspUJZ8RlotjArl8tQbf52Y2e1i/W/TxDJA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-csharp.min.js integrity="sha512-NohR0FaHlz90CtXG/syKPx9DUzzupUltzyiY0RrNsOryPY3NIusNThXSiusO+tIrTfgqRBvANPqBej/O+FKf2w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-bash.min.js integrity="sha512-ZqfG//sXQwAA7DOArFJyMmZQ3knKe+0ft3tPQZPvDPJR04IatmhVO5pTazVV+fLVDYSy28PhoBeUj5wxGRiGAA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-css.min.js integrity="sha512-Jv/EO8zjSyqIDa2S0YjCGFY+mEROxud6g7AhfA0KcggjdzhPBhoRyetxV7G7/dnfBdZBzcOvpRn1K+J6sn3jyw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-yaml.min.js integrity="sha512-/oDzFMYD7kk0uSmERPYzNTGBREQ2mZGYoorj8utUwL4ZWlOuvEWZx8ZJlhsC8XJEnUTKkXXnRh+Wp6ywIx1Qfg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-batch.min.js integrity="sha512-bBPg+8MazXGrcD6KljRj3G/1ys1VnNro8UqYTVJ2aqlf/8w4xAsDtUXiNqaKqi2YG7Jiu+0MzXJ/WYTKcfgOzQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-lisp.min.js integrity="sha512-OdRCYv/rRTwewSGidXYslYI1PU5qjCQbwkF8MJomC0p/AvwHxfOxJOdQbittuP0Vu/sY8AXWM6wxTJmff5LFmw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.8.3/mermaid.min.js integrity="sha512-+TNmhaRJf3jyYHTpzEq/5I6b+aGyhzWb21mGdHAjxSGSYwxN9Grug3Y3B9qVxWfKKY8MscE/6mr9walWvFLFvQ==" crossorigin=anonymous></script>
+<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-37862172-2"></script>
+<script>var host="if1live.github.io";if(host==window.location.host){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-37862172-2")}else console.log("skip google analytics")</script></body></html>
