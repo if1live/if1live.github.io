@@ -18,7 +18,7 @@ url: /posts/generous-code-breaks-easily
 IE로도 동영상 강의가 나오지 않더라.
 왜 안돌아가나 확인해가 위해서 크롬 개발자 도구를 켰더니 이런 코드가 있더라.
 
-![bug]({attach}generous-code-breaks-easily/bug.png)
+![bug](bug.png)
 
 ```javascript
 function window.onload() {
@@ -55,11 +55,11 @@ a.b.bar();
 크롬의 경우 `Uncaught SyntaxError: Unexpected token .` 라는 에러가 발생한다.
 함수이름에 `.`이 들어가는게 문법적으로 올바르지 않나보다.
 
-![chrome]({attach}generous-code-breaks-easily/capture-chrome.png)
+![chrome](capture-chrome.png)
 
 하지만 IE 호환성 모드를 활성화하면 잘 돌아간다.
 
-![ie legacy]({attach}generous-code-breaks-easily/capture-ie-legacy.png)
+![ie legacy](capture-ie-legacy.png)
 
 ## 원인
 
