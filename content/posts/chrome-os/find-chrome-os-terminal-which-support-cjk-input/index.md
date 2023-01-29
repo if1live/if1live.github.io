@@ -84,11 +84,7 @@ ascii세상 사람들이 만든 물건은 non-ascii세상 사람들에 대한 �
 Ctrl-Alt-Shift + F1/F2를 누르면 크롬OS와 Crouton사이에 화면 전환이 가능하다.
 이런 모습으로 화면 전환이 된다.
 
-~~~maya:youtube
-video_id=i8cQ_SZQSRw
-width=480
-height=270
-~~~
+{{< youtube i8cQ_SZQSRw >}}
 
 OS간의 화면 전환이 빠른것도 아니고 화면 전환할때마다 화면이 깜빡인다.
 OS하나에서만 쓴다면 모를까 계속 왔다갔다하면서 작업하기에는 불편하다.
@@ -240,10 +236,10 @@ sudo dpkg-reconfigure locales
 
 
 
-[video-crosh]: {attach}find-chrome-os-terminal-which-support-cjk-input/video-crosh.gif
-[video-secure-shell]: {attach}find-chrome-os-terminal-which-support-cjk-input/video-secure-shell.gif
-[video-ttyd-fail]: {attach}find-chrome-os-terminal-which-support-cjk-input/video-ttyd-locale-fail.gif
-[video-ttyd]: {attach}find-chrome-os-terminal-which-support-cjk-input/video-ttyd.gif
+[video-crosh]: video-crosh.gif
+[video-secure-shell]: video-secure-shell.gif
+[video-ttyd-fail]: video-ttyd-locale-fail.gif
+[video-ttyd]: video-ttyd.gif
 
 
 [site-hyper]: https://hyper.is/
@@ -260,7 +256,7 @@ sudo dpkg-reconfigure locales
 
 [repo-gotty]: https://github.com/yudai/gotty
 [repo-ttyd]: https://github.com/tsl0922/ttyd
-[screenshot-ttyd]: {attach}/find-chrome-os-terminal-which-support-cjk-input/ttyd-screenshot.gif
+[screenshot-ttyd]: ttyd-screenshot.gif
 
 [info-webshell]: https://openwiki.kr/tech/webshell
 

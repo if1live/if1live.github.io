@@ -120,10 +120,10 @@ https://goo.gl/muppJj
 [store-croshwindow]: https://chrome.google.com/webstore/detail/crosh-window/nhbmpbdladcchdhkemlojfjdknjadhmh
 [download-croshwindow]: https://www.crx4chrome.com/crx/59783/
 
-[img-add-to-launcher-dialog]: {attach}how-to-open-multiple-webapp-window-in-chrome-os/add-to-launcher-dialog.png
-[img-add-to-launcher-menu]: {attach}how-to-open-multiple-webapp-window-in-chrome-os/add-to-launcher-menu.png
-[img-launcher-menu]: {attach}how-to-open-multiple-webapp-window-in-chrome-os/launcher-menu.png
-[img-webapp-window]: {attach}how-to-open-multiple-webapp-window-in-chrome-os/webapp-window.png
+[img-add-to-launcher-dialog]: add-to-launcher-dialog.png
+[img-add-to-launcher-menu]: add-to-launcher-menu.png
+[img-launcher-menu]: launcher-menu.png
+[img-webapp-window]: webapp-window.png
 
 [repo-webshell-window]: https://github.com/if1live/webshell-window
 
