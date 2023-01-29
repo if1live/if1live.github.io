@@ -29,9 +29,3 @@
 .font-weight-normal  { font-weight: normal; }
 .font-weight-bold    { font-weight: bold; }
 a.font-italic         { font-style: italic; }
-
-// Misc
-
-.text-hide {
-  @include text-hide();
-}
