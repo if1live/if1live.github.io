@@ -77,7 +77,7 @@ firebase를 붙여서 클라 개발자가 혼자서도 프로토타이핑 할수
 ### 수동 트위터 박제기
 
 * 저장소: https://github.com/if1live/serina
-* 링크: https://libsora.so/serina/
+* 링크: https://if1live.github.io/serina/
 
 트윗 id, url을 넣으면 zip으로 받는 서비스이다.
 2018년에 aws lambda, serverless framework 한번 써보려고 작업한 서비스이다.

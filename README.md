@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/if1live/libsora.so.png?branch=master)](https://travis-ci.org/if1live/libsora.so)
 
-[libsora.so](https://libsora.so) blog content
+[libsora.so](https://if1live.github.io) blog content
 
 ## dependency
 

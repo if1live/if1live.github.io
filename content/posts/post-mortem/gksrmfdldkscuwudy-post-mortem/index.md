@@ -13,7 +13,7 @@ url: /posts/gksrmfdldkscuwudy-post-mortem
 * 개발기간: 2016/05/07 00:00 ~ 2016/05/07 02:00 (2시간)
 * 사용언어: JavaScript
 * 저장소: https://github.com/if1live/gksrmfdldkscuwudy
-* 써보기: http://libsora.so/gksrmfdldkscuwudy/
+* 써보기: https://if1live.github.io/gksrmfdldkscuwudy/
 
 ![왜 만들었을까?](why-i-dev-it.png)
 

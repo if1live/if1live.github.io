@@ -10,7 +10,6 @@ url: /posts/glsl-example
 
 그리고 오늘 프로젝트를 분리시켰다!
 
-* [Site](http://libsora.so/glsl-example/)
 * [Repo](https://github.com/if1live/glsl-example)
 
 ## Library

@@ -18,7 +18,7 @@ url: /posts/maya-markdown-preprocessor-post-mortem
 * 언어 : golang
 * 저장소 : [github.com/if1live/maya](https://github.com/if1live/maya)
 * 개발기간 : 2016/02/20 ~ 2016/03/11
-* 적용사례 : [libsora.so](https://libsora.so)
+* 적용사례 : [libsora.so](https://if1live.github.io)
 
 ## Feature
 

@@ -16,4 +16,4 @@ IrrConsole는 irrlicht engine에 잘 붙어서 좋은 물건인데 기본기능�
 
 [glconsole]: http://www.robots.ox.ac.uk/~gsibley/GLConsole/
 [irrconsole]: http://www.oocities.org/standard_template/irrconsole/index.html
-[irrlicht_console]: http://libsora.so/irrlicht-console/
+[irrlicht_console]: https://if1live.github.io/irrlicht-console/

@@ -214,7 +214,7 @@ J3D같은 방식을 채택한건 잘못된 선택이었다. 자주 당한 문제
 
 [vr_5minlab]: http://vr.5minlab.com/
 [repo]: https://github.com/if1live/unity-scene-web-exporter/
-[demo]: http://libsora.so/unity-scene-web-exporter/
+[demo]: https://if1live.github.io/unity-scene-web-exporter/
 [repo_lightmap]: https://github.com/if1live/unity-scene-web-exporter/blob/8bd26d0e9e5416f4d373f492eff9726213821764/UnityProject/Assets/Kanau/UnityScene/Containers/LightmapContainer.cs#L72-L124
 
 [repo_j3d]: https://github.com/drojdjou/J3D

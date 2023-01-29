@@ -139,7 +139,7 @@ Twitter Card는 이미 3번정도 구현한적 있어서 특별한 문제 없이
 ```html
 <a href="https://twitter.com/share"
   class="twitter-share-button"
-  data-url="http://libsora.so"
+  data-url="https://if1live.github.io"
   data-text="this is title"
   data-via="if1live">Tweet</a>
 <script>.....</script>
@@ -160,7 +160,7 @@ Doge Math의 수치를 조정할때마다 버튼이 사라졌다 새로 생겼�
 
 ## 디자인
 디자인없이 쌩 HTML로 보여주면 없어보이고 그렇다고 새로운 디자인을 만들자니 귀찮더라.
-그래서 [블로그 테마](http://libsora.so)를 뜯어다 붙였다.
+그래서 [블로그 테마](https://if1live.github.io)를 뜯어다 붙였다.
 블로그 테마가 재사용하기 쉬운 형태로 만들어져있지 않아서 삽질을 했는데
 Doge Math와 비슷한 페이지를 나중에 만들거 같으니 이번 기회에 정리해야겠더라.
 (이미 후속작(?) 컨셉 몇가지도 머릿속에 있고)
@@ -305,8 +305,8 @@ HTML5 canvas에 직접 다항식을 그리기 귀찮아서 라이브러리 찾�
 * 맥스페인3 재밌다
 
 [doge_math_repo]: https://github.com/if1live/doge-math
-[doge_math_site]: http://libsora.so/doge-math/
-[doge_math_latex]: http://libsora.so/doge-math/test_latex.html
+[doge_math_site]: https://if1live.github.io/doge-math/
+[doge_math_latex]: https://if1live.github.io/doge-math/test_latex.html
 
 [original_meme]: http://www.funnywebsite.com/funny-website/index.php/2015/05/04/doge-math/
 [twitter_portal]: https://twitter.com/_Yous/status/640341772372054016
