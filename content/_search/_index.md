@@ -1,6 +1,5 @@
 ---
 title: search
-slug: _index
 ---
 
 search

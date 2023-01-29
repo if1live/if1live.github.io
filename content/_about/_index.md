@@ -1,13 +1,12 @@
 ---
 title: about
-slug: _index
 ---
-
 
 * if1live
 * libsora.so
 
 ## contacts
+
 current position : Seoul, South Korea.
 
 * [<i class="fa fa-envelope-o"></i> libsora25 at gmail.com](mailto:libsora25@gmail.com)
@@ -19,6 +18,7 @@ current position : Seoul, South Korea.
 * [<i class="fa fa-keybase"></i>keybase : if1live](//keybase.io/if1live)
 
 ## career
+
 ### 5minlab
 
 Programmer, Jan. 2015 - Current
@@ -26,12 +26,12 @@ Programmer, Jan. 2015 - Current
 * Web-based game server Developer (Ruby on Rails)
 * cocos2d-x based game client Developer (cocos2d-x)
 * VR Game Developer (unity)
-    * [Toy Clash](//www.oculus.com/experiences/gear-vr/1407846952568081/) : Samsung GearVR
-    * [Toy Clash](//store.steampowered.com/app/620360/Toy_Clash/) : SteamVR
-    * [Toy Clash](//play.google.com/store/apps/details?id=com.fiveminlab.toyclash.daydream): Google Daydream
-    * [Toy Clash AR](//itunes.apple.com/app/toy-clash-ar/id1274066398) : iOS ARKit
-    * [Toy Clash](//www.microsoft.com/store/apps/9PN9VBJL9LD4) : Windows Mixed Reality
-    * [Dawn of Toys](//www.microsoft.com/store/apps/9N536DLGNJ73) : Microsoft HoloLens
+    - [Toy Clash](//www.oculus.com/experiences/gear-vr/1407846952568081/) : Samsung GearVR
+    - [Toy Clash](//store.steampowered.com/app/620360/Toy_Clash/) : SteamVR
+    - [Toy Clash](//play.google.com/store/apps/details?id=com.fiveminlab.toyclash.daydream): Google Daydream
+    - [Toy Clash AR](//itunes.apple.com/app/toy-clash-ar/id1274066398) : iOS ARKit
+    - [Toy Clash](//www.microsoft.com/store/apps/9PN9VBJL9LD4) : Windows Mixed Reality
+    - [Dawn of Toys](//www.microsoft.com/store/apps/9N536DLGNJ73) : Microsoft HoloLens
 
 ### Move Incorporation
 
