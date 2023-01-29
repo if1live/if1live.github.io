@@ -13,7 +13,7 @@ url: /posts/bypass-netfunnel
 [서민형 안심전환대출](https://www.hf.go.kr/) 신청하게 되었다.
 신청하러 들어갔더니 대기 페이지가 뜨더라.
 
-![대기]({attach}/bypass-netfunnel/waiting.png)
+![대기](waiting.png)
 
 기다리는 것보다 뜯어서 우회하는게 빠를거같더라.
 나는 인내심이 없는 인간이라서 뜯어봤다.
@@ -24,7 +24,7 @@ url: /posts/bypass-netfunnel
 팝업에서 대기자 수가 계속 바뀐다.
 이것에 대응되는 코드를 찾고 하나씩 따라가면 될거같다.
 
-![DOM]({attach}/bypass-netfunnel/inspect-dom.png)
+![DOM](inspect-dom.png)
 
 `NetFunnel_Loading_Popup_Count`로 검색하면 하나만 걸린다.
 
@@ -43,7 +43,7 @@ js 파일명을 보니 `netfunnel`이라는 솔루션이 있나보다.
 제정신을 갖고 만든 솔루션이라면 클라이언트에서 카운트다운을 세지 않을 것이다.
 서버에서 결과를 클라로 보내고 클라는 이를 적절히 처리할 것이다.
 
-![inspect network]({attach}/bypass-netfunnel/inspect-network.png)
+![inspect network](inspect-network.png)
 
 네트워크를 뜯어보면 주기적으로 클라가 서버로 요청보내는게 보인다.
 폴링 방식으로 구현했나보다. 주고받는 response의 내용도 읽어보자.
@@ -116,7 +116,7 @@ NetFUNNEL을 한두군데에만 팔아먹었을리 없다.
 다른 사람들은 어떻게 우회했나 찾아보려고 했다.
 "NetFunnel 우회"를 입력하니까 첫 페이지에 개발 문서가 뜨더라.
 
-![google search]({attach}/bypass-netfunnel/google-search.png)
+![google search](google-search.png)
 
 ???
 
