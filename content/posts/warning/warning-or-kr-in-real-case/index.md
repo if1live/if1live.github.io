@@ -170,7 +170,7 @@ http 워닝 하나로도 씨발씨발거리면서 살았지만 https라는 청�
 차단하지 않아야 하는 사이트인데 차단을 하는 경우가 있을수도 있다.
 일이 잘못 처리되었을때 알림을 준다면 그나마 대응이 가능할거다.
 
-![error type]({attach}warning-or-kr-in-real-case/Type-I-and-II-errors1-625x468.jpg)
+![error type](Type-I-and-II-errors1-625x468.jpg)
 
 
 현재의 워닝은 알림이 없다.
@@ -282,7 +282,7 @@ http 워닝 하나로도 씨발씨발거리면서 살았지만 https라는 청�
 서로 생각하는게 비슷할지도 모르겠다.
 그리고 한명이 모르는건 위원회에 있는 다른 사람들도 똑같이 모를거같지 않나?
 
-![급식체]({attach}warning-or-kr-in-real-case/c438e4a2edd74104c8aa2f4c9053b0d2.jpg)
+![급식체](c438e4a2edd74104c8aa2f4c9053b0d2.jpg)
 
 제한된 인원으로 구성된 위원회가 세상의 많은 것들을 제대로 이해하고 판단할수 있을지 나는 모르겠다.
 그들 눈에는 급식체가 나쁜 문명으로 보일지 모른다.
