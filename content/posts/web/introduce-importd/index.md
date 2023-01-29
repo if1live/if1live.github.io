@@ -17,15 +17,32 @@ url: /posts/introduce-importd
 
 **importd Hello World**
 
-~~~maya:view
-file=sample_importd.py
-~~~
+```python
+#!/usr/bin/env python
+from importd import d
+
+@d("/")
+def index(request):
+    return d.HttpResponse("Hello World")
+
+if __name__ == "__main__":
+    d.main()
+```
 
 **flask Hello World**
 
-~~~maya:view
-file=sample_flask.py
-~~~
+```python
+#!/usr/bin/env python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+```
 
 위의 코드는 importd와 [flask](http://flask.pocoo.org/) 로 작성한 hello world이다. 소스파일 하나로 서버를 띄울 수 있다.
 크고 아름다운 django에 비하면 매우 단순하다.

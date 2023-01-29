@@ -169,7 +169,7 @@ Skeleton은 픽셀을 이용한다. (문제는 본격 영어 못하면 못쓰는
 ....
 ```
 
-![잘못된 영어 숫자의 예]({attach}ie7-responsive-web-framework/wrong-english-number.jpg)
+![잘못된 영어 숫자의 예](wrong-english-number.jpg)
 
 Less Framework 4의 경우는 요상한 흑마법을 쓰는거같은데 어쨋든 픽셀 기반이다.
 

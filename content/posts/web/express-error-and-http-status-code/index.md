@@ -5,6 +5,7 @@ tags: [express, javascript, http, web]
 slug: express-error-and-http-status-code
 author: if1live
 date: 2019-08-12
+url: /posts/express-error-and-http-status-code
 ---
 
 ## throw new Error('BadRequest')
@@ -14,19 +15,29 @@ express에서도 마찬가지이다.
 Error를 던지면 200 OK가 아닌 500 Internal Server Error를 발생시킬 수 있다.
 
 
-~~~maya:view
-lang=js
-file=main-error.js
-~~~
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  throw new Error('BadRequest');
+});
+app.listen(3000, () => { console.log('listen'); });
+```
 
 요즘 세상에 에러났다고 무조건 500을 던지면 멍청한 REST API처럼 보인다.
 상황에 맞춰서 4xx, 5xx를 던져야한다.
 500 아닌 상태 코드를 보내고 싶으면 `res.status()`를 사용하면 된다.
 
-~~~maya:view
-lang=js
-file=main-manual-400.js
-~~~
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.status(400).json({ text: 'todo' });
+});
+app.listen(3000, () => { console.log('listen'); });
+```
 
 나는 둘을 합치고 싶다.
 `BadRequest`라는 에러를 던지면 400,
@@ -37,10 +48,16 @@ file=main-manual-400.js
 [http-errors][npm-http-errors]를 사용하면 간단하다.
 바퀴는 새로 발명하는게 아니다.
 
-~~~maya:view
-lang=js
-file=main-http-errors.js
-~~~
+```js
+const express = require('express');
+const createError = require('http-errors');
+const app = express();
+
+app.get('/', (req, res) => {
+  throw new createError.BadRequest();
+});
+app.listen(3000, () => { console.log('listen'); });
+```
 
 ## 알아봐서 별 쓸모없는 정보
 
@@ -117,10 +134,17 @@ app.handle = function handle(req, res, callback) {
 위에서 언급한 finalhandler의 README를 보면 구현할 수 있다.
 에러 객체에 `status` 또는 `statusCode`로 원하는 상태 코드를 넣어준다.
 
-~~~maya:view
-lang=js
-file=main-custom-error.js
-~~~
+```js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  const e = new Error('sample');
+  e.status = 400;
+  throw e;
+});
+app.listen(3000, () => { console.log('listen'); });
+```
 
 ### 라이브러리에서 던져진 에러는 어떻게 제어할 수 있는가?
 
@@ -129,16 +153,33 @@ Error에 status, statusCode 넣는건 자바스크립트 세상의 표준이 아
 
 [yup/ValidationError](https://github.com/jquense/yup/blob/v0.27.0/src/ValidationError.js)
 
-~~~maya:view
-lang=js
-file=ValidationError.js
-~~~
+```js
+export default function ValidationError(errors, value, field, type) {
+  this.name = 'ValidationError';
+  this.value = value;
+  this.path = field;
+  this.type = type;
+  this.errors = [];
+  this.inner = [];
+  // ...
+  this.message =
+    this.errors.length > 1
+      ? `${this.errors.length} errors occurred`
+      : this.errors[0];
+
+  if (Error.captureStackTrace) Error.captureStackTrace(this, ValidationError);
+}
+```
 
 [jsonwebtoken/JsonWebTokenError](https://github.com/auth0/node-jsonwebtoken/blob/master/lib/JsonWebTokenError.js)
-~~~maya:view
-lang=js
-file=JsonWebTokenError.js
-~~~
+```js
+var JsonWebTokenError = function (message, error) {
+  // ...
+  this.name = 'JsonWebTokenError';
+  this.message = message;
+  if (error) this.inner = error;
+};
+```
 
 위와 같은 라이브러리를 사용하는데 에러가 던져지면 어떻게 대응할까?
 `catch`를 통해서 라이브러리에서 던져진 에러를 잡은 후 `http-errors`로 다시 던지는 것도 방법이다.
@@ -146,10 +187,32 @@ file=JsonWebTokenError.js
 express middleware를 사용하면 조금 우아하게 처리할 수 있다.
 에러 핸들러에서 `err.name`를 확인하고 원하는 에러를 대신 던지는 식으로 처리할 수 있다.
 
-~~~maya:view
-lang=js
-file=main-error-handler.js
-~~~
+```js
+const express = require('express');
+const createErrors = require('http-errors');
+const jwt = require('jsonwebtoken');
+const app = express();
+
+app.get('/', (req, res) => {
+  throw new jwt.JsonWebTokenError('this is sample error');
+});
+
+const newErrorMap = new Map([
+  ['JsonWebTokenError', createErrors.BadRequest],
+  ['ValidationError', createErrors.BadRequest],
+]);
+
+app.use((err, req, res, next) => {
+  const newError = newErrorMap.get(err.name);
+  if(newError) {
+    next(new newError(err.message));
+  } else {
+    next(err);
+  }
+});
+
+app.listen(3000, () => { console.log('listen'); });
+```
 
 
 [npm-http-errors]: https://www.npmjs.com/package/http-errors
