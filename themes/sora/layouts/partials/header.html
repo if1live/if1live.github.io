@@ -5,21 +5,30 @@
   <nav>
     <h2 hidden>Navigation</h2>
     <ul class="nav-link-list">
+      {{/*
+      TODO: hugo 버전 올리면서 고장난거 고치기
       <li>
         <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
           <i class="fa fa-info"><span hidden>about</span></i>
         </a>
       </li>
+      */}}
+      {{/*
+      TODO: hugo 버전 올리면서 고장난거 고치기
       <li>
         <a href="{{ .Site.BaseURL }}projects/" {{ if eq (lower .Title) "projects" }} class="active" {{ end }} title="projects">
           <i class="fa fa-code"><span hidden>projects</span></i>
         </a>
       </li>
+      */}}
+      {{/*
+      TODO: 원래 고장나있던 기능
       <li>
         <a href="{{ .Site.BaseURL }}archives/" {{ if eq (lower .Title) "archives" }} class="active" {{ end }} title="archives">
           <i class="fa fa-archive"><span hidden>Archives</span></i>
         </a>
       </li>
+      */}}
       <li>
         <a href="{{ .Site.BaseURL }}tags/" {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
           <i class="fa fa-tags"><span hidden>Tags</span></i>
