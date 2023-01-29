@@ -11,7 +11,7 @@ url: /posts/peoples-thoughts-are-similar
 최근에 [클라이언트-서버 웹 앱 만들기 - 자바와 자바스크립트로 배우는 모던 웹 앱 개발][yes24-book]이라는 책을 읽었다.
 도서관 돌아다니다보니 손에 잡혀서 읽어봤다.
 
-![book cover]({attach}peoples-thoughts-are-similar/41548950.jpg)
+![book cover](41548950.jpg)
 
 8장 API 디자인에 재밌는 내용이 나오더라.
 
@@ -24,7 +24,7 @@ url: /posts/peoples-thoughts-are-similar
 
 내가 밟은 삽질이 생각나더라.
 
-[HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?]({attach}http-get-request-with-body-and-http-library)
+[HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?]({{< ref http-get-request-with-body-and-http-library >}})
 
 사람 생각하는건 다 거기서 거기인가보다.
 

@@ -60,9 +60,9 @@ url: /posts/writing-article-is-hard
 하지만 나는 유튜브를 싫어하기때문에 유튜브를 수단으로 쓰진 않을 것이다.
 대신 나한테는 더 나쁜 수단이 있다. 트위터이다.
 
-![google analytics]({attach}writing-article-is-hard/analytics-google.png)
+![google analytics](analytics-google.png)
 
-![twitter analytics]({attach}writing-article-is-hard/analytics-twitter.png)
+![twitter analytics](analytics-twitter.png)
 
 트위터를 쓸때 노출수가 더 많다.
 짧은 생각을 글로 쓸 이유가 나한테는 별로 없다.
