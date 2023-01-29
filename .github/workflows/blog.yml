@@ -29,12 +29,9 @@ jobs:
           hugo-version: "0.110.0"
           extended: true
 
-      - name: install
+      - name: theme
         run:
           ./scripts/ci_install.sh
-
-      - name: build
-        run: |
           ./bin/build_theme.sh
 
       - name: Build
@@ -42,7 +39,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/deploy'
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
