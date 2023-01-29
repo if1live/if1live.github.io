@@ -14,7 +14,7 @@ sin, cos가 있으면 각도를 벡터로 변환할 수 있다.
 반대로 벡터를 각도로 변환할때는 [atan2][c_atan2]를 쓰면 된다.
 DOOM에서는 atan2를 어떻게 구현했나 코드를 뒤져봤다.
 
-아래의 내용을 읽기전에 [DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법]({filename}angle-and-sine-doom-version.md)를 읽어보는 것을 권장한다.
+아래의 내용을 읽기전에 [DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법]({{< ref angle-and-sine-doom-version >}})를 읽어보는 것을 권장한다.
 
 ## 어떻게 돌아가는가?
 DOOM에서 `atan2(y, x)`는 몇단계에 걸쳐서 계산된다.

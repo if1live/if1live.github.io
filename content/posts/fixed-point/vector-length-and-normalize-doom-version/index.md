@@ -19,8 +19,8 @@ DOOM보다 훨씬 나중에 나온 Quake3에도 `sqrt()` 대신 흑마법을 사
 
 이 글을 읽기 전에 다음 글을 읽는것을 권장한다.
 
-* [DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법]({filename}angle-and-sine-doom-version.md)
-* [DOOM에서 배우는 atan2(y, x) 구현]({filename}atan2-doom-version.md)
+* [DOOM에서 배우는 각도 표현하는 방법과 sin, cos 구현법]({{< ref angle-and-sine-doom-version >}})
+* [DOOM에서 배우는 atan2(y, x) 구현]({{< ref atan2-doom-version >}})
 
 DOOM의 렌더리은 3차원이지만 내부 로직은 대부분 2차원 기준으로 굴러간다. 여기에서는 2차원 벡터에 대해서만 이야기한다.
 
@@ -129,7 +129,7 @@ P_AproxDistance
 구현체에는 곱셈, 나눗셈도 없이 덧셈, 뺄셈, left shift정도만 사용했다. 빠르긴 진짜 빠르겠지.
 
 
-![AproxDistance]({attach}vector-length-and-normalize-doom-version/vector-length-triangle-debuggerd.jpg)
+![AproxDistance](vector-length-triangle-debuggerd.jpg)
 
 > 와...ㅁㅊ, id 소프트웨어는 무슨 어둠의 의회 같은덴가....
 > [@debuggerD](https://twitter.com/debuggerD/status/727748272945762305)
