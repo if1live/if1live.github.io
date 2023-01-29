@@ -72,7 +72,8 @@ body {
   a {
     $length: 1.8em;
     display: inline-block;
-    @include square($length);
+    width: $length;
+    height: $length;
     line-height: $length;
     border: 1px solid #fff;
     margin: 0.5em 0.5em;
