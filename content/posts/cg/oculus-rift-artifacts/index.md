@@ -9,7 +9,7 @@ url: /posts/oculus-rift-artifacts
 최근에 오큘러스 리프트 잡고 개발한게 있다. (프로젝트는 망했지만) 개발하면서 일반 CG에서는 절대로 볼수없고 오직 오큘러스 리프트에서만 구경할수 있는 이상 렌더링 몇개 발견해서 스샷 찍어놓은걸 간단히 정리했다.
 
 ## 신개념 Z-fighting artifacts
-![screen shot]({attach}oculus-rift-artifacts/z-fighting.jpg)
+![screen shot](z-fighting.jpg)
 
 이런 이상현상을 뭐라고 불러야 될지 잘 모르겠다. z-fighting이라고 써놨지만 기존의 CG에서 볼수있는 z-fighting하고는 다르다.
 다음의 요소가 결합되어서 발생하는 버그로 추정된다.
@@ -18,7 +18,7 @@ url: /posts/oculus-rift-artifacts
 * 왼쪽눈/오른쪽눈으로 볼때 달라지는 거리
 * 거리에 따라서 렌더링할 객체 순서를 엔진이 정렬
 
-![z-fighting 설명]({attach}oculus-rift-artifacts/z-fighting-desc.jpg)
+![z-fighting 설명](z-fighting-desc.jpg)
 
 주의 : 아래의 설명은 irrlicht engine기준이다. 다른 엔진의 경우는 다를수 있다.
 주의 : 파란색 선과 빨간색 선은 같은 깊이에 그려져있다.
@@ -37,10 +37,10 @@ url: /posts/oculus-rift-artifacts
 ## 사이클롭스의 비애
 위의 이상현상처럼 긴 설명이 필요 없다. 카메라의 view vector 방향으로 두께가 0인 종이를 뒀다고 치자. 그러면 아마도 다음같이 보일것이다.
 
-![one eye]({attach}oculus-rift-artifacts/eye_one.jpg)
+![one eye](eye_one.jpg)
 
 아무것도 안보인다. 이게 정상이다. 하지만 눈이 2개면 그걸 볼수있다.
 
-![two eye]({attach}oculus-rift-artifacts/eye_two.jpg)
+![two eye](eye_two.jpg)
 
 역시 눈은 2개가 좋구나!

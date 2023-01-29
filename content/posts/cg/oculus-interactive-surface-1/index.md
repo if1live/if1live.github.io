@@ -18,13 +18,13 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 
 다음은 스플린터 셀에서 문 비밀번호를 찍는 UI이다. 뒤에 게임화면이 있고 새로운 HUD로 비밀번호를 찍는게 나온다.
 
-![splinter cell numpad UI]({attach}oculus-interactive-surface-1/splinter-cell-number-pad.jpg)
+![splinter cell numpad UI](splinter-cell-number-pad.jpg)
 
 다음은 DOOM3에 등장하는 키패드이다. 화면안에 마우스가 뜨고 잘 움직여서 숫자를 누르면 된다.
 
-![doom3 locker]({attach}oculus-interactive-surface-1/doom3-locker.jpg)
+![doom3 locker](doom3-locker.jpg)
 
-![doom3 number pad]({attach}oculus-interactive-surface-1/doom3-number-pad.jpg)
+![doom3 number pad](doom3-number-pad.jpg)
 
 어느쪽 UI가 더 몰입감 있을까? 또한 오큘러스에 더 잘 어울릴까?
 
@@ -37,13 +37,13 @@ Oculus SDK와 적절히 결합시키기. 다른 엔진에서 오큘러스를 지
 
 [gorilla](http://www.ogre3d.org/tikiwiki/Gorilla) 를 3d gui를 만드는 도구로 선택한 이유는 그럴싸한 샘플이 이미 있기 때문이다.
 
-![gorilla normal screenshot]({attach}oculus-interactive-surface-1/screenshot-normal.jpg)
+![gorilla normal screenshot](screenshot-normal.jpg)
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/e78Hfo5rIyU" frameborder="0" allowfullscreen></iframe>
 
 샘플를 적절히 손봐서 만들어봤다.
 
-![gorilla oculus screenshot]({attach}oculus-interactive-surface-1/screenshot-oculus.jpg)
+![gorilla oculus screenshot](screenshot-oculus.jpg)
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/-8AOYWkNz1Y" frameborder="0" allowfullscreen></iframe>
 
@@ -75,16 +75,16 @@ DOOM3의 방식(게임안에 모니터가 있고 모니터안의 커서를 잘 �
 
 대안으로 다음에 테스트 해보려고 하는건 **입력 상태를 2개(FPS/GUI)** 로 나누는거다. 목표는 DOOM3의 방식에서 커서를 완전히 제거하는거다. FPS모드는 일반적인 FPS이다. 고개 움직이는거로 적절히 처다보고 게임패드를 이용해서 시야/이동을 통제한다. GUI모드에서는 고개를 움직이면 처다보는 시야만 움직이다. GUI 내부 조작과는 무관한다. 게임패드를 이용해서 GUI를 조작한다. 이 상태에서는 게임패드로 캐릭터를 움직일 수 없다. 그리고 USE키를 이용해서 입력GUI앞에서 FPS모드&lt;-&gt;GUI모드를 바꿀수있다. **생각해보니 DeadSpace GUI..?**
 
-![dead space gui]({attach}oculus-interactive-surface-1/dead-space-gui.jpg)
+![dead space gui](dead-space-gui.jpg)
 
 또 다른 대안은 커서를 없애고 **USE키를 여러개** 쓰는거다. GUI를 조작할수 있는 범위(GUI 콘솔 앞)으로 이동하면 Hat Switch(POV Hat라고도 부른다. 아날로그 방향키)의 역할을 GUI조작용으로 바꾸는거다. 내부 GUI를 4방향키로 조작할수 있을정도로 간단하게 만들고 평소에 Hat를 잘 안쓰도록 하면 큰 문제가 없을거같다. 이렇게 하면 고개를 움직이는게 GUI를 보기 위한 용도로만 쓸 수 있고 FPS모드/GUI모드를 분리할 필요가 없으니 GUI조작중에 뒤에서 공격받아도 빨리 대응할수 있을것이다. (데드스페이스 할때 GUI처다보고 있는데 공격받으면 빡쳤음...)
 
 Hat Switch란?
 
-![joystick hat switch]({attach}oculus-interactive-surface-1/joystick-hat.png)
+![joystick hat switch](joystick-hat.png)
 
 [Independence War 2: Edfe of Chaos](http://en.wikipedia.org/wiki/Independence_War_2:_Edge_of_Chaos) 의 경우 Hat Switch로 게임내부 GUI를 조작할수 있도록 했다. 그래서 키보드로 손이 갈 일이 없어서 매우 편하다.
 
-![independence war 2 screenshot]({attach}oculus-interactive-surface-1/independence-war-2.jpg)
+![independence war 2 screenshot](independence-war-2.jpg)
 
 p.s. 이미 DOOM3:BFG Edition이 있어서 둠3를 오큘러스로 해봤었지... 안만들고 그거 다시 플레이 해봤어도 소감은 썻겠다. -_-

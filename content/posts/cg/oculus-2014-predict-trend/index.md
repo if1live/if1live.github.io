@@ -59,17 +59,17 @@ OculusRift에 맞게 렌더링하기 위해서는 일반적인 렌더링보다 �
 
 **No Stereo** 일반적인 게임에서 사용하는 카메라
 
-![sample - no stereo]({attach}oculus-2014-predict-trend/oculus-sample-no-stereo.jpg)
+![sample - no stereo](oculus-sample-no-stereo.jpg)
 
 **Stereo without barrel distortion** 양쪽눈을 각각 렌더링. GPU 성능을
 한쪽눈일 때보다 2배는 사용한다. 아래의 표에서는 **Stereo** 라고 썻다.
 
-![sample - stereo]({attach}oculus-2014-predict-trend/oculus-sample-stereo.jpg)
+![sample - stereo](oculus-sample-stereo.jpg)
 
 **Stereo with barrel distortion** 이렇게 렌더링을 해야 오큘러스 뒤집어
 쓰고 적절히 보인다. 아래의 표에서는 **Oculus** 라고 썻다.
 
-![sample - oculus rift]({attach}oculus-2014-predict-trend/oculus-sample-oculus.jpg)
+![sample - oculus rift](oculus-sample-oculus.jpg)
 
 내 컴퓨터에서 OculusSDK 0.2.5 안에 포함된 샘플인 OculusWorldDemo를
 실행하면 나온는 위치에서의 FPS를 정리한 표이다. 적절히 1980x1080으로도
