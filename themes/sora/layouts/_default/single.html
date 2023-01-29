@@ -1,5 +1,4 @@
-{{ partial "head.html" . }}
-{{ partial "header.html" . }}
+{{ define "main" }}
 
 <div class="container">
   <article class="basic-content article-content">
@@ -43,7 +42,7 @@
         <a href="{{ .PrevPage.Permalink }}" title="Next: {{ .PrevPage.Title }}">
           {{ .PrevPage.Title }}
           {{ if and (isset .PrevPage.Params "subtitle") (ne .PrevPage.Params.subtitle "") }}
-          <br/><small>{{ .PrevPage.Params.subtitle }}</small>
+          <br /><small>{{ .PrevPage.Params.subtitle }}</small>
           {{ end }}
         </a>
         {{ end }}
@@ -54,7 +53,7 @@
         <a href="{{ .NextPage.Permalink }}" title="Previous: {{ .NextPage.Title }}">
           {{ .NextPage.Title }}
           {{ if and (isset .NextPage.Params "subtitle") (ne .NextPage.Params.subtitle "") }}
-          <br/><small>{{ .NextPage.Params.subtitle }}</small>
+          <br /><small>{{ .NextPage.Params.subtitle }}</small>
           {{ end }}
         </a>
         {{ end }}
@@ -62,9 +61,9 @@
     </ul>
 
     <section class="entry-content">
-      {{ partial "disqus.html" . }}
+      {{ template "_internal/disqus.html" . }}
     </section>
   </article>
 </div>
 
-{{ partial "footer.html" . }}
+{{ end }}
