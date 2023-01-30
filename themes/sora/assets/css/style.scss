@@ -3,10 +3,32 @@
 @import "utilities";
 @import "reset";
 
+body {
+  margin: 0;
+  line-height: 1;
+  color: #404040;
+  line-height: 1.75;
+  letter-spacing: 0.008em;
+}
+
+a {
+  text-decoration: none;
+  color: #5badf0;
+}
+
+a:hover {
+  color: #0366d6;
+}
+
 // navigation, header, footer
 @mixin common-header-footer {
   text-align: center;
   color: #eee;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
 
   a:hover {
     color: #fff;
@@ -40,6 +62,9 @@
 }
 
 .menu-button-list {
+  margin: 0;
+  padding: 0;
+
   li {
     display: inline-block;
   }
@@ -64,11 +89,92 @@
   }
 }
 
-// content main
-.content {
+// main content
+.main {
   max-width: 960px;
   margin: 0 auto;
   padding: 10px;
+}
+
+// markdown
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+p {
+  margin-block-start: 1.5em;
+  margin-block-end: 1.5em;
+}
+p,
+pre {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+#archive {
+  // 제목만 모으면 짧아서 줄여서 쓰는게 나은듯
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+#archive .group {
+  margin: 24px auto;
+}
+#archive .group .key {
+  margin-bottom: 12px;
+}
+#archive .group .value {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+#archive .group .value .date {
+  display: block;
+  color: #999;
+  min-width: 60px;
+}
+
+#archive .group .value .title {
+  display: inline;
+
+  a {
+    color: #404040;
+  }
+
+  a:hover {
+    color: #0366d6;
+  }
+
+  .post-subtitle {
+    font-size: 0.8em;
+  }
+}
+
+#archive .group .value .tags {
+  display: block;
+
+  a {
+    display: inline;
+    background: #f2f2f2;
+    padding: 4px 7px;
+    color: #999;
+    font-size: 14px;
+    margin-right: 3px;
+  }
+
+  a:hover {
+    color: #0366d6;
+  }
+}
+
+// tags
+.tags {
+}
+
+// 404
+.page-404 {
 }
 
 /*

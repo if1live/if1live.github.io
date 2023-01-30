@@ -1,5 +1,11 @@
 {{ define "main" }}
 
+<article>
+  <section class="post-body">
+    {{ .Content }}
+  </section>
+</article>
+
 <article class="basic-content article-content">
   <header>
     <hgroup class="entry-title">
@@ -31,9 +37,7 @@
     </ul>
   </footer>
 
-  <section class="entry-content">
-    {{ .Content }}
-  </section>
+
 
   <ul class="articles-timeline">
     <li class="previous-article">
@@ -58,10 +62,8 @@
       {{ end }}
     </li>
   </ul>
-
-  <section class="entry-content">
-    {{ template "_internal/disqus.html" . }}
-  </section>
 </article>
+
+{{ template "_internal/disqus.html" . }}
 
 {{ end }}

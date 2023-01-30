@@ -3,15 +3,36 @@
 <section id="archive">
   {{ range .Data.Pages.GroupByDate "2006" }}
   <div class="group">
-    <h3 class="key">
+    <h2 class="key">
       {{ .Key }}
-    </h3>
+    </h2>
 
     {{ range .Pages }}
-    {{ .Render "article_summary" }}
+    <div class="value">
+      <div class="date">
+        <time datetime="{{ .PublishDate }}">{{ .Date.Format "01. 02" }}</time>
+      </div>
+
+      <div class="title">
+        <a href="{{ .Permalink }}">
+          <span class="post-title">{{ .Title }}</span>
+          <br/>
+          <span class="post-subtitle">{{ .Params.subtitle }}</span>
+        </a>
+      </div>
+
+      {{ with .Params.tags }}
+      <div class="tags">
+        {{ range . }}
+        {{/* 쌍따옴표 쓰면 자동포맷팅 망가져서 우회 */}}
+        <a href='{{ "tags/" | absURL }}{{ . | urlize  }}'>{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end}}
+    </div>
     {{ end }}
+  </div>
   {{ end }}
 </section>
-
 
 {{ end }}
