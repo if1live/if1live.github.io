@@ -3,6 +3,75 @@
 @import "utilities";
 @import "reset";
 
+// navigation, header, footer
+@mixin common-header-footer {
+  text-align: center;
+  color: #eee;
+
+  a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.navigation {
+  @include common-header-footer;
+  padding: 0.5em 0;
+
+  background-image: linear-gradient(
+    to bottom,
+    $sky-bg-color-top 0%,
+    $sky-bg-color-bottom 100%
+  );
+
+  h1 {
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 1.5em;
+  }
+}
+
+.footer {
+  @include common-header-footer;
+  padding: 0.5em 0;
+
+  background-color: $sky-bg-color-bottom;
+  box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
+}
+
+.menu-button-list {
+  li {
+    display: inline-block;
+  }
+
+  a {
+    $length: 1.8em;
+
+    display: inline-block;
+    width: $length;
+    height: $length;
+    line-height: $length;
+
+    margin: 0.5em 0.5em;
+    border: 1px solid #fff;
+    background-color: $sky-btn-color;
+
+    color: #fff;
+    &:hover,
+    &.active {
+      background-color: $sky-btn-hover-color;
+    }
+  }
+}
+
+// content main
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/*
 @mixin core-anchor-mixin {
   a,
   a:visited {
@@ -13,77 +82,6 @@
   a:hover {
     color: $base-a-tag-hover-color;
     border-bottom: 1px dotted $base-a-tag-hover-color;
-  }
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.content {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 10px;
-}
-
-@mixin common-header-footer {
-  color: #eee;
-  text-align: center;
-
-  a,
-  a:hover,
-  a:visited {
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
-  }
-}
-
-.theme-navigation {
-  @include common-header-footer;
-  @include gradient-y($sky-bg-color-top, $sky-bg-color-bottom, 0%);
-  padding: 1em 0 0.5em 0;
-
-  h1 {
-    margin: 0;
-    line-height: 1.5em;
-    font-size: 1.5em;
-  }
-}
-
-.theme-footer {
-  @include common-header-footer;
-  background-color: $sky-bg-color-bottom;
-  box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
-  padding: 0.5em 0 1em 0;
-}
-
-.nav-link-list {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  list-style: none;
-
-  li {
-    display: inline-block;
-  }
-
-  a {
-    $length: 1.8em;
-    display: inline-block;
-    width: $length;
-    height: $length;
-    line-height: $length;
-    border: 1px solid #fff;
-    margin: 0.5em 0.5em;
-    background-color: $sky-btn-color;
-
-    color: #fff;
-    &:hover,
-    &.active {
-      background-color: $sky-btn-hover-color;
-    }
   }
 }
 
@@ -304,3 +302,4 @@ body {
     }
   }
 }
+*/

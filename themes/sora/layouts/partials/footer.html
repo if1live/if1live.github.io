@@ -1,5 +1,5 @@
-<footer class="theme-footer">
-  <ul class="nav-link-list">
+<footer class="footer">
+  <ul class="menu-button-list">
     {{ range .Site.Params.socials }}
     {{ $name := index . 0 }}
     {{ $url := index . 1 }}
@@ -14,7 +14,7 @@
 
     <li>
       <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ .Site.RSSLink }}">
+      <a href="{{ .Site.RSSLink }}" title="RSS">
         <i class="fa-solid fa-rss"></i>
         <span hidden>RSS</span>
       </a>

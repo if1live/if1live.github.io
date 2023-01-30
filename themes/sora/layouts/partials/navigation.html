@@ -1,17 +1,16 @@
-<nav class="theme-navigation">
+<nav class="navigation">
   <a href="{{ .Site.BaseURL }}" title="home">
     <h1>if1live space</h1>
   </a>
-  <ul class="nav-link-list">
-
+  <ul class="menu-button-list">
     <li>
-      <a href="{{ .Site.BaseURL }}about/" {{ if eq (lower .Title) "abouts" }} class="active" {{ end }} title="about">
+      <a href="{{ .Site.BaseURL }}about/" {{ if eq .Title "about" }} class="active" {{ end }} title="about">
         <i class="fa-solid fa-info"></i>
         <span hidden>about</span>
       </a>
     </li>
     <li>
-      <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }}>
+      <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }} title="archive">
         <i class="fa-solid fa-box-archive"></i>
         <span hidden>archive</span>
       </a>
@@ -23,8 +22,7 @@
       </a>
     </li>
     <li>
-      <a href="{{ .Site.BaseURL }}search/" {{ if eq (lower .Title) "searches" }} class="active" {{ end }}
-        title="search">
+      <a href="{{ .Site.BaseURL }}search/" {{ if eq .Title "search" }} class="active" {{ end }} title="search">
         <i class="fa-solid fa-magnifying-glass"></i>
         <span hidden>search</span>
       </a>
