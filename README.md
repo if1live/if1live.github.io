@@ -7,16 +7,10 @@
 ## dependency
 
 * [hugo](https://gohugo.io/getting-started/installing/)
-* sass
-    - windows: [node-sass](https://www.npmjs.com/package/node-sass)
-    - linux: [wellington](https://github.com/wellington/wellington)
 
 ## build
 
 ``` sh
-# build template
-bash ./bin/build_theme_win.sh
-
 # build document
 cd cli && go build && cd ..
 ./cli/libsora.so

@@ -29,11 +29,6 @@ jobs:
           hugo-version: "0.110.0"
           extended: true
 
-      - name: theme
-        run:
-          ./scripts/ci_install.sh
-          ./bin/build_theme.sh
-
       - name: Build
         run: hugo --minify
 
