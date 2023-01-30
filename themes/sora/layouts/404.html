@@ -1,8 +1,27 @@
 {{ define "main" }}
 
-<section class="theme-section">
-  <h1>404 Not Found</h1>
-  {{ partial "google_search.html" . }}
-</section>
+<div id="page-404">
+  <div class="text">
+    <h1>404 - Page Not Found</h1>
+    <div>The content you're looking for doesn't seem to exist.</div>
+  </div>
 
+  <h2 class="read-more">Search</h2>
+  {{ partial "google_search.html" . }}
+
+  <h2 class="read-more">Read more</h2>
+
+  {{ $pages := .Site.RegularPages }}
+  {{ $paginator := .Paginate ($pages) }}
+  {{ range $paginator.Pages }}
+  {{ $title := .Title }}
+  {{ $date := dateFormat "2006. 01. 02" .Date }}
+  <section class="item">
+    <div>
+      <div class="date">{{ $date }}</div>
+      <h1 class="title"><a href='{{ .RelPermalink }}'>{{ $title }}</a></h1>
+    </div>
+  </section>
+  {{ end }}
+</div>
 {{ end }}
