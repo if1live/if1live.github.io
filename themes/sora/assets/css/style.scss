@@ -112,9 +112,69 @@ pre {
   overflow-wrap: anywhere;
 }
 
+/* index post list */
+#list-page .item {
+  margin: 12px 0;
+}
+
+#list-page .title {
+  display: inline-block;
+  color: #404040;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+#list-page .title a {
+  color: #404040;
+  display: block;
+}
+
+#list-page .title a:hover {
+  color: #0366d6;
+}
+
+#list-page .date {
+  text-align: right;
+  color: #bbb;
+}
+
+#list-page .summary {
+  color: #757575;
+  margin-top: 12px;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  margin-bottom: 36px;
+}
+
+#list-page .cover {
+  width: 100px;
+  height: 100px;
+  background: #fff;
+}
+
+#list-page .cover img {
+  width: 100%;
+  text-align: center;
+}
+
+#list-page .pagination {
+  margin: 48px 0;
+  width: 100%;
+  height: 32px;
+  margin-top: 48px;
+}
+
+#list-page .pagination .pre {
+  float: left;
+}
+#list-page .pagination .next {
+  float: right;
+}
+
 #archive {
   // 제목만 모으면 짧아서 줄여서 쓰는게 나은듯
-  max-width: 580px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -195,7 +255,7 @@ pre {
 
 /* 404 page */
 #page-404 {
-  max-width: 580px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 24px;
 }

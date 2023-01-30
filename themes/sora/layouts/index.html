@@ -1,13 +1,52 @@
 {{ define "main" }}
 
-<div class="basic-content article-content">
-  {{ range .Paginator.Pages }}
-  {{ if ne .Slug "_index" }}
-  {{ .Render "article_summary"}}
+<div id="list-page">
+  {{ $pages := .Site.RegularPages }}
+  {{ $paginator := .Paginate ($pages) }}
+  {{ range $paginator.Pages }}
+  {{ $title := .Title }}
+  {{ $subtitle := .Params.subtitle }}
+  {{ $summary := .Summary }}
+  <section class="item">
+    <div>
+      <a href='{{ .RelPermalink }}'>
+        <h1 class="title">{{ $title }}</h1>
+        {{ if ne $subtitle nil }}
+        <br/>
+        <h1 class="title"><small>{{ $subtitle }}</small></h1>
+        {{ end }}
+      </a>
+    </div>
+
+    {{ if ne .Site.Params.hiddenPostSummaryInHomePage true }}
+    <div class="summary">{{ $summary | plainify | htmlUnescape }}</div>
+    {{ end }}
+
+    <div class="date">
+      <time datetime="{{ .PublishDate }}">{{ .Date.Format "2006. 01. 02" }}</time>
+    </div>
+  </section>
   {{ end }}
+
+  {{ if or ($paginator.HasPrev) ($paginator.HasNext) }}
+  <div class="pagination">
+    {{ if $paginator.HasPrev }}
+    <span class="prev">
+      <a href="{{.Paginator.Prev.URL}}">
+        <span class="arrow">←</span> {{ with .Site.Params.newerPosts }}{{ . }}{{ else }}Newer Posts{{ end }}
+      </a>
+    </span>
+    {{ end }}
+
+    {{ if $paginator.HasNext }}
+    <span class="next">
+      <a href="{{.Paginator.Next.URL}}">
+        {{ with .Site.Params.olderPosts }}{{ . }}{{ else }}Older Posts{{ end }} <span class="arrow">→</span>
+      </a>
+    </span>
+    {{ end }}
+  </div>
   {{ end }}
 </div>
-
-{{ template "_internal/pagination.html" . }}
 
 {{ end }}
