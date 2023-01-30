@@ -169,8 +169,28 @@ pre {
   }
 }
 
-// tags
-.tags {
+/* taxonomy */
+#tags {
+  max-width: 700px;
+  margin: 0 auto 0 auto;
+  padding: 0 12px;
+  text-align: center;
+}
+#tags .tag {
+  display: inline-block;
+  margin: 7px 7px;
+}
+
+#tags .tag a {
+  background: #f2f2f2;
+  padding: 4px 7px;
+  color: #757575;
+  color: #404040;
+  font-size: 14px;
+  margin-right: 3px;
+}
+#tags .tag a:hover {
+  color: #0366d6;
 }
 
 // 404
@@ -305,38 +325,6 @@ pre {
     display: inline-block;
     font-style: normal;
     text-decoration: none;
-  }
-}
-
-.list-of-tags {
-  padding: 0;
-  margin: 0;
-  font-weight: bold;
-
-  li {
-    display: inline-block;
-    padding: 0 0.5em 0 0;
-  }
-}
-
-.disqus-section {
-  padding: 1em 0;
-}
-
-// maya
-.maya-youtube {
-  text-align: center;
-}
-
-.tags-content {
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  li {
-    display: inline-block;
-    padding: 5px;
   }
 }
 

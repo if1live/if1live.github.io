@@ -1,16 +1,16 @@
 {{ define "main" }}
 
-<div class="basic-content tags-content">
-  <h1 id="title">{{ .Title }}</h1>
-  <ul>
-    {{ $data := .Data }}
-    {{ range $key, $value := .Data.Terms.Alphabetical }}
-    <li>
-      <a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}">{{ $value.Name }}</a>
-      <sup>{{ $value.Count }}</sup>
-    </li>
-    {{ end }}
-  </ul>
-</div>
+<section id="tags">
+  {{ $data := .Data }}
+  {{ range $key, $value := .Data.Terms.ByCount }}
+  {{ if ($value.Name) }}
+  <span class="tag">
+    <a href='{{ "tags/" | relURL }}{{ $value.Name | urlize }}'>
+      {{ $value.Name }} <small>({{ $value.Count }})</small>
+    </a>
+  </span>
+  {{ end }}
+  {{ end }}
+</section>
 
 {{ end }}
