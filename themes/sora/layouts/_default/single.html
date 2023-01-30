@@ -1,69 +1,28 @@
 {{ define "main" }}
 
-<article>
-  <section class="post-body">
+<section id="single">
+  <h1 class="title">{{ .Title }}</h1>
+
+  <div class="tip">
+    <time datetime="{{ .PublishDate }}">{{ .Date.Format "2006. 01. 02" }}</time>
+  </div>
+
+  <div class="content">
     {{ .Content }}
-  </section>
-</article>
+  </div>
 
-<article class="basic-content article-content">
-  <header>
-    <hgroup class="entry-title">
-      <a href="{{ .RelPermalink }}" rel="bookmark" title="Permalink to {{ .Title }}">
-        <h1>{{ .Title }}</h1>
-        {{ if and (isset .Params "subtitle") (ne .Params.subtitle "") }}
-        <h2>{{ .Params.subtitle }}</h2>
-        {{end}}
-      </a>
-    </hgroup>
-  </header>
-
-  <footer class="post-info">
-    <abbr class="published" title='{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}'>
-      {{ .Date.Format "2006/01/02" }}
-    </abbr>
-    {{ if .Params.author }}
-    <address class="vcard author">
-      By <a href="//twitter.com/{{ .Site.Params.twitterUsername }}">@{{ .Params.author }}</a>
-    </address>
+  {{ with .Params.tags }}
+  <div class="tags">
+    {{ range . }}
+    <a href='{{ "tags/" | absURL }}{{ . | urlize }}'>{{ . }}</a>
     {{ end }}
+  </div>
+  {{ end}}
 
-    <ul class="list-of-tags tags-in-article">
-      {{ range .Params.tags }}
-      <li>
-        <a href="/tags/{{ . | urlize }}">#{{ . }}</a>
-      </li>
-      {{ end }}
-    </ul>
-  </footer>
-
-
-
-  <ul class="articles-timeline">
-    <li class="previous-article">
-      {{ if .PrevPage }}
-      <a href="{{ .PrevPage.Permalink }}" title="Next: {{ .PrevPage.Title }}">
-        {{ .PrevPage.Title }}
-        {{ if and (isset .PrevPage.Params "subtitle") (ne .PrevPage.Params.subtitle "") }}
-        <br /><small>{{ .PrevPage.Params.subtitle }}</small>
-        {{ end }}
-      </a>
-      {{ end }}
-    </li>
-
-    <li class="next-article">
-      {{ if .NextPage }}
-      <a href="{{ .NextPage.Permalink }}" title="Previous: {{ .NextPage.Title }}">
-        {{ .NextPage.Title }}
-        {{ if and (isset .NextPage.Params "subtitle") (ne .NextPage.Params.subtitle "") }}
-        <br /><small>{{ .NextPage.Params.subtitle }}</small>
-        {{ end }}
-      </a>
-      {{ end }}
-    </li>
-  </ul>
-</article>
-
-{{ template "_internal/disqus.html" . }}
+  <div id="comment">
+    <!-- https://gohugo.io/templates/internal/#use-the-disqus-template -->
+    {{ template "_internal/disqus.html" . }}
+  </div>
+</section>
 
 {{ end }}

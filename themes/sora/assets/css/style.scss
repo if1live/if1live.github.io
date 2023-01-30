@@ -91,7 +91,7 @@ a:hover {
 
 // main content
 .main {
-  max-width: 960px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 10px;
 }
@@ -172,9 +172,55 @@ pre {
   float: right;
 }
 
+/* single page */
+#single .title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+@media (max-width: 700px) {
+  #single {
+    padding: 0 18px;
+    margin: 20px auto 0 auto;
+  }
+  #single .title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+#single .tip {
+  text-align: center;
+  color: #8c8c8c;
+  margin-top: 18px;
+  font-size: 14px;
+}
+#single .tip .split {
+  margin: 0 4px;
+}
+
+#single .content {
+  margin-top: 36px;
+}
+
+#single .tags {
+  margin-top: 24px;
+}
+#single .tags a {
+  background: #f2f2f2;
+  padding: 4px 7px;
+  color: #757575;
+  font-size: 14px;
+  margin-right: 3px;
+}
+#single .tags a:hover {
+  color: #0366d6;
+}
+
 #archive {
   // 제목만 모으면 짧아서 줄여서 쓰는게 나은듯
-  max-width: 700px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -231,7 +277,6 @@ pre {
 
 /* taxonomy */
 #tags {
-  max-width: 700px;
   margin: 0 auto 0 auto;
   padding: 0 12px;
   text-align: center;
@@ -255,7 +300,6 @@ pre {
 
 /* 404 page */
 #page-404 {
-  max-width: 700px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -292,204 +336,3 @@ pre {
   top: 1px;
   color: #bbb;
 }
-
-/*
-@mixin core-anchor-mixin {
-  a,
-  a:visited {
-    text-decoration: none;
-    color: $base-a-tag-color;
-    border-bottom: 1px dotted $base-a-tag-color;
-  }
-  a:hover {
-    color: $base-a-tag-hover-color;
-    border-bottom: 1px dotted $base-a-tag-hover-color;
-  }
-}
-
-.basic-content {
-  @include core-anchor-mixin;
-  padding: 10px 0;
-
-  line-height: 1.6em;
-
-  @mixin common-h1 {
-    padding: 0;
-    margin: 10px 0;
-    font-size: 1.6em;
-    color: $gray-darker;
-  }
-
-  h1 {
-    @include common-h1;
-  }
-
-  header {
-    h1 {
-      @include common-h1;
-    }
-    h2 {
-      padding: 0;
-      margin: 10px 0;
-      font-size: 1.2em;
-      color: $gray-dark;
-    }
-  }
-
-  code:not([class*="language-"]) {
-    padding: 2px 4px;
-    margin: 0 2px;
-    color: #d14;
-    background-color: #f3e9e0;
-    //white-space: nowrap;
-    white-space: pre;
-    border-radius: 5px;
-  }
-
-  blockquote {
-    border-left: 5px solid $gray-light;
-    padding-left: 1em;
-    margin: 1em 0em 1em 5px;
-  }
-
-  img {
-    margin: 0 auto;
-    display: block;
-    max-width: 100%;
-  }
-
-  video {
-    margin: 0 auto;
-    display: block;
-  }
-
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  th,
-  td {
-    text-align: left;
-    padding: 8px;
-  }
-  th {
-    background-color: $gray;
-  }
-  tr:nth-child(even) {
-    background-color: $gray-light;
-  }
-}
-
-.entry-content {
-  ul,
-  ol {
-    padding-left: 1em;
-    margin: 0.2em 0;
-    > li > p {
-      margin: 0;
-    }
-  }
-  dl {
-    dd {
-      padding-left: 1em;
-      margin: 0;
-    }
-  }
-}
-
-.articles-timeline {
-  @include clearfix;
-  padding: 0.5em 0;
-  margin: 0;
-  list-style: none;
-
-  .previous-article {
-    @include pull-left;
-    width: 50%;
-  }
-  .next-article {
-    @include pull-right;
-    @extend .text-right;
-    width: 50%;
-  }
-}
-
-.post-info {
-  padding: 0.5em 0;
-  .published,
-  .author {
-    display: inline-block;
-    font-style: normal;
-    text-decoration: none;
-  }
-}
-
-.article-summary {
-  @include clearfix();
-  padding: 10px 0;
-
-  a,
-  a:hover,
-  a:visited {
-    border-bottom: 0;
-  }
-  a:hover * {
-    color: $base-a-tag-hover-color;
-  }
-
-  .article-name {
-    float: left;
-  }
-
-  .article-title {
-    font-size: 1.2em;
-    margin: 0;
-    color: $gray-darker;
-  }
-  .article-subtitle {
-    font-size: 1em;
-    margin: 0;
-    text-indent: 1em;
-    font-weight: normal;
-    color: $gray-dark;
-  }
-  .article-date {
-    float: right;
-    text-align: right;
-  }
-}
-
-.pagination {
-  text-align: center;
-  li {
-    display: inline-block;
-  }
-  a {
-    display: inline-block;
-    font-size: 1.2em;
-    padding: 5px;
-    color: $base-a-tag-color;
-    border-bottom: 1px dotted #fff;
-  }
-  a:hover {
-    color: $base-a-tag-hover-color;
-    border-bottom: 1px dotted $base-a-tag-hover-color;
-  }
-  a,
-  a:hover,
-  a:visited {
-    text-decoration: none;
-  }
-  .active {
-    > a {
-      color: $gray-darker;
-      font-weight: bold;
-    }
-  }
-  .disabled {
-    > a {
-      color: $gray-lighter;
-    }
-  }
-}
-*/
