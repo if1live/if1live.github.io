@@ -1,0 +1,72 @@
+$sky-bg-color-top: #357DAF;
+$sky-bg-color-bottom: #61B4D7;
+$sky-btn-color: #4983BC;
+$sky-btn-hover-color: #6A5F66;
+
+@mixin common-header-footer {
+  text-align: center;
+  color: #eee;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.sora-navigation {
+  @include common-header-footer;
+  padding: 0.5em 0;
+
+  background-image: linear-gradient(
+    to bottom,
+    $sky-bg-color-top 0%,
+    $sky-bg-color-bottom 100%
+  );
+
+  h1 {
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 1.5em;
+  }
+}
+
+.sora-footer {
+  @include common-header-footer;
+  padding: 0.5em 0;
+
+  background-color: $sky-bg-color-bottom;
+  box-shadow: 0 10000px 0 10000px $sky-bg-color-bottom;
+}
+
+.menu-button-list {
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    $length: 1.8em;
+
+    display: inline-block;
+    width: $length;
+    height: $length;
+    line-height: $length;
+
+    margin: 0.5em 0.5em;
+    border: 1px solid #fff;
+    background-color: $sky-btn-color;
+
+    color: #fff;
+    &:hover,
+    &.active {
+      background-color: $sky-btn-hover-color;
+    }
+  }
+}
