@@ -1,22 +1,32 @@
-# libsora.so
+# if1live.github.io
 
-[![Build Status](https://travis-ci.org/if1live/libsora.so.png?branch=master)](https://travis-ci.org/if1live/libsora.so)
+[![github pages](https://github.com/if1live/if1live.github.io/actions/workflows/blog.yml/badge.svg?branch=main)](https://github.com/if1live/if1live.github.io/actions/workflows/blog.yml)
 
-[libsora.so](https://if1live.github.io) blog content
+[if1live.github.io](https://if1live.github.io) blog content
 
 ## dependency
 
 * [hugo](https://gohugo.io/getting-started/installing/)
+* [maya](https://github.com/if1live/maya): markdown preprocessor
+    * `go install github.com/if1live/maya/maya-cli@latest`
+
+## write maya based markdown
+
+```bash
+# build single maya markdown
+cd content/posts/sample/maya-test/maya
+
+# by bash
+maya-cli -mode=hugo -file=document.mkdn -output=../index.md
+# by powrshell
+maya-cli -mode=hugo -file="document.mkdn" -output="../index.md"
+```
+
+or write plain markdown.
 
 ## build
 
-``` sh
-# build document
-cd cli && go build && cd ..
-./cli/libsora.so
-
-# serve hugo
-cd hugo
+```sh
 hugo serve 
 ```
 
