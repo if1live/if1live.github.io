@@ -1,27 +1,26 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>아름다운 PHP array_search() &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="아름다운 PHP array_search()"><meta name=keywords content="array_search ,api ,api-design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>아름다운 PHP array_search() &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="아름다운 PHP array_search()"><meta name=keywords content="array_search ,api ,api-design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>아름다운 PHP array_search()</h1><div class=tip><time datetime="2015-11-08 00:00:00 +0000 UTC">2015. 11. 08</time></div><div class=content><h2 id=개요>개요</h2><pre><code>떡밥 투척
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>아름다운 PHP array_search()</h1><div class=tip><time datetime="2015-11-08 00:00:00 +0000 UTC">2015. 11. 08</time></div><div class=content><h2 id=개요>개요</h2><pre class=markdown-textblock><code>떡밥 투척
 boolean 검사코드
-나는 success==false 파벌
-</code></pre><p><a href=https://twitter.com/if1live/status/662925445990498304>https://twitter.com/if1live/status/662925445990498304</a></p><p>집에서 뒹굴다가 뜬금없는 떡밥이 생각나서 트위터에 투표를 던졌다. 투표를
+나는 success==false 파벌</code></pre><p><a href=https://twitter.com/if1live/status/662925445990498304>https://twitter.com/if1live/status/662925445990498304</a></p><p>집에서 뒹굴다가 뜬금없는 떡밥이 생각나서 트위터에 투표를 던졌다. 투표를
 던지고 보니 생각보다 많은 사람들이 <code>if(!success)</code> 를 선호하더라. 나같은
 <code>success==false</code> 파벌이 얼마 없는걸 보고 왜 내가 <code>success==false</code> 파벌이
 되었나 생각을 했다. 그리고 원인을 찾게 되었는데&mldr;.</p><h2 id=php-array_search>PHP array_search()</h2><p>PHP로 간단한 함수를 짜보자. 한자리수 정수를 넣으면 소수인지 아닌지
 확인하는 함수이다. 제대로 구현하기 매우 귀찮았기 때문에 소수 목록을
 하드코딩했다. 이 함수를 구현하기 위해서 PHP에서 제공하는
-<code>array_search()</code> 를 이용했다. 그리고 함수가 잘 돌아가나 테스트해보자.</p><pre><code class=language-php>&lt;?php
+<code>array_search()</code> 를 이용했다. 그리고 함수가 잘 돌아가나 테스트해보자.</p><pre><code class="language-php line-numbers">&lt;?php
 function check_prime_number_buggy($val) {
   $data = array(2, 3, 5, 7, 11);
   $found = array_search($val, $data);
   if($found) {
-    printf(&quot;%d is prime number, index=%d\n&quot;, $val, $found);
+    printf(&#34;%d is prime number, index=%d\n&#34;, $val, $found);
   } else {
-    printf(&quot;%d is not prime number\n&quot;, $val);
+    printf(&#34;%d is not prime number\n&#34;, $val);
   }
 }
 
@@ -32,15 +31,12 @@ check_prime_number_buggy(2);
 // not exist
 check_prime_number_buggy(-1);
 
-?&gt;
-</code></pre><pre><code class=language-bash>$ php buggy.php
+?&gt;</code></pre><pre><code class="language-bash line-numbers">$ php buggy.php
 5 is prime number, index=2
 2 is not prime number
--1 is not prime number
-</code></pre><p>2는 소수 목록에 있는데도 소수가 아닌거로 처리되었다. 원인은 php
+-1 is not prime number</code></pre><p>2는 소수 목록에 있는데도 소수가 아닌거로 처리되었다. 원인은 php
 <code>array_search()</code> 함수의 잘못된 설계에 있다. 함수의 설명을 뒤지면 다음과
-같은 항목이 있다.</p><p><a href=http://php.net/manual/en/function.array-search.php>http://php.net/manual/en/function.array-search.php</a></p><pre><code>Returns the key for needle if it is found in the array, FALSE otherwise.
-</code></pre><p>배열에서 첫번째 요소를 찾으면 리턴값이 0이다. 배열에서 찾지 못하면
+같은 항목이 있다.</p><p><a href=http://php.net/manual/en/function.array-search.php>http://php.net/manual/en/function.array-search.php</a></p><pre class=markdown-textblock><code>Returns the key for needle if it is found in the array, FALSE otherwise.</code></pre><p>배열에서 첫번째 요소를 찾으면 리턴값이 0이다. 배열에서 찾지 못하면
 리턴값이 FALSE이다. 근데 0과 FALSE는 모두 if 안에서 false로 처리된다.
 그래서 첫번째 요소를 찾았음에도 잘못된 코드가 실행된다.</p><p>PHP <code>array_search()</code> 함수가 잘못 만들어졌다고 생각하는건 나 혼자가
 아니다. <a href=http://noraesae.github.io/PHP-a-fractal-of-bad-design-kr/>PHP: 잘못된 디자인의
@@ -53,16 +49,16 @@ array_search, strpos 함수는 문자열의 처음 위치에서 찾으면 0을 �
 그럼 당신의 프로그램은 터지지 않겠죠.
 대신 당신의 프로그램은 strpos 함수를 사용할 때마다 결과값을 일일히 체크하는 보일러플레이트 코드를 넣지 않는 한 일말의 경고도 없이 엉뚱한 짓을 하게 됩니다.</p><p>이건 정말 나쁜 겁니다! 프로그래밍 언어는 나와 같이 일을 하기 위해서 만들어진 도구잖아요.
 여기, PHP는 개발자가 빠지라고 스스로 찾기 힘든 곳에다가 함정을 파 버립니다.
-그리고 저는 문자열 처리나 결과값이 같은지 비교하는 등의 따분한 작업을 하면서도 신경을 곤두세워야 합니다. PHP는 그야말로 지뢰밭입니다.</p></blockquote><pre><code class=language-php>&lt;?php
+그리고 저는 문자열 처리나 결과값이 같은지 비교하는 등의 따분한 작업을 하면서도 신경을 곤두세워야 합니다. PHP는 그야말로 지뢰밭입니다.</p></blockquote><pre><code class="language-php line-numbers">&lt;?php
 function check_prime_number_correct($val) {
   $data = array(2, 3, 5, 7, 11);
   $found = array_search($val, $data);
 
   // do not use implicit comparison
   if($found !== false) {
-    printf(&quot;%d is prime number, index=%d\n&quot;, $val, $found);
+    printf(&#34;%d is prime number, index=%d\n&#34;, $val, $found);
   } else {
-    printf(&quot;%d is not prime number\n&quot;, $val);
+    printf(&#34;%d is not prime number\n&#34;, $val);
   }
 }
 
@@ -73,48 +69,44 @@ check_prime_number_correct(2);
 // not exist
 check_prime_number_correct(-1);
 
-?&gt;
-</code></pre><pre><code class=language-bash>$ php correct.php
+?&gt;</code></pre><pre><code class="language-bash line-numbers">$ php correct.php
 5 is prime number, index=2
 2 is prime number, index=0
--1 is not prime number
-</code></pre><p>최소한의 수정으로 버그없이 의도한대로 작동하게 하려면 <code>array_search()</code>
+-1 is not prime number</code></pre><p>최소한의 수정으로 버그없이 의도한대로 작동하게 하려면 <code>array_search()</code>
 의 리턴값과 false를 직접 비교해야 한다. 이것 이외의 다른 접근법은 뭐가
 있을까? 다른 언어였으면 어떤 식으로 <code>array_search()</code> 함수를
 디자인했을까?</p><h2 id=대안-존재-확인과-인덱스-확인을-분리>대안. 존재 확인과 인덱스 확인을 분리</h2><p>하나의 함수에서 0과 FALSE가 리턴되기 때문에 문제가 생긴다면 0과 FALSE가
 같이 리턴될 가능성을 없애는거다. 우선 배열에 값이 있는지 확인한다. 있을
 경우에 한해서만 인덱스를 확인한다. 무식한 방법이지만 PHP
 <code>array_search()</code> 의 리턴값을 정확히 기억하고 있지 않은 유지보수 개발자가
-사고칠 가능성을 낮출 수 있다.</p><pre><code class=language-php>&lt;?php
+사고칠 가능성을 낮출 수 있다.</p><pre><code class="language-php line-numbers">&lt;?php
 function check_prime_number($val) {
   $data = array(2, 3, 5, 7, 11);
   if(in_array($val, $data) === false) {
-    printf(&quot;%d is not prime number\n&quot;, $val);
+    printf(&#34;%d is not prime number\n&#34;, $val);
   } else {
     $found = array_search($val, $data);
-    printf(&quot;%d is prime number, index=%d\n&quot;, $val, $found);
+    printf(&#34;%d is prime number, index=%d\n&#34;, $val, $found);
   }
 }
 
 check_prime_number(5);
 check_prime_number(2);
-check_prime_number(-1);
-</code></pre><h2 id=대안-예외를-사용>대안. 예외를 사용</h2><p>파이썬의 경우는 예외를 던진다. 배열에 값이 없을 경우 예외에 의해 다른
-실행 흐름을 따라가니까 문제를 피할 수 있다.</p><pre><code class=language-python>#!/usr/bin/env python
+check_prime_number(-1);</code></pre><h2 id=대안-예외를-사용>대안. 예외를 사용</h2><p>파이썬의 경우는 예외를 던진다. 배열에 값이 없을 경우 예외에 의해 다른
+실행 흐름을 따라가니까 문제를 피할 수 있다.</p><pre><code class="language-python line-numbers">#!/usr/bin/env python
 
 def check_prime_number(val):
     data = [2, 3, 5, 7, 11]
     try:
         found = data.index(val)
-        print(&quot;%d is prime number, index=%d&quot; % (val, found))
+        print(&#34;%d is prime number, index=%d&#34; % (val, found))
     except ValueError:
-        print(&quot;%s is not prime number&quot; % (val,))
+        print(&#34;%s is not prime number&#34; % (val,))
 
 check_prime_number(5)
 check_prime_number(2)
-check_prime_number(-1)
-</code></pre><h2 id=대안-없으면--1>대안. 없으면 -1</h2><p>자바스크립트, 자바의 경우는 찾지 못했을때 -1을 반환한다. <code>found >= 0</code> 을
-이용해서 존재 여부를 확인할수 있다.</p><pre><code class=language-js>function check_prime_number(val) {
+check_prime_number(-1)</code></pre><h2 id=대안-없으면--1>대안. 없으면 -1</h2><p>자바스크립트, 자바의 경우는 찾지 못했을때 -1을 반환한다. <code>found >= 0</code> 을
+이용해서 존재 여부를 확인할수 있다.</p><pre><code class="language-js line-numbers">function check_prime_number(val) {
   var data = [2, 3, 5, 7, 11];
   var found = data.indexOf(val);
   if(found &gt;= 0) {
@@ -127,9 +119,8 @@ check_prime_number(-1)
 
 check_prime_number(5);
 check_prime_number(2);
-check_prime_number(-1);
-</code></pre><p>하지만 <code>if(found)</code> 같이 암묵적으로 비교하다 사고칠 가능성에서 완전히
-자유롭진 않다. <code>-1</code> 은 if 안에서 true로 취급되기 때문이다.</p><pre><code class=language-js>function check_prime_number_buggy(val) {
+check_prime_number(-1);</code></pre><p>하지만 <code>if(found)</code> 같이 암묵적으로 비교하다 사고칠 가능성에서 완전히
+자유롭진 않다. <code>-1</code> 은 if 안에서 true로 취급되기 때문이다.</p><pre><code class="language-js line-numbers">function check_prime_number_buggy(val) {
   var data = [2, 3, 5, 7, 11];
   var found = data.indexOf(val);
   if(found) {
@@ -141,17 +132,15 @@ check_prime_number(-1);
 
 check_prime_number_buggy(5);
 check_prime_number_buggy(2);
-check_prime_number_buggy(-1);
-</code></pre><pre><code class=language-bash>$ node buggy_invalid_index.js
+check_prime_number_buggy(-1);</code></pre><pre><code class="language-bash line-numbers">$ node buggy_invalid_index.js
 5 is prime number, index=2
 2 is not prime number
--1 is prime number, index=-1
-</code></pre><h2 id=대안-iterator>대안. iterator</h2><p>C++ STL에는 요소의 인덱스를 찾는 함수가 없다. 이쪽 세계에서는 iterator로
+-1 is prime number, index=-1</code></pre><h2 id=대안-iterator>대안. iterator</h2><p>C++ STL에는 요소의 인덱스를 찾는 함수가 없다. 이쪽 세계에서는 iterator로
 모든 작업을 처리한다. <code>std::find()</code> 로 항목을 찾은후 <code>std::distance()</code>
 로 인덱스를 계산할 수 있다. 항목을 찾지 못한 경우 <code>last</code> 를 리턴한다.
 덕분에 리턴값 하나만으로 배열에 요소가 존재하는지, 몇번째 요소인지도
 확인할 수 있다. 기본 개념은 <code>in_array()</code>, <code>array_search()</code> 를 같이
-사용한 것과 비슷하지만 더 효율적이다.</p><pre><code class=language-cpp>#include &lt;algorithm&gt;
+사용한 것과 비슷하지만 더 효율적이다.</p><pre><code class="language-cpp line-numbers">#include &lt;algorithm&gt;
 #include &lt;cstdio&gt;
 
 void check_prime_number(int val)
@@ -159,10 +148,10 @@ void check_prime_number(int val)
   auto data = {2, 3, 5, 7, 11};
   auto found = std::find(data.begin(), data.end(), val);
   if(found == data.end()) {
-    printf(&quot;%d is not prime number\n&quot;, val);
+    printf(&#34;%d is not prime number\n&#34;, val);
   } else {
     int idx = std::distance(data.begin(), found);
-    printf(&quot;%d is prime number, index=%d\n&quot;, val, idx);
+    printf(&#34;%d is prime number, index=%d\n&#34;, val, idx);
   }
 }
 
@@ -172,15 +161,12 @@ int main()
   check_prime_number(2);
   check_prime_number(-1);
   return 0;
-}
-</code></pre><h2 id=대안-0--false>대안. 0 != false</h2><p>위에서 나온 대안은 간단하거나 <code>PHP: 잘못된 디자인의 프랙탈</code> 에서 이미
+}</code></pre><h2 id=대안-0--false>대안. 0 != false</h2><p>위에서 나온 대안은 간단하거나 <code>PHP: 잘못된 디자인의 프랙탈</code> 에서 이미
 다룬 내용이다. PHP: 잘못된 디자인의 프랙탈 에서 이미 다룬 내용을 가지고
-글을 쓰면 재미없다. 뭐라도 하나쯤은 다른 대안이 있어야하지 않겠는가?</p><p>루비가 어떻게 문제를 피했는지 확인해보자.</p><pre><code class=language-python>if 0:
-    print(&quot;access&quot;)
-</code></pre><pre><code class=language-ruby>if 0
-  puts &quot;access&quot;
-end
-</code></pre><p>똑같이 생긴 파이썬과 루비 코드이다. if안에 0이 들어갔을때 코드가
+글을 쓰면 재미없다. 뭐라도 하나쯤은 다른 대안이 있어야하지 않겠는가?</p><p>루비가 어떻게 문제를 피했는지 확인해보자.</p><pre><code class="language-python line-numbers">if 0:
+    print(&#34;access&#34;)</code></pre><pre><code class="language-ruby line-numbers">if 0
+  puts &#34;access&#34;
+end</code></pre><p>똑같이 생긴 파이썬과 루비 코드이다. if안에 0이 들어갔을때 코드가
 실행될까? 겉보기에는 똑같이 생겼지만 결과도 똑같진 않다.</p><p>파이썬의 경우는 출력이 없다. 0은 False와 동일한 값으로 취급된다. 이는
 파이썬을 포함한 여러 언어에서 볼 수 있는 방식이다. 루비의 경우는
 <code>access</code> 가 출력된다. 루비에서는 0과 False는 다른 값으로 취급된다.
@@ -188,22 +174,21 @@ if안에서의 0은 True이다.</p><p>Ruby <code>#index</code> 함수는 배열�
 없으면 nil을 리턴한다.</p><p>항목을 찾아서 인덱스를 리턴했으면 0보다 크거나 같을것이고 이는 if 안에서
 True로 취급된다. 찾지 못했으면 nil을 리턴하는데 이는 if 안에서 False로
 취급된다. 그래서 버그가 있는 php와 동일한 구조의 코드임에도 루비에서는
-버그가 없다.</p><pre><code class=language-ruby>#!/usr/bin/env ruby
+버그가 없다.</p><pre><code class="language-ruby line-numbers">#!/usr/bin/env ruby
 
 def check_prime_number(val)
   data = [2, 3, 5, 7, 11];
   found = data.index(val)
   if found
-    puts &quot;#{val} is prime number, index=#{found}&quot;
+    puts &#34;#{val} is prime number, index=#{found}&#34;
   else
-    puts &quot;#{val} is not prime number&quot;
+    puts &#34;#{val} is not prime number&#34;
   end
 end
 
 check_prime_number 5
 check_prime_number 2
-check_prime_number -1
-</code></pre><h2 id=summary>Summary</h2><ul><li>쿨타임 찼다 PHP를 까자.</li><li>PHP 개발자라면 <a href=http://noraesae.github.io/PHP-a-fractal-of-bad-design-kr/>PHP: 잘못된 디자인의
+check_prime_number -1</code></pre><h2 id=summary>Summary</h2><ul><li>쿨타임 찼다 PHP를 까자.</li><li>PHP 개발자라면 <a href=http://noraesae.github.io/PHP-a-fractal-of-bad-design-kr/>PHP: 잘못된 디자인의
 프랙탈</a>
 는 한번쯤 읽어보자.</li><li>여러 언어, 라이브러리를 구경하면 여러가지 해결책을 찾을수 있다.
 패러다임이 같은 언어라고 하나만 알고 있을 필요는 없다.</li><li>루비를 구경해보자. 주력 언어로 쓰지 않더라고 괴랄한 아이디어를 많이
@@ -231,7 +216,6 @@ check_prime_number -1
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

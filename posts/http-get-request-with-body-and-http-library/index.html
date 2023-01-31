@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?"><meta name=keywords content="http ,design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?"><meta name=keywords content="http ,design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -10,61 +10,55 @@
 RESTful API 같은 통신 규격으로 구현하고 있다.
 GET, POST, DELETE, PUT 으로 행동을 구분하고 인자는 모두 body에 json을 붙여서 넘겼다.
 GET의 경우도 특별한 구분없이 POST랑 똑같은 인터페이스를 유지하도록 했다.
-이 접근법은 <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html>elasticseach의 검색 API</a>를 보고 배웠다.</p><pre><code class=language-bash>curl -X GET &quot;localhost:9200/twitter/_search&quot; -H 'Content-Type: application/json' -d'
+이 접근법은 <a href=https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html>elasticseach의 검색 API</a>를 보고 배웠다.</p><pre><code class="language-bash line-numbers">curl -X GET &#34;localhost:9200/twitter/_search&#34; -H &#39;Content-Type: application/json&#39; -d&#39;
 {
-    &quot;query&quot; : {
-        &quot;term&quot; : { &quot;user&quot; : &quot;kimchy&quot; }
+    &#34;query&#34; : {
+        &#34;term&#34; : { &#34;user&#34; : &#34;kimchy&#34; }
     }
 }
-'
-</code></pre><p>query string을 쓰면 인자의 타입이 문자열로 인식되니 숫자로 변환해서 처리하는게 귀찮다.
+&#39;</code></pre><p>query string을 쓰면 인자의 타입이 문자열로 인식되니 숫자로 변환해서 처리하는게 귀찮다.
 게다가 nested 구조는 query string으로 표현하면 깔끔하게 안나온다.
 body에 json붙여서 넘기면 위의 두 문제는 간단하게 해결된다.
 이 좋은걸 POST에서만 쓰고 GET에서 안쓸 이유가 있나 싶어서 GET에도 도입했다.
 (HTTP 스펙상 GET에 body 안붙이는게 맞다는 소리는 알지만 일단 넘어가자. 이론과 현실은 다르다. elasticsearch같은 사례도 있으니)</p><p>서버 API를 적당히 짜고 유니티에도 샘플 씬 만들어서 API 호출 잘 되는거 테스트하고 퇴근했더니&mldr;</p><p>안드로이드 빌드를 뽑은후 돌리면 404 Not Found가 뜬다고 하더라.</p><p>왜죠?</p><p>그래서 UnityWebRequest를 붙잡고 삽질을 시작하게 되는데</p><h2 id=테스트-순서>테스트 순서</h2><p>node.js로 GET, POST를 받을 수 있는 간단한 서버를 구현했다.
-서버는 요청이 들어오면 HTTP method와 body를 응답으로 던진다.</p><pre><code class=language-js>const express = require('express');
+서버는 요청이 들어오면 HTTP method와 body를 응답으로 던진다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) =&gt; {
-  res.json({ method: 'GET', body: req.body });
+app.get(&#39;/&#39;, (req, res) =&gt; {
+  res.json({ method: &#39;GET&#39;, body: req.body });
 });
-app.post('/', (req, res) =&gt; {
-  res.json({ method: 'POST', body: req.body });
+app.post(&#39;/&#39;, (req, res) =&gt; {
+  res.json({ method: &#39;POST&#39;, body: req.body });
 });
 
 const port = 3100;
 app.listen(port, () =&gt; {
   console.log(`server listen - ${port}`);
-});
-</code></pre><p>몇가지 HTTP 라이브러리 서버에 body가 붙은 POST, GET 요청을 보내본다.
+});</code></pre><p>몇가지 HTTP 라이브러리 서버에 body가 붙은 POST, GET 요청을 보내본다.
 그리고 POST와 GET으로 보냈을때의 차이가 있는지 확인한다.</p><h2 id=curl>curl</h2><p><a href=https://curl.haxx.se/>curl</a>은 HTTP API 테스트하기 좋은 툴이다.
-<a href=https://www.getpostman.com/>postman</a>같이 더 이쁜 물건도 있지만 curl에 익숙해져서 자주쓰게 되더라.</p><pre><code class=language-bash>#!/bin/bash
+<a href=https://www.getpostman.com/>postman</a>같이 더 이쁜 물건도 있지만 curl에 익숙해져서 자주쓰게 되더라.</p><pre><code class="language-bash line-numbers">#!/bin/bash
 
-curl -X POST http://127.0.0.1:3100/ -H 'Content-Type: application/json' -d '{&quot;foo&quot;: 1}' -s
-echo &quot;&quot;
+curl -X POST http://127.0.0.1:3100/ -H &#39;Content-Type: application/json&#39; -d &#39;{&#34;foo&#34;: 1}&#39; -s
+echo &#34;&#34;
 
-curl -X GET http://127.0.0.1:3100/ -H 'Content-Type: application/json' -d '{&quot;foo&quot;: 1}' -s
-</code></pre><p>curl로는 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class=language-txt>$ bash curl-demo.sh
-{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-</code></pre><h2 id=python-requests>python requests</h2><p><a href=http://docs.python-requests.org/en/master/>requests</a>는 파이썬 쓸때 자주 쓰던 HTTP 라이브러리이다.
-파이썬 내장 HTTP 라이브러리는 아무리봐도 사용법이 익숙해지질 않아서&mldr;.</p><pre><code class=language-python>import requests
+curl -X GET http://127.0.0.1:3100/ -H &#39;Content-Type: application/json&#39; -d &#39;{&#34;foo&#34;: 1}&#39; -s</code></pre><p>curl로는 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class="language-txt line-numbers">$ bash curl-demo.sh
+{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}</code></pre><h2 id=python-requests>python requests</h2><p><a href=http://docs.python-requests.org/en/master/>requests</a>는 파이썬 쓸때 자주 쓰던 HTTP 라이브러리이다.
+파이썬 내장 HTTP 라이브러리는 아무리봐도 사용법이 익숙해지질 않아서&mldr;.</p><pre><code class="language-python line-numbers">import requests
 
-uri = 'http://127.0.0.1:3100'
+uri = &#39;http://127.0.0.1:3100&#39;
 
-r = requests.post(uri, json={'foo': 1})
+r = requests.post(uri, json={&#39;foo&#39;: 1})
 print(r.text)
 
-r = requests.get(uri, json={'foo': 1})
-print(r.text)
-</code></pre><p>requests로는 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class=language-txt>$ pipenv run python requests-demo.py
-{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-</code></pre><h2 id=c-httpclient>C# HttpClient</h2><p>C#에는 <a href=https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient>HttpClient</a> 라는 HTTP 라이브러리가 내장되어있다.
-의존성 늘어나는거 보기 싫을때 쓰면 좋을거다.</p><h3 id=net-core>.NET Core</h3><pre><code class=language-csharp>﻿using System;
+r = requests.get(uri, json={&#39;foo&#39;: 1})
+print(r.text)</code></pre><p>requests로는 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class="language-txt line-numbers">$ pipenv run python requests-demo.py
+{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}</code></pre><h2 id=c-httpclient>C# HttpClient</h2><p>C#에는 <a href=https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient>HttpClient</a> 라는 HTTP 라이브러리가 내장되어있다.
+의존성 늘어나는거 보기 싫을때 쓰면 좋을거다.</p><h3 id=net-core>.NET Core</h3><pre><code class="language-csharp line-numbers">﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -83,7 +77,7 @@ internal class SimpleReq
 class Program
 {
     private static readonly HttpClient client = new HttpClient();
-    private static readonly string host = &quot;http://127.0.0.1:3100&quot;;
+    private static readonly string host = &#34;http://127.0.0.1:3100&#34;;
 
     public static string ToJsonString&lt;T&gt;(T data)
     {
@@ -101,9 +95,9 @@ class Program
     static async Task&lt;bool&gt; RequestCommon(HttpMethod method)
     {
         var body = ToJsonString(new SimpleReq() { foo = 1 });
-        var request = new HttpRequestMessage(method, $&quot;{host}/&quot;)
+        var request = new HttpRequestMessage(method, $&#34;{host}/&#34;)
         {
-            Content = new StringContent(body, Encoding.UTF8, &quot;application/json&quot;),
+            Content = new StringContent(body, Encoding.UTF8, &#34;application/json&#34;),
         };
         var resp = await client.SendAsync(request);
 
@@ -119,14 +113,12 @@ class Program
         var taskGET = RequestCommon(HttpMethod.Get);
         taskGET.Wait();
     }
-}
-</code></pre><p>.NET Core의 HttpClient를 쓰면 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class=language-txt>$ cd httpclient-dotnet-core
+}</code></pre><p>.NET Core의 HttpClient를 쓰면 GET 요청시 body를 붙여서 보낼 수 있다.</p><pre><code class="language-txt line-numbers">$ cd httpclient-dotnet-core
 $ dotnet run
-{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-</code></pre><h3 id=unity>Unity</h3><p>내가 진짜로 하고 싶은 작업은 콘솔에서 http 통신하는게 아니다.
+{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}</code></pre><h3 id=unity>Unity</h3><p>내가 진짜로 하고 싶은 작업은 콘솔에서 http 통신하는게 아니다.
 게임에서 http 통신 하는게 목적이다.
-.NET Core에서 돌려본 코드를 Unity 2018.3.1f1 로 그대로 옮겨봤다.</p><pre><code class=language-csharp>using UnityEngine;
+.NET Core에서 돌려본 코드를 Unity 2018.3.1f1 로 그대로 옮겨봤다.</p><pre><code class="language-csharp line-numbers">using UnityEngine;
 
 using System;
 using System.IO;
@@ -148,7 +140,7 @@ internal class SimpleReq
 public class Main : MonoBehaviour
 {
     private static readonly HttpClient client = new HttpClient();
-    private static readonly string host = &quot;http://127.0.0.1:3100&quot;;
+    private static readonly string host = &#34;http://127.0.0.1:3100&#34;;
 
     async void Start()
     {
@@ -172,22 +164,20 @@ public class Main : MonoBehaviour
     static async Task&lt;bool&gt; RequestCommon(HttpMethod method)
     {
         var body = ToJsonString(new SimpleReq() { foo = 1 });
-        var request = new HttpRequestMessage(method, $&quot;{host}/&quot;)
+        var request = new HttpRequestMessage(method, $&#34;{host}/&#34;)
         {
-            Content = new StringContent(body, Encoding.UTF8, &quot;application/json&quot;),
+            Content = new StringContent(body, Encoding.UTF8, &#34;application/json&#34;),
         };
         var resp = await client.SendAsync(request);
 
         Debug.Log(await resp.Content.ReadAsStringAsync());
         return true;
     }
-}
-</code></pre><p>유니티에서 HttpClient 쓸때 GET 요청에 body를 붙이면 예외가 발생한다.
-.NET Core랑 Unity의 HttpClient는 이름만 같고 다른 물건인가보다.</p><pre><code class=language-txt>{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-ProtocolViolationException: Cannot send data when method is: GET
-</code></pre><h2 id=c-restsharp>C# RestSharp</h2><p>C# 내장 라이브러리를 사용하니 .NET Core와 유니티에서의 동작이 달라졌다.
+}</code></pre><p>유니티에서 HttpClient 쓸때 GET 요청에 body를 붙이면 예외가 발생한다.
+.NET Core랑 Unity의 HttpClient는 이름만 같고 다른 물건인가보다.</p><pre><code class="language-txt line-numbers">{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+ProtocolViolationException: Cannot send data when method is: GET</code></pre><h2 id=c-restsharp>C# RestSharp</h2><p>C# 내장 라이브러리를 사용하니 .NET Core와 유니티에서의 동작이 달라졌다.
 외부 라이브러리를 쓴다면 .NET 런타임에 따른 문제를 피할 수 있을 것이다.
-대충 검색하니 <a href=http://restsharp.org/>RestSharp</a>를 많이 쓰는거같더라.</p><pre><code class=language-csharp>﻿using System;
+대충 검색하니 <a href=http://restsharp.org/>RestSharp</a>를 많이 쓰는거같더라.</p><pre><code class="language-csharp line-numbers">﻿using System;
 using RestSharp;
 using System.Threading.Tasks;
 
@@ -200,12 +190,12 @@ class SimpleReq
 
 class Program
 {
-    private static readonly string host = &quot;http://127.0.0.1:3100&quot;;
+    private static readonly string host = &#34;http://127.0.0.1:3100&#34;;
 
     static async Task&lt;bool&gt; RequestCommon(Method method)
     {
         var client = new RestClient(host);
-        var request = new RestRequest(&quot;/&quot;, method);
+        var request = new RestRequest(&#34;/&#34;, method);
         request.AddJsonBody(new SimpleReq() { foo = 1 });
 
         var resp = await client.ExecuteTaskAsync(request);
@@ -220,14 +210,12 @@ class Program
         var taskGET = RequestCommon(Method.GET);
         taskGET.Wait();
     }
-}
-</code></pre><p>RestSharp를 쓰면 GET 요청시 body가 전달되지 않는다.</p><pre><code class=language-txt>$ cd restsharp-demo
+}</code></pre><p>RestSharp를 쓰면 GET 요청시 body가 전달되지 않는다.</p><pre><code class="language-txt line-numbers">$ cd restsharp-demo
 $ dotnet run
-{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{}}
-</code></pre><h2 id=unitywebrequest>UnityWebRequest</h2><p>Unity에는 <a href=https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html>UnityWebRequest</a>라는 HTTP 라이브러리가 내장되어있다.
+{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{}}</code></pre><h2 id=unitywebrequest>UnityWebRequest</h2><p>Unity에는 <a href=https://docs.unity3d.com/ScriptReference/Networking.UnityWebRequest.html>UnityWebRequest</a>라는 HTTP 라이브러리가 내장되어있다.
 이 글을 쓰게 된 계기이다.
-얼마나 재밌는 물건인지 보자.</p><pre><code class=language-csharp>﻿using System.Collections;
+얼마나 재밌는 물건인지 보자.</p><pre><code class="language-csharp line-numbers">﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -246,7 +234,7 @@ internal class SimpleReq
 
 public class Main : MonoBehaviour
 {
-    private static readonly string host = &quot;http://192.168.200.20:3100&quot;;
+    private static readonly string host = &#34;http://192.168.200.20:3100&#34;;
 
     void Start()
     {
@@ -266,7 +254,7 @@ public class Main : MonoBehaviour
         var www = new UnityWebRequest(host);
         www.method = method;
         www.uploadHandler = new UploadHandlerRaw(body);
-        www.uploadHandler.contentType = &quot;application/json&quot;;
+        www.uploadHandler.contentType = &#34;application/json&#34;;
         www.downloadHandler = new DownloadHandlerBuffer();
         yield return www.SendWebRequest();
 
@@ -286,15 +274,12 @@ public class Main : MonoBehaviour
         byte[] byteArray = Encoding.UTF8.GetBytes(jsonBody);
         return byteArray;
     }
-}
-</code></pre><p>에디터에서 실행하면 GET 요청에 body를 붙일 수 없다.
-C#의 RestSharp와 같은 식으로 굴러가나보다.</p><pre><code class=language-txt>{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{}}
-</code></pre><p>하지만 안드로이드 빌드를 뽑은후 돌리면 에디터일때와 동작이 바뀐다.
+}</code></pre><p>에디터에서 실행하면 GET 요청에 body를 붙일 수 없다.
+C#의 RestSharp와 같은 식으로 굴러가나보다.</p><pre><code class="language-txt line-numbers">{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{}}</code></pre><p>하지만 안드로이드 빌드를 뽑은후 돌리면 에디터일때와 동작이 바뀐다.
 GET 요청시 body를 붙이면 똑똑한 UnityWebRequest가 POST로 보낸다.
-body가 붙으면 GET이 아니라 POST로 취급하게 구현했나보다.</p><pre><code class=language-txt>{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-{&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-</code></pre><h2 id=다양한-결정>다양한 결정</h2><p>여러가지 구현체에서 같은 기능이 다르게 동작하는 것을 봤다.
+body가 붙으면 GET이 아니라 POST로 취급하게 구현했나보다.</p><pre><code class="language-txt line-numbers">{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+{&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}</code></pre><h2 id=다양한-결정>다양한 결정</h2><p>여러가지 구현체에서 같은 기능이 다르게 동작하는 것을 봤다.
 개발하는 애들이 돌대가리는 아닐테니 각각의 결정에는 이유가 있었을거다.</p><p>클라이언트에서 GET 요청시 body를 붙일 수 있도록 한 경우를 보자.
 curl, requests, .NET Core HttpClient가 이를 선택했다.
 HTTP 라이브러리는 아무 생각없이 프로그래머가 시키는대로 돌아간다.
@@ -318,7 +303,7 @@ Unity의 HttpClient 구현체가 이것을 선택했다.
 코드를 잘못 짰을때 개발자가 이를 즉시 알수 있다는 점에서 좋다고 생각한다.
 예외를 처리하기 위한 코드가 추가되거나 GET 요청 함수와 POST 요청 함수를 분리해야된다는 단점이 있지만 그 정도는 감수할만하다.</p><p>GET 요청시 body가 붙어있으면 POST로 보내는 경우도 생각해보자.
 UnityWebRequest가 이것을 선택했다.
-개인적으로 이것은 오답이라고 본다.</p><p><p class=markdown-image><img src=programming-and-wrong-answer.jpg alt="하지만 오답은 있단다"></p></p><p>HTTP GET 요청에 body를 붙이는 것을 다른 관점에서 보자.
+개인적으로 이것은 오답이라고 본다.</p><p><p class=markdown-image><a href=programming-and-wrong-answer.jpg target=_blank><img src=programming-and-wrong-answer.jpg alt="하지만 오답은 있단다"></a></p></p><p>HTTP GET 요청에 body를 붙이는 것을 다른 관점에서 보자.
 HTTP 요청 함수에 HTTP Method와 body를 인자로 넣는다고 볼 수 있다.
 각각의 인자 (HTTP Method, body)는 같은 중요도를 갖지 않는다고 생각하다.
 body에 비해서 HTTP Method가 중요하다고 생각한다.</p><p>body가 붙은 GET 요청을 스펙에 가깝게 처리하고 싶었다면
@@ -358,7 +343,6 @@ UnityWebRequest는 이름처럼 유니티에서만 돌아가는 라이브러리�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

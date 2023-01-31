@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>스택 지역 변수의 주소값을 이용한 버그 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="스택 지역 변수의 주소값을 이용한 버그"><meta name=keywords content="cpp ,stack allocation ,bug ,local variable ,voodoo magic ,off-by-one"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>스택 지역 변수의 주소값을 이용한 버그 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="스택 지역 변수의 주소값을 이용한 버그"><meta name=keywords content="cpp ,stack allocation ,bug ,local variable ,voodoo magic ,off-by-one"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -10,29 +10,26 @@
 발견해서 간단하게 정리했다.</p><h2 id=스택에-지역변수가-어떤-순서로-쌓일까>스택에 지역변수가 어떤 순서로 쌓일까?</h2><p>C/C++의 경우 지역변수는 스택에 배치된다. 함수에서 두개의 지역변수를
 만들자. (각각의 지역변수를 x, y라고 부르자) 두개의 지역변수는 메모리의
 어떤 주소에 배치될 것이다. 이때 x, y 중에서 어떤 변수의 메모리 주소값이
-높을까? 이를 확인해보려고 아래의 코드를 작성해서 실행해보았다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+높을까? 이를 확인해보려고 아래의 코드를 작성해서 실행해보았다.</p><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 
 int main()
 {
 	int x;
 	int y;
 	int diff = (unsigned long)&amp;x - (unsigned long)&amp;y;
-	printf(&quot;addr x : %lx\n&quot;, (unsigned long)&amp;x);
-	printf(&quot;addr y : %lx\n&quot;, (unsigned long)&amp;y);
-	printf(&quot;addr diff: %d\n&quot;, diff);
+	printf(&#34;addr x : %lx\n&#34;, (unsigned long)&amp;x);
+	printf(&#34;addr y : %lx\n&#34;, (unsigned long)&amp;y);
+	printf(&#34;addr diff: %d\n&#34;, diff);
 	return 0;
-}
-</code></pre><pre><code>gcc simple.c -W -Wall
+}</code></pre><pre class=markdown-textblock><code>gcc simple.c -W -Wall
 ./a.out
 addr x : 7fffcb2d08a4
 addr y : 7fffcb2d08a8
-addr diff: -4
-</code></pre><p>gcc의 경우는 y의 주소값이 더 높다.</p><pre><code>clang simple.c -W -Wall
+addr diff: -4</code></pre><p>gcc의 경우는 y의 주소값이 더 높다.</p><pre class=markdown-textblock><code>clang simple.c -W -Wall
 ./a.out
 addr x : 7fff5918a928
 addr y : 7fff5918a924
-addr diff: 4
-</code></pre><p>clang의 경우는 x의 주소값이 더 높다.</p><p>테스트해보니까 어떤 컴파일러로 컴파일해서 실행하느냐에 따라서 지역변수
+addr diff: 4</code></pre><p>clang의 경우는 x의 주소값이 더 높다.</p><p>테스트해보니까 어떤 컴파일러로 컴파일해서 실행하느냐에 따라서 지역변수
 x, y가 배치되는 순서가 다르더라. 컴파일러마다 행동이 다른걸 보니
 정의되지 않은 행동(Undefined behavior)로 보인다.
 <a href=http://story.wisedog.net/tag/%EC%A0%95%EC%9D%98%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%80-%ED%96%89%EB%8F%99/>blog-undefined-behavior</a></p><p>처음에는 이상하다고 생각했지만 최적화할 수 있는 가능성을 열어둔다는
@@ -41,33 +38,31 @@ x, y가 배치되는 순서가 다르더라. 컴파일러마다 행동이 다른
 별 문제도 없을테고.</p><p>하지만 이것을 이용하면 재밌는 흑마법을 쓸 수 있겠다는 생각이 들었다.
 지역변수가 스택에 어떻게 배치되는지와 인덱스를 벗어난 배열 조회를 합치면
 재밌는걸 할 수 있지 않을까?</p><h2 id=버그-만들기-part-1>버그 만들기 part 1</h2><p>gcc와 clang에서 지역 변수를 스택에 할당하는 순서가 다른 점을 이용해서
-간단하 버그를 만들어보자. 준비물은 다음과 같다.</p><ul><li>카운터 변수. 함수의 지역 변수</li><li>배열. 함수의 지역 변수</li><li>인덱스를 벗어난 배열 조회 <a href=https://en.wikipedia.org/wiki/Off-by-one_error>off-by-one error</a></li></ul><pre><code class=language-c>#define MAX_LOOP_A 2
+간단하 버그를 만들어보자. 준비물은 다음과 같다.</p><ul><li>카운터 변수. 함수의 지역 변수</li><li>배열. 함수의 지역 변수</li><li>인덱스를 벗어난 배열 조회 <a href=https://en.wikipedia.org/wiki/Off-by-one_error>off-by-one error</a></li></ul><pre><code class="language-c line-numbers">#define MAX_LOOP_A 2
 static void run_loop_a()
 {
 	int i = 1234;
 	int data[MAX_LOOP_A];
 
 	g_loop_count = 0;
-	printf(&quot;addr i\t\t: %lx\n&quot;, (unsigned long)&amp;i);
-	printf(&quot;addr data\t: %lx\n&quot;, (unsigned long)data);
+	printf(&#34;addr i\t\t: %lx\n&#34;, (unsigned long)&amp;i);
+	printf(&#34;addr data\t: %lx\n&#34;, (unsigned long)data);
 
-	for(i = 0 ; i &lt;= MAX_LOOP_A ; ++i) {
-		printf(&quot;curr addr[%d]\t: %lx\n&quot;, i, (unsigned long)&amp;data[i]);
+	for(i = 0 ; i &lt;= MAX_LOOP_A ; &#43;&#43;i) {
+		printf(&#34;curr addr[%d]\t: %lx\n&#34;, i, (unsigned long)&amp;data[i]);
 		data[i] = 0;
 
-		g_loop_count++;
-		if(g_loop_count &gt; MAX_LOOP_A + 10) {
-			printf(&quot;ERROR: Infinitely Loop!!!\n&quot;);
+		g_loop_count&#43;&#43;;
+		if(g_loop_count &gt; MAX_LOOP_A &#43; 10) {
+			printf(&#34;ERROR: Infinitely Loop!!!\n&#34;);
 			break;
 		}
 	}
-}
-</code></pre><pre><code>addr i          : 7ffe5f427c7c
+}</code></pre><pre class=markdown-textblock><code>addr i          : 7ffe5f427c7c
 addr data       : 7ffe5f427c80
 curr addr[0]    : 7ffe5f427c80
 curr addr[1]    : 7ffe5f427c84
-curr addr[2]    : 7ffe5f427c88
-</code></pre><p>배열의 크기가 2일때 gcc에서는 무한루프는 발생하지 않는다.</p><pre><code>addr i          : 7ffc94e7f2cc
+curr addr[2]    : 7ffe5f427c88</code></pre><p>배열의 크기가 2일때 gcc에서는 무한루프는 발생하지 않는다.</p><pre class=markdown-textblock><code>addr i          : 7ffc94e7f2cc
 addr data       : 7ffc94e7f2c4
 curr addr[0]    : 7ffc94e7f2c4
 curr addr[1]    : 7ffc94e7f2c8
@@ -82,50 +77,46 @@ curr addr[1]    : 7ffc94e7f2c8
 curr addr[2]    : 7ffc94e7f2cc
 curr addr[1]    : 7ffc94e7f2c8
 curr addr[2]    : 7ffc94e7f2cc
-ERROR: Infinitely Loop!!!
-</code></pre><p>배열의 크기가 2일때 clang에서는 무한루프가 발생한다. (테스트를 위해서
-적당히 루프를 돌다 종료시켰다)</p><p><p class=markdown-image><img src=bug-mem-addr-clang.png alt="gcc memory address"></p></p><p>왜 clang에서는 무한루프가 발생했는지 확인하기 위해서 메모리 구조를
+ERROR: Infinitely Loop!!!</code></pre><p>배열의 크기가 2일때 clang에서는 무한루프가 발생한다. (테스트를 위해서
+적당히 루프를 돌다 종료시켰다)</p><p><p class=markdown-image><a href=bug-mem-addr-clang.png target=_blank><img src=bug-mem-addr-clang.png alt="gcc memory address"></a></p></p><p>왜 clang에서는 무한루프가 발생했는지 확인하기 위해서 메모리 구조를
 간단하게 그려보았다. (나 그림 못그리는거 아니까 알아서 이해하자)</p><p>data[0]의 주소는 <code>7ffc94e7f2c4</code> 이다. data[1]의 주소는 data[0]에서
 4바이트 증가한 <code>7ffc94e7f2c8</code> 이다. data[2]의 주소는 data[1]에서
 4바이트 증가한 <code>7ffc94e7f2cc</code> 가 될것이다. 그리고 <code>7ffc94e7f2cc</code> 는
 지역변수 i의 주소와 동일하다. 즉, <code>data[2] = 0</code> 는 <code>i = 0</code> 과 같은
 동작이고 이것때문에 배열 카운터가 리셋되어서 무한루프가 발생한다.</p><h2 id=버그-만들기-part-2>버그 만들기 part 2</h2><p>여기서 끝나면 재미없다. 배열의 크기가 바꿔서 다시 테스트 해보자. 배열의
-크기를 2에서 4로 바꿨다.</p><pre><code class=language-c>#define MAX_LOOP_B 4
+크기를 2에서 4로 바꿨다.</p><pre><code class="language-c line-numbers">#define MAX_LOOP_B 4
 static void run_loop_b()
 {
 	int i = 1234;
 	int data[MAX_LOOP_B];
 
 	g_loop_count = 0;
-	printf(&quot;addr i\t\t: %lx\n&quot;, (unsigned long)&amp;i);
-	printf(&quot;addr data\t: %lx\n&quot;, (unsigned long)data);
+	printf(&#34;addr i\t\t: %lx\n&#34;, (unsigned long)&amp;i);
+	printf(&#34;addr data\t: %lx\n&#34;, (unsigned long)data);
 
-	for(i = 0 ; i &lt;= MAX_LOOP_B ; ++i) {
-		printf(&quot;curr addr[%d]\t: %lx\n&quot;, i, (unsigned long)&amp;data[i]);
+	for(i = 0 ; i &lt;= MAX_LOOP_B ; &#43;&#43;i) {
+		printf(&#34;curr addr[%d]\t: %lx\n&#34;, i, (unsigned long)&amp;data[i]);
 		data[i] = 0;
 
-		g_loop_count++;
-		if(g_loop_count &gt; MAX_LOOP_B + 10) {
-			printf(&quot;ERROR: Infinitely Loop!!!\n&quot;);
+		g_loop_count&#43;&#43;;
+		if(g_loop_count &gt; MAX_LOOP_B &#43; 10) {
+			printf(&#34;ERROR: Infinitely Loop!!!\n&#34;);
 			break;
 		}
 	}
-}
-</code></pre><pre><code>addr i          : 7ffdfc5c630c
+}</code></pre><pre class=markdown-textblock><code>addr i          : 7ffdfc5c630c
 addr data       : 7ffdfc5c6310
 curr addr[0]    : 7ffdfc5c6310
 curr addr[1]    : 7ffdfc5c6314
 curr addr[2]    : 7ffdfc5c6318
 curr addr[3]    : 7ffdfc5c631c
-curr addr[4]    : 7ffdfc5c6320
-</code></pre><p>배열의 크기가 4일떄 gcc에서는 무한루프가 발생하지 않더라.</p><pre><code>addr i          : 7fffea9c10bc
+curr addr[4]    : 7ffdfc5c6320</code></pre><p>배열의 크기가 4일떄 gcc에서는 무한루프가 발생하지 않더라.</p><pre class=markdown-textblock><code>addr i          : 7fffea9c10bc
 addr data       : 7fffea9c10a0
 curr addr[0]    : 7fffea9c10a0
 curr addr[1]    : 7fffea9c10a4
 curr addr[2]    : 7fffea9c10a8
 curr addr[3]    : 7fffea9c10ac
-curr addr[4]    : 7fffea9c10b0
-</code></pre><p>배열의 크기가 4일때 clang에서는 무한루프가 발생하지 않는다. 이전과는
+curr addr[4]    : 7fffea9c10b0</code></pre><p>배열의 크기가 4일때 clang에서는 무한루프가 발생하지 않는다. 이전과는
 동작이 완전히 달라졌다. clang로 실행했을때의 메모리 주소값을 잘 보면
 지역변수 배열data와 지역변수 i가 연속적으로 배치되어있지 않다.
 지역변수가 연속적으로 배치되어있지 않기 때문에 잘못된 메모리를 건드리긴
@@ -145,7 +136,7 @@ curr addr[4]    : 7fffea9c10b0
 일이 없으니 사고터질 가능성이 줄어들지 않을까?</p><h4 id=stdvectorat>std::vector::at</h4><p>C 배열을 버리고 std::vector 를 사용하자. 그리고 std::vector의 요소에
 접근할때는 <code>at()</code> 함수를 이용하자. <code>at()</code> 함수는 잘못된 인덱스로 접근을
 시도하면 예외를 던진다.</p><blockquote><p>Returns a reference to the element at specified location pos, with bounds checking.
-If pos not within the range of the container, an exception of type std::out_of_range is thrown.</p></blockquote><pre><code class=language-cpp>#include &lt;vector&gt;
+If pos not within the range of the container, an exception of type std::out_of_range is thrown.</p></blockquote><pre><code class="language-cpp line-numbers">#include &lt;vector&gt;
 #include &lt;stdexcept&gt;
 
 void vector_ver()
@@ -153,7 +144,7 @@ void vector_ver()
 	int i = 1234;
 	std::vector&lt;int&gt; data(2);
 
-	for(i = 0 ; i &lt;= 2 ; ++i) {
+	for(i = 0 ; i &lt;= 2 ; &#43;&#43;i) {
 		int &amp;val = data.at(i);
 		val = 0;
 	}
@@ -164,17 +155,16 @@ int main()
 	try {
 		vector_ver();
 	} catch(std::out_of_range e) {
-		printf(&quot;range exception\n&quot;);
+		printf(&#34;range exception\n&#34;);
 	}
 	return 0;
-}
-</code></pre><p>C배열은 스택에 할당되지만 std::vector은 내부에서 동적할당을 수행한다.
+}</code></pre><p>C배열은 스택에 할당되지만 std::vector은 내부에서 동적할당을 수행한다.
 C배열에는 없던 부하가 생겼다. std::vector 대신 다른걸 사용해보는건
 어떨까?</p><h4 id=custom-stdarray>custom std::array</h4><p>C++ TR1에 std::array가 추가되었다. 지금은 std::array이 C++11에 포함되어
 있어서 대부분의 컴파일러에서 사용 가능할 것이다.</p><p>std::array는 C배열과 마찬가지로 스택에 할당된다. std::array를 직접
 사용하면 좋겠지만 std::array의 <code>operator[]</code> 는 인덱스 범위 검사가
 포함되어있지 않다. 그래서 아래와 같이 std::array를 상속받아서
-<code>operator[]</code> 안에 범위 검사를 구현할 수도 있다.</p><pre><code class=language-cpp>#include &lt;cassert&gt;
+<code>operator[]</code> 안에 범위 검사를 구현할 수도 있다.</p><pre><code class="language-cpp line-numbers">#include &lt;cassert&gt;
 #include &lt;array&gt;
 
 template&lt;typename T, std::size_t N&gt;
@@ -194,18 +184,17 @@ int main()
 	int i = 1234;
 	my_array&lt;int, 2&gt; data;
 
-	for(i = 0 ; i &lt;= 2 ; ++i) {
+	for(i = 0 ; i &lt;= 2 ; &#43;&#43;i) {
 		data[i] = 0;
 	}
 
 	return 0;
-}
-</code></pre><h3 id=루프-인덱스를-없애자>루프 인덱스를 없애자</h3><p><code>for(i = 0 ; i &lt;= ARRAY_SIZE ; ++i)</code></p><p>루프를 돌면서 배열을 조회하려다가 잘못된 인덱스로 접근해서 버그가 생긴
+}</code></pre><h3 id=루프-인덱스를-없애자>루프 인덱스를 없애자</h3><p><code>for(i = 0 ; i &lt;= ARRAY_SIZE ; ++i)</code></p><p>루프를 돌면서 배열을 조회하려다가 잘못된 인덱스로 접근해서 버그가 생긴
 것이다. 우리는 배열의 처음부터 끝까지 루프하는게 목적이잖아? 그렇다면
 루프 인덱스를 없애고 배열 전체를 루프하는게 있으면 버그를 피할수 있지
 않을까?</p><h4 id=stdfor_each>std::for_each</h4><p>algorithm 헤더에는 std::for_each 라는게 있다. 시작 iterator 의 끝
 iterator, 그리고 루프동안 수행할 작업을 인자(함수, functor)로 넣어주면
-루프를 대신 돌려준다.</p><pre><code class=language-cpp>#include &lt;array&gt;
+루프를 대신 돌려준다.</p><pre><code class="language-cpp line-numbers">#include &lt;array&gt;
 #include &lt;algorithm&gt; // for std::for_each
 
 struct Functor {
@@ -221,9 +210,8 @@ int main()
 
 	std::for_each(data.begin(), data.end(), Functor());
 	return 0;
-}
-</code></pre><p>C++11 부터는 lambda가 있어서 functor를 쓰지 않아도 된다. 나머지는
-동일하다.</p><pre><code class=language-cpp>#include &lt;array&gt;
+}</code></pre><p>C++11 부터는 lambda가 있어서 functor를 쓰지 않아도 된다. 나머지는
+동일하다.</p><pre><code class="language-cpp line-numbers">#include &lt;array&gt;
 #include &lt;algorithm&gt; // for std::for_each
 
 int main()
@@ -236,10 +224,9 @@ int main()
 		});
 
 	return 0;
-}
-</code></pre><h4 id=foreach-loop-ranged-based-for-statements>foreach loop (ranged-based for statements)</h4><p>기껏 std::for_each를 만들어놨더니 사람들이 안써서 그랬는지 C++11 부터는
+}</code></pre><h4 id=foreach-loop-ranged-based-for-statements>foreach loop (ranged-based for statements)</h4><p>기껏 std::for_each를 만들어놨더니 사람들이 안써서 그랬는지 C++11 부터는
 새로운 for 문법이 추가되었다. ranged-based for 문을 이용하면 루프 카운더
-없이 루프를 사용할수 있다.</p><pre><code class=language-cpp>#include &lt;array&gt;
+없이 루프를 사용할수 있다.</p><pre><code class="language-cpp line-numbers">#include &lt;array&gt;
 
 int main()
 {
@@ -251,8 +238,7 @@ int main()
 	}
 
 	return 0;
-}
-</code></pre><h3 id=다양한-컴파일러-다양한-환경에서-테스트>다양한 컴파일러, 다양한 환경에서 테스트</h3><blockquote><p>컴파일러 경고 수준은 최대한 높이는 것이 좋다.
+}</code></pre><h3 id=다양한-컴파일러-다양한-환경에서-테스트>다양한 컴파일러, 다양한 환경에서 테스트</h3><blockquote><p>컴파일러 경고 수준은 최대한 높이는 것이 좋다.
 모든 플랫폼에 대해 경고 수준을 허용할 수 있는 한도 내에서 최대한 높게 설정할것
 (Visual Studio의 경우는 /W, gcc는 -Wall 등).
 컴파일러 중에는 특히 더 까다로운 것들이 있다.
@@ -281,13 +267,11 @@ clang은 코드의 문제점을 찾아내지 못했다. 간단한 잠재적 위�
 분석툴을 이용해서 위의 잘못된 인덱스로 배열을 접근하는 코드를
 검사해보았다. cppcheck, splint는 이 버그를 잡아내지 못했다.</p><p>실망하기는 이르다. 위의 버그를 잡아낼수 있는 정적 분석 도구가 세상에
 없는건 아니다. <a href=http://www.gimpel.com/>Gimpel Software</a> 에서 개발한
-<code>FlexeLint for C/C++</code> 를 이용하면 위의 버그를 잡아낸다.</p><p><p class=markdown-image><img src=static-analyzer.png alt="C++ static analyzer sample"></p></p><h2 id=links>Links</h2><ul><li><a href=http://stackoverflow.com/questions/1102049/order-of-local-variable-allocation-on-the-stack>stack overflow: Order of local variable allocation on the stack</a></li><li><a href=http://stackoverflow.com/questions/8181887/bound-checking-of-stdarray-in-debug-version-of-gcc>stack overflow: Bound checking of std::array in &ldquo;Debug&rdquo; version</a></li><li><a href=http://en.cppreference.com/w/cpp/container/vector/at>cppreference std::vector::at</a></li></ul><h2 id=sources>Sources</h2><p>본문의 테스트에 사용한 코드이다. 직접 받아서 테스트해볼수 있다.</p><p><a href=https://github.com/if1live/libsora.so/tree/master/content/development/stack-allocation-voodoo-magic>https://github.com/if1live/libsora.so/tree/master/content/development/stack-allocation-voodoo-magic</a></p><h2 id=environment>Environment</h2><p>본문에 나오는 코드를 테스트한 환경이다. 다른 환경에서 테스트했을때도
-같은 결과가 나온다는 보장이 없으니 참고용으로 적어둔다.</p><h3 id=clang-34>clang 3.4</h3><pre><code>$ clang --version
+<code>FlexeLint for C/C++</code> 를 이용하면 위의 버그를 잡아낸다.</p><p><p class=markdown-image><a href=static-analyzer.png target=_blank><img src=static-analyzer.png alt="C++ static analyzer sample"></a></p></p><h2 id=links>Links</h2><ul><li><a href=http://stackoverflow.com/questions/1102049/order-of-local-variable-allocation-on-the-stack>stack overflow: Order of local variable allocation on the stack</a></li><li><a href=http://stackoverflow.com/questions/8181887/bound-checking-of-stdarray-in-debug-version-of-gcc>stack overflow: Bound checking of std::array in &ldquo;Debug&rdquo; version</a></li><li><a href=http://en.cppreference.com/w/cpp/container/vector/at>cppreference std::vector::at</a></li></ul><h2 id=sources>Sources</h2><p>본문의 테스트에 사용한 코드이다. 직접 받아서 테스트해볼수 있다.</p><p><a href=https://github.com/if1live/libsora.so/tree/master/content/development/stack-allocation-voodoo-magic>https://github.com/if1live/libsora.so/tree/master/content/development/stack-allocation-voodoo-magic</a></p><h2 id=environment>Environment</h2><p>본문에 나오는 코드를 테스트한 환경이다. 다른 환경에서 테스트했을때도
+같은 결과가 나온다는 보장이 없으니 참고용으로 적어둔다.</p><h3 id=clang-34>clang 3.4</h3><pre class=markdown-textblock><code>$ clang --version
 Ubuntu clang version 3.4-1ubuntu3 (tags/RELEASE_34/final) (based on LLVM 3.4)
-Target: x86_64-pc-linux-gnu
-</code></pre><h3 id=gcc-484>gcc 4.8.4</h3><pre><code>$ gcc --version
-gcc (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4
-</code></pre><h2 id=history>History</h2><ul><li>v1 : 2015/10/07<ul><li>초안 작성 및 공개</li></ul></li><li>v2 : 2015/10/10<ul><li>소스 원본 링크 추가</li><li>컴파일러 옵션 관련 추가</li><li>이해하기 쉽도록 무한루프 버그 코드 수정</li><li>special thanks : RD</li></ul></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
+Target: x86_64-pc-linux-gnu</code></pre><h3 id=gcc-484>gcc 4.8.4</h3><pre class=markdown-textblock><code>$ gcc --version
+gcc (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4</code></pre><h2 id=history>History</h2><ul><li>v1 : 2015/10/07<ul><li>초안 작성 및 공개</li></ul></li><li>v2 : 2015/10/10<ul><li>소스 원본 링크 추가</li><li>컴파일러 옵션 관련 추가</li><li>이해하기 쉽도록 무한루프 버그 코드 수정</li><li>special thanks : RD</li></ul></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
 <a href=https://if1live.github.io/tags/stack-allocation>stack allocation</a>
 <a href=https://if1live.github.io/tags/bug>bug</a>
 <a href=https://if1live.github.io/tags/local-variable>local variable</a>
@@ -314,7 +298,6 @@ gcc (Ubuntu 4.8.4-2ubuntu1~14.04) 4.8.4
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

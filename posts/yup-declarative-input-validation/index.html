@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>yup로 입력 검증을 덜 귀찮게 처리하자 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="yup로 입력 검증을 덜 귀찮게 처리하자"><meta name=keywords content="library ,javascript ,typescript"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>yup로 입력 검증을 덜 귀찮게 처리하자 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="yup로 입력 검증을 덜 귀찮게 처리하자"><meta name=keywords content="library ,javascript ,typescript"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -7,13 +7,13 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>yup로 입력 검증을 덜 귀찮게 처리하자</h1><div class=tip><time datetime="2019-01-19 00:00:00 +0000 UTC">2019. 01. 19</time></div><div class=content><h2 id=개요>개요</h2><p>프로그래머가 러스트, C#, 타입스크립트같은 타입 있는 언어로 코드를 짜면 컴파일러에 의해서 타입이 보장되니 런타임에서 문제가 생기지 않는다.
 미개한 스크립트 언어들만이 런타임에서 타입으로 문제가 생긴다.
-그러니까 우리는 정적 언어를 써야한다.</p><p><p class=markdown-image><img src=e0080266_51714c9299ca8.jpg alt="그렇게 생각했던 시기가"></p></p><p>물론 세상은 그렇게 굴러가지 않는다.
+그러니까 우리는 정적 언어를 써야한다.</p><p><p class=markdown-image><a href=e0080266_51714c9299ca8.jpg target=_blank><img src=e0080266_51714c9299ca8.jpg alt="그렇게 생각했던 시기가"></a></p></p><p>물론 세상은 그렇게 굴러가지 않는다.
 프로그래머가 코드를 완벽하게 통제하고 있을수는 있어도 외부에서의 입력까지 완벽하게 통제할수는 없다.
 특히 인터넷에 연결된 서버의 경우는 밖에서 어떤 입력이 들어올지 알 수 없다.
 그렇기 때문에 입력 검증은 필요하다.</p><h2 id=선언형-입력-검증>선언형 입력 검증</h2><p>입력 검증은 뻔한 부분이 많다.
 이런 패턴이 흔히 등장한다.</p><ul><li>비어있을 수 없다.</li><li>들어갈 수 있는 값은 A/B/C 중 하나</li><li>이메일 필드</li><li>숫자 필드</li><li>최대 255 글자</li><li>&mldr;</li></ul><p>입력 검증을 직접 구현하는건 너무 귀찮고 선언적으로 때울 방법 어디 없나?
 이런 식으로 돌아가는 느낌으로.</p><ol><li>validator를 생성한다. 이때 각각의 필드별로 어떤 속성이 가능한지 명시한다.<ul><li>name: 문자열 타입, 최대 16글자</li><li>age: 숫자 필드, 최소 18</li><li>대충 이런 느낌으로 필드별로 정의</li></ul></li><li>검증하고 싶은 값을 묶어서 객체로 만든다.</li><li>생성된 객체를 validator에 통과시키면 성공/실패를 알 수 있다.</li></ol><h2 id=yup>yup</h2><p>이전에 GraphQL에 대해서 찾아보다가 <a href=https://github.com/benawad/fullstack-graphql-airbnb-clone>fullstack-graphql-airbnb-clone</a> 라는 저장소를 뜯어본 적이 있다.
-그때 <a href=https://github.com/jquense/yup>yup</a> 라는 입력 검증 라이브러리를 알게 되었다.</p><p>yup를 쓰면 아래와 같은 느낌으로 입력 검증이 가능하다.</p><pre><code class=language-javascript>var yup = require('yup');
+그때 <a href=https://github.com/jquense/yup>yup</a> 라는 입력 검증 라이브러리를 알게 되었다.</p><p>yup를 쓰면 아래와 같은 느낌으로 입력 검증이 가능하다.</p><pre><code class="language-javascript line-numbers">var yup = require(&#39;yup&#39;);
 
 var schema = yup.object().shape({
   name: yup.string().required(),
@@ -32,7 +32,7 @@ var schema = yup.object().shape({
 //check validity
 schema
   .isValid({
-    name: 'jimmy',
+    name: &#39;jimmy&#39;,
     age: 24,
   })
   .then(function(valid) {
@@ -41,19 +41,18 @@ schema
 
 //you can try and type cast objects to the defined schema
 schema.cast({
-  name: 'jimmy',
-  age: '24',
-  createdOn: '2014-09-23T19:25:25Z',
+  name: &#39;jimmy&#39;,
+  age: &#39;24&#39;,
+  createdOn: &#39;2014-09-23T19:25:25Z&#39;,
 });
-// =&gt; { name: 'jimmy', age: 24, createdOn: Date }
-</code></pre><p>비슷한 컨셉의 라이브러리로 <a href=https://github.com/hapijs/joi>joi</a> 라는것도 있더라.
+// =&gt; { name: &#39;jimmy&#39;, age: 24, createdOn: Date }</code></pre><p>비슷한 컨셉의 라이브러리로 <a href=https://github.com/hapijs/joi>joi</a> 라는것도 있더라.
 github star 기준으로는 joi가 더 많더라.
 하지만 joi랑 yup랑 선언형 스키마라는 개념은 비슷하길래 나는 쓰던거 쓴다.</p><h2 id=내가-적용한-코드>내가 적용한 코드</h2><p>요새 서버를 typescript + express로 구현하고 있다.
 입력은 request body에 json을 붙여서 받고있다.
 하지만 body로 들어온 json이 올바른 내용인지는 검증하지 않으면 믿을 수 없다.
-여기에 yup를 붙였다.</p><pre><code class=language-typescript>const allowedAuthTypes = [
-	'twitter',
-	'facebook',
+여기에 yup를 붙였다.</p><pre><code class="language-typescript line-numbers">const allowedAuthTypes = [
+	&#39;twitter&#39;,
+	&#39;facebook&#39;,
 ];
 export const connectAuthSchema = yup.object().shape({
 	auth_type: yup.string().oneOf(allowedAuthTypes).required(),
@@ -64,8 +63,7 @@ const connectAuth = async (req: express.Request, res: express.Response) =&gt; {
 	await connectAuthSchema.validate(req.body, { abortEarly: true });
 	const resp = await connectAuth(new MyRequest&lt;M.ConnectAuthReq&gt;(req));
 	res.json(resp);
-};
-</code></pre><h2 id=직접-써보니까>직접 써보니까</h2><p>선언형 입력 검증 라이브러리를 쓰고 크게 2가지를 얻은거같다.</p><p>입력 검증과 관련된 코드는 줄어들었고 신뢰도는 올라갔다.
+};</code></pre><h2 id=직접-써보니까>직접 써보니까</h2><p>선언형 입력 검증 라이브러리를 쓰고 크게 2가지를 얻은거같다.</p><p>입력 검증과 관련된 코드는 줄어들었고 신뢰도는 올라갔다.
 입력 검증을 직접 구현했다면 입력 검증이 일종의 로직이 되니까 이를 위한 테스트가 필요하다.
 (테스트가 없다면 내가 짠 검증이 제대로 검증하는지 어떻게 믿을 수 있나?)
 그리고 직접 입력 검증을 구현했다면 yup schema보다는 코드가 길었을것이다.
@@ -95,7 +93,6 @@ yup 덕분에 직접 로직을 작성한 것은 거의 없으니 테스트를 �
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

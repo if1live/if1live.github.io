@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2"><meta name=keywords content="http ,design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2"><meta name=keywords content="http ,design"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -8,52 +8,49 @@
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2</h1><div class=tip><time datetime="2019-02-09 00:00:00 +0000 UTC">2019. 02. 09</time></div><div class=content><h2 id=삽질의-시작>삽질의 시작</h2><p>이전에 <a href=https://if1live.github.io/posts/http-get-request-with-body-and-http-library/>HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?</a>를 썼다.
 나중에 자바의 HttpURLConnection의 동작이 안드로이드 버전의 UnityWebRequest와 똑같다는 소리를 들었다.
 유니티 개발자들이 HTTP 라이브러리 만들기 귀찮아서 플랫폼별로 내장된 HTTP 라이브러리를 쓴거 아닐까? 하는 망상을 했다.
-그래서 HttpURLConnection로 HTTP 요청을 보낼때 body 붙이는 짓을 해봤다.</p><h2 id=테스트>테스트</h2><pre><code class=language-js>const express = require('express');
+그래서 HttpURLConnection로 HTTP 요청을 보낼때 body 붙이는 짓을 해봤다.</p><h2 id=테스트>테스트</h2><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.all('/', (req, res) =&gt; {
+app.all(&#39;/&#39;, (req, res) =&gt; {
   res.json({ method: req.method, body: req.body });
 });
 
 const port = 3100;
 app.listen(port, () =&gt; {
   console.log(`server listen - ${port}`);
-});
-</code></pre><p>아래의 <a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods>HTTP request methods</a>는 표준에 정의되어 있다.</p><ul><li>GET</li><li>HEAD : asks for a response identical to that of a GET request, but without the response body.</li><li>POST</li><li>PUT</li><li>DELETE</li><li>CONNECT : establishes a tunnel to the server identified by the target resource.</li><li>OPTIONS</li><li>TRACE</li><li>PATCH</li></ul><p>HEAD와 CONNECT method는 다른 method와 동작이 달라서 보내지 않았다.
+});</code></pre><p>아래의 <a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods>HTTP request methods</a>는 표준에 정의되어 있다.</p><ul><li>GET</li><li>HEAD : asks for a response identical to that of a GET request, but without the response body.</li><li>POST</li><li>PUT</li><li>DELETE</li><li>CONNECT : establishes a tunnel to the server identified by the target resource.</li><li>OPTIONS</li><li>TRACE</li><li>PATCH</li></ul><p>HEAD와 CONNECT method는 다른 method와 동작이 달라서 보내지 않았다.
 나머지 HTTP request method (GET, POST, PUT, DELETE, OPTIONS, TRACE, PATCH)만 테스트해봤다.
-(curl로 HEAD, CONNECT 요청을 보내면 재밌는 결과를 볼수있다.)</p><h3 id=curl>curl</h3><pre><code class=language-bash>#!/bin/bash
+(curl로 HEAD, CONNECT 요청을 보내면 재밌는 결과를 볼수있다.)</p><h3 id=curl>curl</h3><pre><code class="language-bash line-numbers">#!/bin/bash
 
 function request_common {
-    echo -e &quot;$1 =&gt; \c&quot;
+    echo -e &#34;$1 =&gt; \c&#34;
     curl -X $1 http://127.0.0.1:3100/ \
-        -H 'Content-Type: application/json' \
-        -d '{&quot;foo&quot;: 1}' -s
-    echo &quot;&quot;
+        -H &#39;Content-Type: application/json&#39; \
+        -d &#39;{&#34;foo&#34;: 1}&#39; -s
+    echo &#34;&#34;
 }
 
-request_common &quot;GET&quot;
-# request_common &quot;HEAD&quot;
-request_common &quot;POST&quot;
-request_common &quot;PUT&quot;
-request_common &quot;DELETE&quot;
-# request_common &quot;CONNECT&quot;
-request_common &quot;OPTIONS&quot;
-request_common &quot;TRACE&quot;
-request_common &quot;PATCH&quot;
-</code></pre><pre><code class=language-txt>$ bash curl-demo.sh
-GET =&gt; {&quot;method&quot;:&quot;GET&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-POST =&gt; {&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-PUT =&gt; {&quot;method&quot;:&quot;PUT&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-DELETE =&gt; {&quot;method&quot;:&quot;DELETE&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-OPTIONS =&gt; {&quot;method&quot;:&quot;OPTIONS&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-TRACE =&gt; {&quot;method&quot;:&quot;TRACE&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-PATCH =&gt; {&quot;method&quot;:&quot;PATCH&quot;,&quot;body&quot;:{&quot;foo&quot;:1}}
-</code></pre><p>curl을 이용해서 요청을 보낸 경우 서버에서 요청에 붙은 body를 받을 수 있다.
+request_common &#34;GET&#34;
+# request_common &#34;HEAD&#34;
+request_common &#34;POST&#34;
+request_common &#34;PUT&#34;
+request_common &#34;DELETE&#34;
+# request_common &#34;CONNECT&#34;
+request_common &#34;OPTIONS&#34;
+request_common &#34;TRACE&#34;
+request_common &#34;PATCH&#34;</code></pre><pre><code class="language-txt line-numbers">$ bash curl-demo.sh
+GET =&gt; {&#34;method&#34;:&#34;GET&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+POST =&gt; {&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+PUT =&gt; {&#34;method&#34;:&#34;PUT&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+DELETE =&gt; {&#34;method&#34;:&#34;DELETE&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+OPTIONS =&gt; {&#34;method&#34;:&#34;OPTIONS&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+TRACE =&gt; {&#34;method&#34;:&#34;TRACE&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}
+PATCH =&gt; {&#34;method&#34;:&#34;PATCH&#34;,&#34;body&#34;:{&#34;foo&#34;:1}}</code></pre><p>curl을 이용해서 요청을 보낸 경우 서버에서 요청에 붙은 body를 받을 수 있다.
 curl로 요청을 보낸 경우 응답이 원하는대로 나온다.
-서버는 잘 돌아간다는걸 확인할 수 있다.</p><h3 id=java-httpurlconnection>java HttpURLConnection</h3><pre><code class=language-java>import java.net.URL;
+서버는 잘 돌아간다는걸 확인할 수 있다.</p><h3 id=java-httpurlconnection>java HttpURLConnection</h3><pre><code class="language-java line-numbers">import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -61,25 +58,25 @@ import java.util.stream.Collectors;
 
 public class Demo {
     public static void requestCommon(String method) throws Exception {
-        String query = &quot;http://127.0.0.1:3100&quot;;
-        String json = &quot;{\&quot;key\&quot;:1}&quot;;
+        String query = &#34;http://127.0.0.1:3100&#34;;
+        String json = &#34;{\&#34;key\&#34;:1}&#34;;
 
         URL url = new URL(query);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(5000);
-        conn.setRequestProperty(&quot;Content-Type&quot;, &quot;application/json; charset=UTF-8&quot;);
+        conn.setRequestProperty(&#34;Content-Type&#34;, &#34;application/json; charset=UTF-8&#34;);
         conn.setDoOutput(true);
         conn.setDoInput(true);
         conn.setRequestMethod(method);
 
         OutputStream os = conn.getOutputStream();
-        os.write(json.getBytes(&quot;UTF-8&quot;));
+        os.write(json.getBytes(&#34;UTF-8&#34;));
         os.close();
 
         // read the response
         Charset charset = Charset.defaultCharset();
         InputStream in = new BufferedInputStream(conn.getInputStream());
-        String resp = &quot;&quot;;
+        String resp = &#34;&#34;;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in, charset))) {
            resp = br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
@@ -92,18 +89,18 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
         String[] methods = {
-            &quot;GET&quot;,
-            // &quot;HEAD&quot;,
-            &quot;POST&quot;,
-            &quot;PUT&quot;,
-            &quot;DELETE&quot;,
-            // &quot;CONNECT&quot;,
-            &quot;OPTIONS&quot;,
-            &quot;TRACE&quot;,
-            &quot;PATCH&quot;,
+            &#34;GET&#34;,
+            // &#34;HEAD&#34;,
+            &#34;POST&#34;,
+            &#34;PUT&#34;,
+            &#34;DELETE&#34;,
+            // &#34;CONNECT&#34;,
+            &#34;OPTIONS&#34;,
+            &#34;TRACE&#34;,
+            &#34;PATCH&#34;,
         };
         for(String method : methods) {
-            System.out.print(method + &quot; =&gt; &quot;);
+            System.out.print(method &#43; &#34; =&gt; &#34;);
             try {
                 requestCommon(method);
             } catch(Exception e) {
@@ -111,29 +108,26 @@ public class Demo {
             }
         }
     }
-}
-</code></pre><pre><code class=language-txt>GET =&gt; {&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;key&quot;:1}}
-POST =&gt; {&quot;method&quot;:&quot;POST&quot;,&quot;body&quot;:{&quot;key&quot;:1}}
-PUT =&gt; {&quot;method&quot;:&quot;PUT&quot;,&quot;body&quot;:{&quot;key&quot;:1}}
-DELETE =&gt; {&quot;method&quot;:&quot;DELETE&quot;,&quot;body&quot;:{&quot;key&quot;:1}}
-OPTIONS =&gt; {&quot;method&quot;:&quot;OPTIONS&quot;,&quot;body&quot;:{&quot;key&quot;:1}}
-TRACE =&gt; HTTP method TRACE doesn't support output
-PATCH =&gt; Invalid HTTP method: PATCH
-</code></pre><p>자바의 HttpURLConnection를 사용한 경우의 출력이다.
+}</code></pre><pre><code class="language-txt line-numbers">GET =&gt; {&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;key&#34;:1}}
+POST =&gt; {&#34;method&#34;:&#34;POST&#34;,&#34;body&#34;:{&#34;key&#34;:1}}
+PUT =&gt; {&#34;method&#34;:&#34;PUT&#34;,&#34;body&#34;:{&#34;key&#34;:1}}
+DELETE =&gt; {&#34;method&#34;:&#34;DELETE&#34;,&#34;body&#34;:{&#34;key&#34;:1}}
+OPTIONS =&gt; {&#34;method&#34;:&#34;OPTIONS&#34;,&#34;body&#34;:{&#34;key&#34;:1}}
+TRACE =&gt; HTTP method TRACE doesn&#39;t support output
+PATCH =&gt; Invalid HTTP method: PATCH</code></pre><p>자바의 HttpURLConnection를 사용한 경우의 출력이다.
 body가 붙은 HTTP 요청을 보내니까 HTTP request method에 따라서 출력이 다르다.
 비슷한거끼리 묶어서 보자.</p><table><thead><tr><th>HTTP request method</th><th>desc</th></tr></thead><tbody><tr><td>GET</td><td>POST로 보내진다.</td></tr><tr><td>POST, PUT, DELETE, OPTION</td><td>성공</td></tr><tr><td>TRACE</td><td>HTTP method TRACE doesn&rsquo;t support output</td></tr><tr><td>PATCH</td><td>Invalid HTTP method: PATCH</td></tr></tbody></table><h2 id=httpurlconnection>HttpURLConnection?</h2><h3 id=get이-post로-바뀐-이유>GET이 POST로 바뀐 이유</h3><p>동작이 이상해보일때는 소스를 뜯어보자.
 스펙을 뒤지는 사람도 있던데 나는 영어를 못해서 그런거 힘들어.
 검색하다보니 스택오버플로우에서 <a href=https://stackoverflow.com/a/27243207>좋은 답변</a>을 찾았다.</p><p>답변에서는 SUN자바의 HttpURLConnection 구현을 찍어주더라.
 하지만 접속이 안되더라.
-그래서 OpenJDK에서 비슷한 코드를 찾았다.</p><p><a href=http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/tip/src/share/classes/sun/net/www/protocol/http/HttpURLConnection.java#l1072>http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/tip/src/share/classes/sun/net/www/protocol/http/HttpURLConnection.java#l1072</a></p><pre><code class=language-java>if (method.equals(&quot;GET&quot;)) {
-    method = &quot;POST&quot;; // Backward compatibility
+그래서 OpenJDK에서 비슷한 코드를 찾았다.</p><p><a href=http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/tip/src/share/classes/sun/net/www/protocol/http/HttpURLConnection.java#l1072>http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/tip/src/share/classes/sun/net/www/protocol/http/HttpURLConnection.java#l1072</a></p><pre><code class="language-java line-numbers">if (method.equals(&#34;GET&#34;)) {
+    method = &#34;POST&#34;; // Backward compatibility
 }
-if (!&quot;POST&quot;.equals(method) &amp;&amp; !&quot;PUT&quot;.equals(method) &amp;&amp;
-    &quot;http&quot;.equals(url.getProtocol())) {
-    throw new ProtocolException(&quot;HTTP method &quot; + method +
-                                &quot; doesn't support output&quot;);
-}
-</code></pre><p>Backward compatibility라니!
+if (!&#34;POST&#34;.equals(method) &amp;&amp; !&#34;PUT&#34;.equals(method) &amp;&amp;
+    &#34;http&#34;.equals(url.getProtocol())) {
+    throw new ProtocolException(&#34;HTTP method &#34; &#43; method &#43;
+                                &#34; doesn&#39;t support output&#34;);
+}</code></pre><p>Backward compatibility라니!
 하위 호환성 문제로 request body가 붙은 GET 요청은 POST로 바꿔친댄다.
 그렇다면 하위 호환성이 발생한 이유에 대해 망상해보자.
 멍청한 결정을 분석할때는 역사적 배경도 고려해야된다.
@@ -149,18 +143,17 @@ HTTP request method는 OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE가 되었다
 JDK 1.1의 생일과 HTTP/1.1의 생일은 1달 밖에 차이나지 않는다.
 개발 기간을 생각하면 HttpURLConnection은 HTTP/1.1이 아니라 HTTP/1.0을 보고 만들었을것이다.
 HTTP/1.0에는 HEAD, GET, POST뿐이니 request body가 붙은 요청을 POST로 바꾸는게 멍청한 구현이 아니다.
-HTTP/1.1이었다면 request body가 붙는 요청이 POST말고도 PUT, PATCH도 있으니까 멋대로 GET을 POST로 바꾸면 안된다.</p><p>HTTP 코드랑 구현체의 주석을 보니 초기에 만든 동작을 그대로 유지시켰나보다.</p><h3 id=http-method-trace-doesnt-support-output>HTTP method TRACE doesn&rsquo;t support output</h3><p>wikipedia의 <a href=https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol>Hypertext Transfer Protocol</a>의 summary table을 보면 TRACE method은 body 안붙는게 표준이다.</p><p><p class=markdown-image><img src=http-summary-table.png alt="summary table"></p></p><h3 id=invalid-http-method-patch>Invalid HTTP method: PATCH</h3><p>HTTP request method중에서 PATCH는 특별하다. 스펙 문서부터 다르다.
+HTTP/1.1이었다면 request body가 붙는 요청이 POST말고도 PUT, PATCH도 있으니까 멋대로 GET을 POST로 바꾸면 안된다.</p><p>HTTP 코드랑 구현체의 주석을 보니 초기에 만든 동작을 그대로 유지시켰나보다.</p><h3 id=http-method-trace-doesnt-support-output>HTTP method TRACE doesn&rsquo;t support output</h3><p>wikipedia의 <a href=https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol>Hypertext Transfer Protocol</a>의 summary table을 보면 TRACE method은 body 안붙는게 표준이다.</p><p><p class=markdown-image><a href=http-summary-table.png target=_blank><img src=http-summary-table.png alt="summary table"></a></p></p><h3 id=invalid-http-method-patch>Invalid HTTP method: PATCH</h3><p>HTTP request method중에서 PATCH는 특별하다. 스펙 문서부터 다르다.
 PATCH는 RFC5789 <a href=https://tools.ietf.org/html/rfc5789>PATCH Method for HTTP</a>에 정의되어있다.
 게다가 PATCH는 request body 규격도 정의되어있다.
-RFC6902 <a href=https://tools.ietf.org/html/rfc6902>JavaScript Object Notation (JSON) Patch</a>를 보면 아래의 코드가 들어있다.</p><pre><code class=language-json>[
-  { &quot;op&quot;: &quot;test&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: &quot;foo&quot; },
-  { &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;/a/b/c&quot; },
-  { &quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: [ &quot;foo&quot;, &quot;bar&quot; ] },
-  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: 42 },
-  { &quot;op&quot;: &quot;move&quot;, &quot;from&quot;: &quot;/a/b/c&quot;, &quot;path&quot;: &quot;/a/b/d&quot; },
-  { &quot;op&quot;: &quot;copy&quot;, &quot;from&quot;: &quot;/a/b/d&quot;, &quot;path&quot;: &quot;/a/b/e&quot; }
-]
-</code></pre><p>POST, PUT 같은건 request body 규격으로 바가지 안긁는다. 상세 구현은 알아서 적당히 하면 된다.
+RFC6902 <a href=https://tools.ietf.org/html/rfc6902>JavaScript Object Notation (JSON) Patch</a>를 보면 아래의 코드가 들어있다.</p><pre><code class="language-json line-numbers">[
+  { &#34;op&#34;: &#34;test&#34;, &#34;path&#34;: &#34;/a/b/c&#34;, &#34;value&#34;: &#34;foo&#34; },
+  { &#34;op&#34;: &#34;remove&#34;, &#34;path&#34;: &#34;/a/b/c&#34; },
+  { &#34;op&#34;: &#34;add&#34;, &#34;path&#34;: &#34;/a/b/c&#34;, &#34;value&#34;: [ &#34;foo&#34;, &#34;bar&#34; ] },
+  { &#34;op&#34;: &#34;replace&#34;, &#34;path&#34;: &#34;/a/b/c&#34;, &#34;value&#34;: 42 },
+  { &#34;op&#34;: &#34;move&#34;, &#34;from&#34;: &#34;/a/b/c&#34;, &#34;path&#34;: &#34;/a/b/d&#34; },
+  { &#34;op&#34;: &#34;copy&#34;, &#34;from&#34;: &#34;/a/b/d&#34;, &#34;path&#34;: &#34;/a/b/e&#34; }
+]</code></pre><p>POST, PUT 같은건 request body 규격으로 바가지 안긁는다. 상세 구현은 알아서 적당히 하면 된다.
 PATCH는 리소스 변경을 목적으로 나왔느니 조금 더 신경쓴 느낌이다.</p><p>HttpURLConnection에서 PATCH를 지원하지 않는걸보니 최신 스펙에 맞춰서 유지보수하는 클래스가 아닌가보다.
 힙스터가 자바에서 HTTP 통신 사용할일 있으면 HttpURLConnection 쓰면 안되겠다.</p><h2 id=reference>reference</h2><ul><li><a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods>MDN HTTP request methods</a></li><li><a href=https://tools.ietf.org/html/rfc1945>Hypertext Transfer Protocol &ndash; HTTP/1.0</a></li><li><a href=https://tools.ietf.org/html/rfc7231>Hypertext Transfer Protocol &ndash; HTTP/1.1</a></li><li><a href=https://tools.ietf.org/html/rfc5789>PATCH Method for HTTP</a></li><li><a href=https://tools.ietf.org/html/rfc6902>JavaScript Object Notation (JSON) Patch</a></li><li><a href=RFC2616.pdf>Hypertext Transfer Protocol &ndash; HTTP 1.1, 한국전자통신연구소 번역</a></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/http>http</a>
 <a href=https://if1live.github.io/tags/design>design</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
@@ -185,7 +178,6 @@ PATCH는 리소스 변경을 목적으로 나왔느니 조금 더 신경쓴 느�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

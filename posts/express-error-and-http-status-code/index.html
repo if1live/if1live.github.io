@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>express에서 에러로 HTTP status code 통제하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="express에서 에러로 HTTP status code 통제하기"><meta name=keywords content="express ,javascript ,http ,web"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>express에서 에러로 HTTP status code 통제하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="express에서 에러로 HTTP status code 통제하기"><meta name=keywords content="express ,javascript ,http ,web"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -7,39 +7,36 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>express에서 에러로 HTTP status code 통제하기</h1><div class=tip><time datetime="2019-08-12 00:00:00 +0000 UTC">2019. 08. 12</time></div><div class=content><h2 id=throw-new-errorbadrequest>throw new Error(&lsquo;BadRequest&rsquo;)</h2><p>자바스크립트에서 Error를 던져서 에러 처리하는 것은 쉽고 간단한 방법이다.
 express에서도 마찬가지이다.
-Error를 던지면 200 OK가 아닌 500 Internal Server Error를 발생시킬 수 있다.</p><pre><code class=language-js>const express = require('express');
+Error를 던지면 200 OK가 아닌 500 Internal Server Error를 발생시킬 수 있다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 const app = express();
 
-app.get('/', (req, res) =&gt; {
-  throw new Error('BadRequest');
+app.get(&#39;/&#39;, (req, res) =&gt; {
+  throw new Error(&#39;BadRequest&#39;);
 });
-app.listen(3000, () =&gt; { console.log('listen'); });
-</code></pre><p>요즘 세상에 에러났다고 무조건 500을 던지면 멍청한 REST API처럼 보인다.
+app.listen(3000, () =&gt; { console.log(&#39;listen&#39;); });</code></pre><p>요즘 세상에 에러났다고 무조건 500을 던지면 멍청한 REST API처럼 보인다.
 상황에 맞춰서 4xx, 5xx를 던져야한다.
-500 아닌 상태 코드를 보내고 싶으면 <code>res.status()</code>를 사용하면 된다.</p><pre><code class=language-js>const express = require('express');
+500 아닌 상태 코드를 보내고 싶으면 <code>res.status()</code>를 사용하면 된다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 const app = express();
 
-app.get('/', (req, res) =&gt; {
-  res.status(400).json({ text: 'todo' });
+app.get(&#39;/&#39;, (req, res) =&gt; {
+  res.status(400).json({ text: &#39;todo&#39; });
 });
-app.listen(3000, () =&gt; { console.log('listen'); });
-</code></pre><p>나는 둘을 합치고 싶다.
+app.listen(3000, () =&gt; { console.log(&#39;listen&#39;); });</code></pre><p>나는 둘을 합치고 싶다.
 <code>BadRequest</code>라는 에러를 던지면 400,
 <code>NotFound</code>라는 에러를 던지면 404가 HTTP status code로 찍히게 만들고 싶다.</p><h2 id=짧은-방법>짧은 방법</h2><p><a href=https://www.npmjs.com/package/http-errors>http-errors</a>를 사용하면 간단하다.
-바퀴는 새로 발명하는게 아니다.</p><pre><code class=language-js>const express = require('express');
-const createError = require('http-errors');
+바퀴는 새로 발명하는게 아니다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
+const createError = require(&#39;http-errors&#39;);
 const app = express();
 
-app.get('/', (req, res) =&gt; {
+app.get(&#39;/&#39;, (req, res) =&gt; {
   throw new createError.BadRequest();
 });
-app.listen(3000, () =&gt; { console.log('listen'); });
-</code></pre><h2 id=알아봐서-별-쓸모없는-정보>알아봐서 별 쓸모없는 정보</h2><p>심심한 사람만 읽어보자.
+app.listen(3000, () =&gt; { console.log(&#39;listen&#39;); });</code></pre><h2 id=알아봐서-별-쓸모없는-정보>알아봐서 별 쓸모없는 정보</h2><p>심심한 사람만 읽어보자.
 당장 눈 앞의 문제 해결에는 도움이 되지 않는 내용이다.
 하지만 알고있으면 자신의 문제에 응용할 수 있을 것이다.</p><h3 id=왜-throw-new-error를-쓰면-안되는가>왜 <code>throw new Error()</code>를 쓰면 안되는가?</h3><p><code>throw new Error()</code>는 편한 도구이다.
 <code>http-errors</code>를 깔고 import하지 않아도 에러를 만들어서 던질 수 있지 않는가?
 게다가 에러가 던져지면 200이 뜨진 않는다.
-REST API라고 부르기에는 멍청하지만 대충 쓸만하다.</p><p>하지만 sentry가 붙으면 문제가 커진다.</p><p><a href=https://github.com/getsentry/sentry-javascript/blob/v3.27.2/packages/node/src/handlers.ts#L270>https://github.com/getsentry/sentry-javascript/blob/v3.27.2/packages/node/src/handlers.ts#L270</a></p><pre><code class=language-js>export function errorHandler(): (
+REST API라고 부르기에는 멍청하지만 대충 쓸만하다.</p><p>하지만 sentry가 붙으면 문제가 커진다.</p><p><a href=https://github.com/getsentry/sentry-javascript/blob/v3.27.2/packages/node/src/handlers.ts#L270>https://github.com/getsentry/sentry-javascript/blob/v3.27.2/packages/node/src/handlers.ts#L270</a></p><pre><code class="language-js line-numbers">export function errorHandler(): (
   error: MiddlewareError,
   req: http.IncomingMessage,
   res: http.ServerResponse,
@@ -60,35 +57,32 @@ REST API라고 부르기에는 멍청하지만 대충 쓸만하다.</p><p>하지
     (_res as any).sentry = eventId;
     next(error);
   };
-}
-</code></pre><p><a href=https://github.com/getsentry/sentry-javascript/>Official Sentry SDKs for JavaScript</a>의 경우 HTTP 상태 코드가 5xx이면 에러 리포팅 올리는게 기본값이다.
+}</code></pre><p><a href=https://github.com/getsentry/sentry-javascript/>Official Sentry SDKs for JavaScript</a>의 경우 HTTP 상태 코드가 5xx이면 에러 리포팅 올리는게 기본값이다.
 <code>throw new Error</code>로 던진 에러가 전부 sentry에 등록된다.
 이는 당신이 의도한 동작이 아닐 것이다.</p><h3 id=왜-기본값이-500인가>왜 기본값이 500인가?</h3><p>express는 finalhandler를 기본 에러 핸들러도 사용한다.
-<a href=https://github.com/expressjs/express/blob/4.17.1/lib/application.js>application.js</a></p><pre><code class=language-js>app.handle = function handle(req, res, callback) {
+<a href=https://github.com/expressjs/express/blob/4.17.1/lib/application.js>application.js</a></p><pre><code class="language-js line-numbers">app.handle = function handle(req, res, callback) {
   var router = this._router;
 
   // final handler
   var done = callback || finalhandler(req, res, {
-    env: this.get('env'),
+    env: this.get(&#39;env&#39;),
     onerror: logerror.bind(this)
   });
-  ...
-</code></pre><p><a href=https://github.com/pillarjs/finalhandler>finalhandler</a>의 README를 참고하면 500이 되는 이유를 알 수 있다.</p><blockquote><p>The res.statusCode is set from err.status (or err.statusCode).
+  ...</code></pre><p><a href=https://github.com/pillarjs/finalhandler>finalhandler</a>의 README를 참고하면 500이 되는 이유를 알 수 있다.</p><blockquote><p>The res.statusCode is set from err.status (or err.statusCode).
 If this value is outside the 4xx or 5xx range, it will be set to 500.</p></blockquote><h3 id=4xx-5xx는-어떻게-던질수-있는가>4xx, 5xx는 어떻게 던질수 있는가?</h3><p><code>http-errors</code> 쓰는 대신 에러 클래스를 직접 구현하고 싶은 생각이 들지 모른다.
 <code>http-errors</code>를 직접 만들어보자.
 위에서 언급한 finalhandler의 README를 보면 구현할 수 있다.
-에러 객체에 <code>status</code> 또는 <code>statusCode</code>로 원하는 상태 코드를 넣어준다.</p><pre><code class=language-js>const express = require('express');
+에러 객체에 <code>status</code> 또는 <code>statusCode</code>로 원하는 상태 코드를 넣어준다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 const app = express();
 
-app.get('/', (req, res) =&gt; {
-  const e = new Error('sample');
+app.get(&#39;/&#39;, (req, res) =&gt; {
+  const e = new Error(&#39;sample&#39;);
   e.status = 400;
   throw e;
 });
-app.listen(3000, () =&gt; { console.log('listen'); });
-</code></pre><h3 id=라이브러리에서-던져진-에러는-어떻게-제어할-수-있는가>라이브러리에서 던져진 에러는 어떻게 제어할 수 있는가?</h3><p>Error에 status, statusCode 넣는건 자바스크립트 세상의 표준이 아니다.
-그래서 많은 라이브러리의 에러 클래스에는 status, statusCode 속성이 없다.</p><p><a href=https://github.com/jquense/yup/blob/v0.27.0/src/ValidationError.js>yup/ValidationError</a></p><pre><code class=language-js>export default function ValidationError(errors, value, field, type) {
-  this.name = 'ValidationError';
+app.listen(3000, () =&gt; { console.log(&#39;listen&#39;); });</code></pre><h3 id=라이브러리에서-던져진-에러는-어떻게-제어할-수-있는가>라이브러리에서 던져진 에러는 어떻게 제어할 수 있는가?</h3><p>Error에 status, statusCode 넣는건 자바스크립트 세상의 표준이 아니다.
+그래서 많은 라이브러리의 에러 클래스에는 status, statusCode 속성이 없다.</p><p><a href=https://github.com/jquense/yup/blob/v0.27.0/src/ValidationError.js>yup/ValidationError</a></p><pre><code class="language-js line-numbers">export default function ValidationError(errors, value, field, type) {
+  this.name = &#39;ValidationError&#39;;
   this.value = value;
   this.path = field;
   this.type = type;
@@ -101,29 +95,27 @@ app.listen(3000, () =&gt; { console.log('listen'); });
       : this.errors[0];
 
   if (Error.captureStackTrace) Error.captureStackTrace(this, ValidationError);
-}
-</code></pre><p><a href=https://github.com/auth0/node-jsonwebtoken/blob/master/lib/JsonWebTokenError.js>jsonwebtoken/JsonWebTokenError</a></p><pre><code class=language-js>var JsonWebTokenError = function (message, error) {
+}</code></pre><p><a href=https://github.com/auth0/node-jsonwebtoken/blob/master/lib/JsonWebTokenError.js>jsonwebtoken/JsonWebTokenError</a></p><pre><code class="language-js line-numbers">var JsonWebTokenError = function (message, error) {
   // ...
-  this.name = 'JsonWebTokenError';
+  this.name = &#39;JsonWebTokenError&#39;;
   this.message = message;
   if (error) this.inner = error;
-};
-</code></pre><p>위와 같은 라이브러리를 사용하는데 에러가 던져지면 어떻게 대응할까?
+};</code></pre><p>위와 같은 라이브러리를 사용하는데 에러가 던져지면 어떻게 대응할까?
 <code>catch</code>를 통해서 라이브러리에서 던져진 에러를 잡은 후 <code>http-errors</code>로 다시 던지는 것도 방법이다.
 하지만 기존 코드를 전부 <code>catch</code>로 감싸는건 너무 무식하다.
 express middleware를 사용하면 조금 우아하게 처리할 수 있다.
-에러 핸들러에서 <code>err.name</code>를 확인하고 원하는 에러를 대신 던지는 식으로 처리할 수 있다.</p><pre><code class=language-js>const express = require('express');
-const createErrors = require('http-errors');
-const jwt = require('jsonwebtoken');
+에러 핸들러에서 <code>err.name</code>를 확인하고 원하는 에러를 대신 던지는 식으로 처리할 수 있다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
+const createErrors = require(&#39;http-errors&#39;);
+const jwt = require(&#39;jsonwebtoken&#39;);
 const app = express();
 
-app.get('/', (req, res) =&gt; {
-  throw new jwt.JsonWebTokenError('this is sample error');
+app.get(&#39;/&#39;, (req, res) =&gt; {
+  throw new jwt.JsonWebTokenError(&#39;this is sample error&#39;);
 });
 
 const newErrorMap = new Map([
-  ['JsonWebTokenError', createErrors.BadRequest],
-  ['ValidationError', createErrors.BadRequest],
+  [&#39;JsonWebTokenError&#39;, createErrors.BadRequest],
+  [&#39;ValidationError&#39;, createErrors.BadRequest],
 ]);
 
 app.use((err, req, res, next) =&gt; {
@@ -135,8 +127,7 @@ app.use((err, req, res, next) =&gt; {
   }
 });
 
-app.listen(3000, () =&gt; { console.log('listen'); });
-</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/express>express</a>
+app.listen(3000, () =&gt; { console.log(&#39;listen&#39;); });</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/express>express</a>
 <a href=https://if1live.github.io/tags/javascript>javascript</a>
 <a href=https://if1live.github.io/tags/http>http</a>
 <a href=https://if1live.github.io/tags/web>web</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
@@ -161,7 +152,6 @@ app.listen(3000, () =&gt; { console.log('listen'); });
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

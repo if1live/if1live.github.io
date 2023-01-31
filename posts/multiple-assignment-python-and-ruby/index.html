@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment"><meta name=keywords content="python ,ruby ,multiple assignment"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="예제로 보는 Python과 Ruby의 문법 차이 - Multiple Assignment"><meta name=keywords content="python ,ruby ,multiple assignment"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -9,31 +9,25 @@
 그래서 파이썬을 생각하면서 루비 코드를 짜면 어처구니 없는 버그가 생긴다.
 이런 일을 방지하고자 지금까지 당해본 파이썬과 루비의 문법 차이를 정리하려고 한다.
 오늘은 Multiple Assignment이다. (여러 개의 변수에 값을 동시에 할당하기)</p><h2 id=python-2x>Python 2.x</h2><p>변수 1개에 정수를 1개 할당하는 것부터 시작하자.
-매우 기본적인 문법이다.</p><pre><code>source: a = 1
-a=1
-</code></pre><p>변수 2개에 정수를 2개 할당하면 어떻게 될까?
+매우 기본적인 문법이다.</p><pre class=markdown-textblock><code>source: a = 1
+a=1</code></pre><p>변수 2개에 정수를 2개 할당하면 어떻게 될까?
 <code>1, 2</code> 이라고 썻기때문에 값이 2개인 것처럼 보이지만 사실 파이썬에서는 <code>(1, 2)</code> 같이 튜플로 묶어서 처리한다.
-2개의 값이 들어있는 하나의 튜플을 쪼개서 2개의 변수에 할당하는 식으로 동작한다. (이는 쉘에서 확인할 수 있다)</p><pre><code>source: a, b = 1, 2
+2개의 값이 들어있는 하나의 튜플을 쪼개서 2개의 변수에 할당하는 식으로 동작한다. (이는 쉘에서 확인할 수 있다)</p><pre class=markdown-textblock><code>source: a, b = 1, 2
 a=1
 b=2
 
-&gt;&gt;&gt; 1, 2
-(1, 2)
-</code></pre><p>변수 1개에 정수를 2개 할당하면 어떻게 될까?
-<code>1,2</code>는 <code>(1, 2)</code>과 동일하기 때문에 변수에 튜플이 할당된다.</p><pre><code>source: a = 1, 2
-a=(1, 2)
-</code></pre><p>변수 2개에 정수 값을 하나만 할당하면 어떻게 될까?
+>>> 1, 2
+(1, 2)</code></pre><p>변수 1개에 정수를 2개 할당하면 어떻게 될까?
+<code>1,2</code>는 <code>(1, 2)</code>과 동일하기 때문에 변수에 튜플이 할당된다.</p><pre class=markdown-textblock><code>source: a = 1, 2
+a=(1, 2)</code></pre><p>변수 2개에 정수 값을 하나만 할당하면 어떻게 될까?
 튜플이었으면 쪼개서 변수에 값을 할당하는 것이 가능하지만 정수는 그렇게 할수 없다.
-그래서 예외가 발생한다.</p><pre><code>source: a, b = 1
-TypeError: 'int' object is not iterable
-</code></pre><p>변수 2개에 정수값 3개를 할당하면 어떻게 될까?
-남는 값을 변수에 할당할수 없어서 예외가 발생한다.</p><pre><code>source: a, b = 1, 2, 3
-ValueError: too many values to unpack
-</code></pre><p>wildcard 같은 느낌으로 매칭되고 남은 것을 튜플로 묶어서 변수에 할당하는게 가능할까?
-아쉽게도 파이썬 2.x에는 이런 문법이 존재하지 않는다.</p><pre><code>source: a, *b = 1, 2, 3
-SyntaxError: invalid syntax (&lt;string&gt;, line 1)
-</code></pre><h2 id=python-3x>Python 3.x</h2><p>파이썬 3.x는 단순한 버전 업그레이드가 아니다. 문법 차이가 많이 존재한다.
-그 중의 하나가 multiple assignment이다.</p><p>파이썬 2.x와 동일한 내용은 결과만 기록해두었다.</p><pre><code>source: a = 1
+그래서 예외가 발생한다.</p><pre class=markdown-textblock><code>source: a, b = 1
+TypeError: 'int' object is not iterable</code></pre><p>변수 2개에 정수값 3개를 할당하면 어떻게 될까?
+남는 값을 변수에 할당할수 없어서 예외가 발생한다.</p><pre class=markdown-textblock><code>source: a, b = 1, 2, 3
+ValueError: too many values to unpack</code></pre><p>wildcard 같은 느낌으로 매칭되고 남은 것을 튜플로 묶어서 변수에 할당하는게 가능할까?
+아쉽게도 파이썬 2.x에는 이런 문법이 존재하지 않는다.</p><pre class=markdown-textblock><code>source: a, *b = 1, 2, 3
+SyntaxError: invalid syntax (<string>, line 1)</code></pre><h2 id=python-3x>Python 3.x</h2><p>파이썬 3.x는 단순한 버전 업그레이드가 아니다. 문법 차이가 많이 존재한다.
+그 중의 하나가 multiple assignment이다.</p><p>파이썬 2.x와 동일한 내용은 결과만 기록해두었다.</p><pre class=markdown-textblock><code>source: a = 1
 a=1
 
 source: a, b = 1, 2
@@ -44,18 +38,15 @@ source: a = 1, 2
 a=(1, 2)
 
 source: a, b = 1
-TypeError: 'int' object is not iterable
-</code></pre><p>변수 2개에 정수값 3개를 할당하면 파이썬 2.x와 비슷하면 예외가 발생하지만 완전히 똑같진 않다.
+TypeError: 'int' object is not iterable</code></pre><p>변수 2개에 정수값 3개를 할당하면 파이썬 2.x와 비슷하면 예외가 발생하지만 완전히 똑같진 않다.
 예외 메세지 안에 <code>(expected 2)</code> 가 추가되었다.
-예외 메세지가 바뀌었다는건 multiple assignment에서 파이썬 2.x와 행동이 다른 부분이 있다는거겠지?</p><pre><code>source: a, b = 1, 2, 3
-ValueError: too many values to unpack (expected 2)
-</code></pre><p>파이썬 3.x부터는 튜플의 크기가 변수보다 큰 경우 남는 것을 몰아서 할당하는 것이 가능하다.
+예외 메세지가 바뀌었다는건 multiple assignment에서 파이썬 2.x와 행동이 다른 부분이 있다는거겠지?</p><pre class=markdown-textblock><code>source: a, b = 1, 2, 3
+ValueError: too many values to unpack (expected 2)</code></pre><p>파이썬 3.x부터는 튜플의 크기가 변수보다 큰 경우 남는 것을 몰아서 할당하는 것이 가능하다.
 wildcard같은 느낌으로 변수앞에 <code>*</code>를 붙여주면 된다.
-<code>*</code>가 없는 항목에 값이 1개 들어가고 <code>*</code>가 있는 것에는 남은 변수가 튜플 형태로 할당된다.</p><pre><code>source: a, *b = 1, 2, 3
+<code>*</code>가 없는 항목에 값이 1개 들어가고 <code>*</code>가 있는 것에는 남은 변수가 튜플 형태로 할당된다.</p><pre class=markdown-textblock><code>source: a, *b = 1, 2, 3
 a=1
-b=[2, 3]
-</code></pre><p><code>*</code>는 맨 앞에 오는것도 가능하고 중간에 오는것도 가능하고 끝에 오는것도 가능하다.
-적절하게 매칭되서 변수에 값이 할당된다.</p><pre><code>source: a, b, *c = 1, 2, 3, 4, 5
+b=[2, 3]</code></pre><p><code>*</code>는 맨 앞에 오는것도 가능하고 중간에 오는것도 가능하고 끝에 오는것도 가능하다.
+적절하게 매칭되서 변수에 값이 할당된다.</p><pre class=markdown-textblock><code>source: a, b, *c = 1, 2, 3, 4, 5
 a=1
 b=2
 c=[3, 4, 5]
@@ -68,33 +59,25 @@ c=5
 source: *a, b, c = 1, 2, 3, 4, 5
 a=[1, 2, 3]
 b=4
-c=5
-</code></pre><p>변수의 갯수보다 튜플의 크기가 작아서 <code>*</code>에 할당될 변수가 없을때도 예외없이 잘 굴러간다.</p><pre><code>source: a, *b, c = 1, 2
+c=5</code></pre><p>변수의 갯수보다 튜플의 크기가 작아서 <code>*</code>에 할당될 변수가 없을때도 예외없이 잘 굴러간다.</p><pre class=markdown-textblock><code>source: a, *b, c = 1, 2
 a=1
 b=[]
-c=2
-</code></pre><h2 id=ruby>Ruby</h2><p>변수 하나에 정수값 하나를 할당하는건 기본적인 문법이다.</p><pre><code>source: a = 1
+c=2</code></pre><h2 id=ruby>Ruby</h2><p>변수 하나에 정수값 하나를 할당하는건 기본적인 문법이다.</p><pre class=markdown-textblock><code>source: a = 1
+a = 1</code></pre><p>변수 2개에 정수값 2개를 할당하는 것도 가능하다.</p><pre class=markdown-textblock><code>source: a, b = 1, 2
 a = 1
-</code></pre><p>변수 2개에 정수값 2개를 할당하는 것도 가능하다.</p><pre><code>source: a, b = 1, 2
-a = 1
-b = 2
-</code></pre><p>겉보기에는 파이썬과 똑같아보이지만 내부는 다르다.
-루비에서는 <code>1, 2</code>만 쓰면 문법 에러가 발생한다. (파이썬에서는 튜플로 취급)</p><pre><code>irb(main):001:0&gt; 1, 2
+b = 2</code></pre><p>겉보기에는 파이썬과 똑같아보이지만 내부는 다르다.
+루비에서는 <code>1, 2</code>만 쓰면 문법 에러가 발생한다. (파이썬에서는 튜플로 취급)</p><pre class=markdown-textblock><code>irb(main):001:0> 1, 2
 SyntaxError: (irb):1: syntax error, unexpected ',', expecting end-of-input
-        from /Users/yurie/.rbenv/versions/2.1.5/bin/irb:11:in `&lt;main&gt;'
-</code></pre><p>변수 하나에 정수값 2개를 할당하면 배열이 된다.</p><pre><code>source: a = 1, 2
-a = [1, 2]
-</code></pre><p>변수 2개에 정수값 하나를 할당하면 어떻게 될까?
+        from /Users/yurie/.rbenv/versions/2.1.5/bin/irb:11:in `<main>'</code></pre><p>변수 하나에 정수값 2개를 할당하면 배열이 된다.</p><pre class=markdown-textblock><code>source: a = 1, 2
+a = [1, 2]</code></pre><p>변수 2개에 정수값 하나를 할당하면 어떻게 될까?
 파이썬에서는 예외가 발생했다.
-루비에서는 문제없이 실행된다. 다만 짝이 맞지않는 변수에는 <code>nil</code>이 들어간다.</p><pre><code>source: a, b = 1
+루비에서는 문제없이 실행된다. 다만 짝이 맞지않는 변수에는 <code>nil</code>이 들어간다.</p><pre class=markdown-textblock><code>source: a, b = 1
 a = 1
-b = nil
-</code></pre><p>변수 2개에 정수갑 3개를 할당하면 어떻게 될까?
+b = nil</code></pre><p>변수 2개에 정수갑 3개를 할당하면 어떻게 될까?
 파이썬에서는 예외가 발생했다.
-루비에서는 문제없이 실행된다. 그리고 짝이 맞지 않는 값은 버린다.</p><pre><code>source: a, b = 1, 2, 3
+루비에서는 문제없이 실행된다. 그리고 짝이 맞지 않는 값은 버린다.</p><pre class=markdown-textblock><code>source: a, b = 1, 2, 3
 a = 1
-b = 2
-</code></pre><p><code>*</code> 를 이용하면 파이썬 3.x와 같은 결과가 나온다.</p><pre><code>source: a, *b = 1, 2, 3
+b = 2</code></pre><p><code>*</code> 를 이용하면 파이썬 3.x와 같은 결과가 나온다.</p><pre class=markdown-textblock><code>source: a, *b = 1, 2, 3
 a = 1
 b = [2, 3]
 
@@ -116,8 +99,7 @@ c = 5
 source: a, *b, c = 1, 2
 a = 1
 b = []
-c = 2
-</code></pre><h2 id=응용-뻘짓>응용 뻘짓</h2><script type=application/javascript src=https://gist.github.com/if1live/5ec0e00d0b27c6feaee9.js></script><p>할당할 변수는 10개지만 Array에 들어있는 요소는 9개이다.
+c = 2</code></pre><h2 id=응용-뻘짓>응용 뻘짓</h2><script type=application/javascript src=https://gist.github.com/if1live/5ec0e00d0b27c6feaee9.js></script><p>할당할 변수는 10개지만 Array에 들어있는 요소는 9개이다.
 그래서 마지막 요소인 Pluto에는 nil이 들어간다.
 만약 파이썬이었으면 문법 에러가 발생했을 것이다.</p><h2 id=test-code>test code</h2><ul><li><a href=https://github.com/if1live/libsora.so/tree/master/content/development/multiple-assignment-python-and-ruby>test code</a></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/python>python</a>
 <a href=https://if1live.github.io/tags/ruby>ruby</a>
@@ -143,7 +125,6 @@ c = 2
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>GC없이 C# Dictionary에서 enum을 key로 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="GC없이 C# Dictionary에서 enum을 key로 쓰기"><meta name=keywords content="csharp ,unity ,c#"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>GC없이 C# Dictionary에서 enum을 key로 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="GC없이 C# Dictionary에서 enum을 key로 쓰기"><meta name=keywords content="csharp ,unity ,c#"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -7,30 +7,29 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>GC없이 C# Dictionary에서 enum을 key로 쓰기</h1><div class=tip><time datetime="2017-08-20 00:00:00 +0000 UTC">2017. 08. 20</time></div><div class=content><h2 id=c-dictionary--enum>C# Dictionary + enum</h2><p>C# Dictionary는 Key-Value로 데이터를 저장할수 있는 좋은 자료구조이다.
 enum은 key로 쓰기에 좋은 타입이다.
-그렇다면 둘을 합쳐보자.</p><p><p class=markdown-image><img src=ppap.jpg alt=ppap></p></p><p>적당한 클래스와 enum을 준비한다.</p><pre><code class=language-csharp>﻿interface IState {
+그렇다면 둘을 합쳐보자.</p><p><p class=markdown-image><a href=ppap.jpg target=_blank><img src=ppap.jpg alt=ppap></a></p></p><p>적당한 클래스와 enum을 준비한다.</p><pre><code class="language-csharp line-numbers">﻿interface IState {
     string GetMessage();
 }
 
 class State_Wait : IState {
     public string GetMessage() {
-        return &quot;wait&quot;;
+        return &#34;wait&#34;;
     }
 }
 
 class State_Run : IState {
     public string GetMessage() {
-        return &quot;run&quot;;
+        return &#34;run&#34;;
     }
 }
 
 enum States {
     Wait,
     Run,
-}
-</code></pre><p>Dictionary을 만들고 데이터를 저장해두자.
+}</code></pre><p>Dictionary을 만들고 데이터를 저장해두자.
 <code>Update()</code>에서 Dictionary에 접근해보자.
 Dictionary를 쓰면 자주 사용할 기능 두 개를 사용했다.
-키가 존재하는지 확인하는 함수와 키로 값을 얻는 기능을 사용했다.</p><pre><code class=language-csharp>﻿using System.Collections;
+키가 존재하는지 확인하는 함수와 키로 값을 얻는 기능을 사용했다.</p><pre><code class="language-csharp line-numbers">﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,10 +48,9 @@ public class Main_Simple : MonoBehaviour {
         var a = dict.ContainsKey(States.Run);
         var b = dict[States.Wait];
     }
-}
-</code></pre><p>유니티 프로파일러 띄워서 성능 이슈가 있는지 살펴보자.</p><p><p class=markdown-image><img src=profiler.png alt=profiler></p></p><p><code>Main_Simple</code>의 <code>ContainsKey</code>, <code>get_item</code>에서 GC Alloc이 발생하는 것을 볼수있다. Dictionary에 키가 있는지 확인하고 값을 읽는 것만으로도 GC가 발생하는건 쓸데없는 부하같다.</p><p>이를 최적화해서 GC Alloc이 없는 <code>Main_Manual</code>, <code>Main_Generic</code>로 만들어보자.</p><h2 id=custom-enumcomparer>Custom EnumComparer</h2><p>프로파일러에서 GC가 생기는 지점을 보면 <code>DefaultComparer</code>에서 GC Alloc가 발생하는 것을 알수있다.
+}</code></pre><p>유니티 프로파일러 띄워서 성능 이슈가 있는지 살펴보자.</p><p><p class=markdown-image><a href=profiler.png target=_blank><img src=profiler.png alt=profiler></a></p></p><p><code>Main_Simple</code>의 <code>ContainsKey</code>, <code>get_item</code>에서 GC Alloc이 발생하는 것을 볼수있다. Dictionary에 키가 있는지 확인하고 값을 읽는 것만으로도 GC가 발생하는건 쓸데없는 부하같다.</p><p>이를 최적화해서 GC Alloc이 없는 <code>Main_Manual</code>, <code>Main_Generic</code>로 만들어보자.</p><h2 id=custom-enumcomparer>Custom EnumComparer</h2><p>프로파일러에서 GC가 생기는 지점을 보면 <code>DefaultComparer</code>에서 GC Alloc가 발생하는 것을 알수있다.
 <code>DefaultComparer</code> 내부의 boxing 때문에 GC가 발생하는 것일테니 boxing이 없는 Comparer를 구현하면 GC Alloc를 없앨 수 있을 것이다.
-<code>IEqualityComparer</code>를 구현해서 EnumComparer를 직접 만들어보자. 이를 Dictionary의 생성자로 넣어준다.</p><pre><code class=language-csharp>﻿using System.Collections.Generic;
+<code>IEqualityComparer</code>를 구현해서 EnumComparer를 직접 만들어보자. 이를 Dictionary의 생성자로 넣어준다.</p><pre><code class="language-csharp line-numbers">﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Main_Manual : MonoBehaviour {
@@ -79,10 +77,9 @@ public class Main_Manual : MonoBehaviour {
         var a = dict.ContainsKey(States.Run);
         var b = dict[States.Wait];
     }
-}
-</code></pre><h2 id=generic-enumcomparer>Generic EnumComparer</h2><p>코드에 존재하는 enum이 한두개도 아닌데 enum마다 enum comparer를 구현하는건 역시 귀찮다.
+}</code></pre><h2 id=generic-enumcomparer>Generic EnumComparer</h2><p>코드에 존재하는 enum이 한두개도 아닌데 enum마다 enum comparer를 구현하는건 역시 귀찮다.
 제네릭으로 적절한 enum comparer를 찍어낼수 있으면 편할 것이다.
-이런 좋은 기능은 남들이 다 구현해뒀으니 갖다쓰면 된다.</p><p><a href=https://www.codeproject.com/Articles/33528/Accelerating-Enum-Based-Dictionaries-with-Generic>Accelerating Enum-Based Dictionaries with Generic EnumComparer</a></p><p><a href=https://github.com/OmerMor/EnumComparer>Repository</a></p><pre><code class=language-csharp>﻿using SitraUtils;
+이런 좋은 기능은 남들이 다 구현해뒀으니 갖다쓰면 된다.</p><p><a href=https://www.codeproject.com/Articles/33528/Accelerating-Enum-Based-Dictionaries-with-Generic>Accelerating Enum-Based Dictionaries with Generic EnumComparer</a></p><p><a href=https://github.com/OmerMor/EnumComparer>Repository</a></p><pre><code class="language-csharp line-numbers">﻿using SitraUtils;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -101,19 +98,17 @@ public class Main_Generic : MonoBehaviour {
         var a = dict.ContainsKey(States.Run);
         var b = dict[States.Wait];
     }
-}
-</code></pre><h2 id=il2cpp>IL2CPP</h2><p>유니티에서 모바일 개발을 하면 IL2CPP는 피할수 없다.
+}</code></pre><h2 id=il2cpp>IL2CPP</h2><p>유니티에서 모바일 개발을 하면 IL2CPP는 피할수 없다.
 iOS 11 부터는 64비트 어플리케이션만 굴러간다.
-그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.</p><p>IL2CPP 옵션을 켜고 빌드한후 실행하면 에러가 난다.</p><pre><code class=language-txt>NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.dictionaryenumkey
+그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.</p><p>IL2CPP 옵션을 켜고 빌드한후 실행하면 에러가 난다.</p><pre><code class="language-txt line-numbers">NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.dictionaryenumkey
   at System.Reflection.Emit.DynamicMethod.CreateDynMethod () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
   at System.Reflection.Emit.DynamicMethod.CreateDelegate (System.Type delegateType, System.Object target) [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
   at System.Linq.Expressions.Expression`1[TDelegate].Compile () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
   at SitraUtils.EnumComparer`1[TEnum]..cctor () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
   at SitraUtils.EnumComparer.For[TEnum] () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
   at Main_Generic.Start () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
-Rethrow as TypeInitializationException: The type initializer for 'SitraUtils.EnumComparer&lt;States&gt;' threw an exception.: so.libsora.dictionaryenumkey
-  at SitraUtils.EnumComparer.For[TEnum] () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey
-</code></pre><p>IL2CPP에서는 dynamic method를 사용할 수 없다.
+Rethrow as TypeInitializationException: The type initializer for &#39;SitraUtils.EnumComparer&lt;States&gt;&#39; threw an exception.: so.libsora.dictionaryenumkey
+  at SitraUtils.EnumComparer.For[TEnum] () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.dictionaryenumkey</code></pre><p>IL2CPP에서는 dynamic method를 사용할 수 없다.
 그래서 Generic EnumComparer는 쓸수 없다.
 IL2CPP를 사용할 경우 수동으로 EnumComparer를 구현해야 된다.</p><p>관련 내용은 유니티 문서 <a href=%5Bhttps://docs.unity3d.com/Manual/ScriptingRestrictions.html%5D>Scripting restrictions</a>에서 찾을 수 있다.
 iOS IL2CPP, android IL2CPP는 <code>Ahead-of-time compile</code>의 제약에 걸려있다.
@@ -143,7 +138,6 @@ as long as the compiler can infer that the code used via reflection needs to exi
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

@@ -1,27 +1,26 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입 안전한 express 앱 구현하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입 안전한 express 앱 구현하기"><meta name=keywords content="typescript ,express"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입 안전한 express 앱 구현하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입 안전한 express 앱 구현하기"><meta name=keywords content="typescript ,express"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입 안전한 express 앱 구현하기</h1><div class=tip><time datetime="2019-06-30 00:00:00 +0000 UTC">2019. 06. 30</time></div><div class=content><h2 id=개요>개요</h2><pre><code class=language-typescript>import express from 'express';
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입 안전한 express 앱 구현하기</h1><div class=tip><time datetime="2019-06-30 00:00:00 +0000 UTC">2019. 06. 30</time></div><div class=content><h2 id=개요>개요</h2><pre><code class="language-typescript line-numbers">import express from &#39;express&#39;;
 
 const app = express();
 
-app.get('/sum', (req, res) =&gt; {
+app.get(&#39;/sum&#39;, (req, res) =&gt; {
   const a = parseInt(req.query.a, 10);
   const b = parseInt(req.query.b, 10);
-  if (isNaN(a)) { throw new Error('not a number'); }
-  if (isNaN(b)) { throw new Error('not a number'); }
+  if (isNaN(a)) { throw new Error(&#39;not a number&#39;); }
+  if (isNaN(b)) { throw new Error(&#39;not a number&#39;); }
 
-  const result = a + b;
+  const result = a &#43; b;
   res.json({ result });
 });
 
 const port = 5000;
-app.listen(port, () =&gt; console.log(`running 127.0.0.1:${port}`));
-</code></pre><p>위의 코드는 express, 타입스크립트를 사용해서 만든 간단한 서버이다.
+app.listen(port, () =&gt; console.log(`running 127.0.0.1:${port}`));</code></pre><p>위의 코드는 express, 타입스크립트를 사용해서 만든 간단한 서버이다.
 서버는 간단하고 대응되는 클라를 짜는것도 간단한 일이다.
 하지만 클라, 서버를 유지보수하는 일은 쉽지 않다.</p><p>클라이언트는 쿼리 문자열에 a, b를 넣어서 서버로 요청해야한다.
 서버를 리팩토링하면서 a, b를 x, y로 바꾸면 클라이언트가 터진다.</p><p>서버는 쿼리 문자열로 들어온 값을 검증, 캐스팅해야 한다.
@@ -29,20 +28,18 @@ app.listen(port, () =&gt; console.log(`running 127.0.0.1:${port}`));
 서버를 리팩토링하면서 result를 다른 이름으로 바꾸면 클라이언트가 터진다.</p><p>이런 문제를 막는 쉬운 방법은 타입 검사이다.
 서버의 API 타입 정보를 클라이언트가 컴파일 시간에 쓰도록 바꾸자.
 그러면 런타임 중에 클라이언트가 터지는 일이 사라진다.
-API 타입 정보를 서버에서 검증용으로 사용하면 노다가 코드도 줄일 수 있다.</p><p>글은 아래의 조건을 갖춘 사람에게만 쓸만할거다.</p><ul><li>express 앱을 개발</li><li>클라, 서버 모두 타입스크립트 기반</li><li>클라, 서버는 코드를 공유</li><li>RESTful API 서버</li></ul><h2 id=개선>개선</h2><h3 id=입력-걸러내기>입력 걸러내기</h3><pre><code class=language-ts>const a: number = req.query.a;
-const b: number = req.query.b;
-</code></pre><p>이런식으로 짜면 쿼리 문자열로부터 number타입으로 얻을 수 있다.</p><p>라고 생각하면 안된다!
+API 타입 정보를 서버에서 검증용으로 사용하면 노다가 코드도 줄일 수 있다.</p><p>글은 아래의 조건을 갖춘 사람에게만 쓸만할거다.</p><ul><li>express 앱을 개발</li><li>클라, 서버 모두 타입스크립트 기반</li><li>클라, 서버는 코드를 공유</li><li>RESTful API 서버</li></ul><h2 id=개선>개선</h2><h3 id=입력-걸러내기>입력 걸러내기</h3><pre><code class="language-ts line-numbers">const a: number = req.query.a;
+const b: number = req.query.b;</code></pre><p>이런식으로 짜면 쿼리 문자열로부터 number타입으로 얻을 수 있다.</p><p>라고 생각하면 안된다!
 타입스크립트는 컴파일 타임에만 개입할 뿐이다.
 런타임은 자바스크립트로 돌아간다.</p><p><code>const a: number = req.query.a</code>를 컴파일하면 <code>var a = req.query.a</code>가 된다.
 쿼리 문자열이라서 <code>req.query.a</code>의 실제 타입은 문자열 또는 undefined가 된다.
-숫자의 덧셈을 구현하고 싶었으나 문자열 합치는 동작으로 돌아간다.</p><pre><code class=language-ts>const a = parseInt(req.query.a, 10);
+숫자의 덧셈을 구현하고 싶었으나 문자열 합치는 동작으로 돌아간다.</p><pre><code class="language-ts line-numbers">const a = parseInt(req.query.a, 10);
 const b = parseInt(req.query.b, 10);
-if (isNaN(a)) { throw new Error('not a number'); }
-if (isNaN(b)) { throw new Error('not a number'); }
-</code></pre><p><code>parseInt()</code>같은 함수를 통해 쿼리 문자열을 숫자로 바꿔야한다.
+if (isNaN(a)) { throw new Error(&#39;not a number&#39;); }
+if (isNaN(b)) { throw new Error(&#39;not a number&#39;); }</code></pre><p><code>parseInt()</code>같은 함수를 통해 쿼리 문자열을 숫자로 바꿔야한다.
 하지만 이는 너무 귀찮은 작업이다.
 나는 <a href=https://github.com/jquense/yup>yup</a>를 사용해서 귀찮은 짓을 줄였다.
-<a href=https://if1live.github.io/posts/yup-declarative-input-validation/>yup로 입력 검증을 덜 귀찮게 처리하자</a></p><pre><code class=language-ts>export interface Req {
+<a href=https://if1live.github.io/posts/yup-declarative-input-validation/>yup로 입력 검증을 덜 귀찮게 처리하자</a></p><pre><code class="language-ts line-numbers">export interface Req {
   a: number;
   b: number;
 }
@@ -52,39 +49,32 @@ const schema = yup.object().shape&lt;Req&gt;({
   b: yup.number().required(),
 });
 
-const ctx = await schema.validate(req.query);
-</code></pre><h3 id=응답-타입-빼내기>응답 타입 빼내기</h3><pre><code class=language-ts>app.get('/sum', (req, res) =&gt; res.json(...));
-</code></pre><p>express 예제는 보통 이런식으로 코드를 짜더라.
+const ctx = await schema.validate(req.query);</code></pre><h3 id=응답-타입-빼내기>응답 타입 빼내기</h3><pre><code class="language-ts line-numbers">app.get(&#39;/sum&#39;, (req, res) =&gt; res.json(...));</code></pre><p>express 예제는 보통 이런식으로 코드를 짜더라.
 자바스크립트에서는 괜찮은 코드겠지만 타입스크립트에서도 괜찮은 코드라고 할 순 없다.
 현재 상태로는 타입 정보를 빼낼수 없다.
 핸들러 함수 안에서 <code>res.json()</code>으로 직접 응답을 보낸다.
 응답 타입은 <code>res.json()</code>으로 들어가는 객체의 타입일텐데 함수 안쪽이라서 뽑을 수 없다.
-핸들러 함수와 express app에 등록하는 과정을 분리하자.</p><pre><code class=language-ts>interface Resp { ... }
+핸들러 함수와 express app에 등록하는 과정을 분리하자.</p><pre><code class="language-ts line-numbers">interface Resp { ... }
 
 const handleSum = (req: express.Request): Resp =&gt; {
   return { ... };
 };
 
-app.get('/sum', (req, res) =&gt; res.json(handleSum(req)))
-</code></pre><p>핸들러 함수마다 리턴 타입을 명시하는 방법도 있지만 유지보수하기 귀찮다.
+app.get(&#39;/sum&#39;, (req, res) =&gt; res.json(handleSum(req)))</code></pre><p>핸들러 함수마다 리턴 타입을 명시하는 방법도 있지만 유지보수하기 귀찮다.
 새로운 필드가 추가될때마다 함수도 고쳐야하고 타입도 고쳐야 한다.
 다행히도 타입스크립트에는 함수의 리턴타입을 알아내는 방법이 있다.
-<a href=https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html>typescript 2.8</a>에 추가된 <code>ReturnType</code>을 쓰면 된다.</p><pre><code class=language-ts>function foo() { return 1; }
+<a href=https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html>typescript 2.8</a>에 추가된 <code>ReturnType</code>을 쓰면 된다.</p><pre><code class="language-ts line-numbers">function foo() { return 1; }
 
-type A = ReturnType&lt;typeof foo&gt;;
-</code></pre><p><p class=markdown-image><img src=ts-returntype.png alt=ReturnType></p></p><h3 id=asyncawait>async/await</h3><pre><code class=language-ts>const handleSum = async (req: express.Request) =&gt; { ... };
-</code></pre><p><code>handleSum()</code>이 <code>Resp</code>을 리턴하면 <code>ReturnType</code>만으로 충분하다.
+type A = ReturnType&lt;typeof foo&gt;;</code></pre><p><p class=markdown-image><a href=ts-returntype.png target=_blank><img src=ts-returntype.png alt=ReturnType></a></p></p><h3 id=asyncawait>async/await</h3><pre><code class="language-ts line-numbers">const handleSum = async (req: express.Request) =&gt; { ... };</code></pre><p><code>handleSum()</code>이 <code>Resp</code>을 리턴하면 <code>ReturnType</code>만으로 충분하다.
 하지만 <code>handleSum()</code>이 <code>Promise&lt;Resp></code>를 리턴하면 <code>ReturnType</code>만으로는 부족하다.
 내가 필요한건 <code>Resp</code>이지 <code>Promise&lt;Resp></code>가 아니다.
 <a href=https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html>typescript 2.8</a>에 있는 기능을 잘 이용하면 <code>Promise</code>가 들고있는 타입을 얻을 수 있다.
-<code>Promise&lt;U></code>일때는 U를 얻고 아닐때는 타입을 그대로 쓰면 된다.</p><pre><code class=language-ts>type ThenArg&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
+<code>Promise&lt;U></code>일때는 U를 얻고 아닐때는 타입을 그대로 쓰면 된다.</p><pre><code class="language-ts line-numbers">type ThenArg&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
 type A = ThenArg&lt;Promise&lt;number&gt;&gt;;
 type B = ThenArg&lt;number&gt;;
 
-type C = A | B;
-</code></pre><p><p class=markdown-image><img src=ts-thenarg.png alt=ThenArg></p></p><pre><code class=language-ts>export type Resp = ThenArg&lt;ReturnType&lt;typeof handleSum&gt;&gt;;
-</code></pre><p>둘을 합치면 sum API의 응답 타입을 올바르게 가져올 수 있다.</p><h2 id=typesafe-express-app>typesafe express app</h2><p>지금까지 다룬 내용을 종합하면 아래와 같은 서버를 구현할 수 있다.</p><pre><code class=language-typescript>import express from 'express';
-import * as yup from 'yup';
+type C = A | B;</code></pre><p><p class=markdown-image><a href=ts-thenarg.png target=_blank><img src=ts-thenarg.png alt=ThenArg></a></p></p><pre><code class="language-ts line-numbers">export type Resp = ThenArg&lt;ReturnType&lt;typeof handleSum&gt;&gt;;</code></pre><p>둘을 합치면 sum API의 응답 타입을 올바르게 가져올 수 있다.</p><h2 id=typesafe-express-app>typesafe express app</h2><p>지금까지 다룬 내용을 종합하면 아래와 같은 서버를 구현할 수 있다.</p><pre><code class="language-typescript line-numbers">import express from &#39;express&#39;;
+import * as yup from &#39;yup&#39;;
 
 const app = express();
 
@@ -104,11 +94,11 @@ type ReqGenereated = YupArg&lt;typeof schema&gt;;
 const handleSum = async (req: express.Request) =&gt; {
   const ctx = await schema.validate(req.query);
   const { a, b } = ctx;
-  const result = a + b;
+  const result = a &#43; b;
   return { result };
 }
 
-app.get('/sum', async (req, res) =&gt; {
+app.get(&#39;/sum&#39;, async (req, res) =&gt; {
   const resp = await handleSum(req);
   res.json(resp);
 });
@@ -118,12 +108,11 @@ type ThenArg&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
 export type Resp = ThenArg&lt;ReturnType&lt;typeof handleSum&gt;&gt;;
 
 const port = 5000;
-app.listen(port, () =&gt; console.log(`running 127.0.0.1:${port}`));
-</code></pre><p>서버에서 Req, Resp를 export하면 타입스크립트 기반 클라에서 사용할 수 있다.
+app.listen(port, () =&gt; console.log(`running 127.0.0.1:${port}`));</code></pre><p>서버에서 Req, Resp를 export하면 타입스크립트 기반 클라에서 사용할 수 있다.
 적당히 응용하면 자신의 프로젝트에도 적용할 수 있을 것이다.
-자동완성, 타입검사의 혜택을 누리면서 클라이언트를 짜자.</p><pre><code class=language-typescript>import fetch from 'node-fetch';
-import { Req, Resp } from './server-typesafe';
-import qs from 'qs';
+자동완성, 타입검사의 혜택을 누리면서 클라이언트를 짜자.</p><pre><code class="language-typescript line-numbers">import fetch from &#39;node-fetch&#39;;
+import { Req, Resp } from &#39;./server-typesafe&#39;;
+import qs from &#39;qs&#39;;
 
 async function request() {
   const req: Req = { a: 1, b: 2 };
@@ -133,16 +122,14 @@ async function request() {
   console.log(`output = ${json.result}`);
 }
 
-request();
-</code></pre><h2 id=도전과제-yup-schema에서-타입-뽑아내기>도전과제: yup schema에서 타입 뽑아내기</h2><p>머리를 잘 굴리면 yup로 생성된 schema에서 타입을 뽑아낼 수 있을지 모른다.
+request();</code></pre><h2 id=도전과제-yup-schema에서-타입-뽑아내기>도전과제: yup schema에서 타입 뽑아내기</h2><p>머리를 잘 굴리면 yup로 생성된 schema에서 타입을 뽑아낼 수 있을지 모른다.
 Req를 선언하지 않고 schema만 짜면되니 유지보수하기 쉬워질 것이다.
 나는 멍청해서 yup schema에서 타입 뽑아내는 기능이 모든 상황에서 잘 돌아가도록 만들 자신이 없었다.
 아래의 코드는 schema가 간단할때는 잘 돌아간다.
 이번에 사용된 Req는 number만 있는 간단한 타입이라서 잘 돌아갔다.
 하지만 yup로 만든 schema가 복잡해지면 잘 돌아가지 않을 수 있다.(예: enum, 중첩 구조)
-타입스크립트 잘 아는 사람이라면 도전해보자.</p><pre><code class=language-ts>type YupArg&lt;T&gt; = T extends yup.ObjectSchema&lt;yup.Shape&lt;any, infer Y&gt;&gt; ? Y : never;
-type ReqGenereated = YupArg&lt;typeof schema&gt;;
-</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+타입스크립트 잘 아는 사람이라면 도전해보자.</p><pre><code class="language-ts line-numbers">type YupArg&lt;T&gt; = T extends yup.ObjectSchema&lt;yup.Shape&lt;any, infer Y&gt;&gt; ? Y : never;
+type ReqGenereated = YupArg&lt;typeof schema&gt;;</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
 <a href=https://if1live.github.io/tags/express>express</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -165,7 +152,6 @@ type ReqGenereated = YupArg&lt;typeof schema&gt;;
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

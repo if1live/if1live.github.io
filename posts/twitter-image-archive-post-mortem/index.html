@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Twitter Image Archive 개발 포스트모템 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Twitter Image Archive 개발 포스트모템"><meta name=keywords content="twitter ,postmortem"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Twitter Image Archive 개발 포스트모템 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Twitter Image Archive 개발 포스트모템"><meta name=keywords content="twitter ,postmortem"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -12,52 +12,51 @@
 내가 업로드한 이미지나 리트윗한 이미지 자체를 아카이브에 포함되어있지 않고 링크만 있더라.
 그래서 아카이브한 트윗 데이터에서 이미지 URL 정보를 전부 뽑아내서 다운받는 것을 만들기로 했다.</p><ul><li>목표 : 트위터 아카이브의 모든 내용을 오프라인에서 볼수 있어야한다. (주로 이미지)</li><li>사용한 언어 : NodeJS</li><li>개발기간<ul><li>2016/03/04 : 프로젝트 방향 결정</li><li>2016/03/05 : 실제 개발</li></ul></li></ul><h2 id=어떻게-만들것인가>어떻게 만들것인가?</h2><p>트위터 아카이브를 열어보면 트윗 데이터가 <code>data/js/tweets/2016_03.js</code> 같은 위치에 저장되어있다.
 해당 파일을 열어보면 자바스크립트 객체로 각각의 트윗 정보가 기록되어있다.
-쭉 읽어보니까 이미지와 관련된 URL은 <code>media_url</code>, <code>media_url_https</code>, <code>profile_image_url_https</code> 가 있더라.</p><pre><code class=language-json>{
-  &quot;source&quot; : &quot;\u003Ca href=\&quot;https:\/\/about.twitter.com\/products\/....&quot;,
-  &quot;entities&quot; : {
-    &quot;user_mentions&quot; : [ { ... } ],
-      &quot;media_url&quot; : &quot;http:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&quot;,
-      &quot;media_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&quot;,
+쭉 읽어보니까 이미지와 관련된 URL은 <code>media_url</code>, <code>media_url_https</code>, <code>profile_image_url_https</code> 가 있더라.</p><pre><code class="language-json line-numbers">{
+  &#34;source&#34; : &#34;\u003Ca href=\&#34;https:\/\/about.twitter.com\/products\/....&#34;,
+  &#34;entities&#34; : {
+    &#34;user_mentions&#34; : [ { ... } ],
+      &#34;media_url&#34; : &#34;http:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&#34;,
+      &#34;media_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&#34;,
       ...
     }, {
-      &quot;media_url&quot; : &quot;http:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&quot;,
-      &quot;media_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&quot;,
+      &#34;media_url&#34; : &#34;http:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&#34;,
+      &#34;media_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&#34;,
       ...
     } ],
     ...
   },
   ...
-  &quot;retweeted_status&quot; : {
-    &quot;source&quot; : &quot;\u003Ca href=\&quot;http:\/\/twitter.com\/download\/...&quot;,
-    &quot;entities&quot; : {
-      &quot;user_mentions&quot; : [ ],
-      &quot;media&quot; : [ {
-        &quot;media_url&quot; : &quot;http:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&quot;,
-        &quot;media_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&quot;,
+  &#34;retweeted_status&#34; : {
+    &#34;source&#34; : &#34;\u003Ca href=\&#34;http:\/\/twitter.com\/download\/...&#34;,
+    &#34;entities&#34; : {
+      &#34;user_mentions&#34; : [ ],
+      &#34;media&#34; : [ {
+        &#34;media_url&#34; : &#34;http:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&#34;,
+        &#34;media_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/media\/CcYQxY1UMAA1SZj.jpg&#34;,
         ...
       }, {
-        &quot;media_url&quot; : &quot;http:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&quot;,
-        &quot;media_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&quot;,
+        &#34;media_url&#34; : &#34;http:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&#34;,
+        &#34;media_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/media\/CcYQyWkVAAA1EWK.jpg&#34;,
         ...
       } ],
       ...
     },
     ...
-    &quot;user&quot; : {
-      &quot;screen_name&quot; : &quot;gckbook&quot;,
-      &quot;profile_image_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/profile_images\/1682141341\/____logo_normal.jpg&quot;,
+    &#34;user&#34; : {
+      &#34;screen_name&#34; : &#34;gckbook&#34;,
+      &#34;profile_image_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/profile_images\/1682141341\/____logo_normal.jpg&#34;,
       ...
     }
   },
-  &quot;id&quot; : 704292650828984320,
-  &quot;created_at&quot; : &quot;2016-02-29 13:10:27 +0000&quot;,
-  &quot;user&quot; : {
+  &#34;id&#34; : 704292650828984320,
+  &#34;created_at&#34; : &#34;2016-02-29 13:10:27 &#43;0000&#34;,
+  &#34;user&#34; : {
     ...
-    &quot;profile_image_url_https&quot; : &quot;https:\/\/pbs.twimg.com\/profile_images\/671688812007809024\/4vIrI5gJ_normal.png&quot;,
+    &#34;profile_image_url_https&#34; : &#34;https:\/\/pbs.twimg.com\/profile_images\/671688812007809024\/4vIrI5gJ_normal.png&#34;,
     ...
   }
-}
-</code></pre><p>트위터 아카이브에 포함된 뷰어의 경우는 해당 JSON을 읽어서 적절히 보여주는 방식으로 작동하더라.</p><p><p class=markdown-image><img src=external-image-link.png alt="not-offline mode"></p></p><p>만약 트윗 데이터 파일을 조작해서
+}</code></pre><p>트위터 아카이브에 포함된 뷰어의 경우는 해당 JSON을 읽어서 적절히 보여주는 방식으로 작동하더라.</p><p><p class=markdown-image><a href=external-image-link.png target=_blank><img src=external-image-link.png alt="not-offline mode"></a></p></p><p>만약 트윗 데이터 파일을 조작해서
 <code>"media_url" : "https:\/\/pbs.twimg.com\/media\/sample.png"</code>
 대신
 <code>"media_url" : "\/cache\/pbs.twimg.com\/media\/sample.png"</code>
@@ -68,27 +67,25 @@
 URL 목록을 뽑아보니까 받아야하는 이미지가 몇만개더라. 동기적으로 이미지를 하나씩 받은건 역시 미친짓같다.
 비동기라는 자바스크립트의 장점을 살려서 몇만개의 이미지를 동시에 받으면 작업이 훨씬더 빨리 끝날거다.</p><p>라고 생각하고 처음에는 개발을 시작했지만 문제가 생겼다.
 테스트 데이터로 이미지 몇십개를 동시에 받을때는 문제가 없었는데 실제 데이터로 작업을 수행하면 문제가 생기더라.
-비동기 덕분에 이미지URL 갯수만큼의 HTTP 요청을 동시에 날리는데 URL갯수가 너무 많다보니 실행이 오래걸려서 타임아웃같은 네트워크 문제로 죽는거같더라.</p><p>그래서 <a href=https://github.com/caolan/async>async</a>의 <code>.eachLimit()</code>를 이용해서 동시에 N개의 이미지만 받도록 제한했다.</p><pre><code class=language-js>async.eachLimit(links, 5, function(uri, callback) {
+비동기 덕분에 이미지URL 갯수만큼의 HTTP 요청을 동시에 날리는데 URL갯수가 너무 많다보니 실행이 오래걸려서 타임아웃같은 네트워크 문제로 죽는거같더라.</p><p>그래서 <a href=https://github.com/caolan/async>async</a>의 <code>.eachLimit()</code>를 이용해서 동시에 N개의 이미지만 받도록 제한했다.</p><pre><code class="language-js line-numbers">async.eachLimit(links, 5, function(uri, callback) {
   doSomething();
   callback();
-}
-</code></pre><h2 id=삽질2-비동기-어려워요>삽질2. 비동기 어려워요</h2><p>프로그램의 구조를 다시 보자.</p><ol><li>URL 목록 뽑기</li><li>URL 전부 받기</li><li>데이터 파일 갱신</li></ol><p>설계 자체가 1단계가 완전히 끝나고 2단계를 시작하고, 2단계가 완전히 끝나고 3단계를 진행하는 방식이다.
+}</code></pre><h2 id=삽질2-비동기-어려워요>삽질2. 비동기 어려워요</h2><p>프로그램의 구조를 다시 보자.</p><ol><li>URL 목록 뽑기</li><li>URL 전부 받기</li><li>데이터 파일 갱신</li></ol><p>설계 자체가 1단계가 완전히 끝나고 2단계를 시작하고, 2단계가 완전히 끝나고 3단계를 진행하는 방식이다.
 즉 구조 자체가 동기적으로 작동한다.
 근데 자바스크립트는 비동기잖아?
 <a href=https://en.wikipedia.org/wiki/Busy_waiting>Busy waiting</a>같은 컨셉으로 위에서 비동기 작업을 걸어둔게 끝날때까지 <code>sleep()</code> 하고 싶어도 자바스크립트에는 sleep 함수가 없다.
 (편법으로 sleep를 흉내내는 방법이 있지만 C처럼 sleep 함수 자체가 있는건 아니다)
-비동기로 굴러가는 함수를 동기로 바꾸기 위해서 <a href=https://github.com/abbr/deasync>deasync</a>를 이용했다.</p><pre><code class=language-js>function SyncFunction(){
+비동기로 굴러가는 함수를 동기로 바꾸기 위해서 <a href=https://github.com/abbr/deasync>deasync</a>를 이용했다.</p><pre><code class="language-js line-numbers">function SyncFunction(){
   var ret;
   setTimeout(function(){
-    ret = &quot;hello&quot;;
+    ret = &#34;hello&#34;;
   },3000);
   while(ret === undefined) {
-    require('deasync').sleep(100);
+    require(&#39;deasync&#39;).sleep(100);
   }
   // returns hello with sleep; undefined without
   return ret;
-}
-</code></pre><h2 id=결과물>결과물</h2><p><a href=https://github.com/if1live/twitter-image-archive>Repo</a></p><p><p class=markdown-image><img src=https://raw.githubusercontent.com/if1live/twitter-image-archive/master/document/twitter-image-archive-sample.png alt=image></p></p><h2 id=개발-소감>개발 소감</h2><p>백업된 이미지를 보면 평소에 어떤 이미지를 올리고 어떤걸 리트윗하면서 살았나 반성하게 된다.</p><p><p class=markdown-image><img src=media-sample.png alt=result></p></p></div><div class=tags><a href=https://if1live.github.io/tags/twitter>twitter</a>
+}</code></pre><h2 id=결과물>결과물</h2><p><a href=https://github.com/if1live/twitter-image-archive>Repo</a></p><p><p class=markdown-image><a href=https://raw.githubusercontent.com/if1live/twitter-image-archive/master/document/twitter-image-archive-sample.png target=_blank><img src=https://raw.githubusercontent.com/if1live/twitter-image-archive/master/document/twitter-image-archive-sample.png alt=image></a></p></p><h2 id=개발-소감>개발 소감</h2><p>백업된 이미지를 보면 평소에 어떤 이미지를 올리고 어떤걸 리트윗하면서 살았나 반성하게 된다.</p><p><p class=markdown-image><a href=media-sample.png target=_blank><img src=media-sample.png alt=result></a></p></p></div><div class=tags><a href=https://if1live.github.io/tags/twitter>twitter</a>
 <a href=https://if1live.github.io/tags/postmortem>postmortem</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -111,7 +108,6 @@ URL 목록을 뽑아보니까 받아야하는 이미지가 몇만개더라. 동�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

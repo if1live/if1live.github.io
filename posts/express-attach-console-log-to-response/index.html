@@ -1,16 +1,16 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기"><meta name=keywords content="express ,logging ,monkey patch ,cls-hooked"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기"><meta name=keywords content="express ,logging ,monkey patch ,cls-hooked"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기</h1><div class=tip><time datetime="2020-07-11 00:00:00 +0900 +0900">2020. 07. 11</time></div><div class=content><h2 id=http-응답에-콘솔-로그-붙인-이유>HTTP 응답에 콘솔 로그 붙인 이유</h2><p>간단한 express 서버가 있다고 치자.</p><pre><code class=language-js>const express = require('express');
-const delay = require('delay');
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기</h1><div class=tip><time datetime="2020-07-11 00:00:00 +0900 +0900">2020. 07. 11</time></div><div class=content><h2 id=http-응답에-콘솔-로그-붙인-이유>HTTP 응답에 콘솔 로그 붙인 이유</h2><p>간단한 express 서버가 있다고 치자.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
+const delay = require(&#39;delay&#39;);
 
 const app = express();
 
-app.get('/', async (req, res) =&gt; {
+app.get(&#39;/&#39;, async (req, res) =&gt; {
   const data = await execute(req.query || {});
   res.json(data);
 });
@@ -24,27 +24,23 @@ async function execute(input) {
 }
 
 const port = 3000;
-app.listen(port, () =&gt; console.log(`listen: 127.0.0.1:${port}`));
-</code></pre><p><code>http://127.0.0.1:3000/?id=1</code>로 접속하면 아래와 같은 JSON을 응답으로 받는다.</p><pre><code class=language-json>{
-  &quot;id&quot;:&quot;1&quot;
-}
-</code></pre><p>동시에 콘솔에는 아래와 같은 로그가 찍힐 것이다.</p><pre><code>before delay: 123
-after delay: 123
-</code></pre><p>로컬 환경에서는 내 컴퓨터에 서버를 띄워두고 내 컴퓨터에서 접속하니까 응답과 로그를 동시에 보기 쉽다.
+app.listen(port, () =&gt; console.log(`listen: 127.0.0.1:${port}`));</code></pre><p><code>http://127.0.0.1:3000/?id=1</code>로 접속하면 아래와 같은 JSON을 응답으로 받는다.</p><pre><code class="language-json line-numbers">{
+  &#34;id&#34;:&#34;1&#34;
+}</code></pre><p>동시에 콘솔에는 아래와 같은 로그가 찍힐 것이다.</p><pre class=markdown-textblock><code>before delay: 123
+after delay: 123</code></pre><p>로컬 환경에서는 내 컴퓨터에 서버를 띄워두고 내 컴퓨터에서 접속하니까 응답과 로그를 동시에 보기 쉽다.
 하지만 로컬 환경을 탈출하는 순간부터는 로그 보는게 쉽지 않다.</p><p>127.0.0.1이 아닌 곳에서 docker같은 것으로 돌아가고 있을테니까 로그를 보기 위해서 터미널이 띄워야 한다.
 aws lambda로 굴러가는 경우에는 cloudwatch에 로그가 쌓이는데 실시간 로그가 아니다.
 API 호출하고 몇초에서 몇십초가 지나야 cloudwatch에서 보인다.
 게다가 서버를 나 혼자 쓴다는 보장도 없다.
 지금 호출한 API에서 발생한 로그 이외의 다른 로그가 뒤섞여있다.
 내가 로그를 뒤지는 동안에도 로그는 더 쌓일 것이다.</p><p>REST API에서 발생한 로그를 HTTP 응답에 붙여서 던지면 편하지 않을까?
-API 응답과 콘솔 로그를 합쳐서 아래와 같은 형태로 만들어보자.</p><pre><code class=language-json>{
-  &quot;id&quot;:&quot;1&quot;,
-  &quot;_logs&quot;:[
-    &quot;[INFO] before delay: 1&quot;,
-    &quot;[WARN] after delay: 1&quot;
+API 응답과 콘솔 로그를 합쳐서 아래와 같은 형태로 만들어보자.</p><pre><code class="language-json line-numbers">{
+  &#34;id&#34;:&#34;1&#34;,
+  &#34;_logs&#34;:[
+    &#34;[INFO] before delay: 1&#34;,
+    &#34;[WARN] after delay: 1&#34;
   ]
-}
-</code></pre><h2 id=cls-hooked>cls-hooked</h2><p>django 쓸때는 <a href=https://pypi.org/project/django-threadlocals/>django-threadlocals</a>같은거 사용해서 원하는 기능을 만들었다.
+}</code></pre><h2 id=cls-hooked>cls-hooked</h2><p>django 쓸때는 <a href=https://pypi.org/project/django-threadlocals/>django-threadlocals</a>같은거 사용해서 원하는 기능을 만들었다.
 node.js에서는 다른 방법을 써야한다.
 thread-local storage 대신 continuation-local storage로 찾으면 몇개 나온다.
 <a href=https://www.npmjs.com/package/cls-hooked>cls-hooked</a>를 사용하기로 했다.</p><p>최신 node.js에서는 <a href=https://nodejs.org/api/async_hooks.html#async_hooks_class_asynclocalstorage>AsyncLocalStorage</a>라는게 있다더라.
@@ -52,8 +48,8 @@ thread-local storage 대신 continuation-local storage로 찾으면 몇개 나�
 node.js 12.17에서는 AsyncLocalStorage를 쓸 수 있지만 aws lambda에서의 버전은 12.17보다 높을 수도 있고 낮을 수도 있다.
 괜히 12.x라고 적어둔게 아니더라.</p><p>cls-hooked는 남들이 짜둔 코드를 보고 익혔다.
 <a href=https://github.com/puzpuzpuz/cls-rtracer/blob/1.4.1/index.js#L18>cls-rtracer 1.x</a>와 <a href=https://github.com/skonves/express-http-context/blob/v1.2.3/index.js>express-http-context</a>를 베끼면 원하는걸 만들 수 있겠더라.</p><h2 id=의식의-흐름>의식의 흐름</h2><p>콘솔 로그를 쌓아둘 함수를 만든다.
-<a href=https://github.com/skonves/express-http-context/blob/v1.2.3/index.js>express-http-context</a>를 베끼면 된다.</p><pre><code class=language-js>const NSID = 'writer';
-const KEY_LOGS = 'logs';
+<a href=https://github.com/skonves/express-http-context/blob/v1.2.3/index.js>express-http-context</a>를 베끼면 된다.</p><pre><code class="language-js line-numbers">const NSID = &#39;writer&#39;;
+const KEY_LOGS = &#39;logs&#39;;
 
 function set(key, val) {
   const ns = getNamespace(NSID);
@@ -63,21 +59,18 @@ function set(key, val) {
 function get(key) {
   const ns = getNamespace(NSID);
   return (ns &amp;&amp; ns.active) ? ns.get(key) : undefined;
-}
-</code></pre><p>express middleware를 적당히 만들어서 context를 생성한다.
+}</code></pre><p>express middleware를 적당히 만들어서 context를 생성한다.
 middleware 이후에 나오는 코드에서 CLS를 쓸 수 있다
-<a href=https://github.com/puzpuzpuz/cls-rtracer/blob/1.4.1/index.js#L18>cls-rtracer 1.x</a>를 베끼면 된다.</p><pre><code class=language-js>app.use((req, res, next) =&gt; {
+<a href=https://github.com/puzpuzpuz/cls-rtracer/blob/1.4.1/index.js#L18>cls-rtracer 1.x</a>를 베끼면 된다.</p><pre><code class="language-js line-numbers">app.use((req, res, next) =&gt; {
   const ns = getNamespace(NSID) || createNamespace(NSID);
   ns.bindEmitter(req);
   ns.bindEmitter(res);
 
   ns.run(() =&gt; next());
-});
-</code></pre><p>express에서는 <code>res.json()</code>을 두 번 호출할 수 없다.
-로그를 끼워넣은 후 진짜 <code>res.json()</code>를 호출하는 함수로 교체한다.</p><pre><code class=language-js>const default_json = res.json.bind(res);
-res.json = (data) =&gt; default_json({ ...data, _logs: get(KEY_LOGS) });
-</code></pre><p>콘솔 로그 함수를 새거로 바꾼다.
-CLS로 로그를 쌓고 콘솔에도 로그를 찍는다.</p><pre><code class=language-js>const propertyNames = ['info', 'warn', 'error']
+});</code></pre><p>express에서는 <code>res.json()</code>을 두 번 호출할 수 없다.
+로그를 끼워넣은 후 진짜 <code>res.json()</code>를 호출하는 함수로 교체한다.</p><pre><code class="language-js line-numbers">const default_json = res.json.bind(res);
+res.json = (data) =&gt; default_json({ ...data, _logs: get(KEY_LOGS) });</code></pre><p>콘솔 로그 함수를 새거로 바꾼다.
+CLS로 로그를 쌓고 콘솔에도 로그를 찍는다.</p><pre><code class="language-js line-numbers">const propertyNames = [&#39;info&#39;, &#39;warn&#39;, &#39;error&#39;]
 for (const property of propertyNames) {
   const default_fn = console[property].bind(console);
   console[property] = (message) =&gt; {
@@ -87,27 +80,25 @@ for (const property of propertyNames) {
 
     default_fn(message);
   };
-}
-</code></pre><p>전부 이어붙이면 아래와 같은 결과를 볼 수 있다.</p><pre><code>$ curl -s &quot;http://127.0.0.1:3000/?id=1&quot; -w '\n' &amp; curl -s &quot;http://127.0.0.1:3000/?id=2&quot; -w '\n' &amp;
+}</code></pre><p>전부 이어붙이면 아래와 같은 결과를 볼 수 있다.</p><pre class=markdown-textblock><code>$ curl -s "http://127.0.0.1:3000/?id=1" -w '\n' & curl -s "http://127.0.0.1:3000/?id=2" -w '\n' &
 [1] 6454
 [2] 6455
 
-{&quot;id&quot;:&quot;1&quot;,&quot;_logs&quot;:[&quot;[INFO] before delay: 1&quot;,&quot;[WARN] after delay: 1&quot;]}
-{&quot;id&quot;:&quot;2&quot;,&quot;_logs&quot;:[&quot;[INFO] before delay: 2&quot;,&quot;[WARN] after delay: 2&quot;]}
-</code></pre><h2 id=응용>응용</h2><p>삽질을 더 하면 <code>console.info()</code>보다 더 다양한 것을 로깅할 수 있다.
+{"id":"1","_logs":["[INFO] before delay: 1","[WARN] after delay: 1"]}
+{"id":"2","_logs":["[INFO] before delay: 2","[WARN] after delay: 2"]}</code></pre><h2 id=응용>응용</h2><p>삽질을 더 하면 <code>console.info()</code>보다 더 다양한 것을 로깅할 수 있다.
 <a href=https://if1live.github.io/posts/ioredis-logging-with-monkey-patch/>몽키 패치를 사용해서 ioredis 로깅</a>하는 방법을 정리한건 빅-픽처의 일부였다.</p><p>API에서 발생한 SQL, redis, fetch도 로그로 남기면 언젠가 쓸모있을 것이다.
 typeorm logger에 CLS 로깅을 붙여서 <code>repository.save()</code>가 쿼리를 생각보다 많이 발생시킨다는걸 확인했다.
-<a href=https://if1live.github.io/posts/typeorm-entity-proxy-for-save/>typeorm으로 삽질한 글</a>은 CLS 로깅 덕분에 나온 것이다.</p><h2 id=code>code</h2><pre><code class=language-js>/**
+<a href=https://if1live.github.io/posts/typeorm-entity-proxy-for-save/>typeorm으로 삽질한 글</a>은 CLS 로깅 덕분에 나온 것이다.</p><h2 id=code>code</h2><pre><code class="language-js line-numbers">/**
  * test
- * curl &quot;http://127.0.0.1:3000/?id=1&quot; &amp; curl &quot;http://127.0.0.1:3000/?id=2&quot;
+ * curl &#34;http://127.0.0.1:3000/?id=1&#34; &amp; curl &#34;http://127.0.0.1:3000/?id=2&#34;
  */
 
-const express = require('express');
-const delay = require('delay');
-const { getNamespace, createNamespace } = require('cls-hooked');
+const express = require(&#39;express&#39;);
+const delay = require(&#39;delay&#39;);
+const { getNamespace, createNamespace } = require(&#39;cls-hooked&#39;);
 
-const NSID = 'writer';
-const KEY_LOGS = 'logs';
+const NSID = &#39;writer&#39;;
+const KEY_LOGS = &#39;logs&#39;;
 
 function set(key, val) {
   const ns = getNamespace(NSID);
@@ -120,7 +111,7 @@ function get(key) {
 }
 
 function monkeypatch_console() {
-  const propertyNames = ['info', 'warn', 'error']
+  const propertyNames = [&#39;info&#39;, &#39;warn&#39;, &#39;error&#39;]
   for (const property of propertyNames) {
     const default_fn = console[property].bind(console);
     console[property] = (message) =&gt; {
@@ -147,7 +138,7 @@ app.use((req, res, next) =&gt; {
   ns.run(() =&gt; next());
 });
 
-app.get('/', async (req, res) =&gt; {
+app.get(&#39;/&#39;, async (req, res) =&gt; {
   const data = await execute(req.query || {});
   res.json(data);
 });
@@ -161,8 +152,7 @@ async function execute(input) {
 }
 
 const port = 3000;
-app.listen(port, () =&gt; console.log(`listen: 127.0.0.1:${port}`));
-</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/express>express</a>
+app.listen(port, () =&gt; console.log(`listen: 127.0.0.1:${port}`));</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/express>express</a>
 <a href=https://if1live.github.io/tags/logging>logging</a>
 <a href=https://if1live.github.io/tags/monkey-patch>monkey patch</a>
 <a href=https://if1live.github.io/tags/cls-hooked>cls-hooked</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
@@ -187,7 +177,6 @@ app.listen(port, () =&gt; console.log(`listen: 127.0.0.1:${port}`));
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기"><meta name=keywords content="template metaprogramming ,c++ ,cpp ,TMP ,템플릿 메타프로그래밍"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C++ TMP를 이용해서 2015년의 13일의 금요일 계산하기"><meta name=keywords content="template metaprogramming ,c++ ,cpp ,TMP ,템플릿 메타프로그래밍"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -20,7 +20,7 @@
 윤년인지 파악할수 있으면 <code>2000/01/01</code>로부터 <code>YYYY/01/01</code>까지의 간격을 계산할수 있다.
 다음으로는 월에 며칠이 있는지 계산할수 있어야한다.
 1월에는 31일이 있다는걸 알수 있으면 <code>YYYY/01/01</code>로 부터 <code>YYYY/02/01</code>의 요일을 추정할수 있을것이다.</p><p>다음으로는 반복문을 만들수 있어야한다.
-반복문을 이용하여 2015년 1월부터 12월까지의 13일의 금요일을 계산할수 있을것이다.</p><h2 id=요일상수와-20000101>요일상수와 2000/01/01</h2><p><code>2000/01/01</code>은 토요일이다. 이 정보는 나중에 사용할 예정이다.</p><p>요일의 시작은 월요일로 잡았다.</p><pre><code class=language-cpp>enum {
+반복문을 이용하여 2015년 1월부터 12월까지의 13일의 금요일을 계산할수 있을것이다.</p><h2 id=요일상수와-20000101>요일상수와 2000/01/01</h2><p><code>2000/01/01</code>은 토요일이다. 이 정보는 나중에 사용할 예정이다.</p><p>요일의 시작은 월요일로 잡았다.</p><pre><code class="language-cpp line-numbers">enum {
 	DAY_MON = 0,
 	DAY_TUE,
 	DAY_WED,
@@ -28,10 +28,9 @@
 	DAY_FRI,
 	DAY_SAT,
 	DAY_SUN
-};
-</code></pre><h2 id=윤년>윤년</h2><p>윤년인지 확인하는 공식은 <a href=http://ko.wikipedia.org/wiki/%EC%9C%A4%EB%85%84>위키</a> 를 참조했다.</p><ol><li>서력 기원 연수가 4로 나누어 떨어지는 해는 윤년으로 한다.(2004년, 2008년, 2012년, 2016년…)</li><li>이 중에서 100으로 나누어 떨어지는 해는 평년으로 한다.(1900년, 2100년, 2200년, 2300년…)</li><li>그중에 400으로 나누어 떨어지는 해는 윤년으로 둔다.(1600년, 2000년, 2400년 …)</li></ol><p>구조체에 윤년여부와 그 해에 며칠이 있는지를 같이 넣어놓으면 이후에 사용할수 있다.
+};</code></pre><h2 id=윤년>윤년</h2><p>윤년인지 확인하는 공식은 <a href=http://ko.wikipedia.org/wiki/%EC%9C%A4%EB%85%84>위키</a> 를 참조했다.</p><ol><li>서력 기원 연수가 4로 나누어 떨어지는 해는 윤년으로 한다.(2004년, 2008년, 2012년, 2016년…)</li><li>이 중에서 100으로 나누어 떨어지는 해는 평년으로 한다.(1900년, 2100년, 2200년, 2300년…)</li><li>그중에 400으로 나누어 떨어지는 해는 윤년으로 둔다.(1600년, 2000년, 2400년 …)</li></ol><p>구조체에 윤년여부와 그 해에 며칠이 있는지를 같이 넣어놓으면 이후에 사용할수 있다.
 이를 템플릿 메타프로그래밍으로 표현하면 다음과 같다.
-윤년 검증은 <code>static_assert</code>를 이용했다. 앞으로도 이것을 자주 사용할 것이다.</p><pre><code class=language-cpp>template&lt;int Y&gt;
+윤년 검증은 <code>static_assert</code>를 이용했다. 앞으로도 이것을 자주 사용할 것이다.</p><pre><code class="language-cpp line-numbers">template&lt;int Y&gt;
 struct LeapYear {
 	enum {
 		value = ((Y % 4 == 0) &amp;&amp; (Y % 100 != 0)) || (Y % 400 == 0),
@@ -40,26 +39,24 @@ struct LeapYear {
 };
 
 // 서력 기원 연수가 4로 나누어 떨어지는 해는 윤년으로 한다.(2004년, 2008년, 2012년, 2016년…)
-static_assert(LeapYear&lt;2004&gt;::value == true, &quot;&quot;);
-static_assert(LeapYear&lt;2008&gt;::value == true, &quot;&quot;);
-static_assert(LeapYear&lt;2012&gt;::value == true, &quot;&quot;);
-static_assert(LeapYear&lt;2016&gt;::value == true, &quot;&quot;);
+static_assert(LeapYear&lt;2004&gt;::value == true, &#34;&#34;);
+static_assert(LeapYear&lt;2008&gt;::value == true, &#34;&#34;);
+static_assert(LeapYear&lt;2012&gt;::value == true, &#34;&#34;);
+static_assert(LeapYear&lt;2016&gt;::value == true, &#34;&#34;);
 // 이 중에서 100으로 나누어 떨어지는 해는 평년으로 한다.(1900년, 2100년, 2200년, 2300년…)
-static_assert(LeapYear&lt;1900&gt;::value == false, &quot;&quot;);
-static_assert(LeapYear&lt;2100&gt;::value == false, &quot;&quot;);
-static_assert(LeapYear&lt;2200&gt;::value == false, &quot;&quot;);
-static_assert(LeapYear&lt;2300&gt;::value == false, &quot;&quot;);
+static_assert(LeapYear&lt;1900&gt;::value == false, &#34;&#34;);
+static_assert(LeapYear&lt;2100&gt;::value == false, &#34;&#34;);
+static_assert(LeapYear&lt;2200&gt;::value == false, &#34;&#34;);
+static_assert(LeapYear&lt;2300&gt;::value == false, &#34;&#34;);
 // 그중에 400으로 나누어 떨어지는 해는 윤년으로 둔다.(1600년, 2000년, 2400년 …)
-static_assert(LeapYear&lt;1600&gt;::value == true, &quot;&quot;);
-static_assert(LeapYear&lt;2000&gt;::value == true, &quot;&quot;);
-static_assert(LeapYear&lt;2400&gt;::value == true, &quot;&quot;);
-</code></pre><h2 id=배열-접근>배열(?) 접근</h2><p>1월부터 12월까지 각각의 월이 며칠로 구성되는지 배열로 만들어두고
-인덱스를 이용해서 접근할수 있으면 5월이 31일로 구성한것을 알 수 있다.</p><pre><code class=language-cpp>int month_list[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
-int day = month_list[5];
-</code></pre><p>하지만 템플릿 메타프로그래밍에서는 C배열에 접근할수 없다.
+static_assert(LeapYear&lt;1600&gt;::value == true, &#34;&#34;);
+static_assert(LeapYear&lt;2000&gt;::value == true, &#34;&#34;);
+static_assert(LeapYear&lt;2400&gt;::value == true, &#34;&#34;);</code></pre><h2 id=배열-접근>배열(?) 접근</h2><p>1월부터 12월까지 각각의 월이 며칠로 구성되는지 배열로 만들어두고
+인덱스를 이용해서 접근할수 있으면 5월이 31일로 구성한것을 알 수 있다.</p><pre><code class="language-cpp line-numbers">int month_list[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }
+int day = month_list[5];</code></pre><p>하지만 템플릿 메타프로그래밍에서는 C배열에 접근할수 없다.
 그래서 typelist나 Variadic Template를 사용해야한다.
 제약조건에 맞춰서 가변인자 템플릿을 사용하기로 했다.
-템플릿의 첫번째 인자가 인덱스고 나머지가 배열 역할을 한다.</p><pre><code class=language-cpp>template&lt;int idx, int I, int... Remainder&gt;
+템플릿의 첫번째 인자가 인덱스고 나머지가 배열 역할을 한다.</p><pre><code class="language-cpp line-numbers">template&lt;int idx, int I, int... Remainder&gt;
 struct ElementAt {
 	enum {
 		value = ElementAt&lt;idx - 1, Remainder...&gt;::value
@@ -73,13 +70,12 @@ struct ElementAt &lt;0, I, Remainder...&gt; {
 	};
 };
 
-static_assert(ElementAt&lt;0, 1, 2, 4&gt;::value == 1, &quot;&quot;);	//[1, 2, 4][0]
-static_assert(ElementAt&lt;1, 1, 2, 4&gt;::value == 2, &quot;&quot;);	//[1, 2, 4][1]
-static_assert(ElementAt&lt;2, 1, 2, 4&gt;::value == 4, &quot;&quot;);	//[1, 2, 4][2]
-</code></pre><h2 id=n월이-며칠로-구성되는가>N월이 며칠로 구성되는가?</h2><p>인덱스로 접근가능한 배열(?)을 만들었으니 1월부터 12월이 각각 며칠로 구성되는지 알 수 있다.
+static_assert(ElementAt&lt;0, 1, 2, 4&gt;::value == 1, &#34;&#34;);	//[1, 2, 4][0]
+static_assert(ElementAt&lt;1, 1, 2, 4&gt;::value == 2, &#34;&#34;);	//[1, 2, 4][1]
+static_assert(ElementAt&lt;2, 1, 2, 4&gt;::value == 4, &#34;&#34;);	//[1, 2, 4][2]</code></pre><h2 id=n월이-며칠로-구성되는가>N월이 며칠로 구성되는가?</h2><p>인덱스로 접근가능한 배열(?)을 만들었으니 1월부터 12월이 각각 며칠로 구성되는지 알 수 있다.
 윤년과 평년 각각에 맞춰서 클래스를 준비한다.
 편의상 첫번째 인자를 0으로 두고 13개의 요소를 넣었다.
-이렇게 하면 1월을 얻고 싶을때 인덱스 1로 접근하면 된다.</p><pre><code class=language-cpp>template&lt;int Month&gt;
+이렇게 하면 1월을 얻고 싶을때 인덱스 1로 접근하면 된다.</p><pre><code class="language-cpp line-numbers">template&lt;int Month&gt;
 struct NormalYearDayCount {
 	enum {
 		value = ElementAt&lt;Month, 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31&gt;::value
@@ -93,34 +89,32 @@ struct LeapYearDayCount {
 	};
 };
 
-static_assert(NormalYearDayCount&lt;2&gt;::value == 28, &quot;&quot;);
-static_assert(LeapYearDayCount&lt;2&gt;::value == 29, &quot;&quot;);
-</code></pre><p>윤년인지 아닌지를 직접 확인하는 것은 불편하다.
+static_assert(NormalYearDayCount&lt;2&gt;::value == 28, &#34;&#34;);
+static_assert(LeapYearDayCount&lt;2&gt;::value == 29, &#34;&#34;);</code></pre><p>윤년인지 아닌지를 직접 확인하는 것은 불편하다.
 클래스안에서 윤년인지 아닌지를 확인할수 있으면 <code>NormalYearDayCount</code>와 <code>LeapYearDayCount</code>를 구분하지 않고 하나로 처리할수 있을 것이다.
-이전에 만들어둔 윤년 클래스를 이용하자.</p><pre><code class=language-cpp>template&lt;int Year, int Month&gt;
+이전에 만들어둔 윤년 클래스를 이용하자.</p><pre><code class="language-cpp line-numbers">template&lt;int Year, int Month&gt;
 struct YearDayCount {
 	enum {
 		value = LeapYear&lt;Year&gt;::value ? LeapYearDayCount&lt;Month&gt;::value : NormalYearDayCount&lt;Month&gt;::value
 	};
 };
 
-static_assert(YearDayCount&lt;2015, 2&gt;::value == 28, &quot;&quot;);
-static_assert(YearDayCount&lt;2016, 2&gt;::value == 29, &quot;&quot;);
-</code></pre><h2 id=yyyy0101--yyyymmdd><code>YYYY/01/01</code> ~ <code>YYYY/MM/DD</code></h2><p>새해의 첫날로부터 며칠이 지나야 특정 날짜가 되는지 확인하는 클래스를 만들어보자.
+static_assert(YearDayCount&lt;2015, 2&gt;::value == 28, &#34;&#34;);
+static_assert(YearDayCount&lt;2016, 2&gt;::value == 29, &#34;&#34;);</code></pre><h2 id=yyyy0101--yyyymmdd><code>YYYY/01/01</code> ~ <code>YYYY/MM/DD</code></h2><p>새해의 첫날로부터 며칠이 지나야 특정 날짜가 되는지 확인하는 클래스를 만들어보자.
 템플릿 특수화를 사용하면 간단하게 만들수 있다.
 사용하는 조건은 다음과 같다.</p><ol><li><code>YYYY/01/01</code>은 0일이다.</li><li><code>YYYY/MM/01</code>은 <code>1월</code>부터 <code>MM-1월</code>까지의 합이다.
 예를 들어 <code>2015/04/01</code>은 1,2,3월이 전부다 지났다는 뜻이니까 1,2,3월의 날짜를 전부 더한다. (31 + 28 + 31)</li><li><code>YYYY/MM/DD</code>는 <code>YYYY/MM/01</code>로 부터의 경과일을 센다.
-예를 들어 <code>2015/01/11</code>은 <code>2015/01/01</code>로부터 10일이 지났다.</li></ol><p>이를 코드로 표현하면 다음과 같다.</p><pre><code class=language-cpp>template&lt;int Year, int Month, int Day&gt;
+예를 들어 <code>2015/01/11</code>은 <code>2015/01/01</code>로부터 10일이 지났다.</li></ol><p>이를 코드로 표현하면 다음과 같다.</p><pre><code class="language-cpp line-numbers">template&lt;int Year, int Month, int Day&gt;
 struct DayCount {
 	enum {
-		value = DayCount&lt;Year, Month, 1&gt;::value + Day - 1
+		value = DayCount&lt;Year, Month, 1&gt;::value &#43; Day - 1
 	};
 };
 
 template&lt;int Year, int Month&gt;
 struct DayCount &lt; Year, Month, 1 &gt; {
 	enum {
-		value = DayCount&lt;Year, Month - 1, 1&gt;::value + YearDayCount&lt;Year, Month - 1&gt;::value
+		value = DayCount&lt;Year, Month - 1, 1&gt;::value &#43; YearDayCount&lt;Year, Month - 1&gt;::value
 	};
 };
 
@@ -131,17 +125,16 @@ struct DayCount &lt;Year, 1, 1&gt; {
 	};
 };
 
-static_assert(DayCount&lt;2015, 1, 1&gt;::value == 0, &quot;&quot;);
-static_assert(DayCount&lt;2015, 1, 11&gt;::value == 10, &quot;&quot;);
+static_assert(DayCount&lt;2015, 1, 1&gt;::value == 0, &#34;&#34;);
+static_assert(DayCount&lt;2015, 1, 11&gt;::value == 10, &#34;&#34;);
 
-static_assert(DayCount&lt;2015, 2, 1&gt;::value == 31, &quot;&quot;);
-static_assert(DayCount&lt;2015, 3, 1&gt;::value == 31 + 28, &quot;&quot;);
-static_assert(DayCount&lt;2015, 4, 1&gt;::value == 31 + 28 + 31, &quot;&quot;);
-</code></pre><h2 id=20000101--yyyy0101><code>2000/01/01</code> ~ <code>YYYY/01/01</code></h2><p>새해까지의 간격을 계산하는 클래스를 만들자. 윤년인지 아닌지를 확인해서 365 또는 366을 연속으로 더하면된다.
-<code>2000/01/01</code>이 토요일이라는 정보를 이용해서 템플릿 특수화를 한다.</p><pre><code class=language-cpp>template&lt;int Year&gt;
+static_assert(DayCount&lt;2015, 2, 1&gt;::value == 31, &#34;&#34;);
+static_assert(DayCount&lt;2015, 3, 1&gt;::value == 31 &#43; 28, &#34;&#34;);
+static_assert(DayCount&lt;2015, 4, 1&gt;::value == 31 &#43; 28 &#43; 31, &#34;&#34;);</code></pre><h2 id=20000101--yyyy0101><code>2000/01/01</code> ~ <code>YYYY/01/01</code></h2><p>새해까지의 간격을 계산하는 클래스를 만들자. 윤년인지 아닌지를 확인해서 365 또는 366을 연속으로 더하면된다.
+<code>2000/01/01</code>이 토요일이라는 정보를 이용해서 템플릿 특수화를 한다.</p><pre><code class="language-cpp line-numbers">template&lt;int Year&gt;
 struct YearTotalDay {
 	enum {
-		value = YearTotalDay&lt;Year - 1&gt;::value + LeapYear&lt;Year - 1&gt;::total
+		value = YearTotalDay&lt;Year - 1&gt;::value &#43; LeapYear&lt;Year - 1&gt;::total
 	};
 };
 
@@ -153,44 +146,42 @@ struct YearTotalDay &lt;2000&gt; {
 	};
 };
 
-static_assert(YearTotalDay&lt;2000&gt;::value == DAY_SAT, &quot;&quot;);
-static_assert(YearTotalDay&lt;2001&gt;::value % 7 == DAY_MON, &quot;&quot;);
-static_assert(YearTotalDay&lt;2002&gt;::value % 7 == DAY_TUE, &quot;&quot;);
-</code></pre><h2 id=yyyymmdd의-요일><code>YYYY/MM/DD</code>의 요일</h2><p><code>2000/01/01</code>로부터의 경과일을 알면 요일은 간단하게 구할수 있다. 경과일에 <code>mod 7</code>을 하면 된다.
-위에서 준비한 클래스를 조합하면 다음과 같다.</p><pre><code class=language-cpp>template&lt;int Y, int M, int D&gt;
+static_assert(YearTotalDay&lt;2000&gt;::value == DAY_SAT, &#34;&#34;);
+static_assert(YearTotalDay&lt;2001&gt;::value % 7 == DAY_MON, &#34;&#34;);
+static_assert(YearTotalDay&lt;2002&gt;::value % 7 == DAY_TUE, &#34;&#34;);</code></pre><h2 id=yyyymmdd의-요일><code>YYYY/MM/DD</code>의 요일</h2><p><code>2000/01/01</code>로부터의 경과일을 알면 요일은 간단하게 구할수 있다. 경과일에 <code>mod 7</code>을 하면 된다.
+위에서 준비한 클래스를 조합하면 다음과 같다.</p><pre><code class="language-cpp line-numbers">template&lt;int Y, int M, int D&gt;
 struct Weekday {
 	enum {
 		start = YearTotalDay&lt;Y&gt;::value % 7,
-		month_start = (DayCount&lt;Y, M, 1&gt;::value + start) % 7,
-		value = (DayCount&lt;Y, M, D&gt;::value + start) % 7
+		month_start = (DayCount&lt;Y, M, 1&gt;::value &#43; start) % 7,
+		value = (DayCount&lt;Y, M, D&gt;::value &#43; start) % 7
 	};
 };
 
-static_assert(Weekday&lt;2001, 1, 1&gt;::value == DAY_MON, &quot;&quot;);
-static_assert(Weekday&lt;2002, 1, 1&gt;::value == DAY_TUE, &quot;&quot;);
-static_assert(Weekday&lt;2003, 1, 1&gt;::value == DAY_WED, &quot;&quot;);
-static_assert(Weekday&lt;2015, 1, 1&gt;::value == DAY_THU, &quot;&quot;);
+static_assert(Weekday&lt;2001, 1, 1&gt;::value == DAY_MON, &#34;&#34;);
+static_assert(Weekday&lt;2002, 1, 1&gt;::value == DAY_TUE, &#34;&#34;);
+static_assert(Weekday&lt;2003, 1, 1&gt;::value == DAY_WED, &#34;&#34;);
+static_assert(Weekday&lt;2015, 1, 1&gt;::value == DAY_THU, &#34;&#34;);
 
-static_assert(Weekday&lt;2015, 1, 1&gt;::month_start == DAY_THU, &quot;&quot;);
-static_assert(Weekday&lt;2015, 2, 1&gt;::month_start == DAY_SUN, &quot;&quot;);
-static_assert(Weekday&lt;2015, 3, 1&gt;::month_start == DAY_SUN, &quot;&quot;);
+static_assert(Weekday&lt;2015, 1, 1&gt;::month_start == DAY_THU, &#34;&#34;);
+static_assert(Weekday&lt;2015, 2, 1&gt;::month_start == DAY_SUN, &#34;&#34;);
+static_assert(Weekday&lt;2015, 3, 1&gt;::month_start == DAY_SUN, &#34;&#34;);
 
-static_assert(Weekday&lt;2015, 1, 13&gt;::value == DAY_TUE, &quot;&quot;);
-static_assert(Weekday&lt;2015, 2, 13&gt;::value == DAY_FRI, &quot;&quot;);
-static_assert(Weekday&lt;2015, 3, 13&gt;::value == DAY_FRI, &quot;&quot;);
-</code></pre><h2 id=yyyy0113--yyyy1213이-금요일인가><code>YYYY/01/13</code> ~ <code>YYYY/12/13</code>이 금요일인가?</h2><p>특정 날짜의 요일을 알수 있으면 금요일인지 비교하는 것은 아주 쉽다.
+static_assert(Weekday&lt;2015, 1, 13&gt;::value == DAY_TUE, &#34;&#34;);
+static_assert(Weekday&lt;2015, 2, 13&gt;::value == DAY_FRI, &#34;&#34;);
+static_assert(Weekday&lt;2015, 3, 13&gt;::value == DAY_FRI, &#34;&#34;);</code></pre><h2 id=yyyy0113--yyyy1213이-금요일인가><code>YYYY/01/13</code> ~ <code>YYYY/12/13</code>이 금요일인가?</h2><p>특정 날짜의 요일을 알수 있으면 금요일인지 비교하는 것은 아주 쉽다.
 그러니까 1월부터 12월까지의 13일의 금요일을 확인하는 것을 같이 한다.
 13일의 금요일 여부를 확인한 다음 if를 이용해서 재귀호출을 어떻게 할지 결정할수도 있겠지만 제약조건으로 if를 쓰지 않기로 했기 때문에 다른 방법을 이용했다.
 <code>제네릭 프로그래밍과 디자인 패턴을 적용한 Modern C++ Design</code>을 보면 int를 type로 바꾸는 편법이 있다.
 이것과 오버로딩을 이용했다.
-<code>YYYY/01/13</code>부터 <code>YYYY/12/13</code>까지 재귀적으로 호출된다. 만약 해당 월의 13일이 금요일이면 vector에 집어넣는다.</p><pre><code class=language-cpp>template&lt;int v&gt;
+<code>YYYY/01/13</code>부터 <code>YYYY/12/13</code>까지 재귀적으로 호출된다. 만약 해당 월의 13일이 금요일이면 vector에 집어넣는다.</p><pre><code class="language-cpp line-numbers">template&lt;int v&gt;
 struct Int2Type {
 	enum { value = v };
 };
 
 template&lt;int Year, int Month&gt;
 struct EvilYear {
-	typedef EvilYear&lt;Year, Month + 1&gt; Next;
+	typedef EvilYear&lt;Year, Month &#43; 1&gt; Next;
 
 	enum {
 		Weekday = Weekday&lt;2015, Month, 13&gt;::value,
@@ -228,17 +219,15 @@ struct EvilYear&lt;Year, 12&gt; {
 	}
 	static void run(std::vector&lt;int&gt; &amp;result, Int2Type&lt;false&gt;) {
 	}
-};
-</code></pre><h3 id=실행기>실행기</h3><p>년도만 지정하면 1월을 호출하는 클래스이다. 실제 재귀는 각각의 월에서 알아서 처리한다.</p><pre><code class=language-cpp>template&lt;int Year&gt;
+};</code></pre><h3 id=실행기>실행기</h3><p>년도만 지정하면 1월을 호출하는 클래스이다. 실제 재귀는 각각의 월에서 알아서 처리한다.</p><pre><code class="language-cpp line-numbers">template&lt;int Year&gt;
 struct EvilYearRunner {
 	typedef EvilYear&lt;Year, 1&gt; Start;
 	
 	static void run(std::vector&lt;int&gt; &amp;result) {
 		Start::run(result);
 	}
-};
-</code></pre><h2 id=main>main()</h2><p>별거 없다. 이전에 만든 실행기에 인자를 2015년으로 지정한 다음에 실행한다.
-그리고 실행결과가 올바른지 확인하고 출력한다.</p><pre><code class=language-cpp>int main()
+};</code></pre><h2 id=main>main()</h2><p>별거 없다. 이전에 만든 실행기에 인자를 2015년으로 지정한 다음에 실행한다.
+그리고 실행결과가 올바른지 확인하고 출력한다.</p><pre><code class="language-cpp line-numbers">int main()
 {
 	const int Year = 2015;
 
@@ -253,13 +242,12 @@ struct EvilYearRunner {
 	}
 
 	for (int month : retval) {
-		printf(&quot;%d &quot;, month);
+		printf(&#34;%d &#34;, month);
 	}
 
 	getchar();
 	return 0;
-}
-</code></pre><h2 id=o1>O(1)</h2><p>코드는 2015년 1월부터 12월까지 총 12번 <code>EvilYear&lt;Year, Month>::run()</code>을 호출한다.
+}</code></pre><h2 id=o1>O(1)</h2><p>코드는 2015년 1월부터 12월까지 총 12번 <code>EvilYear&lt;Year, Month>::run()</code>을 호출한다.
 해당 년월의 13일이 금요일인지는 컴파일 시간에 이미 계산되었기 때문에 vector에 월을 집어넣는 작업밖에 수행하지 않는다.
 즉, 런타임에서 날짜 계산은 아무것도 하지 않는다.
 이것이 C++ Template Metaprogramming의 좋은 점이다.</p><h2 id=정리>정리</h2><ul><li>C++ Template Metaprogramming은 흑마법이라고 불리지만 차근차근 하면 못할 짓은 아니다.</li><li>나같은 초보자도 13일의 금요일 정도의 로직은 C++ Template Metaprogramming 정도로 짤 수 있다.</li><li>C++ TMP를 이용하면 if/for/while 하나없이 로직을 작성하는 것이 가능하다.</li><li><strong>흑마법은 안하는게 정신건강에 좋다.</strong></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/template-metaprogramming>template metaprogramming</a>
@@ -288,7 +276,6 @@ struct EvilYearRunner {
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

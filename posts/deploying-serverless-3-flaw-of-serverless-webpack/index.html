@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (3) serverless-webpack의 결함 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (3) serverless-webpack의 결함"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (3) serverless-webpack의 결함 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (3) serverless-webpack의 결함"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -16,78 +16,68 @@ serverless-webpack의 버전이 올라가면 글의 내용과 달라질 수 있�
 의존성 걸린 패키지는 이미 로컬 <code>node_modules/</code>에 들어있다.</p><p>대체 왜 느린거지?</p><h3 id=중복된-복사>중복된 복사</h3><p>웹팩 빌드 결과물을 뒤져보면 두개의 <code>node_modules/</code> 가 새로 생긴다.
 수십MB의 파일, 수만개의 파일이 새로 생겼으니 패키징 속도가 빠를 수 없다.</p><p>근데 왜 <code>node_modules</code>가 두개나 생긴거지? 디렉토리 내부를 비교해보면 재밌다.
 이전글에서 배포 패키지 크기를 줄이려고 <code>npx rimraf "node_modules/@types"</code>를 썻다.</p><ul><li><code>.webpack/dependencies/node_modules</code><ul><li><code>@types</code> 있음</li></ul></li><li><code>.webpack/services/node_modules</code><ul><li><code>@types</code> 없음</li></ul></li></ul><p>결과물을 보고 serverless-webpack의 코드를 보지 않고도 동작을 상상할 수 있다.</p><ol><li>생성: <code>.webpack/dependencies/node_modules</code></li><li>복사: <code>.webpack/dependencies/node_modules</code> -> <code>.webpack/services/node_modules</code></li><li>삭제: <code>.webpack/services/node_modules/@types</code></li><li>zip: <code>.webpack/services</code> -> <code>.webpack/xxx.zip</code></li></ol><p>근데 node_modules는 대체 왜 만들어진거지?</p><h3 id=npm-install>npm install</h3><p>serverless-webpack은 npm, yarn을 지원한다.
-코드를 뒤져보면 각각의 패키지 매니저에 대응하는 install 이 있다.</p><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/packagers/npm.js#L110>npm</a></p><pre><code class=language-js>static install(cwd) {
-	const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
-	const args = ['install'];
+코드를 뒤져보면 각각의 패키지 매니저에 대응하는 install 이 있다.</p><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/packagers/npm.js#L110>npm</a></p><pre><code class="language-js line-numbers">static install(cwd) {
+	const command = /^win/.test(process.platform) ? &#39;npm.cmd&#39; : &#39;npm&#39;;
+	const args = [&#39;install&#39;];
 
 	return Utils.spawnProcess(command, args, { cwd }).return();
-}
-</code></pre><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/packagers/yarn.js#L135>yarn</a></p><pre><code class=language-js>static install(cwd, packagerOptions) {
-	const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
-	const args = [ 'install', '--non-interactive' ];
+}</code></pre><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/packagers/yarn.js#L135>yarn</a></p><pre><code class="language-js line-numbers">static install(cwd, packagerOptions) {
+	const command = /^win/.test(process.platform) ? &#39;yarn.cmd&#39; : &#39;yarn&#39;;
+	const args = [ &#39;install&#39;, &#39;--non-interactive&#39; ];
 	...
 	return Utils.spawnProcess(command, args, { cwd }).return();
-}
-</code></pre><p>두 install 함수 모두 <code>Utils.spawnProcess()</code>를 쓴다.
+}</code></pre><p>두 install 함수 모두 <code>Utils.spawnProcess()</code>를 쓴다.
 이 함수는 진짜로 process를 spawn한다.
 <code>.webpack/dependencies/node_modules</code>는 <code>npm install</code>에 의해서 만들어진 것이다.
-npm install이 실행되고 인터넷에서 패키지를 받을테니 패키징 속도가 느린건 어쩔 수 없다.</p><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/utils.js#L73>https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/utils.js#L73</a></p><pre><code class=language-js>function spawnProcess(command, args, options) {
+npm install이 실행되고 인터넷에서 패키지를 받을테니 패키징 속도가 느린건 어쩔 수 없다.</p><p><a href=https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/utils.js#L73>https://github.com/serverless-heaven/serverless-webpack/blob/v5.5.1/lib/utils.js#L73</a></p><pre><code class="language-js line-numbers">function spawnProcess(command, args, options) {
 	return new BbPromise((resolve, reject) =&gt; {
-		const child = childProcess.spawn(command, args, options);
-</code></pre><p>npm install 하려면 package.json이 필요한데 이건 어떻게 만들어진거지?</p><h2 id=새로운-packagejson>새로운 package.json</h2><p>serverless-webpack이 얼마나 똑똑한지 보여주려고 멍청한 짓을 해봤다.
+		const child = childProcess.spawn(command, args, options);</code></pre><p>npm install 하려면 package.json이 필요한데 이건 어떻게 만들어진거지?</p><h2 id=새로운-packagejson>새로운 package.json</h2><p>serverless-webpack이 얼마나 똑똑한지 보여주려고 멍청한 짓을 해봤다.
 <code>p-limit</code>은 package.json에는 있지만 handler.ts에는 없다.
 package.json에는 의존성이 정의되어 있지만 실제로는 사용되지 않는 패키지이다.
 <code>aws-xray-sdk-core</code>는 package.json에는 없지만 handler.ts에는 있다.
-<code>dynamo-types</code>는 <code>aws-xray-sdk-core</code>에 의존하고 있어서 package.json에 넣지 않아도 쓸 수 있다.</p><p>package.json</p><pre><code>&quot;dependencies&quot;: {
-	&quot;aws-sdk&quot;: &quot;^2.958.0&quot;,
-	&quot;dynamo-types&quot;: &quot;^2.10.1&quot;,
-	&quot;lodash&quot;: &quot;^4.17.21&quot;,
-	&quot;mysql&quot;: &quot;^2.18.1&quot;,
-	&quot;p-limit&quot;: &quot;^3.1.0&quot;,
-	&quot;typeorm&quot;: &quot;^0.2.36&quot;
+<code>dynamo-types</code>는 <code>aws-xray-sdk-core</code>에 의존하고 있어서 package.json에 넣지 않아도 쓸 수 있다.</p><p>package.json</p><pre class=markdown-textblock><code>"dependencies": {
+	"aws-sdk": "^2.958.0",
+	"dynamo-types": "^2.10.1",
+	"lodash": "^4.17.21",
+	"mysql": "^2.18.1",
+	"p-limit": "^3.1.0",
+	"typeorm": "^0.2.36"
 },
-&quot;devDependencies&quot;: {
-	&quot;@types/aws-lambda&quot;: &quot;^8.10.71&quot;,
-	&quot;@types/lodash&quot;: &quot;^4.14.171&quot;,
-	&quot;@types/node&quot;: &quot;^14.14.25&quot;,
-	....
-</code></pre><p>src/handler.ts</p><pre><code class=language-ts>import 'aws-sdk';
-import 'dynamo-types';
-import 'lodash';
-import 'typeorm';
-import 'mysql';
+"devDependencies": {
+	"@types/aws-lambda": "^8.10.71",
+	"@types/lodash": "^4.14.171",
+	"@types/node": "^14.14.25",
+	....</code></pre><p>src/handler.ts</p><pre><code class="language-ts line-numbers">import &#39;aws-sdk&#39;;
+import &#39;dynamo-types&#39;;
+import &#39;lodash&#39;;
+import &#39;typeorm&#39;;
+import &#39;mysql&#39;;
 
-import 'aws-xray-sdk-core';
-</code></pre><p><code>npx sls webpack</code>을 돌리면 아래와 같은 로그를 볼 수 있다.</p><pre><code>Serverless: WARNING: Could not determine version of module aws-xray-sdk-core
+import &#39;aws-xray-sdk-core&#39;;</code></pre><p><code>npx sls webpack</code>을 돌리면 아래와 같은 로그를 볼 수 있다.</p><pre class=markdown-textblock><code>Serverless: WARNING: Could not determine version of module aws-xray-sdk-core
 Serverless: Excluding external modules: aws-sdk@^2.958.0
 Serverless: Package lock found - Using locked versions
 Serverless: Packing external modules: dynamo-types@^2.10.1, lodash@^4.17.21, typeorm@^0.2.36, mysql@^2.18.1, aws-xray-sdk-core
 Serverless: WARNING: Could not determine version of module aws-xray-sdk-core
-Serverless: Copying existing artifacts...
-</code></pre><p>.webpack/dependencies/package.json 가 생성된다.</p><pre><code class=language-json>{
-  &quot;name&quot;: &quot;webpack-flaw&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;Packaged externals for webpack-flaw&quot;,
-  &quot;private&quot;: true,
-  &quot;scripts&quot;: {
-    &quot;script0&quot;: &quot;npx rimraf \&quot;node_modules/{aws-sdk,figlet}\&quot;&quot;,
-    &quot;script1&quot;: &quot;npx rimraf \&quot;node_modules/@types\&quot;&quot;
+Serverless: Copying existing artifacts...</code></pre><p>.webpack/dependencies/package.json 가 생성된다.</p><pre><code class="language-json line-numbers">{
+  &#34;name&#34;: &#34;webpack-flaw&#34;,
+  &#34;version&#34;: &#34;1.0.0&#34;,
+  &#34;description&#34;: &#34;Packaged externals for webpack-flaw&#34;,
+  &#34;private&#34;: true,
+  &#34;scripts&#34;: {
+    &#34;script0&#34;: &#34;npx rimraf \&#34;node_modules/{aws-sdk,figlet}\&#34;&#34;,
+    &#34;script1&#34;: &#34;npx rimraf \&#34;node_modules/@types\&#34;&#34;
   },
-  &quot;dependencies&quot;: {
-    &quot;dynamo-types&quot;: &quot;^2.10.1&quot;,
-    &quot;lodash&quot;: &quot;^4.17.21&quot;,
-    &quot;typeorm&quot;: &quot;^0.2.36&quot;,
-    &quot;mysql&quot;: &quot;^2.18.1&quot;,
-    &quot;aws-xray-sdk-core&quot;: &quot;&quot;
+  &#34;dependencies&#34;: {
+    &#34;dynamo-types&#34;: &#34;^2.10.1&#34;,
+    &#34;lodash&#34;: &#34;^4.17.21&#34;,
+    &#34;typeorm&#34;: &#34;^0.2.36&#34;,
+    &#34;mysql&#34;: &#34;^2.18.1&#34;,
+    &#34;aws-xray-sdk-core&#34;: &#34;&#34;
   }
-}
-</code></pre><p>package.json를 보면 로그를 해석할 수 있다.</p><pre><code>Serverless: WARNING: Could not determine version of module aws-xray-sdk-core
-</code></pre><p>handler.ts에서 <code>aws-xray-sdk-core</code>를 쓰니까 의존성에 끼워넣는다.
-하지만 버전이 뭔지 모르니까 공백으로 들어간다. <code>"aws-xray-sdk-core": ""</code>.</p><pre><code>Serverless: Excluding external modules: aws-sdk@^2.958.0
-</code></pre><p>이전글에서 <code>serverless.yml</code> 편집을 통해서 <code>aws-sdk</code>를 제외하는 방법을 다뤘다.
-그래서 생성된 package.json에는 <code>aws-sdk</code>가 없다.</p><pre><code>Serverless: Package lock found - Using locked versions
-Serverless: Packing external modules: dynamo-types@^2.10.1, lodash@^4.17.21, typeorm@^0.2.36, mysql@^2.18.1, aws-xray-sdk-core
-</code></pre><p>원본 package.json에서 버전을 찾을수 있는건 그대로 새로운 package.json에도 포함된다.</p><p>serverless-webpack이 잘 만들어져있어서 코드에서 사용되지 않은 <code>p-limit</code>을 지운걸 확인할 수 있다.</p><h3 id=phantom-dependencies>Phantom dependencies</h3><p>npm의 경우 직접 설치한적 없지만 의존성에 의해서 설치된 패키지를 코드에서 쓸 수 있다.
+}</code></pre><p>package.json를 보면 로그를 해석할 수 있다.</p><pre class=markdown-textblock><code>Serverless: WARNING: Could not determine version of module aws-xray-sdk-core</code></pre><p>handler.ts에서 <code>aws-xray-sdk-core</code>를 쓰니까 의존성에 끼워넣는다.
+하지만 버전이 뭔지 모르니까 공백으로 들어간다. <code>"aws-xray-sdk-core": ""</code>.</p><pre class=markdown-textblock><code>Serverless: Excluding external modules: aws-sdk@^2.958.0</code></pre><p>이전글에서 <code>serverless.yml</code> 편집을 통해서 <code>aws-sdk</code>를 제외하는 방법을 다뤘다.
+그래서 생성된 package.json에는 <code>aws-sdk</code>가 없다.</p><pre class=markdown-textblock><code>Serverless: Package lock found - Using locked versions
+Serverless: Packing external modules: dynamo-types@^2.10.1, lodash@^4.17.21, typeorm@^0.2.36, mysql@^2.18.1, aws-xray-sdk-core</code></pre><p>원본 package.json에서 버전을 찾을수 있는건 그대로 새로운 package.json에도 포함된다.</p><p>serverless-webpack이 잘 만들어져있어서 코드에서 사용되지 않은 <code>p-limit</code>을 지운걸 확인할 수 있다.</p><h3 id=phantom-dependencies>Phantom dependencies</h3><p>npm의 경우 직접 설치한적 없지만 의존성에 의해서 설치된 패키지를 코드에서 쓸 수 있다.
 이를 <a href=https://rushjs.io/pages/advanced/phantom_deps/>Phantom dependencies</a>라고 부른다.</p><p>package.json에서는 <code>aws-xray-sdk-core</code>를 설치한적 없다.
 <code>dynamo-types</code>가 설치될때 <code>aws-xray-sdk-core</code>가 같이 설치되서 쓸 수 있는거다.
 나쁜 코드지만 아무튼 돌아간다. 하지만 나쁜 코드에는 이유가 있다.</p><p>오늘의 <code>aws-xray-sdk-core</code>의 최신버전이 <code>2.3.6</code>라고 가정하자.
@@ -135,7 +125,6 @@ pnpm의 경우 받은 패키지를 로컬에 저장해둔다.
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

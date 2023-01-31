@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Uber Shader &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Uber Shader"><meta name=keywords content="cg ,shader"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Uber Shader &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Uber Shader"><meta name=keywords content="cg ,shader"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -8,7 +8,7 @@
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>Uber Shader</h1><div class=tip><time datetime="2013-01-27 00:00:00 +0000 UTC">2013. 01. 27</time></div><div class=content><p>기본 개념은 한 개의 쉐이더 소스를 짜고 ifdef/ifndef 질을 해서 쉐이더 코드를 여러 형태로 변화시키는 것이다.
 이것이 의미가 있는 이유는 여러 종류의 광원모델을 기반으로 쉐이더를 짠다고 하더라도 똑같은 로직/속성의 반복이 등장하기 떄문이다.
 (즉, 쉐이더 코드의 중복을 줄일 수 있다.)</p><h2 id=간단한-예시>간단한 예시</h2><p>하나의 프래그먼트 쉐이더로 색을 그대로 칠하는것과 텍스쳐와 색을 조합해서 칠하는것을 처리하는 예제코드이다.
-다음의 예제코드의 맨 앞부분에 매크로를 집어넣고 쉐이더를 컴파일하면 그 결과물은 각각 다른것이 나온다.</p><pre><code>void main()
+다음의 예제코드의 맨 앞부분에 매크로를 집어넣고 쉐이더를 컴파일하면 그 결과물은 각각 다른것이 나온다.</p><pre class=markdown-textblock><code>void main()
 {
 	vec4 color = vec4(1, 1, 1, 1);
 #if USE_TEXTURE == 1
@@ -16,32 +16,26 @@
 #else
 	gl_FragColor = color;
 #endif
-}
-</code></pre><h3 id=use_texture-1>USE_TEXTURE 1</h3><h4 id=input>input</h4><pre><code>#define USE_TEXTURE 1
+}</code></pre><h3 id=use_texture-1>USE_TEXTURE 1</h3><h4 id=input>input</h4><pre class=markdown-textblock><code>#define USE_TEXTURE 1
 // input original source
-// ...
-</code></pre><h4 id=output>output</h4><pre><code>void main()
+// ...</code></pre><h4 id=output>output</h4><pre class=markdown-textblock><code>void main()
 {
 	vec4 color = vec4(1, 1, 1, 1);
 	gl_FragColor = texture2D(tex, texcoord) * color;
-}
-</code></pre><h3 id=use_texture-0>USE_TEXTURE 0</h3><h4 id=input-1>input</h4><pre><code>#define USE_TEXTURE 0
+}</code></pre><h3 id=use_texture-0>USE_TEXTURE 0</h3><h4 id=input-1>input</h4><pre class=markdown-textblock><code>#define USE_TEXTURE 0
 // input original source
-// ...
-</code></pre><h4 id=output-1>output</h4><pre><code>void main()
+// ...</code></pre><h4 id=output-1>output</h4><pre class=markdown-textblock><code>void main()
 {
 	vec4 color = vec4(1, 1, 1, 1);
 	gl_FragColor = color;
-}
-</code></pre><h2 id=대체-이걸-어떻게언제-쓰는가>대체 이걸 어떻게/언제 쓰는가?</h2><p>내가 간단하게 사용한 방식은 다음과 같다</p><ol><li>다음의 속성을 전부 때려박은 광원 모델을 계산하는 쉐이터를 만든다<ul><li>Ambient Color</li><li>Diffuse Color</li><li>Diffuse Map</li><li>Specular Color</li><li>Specular Map</li></ul></li><li>각각의 속성에 따른 빛 계산 부분을 블럭으로 묶고 위와 같이 ifdef&mldr;endif로 잡아준다</li><li>어떤 라이팅 모델이 필요할지에 따라서 코드 맨 위에 define을 걸어준다. 만약 Ambient, DiffuseColor, SpecularColor만 사용하고 싶으면 다음과 같은 문자열과 쉐이더 코드를 합쳐서 쉐이더 코드로 사용한다</li></ol><pre><code>#define USE_AMBIENT_COLOR 1
+}</code></pre><h2 id=대체-이걸-어떻게언제-쓰는가>대체 이걸 어떻게/언제 쓰는가?</h2><p>내가 간단하게 사용한 방식은 다음과 같다</p><ol><li>다음의 속성을 전부 때려박은 광원 모델을 계산하는 쉐이터를 만든다<ul><li>Ambient Color</li><li>Diffuse Color</li><li>Diffuse Map</li><li>Specular Color</li><li>Specular Map</li></ul></li><li>각각의 속성에 따른 빛 계산 부분을 블럭으로 묶고 위와 같이 ifdef&mldr;endif로 잡아준다</li><li>어떤 라이팅 모델이 필요할지에 따라서 코드 맨 위에 define을 걸어준다. 만약 Ambient, DiffuseColor, SpecularColor만 사용하고 싶으면 다음과 같은 문자열과 쉐이더 코드를 합쳐서 쉐이더 코드로 사용한다</li></ol><pre class=markdown-textblock><code>#define USE_AMBIENT_COLOR 1
 #define USE_DIFFUSE_COLOR 1
 #define USE_DIFFUSE_MAP 0
 #define USE_SPECULAR_COLOR 1
 #define USE_SPECULAR_MAP 0
 
 // Real Uber-Shader Code
-//....
-</code></pre><p>기타 광원 효과도 나중에 블럭으로 만들어서 집어넣음으로써 확장이 가능하다.</p><h2 id=장점>장점</h2><p>핵심 라이팅 모델은 쉐이더 코드 하나만 유지보수함으로써 끝난다.
+//....</code></pre><p>기타 광원 효과도 나중에 블럭으로 만들어서 집어넣음으로써 확장이 가능하다.</p><h2 id=장점>장점</h2><p>핵심 라이팅 모델은 쉐이더 코드 하나만 유지보수함으로써 끝난다.
 쉐이더를 많이 짤 일이 없는 경우는 Uber shader 몇개로 어지간한건 다 떄울수 있겟더라.
 <a href=http://fabiensanglard.net/dEngineSourceCodeRelease/index.php>dEngine</a>의 경우가 크고 아름다운 UberShader와 몇개의 간단한 쉐이더로
 필요한 쉐이더를 전부 때웠다.</p><h2 id=단점>단점</h2><p>전처리기 명령이 떡칠되다보니까 쉐이더 코드 유지보수하기가 어렵다.</p><h2 id=reference>Reference</h2><ul><li><a href=http://kindtis.tistory.com/202>내 맘대로 엔진 제작기 - 10(셰이더 Shader)</a></li><li><a href=http://fabiensanglard.net/dEngineSourceCodeRelease/index.php>dEngine: A iOS 3D renderer source code</a></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/cg>cg</a>
@@ -67,7 +61,6 @@
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

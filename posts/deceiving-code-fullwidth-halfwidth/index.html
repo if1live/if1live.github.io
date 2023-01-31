@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>코드에 반각/전각문자 넣어서 낚시하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="코드에 반각/전각문자 넣어서 낚시하기"><meta name=keywords content="전각 ,반각 ,halfwidth ,fullwidth ,낚시"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>코드에 반각/전각문자 넣어서 낚시하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="코드에 반각/전각문자 넣어서 낚시하기"><meta name=keywords content="전각 ,반각 ,halfwidth ,fullwidth ,낚시"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -12,7 +12,7 @@
 악의를 가지고 코드를 수정하지 않는 이상 위의 코드를 볼 일은 없다.
 그렇다면 이건 어떨까?</p><blockquote><p>프로그래머 머리 터지게 하는 방법
 작업중인 코드의 정규식을 몰래 열어 반각 공백문자 2개( )를 전각 공백문자 1개(　)로 바꾼다
-<a href=https://twitter.com/if1live/status/591252041479008256>tweet</a></p></blockquote><h2 id=반각전각>반각/전각</h2><p>여기에서는 간단하게 설명한다. 자세한 설명은 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>위키피디아</a>를 참고.</p><p><p class=markdown-image><img src=KoreanDOSPrompt.png alt=반각/전각></p></p><ol><li>일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다.</li><li>한글, 한자, 일본어는 가로폭 넓다.</li><li>고정폭 폰트를 사용하면 화면에 보이는 글자가 격자에 딱 맞게 들어가야한다.</li><li>한글 한글자의 가로폭을 알파벳 2글자 크기가 맞추면 되지 않을까?</li></ol><h2 id=실제-사례로-보는-버그>실제 사례로 보는 버그</h2><h3 id=버그>버그</h3><p><a href=http://birthday.libsora.so/>Happy Birthday, Waifu</a>를 만들때 낚인 사례이다.
+<a href=https://twitter.com/if1live/status/591252041479008256>tweet</a></p></blockquote><h2 id=반각전각>반각/전각</h2><p>여기에서는 간단하게 설명한다. 자세한 설명은 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>위키피디아</a>를 참고.</p><p><p class=markdown-image><a href=KoreanDOSPrompt.png target=_blank><img src=KoreanDOSPrompt.png alt=반각/전각></a></p></p><ol><li>일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다.</li><li>한글, 한자, 일본어는 가로폭 넓다.</li><li>고정폭 폰트를 사용하면 화면에 보이는 글자가 격자에 딱 맞게 들어가야한다.</li><li>한글 한글자의 가로폭을 알파벳 2글자 크기가 맞추면 되지 않을까?</li></ol><h2 id=실제-사례로-보는-버그>실제 사례로 보는 버그</h2><h3 id=버그>버그</h3><p><a href=http://birthday.libsora.so/>Happy Birthday, Waifu</a>를 만들때 낚인 사례이다.
 레일즈를 공부할겸 캐릭터 생일을 보여주는 간단한 웹서비스를 만들었다.
 개발 당시 캐릭터의 생일DB가 깨끗하게 정리된 곳을 찾지 못했다.
 그래서 DB는 <a href=http://www.animecharactersdatabase.com/>Anime Characters Database</a>를 크롤링하기로 했다.
@@ -21,8 +21,7 @@ Anime Characters Database에 등록된 카스가노 소라의 일본어 이름�
 <a href="http://www.animecharactersdatabase.com/character.php?id=62894">시라쿠사 이부키</a>가 선택되었다.
 DB에 등록된 시라쿠사 이부키의 일본어 이름은 <code>白草 いぶき （しらくさ いぶき）</code>이다.</p><p>DB에 등록된 카스가노 소라와 시라쿠사 이부키의 이름을 보니 다음과 같은 형식으로 DB에서 관리하는거 같더라.
 <code>[한자 이름][공백][（][히라가나 이름][）]</code>
-전각 문자를 어떻게 입력하는지 몰라서 카스가노 소라의 이름을 복사한 다음에 살짝 고쳐서 정규식을 만들었다.</p><pre><code class=language-ruby>regexp = /(?&lt;kanji&gt;.+)（(?&lt;kana&gt;.+)）/
-</code></pre><p>이후 가끔씩 시간나면 수동으로 크롤러 돌려보고 문제없는지 확인하고 캐릭터를 추가했다.
+전각 문자를 어떻게 입력하는지 몰라서 카스가노 소라의 이름을 복사한 다음에 살짝 고쳐서 정규식을 만들었다.</p><pre><code class="language-ruby line-numbers">regexp = /(?&lt;kanji&gt;.&#43;)（(?&lt;kana&gt;.&#43;)）/</code></pre><p>이후 가끔씩 시간나면 수동으로 크롤러 돌려보고 문제없는지 확인하고 캐릭터를 추가했다.
 4월 3일까지 아이마스의 아마미 하루카를 추가해달라는 요청이 있어서 아이마스 캐릭터를 넣어보기로 했다.
 그런데 파서가 뭔가 이상하게 작동했다. 이름 파싱이 제대로 안되더라.
 파싱 문제가 발생한건 <a href="http://www.animecharactersdatabase.com/character.php?id=70886">키사라기 치하야</a>였다.
@@ -30,7 +29,7 @@ DB에 등록된 키사라기 치하야의 이름은 <code>如月千早 (きさ�
 자주 쓰기는 특수문자(공백, [, ], +, -,&mldr;)가 전각문자일때 이를 반각문자로 바꿔도 위와 같은 버그는 피할 수 있을 것이다.
 아스키 코드에 있을 정도로 뻔한 문자 한정으로 전각문자를 반각문자로 바꿔보자.</p><p><a href=http://www.asciitable.com/>ASCII Code</a>와 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>전각문자 유니코드</a>를 비교하면 어떤식으로 전각문자를 반각문자로 교체할수 있는지 확인할 수 있다.
 아스키 코드에서 0x20(space)부터 0x7E(~)는 유니코드의 U+FF00(　)부터 U+FF5E(～)에 같은 순서로 배치되어있다.
-즉, 코드값만 바꾸면 순서대로 1:1 대응시킬수 있다. 다음은 이를 구현한 간단한 파이썬 코드이다.</p><pre><code class=language-python>#-*- coding: utf-8 -*-
+즉, 코드값만 바꾸면 순서대로 1:1 대응시킬수 있다. 다음은 이를 구현한 간단한 파이썬 코드이다.</p><pre><code class="language-python line-numbers">#-*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -38,38 +37,36 @@ from __future__ import print_function
 def convert_full_to_half_char(ch):
     codeval = ord(ch)
     if 0xFF00 &lt;= codeval &lt;= 0xFF5E:
-        ascii = codeval - 0xFF00 + 0x20;
+        ascii = codeval - 0xFF00 &#43; 0x20;
         return unichr(ascii)
     else:
         return ch
 
 def convert_full_to_half_string(line):
     output_list = [convert_full_to_half_char(x) for x in line]
-    return ''.join(output_list)
+    return &#39;&#39;.join(output_list)
 
-input_str = &quot;&quot;&quot;！＂＃＄％＆＇（）＊＋，－．／
+input_str = &#34;&#34;&#34;！＂＃＄％＆＇（）＊＋，－．／
 ０１２３４５６７８９：；＜＝＞？
 ＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
 ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
 ｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
-ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～&quot;&quot;&quot;
+ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～&#34;&#34;&#34;
 output_str = convert_full_to_half_string(input_str)
 print(input_str)
-print(output_str)
-</code></pre><pre><code class=language-bash>$ python convert.py
+print(output_str)</code></pre><pre><code class="language-bash line-numbers">$ python convert.py
 ！＂＃＄％＆＇（）＊＋，－．／
 ０１２３４５６７８９：；＜＝＞？
 ＠ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯ
 ＰＱＲＳＴＵＶＷＸＹＺ［＼］＾＿
 ｀ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏ
 ｐｑｒｓｔｕｖｗｘｙｚ｛｜｝～
-!&quot;#$%&amp;'()*+,-./
+!&#34;#$%&amp;&#39;()*&#43;,-./
 0123456789:;&lt;=&gt;?
 @ABCDEFGHIJKLMNO
 PQRSTUVWXYZ[\]^_
 `abcdefghijklmno
-pqrstuvwxyz{|}~
-</code></pre><p><a href=http://stackoverflow.com/questions/25149458/convert-fullwidth-to-halfwidth>C#의 경우는 전각문자열을 반각문자열로 바꿔주는 함수</a>가 있다고 한다.
+pqrstuvwxyz{|}~</code></pre><p><a href=http://stackoverflow.com/questions/25149458/convert-fullwidth-to-halfwidth>C#의 경우는 전각문자열을 반각문자열로 바꿔주는 함수</a>가 있다고 한다.
 자신이 사용하는 언어에 유사한 함수가 있는지 먼저 찾아보자.</p><h2 id=추가>추가</h2><p>일본에서는 전각문자를 상당히 많이 사용한다.
 일본 사이트를 돌아다니면서 자세히 보면 우리와 다른 특수문자를 쓰는걸 볼 수 있다.
 나처럼 일본 사이트 또는 일본과 관련된 자료를 파싱할 때는 낚이지 않게 조심하자.</p><ul><li><code>!</code> != <code>！</code></li><li><code>?</code> != <code>？</code></li></ul><p>일본에서는 반각/전각문자를 섞어쓰는게 일상이다보니 게임 금지어도 영향을 받았다.
@@ -99,7 +96,6 @@ pqrstuvwxyz{|}~
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

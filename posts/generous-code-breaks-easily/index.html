@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>관대한 코드는 쉽게 망가진다 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="관대한 코드는 쉽게 망가진다"><meta name=keywords content="design ,specification ,javascript ,ie"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>관대한 코드는 쉽게 망가진다 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="관대한 코드는 쉽게 망가진다"><meta name=keywords content="design ,specification ,javascript ,ie"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -10,27 +10,23 @@
 액티브엑스 기반 강의라고 붙어있더니 역시나 크롬에서 안되는거같더라.
 그래서 익스플로러를 켜고 인강을 들어갔다.
 IE로도 동영상 강의가 나오지 않더라.
-왜 안돌아가나 확인해가 위해서 크롬 개발자 도구를 켰더니 이런 코드가 있더라.</p><p><p class=markdown-image><img src=bug.png alt=bug></p></p><pre><code class=language-javascript>function window.onload() {
+왜 안돌아가나 확인해가 위해서 크롬 개발자 도구를 켰더니 이런 코드가 있더라.</p><p><p class=markdown-image><a href=bug.png target=_blank><img src=bug.png alt=bug></a></p></p><pre><code class="language-javascript line-numbers">function window.onload() {
     ....
-}
-</code></pre><p>잉? 함수 이름에 <code>.</code> 들어가는게 가능했어?
+}</code></pre><p>잉? 함수 이름에 <code>.</code> 들어가는게 가능했어?
 이런 코드는 처음봤다.
 처음보는 황당한 코드, 한때는 잘 돌아갔던 프로그램, 답은 뻔하다.
 <strong>IE 구버전</strong>.
-IE 호환성 모드를 켜고 인강을 켜니까 잘 돌아갔다.</p><p>IE 구버전에서만 해당되는 문제니까 이제와서는 아무짝에도 쓸모없지만 재밌는 현상이길래 글을 써봤다.</p><h2 id=문제가-발생하는-코드>문제가 발생하는 코드</h2><p>브라우저 개발자 도구를 켜고 아래의 코드를 넣으면 잘 돌아간다</p><pre><code class=language-javascript>a = {};
+IE 호환성 모드를 켜고 인강을 켜니까 잘 돌아갔다.</p><p>IE 구버전에서만 해당되는 문제니까 이제와서는 아무짝에도 쓸모없지만 재밌는 현상이길래 글을 써봤다.</p><h2 id=문제가-발생하는-코드>문제가 발생하는 코드</h2><p>브라우저 개발자 도구를 켜고 아래의 코드를 넣으면 잘 돌아간다</p><pre><code class="language-javascript line-numbers">a = {};
 a.b = {};
 a.b.foo = function() { console.log(1); };
-a.b.foo();
-</code></pre><p>하지만 아래의 코드는 아마 안돌아갈거다.</p><pre><code class=language-javascript>function a.b.bar() { console.log(2); }
-a.b.bar();
-</code></pre><p>크롬의 경우 <code>Uncaught SyntaxError: Unexpected token .</code> 라는 에러가 발생한다.
-함수이름에 <code>.</code>이 들어가는게 문법적으로 올바르지 않나보다.</p><p><p class=markdown-image><img src=capture-chrome.png alt=chrome></p></p><p>하지만 IE 호환성 모드를 활성화하면 잘 돌아간다.</p><p><p class=markdown-image><img src=capture-ie-legacy.png alt="ie legacy"></p></p><h2 id=원인>원인</h2><p>IE 구버전은 옛날 물건이다.
+a.b.foo();</code></pre><p>하지만 아래의 코드는 아마 안돌아갈거다.</p><pre><code class="language-javascript line-numbers">function a.b.bar() { console.log(2); }
+a.b.bar();</code></pre><p>크롬의 경우 <code>Uncaught SyntaxError: Unexpected token .</code> 라는 에러가 발생한다.
+함수이름에 <code>.</code>이 들어가는게 문법적으로 올바르지 않나보다.</p><p><p class=markdown-image><a href=capture-chrome.png target=_blank><img src=capture-chrome.png alt=chrome></a></p></p><p>하지만 IE 호환성 모드를 활성화하면 잘 돌아간다.</p><p><p class=markdown-image><a href=capture-ie-legacy.png target=_blank><img src=capture-ie-legacy.png alt="ie legacy"></a></p></p><h2 id=원인>원인</h2><p>IE 구버전은 옛날 물건이다.
 요새 자바스크립트 스펙으로 IE 구버전을 공격하는건 너무하잖아?
-1997년에 작성된 <a href=https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf>ECMA-262 1판</a>을 보자.</p><p><code>13. Function Definition</code> 에 함수의 문법 정의가 있다.</p><pre><code>FunctionDeclaration :
-    function Identifier ( FormalParameterListopt ) Block
-</code></pre><p>함수 이름은 identifier만 가능하다.
+1997년에 작성된 <a href=https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf>ECMA-262 1판</a>을 보자.</p><p><code>13. Function Definition</code> 에 함수의 문법 정의가 있다.</p><pre class=markdown-textblock><code>FunctionDeclaration :
+    function Identifier ( FormalParameterListopt ) Block</code></pre><p>함수 이름은 identifier만 가능하다.
 그렇다면 identifier의 문법은 무엇인가?
-<code>7.5 Identifiers</code> 를 보면 된다.</p><pre><code>Identifier ::
+<code>7.5 Identifiers</code> 를 보면 된다.</p><pre class=markdown-textblock><code>Identifier ::
     IdentifierName but not ReservedWord
 IdentifierName ::
     IdentifierLetter
@@ -41,13 +37,11 @@ IdentifierLetter :: one of
     A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  
     $ _
 DecimalDigit :: one of
-    0 1 2 3 4 5 6 7 8 9
-</code></pre><p>최초의 자바스크립트 문법을 보면 identifier에 <code>.</code>가 들어가는걸 허용하지 않는다.
+    0 1 2 3 4 5 6 7 8 9</code></pre><p>최초의 자바스크립트 문법을 보면 identifier에 <code>.</code>가 들어가는걸 허용하지 않는다.
 <code>.</code>는 다른 목적으로 써야하니까 이걸 identifer로 허용하는건 제정신이 아닐거다.
 IE 구버전이 ECMA-262 스펙을 지키지 않은게 원인이다.</p><h2 id=개발-의도>개발 의도?</h2><p>내가 익스플로러를 구현한게 아니니까 익스플로러 개발자가 무슨 생각으로 저런 결정을 했나 정확히 알지는 못한다.
-하지만 상상은 할 수 있겠다.</p><pre><code class=language-javascript>a.b.c = function() { ... };
-function a.b.c() { ... }
-</code></pre><p>위의 두 코드를 똑같이 취급하게 만들고 싶었나보다.
+하지만 상상은 할 수 있겠다.</p><pre><code class="language-javascript line-numbers">a.b.c = function() { ... };
+function a.b.c() { ... }</code></pre><p>위의 두 코드를 똑같이 취급하게 만들고 싶었나보다.
 비슷한 느낌의 코드가 자바스크립트가 또 있다.
 자바스크립트에서 <code>foo['bar']</code>와 <code>foo.bar</code>를 똑같이 취급한다.</p><p>IE의 자바스크립트는 JavaScript 아니라 JScript이다.
 그래서 표준을 적당히 무시하고 구현했을지 모른다.</p><p>IE 구버전에서 허용한 의도는 이해하겠는데 좀 우주로 가는 코드같다.
@@ -78,7 +72,6 @@ function a.b.c() { ... }
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

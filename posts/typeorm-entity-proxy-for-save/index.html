@@ -1,11 +1,11 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기"><meta name=keywords content="typeorm"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기"><meta name=keywords content="typeorm"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기</h1><div class=tip><time datetime="2020-07-10 00:00:00 +0000 UTC">2020. 07. 10</time></div><div class=content><h2 id=repositorysave-의-함정>repository.save() 의 함정</h2><p>typeorm으로 아래와 같은 엔티티를 정의했다고 치자.</p><pre><code class=language-ts>@Entity()
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>typeorm에서 repository.save() 호출할때 UPDATE 쿼리만 사용하기</h1><div class=tip><time datetime="2020-07-10 00:00:00 +0000 UTC">2020. 07. 10</time></div><div class=content><h2 id=repositorysave-의-함정>repository.save() 의 함정</h2><p>typeorm으로 아래와 같은 엔티티를 정의했다고 치자.</p><pre><code class="language-ts line-numbers">@Entity()
 export class UserEntity {
   @PrimaryColumn()
   key1: string;
@@ -15,33 +15,26 @@ export class UserEntity {
 
   @Column()
   data: string;
-}
-</code></pre><p>엔티티를 살짝 고쳐서 저장하자.<code>repository.save()</code>를 이용하면 쉽게 저장할 수 있다.
-(<code>BEGIN TRANSACTION</code>, <code>COMMIT</code>이 쿼리에 들어가는걸 없애려고 transaction을 껏다)</p><pre><code class=language-ts>const repo = conn.manager.getRepository(UserEntity);
-user.data = 'save';
-await repo.save(user, { transaction: false });
-</code></pre><p>데이터 저장하는건 1줄인데 실행되는 SQL은 1개가 아니다.</p><pre><code>query: SELECT &quot;UserEntity&quot;.&quot;key1&quot; AS &quot;UserEntity_key1&quot;, &quot;UserEntity&quot;.&quot;key2&quot; AS &quot;UserEntity_key2&quot;, &quot;UserEntity&quot;.&quot;data&quot; AS &quot;UserEntity_data&quot; FROM &quot;user_entity&quot; &quot;UserEntity&quot; WHERE &quot;UserEntity&quot;.&quot;key1&quot; = ? AND &quot;UserEntity&quot;.&quot;key2&quot; = ? -- PARAMETERS: [&quot;foo&quot;,&quot;bar&quot;]
-query: UPDATE &quot;user_entity&quot; SET &quot;data&quot; = ? WHERE &quot;key1&quot; = ? AND &quot;key2&quot; = ? -- PARAMETERS: [&quot;save&quot;,&quot;foo&quot;,&quot;bar&quot;]
-</code></pre><p>엔티티 1개의 필드 1개를 고친거니까 UPDATE 쿼리 1개로 충분해보이지만 SELECT가 같이 실행된다.
+}</code></pre><p>엔티티를 살짝 고쳐서 저장하자.<code>repository.save()</code>를 이용하면 쉽게 저장할 수 있다.
+(<code>BEGIN TRANSACTION</code>, <code>COMMIT</code>이 쿼리에 들어가는걸 없애려고 transaction을 껏다)</p><pre><code class="language-ts line-numbers">const repo = conn.manager.getRepository(UserEntity);
+user.data = &#39;save&#39;;
+await repo.save(user, { transaction: false });</code></pre><p>데이터 저장하는건 1줄인데 실행되는 SQL은 1개가 아니다.</p><pre class=markdown-textblock><code>query: SELECT "UserEntity"."key1" AS "UserEntity_key1", "UserEntity"."key2" AS "UserEntity_key2", "UserEntity"."data" AS "UserEntity_data" FROM "user_entity" "UserEntity" WHERE "UserEntity"."key1" = ? AND "UserEntity"."key2" = ? -- PARAMETERS: ["foo","bar"]
+query: UPDATE "user_entity" SET "data" = ? WHERE "key1" = ? AND "key2" = ? -- PARAMETERS: ["save","foo","bar"]</code></pre><p>엔티티 1개의 필드 1개를 고친거니까 UPDATE 쿼리 1개로 충분해보이지만 SELECT가 같이 실행된다.
 <a href=https://github.com/typeorm/typeorm/issues/3772>알려진 이슈</a>인데 고칠 생각은 없는거같다.
-insert or update 같은 고수준 기능 밑에서 저수준 SQL 여러개 실행되는건 추상화의 숙명이니까 어쩔 수 없나보다.</p><pre><code class=language-ts>const repo = conn.manager.getRepository(UserEntity);
+insert or update 같은 고수준 기능 밑에서 저수준 SQL 여러개 실행되는건 추상화의 숙명이니까 어쩔 수 없나보다.</p><pre><code class="language-ts line-numbers">const repo = conn.manager.getRepository(UserEntity);
 await repo.update({
   key1: user.key1,
   key2: user.key2,
 }, {
-  data: 'update',
-});
-</code></pre><pre><code>UPDATE &quot;user_entity&quot; SET &quot;data&quot; = ? WHERE &quot;key1&quot; = ? AND &quot;key2&quot; = ? -- PARAMETERS: [&quot;update&quot;,&quot;foo&quot;,&quot;bar&quot;]
-</code></pre><p>UPDATE만 실행하고 싶으면 <code>repository.update()</code>를 쓰면 된다.
+  data: &#39;update&#39;,
+});</code></pre><pre class=markdown-textblock><code>UPDATE "user_entity" SET "data" = ? WHERE "key1" = ? AND "key2" = ? -- PARAMETERS: ["update","foo","bar"]</code></pre><p>UPDATE만 실행하고 싶으면 <code>repository.update()</code>를 쓰면 된다.
 SELECT 쿼리가 실행되지 않지만 <code>user.data = 'save'</code>를 쓸수 없는게 아쉽다.</p><p>삽질을 잘 하면 <code>repository.save()</code>와 비슷하면서 UPDATE 쿼리만 호출되도록 만들수 있지 않을까?
 겉보기에는 <code>save()</code> 쓰는 것처럼 보이지만 내부에서는 <code>update()</code> 호출하게 만들어보자.
-<code>save()</code>와 동일한 수준의 기능은 필요없다. 엔티티 1개에 대해서만 대충 작동하게 만들자.</p><pre><code class=language-ts>@EntityRepository(UserEntity)
-class UserRepository extends MyRepository&lt;UserEntity&gt; { }
-</code></pre><pre><code class=language-ts>const repo = conn.manager.getCustomRepository(UserRepository)
+<code>save()</code>와 동일한 수준의 기능은 필요없다. 엔티티 1개에 대해서만 대충 작동하게 만들자.</p><pre><code class="language-ts line-numbers">@EntityRepository(UserEntity)
+class UserRepository extends MyRepository&lt;UserEntity&gt; { }</code></pre><pre><code class="language-ts line-numbers">const repo = conn.manager.getCustomRepository(UserRepository)
 const user = EntityProxy.create(ent);
-user.data = 'custom';
-await repo.customSave(user);
-</code></pre><h2 id=의식의-흐름>의식의 흐름</h2><h3 id=myrepositorycustomsave>MyRepository.customSave()</h3><pre><code class=language-ts>export class MyRepository&lt;T extends ObjectLiteral&gt; extends Repository&lt;T&gt; {
+user.data = &#39;custom&#39;;
+await repo.customSave(user);</code></pre><h2 id=의식의-흐름>의식의 흐름</h2><h3 id=myrepositorycustomsave>MyRepository.customSave()</h3><pre><code class="language-ts line-numbers">export class MyRepository&lt;T extends ObjectLiteral&gt; extends Repository&lt;T&gt; {
   public async customSave(proxy: EntityProxy&lt;T&gt;) {
     const { ent, diff } = proxy;
     if (!diff) { return; }
@@ -49,12 +42,11 @@ await repo.customSave(user);
     const id = this.getId(ent);
     await this.update(id, diff);
   }
-}
-</code></pre><p>custom repository는 대충 이런 느낌으로 만들면 된다.
+}</code></pre><p>custom repository는 대충 이런 느낌으로 만들면 된다.
 update에 필요한 인자인 조건과 데이터를 빼낼수 있으면 된다.
 데이터 수정이 없을때는 쿼리 실행을 건너뛰자.</p><p>엔티티 1개만 처리할거니까 조건은 PK로 충분할 것이다.
 <code>repository.getId()</code>를 쓰면 PK를 얻을수 있다.
-<a href=https://typeorm.io/#/repository-api>https://typeorm.io/#/repository-api</a></p><h3 id=diff>diff</h3><p>엔티티와 변경된 필드 목록이 있다면 diff에 해당되는 객체를 만들 수 있을 것이다</p><pre><code class=language-ts>function createPartialEntity&lt;T&gt;(
+<a href=https://typeorm.io/#/repository-api>https://typeorm.io/#/repository-api</a></p><h3 id=diff>diff</h3><p>엔티티와 변경된 필드 목록이 있다면 diff에 해당되는 객체를 만들 수 있을 것이다</p><pre><code class="language-ts line-numbers">function createPartialEntity&lt;T&gt;(
   ent: T,
   iter: IterableIterator&lt;keyof T&gt;,
 ): Partial&lt;T&gt; {
@@ -63,20 +55,18 @@ update에 필요한 인자인 조건과 데이터를 빼낼수 있으면 된다.
     data[f] = ent[f];
   };
   return data;
-}
-</code></pre><h3 id=proxy>proxy</h3><p>변경된 필드 목록은 어떻게 뽑을수 있는가?
-엔티티를 통째로 감싸면 된다.</p><pre><code class=language-ts>class Data { a: number; }
+}</code></pre><h3 id=proxy>proxy</h3><p>변경된 필드 목록은 어떻게 뽑을수 있는가?
+엔티티를 통째로 감싸면 된다.</p><pre><code class="language-ts line-numbers">class Data { a: number; }
 
 class Proxy {
   constructor(private inner: Data) {}
   public get a() { return this.inner.a; }
   public set a(x: number) {
-    console.log('modify');
+    console.log(&#39;modify&#39;);
     this.inner.a = x;
   }
-}
-</code></pre><p>손으로 엔티티마다 속성을 하나씩 붙이는건 미친짓이다.
-<code>Object.defineProperty()</code>를 사용하면 노가다를 없앨 수 있다.</p><pre><code class=language-ts>export class EntityProxy&lt;T&gt; {
+}</code></pre><p>손으로 엔티티마다 속성을 하나씩 붙이는건 미친짓이다.
+<code>Object.defineProperty()</code>를 사용하면 노가다를 없앨 수 있다.</p><pre><code class="language-ts line-numbers">export class EntityProxy&lt;T&gt; {
   private readonly fields = new Set&lt;keyof T&gt;();
 
   constructor(public readonly ent: T) {
@@ -95,30 +85,26 @@ class Proxy {
       },
     })
   }
-}
-</code></pre><p>속성을 자동 생성하려면 컬럼으로 사용된 속성 목록이 필요하다.</p><h3 id=columns>columns</h3><p>엔티티에는 <code>@Column</code> 이외의 속성이 들어있을지 모른다.
+}</code></pre><p>속성을 자동 생성하려면 컬럼으로 사용된 속성 목록이 필요하다.</p><h3 id=columns>columns</h3><p>엔티티에는 <code>@Column</code> 이외의 속성이 들어있을지 모른다.
 <code>@Column</code>, <code>@PrimaryColumn</code>같은 데코레이터가 붙은 속성 목록이 필요하다.
-reflect-metadata를 사용하면 얻을 수 있다.</p><pre><code class=language-ts>function extractColumns&lt;T&gt;(ent: T): string[] {
+reflect-metadata를 사용하면 얻을 수 있다.</p><pre><code class="language-ts line-numbers">function extractColumns&lt;T&gt;(ent: T): string[] {
   return Object.keys(ent).filter(propertyName =&gt; {
     const keys = Reflect.getMetadataKeys(ent, propertyName);
-    return keys.includes('design:type');
+    return keys.includes(&#39;design:type&#39;);
   });
-}
-</code></pre><p>typeorm 코드를 뒤져보면 <code>design:type</code>로 하드코딩된 이유를 알 수 있다.
-<a href=https://github.com/typeorm/typeorm/blob/0.2.25/src/decorator/columns/Column.ts#L114>https://github.com/typeorm/typeorm/blob/0.2.25/src/decorator/columns/Column.ts#L114</a></p><h3 id=diff-1>diff</h3><p>위에서 만든 createPartialEntity와 프록시를 연결한다</p><pre><code class=language-ts>public get diff(): Partial&lt;T&gt; | undefined {
+}</code></pre><p>typeorm 코드를 뒤져보면 <code>design:type</code>로 하드코딩된 이유를 알 수 있다.
+<a href=https://github.com/typeorm/typeorm/blob/0.2.25/src/decorator/columns/Column.ts#L114>https://github.com/typeorm/typeorm/blob/0.2.25/src/decorator/columns/Column.ts#L114</a></p><h3 id=diff-1>diff</h3><p>위에서 만든 createPartialEntity와 프록시를 연결한다</p><pre><code class="language-ts line-numbers">public get diff(): Partial&lt;T&gt; | undefined {
   if (!this.fields.size) { return; }
   const iter = this.fields[Symbol.iterator]();
   const data = createPartialEntity(this.ent, iter);
   this.fields.clear();
   return data;
-}
-</code></pre><h3 id=create>create</h3><p>만들어진 객체의 타입은 <code>EntityProxy&lt;T></code>이다.
+}</code></pre><h3 id=create>create</h3><p>만들어진 객체의 타입은 <code>EntityProxy&lt;T></code>이다.
 하지만 외부에서 볼때 <code>T</code> 타입이어야 <code>ent.data = 'xxx'</code>가 가능하다.
-<code>T</code>에 붙은 속성을 정의했으니까 <code>T</code>로 캐스팅해도 대충 돌아가겠지?</p><pre><code class=language-ts>public static create&lt;T&gt;(ent: T): EntityProxy&lt;T&gt; &amp; T {
+<code>T</code>에 붙은 속성을 정의했으니까 <code>T</code>로 캐스팅해도 대충 돌아가겠지?</p><pre><code class="language-ts line-numbers">public static create&lt;T&gt;(ent: T): EntityProxy&lt;T&gt; &amp; T {
   const proxy = new EntityProxy&lt;T&gt;(ent);
   return proxy as any;
-}
-</code></pre><h2 id=summary>summary</h2><p>프로덕션 수준으로 올리면서 더 개선해야되는데 귀찮은 관계로 여기에서 멈춘다.
+}</code></pre><h2 id=summary>summary</h2><p>프로덕션 수준으로 올리면서 더 개선해야되는데 귀찮은 관계로 여기에서 멈춘다.
 예외처리를 대충해놔서 그대로 쓰면 엔티티 조금 더 복잡해졌을때 터질 것이다.
 필요한 사람은 알아서 잘 고쳐서 쓰자.</p><p>전체 코드는 <a href=https://github.com/if1live/typeorm-entity-proxy-for-save>typeorm-entity-proxy-for-save</a>에서 볼수 있다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typeorm>typeorm</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
@@ -142,7 +128,6 @@ reflect-metadata를 사용하면 얻을 수 있다.</p><pre><code class=language
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

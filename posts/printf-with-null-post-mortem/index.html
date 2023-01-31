@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>printf("%s\n", NULL)의 출력 결과는? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="printf(&#34;%s\n&#34;, NULL)의 출력 결과는?"><meta name=keywords content="c ,c++ ,printf ,undefined behavior ,gcc ,postmortem"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>printf("%s\n", NULL)의 출력 결과는? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="printf(&#34;%s\n&#34;, NULL)의 출력 결과는?"><meta name=keywords content="c ,c++ ,printf ,undefined behavior ,gcc ,postmortem"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -9,31 +9,25 @@
 <a href=https://twitter.com/_Yous/status/706349364965289985>@_Yous</a></p></blockquote><p>트윗을 보자마자 <code>%s</code>에다가 <code>NULL</code>을 넣어보았다.</p><blockquote><p>New Tweet &ldquo;트위터만 보고 있지 말고 %s 해야지&rdquo;, NULL
 <a href=https://twitter.com/if1live/status/706350121651339265>@if1live</a></p></blockquote><p>트윗을 쓰고 나니 옛날에 비슷한걸 해본적이 생각났다.
 <strong>그러고보니 printf(%s”, NULL) 해도 프로그램이 안뒤졌던거같은 기분이 드는데?</strong>
-그래서 직접 돌려봤다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+그래서 직접 돌려봤다.</p><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 int main()
 {
-  printf(&quot;string = %s\n&quot;, NULL);
+  printf(&#34;string = %s\n&#34;, NULL);
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang simple.c &amp;&amp; ./a.out
-string = (null)
-</code></pre><p>안죽네? 게다가 <code>(null)</code>은 어디서 튀어나온거지?
+}</code></pre><pre><code class="language-bash line-numbers">$ clang simple.c &amp;&amp; ./a.out
+string = (null)</code></pre><p>안죽네? 게다가 <code>(null)</code>은 어디서 튀어나온거지?
 왜 그런지 이유를 찾아보자.</p><h2 id=스펙스펙을-보자>스펙&mldr;스펙을 보자!</h2><p><a href=http://en.cppreference.com/w/c/io/fprintf>printf reference</a>를 읽어봤는데 &ldquo;(null)&ldquo;과 관련된 내용이 안보이더라.
 <code>%s</code>에다가 <code>NULL</code>을 넣는게 undefined behavior일거같다는 생각이 들었는데 좀더 깊이 파보기로 했다.
 까막눈이라 영어 읽는게 어려우니 차라리 코드를 뒤져보자.
 코드가 어떻게 행동하는지를 보고 이 동작이 스펙인지 아닌지를 유추해보자.</p><h2 id=glibc>glibc</h2><p>glibc의 printf 구현은 다음 파일에서 찾을수 있다.
 <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=stdio-common/vfprintf.c;h=6829d4dc8e7fe7c066a06f1857ee926e0f48c379">stdio-common/vfprintf.c</a>
-printf 코드는 크고 아름다우니 <code>printf("%s\n", NULL)</code> 의 행동과 관련된 코드만 찾아보자.</p><pre><code class=language-c>REF (precision), /* for '.' */
-</code></pre><p>printf의 경우 포매팅에서 <code>.</code>를 정밀도(precision)으로 사용한다.</p><pre><code class=language-c>int prec = -1;	/* Precision of output; -1 means none specified.  */
-</code></pre><p>정밀도(prec)의 기본값은 -1이다. 나중에 이 값을 쓰게 된다.</p><pre><code class=language-c>REF (form_string), /* for 's', 'S' */
-</code></pre><p>확인하고 싶은건 <code>%s</code>의 행동이다. <code>form_string</code> 으로 연결된 것만 나중에 확인하면 된다.</p><pre><code class=language-c>/* Global constants.  */
-static const CHAR_T null[] = L_(&quot;(null)&quot;);
-</code></pre><p><code>(null)</code>를 찾았다. 문자열 <code>null</code>이 어디에서 쓰이는지를 찾아보면 될거다.</p><pre><code class=language-c>LABEL (form_string):
+printf 코드는 크고 아름다우니 <code>printf("%s\n", NULL)</code> 의 행동과 관련된 코드만 찾아보자.</p><pre><code class="language-c line-numbers">REF (precision), /* for &#39;.&#39; */</code></pre><p>printf의 경우 포매팅에서 <code>.</code>를 정밀도(precision)으로 사용한다.</p><pre><code class="language-c line-numbers">int prec = -1;	/* Precision of output; -1 means none specified.  */</code></pre><p>정밀도(prec)의 기본값은 -1이다. 나중에 이 값을 쓰게 된다.</p><pre><code class="language-c line-numbers">REF (form_string), /* for &#39;s&#39;, &#39;S&#39; */</code></pre><p>확인하고 싶은건 <code>%s</code>의 행동이다. <code>form_string</code> 으로 연결된 것만 나중에 확인하면 된다.</p><pre><code class="language-c line-numbers">/* Global constants.  */
+static const CHAR_T null[] = L_(&#34;(null)&#34;);</code></pre><p><code>(null)</code>를 찾았다. 문자열 <code>null</code>이 어디에서 쓰이는지를 찾아보면 될거다.</p><pre><code class="language-c line-numbers">LABEL (form_string):
   {
     ...
     if (string == NULL)
     {
-      /* Write &quot;(null)&quot; if there's space.  */
+      /* Write &#34;(null)&#34; if there&#39;s space.  */
       if (prec == -1 || prec &gt;= (int) sizeof (null) - 1)
         {
           string = (char *) null;
@@ -41,83 +35,75 @@ static const CHAR_T null[] = L_(&quot;(null)&quot;);
         }
       else
         {
-          string = (char *) &quot;&quot;;
+          string = (char *) &#34;&#34;;
           len = 0;
         }
     }
-    ...
-</code></pre><ol><li><code>string</code>가 <code>NULL</code>인 경우&mldr;</li><li>정밀도(prec)가 기본값이거나 <code>(null)</code>의 길이보다 큰 경우<ol><li><code>(null)</code>를 출력</li></ol></li><li>그렇지 않으면(올바른 범위의 정밀도를 사용한다면)<ol><li>아무것도 출력하지 않는다.</li></ol></li></ol><p><code>%s</code>에서 정밀도를 쓸 수 있는건 처음 알았다. 배웠으니 한번 써보자.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+    ...</code></pre><ol><li><code>string</code>가 <code>NULL</code>인 경우&mldr;</li><li>정밀도(prec)가 기본값이거나 <code>(null)</code>의 길이보다 큰 경우<ol><li><code>(null)</code>를 출력</li></ol></li><li>그렇지 않으면(올바른 범위의 정밀도를 사용한다면)<ol><li>아무것도 출력하지 않는다.</li></ol></li></ol><p><code>%s</code>에서 정밀도를 쓸 수 있는건 처음 알았다. 배웠으니 한번 써보자.</p><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 int main()
 {
-  printf(&quot;%s\n&quot;, NULL);
-  printf(&quot;%.0s\n&quot;, NULL);
-  printf(&quot;%.3s\n&quot;, NULL);
+  printf(&#34;%s\n&#34;, NULL);
+  printf(&#34;%.0s\n&#34;, NULL);
+  printf(&#34;%.3s\n&#34;, NULL);
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang printf_prec.c &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang printf_prec.c &amp;&amp; ./a.out
 (null)
 
-(nu
-</code></pre><p>내가 OSX를 쓰는데 glibc의 코드에서 확인한 행동과 osx에서의 행동이 다르다.
+(nu</code></pre><p>내가 OSX를 쓰는데 glibc의 코드에서 확인한 행동과 osx에서의 행동이 다르다.
 glibc였다면 마지막 출력은 <code>(nu</code>가 아니라 공백이어야 한다.
 여기에서 두가지 사실을 유추할수 있다.</p><ol><li>OSX에서는 glibc를 쓰지 않는다. 다른 C 라이브러리를 쓰고있다.</li><li>glibc와 OSX에서 사용하는 C 라이브러리의 출력이 다르니 이것은 undefined behavior이다.</li></ol><h2 id=libc>libc</h2><p>여기까지 온 이상 OSX의 C 라이브러리에서는 어떻게 구현했는지도 확인해보자.
 <a href=https://twitter.com/sairion/status/706360731562672128>‏@sairion</a>님의 도움을 받아서 OSX에서는 <a href=http://www.opensource.apple.com/source/Libc/>libc</a>를 사용한다는걸 알았다.</p><p>libc에서는 <a href=http://www.opensource.apple.com/source/Libc/Libc-1082.20.4/stdio/FreeBSD/vfprintf.c>stdio/FreeBSD/vfprintf.c</a>에 printf의 구현체가 있다.
-glibc와 마찬가지로 코드를 살펴보자.</p><pre><code class=language-c>case 's':
+glibc와 마찬가지로 코드를 살펴보자.</p><pre><code class="language-c line-numbers">case &#39;s&#39;:
   if (flags &amp; LONGINT) {
     ...
     if ((wcp = GETARG(wchar_t *)) == NULL)
-      cp = &quot;(null)&quot;;
+      cp = &#34;(null)&#34;;
     ...
   } else if ((cp = GETARG(char *)) == NULL)
-    cp = &quot;(null)&quot;;
+    cp = &#34;(null)&#34;;
   size = (prec &gt;= 0) ? strnlen(cp, prec) : strlen(cp);
-  sign = '\0';
-  break;
-</code></pre><ol><li>출력할 대상이 <code>NULL</code>이면 <code>(null)</code>을 출력 후보로 바꾼다.</li><li>정밀도가 있으면 정밀도만큼 size를 잡는다. 정밀도가 없으면 문자열 <code>(null)</code>의 길이를 size로 쓴다.</li></ol><p>그래서 libc에서는 <code>NULL</code>과 정밀도를 같이 쓰면 문자열이 잘려서 출력된다.</p><h2 id=번외편--gcc--printfsn-null>번외편 : gcc + printf("%s\n&rdquo;, NULL)</h2><blockquote><p>gcc 에서 printf("%s\n&rdquo;, NULL); 하면 segfault 나고 printf(&ldquo;Test %s\n&rdquo;,NULL) 하면 Test (null) 나옴
+  sign = &#39;\0&#39;;
+  break;</code></pre><ol><li>출력할 대상이 <code>NULL</code>이면 <code>(null)</code>을 출력 후보로 바꾼다.</li><li>정밀도가 있으면 정밀도만큼 size를 잡는다. 정밀도가 없으면 문자열 <code>(null)</code>의 길이를 size로 쓴다.</li></ol><p>그래서 libc에서는 <code>NULL</code>과 정밀도를 같이 쓰면 문자열이 잘려서 출력된다.</p><h2 id=번외편--gcc--printfsn-null>번외편 : gcc + printf("%s\n&rdquo;, NULL)</h2><blockquote><p>gcc 에서 printf("%s\n&rdquo;, NULL); 하면 segfault 나고 printf(&ldquo;Test %s\n&rdquo;,NULL) 하면 Test (null) 나옴
 <a href=https://twitter.com/mega_kina/status/706357586090598400>@mega_kina</a></p></blockquote><p>clang만 쓰다보니까 gcc의 동작은 테스트를 제대로 안해봤는데 진짜로 저렇게 행동한다.
 뒤져보니 gcc의 최적화에 대해서 정리한 글이 있더라. 자세한 내용은 아래의 글을 참고하기 바란다.
 <a href=http://www.ciselant.de/projects/gcc_printf/gcc_printf.html>About GCC printf optimization</a></p><p>영어 읽기 싫은 사람을 위해서 간단하게 요약했다.
 <strong>gcc는 특정 조건에서 <code>printf()</code>를 <code>puts()</code>로 바꾼다. 코드에서 <code>printf()</code>를 호출해도 <code>puts()</code>가 대신 호출된다는거다.</strong></p><p>참고: 2005년도에 작성된 글이라 gcc 최신버전인 5.3.0에서는 파일, 함수이름이 다르다. <code>gimple_fold_builtin_printf()</code>
 <a href=https://github.com/gcc-mirror/gcc/blob/gcc_5_3_0_release/gcc/gimple-fold.c#L2691-L2851>gcc/gimple-fold.c</a></p><h2 id=흑마법사를-위한-가이드>흑마법사를 위한 가이드</h2><p>새로운 undefined behavior를 배웠으면 이를 이용해서 어떻게 사람을 엿먹일지를 생각해봐야한다. 그래야 내가 엿먹기 전에 남을 엿먹일수 있다. (선빵필승!)
-몇가지 알려진 편법을 응용해보자.</p><ul><li>회원가입을 할때 생일을 <code>1970년 1월 1일</code>로 입력한다. 개발자는 날짜가 제대로 입력되지 않는 버그가 있는줄 알고 디버깅을 할 것이다.</li><li>회원가입을 할때 이름을 <code>NULL</code>로 입력한다. 개발자는 어딘가에 버그가 있다고 생각하고 디버깅을 할 것이다.</li></ul><pre><code class=language-c>#include &lt;stdio.h&gt;
+몇가지 알려진 편법을 응용해보자.</p><ul><li>회원가입을 할때 생일을 <code>1970년 1월 1일</code>로 입력한다. 개발자는 날짜가 제대로 입력되지 않는 버그가 있는줄 알고 디버깅을 할 것이다.</li><li>회원가입을 할때 이름을 <code>NULL</code>로 입력한다. 개발자는 어딘가에 버그가 있다고 생각하고 디버깅을 할 것이다.</li></ul><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 const char *hello(const char *name)
 {
   static char msg[256];
-  sprintf(msg, &quot;Hello, %s&quot;, name);
+  sprintf(msg, &#34;Hello, %s&#34;, name);
   return msg;
 }
 
 int main()
 {
-  printf(&quot;%s\n&quot;, hello(&quot;(null)&quot;));
-  printf(&quot;%s\n&quot;, hello(NULL));
+  printf(&#34;%s\n&#34;, hello(&#34;(null)&#34;));
+  printf(&#34;%s\n&#34;, hello(NULL));
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang trap_fake_null.c &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang trap_fake_null.c &amp;&amp; ./a.out
 Hello, (null)
-Hello, (null)
-</code></pre><p>진짜로 <code>(null)</code>을 출력하고자한 경우와 실수로 <code>NULL</code>이 들어간 경우를 구분할수 없다.
-함정을 밟지 않으려면 <code>NULL</code> 확인을 앞에 배치하는게 좋을거다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+Hello, (null)</code></pre><p>진짜로 <code>(null)</code>을 출력하고자한 경우와 실수로 <code>NULL</code>이 들어간 경우를 구분할수 없다.
+함정을 밟지 않으려면 <code>NULL</code> 확인을 앞에 배치하는게 좋을거다.</p><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 #include &lt;assert.h&gt;
 const char *hello(const char *name)
 {
   assert(name != NULL);
   static char msg[256];
-  sprintf(msg, &quot;Hello, %s&quot;, name);
+  sprintf(msg, &#34;Hello, %s&#34;, name);
   return msg;
 }
 
 int main()
 {
-  printf(&quot;%s\n&quot;, hello(&quot;(null)&quot;));
-  printf(&quot;%s\n&quot;, hello(NULL));
+  printf(&#34;%s\n&#34;, hello(&#34;(null)&#34;));
+  printf(&#34;%s\n&#34;, hello(NULL));
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang trap_fake_null_alt.c &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang trap_fake_null_alt.c &amp;&amp; ./a.out
 Assertion failed: (name != NULL), function hello, file trap_fake_null_alt.c, line 5.
 Hello, (null)
-/var/folders/mt/f4mnd72x2_526m85rvxhg3bc0000gn/T/maya264151972: line 1:  1788 Abort trap: 6           ./a.out
-</code></pre><h2 id=요약>요약</h2><ul><li><code>printf("%s\n", NULL)</code>은 undefined behavior이다.</li><li><code>vsprintf()</code> 계열의 함수에서 undefined behavior부분은 구현체에 따라 다르다.</li><li>최적화를 위해 컴파일러가 호출하는 함수를 바꿔버리는 경우도 있다.</li><li><s>잘 모르겠으면 일단 구현체 소스를 까보자</s></li></ul><h2 id=도전-과제>도전 과제</h2><p>그렇다면 윈도우에서는 어떻게 작동할까?
+/var/folders/mt/f4mnd72x2_526m85rvxhg3bc0000gn/T/maya264151972: line 1:  1788 Abort trap: 6           ./a.out</code></pre><h2 id=요약>요약</h2><ul><li><code>printf("%s\n", NULL)</code>은 undefined behavior이다.</li><li><code>vsprintf()</code> 계열의 함수에서 undefined behavior부분은 구현체에 따라 다르다.</li><li>최적화를 위해 컴파일러가 호출하는 함수를 바꿔버리는 경우도 있다.</li><li><s>잘 모르겠으면 일단 구현체 소스를 까보자</s></li></ul><h2 id=도전-과제>도전 과제</h2><p>그렇다면 윈도우에서는 어떻게 작동할까?
 내가 컴맹이라서 윈도우는 잘 모르니 참고용 트윗만 기록해둔다.</p><p><a href=https://twitter.com/summerlight00/status/706358610528329728>왜냐하면 널이 인자로 넘어가는 경우는 undefined behavior라 컴파일러 벤더 맘대로 구현해도 되서 그렇습니다..</a></p><p><a href=https://twitter.com/summerlight00/status/706360559063576576>msvc 같은 경우는 최근 오픈 소스 라이브러리의 윈도우 이식을 쉽게 하려고 c99 함수들 구현하는 김에 c 표준 라이브러리를 새로 재구현했는데요, 이런 맥락이라면 gcc 동작을 그대로 베끼는게 이해는 갑니다.</a></p><p><a href=https://twitter.com/sokcuri/status/706366233583595520>Microsoft Visual Studio 14.0\VC\crt\src\i386 경로에 있네요</a></p></div><div class=tags><a href=https://if1live.github.io/tags/c>c</a>
 <a href=https://if1live.github.io/tags/c++>c++</a>
 <a href=https://if1live.github.io/tags/printf>printf</a>
@@ -145,7 +131,6 @@ Hello, (null)
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

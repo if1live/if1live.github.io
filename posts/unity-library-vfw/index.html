@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW"><meta name=keywords content="unity ,library"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="MonoBehaviour를 더 좋게 만들어주는 라이브러리, VFW"><meta name=keywords content="unity ,library"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -15,17 +15,15 @@ MonoBehaviour를 상속받을 자리에 BaseBehaviour를 넣음으로써 큰 수
 그래서 사용해본 기능 중에서 특별히 유용한 기능만 적었다.</p><h3 id=인스펙터에-버튼-넣을때-별도의-editor-스크립트가-필요없다>인스펙터에 버튼 넣을때 별도의 Editor 스크립트가 필요없다</h3><p>유니티 인스펙터를 확장하려면 <code>UnityEditor.Editor</code>를 상속받는 클래스가 필요하다.
 (이를 앞으로 <code>에디터 클래스</code>라고 부른다)
 개발하다보면 특정 함수를 직접 호출하고 싶을때가 있다.
-일반적인 경우 아래의 방식으로 구현한다.</p><ol><li>에디터 클래스용 소스 파일을 새로 만든다.</li><li>에디터 클래스를 정의한다.</li><li><code>OnInspectorGUI()</code>를 오버라이드 해서 버튼을 정의하고 버튼에 함수를 연결한다.</li></ol><pre><code class=language-csharp>class DummyMonoBehaviour : MonoBehaviour {
+일반적인 경우 아래의 방식으로 구현한다.</p><ol><li>에디터 클래스용 소스 파일을 새로 만든다.</li><li>에디터 클래스를 정의한다.</li><li><code>OnInspectorGUI()</code>를 오버라이드 해서 버튼을 정의하고 버튼에 함수를 연결한다.</li></ol><pre><code class="language-csharp line-numbers">class DummyMonoBehaviour : MonoBehaviour {
     ...
-}
-</code></pre><pre><code class=language-csharp>[CustomEditor(typeof(DummyMonoBehaviour))]
+}</code></pre><pre><code class="language-csharp line-numbers">[CustomEditor(typeof(DummyMonoBehaviour))]
 class DummyMonoBehaviourEditor : UnityEditor.Editor {
     public override void OnInspectorGUI() {
         ...
    }
-}
-</code></pre><p>인스펙터에 버튼 하나 추가하겠다고 새로운 파일 하나 더 만드는건 귀찮더라.
-이런 경우 ifdef를 쓰면 소스파일 하나에 에디터 클래스까지 구현하는게 가능하다.</p><pre><code class=language-csharp>#if UNITY_EDITOR
+}</code></pre><p>인스펙터에 버튼 하나 추가하겠다고 새로운 파일 하나 더 만드는건 귀찮더라.
+이런 경우 ifdef를 쓰면 소스파일 하나에 에디터 클래스까지 구현하는게 가능하다.</p><pre><code class="language-csharp line-numbers">#if UNITY_EDITOR
 using UnityEditor;
 #endif
 
@@ -34,32 +32,29 @@ using UnityEditor;
 class DummyMonoBehaviourEditor : UnityEditor.Editor {
     ...
 }
-#endif
-</code></pre><p>하지만 귀찮은 문제가 남아있다.</p><p><code>UnityEditor</code>와 관련된 부분을 <code>#if UNITY_EDITOR ~ #endif</code>로 감싸지 않으면 빌드가 되지 않는다.
+#endif</code></pre><p>하지만 귀찮은 문제가 남아있다.</p><p><code>UnityEditor</code>와 관련된 부분을 <code>#if UNITY_EDITOR ~ #endif</code>로 감싸지 않으면 빌드가 되지 않는다.
 에디터 환경에서는 문제없이 굴러가지만 <code>UnityEditor</code>는 빌드에서 제외되기 때문에 빌드할떄 컴파일 에러가 뜬다.
 그리고 수동으로 <code>#if UNITY_EDITOR</code>를 쓰다보면 실수로 빼먹는일이 생기니 귀찮은 빌드 에러를 자주 보게된다.</p><p>또다른 문제는 유지보수이다. 아래의 시나리오를 보자.</p><ol><li><code>Foo</code>라는 스크립트 클래스가 있다.</li><li><code>Foo</code>에 대응되는 에디터 클래스를 <code>FooEditor</code>라는 이름으로 만들었다. 이렇게 지으면 나중에 검색하기 쉬울거다다.</li><li><code>Foo</code> 클래스의 이름이 <code>Bar</code>로 바뀌었다.</li><li>1개월 경과</li><li><code>Bar</code>의 에디터 클래스 이름은 <code>BarEditor</code>일텐데 이거 어디있어?</li><li>클래스 이름으로 찾지 못해서 <code>[CustomEditor(typeof(Bar))]</code>로 검색해서 에디터 클래스를 찾음.</li></ol><p>에디터 클래스 역시 유지보수의 대상이라는게 문제의 원인이다.
 스크립트 클래스 이름이 바뀌면 그것에 맞춰서 에디터 클래스의 이름도 바꿔줘야 찾기 쉽다.
 만약 버튼 이름과 함수 이름을 일치시켜서 사용하고 있다면 함수가 바뀌었을때 버튼이름도 바꿔줘야한다.
 이런 작업은 매우 귀찮다. 유지보수할 코드 자체가 줄어들면 덜 귀찮을거다.</p><p>VFW의 BaseBehaviour를 사용하면 이런 작업이 매우 간단해진다.
 함수에 <code>[Show]</code>만 붙여주면 된다. 그러면 인스펙터에 함수를 호출할수 있는 버튼이 생긴다.
-(내가 VFW를 쓰게된 가장 큰 이유는 이거다)</p><pre><code class=language-csharp>class DummyBaseBehaviour : BaseBehaviour {
+(내가 VFW를 쓰게된 가장 큰 이유는 이거다)</p><pre><code class="language-csharp line-numbers">class DummyBaseBehaviour : BaseBehaviour {
     [Show]
     void PrintLog() {
-        Debug.Log(&quot;method invoked - base behaviour&quot;);
+        Debug.Log(&#34;method invoked - base behaviour&#34;);
     }
     ...
-}
-</code></pre><p><p class=markdown-image><img src=unity-inspector-show.png alt=inspector></p></p><h3 id=디버그-로그-onoff>디버그 로그 On/Off</h3><p>새로운 기능을 개발하다보면 <code>Debug.Log()</code>를 이용해서 콘솔 출력을 쓰게된다.
+}</code></pre><p><p class=markdown-image><a href=unity-inspector-show.png target=_blank><img src=unity-inspector-show.png alt=inspector></a></p></p><h3 id=디버그-로그-onoff>디버그 로그 On/Off</h3><p>새로운 기능을 개발하다보면 <code>Debug.Log()</code>를 이용해서 콘솔 출력을 쓰게된다.
 그런데 기능 개발이 끝나면 디버그용 로그는 어떻게 되는가?</p><p>쓸데없는 로그 출력은 성능상 필요없다. 또한 다른 로그와 뒤섞여서 개발에 방해되기 때문에 지울것이다.
 보통은 주석으로 지울텐데 주석으로 지우면 코드를 건드리잖아? 그러면 스크립트 컴파일을 다시해야되니 유니티가 멈추잖아?
-VFW에서 제공하는 <code>dLog()</code>, <code>dLogFormat()</code>를 이용하면 스크립트 컴파일 없이 로그를 없앨수있다.</p><pre><code class=language-csharp>[Show]
+VFW에서 제공하는 <code>dLog()</code>, <code>dLogFormat()</code>를 이용하면 스크립트 컴파일 없이 로그를 없앨수있다.</p><pre><code class="language-csharp line-numbers">[Show]
 void PrintDebugLog() {
-    dLog(&quot;debug log&quot;);
-    dLogFormat(&quot;{0} {1} {2}&quot;, &quot;debug&quot;, &quot;log&quot;, &quot;+ format&quot;);
-}
-</code></pre><p>기능 자체는 간단하다.
+    dLog(&#34;debug log&#34;);
+    dLogFormat(&#34;{0} {1} {2}&#34;, &#34;debug&#34;, &#34;log&#34;, &#34;&#43; format&#34;);
+}</code></pre><p>기능 자체는 간단하다.
 디버그 플래그에 따라서 로그를 출력하는 함수가 BaseBehaviour에 구현되어있다.
-플래그를 켜고 끄는것만으로 해당 컴포넌트의 로그를 끌수있다.</p><pre><code class=language-csharp>protected void dLogFormat(string msg, params object[] args)
+플래그를 켜고 끄는것만으로 해당 컴포넌트의 로그를 끌수있다.</p><pre><code class="language-csharp line-numbers">protected void dLogFormat(string msg, params object[] args)
 {
     if (dbg) LogFormat(msg, args);
 }
@@ -67,26 +62,22 @@ void PrintDebugLog() {
 protected void dLog(object obj)
 {
     if (dbg) Log(obj);
-}
-</code></pre><p><p class=markdown-image><img src=vfw-log-flag.png alt="debug log on/off"></p></p><h3 id=interface도-보인다>Interface도 보인다</h3><pre><code class=language-csharp>public IDummyContainer foo_interface = null;
-</code></pre><p>스크립트 안에 인터페이스가 멤버변수로 있는 경우 유니티 기본 인스펙터에서는 보이지 않는다.
-하지만 BaseBehaviour에서는 보인다.</p><p><p class=markdown-image><img src=unity-inspector-interface.png alt=inspector></p></p><h2 id=단점>단점</h2><h3 id=새로-배워야한다>새로 배워야한다</h3><pre><code class=language-csharp>[Header(&quot;bar&quot;)]
+}</code></pre><p><p class=markdown-image><a href=vfw-log-flag.png target=_blank><img src=vfw-log-flag.png alt="debug log on/off"></a></p></p><h3 id=interface도-보인다>Interface도 보인다</h3><pre><code class="language-csharp line-numbers">public IDummyContainer foo_interface = null;</code></pre><p>스크립트 안에 인터페이스가 멤버변수로 있는 경우 유니티 기본 인스펙터에서는 보이지 않는다.
+하지만 BaseBehaviour에서는 보인다.</p><p><p class=markdown-image><a href=unity-inspector-interface.png target=_blank><img src=unity-inspector-interface.png alt=inspector></a></p></p><h2 id=단점>단점</h2><h3 id=새로-배워야한다>새로 배워야한다</h3><pre><code class="language-csharp line-numbers">[Header(&#34;bar&#34;)]
 [Range(0, 10)]
 public int bar_int = 3;
 [Range(0, 1.0f)]
-public float bar_float = 0.5f;
-</code></pre><p><code>HeaderAttribute</code>, <code>RangeAttribute</code> 등은 유니티에 내장되어있는 속성이다.
+public float bar_float = 0.5f;</code></pre><p><code>HeaderAttribute</code>, <code>RangeAttribute</code> 등은 유니티에 내장되어있는 속성이다.
 BaseBehaviour는 인스펙터 자체를 갈아치우기때문에 유니티에 내장된 것은 못쓴다.
-비슷한 기능의 다른 코드를 사용해야한다.</p><pre><code class=language-csharp>[DefineCategory(&quot;bar&quot;, Pattern = &quot;^bar_&quot;)]
+비슷한 기능의 다른 코드를 사용해야한다.</p><pre><code class="language-csharp line-numbers">[DefineCategory(&#34;bar&#34;, Pattern = &#34;^bar_&#34;)]
 class DummyBaseBehaviour : BaseBehaviour {
     [iSlider(0, 10)]
     public int bar_int = 3;
     [fSlider(0, 1.0f)]
     public float bar_float = 0.5f;
-}
-</code></pre><p>예를 들어 <code>DefineCategoryAttribute</code>를 사용해서 <code>HeaderAttribute</code>와 비슷한 역할을 수행할수 있다.
+}</code></pre><p>예를 들어 <code>DefineCategoryAttribute</code>를 사용해서 <code>HeaderAttribute</code>와 비슷한 역할을 수행할수 있다.
 <code>RangeAttribute</code>의 경우는 int, float에 따라서 <code>iSliderAttribute</code>, <code>fSliderAttribute</code>를 사용하면 된다.</p><h3 id=prefab이-복잡해진다>Prefab이 복잡해진다</h3><p>MonoBehaviour를 상속받아서 새로운 컴포넌트를 만들자.
-그리고 이를 prefab에 넣고 프리팹을 열어보면 다음과 같은걸 볼수있다.</p><pre><code class=language-yaml>MonoBehaviour:
+그리고 이를 prefab에 넣고 프리팹을 열어보면 다음과 같은걸 볼수있다.</p><pre><code class="language-yaml line-numbers">MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -96,8 +87,7 @@ class DummyBaseBehaviour : BaseBehaviour {
   m_Script: {fileID: 11500000, guid: 4e519f1a92e34594a850cc775bebbc0e, type: 3}
   m_Name:
   m_EditorClassIdentifier:
-  ...
-</code></pre><p>MonoBehaviour 대신 BaseBehaviour를 이용해서 똑같은 작업을 하면 다음과 같은것을 볼수있다.</p><pre><code class=language-yaml>MonoBehaviour:
+  ...</code></pre><p>MonoBehaviour 대신 BaseBehaviour를 이용해서 똑같은 작업을 하면 다음과 같은것을 볼수있다.</p><pre><code class="language-yaml line-numbers">MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -140,8 +130,7 @@ class DummyBaseBehaviour : BaseBehaviour {
     - ValueString:
       ValueFloat: 0
       Type: 0
-  ...
-</code></pre><p>BaseBehaviour를 프리팹에 넣는 경우 MonoBehaviour를 추가했을때보다 많은 내용이 추가된다.
+  ...</code></pre><p>BaseBehaviour를 프리팹에 넣는 경우 MonoBehaviour를 추가했을때보다 많은 내용이 추가된다.
 또한 프리팹을 갱신할때마다 <code>_Version</code> 값이 바뀐다. (어떤 수정이 없더라도 Apply 누르면 바뀐다)
 그래서 머지할때 귀찮다.</p><h3 id=다중-객체-편집을-지원하지-않는다>다중 객체 편집을 지원하지 않는다</h3><p><code>No multi-object editing support yet</code>. VFW 문서에서도 있는 내용이다.
 누군가 고쳐주지 않을까 싶은데 아직 고쳐지지 않았다 (나는 유니티 몰라서 안고칠거야 깔깔깔)</p><h2 id=나는-어떻게-사용했는가>나는 어떻게 사용했는가?</h2><p>세가지 경우로 나눠서 생각하자.</p><p>첫번쨰는 BaseBehaviour를 쓰고싶어도 못쓰는 경우이다.
@@ -175,7 +164,6 @@ class DummyBaseBehaviour : BaseBehaviour {
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

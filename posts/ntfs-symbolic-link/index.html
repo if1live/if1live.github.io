@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>윈도우에서 심볼릭 링크 만들기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="윈도우에서 심볼릭 링크 만들기"><meta name=keywords content="ntfs ,symbolic link"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>윈도우에서 심볼릭 링크 만들기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="윈도우에서 심볼릭 링크 만들기"><meta name=keywords content="ntfs ,symbolic link"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -15,48 +15,47 @@
 당시에도 <a href="https://partner.steamgames.com/doc/features/cloud?l=koreana">스팀 클라우드</a>로 세이브 파일을 저장하는 기능이 있긴했다.
 하지만 스팀 클라우드는 내가 내용물을 직접 볼수 있는것도 아니고 모든 게임이 지원하는 것도 아니었다.
 그래서 git으로 세이브 파일을 관리한다는 개념이 뻘짓같진 않더라.</p><p>저장소에 폴더를 만들고 이것을 세이브 파일이 저장되는 위치로 심볼릭 링크로 걸어둔다.
-세이브 파일이 생성되면 이것을 git에서도 볼수있고 이를 그대로 커밋하면 되겠더라.</p><p><p class=markdown-image><img src=game-save-files.png alt=diagram></p></p><p>게임마다 세이브 데이터의 구현이 다를 것이다.</p><p>하나의 세이브 슬롯이 여러개의 파일로 구성되는 경우도 있을 것이다.
+세이브 파일이 생성되면 이것을 git에서도 볼수있고 이를 그대로 커밋하면 되겠더라.</p><p><p class=markdown-image><a href=game-save-files.png target=_blank><img src=game-save-files.png alt=diagram></a></p></p><p>게임마다 세이브 데이터의 구현이 다를 것이다.</p><p>하나의 세이브 슬롯이 여러개의 파일로 구성되는 경우도 있을 것이다.
 (스크린샷용 이미지 파일과 세이브 데이터가 하나의 세이브 슬롯을 구성하는 경우가 있다)
 이런 경우는 게임 세이브 폴더에 대한 심볼릭 링크를 쓰는 것이 좋다.</p><p>세이브 파일이 저장되는 폴더가 분리되지 않고 게임 데이터 파일에 섞이는 경우도 있을것이다.
 이런 경우는 세이브 파일 하나에 대해서만 심볼릭 링크를 쓰는 것이 좋다.</p><p>디렉토리에 대한 심볼릭 링크, 파일에 대한 심볼릭 링크를 만들수 있다면 게임 세이브 파일을 git으로 관리하는게 가능해질거다.
 방향은 잡았으니 삽질을 해보자.</p><h2 id=ntfs-symbolic-link>NTFS symbolic link</h2><p>윈도우 비스타 이후부터는 NTFS 파일 시스템에서 심볼릭 링크를 지원한다.
 하지만 심볼릭 링크를 만들기 위해서는 administrator 권한이 필요하다.
-권한을 요구한다는게 마음에 안들지만 아무튼 사용해보자.</p><ol><li><code>dir</code>이라는 폴더와 <code>file.txt</code>이라는 파일을 만든다.</li><li><code>dir</code>의 심볼릭 링크인 <code>dir-sym</code>을 만든다</li><li><code>file.txt</code>의 심볼릭 링크인 <code>file-sym.txt</code>를 만든다.</li></ol><p><code>mklink</code>를 사용하면 심볼릭 링크를 만들 수 있다.</p><pre><code>C:\Users\libso\Downloads\foo&gt;dir
+권한을 요구한다는게 마음에 안들지만 아무튼 사용해보자.</p><ol><li><code>dir</code>이라는 폴더와 <code>file.txt</code>이라는 파일을 만든다.</li><li><code>dir</code>의 심볼릭 링크인 <code>dir-sym</code>을 만든다</li><li><code>file.txt</code>의 심볼릭 링크인 <code>file-sym.txt</code>를 만든다.</li></ol><p><code>mklink</code>를 사용하면 심볼릭 링크를 만들 수 있다.</p><pre class=markdown-textblock><code>C:\Users\libso\Downloads\foo>dir
  C 드라이브의 볼륨에는 이름이 없습니다.
  볼륨 일련 번호: D6A1-3323
 
  C:\Users\libso\Downloads\foo 디렉터리
 
-2018-08-15  오후 11:34    &lt;DIR&gt;          .
-2018-08-15  오후 11:34    &lt;DIR&gt;          ..
-2018-08-15  오후 11:30    &lt;DIR&gt;          dir
+2018-08-15  오후 11:34    <dir>          .
+2018-08-15  오후 11:34    <dir>          ..
+2018-08-15  오후 11:30    <dir>          dir
 2018-08-15  오후 11:33                 0 file.txt
                1개 파일                   0 바이트
                3개 디렉터리  40,191,881,216 바이트 남음
 
-C:\Users\libso\Downloads\foo&gt;mklink file-sym.txt file.txt
-file-sym.txt &lt;&lt;===&gt;&gt; file.txt에 대한 기호화된 링크를 만들었습니다.
+C:\Users\libso\Downloads\foo>mklink file-sym.txt file.txt
+file-sym.txt <<===>> file.txt에 대한 기호화된 링크를 만들었습니다.
 
-C:\Users\libso\Downloads\foo&gt;mklink dir-sym dir
-dir-sym &lt;&lt;===&gt;&gt; dir에 대한 기호화된 링크를 만들었습니다.
+C:\Users\libso\Downloads\foo>mklink dir-sym dir
+dir-sym <<===>> dir에 대한 기호화된 링크를 만들었습니다.
 
-C:\Users\libso\Downloads\foo&gt;dir
+C:\Users\libso\Downloads\foo>dir
  C 드라이브의 볼륨에는 이름이 없습니다.
  볼륨 일련 번호: D6A1-3323
 
  C:\Users\libso\Downloads\foo 디렉터리
 
-2018-08-15  오후 11:45    &lt;DIR&gt;          .
-2018-08-15  오후 11:45    &lt;DIR&gt;          ..
-2018-08-15  오후 11:30    &lt;DIR&gt;          dir
-2018-08-15  오후 11:45    &lt;SYMLINK&gt;      dir-sym [dir]
-2018-08-15  오후 11:45    &lt;SYMLINK&gt;      file-sym.txt [file.txt]
+2018-08-15  오후 11:45    <dir>          .
+2018-08-15  오후 11:45    <dir>          ..
+2018-08-15  오후 11:30    <dir>          dir
+2018-08-15  오후 11:45    <symlink>      dir-sym [dir]
+2018-08-15  오후 11:45    <symlink>      file-sym.txt [file.txt]
 2018-08-15  오후 11:44                 0 file.txt
                3개 파일                   0 바이트
-               3개 디렉터리  40,185,454,592 바이트 남음
-</code></pre><p><p class=markdown-image><img src=ntfs-symlink.png alt="NTFS symlink"></p></p><p>파일의 심볼릭링크는 상상한대로 생겼지만 폴더의 심볼릭 링크는 생긴게 이상하다.
+               3개 디렉터리  40,185,454,592 바이트 남음</code></pre><p><p class=markdown-image><a href=ntfs-symlink.png target=_blank><img src=ntfs-symlink.png alt="NTFS symlink"></a></p></p><p>파일의 심볼릭링크는 상상한대로 생겼지만 폴더의 심볼릭 링크는 생긴게 이상하다.
 아이콘이 폴더 모양이 아니다. 바로가기가 오히려 심볼릭 링크처럼 생겼다.
-그리고 <code>dir-sym</code>을 더블클릭하면 파일 열기가 뜬다. 반면 바로가기를 더블클릭하면 <code>dir</code>로 들어가진다.</p><p><p class=markdown-image><img src=ntfs-shortcut.png alt=shortcut></p></p><p>폴더의 심볼릭 링크를 만들 목적으로 NTFS에서 지원하는 심볼릭 링크는 못 쓰겠다.
+그리고 <code>dir-sym</code>을 더블클릭하면 파일 열기가 뜬다. 반면 바로가기를 더블클릭하면 <code>dir</code>로 들어가진다.</p><p><p class=markdown-image><a href=ntfs-shortcut.png target=_blank><img src=ntfs-shortcut.png alt=shortcut></a></p></p><p>폴더의 심볼릭 링크를 만들 목적으로 NTFS에서 지원하는 심볼릭 링크는 못 쓰겠다.
 다른 무언가가 있어야한다.</p><h3 id=windows-10-에서의-변경사항>windows 10 에서의 변경사항</h3><p><a href=https://blogs.windows.com/buildingapps/2016/12/02/symlinks-windows-10/#Ko51LFQ8bjGcBSq1.97>윈도우 10 build 14972부터는 administrator 권한 없이도 가능</a>하게 바뀌었다.
 하지만 내가 NTFS 파일 시스템 붙잡고 삽질하던 2014년에는 윈도우 10도 없었다.
 2014년에 썻어야할 글을 게을러서 미루다 2018년에 쓰게 되어서 꼬였다.</p><h2 id=ntfs-junction-point>NTFS junction point</h2><p>윈도우 95부터는 바로 가기 라는 개념이 있다.
@@ -66,51 +65,47 @@ C:\Users\libso\Downloads\foo&gt;dir
 FAT는 심볼릭 링크를 지원하지 않는다.
 그래서 윈도우 95는 <code>.lnk</code> 파일을 만들어서 심볼릭 링크를 흉내냈다.</p><p>바로가기는 일종의 파일이기 때문에 열 수 있다.
 <code>origin</code> 이라는 폴더를 만들고 이것의 바로가기인 <code>link.lnk</code>를 만들자.
-그리고 파이썬을 통해서 각각을 열어보자.</p><pre><code>&gt;&gt;&gt; f = open('origin', 'rb')
+그리고 파이썬을 통해서 각각을 열어보자.</p><pre class=markdown-textblock><code>>>> f = open('origin', 'rb')
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-PermissionError: [Errno 13] Permission denied: 'origin'
-</code></pre><pre><code>&gt;&gt;&gt; f = open('link.lnk', 'rb')
-&gt;&gt;&gt; len(f.read())
-927
-</code></pre><p>폴더는 파일이 아니기때문에 열 수 없다.
+  File "<stdin>", line 1, in <module>
+PermissionError: [Errno 13] Permission denied: 'origin'</code></pre><pre class=markdown-textblock><code>>>> f = open('link.lnk', 'rb')
+>>> len(f.read())
+927</code></pre><p>폴더는 파일이 아니기때문에 열 수 없다.
 그래서 PermissionError가 발생한다.
 하지만 바로가기는 파일이라서 열 수 있다.</p><p>마이크로소프트 사람들은 똑똑하니까 FAT32를 버리고 NTFS를 만들때 FAT32의 문제를 해결하려고 노력했을거다.
 해결하고자 노력한 문제중에는 심볼릭 링크도 있었을것이다.
 그래서 <a href=https://en.wikipedia.org/wiki/NTFS_junction_point>NTFS junction point</a>라는게 만들어졌다.
-NTFS junction은 디렉토리에 대해서 동작하는 심볼릭 링크라고 생각하면 된다.</p><p><code>mklink /j</code> 를 이용하면 junction을 만들 수 있다.</p><pre><code>C:\Users\libso\Downloads\foo&gt;dir
+NTFS junction은 디렉토리에 대해서 동작하는 심볼릭 링크라고 생각하면 된다.</p><p><code>mklink /j</code> 를 이용하면 junction을 만들 수 있다.</p><pre class=markdown-textblock><code>C:\Users\libso\Downloads\foo>dir
  C 드라이브의 볼륨에는 이름이 없습니다.
  볼륨 일련 번호: D6A1-3323
 
  C:\Users\libso\Downloads\foo 디렉터리
 
-2018-08-15  오후 11:42    &lt;DIR&gt;          .
-2018-08-15  오후 11:42    &lt;DIR&gt;          ..
-2018-08-15  오후 11:30    &lt;DIR&gt;          dir
+2018-08-15  오후 11:42    <dir>          .
+2018-08-15  오후 11:42    <dir>          ..
+2018-08-15  오후 11:30    <dir>          dir
                0개 파일                   0 바이트
                3개 디렉터리  40,189,546,496 바이트 남음
 
-C:\Users\libso\Downloads\foo&gt;mklink /j dir-junction dir
-dir-junction &lt;&lt;===&gt;&gt; dir에 대한 교차점을 만들었습니다.
+C:\Users\libso\Downloads\foo>mklink /j dir-junction dir
+dir-junction <<===>> dir에 대한 교차점을 만들었습니다.
 
-C:\Users\libso\Downloads\foo&gt;dir
+C:\Users\libso\Downloads\foo>dir
  C 드라이브의 볼륨에는 이름이 없습니다.
  볼륨 일련 번호: D6A1-3323
 
  C:\Users\libso\Downloads\foo 디렉터리
 
-2018-08-15  오후 11:42    &lt;DIR&gt;          .
-2018-08-15  오후 11:42    &lt;DIR&gt;          ..
-2018-08-15  오후 11:30    &lt;DIR&gt;          dir
-2018-08-15  오후 11:42    &lt;JUNCTION&gt;     dir-junction [C:\Users\libso\Downloads\foo\dir]
+2018-08-15  오후 11:42    <dir>          .
+2018-08-15  오후 11:42    <dir>          ..
+2018-08-15  오후 11:30    <dir>          dir
+2018-08-15  오후 11:42    <junction>     dir-junction [C:\Users\libso\Downloads\foo\dir]
                0개 파일                   0 바이트
-               4개 디렉터리  40,187,174,912 바이트 남음
-</code></pre><p><p class=markdown-image><img src=ntfs-junction.png alt="NTFS junction"></p></p><p>파이썬으로 junction을 열려고 하면 열 수 없다.
-바로가기를 사용했을때와는 결과가 바뀌었다.</p><pre><code>&gt;&gt;&gt; f = open('dir-junction')
+               4개 디렉터리  40,187,174,912 바이트 남음</code></pre><p><p class=markdown-image><a href=ntfs-junction.png target=_blank><img src=ntfs-junction.png alt="NTFS junction"></a></p></p><p>파이썬으로 junction을 열려고 하면 열 수 없다.
+바로가기를 사용했을때와는 결과가 바뀌었다.</p><pre class=markdown-textblock><code>>>> f = open('dir-junction')
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-PermissionError: [Errno 13] Permission denied: 'dir-junction'
-</code></pre><h2 id=summary>summary</h2><p>윈도우에서 심볼릭 링크를 쓸라면 폴더, 파일을 구분해야한다.
+  File "<stdin>", line 1, in <module>
+PermissionError: [Errno 13] Permission denied: 'dir-junction'</code></pre><h2 id=summary>summary</h2><p>윈도우에서 심볼릭 링크를 쓸라면 폴더, 파일을 구분해야한다.
 파일일때는 심볼릭 링크를 쓰면 된다.
 폴더일때는 NTFS junction을 쓰면 된다.</p></div><div class=tags><a href=https://if1live.github.io/tags/ntfs>ntfs</a>
 <a href=https://if1live.github.io/tags/symbolic-link>symbolic link</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
@@ -135,7 +130,6 @@ PermissionError: [Errno 13] Permission denied: 'dir-junction'
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

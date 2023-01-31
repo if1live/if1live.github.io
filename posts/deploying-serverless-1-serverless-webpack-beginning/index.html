@@ -1,11 +1,11 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (1) serverless-webpack 초급 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (1) serverless-webpack 초급"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (1) serverless-webpack 초급 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (1) serverless-webpack 초급"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>serverless 배포하기 (1) serverless-webpack 초급</h1><div class=tip><time datetime="2021-08-01 00:00:00 +0000 UTC">2021. 08. 01</time></div><div class=content><h2 id=why-serverless-framework>why serverless-framework?</h2><p><p class=markdown-image><img src=lambda-console-editor.png alt=editor></p></p><p>웹 콘솔을 통해서 AWS Lambda 함수를 만들고 코드를 고칠 수 있다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>serverless 배포하기 (1) serverless-webpack 초급</h1><div class=tip><time datetime="2021-08-01 00:00:00 +0000 UTC">2021. 08. 01</time></div><div class=content><h2 id=why-serverless-framework>why serverless-framework?</h2><p><p class=markdown-image><a href=lambda-console-editor.png target=_blank><img src=lambda-console-editor.png alt=editor></a></p></p><p>웹 콘솔을 통해서 AWS Lambda 함수를 만들고 코드를 고칠 수 있다.
 SQS로 람다를 트리거해서 SES를 통해 이메일 보내는 기능은 웹콘솔로도 충분히 작성할 수 있을 것이다.
 하지만 현실의 애플리케이션은 이정도로 간단하지 않다.
 복잡한 애플리케이션을 짜려면 외부 라이브러리가 필요하고 node.js 패키지를 갖다쓰게 된다.
@@ -17,38 +17,38 @@ SQS로 람다를 트리거해서 SES를 통해 이메일 보내는 기능은 웹
 <code>node_modules</code>를 통째로 압축해서 람다로 올리면 의존성을 신경쓰지 않아도 되니까 편할 것이다.
 하지만 람다 패키지 업로드 크기는 50MB로 제한되어 있다.
 <code>devDependencies</code>의 내용물을 배포에서 빼야 50MB 제한을 맞출 수 있다.</p><p>세번째, 람다에서 실행될 코드, 패키지를 압축해서 zip 파일 1개로 만들어야한다.
-<code>node_modules</code>의 수많은 파일이 낱개로 업로드되는건 말도 안되잖아?</p><p><a href=https://github.com/serverless-heaven/serverless-webpack>serverless-webpack</a>를 쓰면 이 과정을 알아서 해준다.</p><p>webpack.config.js</p><pre><code class=language-js>const path = require('path');
-const slsw = require('serverless-webpack');
-const nodeExternals = require('webpack-node-externals');
+<code>node_modules</code>의 수많은 파일이 낱개로 업로드되는건 말도 안되잖아?</p><p><a href=https://github.com/serverless-heaven/serverless-webpack>serverless-webpack</a>를 쓰면 이 과정을 알아서 해준다.</p><p>webpack.config.js</p><pre><code class="language-js line-numbers">const path = require(&#39;path&#39;);
+const slsw = require(&#39;serverless-webpack&#39;);
+const nodeExternals = require(&#39;webpack-node-externals&#39;);
 
 module.exports = {
   context: __dirname,
-  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
+  mode: slsw.lib.webpack.isLocal ? &#39;development&#39; : &#39;production&#39;,
   entry: slsw.lib.entries,
-  devtool: slsw.lib.webpack.isLocal ? 'eval-cheap-module-source-map' : 'source-map',
+  devtool: slsw.lib.webpack.isLocal ? &#39;eval-cheap-module-source-map&#39; : &#39;source-map&#39;,
   resolve: {
-    extensions: ['.mjs', '.json', '.ts'],
+    extensions: [&#39;.mjs&#39;, &#39;.json&#39;, &#39;.ts&#39;],
     symlinks: false,
     cacheWithContext: false,
   },
   output: {
-    libraryTarget: 'commonjs',
-    path: path.join(__dirname, '.webpack'),
-    filename: '[name].js',
+    libraryTarget: &#39;commonjs&#39;,
+    path: path.join(__dirname, &#39;.webpack&#39;),
+    filename: &#39;[name].js&#39;,
   },
-  target: 'node',
+  target: &#39;node&#39;,
   externals: [nodeExternals()],
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       {
         test: /\.(tsx?)$/,
-        loader: 'ts-loader',
+        loader: &#39;ts-loader&#39;,
         exclude: [
           [
-            path.resolve(__dirname, 'node_modules'),
-            path.resolve(__dirname, '.serverless'),
-            path.resolve(__dirname, '.webpack'),
+            path.resolve(__dirname, &#39;node_modules&#39;),
+            path.resolve(__dirname, &#39;.serverless&#39;),
+            path.resolve(__dirname, &#39;.webpack&#39;),
           ],
         ],
         options: {
@@ -62,10 +62,9 @@ module.exports = {
   optimization: {
     minimize: false
   },
-};
-</code></pre><p>serverless.yml</p><pre><code class=language-yml>service: webpack-beginning
+};</code></pre><p>serverless.yml</p><pre><code class="language-yml line-numbers">service: webpack-beginning
 
-frameworkVersion: '2'
+frameworkVersion: &#39;2&#39;
 
 plugins:
   - serverless-webpack
@@ -85,42 +84,39 @@ functions:
   hello:
     handler: src/handler.hello
     events:
-      - httpApi: '*'
+      - httpApi: &#39;*&#39;
 
 custom:
   webpack:
-    webpackConfig: './webpack.config.js'
-    includeModules: true
-</code></pre><p><code>serverless.yml</code>은 serverless-webpack 문서를 보고 적당히 수정하면 된다.</p><pre><code class=language-yml>plugins:
+    webpackConfig: &#39;./webpack.config.js&#39;
+    includeModules: true</code></pre><p><code>serverless.yml</code>은 serverless-webpack 문서를 보고 적당히 수정하면 된다.</p><pre><code class="language-yml line-numbers">plugins:
   - serverless-webpack
 
 custom:
   webpack:
-    webpackConfig: './webpack.config.js'
-    includeModules: true
-</code></pre><h2 id=handler>handler</h2><p>람다 핸들러에는 <code>import 'xxx'</code>를 넣어서 webpack에서 코드를 짤라버리지 않도록 했다.</p><pre><code class=language-ts>import {
+    webpackConfig: &#39;./webpack.config.js&#39;
+    includeModules: true</code></pre><h2 id=handler>handler</h2><p>람다 핸들러에는 <code>import 'xxx'</code>를 넣어서 webpack에서 코드를 짤라버리지 않도록 했다.</p><pre><code class="language-ts line-numbers">import {
   APIGatewayProxyHandlerV2,
-} from 'aws-lambda';
+} from &#39;aws-lambda&#39;;
 
-import 'aws-sdk';
-import 'dynamo-types';
-import 'lodash';
-import 'typeorm';
-import 'mysql';
+import &#39;aws-sdk&#39;;
+import &#39;dynamo-types&#39;;
+import &#39;lodash&#39;;
+import &#39;typeorm&#39;;
+import &#39;mysql&#39;;
 
 export const hello: APIGatewayProxyHandlerV2 = async (event) =&gt; {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
+      message: &#39;Go Serverless v1.0! Your function executed successfully!&#39;,
       input: event,
     }, null, 2),
   };
-};
-</code></pre><h2 id=packaging-and-deploy>packaging and deploy</h2><p><code>npx sls webpack</code>을 실행하면 <code>.webpack</code> 폴더가 생기고 폴더에는 빌드된 결과물이 들어있다.
+};</code></pre><h2 id=packaging-and-deploy>packaging and deploy</h2><p><code>npx sls webpack</code>을 실행하면 <code>.webpack</code> 폴더가 생기고 폴더에는 빌드된 결과물이 들어있다.
 <code>npx sls package</code>을 실행하면 <code>.serverless</code> 폴더가 생기고 폴더에는 배포될 결과물이 들어있다.</p><p><code>npx sls deploy</code>를 호출하면 배포한다.
 deploy만 하면 패키징은 serverless에서 알아서 수행한다.
-webpack, package 명령이 있다는건 나중을 위해서 알아두면 된다.</p><pre><code>Serverless: Bundling with Webpack...
+webpack, package 명령이 있다는건 나중을 위해서 알아두면 된다.</p><pre class=markdown-textblock><code>Serverless: Bundling with Webpack...
 asset src/handler.js 2.71 KiB [emitted] (name: src/handler) 1 related asset
 orphan modules 210 bytes [orphan] 5 modules
 runtime modules 670 bytes 3 modules
@@ -151,8 +147,7 @@ endpoints:
 functions:
   hello: webpack-beginning-dev-hello
 layers:
-  None
-</code></pre><h2 id=next>next?</h2><p>인터넷 뒤지면 serverless framework로 람다 배포하는 글이 많이 있다.
+  None</code></pre><h2 id=next>next?</h2><p>인터넷 뒤지면 serverless framework로 람다 배포하는 글이 많이 있다.
 나도 글을 더 잘 쓰는 사람들이 썼다. 여기까지는 내 글보다 다른 사람들의 글이 쓸만할 것이다.</p><p>다음 편부터는 아래의 주제를 다룰 것이다. 여기부터는 다른 사람들의 글과 많이 달라질 것이다.</p><ul><li><code>Serverless: Uploading service xxx.zip file to S3 (21.18 MB)...</code> 용량 줄이기</li><li>serverless-webpack의 작동 방식과 위험성</li><li>패키징/배포 시간 단축</li></ul></div><div class=tags><a href=https://if1live.github.io/tags/serverless>serverless</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -175,7 +170,6 @@ layers:
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

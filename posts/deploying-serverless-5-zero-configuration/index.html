@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (5) 최소한의 설정파일로 타입스크립트 함수 배포하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (5) 최소한의 설정파일로 타입스크립트 함수 배포하기"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>serverless 배포하기 (5) 최소한의 설정파일로 타입스크립트 함수 배포하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="serverless 배포하기 (5) 최소한의 설정파일로 타입스크립트 함수 배포하기"><meta name=keywords content="serverless"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -16,9 +16,9 @@
 deno의 경우 <a href=https://deno.land/manual/tools/bundler>deno bundle</a> 명령어를 사용해서 타입스크립트 프로젝트를 자바스크립트 파일 1개로 묶을 수 있다.
 node.js에서 <code>deno bundle</code>와 비슷한걸 사용해서 자바스크립트 파일 1개로 패키지까지 묶을수 있으면 배포가 편하다.
 (참고: ESM 프로젝트의 경우 package.json도 생긴다. package.json에 ESM 플래그가 포함된다)</p><p><a href=https://github.com/vercel/ncc>ncc</a>를 쓰면 webpack이 처리하는 문제를 더 간단하게 해결할수 있다.</p><blockquote><p>Compile a Node.js project into a single file. Supports TypeScript, binary addons, dynamic requires.</p></blockquote><p><code>ncc build ./handler.ts -o output</code> 로 타입스크립트 핸들러 함수와 의존성 패키지를 하나의 자바스크립트 파일로 묶을수 있다.</p><h2 id=패키징>패키징</h2><p>deno 프로젝트를 serverless를 사용해서 람다로 배포하려고 찾아보다가 <a href=https://github.com/hayd/deno-lambda/tree/master/example-serverless>deno-lambda</a>를 발견했다.
-deno-lambda의 예제가 <a href=https://github.com/weixu365/serverless-scriptable-plugin>serverless-scriptable-plugin</a>를 사용하더라.</p><p><code>serverless-scriptable-plugin</code>를 사용해서 빌드 아티팩트 생성 직전에 <code>ncc</code>로 빌드를 하면 뭔가 될거같더라.</p><pre><code class=language-yaml>service: hello-zero-configuration
+deno-lambda의 예제가 <a href=https://github.com/weixu365/serverless-scriptable-plugin>serverless-scriptable-plugin</a>를 사용하더라.</p><p><code>serverless-scriptable-plugin</code>를 사용해서 빌드 아티팩트 생성 직전에 <code>ncc</code>로 빌드를 하면 뭔가 될거같더라.</p><pre><code class="language-yaml line-numbers">service: hello-zero-configuration
 
-frameworkVersion: '3'
+frameworkVersion: &#39;3&#39;
 
 provider:
   name: aws
@@ -27,8 +27,8 @@ provider:
 
 package:
   patterns:
-    - &quot;!**&quot;
-    - &quot;!node_modules/**&quot;
+    - &#34;!**&#34;
+    - &#34;!node_modules/**&#34;
     - output/*.js
     - output/*.json
 
@@ -36,34 +36,29 @@ functions:
   hello:
     handler: output/index.hello
     events:
-      - httpApi: '*'
+      - httpApi: &#39;*&#39;
 
 plugins:
   - serverless-scriptable-plugin
 
 custom:
   scriptHooks:
-    before:package:createDeploymentArtifacts: ncc build ./handler.ts -o output
-</code></pre><pre><code class=language-yaml>plugins:
+    before:package:createDeploymentArtifacts: ncc build ./handler.ts -o output</code></pre><pre><code class="language-yaml line-numbers">plugins:
   - serverless-scriptable-plugin
 
 custom:
   scriptHooks:
-    before:package:createDeploymentArtifacts: ncc build ./handler.ts -o output
-</code></pre><p><code>serverless-scriptable-plugin</code> README를 참고해서 ncc로 빌드를 뽑아서 <code>output/</code> 디렉토리에 넣었다.</p><pre><code class=language-yaml>package:
+    before:package:createDeploymentArtifacts: ncc build ./handler.ts -o output</code></pre><p><code>serverless-scriptable-plugin</code> README를 참고해서 ncc로 빌드를 뽑아서 <code>output/</code> 디렉토리에 넣었다.</p><pre><code class="language-yaml line-numbers">package:
   patterns:
-    - &quot;!**&quot;
-    - &quot;!node_modules/**&quot;
+    - &#34;!**&#34;
+    - &#34;!node_modules/**&#34;
     - output/*.js
-    - output/*.json
-</code></pre><p>serverless가 패키징할때 <code>output/</code> 디렉토리만 갖다 쓰게 제한했다.
+    - output/*.json</code></pre><p>serverless가 패키징할때 <code>output/</code> 디렉토리만 갖다 쓰게 제한했다.
 <code>serverless-scriptable-plugin</code> README와는 형태는 조금 다른데 알아서 잘 수정해서 쓰면 된다.
-(프로젝트에 따라서는 typeorm의 ormconfig.json과 같이 별도의 설정파일도 패키징에 포함되어야 할 수 있다)</p><pre><code class=language-yaml>functions:
+(프로젝트에 따라서는 typeorm의 ormconfig.json과 같이 별도의 설정파일도 패키징에 포함되어야 할 수 있다)</p><pre><code class="language-yaml line-numbers">functions:
   hello:
-    handler: output/index.hello
-</code></pre><p><code>ncc</code>로 빌드를 뽑으면 출력 파일명이 <code>index.js</code>이다.
-출력 경로를 <code>output/</code>로 잡았으니 <code>output/index.js</code>의 함수 <code>hello</code>를 핸들러로 연결했다.</p><h2 id=배포>배포</h2><pre><code class=language-bash>pnpm sls deploy
-</code></pre><p>serverless deploy 명령어 한줄이면 된다!</p><p>상황에 따라 별도의 빌드 스크립트가 필요해져도 <code>serverless.yml</code>만 고치면 된다.
+    handler: output/index.hello</code></pre><p><code>ncc</code>로 빌드를 뽑으면 출력 파일명이 <code>index.js</code>이다.
+출력 경로를 <code>output/</code>로 잡았으니 <code>output/index.js</code>의 함수 <code>hello</code>를 핸들러로 연결했다.</p><h2 id=배포>배포</h2><pre><code class="language-bash line-numbers">pnpm sls deploy</code></pre><p>serverless deploy 명령어 한줄이면 된다!</p><p>상황에 따라 별도의 빌드 스크립트가 필요해져도 <code>serverless.yml</code>만 고치면 된다.
 serverless-scriptable-plugin는 cli 명령을 그대로 실행하니까 적당히 잘 넣으면 된다.
 내 경우, <code>before:package:createDeploymentArtifacts: pnpm run build</code>로 쓰고 있다.
 복잡해질수 있는 ncc 빌드와 serverless 패키징을 분리해서 생각하니까 좋더라.</p><h2 id=next>next?</h2><p>2022년에 타입스크립트 프로젝트를 람다로 배포하려면 어떻게 해야되는가?
@@ -105,7 +100,6 @@ serverless 내장된 템플릿이 <code>serverless-webpack</code>를 쓰니까 �
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

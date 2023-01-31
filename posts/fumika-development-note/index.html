@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Project Fumika, 중고책 처분 프로세스 개발기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Project Fumika, 중고책 처분 프로세스 개발기"><meta name=keywords content="development note"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>Project Fumika, 중고책 처분 프로세스 개발기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="Project Fumika, 중고책 처분 프로세스 개발기"><meta name=keywords content="development note"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -43,10 +43,9 @@ PC(유니티 에디터 환경)에서는 Google API Console에서 기타 유형�
 하지만 안드로이드에서는 Android 유형으로 OAuth 클라이어트 ID를 만들어야한다.</p><p>OAuth 클라이언트 ID 만드는것이 끝이 아니라 apk signing 과정도 필요하다는걸 몰라서 두번째 삽질을 했다.
 apk signing 과정을 거치지 않으니까 플러그인 안쪽에서 예외가 발생하더라.</p><p>그것으로 삽질은 끝이 아니었다. 하드코딩된 scope가 플러그인 코드에 남아있어서 세번째 삽질을 했다.
 scope를 변경하는 기능을 만들고 테스트했지만 이건 PC환경에서만 돌아가는 코드였다.
-안드로이드에서는 인증 과정이 다르니까 scope설정하는 부분도 다른곳에 있었다.</p><p><a href=https://github.com/midworld/unity-googledrive/blob/def2c16676194762699b16ed781f7f6a5e8a4c16/NativePlugins/Android/GoogleDrivePlugin/src/com/studio272/googledriveplugin/GoogleDrivePlugin.java#L47-L49>GoogleDrivePlugin.java</a></p><pre><code class=language-java>credential = GoogleAccountCredential.usingOAuth2(activity,
-    &quot;https://www.googleapis.com/auth/drive.file&quot;,
-    &quot;https://www.googleapis.com/auth/drive.appdata&quot;);
-</code></pre><p>자바 코드를 고쳐야하다니! 빌드하는 방법도 모르는데! 게다가 자바 코드 쓰기 싫어서 유니티로 시작한건데!</p><p>당연히 우회했다. 왜 내가 이 삽질을 더 해야하는가?
+안드로이드에서는 인증 과정이 다르니까 scope설정하는 부분도 다른곳에 있었다.</p><p><a href=https://github.com/midworld/unity-googledrive/blob/def2c16676194762699b16ed781f7f6a5e8a4c16/NativePlugins/Android/GoogleDrivePlugin/src/com/studio272/googledriveplugin/GoogleDrivePlugin.java#L47-L49>GoogleDrivePlugin.java</a></p><pre><code class="language-java line-numbers">credential = GoogleAccountCredential.usingOAuth2(activity,
+    &#34;https://www.googleapis.com/auth/drive.file&#34;,
+    &#34;https://www.googleapis.com/auth/drive.appdata&#34;);</code></pre><p>자바 코드를 고쳐야하다니! 빌드하는 방법도 모르는데! 게다가 자바 코드 쓰기 싫어서 유니티로 시작한건데!</p><p>당연히 우회했다. 왜 내가 이 삽질을 더 해야하는가?
 구글 스프레드시트에 데이터를 올리는 과정은 둘로 나눌수 있다고 했다.
 인증, 그리고 데이터 추가.
 PC에서 인증과정을 거치는건 문제가 없다.
@@ -54,17 +53,17 @@ PC에서 인증과정을 거치는건 문제가 없다.
 그래서 세번째 삽질은 우회로 대응했다.</p><p>유니티에서 HTTP 요청하는 방법은 잘 몰라서 옛날에 본 코드를 참고했다.
 <a href=https://www.assetstore.unity3d.com/kr/#!/content/69399>유니티 Speech-to-Text</a>와
 <a href=https://pastebin.com/bB6m9AcD>수정된 코드</a>를 섞어서 구현했다.
-삽질해본게 하도 많으니까 옛날에 본 코드 섞어도 대충 굴러가더라.</p><pre><code class=language-csharp>public IEnumerator BeginAppendValue(string val) {
-  var range = &quot;A1&quot;;
-  var uri = string.Format(&quot;https://sheets.googleapis.com/v4/spreadsheets/{0}/values/{1}:append&quot;, SheetID, range);
+삽질해본게 하도 많으니까 옛날에 본 코드 섞어도 대충 굴러가더라.</p><pre><code class="language-csharp line-numbers">public IEnumerator BeginAppendValue(string val) {
+  var range = &#34;A1&#34;;
+  var uri = string.Format(&#34;https://sheets.googleapis.com/v4/spreadsheets/{0}/values/{1}:append&#34;, SheetID, range);
 
   // Query parameters
   var qs = new QueryStringBuilder();
-  qs.Add(&quot;valueInputOption&quot;, &quot;USER_ENTERED&quot;);
-  qs.Add(&quot;insertDataOption&quot;, &quot;INSERT_ROWS&quot;);
-  qs.Add(&quot;includeValuesInResponse&quot;, &quot;true&quot;);
-  qs.Add(&quot;responseValueRenderOption&quot;, &quot;FORMULA&quot;);
-  qs.Add(&quot;responseDateTimeRenderOption&quot;, &quot;FORMATTED_STRING&quot;);
+  qs.Add(&#34;valueInputOption&#34;, &#34;USER_ENTERED&#34;);
+  qs.Add(&#34;insertDataOption&#34;, &#34;INSERT_ROWS&#34;);
+  qs.Add(&#34;includeValuesInResponse&#34;, &#34;true&#34;);
+  qs.Add(&#34;responseValueRenderOption&#34;, &#34;FORMULA&#34;);
+  qs.Add(&#34;responseDateTimeRenderOption&#34;, &#34;FORMATTED_STRING&#34;);
   var querystring = qs.ToString();
 
   JSONObject row = new JSONObject(JSONObject.Type.ARRAY);
@@ -74,20 +73,20 @@ PC에서 인증과정을 거치는건 문제가 없다.
   values.Add(row);
 
   JSONObject requestJSON = new JSONObject();
-  requestJSON.AddField(&quot;values&quot;, values);
+  requestJSON.AddField(&#34;values&#34;, values);
 
-  var url = uri + &quot;?&quot; + querystring;
+  var url = uri &#43; &#34;?&#34; &#43; querystring;
   UnityWebRequest www = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
 
-  www.SetRequestHeader(&quot;Authorization&quot;, &quot;Bearer &quot; + storage.AccessToken);
+  www.SetRequestHeader(&#34;Authorization&#34;, &#34;Bearer &#34; &#43; storage.AccessToken);
 
   byte[] bytes = Encoding.UTF8.GetBytes(requestJSON.ToString());
   UploadHandlerRaw uH = new UploadHandlerRaw(bytes);
-  uH.contentType = &quot;application/json&quot;;
+  uH.contentType = &#34;application/json&#34;;
   www.uploadHandler = uH;
 
   www.downloadHandler = new DownloadHandlerBuffer();
-  www.SetRequestHeader(&quot;Content-Type&quot;, &quot;application/json&quot;);
+  www.SetRequestHeader(&#34;Content-Type&#34;, &#34;application/json&#34;);
 
   yield return www.Send();
 
@@ -97,8 +96,7 @@ PC에서 인증과정을 거치는건 문제가 없다.
 
   var resp = new APIResponse(www);
   LastResponse = resp;
-}
-</code></pre><p>토큰 직접 넣어서 API 호출하니 문제없이 스프레드시트에 데이터가 들어가더라.</p><h2 id=유니티-버전-바코드-스캐너의-실패>유니티 버전 바코드 스캐너의 실패</h2><p>바코드를 스캔할수도 있고 스캔한 내용을 구글 스프레드시트에 올리는것도 된다.
+}</code></pre><p>토큰 직접 넣어서 API 호출하니 문제없이 스프레드시트에 데이터가 들어가더라.</p><h2 id=유니티-버전-바코드-스캐너의-실패>유니티 버전 바코드 스캐너의 실패</h2><p>바코드를 스캔할수도 있고 스캔한 내용을 구글 스프레드시트에 올리는것도 된다.
 책의 ISBN을 스캔하기 시작했다.</p><p>스캔을 시작하니 생각보다 ISBN이 안찍히더라?
 ISBN을 찍으려고 가까이해면 카메라가 흐릿해지고 멀리하면 바코드가 잘 안찍혔다.
 아무래도 유니티에서 카메라를 쓰면 자동 초점 기능이 꺼져있는거 같다.
@@ -126,7 +124,7 @@ stackoverflow에서 <a href=http://stackoverflow.com/questions/38949318/google-s
 이것이 발상의 전환이구나!</p><p>그래서 이걸 응용했다.
 서비스 계정 키에는 email주소가 있잖아?
 스프레드시트의 공유 목록에 email주소 추가하면 되는거 아냐?
-해보니까 되더라. 야매 해결책 같긴한데 어쨌든 되니까 신경 끄기로 했다.</p><h2 id=결과물>결과물</h2><p><p class=markdown-image><img src=https://raw.githubusercontent.com/if1live/fumika-scanner/master/document/final-result.jpeg alt=screenshot></p></p><p>실제로 굴러가는 <a href="https://docs.google.com/spreadsheets/d/13IXCsO7FPjhUmOG0bp08xfZXlusdkSER6b33xPMvV9M/edit?usp=sharing">스프레드시트</a>이다.
+해보니까 되더라. 야매 해결책 같긴한데 어쨌든 되니까 신경 끄기로 했다.</p><h2 id=결과물>결과물</h2><p><p class=markdown-image><a href=https://raw.githubusercontent.com/if1live/fumika-scanner/master/document/final-result.jpeg target=_blank><img src=https://raw.githubusercontent.com/if1live/fumika-scanner/master/document/final-result.jpeg alt=screenshot></a></p></p><p>실제로 굴러가는 <a href="https://docs.google.com/spreadsheets/d/13IXCsO7FPjhUmOG0bp08xfZXlusdkSER6b33xPMvV9M/edit?usp=sharing">스프레드시트</a>이다.
 목록은 만들었으니 어떤걸 중고로 팔지 결정하면 될거같은데 그건 시간날때 진행해도 되겠지.</p></div><div class=tags><a href=https://if1live.github.io/tags/development-note>development note</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -149,7 +147,6 @@ stackoverflow에서 <a href=http://stackoverflow.com/questions/38949318/google-s
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

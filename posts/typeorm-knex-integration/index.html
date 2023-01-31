@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>TypeORM과 Knex 같이 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="TypeORM과 Knex 같이 쓰기"><meta name=keywords content="typeorm ,knex ,mysql"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>TypeORM과 Knex 같이 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="TypeORM과 Knex 같이 쓰기"><meta name=keywords content="typeorm ,knex ,mysql"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -7,7 +7,7 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>TypeORM과 Knex 같이 쓰기</h1><div class=tip><time datetime="2022-09-25 00:00:00 +0000 UTC">2022. 09. 25</time></div><div class=content><h2 id=요구사항>요구사항</h2><p>데이터베이스가 없는 백엔드는 상상하기 어렵다.
 프로젝트에서 데이터베이스, 그중에서도 RDBMS를 쓰게 된다면 query builder, ORM 같은 물건을 피할 수 없다. 이 글에서는 TypeORM과 Knex를 섞어쓴 배경과 이를 구현한 매직을 다룬다.</p><h3 id=typeorm--knex>TypeORM + Knex?</h3><p>ORM을 사용하면 엔티티의 형상을 관리하고 간단한 쿼리는 쉽게 처리할 수 있다.
-TypeORM을 오래 사용하고 익숙해져서 ORM 중에서 선택했다.</p><pre><code class=language-ts>@Entity({ name: 'user' })
+TypeORM을 오래 사용하고 익숙해져서 ORM 중에서 선택했다.</p><pre><code class="language-ts line-numbers">@Entity({ name: &#39;user&#39; })
 export class User {
     @PrimaryGeneratedColumn()
     id: number
@@ -16,94 +16,86 @@ export class User {
     name: string
 }
 
-const firstUser = await userRepository.findOneBy({ id: 1 });
-</code></pre><p>하지만 복잡한 쿼리를 사용해야될 경우에는 ORM이 문제를 더 복잡하게 만든다.
-TypeORM의 경우에는 문자열로 쿼리를 작성해야되서 타입 정보도 잃어버린다.</p><pre><code class=language-ts>const { sum } = await dataSource
+const firstUser = await userRepository.findOneBy({ id: 1 });</code></pre><p>하지만 복잡한 쿼리를 사용해야될 경우에는 ORM이 문제를 더 복잡하게 만든다.
+TypeORM의 경우에는 문자열로 쿼리를 작성해야되서 타입 정보도 잃어버린다.</p><pre><code class="language-ts line-numbers">const { sum } = await dataSource
     .getRepository(User)
-    .createQueryBuilder(&quot;user&quot;)
-    .select(&quot;SUM(user.photosCount)&quot;, &quot;sum&quot;)
-    .where(&quot;user.id = :id&quot;, { id: 1 })
-    .getRawOne()
-</code></pre><p>Knex은 SQL query builder이다.
+    .createQueryBuilder(&#34;user&#34;)
+    .select(&#34;SUM(user.photosCount)&#34;, &#34;sum&#34;)
+    .where(&#34;user.id = :id&#34;, { id: 1 })
+    .getRawOne()</code></pre><p>Knex은 SQL query builder이다.
 함수를 chaining해서 호출하면 쿼리가 만들어지고 DB로 요청을 보낼 수 도 있다.
-목적이 SQL query builder니까 복잡한 쿼리를 구성해도 TypeORM보다 멀쩡하게 나온다.</p><pre><code class=language-ts>knex('users').sum('products')
-</code></pre><p>Knex는 SQL query builder답게 엔티티 관리 기능이 없다.
+목적이 SQL query builder니까 복잡한 쿼리를 구성해도 TypeORM보다 멀쩡하게 나온다.</p><pre><code class="language-ts line-numbers">knex(&#39;users&#39;).sum(&#39;products&#39;)</code></pre><p>Knex는 SQL query builder답게 엔티티 관리 기능이 없다.
 테이블의 최종 형상도 손으로 관리해야되고 마이그레이션 스크립트도 손으로 관리해야된다.
 Knex에는 <code>knex migrate:make migration_name</code> 같은 명령어가 있는데 빈 마이그레이션 스크립트를 만들뿐이다.
-TypeORM의 migration은 DB의 테이블 구조와 코드의 엔티티 구조를 비교해서 바뀐 필드를 찾고 마이그레이션 스크립트를 만들어주는데!</p><p>TypeORM와 Knex를 섞어서쓰면 둘의 장점을 동시에 챙길수 있지 않을까?</p><h3 id=커넥션을-공유할것>커넥션을 공유할것</h3><p>무식한 방법은 프로젝트에 TypeORM과 Knex를 동시에 넣는 것이다.</p><pre><code class=language-ts>// typeorm
+TypeORM의 migration은 DB의 테이블 구조와 코드의 엔티티 구조를 비교해서 바뀐 필드를 찾고 마이그레이션 스크립트를 만들어주는데!</p><p>TypeORM와 Knex를 섞어서쓰면 둘의 장점을 동시에 챙길수 있지 않을까?</p><h3 id=커넥션을-공유할것>커넥션을 공유할것</h3><p>무식한 방법은 프로젝트에 TypeORM과 Knex를 동시에 넣는 것이다.</p><pre><code class="language-ts line-numbers">// typeorm
 const dataSource = new DataSource({ ... });
 // knex
-const knex = require('knex')({ ... });
+const knex = require(&#39;knex&#39;)({ ... });
 
 const x = await dataSource.find(...)
-const y = await knex.select(...)
-</code></pre><p>겉보기에는 멀쩡하지만 트랜잭션에서 문제을 일으킬 수 있다.
+const y = await knex.select(...)</code></pre><p>겉보기에는 멀쩡하지만 트랜잭션에서 문제을 일으킬 수 있다.
 TypeORM 초기화할때 connection pool을 설정한다.
 Knex 초기화할때도 connection pool을 설정한다.
 두 connection pool 독립적이다.
 커넥션을 서로 공유하지 않으니까 하나의 트랜잭션에서 TypeORM, Knex를 동시에 사용하기 어렵다.</p><p>커넥션풀을 외부에서 직접 꽂을수 있다면 문제가 간단해질것이다.
 하지만 TypeORM, Knex 문서에서 connection pool을 상세 구현을 직접 제어하는 방법은 찾지 못했다.
-TypeORM, Knex 초기화 시점에 DB 접속 정보를 나머지는 라이브러리가 알아서 처리한다.</p><pre><code class=language-ts>// knex
-const knex = require('knex')({
-  client: 'mysql',
+TypeORM, Knex 초기화 시점에 DB 접속 정보를 나머지는 라이브러리가 알아서 처리한다.</p><pre><code class="language-ts line-numbers">// knex
+const knex = require(&#39;knex&#39;)({
+  client: &#39;mysql&#39;,
   connection: {
-    host : '127.0.0.1',
+    host : &#39;127.0.0.1&#39;,
     port : 3306,
-    user : 'your_database_user',
-    password : 'your_database_password',
-    database : 'myapp_test'
+    user : &#39;your_database_user&#39;,
+    password : &#39;your_database_password&#39;,
+    database : &#39;myapp_test&#39;
   },
   pool: { min: 0, max: 7 }
 });
 
 // typeorm
 const AppDataSource = new DataSource({
-    type: &quot;mysql&quot;,
-    host: &quot;localhost&quot;,
+    type: &#34;mysql&#34;,
+    host: &#34;localhost&#34;,
     port: 3306,
-    username: &quot;test&quot;,
-    password: &quot;test&quot;,
-    database: &quot;test&quot;,
-});
-</code></pre><h3 id=타입-정보가-유지되어야한다>타입 정보가 유지되어야한다</h3><p>Knex는 SQL query builder라서 SQL만 뽑아내는게 가능하다.
-Knex로는 SQL만 생성하고 쿼리 보내는걸 TypeORM에서 처리하면 커넥션풀과 관련된 문제가 사라진다.</p><p><a href=https://knexjs.org/guide/interfaces.html#tosql>https://knexjs.org/guide/interfaces.html#tosql</a></p><pre><code class=language-ts>knex.select('*')
-  .from('users')
-  .where(knex.raw('id = ?', [1]))
+    username: &#34;test&#34;,
+    password: &#34;test&#34;,
+    database: &#34;test&#34;,
+});</code></pre><h3 id=타입-정보가-유지되어야한다>타입 정보가 유지되어야한다</h3><p>Knex는 SQL query builder라서 SQL만 뽑아내는게 가능하다.
+Knex로는 SQL만 생성하고 쿼리 보내는걸 TypeORM에서 처리하면 커넥션풀과 관련된 문제가 사라진다.</p><p><a href=https://knexjs.org/guide/interfaces.html#tosql>https://knexjs.org/guide/interfaces.html#tosql</a></p><pre><code class="language-ts line-numbers">knex.select(&#39;*&#39;)
+  .from(&#39;users&#39;)
+  .where(knex.raw(&#39;id = ?&#39;, [1]))
   .toSQL()
 // Outputs:
 // {
 //   bindings: [1],
-//   method: 'select',
-//   sql: 'select * from &quot;users&quot; where id = ?',
+//   method: &#39;select&#39;,
+//   sql: &#39;select * from &#34;users&#34; where id = ?&#39;,
 //   options: undefined,
 //   toNative: function () {}
 // }
 
-knex.select('*')
-  .from('users')
-  .where(knex.raw('id = ?', [1]))
+knex.select(&#39;*&#39;)
+  .from(&#39;users&#39;)
+  .where(knex.raw(&#39;id = ?&#39;, [1]))
   .toSQL()
   .toNative()
 // Outputs for postgresql dialect:
 // {
 //   bindings: [1],
-//   sql: 'select * from &quot;users&quot; where id = $1',
-// }
-</code></pre><p>이렇게 할 경우 타입 정보를 잃어버리고 손으로 붙여줘야한다.</p><pre><code class=language-ts>const context = knex.select('*').from('users').where(knex.raw('id = ?', [1])).toSQL().toNative();
+//   sql: &#39;select * from &#34;users&#34; where id = $1&#39;,
+// }</code></pre><p>이렇게 할 경우 타입 정보를 잃어버리고 손으로 붙여줘야한다.</p><pre><code class="language-ts line-numbers">const context = knex.select(&#39;*&#39;).from(&#39;users&#39;).where(knex.raw(&#39;id = ?&#39;, [1])).toSQL().toNative();
 const rawData = await manager.query(context.sql, context.bindings); // TypeORM은 knex의 리턴타입을 모른다
-const users = rawData as User[];	// casting
-</code></pre><p>Knex는 타입스크립트를 지원한다. Knex에서 DB로 직접 요청했다면 타입 정보가 유지된다.</p><p><a href=https://knexjs.org/guide/query-builder.html#usage-with-typescript>https://knexjs.org/guide/query-builder.html#usage-with-typescript</a></p><pre><code class=language-ts>interface User {
+const users = rawData as User[];	// casting</code></pre><p>Knex는 타입스크립트를 지원한다. Knex에서 DB로 직접 요청했다면 타입 정보가 유지된다.</p><p><a href=https://knexjs.org/guide/query-builder.html#usage-with-typescript>https://knexjs.org/guide/query-builder.html#usage-with-typescript</a></p><pre><code class="language-ts line-numbers">interface User {
   id: number;
   name: string;
   age: number;
 }
 
-knex&lt;User&gt;('users') // User is the type of row in database
-  .where('id', 1) // Your IDE will be able to help with the completion of id
-  .first(); // Resolves to User | undefined
-</code></pre><p>Knex에서 직접 DB로 쿼리 날리는걸 버리고 싶진 않다.</p><h2 id=구현-방향>구현 방향</h2><ol><li>TypeORM 기반으로 프로젝트를 구성한다. Mysql 커넥션풀 관리는 TypeORM에서 수행한다.</li><li>TypeORM의 DataSource나 EntityManager에서 mysql connection에 접근하는 방법을 찾는다.</li><li>mysql connection을 그대로 꽂을수 있는 Knex custom dialect를 작성한다.</li><li><code>SELECT CONNECTION_ID()</code> 쿼리를 TypeORM, Knex에서 호출해서 같은 값인지 확인한다.</li></ol><p><a href=https://github.com/if1live/typeorm-knex-integration>if1live/typeorm-knex-integration</a>
+knex&lt;User&gt;(&#39;users&#39;) // User is the type of row in database
+  .where(&#39;id&#39;, 1) // Your IDE will be able to help with the completion of id
+  .first(); // Resolves to User | undefined</code></pre><p>Knex에서 직접 DB로 쿼리 날리는걸 버리고 싶진 않다.</p><h2 id=구현-방향>구현 방향</h2><ol><li>TypeORM 기반으로 프로젝트를 구성한다. Mysql 커넥션풀 관리는 TypeORM에서 수행한다.</li><li>TypeORM의 DataSource나 EntityManager에서 mysql connection에 접근하는 방법을 찾는다.</li><li>mysql connection을 그대로 꽂을수 있는 Knex custom dialect를 작성한다.</li><li><code>SELECT CONNECTION_ID()</code> 쿼리를 TypeORM, Knex에서 호출해서 같은 값인지 확인한다.</li></ol><p><a href=https://github.com/if1live/typeorm-knex-integration>if1live/typeorm-knex-integration</a>
 typeorm과 knex에서 mysql connection을 공유하는걸 구현해봤다.</p><p>knex에 mysql dialect, sqlite dialect, &mldr; 같은걸 끼워넣을수 있다면 내가 만든 mysql typeorm dialect를 못끼워넣을 이유가 어디에 있는가?
-<a href=https://github.com/knex/knex/blob/v0.16.2/CONTRIBUTING.md>I would like to add support for new dialect to knex, is it possible?</a></p><p>저장소의 코드에서 컨셉만 남겨봤다.</p><pre><code class=language-ts>const MysqlDialect = (await import(`knex/lib/dialects/mysql/index.js`)).default;
+<a href=https://github.com/knex/knex/blob/v0.16.2/CONTRIBUTING.md>I would like to add support for new dialect to knex, is it possible?</a></p><p>저장소의 코드에서 컨셉만 남겨봤다.</p><pre><code class="language-ts line-numbers">const MysqlDialect = (await import(`knex/lib/dialects/mysql/index.js`)).default;
 
 // typeorm-knex mapping table
 MysqlDialect.prototype.table = {};
@@ -138,13 +130,11 @@ await AppDataSource.manager.transaction(async (manager) =&gt; {
   await execute_knex(knex, title);
 
   await knex.destroy();
-});
-</code></pre><p>TypeORM에서 커넥션 접근하는건 <a href=https://github.com/typeorm/typeorm/blob/0.3.10/src/query-runner/QueryRunner.ts#L73>QueryRunner</a>에서 찾았다.</p><pre><code>/**
+});</code></pre><p>TypeORM에서 커넥션 접근하는건 <a href=https://github.com/typeorm/typeorm/blob/0.3.10/src/query-runner/QueryRunner.ts#L73>QueryRunner</a>에서 찾았다.</p><pre class=markdown-textblock><code>/**
  * Creates/uses database connection from the connection pool to perform further operations.
  * Returns obtained database connection.
  */
-connect(): Promise&lt;any&gt;
-</code></pre><h2 id=production-ready>production-ready?</h2><p>TypeORM과 Knex를 섞어서 쓰는게 가능하다는걸 검증했을뿐이다. 실제 프로덕션에 넣으면 사고가 터질것이다.
+connect(): Promise<any></code></pre><h2 id=production-ready>production-ready?</h2><p>TypeORM과 Knex를 섞어서 쓰는게 가능하다는걸 검증했을뿐이다. 실제 프로덕션에 넣으면 사고가 터질것이다.
 프로덕션에서 사용하려면 예외 처리, 자원 관리와 같은 문제를 해결해야되는데 나는 실력이 없어서 거기까지 하진 않았다.</p><p>아직까지는 하나의 트랜잭션 안에서 TypeORM과 Knex를 동시에 써야하는 일이 생기지 않았다.
 앞으로도 없으면 좋겠다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typeorm>typeorm</a>
 <a href=https://if1live.github.io/tags/knex>knex</a>
@@ -170,7 +160,6 @@ connect(): Promise&lt;any&gt;
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

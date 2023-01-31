@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>고정소수점에서 2차원 벡터의 크기, 정규화된 벡터 계산하는 방법 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="고정소수점에서 2차원 벡터의 크기, 정규화된 벡터 계산하는 방법"><meta name=keywords content="fixed point ,vector ,vector length ,normalized vector"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>고정소수점에서 2차원 벡터의 크기, 정규화된 벡터 계산하는 방법 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="고정소수점에서 2차원 벡터의 크기, 정규화된 벡터 계산하는 방법"><meta name=keywords content="fixed point ,vector ,vector length ,normalized vector"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -16,7 +16,7 @@ DOOM보다 훨씬 나중에 나온 Quake3에도 <code>sqrt()</code> 대신 흑�
 덕분에 <code>sqrt()</code>는 그렇게 빠른 함수가 아니다.
 요즘은 컴퓨터가 좋으니까 심각한 문제 없지만 386, 486이면 이야기가 다를거다.</p><p>두번째 문제는 고정소수점의 정밀도이다.
 Q16.16을 사용하면 정수부는 2바이트뿐이다.
-a가 큰 값이면 <code>a*a + b*b</code>를 계산하다 고정소수점의 표현범위를 벗어날수 있다.</p><p>그래서 DOOM은 다른 방법으로 구현했다.</p><p><a href=https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L391-L418>https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L391-L418</a></p><pre><code class=language-c>fixed_t
+a가 큰 값이면 <code>a*a + b*b</code>를 계산하다 고정소수점의 표현범위를 벗어날수 있다.</p><p>그래서 DOOM은 다른 방법으로 구현했다.</p><p><a href=https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L391-L418>https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L391-L418</a></p><pre><code class="language-c line-numbers">fixed_t
 R_PointToDist
 ( fixed_t	x,
   fixed_t	y )
@@ -37,23 +37,20 @@ R_PointToDist
         dy = temp;
     }
 
-    angle = (tantoangle[ FixedDiv(dy,dx)&gt;&gt;DBITS ]+ANG90) &gt;&gt; ANGLETOFINESHIFT;
+    angle = (tantoangle[ FixedDiv(dy,dx)&gt;&gt;DBITS ]&#43;ANG90) &gt;&gt; ANGLETOFINESHIFT;
 
     // use as cosine
     dist = FixedDiv (dx, finesine[angle] );
 
     return dist;
-}
-</code></pre><ol><li><code>angle = atan2(y, x)</code></li><li><code>distance = x / sin(angle)</code></li></ol><p>벡터의 크기를 직접 구하는게 아니라 벡터에서 X축 성분만 이용했다.
-충분히 빠르고 안에 루프문이 없는 <code>atan2(y, x)</code>, <code>sin()</code>를 구현했으니까 이것을 이용한 함수도 충분히 빠르지 않겠어?</p><h3 id=divied-by-zero>divied by zero?</h3><p>vector.length() 구현에는 다음 코드에 들어있다.</p><pre><code class=language-c>dist = FixedDiv (dx, finesine[angle] );
-</code></pre><p>각도가 0이면 <code>sin(0) = 0</code>, divided by zero 버그가 발생할수 있다.
+}</code></pre><ol><li><code>angle = atan2(y, x)</code></li><li><code>distance = x / sin(angle)</code></li></ol><p>벡터의 크기를 직접 구하는게 아니라 벡터에서 X축 성분만 이용했다.
+충분히 빠르고 안에 루프문이 없는 <code>atan2(y, x)</code>, <code>sin()</code>를 구현했으니까 이것을 이용한 함수도 충분히 빠르지 않겠어?</p><h3 id=divied-by-zero>divied by zero?</h3><p>vector.length() 구현에는 다음 코드에 들어있다.</p><pre><code class="language-c line-numbers">dist = FixedDiv (dx, finesine[angle] );</code></pre><p>각도가 0이면 <code>sin(0) = 0</code>, divided by zero 버그가 발생할수 있다.
 DOOM에서는 이를 어떻게 피했는가? <code>sin(0) != 0</code>으로 만들었다.
 DOOM의 sine lookup table에서는 0, -1, 1에 대응하는 값은 없다.
-<code>sin(90deg)=1 </code>처럼 sine은 0이 아니더라도 <code>cos(90deg)=0</code> 이 될 수 있기 때문에 일부러 피한것으로 보인다.</p><pre><code>// finesine[0] != 0
-int finesine[10240] = { 25,75,125,175,226,276,326,376, ...}
-</code></pre><h2 id=fast-vectorlength>fast vector.length()</h2><p>요즘 세상에서는 벡터의 길이를 구하는 함수는 하나면 충분하다.
+<code>sin(90deg)=1 </code>처럼 sine은 0이 아니더라도 <code>cos(90deg)=0</code> 이 될 수 있기 때문에 일부러 피한것으로 보인다.</p><pre class=markdown-textblock><code>// finesine[0] != 0
+int finesine[10240] = { 25,75,125,175,226,276,326,376, ...}</code></pre><h2 id=fast-vectorlength>fast vector.length()</h2><p>요즘 세상에서는 벡터의 길이를 구하는 함수는 하나면 충분하다.
 하지만 DOOM은 486 시대에 만들어서 그런지 벡터의 길이를 구하는 방법을 하나 더 만들었다.
-정확한 값을 포기하고 벡터의 길이의 근사값을 구하는 매우 빠른 함수가 따로있다.</p><p><a href=https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_maputl.c#L43-L58>https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_maputl.c#L43-L58</a></p><pre><code class=language-c>fixed_t
+정확한 값을 포기하고 벡터의 길이의 근사값을 구하는 매우 빠른 함수가 따로있다.</p><p><a href=https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_maputl.c#L43-L58>https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_maputl.c#L43-L58</a></p><pre><code class="language-c line-numbers">fixed_t
 P_AproxDistance
 ( fixed_t	dx,
   fixed_t	dy )
@@ -61,15 +58,14 @@ P_AproxDistance
     dx = abs(dx);
     dy = abs(dy);
     if (dx &lt; dy)
-        return dx+dy-(dx&gt;&gt;1);
-    return dx+dy-(dy&gt;&gt;1);
-}
-</code></pre><p>벡터의 길이를 대충 계산하는지는 방법은 매우 간단하다. <code>length = a + b/2</code> (단, a >= b).
+        return dx&#43;dy-(dx&gt;&gt;1);
+    return dx&#43;dy-(dy&gt;&gt;1);
+}</code></pre><p>벡터의 길이를 대충 계산하는지는 방법은 매우 간단하다. <code>length = a + b/2</code> (단, a >= b).
 그림으로 보면 간단하게 이해할 수 있다.
-구현체에는 곱셈, 나눗셈도 없이 덧셈, 뺄셈, left shift정도만 사용했다. 빠르긴 진짜 빠르겠지.</p><p><p class=markdown-image><img src=vector-length-triangle-debuggerd.jpg alt=AproxDistance></p></p><blockquote><p>와&mldr;ㅁㅊ, id 소프트웨어는 무슨 어둠의 의회 같은덴가&mldr;.
+구현체에는 곱셈, 나눗셈도 없이 덧셈, 뺄셈, left shift정도만 사용했다. 빠르긴 진짜 빠르겠지.</p><p><p class=markdown-image><a href=vector-length-triangle-debuggerd.jpg target=_blank><img src=vector-length-triangle-debuggerd.jpg alt=AproxDistance></a></p></p><blockquote><p>와&mldr;ㅁㅊ, id 소프트웨어는 무슨 어둠의 의회 같은덴가&mldr;.
 <a href=https://twitter.com/debuggerD/status/727748272945762305>@debuggerD</a></p></blockquote><h2 id=vectornormalize>vector.normalize()</h2><p>Normalized Vector를 구하는 방법은 <code>normalized_vector = vector / vector.length</code> 이다.
 위에서 벡터의 길이를 구하는 함수를 만들어냈으니 이것을 이용하면 normalized vector를 구할수 있을거다.
-하지만 DOOM은 그런 방법을 선택하지 않았다.</p><p><a href=https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074>https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074</a></p><pre><code class=language-c>exact = R_PointToAngle2 (actor-&gt;x, actor-&gt;y, dest-&gt;x, dest-&gt;y);
+하지만 DOOM은 그런 방법을 선택하지 않았다.</p><p><a href=https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074>https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074</a></p><pre><code class="language-c line-numbers">exact = R_PointToAngle2 (actor-&gt;x, actor-&gt;y, dest-&gt;x, dest-&gt;y);
 
 if (exact != actor-&gt;angle)
 {
@@ -81,7 +77,7 @@ if (exact != actor-&gt;angle)
     }
     else
     {
-        actor-&gt;angle += TRACEANGLE;
+        actor-&gt;angle &#43;= TRACEANGLE;
         if (exact - actor-&gt;angle &gt; 0x80000000)
             actor-&gt;angle = exact;
     }
@@ -89,8 +85,7 @@ if (exact != actor-&gt;angle)
 
 exact = actor-&gt;angle&gt;&gt;ANGLETOFINESHIFT;
 actor-&gt;momx = FixedMul (actor-&gt;info-&gt;speed, finecosine[exact]);
-actor-&gt;momy = FixedMul (actor-&gt;info-&gt;speed, finesine[exact]);
-</code></pre><ol><li><code>angle = atan2(y, x)</code></li><li><code>vector_x = sin(angle)</code></li><li><code>vector_y = cos(angle)</code></li></ol><p>충분히 빠르게 동작하는 atan2, sin, cos가 있으니까 그걸 썼다.
+actor-&gt;momy = FixedMul (actor-&gt;info-&gt;speed, finesine[exact]);</code></pre><ol><li><code>angle = atan2(y, x)</code></li><li><code>vector_x = sin(angle)</code></li><li><code>vector_y = cos(angle)</code></li></ol><p>충분히 빠르게 동작하는 atan2, sin, cos가 있으니까 그걸 썼다.
 벡터의 정규화는 결국 방향이 원래 벡터와 같은 크기 1짜리 벡터를 만들어내는 과정이잖아?
 벡터의 각도 알아내고 sin, cos로 x, y 성분 만들면 그게 곧 정규화된 벡터 아니겠는가?</p></div><div class=tags><a href=https://if1live.github.io/tags/fixed-point>fixed point</a>
 <a href=https://if1live.github.io/tags/vector>vector</a>
@@ -117,7 +112,6 @@ actor-&gt;momy = FixedMul (actor-&gt;info-&gt;speed, finesine[exact]);
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

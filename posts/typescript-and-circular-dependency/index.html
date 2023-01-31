@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트와 순환 의존성 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트와 순환 의존성"><meta name=keywords content="typescript ,circular dependency ,circular reference"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트와 순환 의존성 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트와 순환 의존성"><meta name=keywords content="typescript ,circular dependency ,circular reference"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -8,47 +8,40 @@
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입스크립트와 순환 의존성</h1><div class=tip><time datetime="2019-12-28 00:00:00 +0000 UTC">2019. 12. 28</time></div><div class=content><h2 id=타입스크립트와-순환-의존성>타입스크립트와 순환 의존성</h2><p>circular dependency(순환 의존성, circular reference, 순환 참조)는 대부분의 언어에서 발생시킬 수 있는 문제이다.
 C 에서도 circular dependency 문제가 있다.
 C 에서는 전방선언 같은 수단을 쓰지 않으면 컴파일이 되지 않기 때문에 문제를 쉽게 찾을수 있다.</p><p>타입스크립트 역시 순환 의존성 문제가 발생할 수 있다.
-하지만 타입스크립트에서의 순환 의존성 문제는 C와는 조금 다르다.</p><h2 id=undefined>undefined</h2><p>순환 의존성을 구현한 간단한 예제이다.</p><p>const-a.ts</p><pre><code class=language-ts>import { b } from './const-b';
+하지만 타입스크립트에서의 순환 의존성 문제는 C와는 조금 다르다.</p><h2 id=undefined>undefined</h2><p>순환 의존성을 구현한 간단한 예제이다.</p><p>const-a.ts</p><pre><code class="language-ts line-numbers">import { b } from &#39;./const-b&#39;;
 console.log({ b });
 
-export const a: number = b + 1;
-</code></pre><p>const-b.ts</p><pre><code class=language-ts>import { a } from './const-a';
+export const a: number = b &#43; 1;</code></pre><p>const-b.ts</p><pre><code class="language-ts line-numbers">import { a } from &#39;./const-a&#39;;
 console.log({ a })
 
-export const b: number = a + 1;
-</code></pre><p>index.ts</p><pre><code class=language-ts>import { a } from './const-a';
+export const b: number = a &#43; 1;</code></pre><p>index.ts</p><pre><code class="language-ts line-numbers">import { a } from &#39;./const-a&#39;;
 
-console.log(`result: ${a}`);
-</code></pre><pre><code>{ a: undefined }
+console.log(`result: ${a}`);</code></pre><pre class=markdown-textblock><code>{ a: undefined }
 { b: NaN }
-result: NaN
-</code></pre><p><code>const-a.ts</code>는 <code>const-b.ts</code>가 필요하고 <code>const-b.ts</code>는 <code>const-a.ts</code>가 필요하다.
+result: NaN</code></pre><p><code>const-a.ts</code>는 <code>const-b.ts</code>가 필요하고 <code>const-b.ts</code>는 <code>const-a.ts</code>가 필요하다.
 순환 참조가 발생했을때 import한 값은 <code>undefined</code>가 된다.
 의도하지 않게 undefined가 튀어나왔으니 결과가 이상해진다.</p><p>C에서 순환 의존성 문제가 발생하면 컴파일이 실패한다. 문제를 즉시 찾을 수 있다.
 자바스크립트에서 순환 의존성 문제가 발생하면 런타임에서 터진다.
 스크립트 언어는 런타임에서 터지는게 일상이니까 이상한게 아니다.</p><p>골치 아픈건 타입스크립트에서의 순환 의존성이다.
-컴파일은 통과했으니 잘 돌아갈거라고 생각한 코드지만 런타임에 터지는 것이다.</p><h2 id=순환-의존성과-class-문제-있는-예제>순환 의존성과 class: 문제 있는 예제</h2><p>class-x.ts</p><pre><code class=language-ts>import { Y } from './class-y';
+컴파일은 통과했으니 잘 돌아갈거라고 생각한 코드지만 런타임에 터지는 것이다.</p><h2 id=순환-의존성과-class-문제-있는-예제>순환 의존성과 class: 문제 있는 예제</h2><p>class-x.ts</p><pre><code class="language-ts line-numbers">import { Y } from &#39;./class-y&#39;;
 
 export class X {
   public static sample() { return new Y(); }
-}
-</code></pre><p>class-y.ts</p><pre><code class=language-ts>import { X } from './class-x';
+}</code></pre><p>class-y.ts</p><pre><code class="language-ts line-numbers">import { X } from &#39;./class-x&#39;;
 
 console.log({ X });
 const x = new X();
 
 export class Y {
   public static sample() { return x; }
-}
-</code></pre><p>index.ts</p><pre><code class=language-ts>import { X } from './class-x';
-console.log(X);
-</code></pre><p>실행 결과</p><pre><code>{ X: undefined }
-&lt;my-path&gt;\class-y.js:4
+}</code></pre><p>index.ts</p><pre><code class="language-ts line-numbers">import { X } from &#39;./class-x&#39;;
+console.log(X);</code></pre><p>실행 결과</p><pre class=markdown-textblock><code>{ X: undefined }
+<my-path>\class-y.js:4
 var x = new class_x_1.X();
         ^
 
 TypeError: class_x_1.X is not a constructor
-    at Object.&lt;anonymous&gt; (&lt;my-path&gt;\class-y.js:4:9)
+    at Object.<anonymous> (<my-path>\class-y.js:4:9)
     at Module._compile (internal/modules/cjs/loader.js:778:30)
     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
     at Module.load (internal/modules/cjs/loader.js:653:32)
@@ -56,12 +49,11 @@ TypeError: class_x_1.X is not a constructor
     at Function.Module._load (internal/modules/cjs/loader.js:585:3)
     at Module.require (internal/modules/cjs/loader.js:692:17)
     at require (internal/modules/cjs/helpers.js:25:18)
-    at Object.&lt;anonymous&gt; (&lt;my-path&gt;\class-x.js:3:17)
-    at Module._compile (internal/modules/cjs/loader.js:778:30)
-</code></pre><p><code>TypeError: XXXX is not a constructor</code>. 내가 몇 번 밟아본 버그이다.
+    at Object.<anonymous> (<my-path>\class-x.js:3:17)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)</code></pre><p><code>TypeError: XXXX is not a constructor</code>. 내가 몇 번 밟아본 버그이다.
 에러 메세지에 undefined가 들어있으면 쉽게 깨달을수 있는데 현실은 그렇지 않다.
 클래스의 생성자가 이상하다는 에러 메세지를 보고 클래스를 찍어보면 undefined가 나온다.
-순환 의존성 때문에 초기화가 안된 상태에서 객체를 생성하니까 문제가 생기는 것이다.</p><h2 id=순환-의존성과-class-문제-없는-예제>순환 의존성과 class: 문제 없는 예제</h2><p>class-a.ts</p><pre><code class=language-ts>import { B } from './class-b';
+순환 의존성 때문에 초기화가 안된 상태에서 객체를 생성하니까 문제가 생기는 것이다.</p><h2 id=순환-의존성과-class-문제-없는-예제>순환 의존성과 class: 문제 없는 예제</h2><p>class-a.ts</p><pre><code class="language-ts line-numbers">import { B } from &#39;./class-b&#39;;
 console.log(`import B: ${B}`);
 
 export class A {
@@ -69,8 +61,7 @@ export class A {
     console.log(`function B: ${B}`);
     return new B();
   }
-}
-</code></pre><p>class-b.ts</p><pre><code class=language-ts>import { A } from './class-a';
+}</code></pre><p>class-b.ts</p><pre><code class="language-ts line-numbers">import { A } from &#39;./class-a&#39;;
 console.log(`import A: ${A}`);
 
 export class B {
@@ -78,9 +69,8 @@ export class B {
     console.log(`function A: ${A}`);
     return new A();
   }
-}
-</code></pre><p>index.ts</p><pre><code class=language-ts>import { A } from './class-a';
-import { B } from './class-b';
+}</code></pre><p>index.ts</p><pre><code class="language-ts line-numbers">import { A } from &#39;./class-a&#39;;
+import { B } from &#39;./class-b&#39;;
 
 console.log({ A });
 console.log({ B });
@@ -89,8 +79,7 @@ const a = new A();
 const b = new B();
 
 b.sample();
-a.sample();
-</code></pre><p>실행 결과</p><pre><code>import A: undefined
+a.sample();</code></pre><p>실행 결과</p><pre class=markdown-textblock><code>import A: undefined
 import B: function B() {
     }
 { A: [Function: A] }
@@ -98,27 +87,25 @@ import B: function B() {
 function A: function A() {
     }
 function B: function B() {
-    }
-</code></pre><p>import한 직후에 A가 undefined로 뜨는 것은 문제가 있는 예제와 마찬가지이다.
-하지만 함수 안에서 객체를 생성할 시점에는 A가 더이상 undefined가 아니다.</p><p>컴파일된 결과물 <code>class-b.js</code>를 보면 이해할 수 있다.</p><pre><code class=language-js>&quot;use strict&quot;;
-Object.defineProperty(exports, &quot;__esModule&quot;, { value: true });
-var class_a_1 = require(&quot;./class-a&quot;);
-console.log(&quot;import A: &quot; + class_a_1.A);
+    }</code></pre><p>import한 직후에 A가 undefined로 뜨는 것은 문제가 있는 예제와 마찬가지이다.
+하지만 함수 안에서 객체를 생성할 시점에는 A가 더이상 undefined가 아니다.</p><p>컴파일된 결과물 <code>class-b.js</code>를 보면 이해할 수 있다.</p><pre><code class="language-js line-numbers">&#34;use strict&#34;;
+Object.defineProperty(exports, &#34;__esModule&#34;, { value: true });
+var class_a_1 = require(&#34;./class-a&#34;);
+console.log(&#34;import A: &#34; &#43; class_a_1.A);
 var B = /** @class */ (function () {
     function B() {
     }
     B.prototype.sample = function () {
-        console.log(&quot;function A: &quot; + class_a_1.A);
+        console.log(&#34;function A: &#34; &#43; class_a_1.A);
         return new class_a_1.A();
     };
     return B;
 }());
-exports.B = B;
-</code></pre><p><code>class_a_1.A</code>를 변수에 할당해두고 쓰지 않는다.
+exports.B = B;</code></pre><p><code>class_a_1.A</code>를 변수에 할당해두고 쓰지 않는다.
 <code>class_a_1</code>가 초기화되기 전에 쓰면 <code>class_a_1.A</code>가 undefined가 되는 것이고 그렇지 않으면 올바른 값이 되는 것이다.</p><h2 id=순환-의존성은-피할수-있는가>순환 의존성은 피할수 있는가?</h2><p><a href=https://github.com/typeorm/typeorm>typeorm</a>이라는 ORM을 사용 중이다.
 멀쩡한 ORM 답게 <a href=https://github.com/typeorm/typeorm/blob/master/docs/many-to-one-one-to-many-relations.md>many-to-one</a>을 지원한다.
-many-to-one 예제 코드를 보면 이런게 튀어나온다.</p><p>Photo.ts</p><pre><code class=language-ts>import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { User } from './User';
+many-to-one 예제 코드를 보면 이런게 튀어나온다.</p><p>Photo.ts</p><pre><code class="language-ts line-numbers">import { Entity, PrimaryGeneratedColumn, ManyToOne } from &#39;typeorm&#39;;
+import { User } from &#39;./User&#39;;
 
 @Entity()
 export class Photo {
@@ -127,9 +114,8 @@ export class Photo {
 
     @ManyToOne(type =&gt; User, user =&gt; user.photos)
     user: User; 
-}
-</code></pre><p>User.ts</p><pre><code class=language-ts>import { Entity, PrimaryGeneratedColumn,OneToMany } from 'typeorm';
-import { Photo } from './Photo';
+}</code></pre><p>User.ts</p><pre><code class="language-ts line-numbers">import { Entity, PrimaryGeneratedColumn,OneToMany } from &#39;typeorm&#39;;
+import { Photo } from &#39;./Photo&#39;;
 
 @Entity()
 export class User {
@@ -138,8 +124,7 @@ export class User {
 
     @OneToMany(type =&gt; Photo, photo =&gt; photo.user)
     photos: Photo[];
-}
-</code></pre><p><code>Photo.user</code>는 <code>User</code> 타입으로 되어있으며 <code>User.photos</code>는 <code>Photo[]</code> 타입으로 되어있다.
+}</code></pre><p><code>Photo.user</code>는 <code>User</code> 타입으로 되어있으며 <code>User.photos</code>는 <code>Photo[]</code> 타입으로 되어있다.
 <code>User</code>와 <code>Photo</code>는 서로 의존하고 있다.
 순환 의존성을 없애려면 둘을 같은 파일에 넣으면 된다.
 샘플은 Entity별로 독립된 파일로 만들고 싶었는지 그런 선택을 하지 않았다.</p><p>설계를 잘 하고 마음에 들지 않는 코드를 참을 수 있다면 순환 의존성은 피할 수 있다.
@@ -150,20 +135,19 @@ export class User {
 워닝이 일상이 되면 아무도 워닝을 주목하지 않는다.
 진짜 중요한 워닝이 발생했을때 무시되고 사고가 터진다.</p><p>몇번 당해봤기때문에 tslint-no-circular-imports를 사용하지 않았다.</p><h2 id=순환-의존성-찾기-webpack>순환 의존성 찾기: webpack</h2><p>지금은 <a href=https://github.com/aackerman/circular-dependency-plugin>circular-dependency-plugin</a>를 사용하고 있다.
 webpack은 이미 사용하고 있고 tslint-no-circular-import보다 지원하는 설정이 많더라.
-설정을 손봐서 typeorm entity간의 순환 참조는 무시하도록 해놨다.</p><pre><code class=language-js>new CircularDependencyPlugin({
+설정을 손봐서 typeorm entity간의 순환 참조는 무시하도록 해놨다.</p><pre><code class="language-js line-numbers">new CircularDependencyPlugin({
     // 대부분의 필드는 기본값 사용
 
     onDetected({ module: webpackModuleRecord, paths, compilation }) {
         // entity에서 x-to-x 관계를 본격적으로 쓰면 cycle를 피하기 어렵다
         // ClanEntity -&gt; ClanMemberEntity -&gt; ClanEntity
         // 그래서 entity간의 사이클은 무시
-        const isEntityCycle = paths.map(x =&gt; x.endsWith('Entity.ts')).reduce((a, b) =&gt; a &amp;&amp; b, true);
+        const isEntityCycle = paths.map(x =&gt; x.endsWith(&#39;Entity.ts&#39;)).reduce((a, b) =&gt; a &amp;&amp; b, true);
         if (isEntityCycle) { return; }
 
-        compilation.errors.push(new Error(paths.join(' -&gt; ')))
+        compilation.errors.push(new Error(paths.join(&#39; -&gt; &#39;)))
     },
-}),
-</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+}),</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
 <a href=https://if1live.github.io/tags/circular-dependency>circular dependency</a>
 <a href=https://if1live.github.io/tags/circular-reference>circular reference</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
@@ -187,7 +171,6 @@ webpack은 이미 사용하고 있고 tslint-no-circular-import보다 지원하�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

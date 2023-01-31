@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트 + Promise + async/await + Error = ??? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트 + Promise + async/await + Error = ???"><meta name=keywords content="typescript ,javascript ,promise ,exception ,error"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트 + Promise + async/await + Error = ??? &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트 + Promise + async/await + Error = ???"><meta name=keywords content="typescript ,javascript ,promise ,exception ,error"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -16,7 +16,7 @@ HTTP API를 구현하는 경우에는 로직에서는 <code>NotFoundError</code>
 깊은 콜스택의 아래에서 에러가 발생했을때 return을 통해서 한단계씩 위쪽으로 던잘하는것보다 throw로 한번에 위로 전달하면 편하다.</p><p>타입스크립트, Promise, async/await, Error는 좋은 기능이니까 엮으면 정말 좋은게 나오겠네?</p><h2 id=trycatch에서-await가-붙지-않은-비동기-함수>try&mldr;catch에서 await가 붙지 않은 비동기 함수</h2><p>try&mldr;catch에서 에러를 던지는 비동기 함수를 호출한다.
 에러를 잡으면 콘솔 로그를 찍는 단순한 예제이다.
 node.js의 <code>fs.promises</code>와 비슷하다.
-<code>fs.promises.stat()</code>의 경우 해당 위치에 파일이 없으면 에러를 던진다.</p><pre><code class=language-typescript>export { };
+<code>fs.promises.stat()</code>의 경우 해당 위치에 파일이 없으면 에러를 던진다.</p><pre><code class="language-typescript line-numbers">export { };
 
 export async function func_throw(): Promise&lt;number&gt; {
   throw new Error();
@@ -26,17 +26,15 @@ async function main() {
   try {
     return await func_throw()
   } catch (e) {
-    console.log('catch');
+    console.log(&#39;catch&#39;);
   }
 }
 
-main().then(console.log).catch(console.error);
-</code></pre><pre><code class=language-bash>$ pnpx ts-node try_catch_without_await/main_ok.ts
+main().then(console.log).catch(console.error);</code></pre><pre><code class="language-bash line-numbers">$ pnpx ts-node try_catch_without_await/main_ok.ts
 catch
-undefined
-</code></pre><p>에러가 try&mldr;catch에서 잘 잡힌다.</p><p>잘 돌아가는 코드에서 한줄만 고치고 돌려보자.
+undefined</code></pre><p>에러가 try&mldr;catch에서 잘 잡힌다.</p><p>잘 돌아가는 코드에서 한줄만 고치고 돌려보자.
 <code>func_throw()</code> 호출할때 실수로 <code>return await func_throw();</code> 대신 <code>return func_throw();</code>를 입력했다고 치자.
-컴파일에서 터지면 이런 실수를 안할텐데 await를 고쳐도 문제없이 컴파일된다.</p><pre><code class=language-typescript>export { };
+컴파일에서 터지면 이런 실수를 안할텐데 await를 고쳐도 문제없이 컴파일된다.</p><pre><code class="language-typescript line-numbers">export { };
 
 export async function func_throw(): Promise&lt;number&gt; {
   throw new Error();
@@ -46,12 +44,11 @@ async function main() {
   try {
     return func_throw();
   } catch (e) {
-    console.log('catch');
+    console.log(&#39;catch&#39;);
   }
 }
 
-main().then(console.log).catch(console.error);
-</code></pre><pre><code class=language-bash>$ pnpx ts-node try_catch_without_await/main_err.ts
+main().then(console.log).catch(console.error);</code></pre><pre><code class="language-bash line-numbers">$ pnpx ts-node try_catch_without_await/main_err.ts
 Error: 
     at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:4:9
     at Generator.next (&lt;anonymous&gt;)
@@ -62,18 +59,16 @@ Error:
     at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:9:12
     at Generator.next (&lt;anonymous&gt;)
     at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\try_catch_without_await\main_err.ts:8:71
-    at new Promise (&lt;anonymous&gt;)
-</code></pre><p>try&mldr;catch에서 에러를 잡지 못하고 <code>main()</code>을 호출한 시점에서 에러를 잡았다.
+    at new Promise (&lt;anonymous&gt;)</code></pre><p>try&mldr;catch에서 에러를 잡지 못하고 <code>main()</code>을 호출한 시점에서 에러를 잡았다.
 <code>await</code> 하나 뺀거 치고는 동작이 많이 바뀐다.
 그래도 main의 catch에서 잡히기라도 했으니 운이 좋은 상황이다.</p><h2 id=미리-생성한-promise>미리 생성한 Promise</h2><p>여러 Promise가 전부 끝날때까지 기다릴때는 <code>Promise.all()</code>을 쓰면 된다.
 Promise 만드는 함수가 <code>async function executeTask()</code>같은 형태면 <code>Promise.all()</code>에서 그대로 호출해도 코드가 볼만할거다.
-하지만 Promise 만드는 과정이 복잡하거나 중복코드가 생기기 시작하면 잔머리를 굴리기 시작한다.</p><pre><code class=language-ts>Promise.all([
+하지만 Promise 만드는 과정이 복잡하거나 중복코드가 생기기 시작하면 잔머리를 굴리기 시작한다.</p><pre><code class="language-ts line-numbers">Promise.all([
     new CharacterService(some_options).execute({ id: 1 }),
     new CharacterService(some_options).execute({ id: 2 }),
     new ShopService(some_options).execute(),
     ...
-]);
-</code></pre><p>위와 같이 쓰는대신 아래와 같이 쓰면 <code>Promise.all()</code>이 어떤 작업을 할지 간단하게 보일 것이다.</p><pre><code class=language-ts>const characterService = new CharacterService(some_options);
+]);</code></pre><p>위와 같이 쓰는대신 아래와 같이 쓰면 <code>Promise.all()</code>이 어떤 작업을 할지 간단하게 보일 것이다.</p><pre><code class="language-ts line-numbers">const characterService = new CharacterService(some_options);
 const shopService = new ShopService(some_options);
 
 const p_character_1 = characterService.execute({ id: 1 });
@@ -85,10 +80,9 @@ Promise.all([
     p_character_2,
     p_shop,
     ...
-]);
-</code></pre><p>위의 개념을 적용해서 간단한 코드를 작성했다.
+]);</code></pre><p>위의 개념을 적용해서 간단한 코드를 작성했다.
 <code>Promise.all()</code>로 2개의 promise를 처리하는데 하나는 성공하고 하나는 실패한다.
-try&mldr;catch 로 묶어서 실패가 잡히는걸 기대한다.</p><pre><code class=language-typescript>export { };
+try&mldr;catch 로 묶어서 실패가 잡히는걸 기대한다.</p><pre><code class="language-typescript line-numbers">export { };
 
 async function main() {
   const p1 = func_throw();
@@ -97,7 +91,7 @@ async function main() {
   try {
     await Promise.all([p1, p2]);
   } catch (e) {
-    console.log('catch');
+    console.log(&#39;catch&#39;);
   }
 }
 
@@ -109,13 +103,11 @@ async function func_throw(): Promise&lt;number&gt; {
 
 async function func_simple(): Promise&lt;number&gt; {
   return 1;
-}
-</code></pre><pre><code class=language-bash>$ pnpx ts-node outbound_promise/main_delay_off.ts
+}</code></pre><pre><code class="language-bash line-numbers">$ pnpx ts-node outbound_promise/main_delay_off.ts
 catch
-undefined
-</code></pre><p>예상대로 <code>func_throw()</code>에서 던진 에러가 try&mldr;catch에서 잡혀서 콘솔 로그가 찍히는걸 볼 수 있다.</p><p>위의 성공적인 코드에서 한줄만 바꾸자.
+undefined</code></pre><p>예상대로 <code>func_throw()</code>에서 던진 에러가 try&mldr;catch에서 잡혀서 콘솔 로그가 찍히는걸 볼 수 있다.</p><p>위의 성공적인 코드에서 한줄만 바꾸자.
 Promise 객체를 생성한 지점과 <code>Promise.all()</code>사이에 <code>delay()</code>를 추가했다.
-async/await로 delay에서 약간 기다렸다가 <code>Promise.all()</code>를 호출했다.</p><pre><code class=language-typescript>export { };
+async/await로 delay에서 약간 기다렸다가 <code>Promise.all()</code>를 호출했다.</p><pre><code class="language-typescript line-numbers">export { };
 
 async function main() {
   const p1 = func_throw();
@@ -124,7 +116,7 @@ async function main() {
   try {
     await Promise.all([p1, p2]);
   } catch (e) {
-    console.log('catch');
+    console.log(&#39;catch&#39;);
   }
 }
 
@@ -142,8 +134,7 @@ async function delay(millis: number): Promise&lt;void&gt; {
   return new Promise(resolve =&gt; {
     setTimeout(resolve, millis);
   });
-}
-</code></pre><pre><code class=language-bash>$ pnpx ts-node outbound_promise/main_delay_on.ts
+}</code></pre><pre><code class="language-bash line-numbers">$ pnpx ts-node outbound_promise/main_delay_on.ts
 (node:11376) UnhandledPromiseRejectionWarning: Error: 
     at D:\blog\if1live.github.io\content\typescript\typescript-pitfall-of-promise-and-error\outbound_promise\main_delay_on.ts:17:9
     at Generator.next (&lt;anonymous&gt;)
@@ -160,8 +151,7 @@ async function delay(millis: number): Promise&lt;void&gt; {
 (node:11376) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
 catch
 undefined
-(node:11376) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 1)
-</code></pre><p><code>UnhandledPromiseRejectionWarning</code>가 발생한다.
+(node:11376) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 1)</code></pre><p><code>UnhandledPromiseRejectionWarning</code>가 발생한다.
 <code>main()</code>에 붙인 catch로도 잡지 못했다.
 최상위에 붙은 에러 핸들러로 잡지 못했으니 Sentry가 붙어있어도 에러를 잡지 못했을 것이다.,
 한줄의 수정으로 컴파일은 통과하지만 런타임에 터지는 프로그램으로 바꿀 수 있다.</p><h2 id=우회>우회</h2><p>Promise, async/await, Error가 합쳐지면 컴파일되는 올바른 타입스크립트 코드지만 의도한대로 동작하지 않을 수 있다.
@@ -170,13 +160,11 @@ undefined
 <a href=https://typescript-eslint.io/>TypeScript ESLint</a>의 경우 Promise 관련 규칙이 존재한다.
 함정을 밟을때마다 lint 규칙을 강화하면 똑같은 문제를 다시 밟는건 피할 수 있을 것이다.
 내장 규칙으로만 모든 문제를 잡을수 없다면 다른 lint rule이나 rule 플러그인을 짤 수 있다.</p><p>에러를 던지지 않는 방향으로 코딩하는 것도 방법이 될수 있다.
-rust의 Result, fp-ts의 Either를 따라할 수 있다.</p><pre><code class=language-ts>type Result&lt;T, E&gt; = (
+rust의 Result, fp-ts의 Either를 따라할 수 있다.</p><pre><code class="language-ts line-numbers">type Result&lt;T, E&gt; = (
     | { ok: true; value: T }
     | { ok: false; error: E }
 )
-type MyResult = Result&lt;number, Error&gt;;
-</code></pre><p>golang처럼 에러를 리턴하게 바꿀수도 있다. <a href=https://github.com/xobotyi/await-of>https://github.com/xobotyi/await-of</a></p><pre><code class=language-ts>async function foo(): Promise&lt;[T, Error]&gt;
-</code></pre><p>언어의 근본적인 문제라고 생각하면 에러가 없는 언어로 도망치는것도 방법이 되지 않을까?
+type MyResult = Result&lt;number, Error&gt;;</code></pre><p>golang처럼 에러를 리턴하게 바꿀수도 있다. <a href=https://github.com/xobotyi/await-of>https://github.com/xobotyi/await-of</a></p><pre><code class="language-ts line-numbers">async function foo(): Promise&lt;[T, Error]&gt;</code></pre><p>언어의 근본적인 문제라고 생각하면 에러가 없는 언어로 도망치는것도 방법이 되지 않을까?
 rust의 경우는 에러를 던지지 않는다.</p><p>그래서 2022년에는 rust로 삽질해보려고 한다.
 rust 마지막으로 하던게 2018년이었는데 그 사이에 얼마나 바뀌었으려나.</p></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
 <a href=https://if1live.github.io/tags/javascript>javascript</a>
@@ -204,7 +192,6 @@ rust 마지막으로 하던게 2018년이었는데 그 사이에 얼마나 바�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

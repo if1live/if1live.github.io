@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기"><meta name=keywords content="typescript ,api specification"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트로 API 명세 작성하고 서버/클라 stub 생성하기"><meta name=keywords content="typescript ,api specification"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -10,13 +10,12 @@
 프론트엔드는 typescript + react로 굴러간다.</p><p>양쪽을 같은 언어로 구현했으니까 RPC를 싸게 만들 방법이 있지 않을까 생각해서 나온 결과물이다.
 요즘 세상에 RPC를 새로 만드는건 바퀴의 재발명같아 보인다.
 하지만 다른 RPC를 붙여서 프로젝트를 복잡하게 만들고 싶지 않았다.</p><p>타입스크립트로 API 명세를 작성하고 이를 사용해서 HTTP API 서버/클라 구현하는 기법을 정리했다.</p><h2 id=specification>specification</h2><p>간단한 예제니까 API 명세에는 최소한의 정보만 넣자.
-HTTP method, URL, 응답과 출력만 명시한다.</p><pre><code class=language-ts>interface Specification&lt;TReq, TResp&gt; {
-  method: 'get' | 'post';
+HTTP method, URL, 응답과 출력만 명시한다.</p><pre><code class="language-ts line-numbers">interface Specification&lt;TReq, TResp&gt; {
+  method: &#39;get&#39; | &#39;post&#39;;
   endpoint: string;
-}
-</code></pre><p>예제로 간단한 카운터를 만들자.
+}</code></pre><p>예제로 간단한 카운터를 만들자.
 <code>POST /inc</code>로 카운터를 증가시킬 수 있다.
-<code>POST /reset</code>으로 카운터를 초기화 할 수 있다.</p><pre><code class=language-ts>interface CounterModel {
+<code>POST /reset</code>으로 카운터를 초기화 할 수 있다.</p><pre><code class="language-ts line-numbers">interface CounterModel {
   id: string;
   value: number;
 }
@@ -24,45 +23,40 @@ HTTP method, URL, 응답과 출력만 명시한다.</p><pre><code class=language
 interface Input { id: string; }
 
 const inc: Specification&lt;Input, CounterModel&gt; = {
-  method: 'post',
-  endpoint: '/inc',
+  method: &#39;post&#39;,
+  endpoint: &#39;/inc&#39;,
 };
 
 const reset: Specification&lt;Input, CounterModel&gt; = {
-  method: 'post',
-  endpoint: '/reset',
-};
-</code></pre><p><code>inc</code>, <code>reset</code>이 따로 굴러다니면 관리하기 어려우니까 묶자.</p><pre><code class=language-ts>const counterSpec = {
+  method: &#39;post&#39;,
+  endpoint: &#39;/reset&#39;,
+};</code></pre><p><code>inc</code>, <code>reset</code>이 따로 굴러다니면 관리하기 어려우니까 묶자.</p><pre><code class="language-ts line-numbers">const counterSpec = {
   inc,
   reset,
-};
-</code></pre><p><code>counterSpec</code>을 사용해서 서버와 클라이언트를 구현한다.</p><h2 id=server>server</h2><h3 id=stub>stub</h3><p><code>counterSpec</code>을 사용해서 서버에서 사용할 컨트롤러를 만들자.
+};</code></pre><p><code>counterSpec</code>을 사용해서 서버와 클라이언트를 구현한다.</p><h2 id=server>server</h2><h3 id=stub>stub</h3><p><code>counterSpec</code>을 사용해서 서버에서 사용할 컨트롤러를 만들자.
 컨트롤러가 어떻게 생겨야하는지 인터페이스를 생성해야 한다.</p><p><a href=https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types>Type inference in conditional types</a>를 사용해서 컨트롤러 함수가 어떻게 생겨야하는지 정의한다.
-카운터는 간단한 예제니까 <code>(body: Req) => Resp</code> 으로 충분할 것이다.</p><pre><code class=language-ts>type ControllerFunction&lt;T&gt; = T extends Specification&lt;infer Req, infer Resp&gt;
+카운터는 간단한 예제니까 <code>(body: Req) => Resp</code> 으로 충분할 것이다.</p><pre><code class="language-ts line-numbers">type ControllerFunction&lt;T&gt; = T extends Specification&lt;infer Req, infer Resp&gt;
   ? (body: Req) =&gt; Resp
-  : never;
-</code></pre><p><code>ControllerFunction</code>은 API 명세 1개에 대해서만 동작한다.
+  : never;</code></pre><p><code>ControllerFunction</code>은 API 명세 1개에 대해서만 동작한다.
 <code>counterSpec</code>는 2개의 API를 포함하고 있다.
-<a href=https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types>Mapped types</a>를 사용하면 노가다 없이 여러 API 명세에 맞춰 인터페이스를 찍어낼 수 있다.</p><pre><code class=language-ts>type Controller&lt;T&gt; = { [P in keyof T]: ControllerFunction&lt;T[P]&gt; };
-type CounterStub = Controller&lt;typeof counterSpec&gt;;
-</code></pre><p>인터페이스를 채워서 컨트롤러를 구현한다.</p><pre><code class=language-ts>class CounterController implements CounterStub {
+<a href=https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types>Mapped types</a>를 사용하면 노가다 없이 여러 API 명세에 맞춰 인터페이스를 찍어낼 수 있다.</p><pre><code class="language-ts line-numbers">type Controller&lt;T&gt; = { [P in keyof T]: ControllerFunction&lt;T[P]&gt; };
+type CounterStub = Controller&lt;typeof counterSpec&gt;;</code></pre><p>인터페이스를 채워서 컨트롤러를 구현한다.</p><pre><code class="language-ts line-numbers">class CounterController implements CounterStub {
   private readonly map = new Map&lt;string, number&gt;();
 
-  public inc: CounterStub['inc'] = body =&gt; {
+  public inc: CounterStub[&#39;inc&#39;] = body =&gt; {
     const { id } = body;
-    const value = (this.map.get(id) ?? 0) + 1;
+    const value = (this.map.get(id) ?? 0) &#43; 1;
     this.map.set(id, value);
     return { id, value };
   }
 
-  public reset: CounterStub['reset'] = body =&gt; {
+  public reset: CounterStub[&#39;reset&#39;] = body =&gt; {
     const { id } = body;
     this.map.set(id, 0);
     return { id, value: 0 };
   }
-}
-</code></pre><h3 id=express>express</h3><p>컨트롤러로 정의된 핸들러를 express로 연결해야 HTTP 요청으로 사용할 수 있다.
-손으로 일일히 입력해서 등록하는건 귀찮으니 API 명세를 우려먹자.</p><p>API 명세 1개와 핸들러 함수 1개를 엮어서 express에 등록하는 함수 <code>registerSpec</code>를 만든다.</p><pre><code class=language-ts>function registerSpec&lt;Req, Resp&gt;(
+}</code></pre><h3 id=express>express</h3><p>컨트롤러로 정의된 핸들러를 express로 연결해야 HTTP 요청으로 사용할 수 있다.
+손으로 일일히 입력해서 등록하는건 귀찮으니 API 명세를 우려먹자.</p><p>API 명세 1개와 핸들러 함수 1개를 엮어서 express에 등록하는 함수 <code>registerSpec</code>를 만든다.</p><pre><code class="language-ts line-numbers">function registerSpec&lt;Req, Resp&gt;(
   app: express.Application,
   spec: Specification&lt;Req, Resp&gt;,
   handler: ControllerFunction&lt;Specification&lt;Req, Resp&gt;&gt;,
@@ -73,11 +67,10 @@ type CounterStub = Controller&lt;typeof counterSpec&gt;;
     const resp = await handler(payload);
     res.json(resp);
   });
-}
-</code></pre><p>여러개의 API 명세를 사용해서 <code>registerSpec</code>를 호출하는 함수를 만든다.
+}</code></pre><p>여러개의 API 명세를 사용해서 <code>registerSpec</code>를 호출하는 함수를 만든다.
 <code>any</code> 사용하지 않는 우아한 방법을 찾지 못했다. (타입시스템은 잘 몰라서 그게 가능한건지 모르겠다)
 API 명세와 컨트롤러는 같은 이름의 속성을 갖고있는게 컴파일 타임에 보장된다.
-적당히 돌아가니까 생각하는걸 포기하고 이렇게 구현했다.</p><pre><code class=language-ts>function registerController&lt;T&gt;(
+적당히 돌아가니까 생각하는걸 포기하고 이렇게 구현했다.</p><pre><code class="language-ts line-numbers">function registerController&lt;T&gt;(
   app: express.Application,
   spec: T,
   controller: Controller&lt;T&gt;,
@@ -87,13 +80,10 @@ API 명세와 컨트롤러는 같은 이름의 속성을 갖고있는게 컴파�
     const fn = controller[key].bind(controller);
     registerSpec(app, spec[key] as any, fn);
   }
-}
-</code></pre><h2 id=client>client</h2><p>서버와 똑같이 Type inference in conditional types와 Mapped types를 사용한다.
-HTTP 요청을 사용하니까 비동기 함수여야한다. 그래서 <code>(body: Req) => Promise&lt;Resp></code>를 썻다.</p><pre><code class=language-ts>type ClientFunction&lt;T&gt; = T extends Specification&lt;infer Req, infer Resp&gt;
+}</code></pre><h2 id=client>client</h2><p>서버와 똑같이 Type inference in conditional types와 Mapped types를 사용한다.
+HTTP 요청을 사용하니까 비동기 함수여야한다. 그래서 <code>(body: Req) => Promise&lt;Resp></code>를 썻다.</p><pre><code class="language-ts line-numbers">type ClientFunction&lt;T&gt; = T extends Specification&lt;infer Req, infer Resp&gt;
   ? (body: Req) =&gt; Promise&lt;Resp&gt;
-  : never;
-</code></pre><pre><code class=language-ts>type Client&lt;T&gt; = { [P in keyof T]: ClientFunction&lt;T[P]&gt; };
-</code></pre><p>API 명세를 받아서 node-fetch로 요청을 보내는 고차 함수를 만들었다.</p><pre><code class=language-ts>class BaseClient {
+  : never;</code></pre><pre><code class="language-ts line-numbers">type Client&lt;T&gt; = { [P in keyof T]: ClientFunction&lt;T[P]&gt; };</code></pre><p>API 명세를 받아서 node-fetch로 요청을 보내는 고차 함수를 만들었다.</p><pre><code class="language-ts line-numbers">class BaseClient {
   constructor(protected readonly host: string) { }
 
   protected handle&lt;Req, Resp&gt;(
@@ -106,34 +96,30 @@ HTTP 요청을 사용하니까 비동기 함수여야한다. 그래서 <code>(bo
       const resp = await fetch(url, {
         method: method,
         body: JSON.stringify(req),
-        headers: { 'Content-Type': 'application/json' },
+        headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
       });
       return await resp.json();
     };
   }
-}
-</code></pre><p>API 명세별로 고차 함수의 리턴을 연결했다.</p><pre><code class=language-ts>class CounterClient extends BaseClient implements Client&lt;typeof counterSpec&gt; {
+}</code></pre><p>API 명세별로 고차 함수의 리턴을 연결했다.</p><pre><code class="language-ts line-numbers">class CounterClient extends BaseClient implements Client&lt;typeof counterSpec&gt; {
   public inc = this.handle(counterSpec.inc);
   public reset = this.handle(counterSpec.reset);
-}
-</code></pre><h2 id=demo>demo</h2><p>서버와 클라를 뒤섞어서 간단한 데모를 구현했다.</p><pre><code class=language-ts>const PORT = 3000;
+}</code></pre><h2 id=demo>demo</h2><p>서버와 클라를 뒤섞어서 간단한 데모를 구현했다.</p><pre><code class="language-ts line-numbers">const PORT = 3000;
 app.listen(PORT, async () =&gt; {
   console.log(`listen 127.0.0.1:${PORT}`);
 
   const client = new CounterClient(`http://127.0.0.1:${PORT}`);
-  const id = 'foo';
-  console.log('inc', await client.inc({ id }));
-  console.log('inc', await client.inc({ id }));
-  console.log('inc', await client.reset({ id }));
-  console.log('inc', await client.inc({ id }));
+  const id = &#39;foo&#39;;
+  console.log(&#39;inc&#39;, await client.inc({ id }));
+  console.log(&#39;inc&#39;, await client.inc({ id }));
+  console.log(&#39;inc&#39;, await client.reset({ id }));
+  console.log(&#39;inc&#39;, await client.inc({ id }));
   process.exit();
-});
-</code></pre><pre><code>listen 127.0.0.1:3000
+});</code></pre><pre class=markdown-textblock><code>listen 127.0.0.1:3000
 inc { id: 'foo', value: 1 }
 inc { id: 'foo', value: 2 }
 inc { id: 'foo', value: 0 }
-inc { id: 'foo', value: 1 }
-</code></pre><p><a href=https://github.com/if1live/libsora.so/blob/master/content/typescript/stub-from-typescript-api-specification/src/index.ts>source</a></p><h2 id=도전과제>도전과제?</h2><p>예제를 단순하게 만들기 위해 POST만 사용했다.
+inc { id: 'foo', value: 1 }</code></pre><p><a href=https://github.com/if1live/libsora.so/blob/master/content/typescript/stub-from-typescript-api-specification/src/index.ts>source</a></p><h2 id=도전과제>도전과제?</h2><p>예제를 단순하게 만들기 위해 POST만 사용했다.
 다른 Method도 지원하게 개선할 수 있을 것이다.
 POST로 json body 사용하는거 말고 query string, path variable을 쓰도록 확장할 수 있다.</p><p>예제를 단순하게 만드려고 <code>express.Application</code>에 직접 연결했다.
 <code>express.Router</code>를 사용하면 확장 가능한 형태로 만들 수 있다.</p><p><a href=https://github.com/jquense/yup>yup</a>같은 라이브러리를 사용하면 js 객체가 미리 정의된 스키마에 맞는지 검증할 수 있다.
@@ -165,7 +151,6 @@ C에서의 <a href=https://en.wikipedia.org/wiki/X_Macro>X-Macro</a>가 생각�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

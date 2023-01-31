@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>bit mask로 사람 낚기. (flags & MASK == MASK) &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="bit mask로 사람 낚기. (flags & MASK == MASK)"><meta name=keywords content="bitmask ,비트마스트 ,낚시"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>bit mask로 사람 낚기. (flags & MASK == MASK) &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="bit mask로 사람 낚기. (flags & MASK == MASK)"><meta name=keywords content="bitmask ,비트마스트 ,낚시"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -9,7 +9,7 @@
 한다. 다음은 간단한 예제 코드이다. 사용 가능한 플래그로는 fullscreen,
 stencil, double buffer가 있다. 이중에서 fullscreen, double buffer를 비트
 OR 연산자를 이용해서 합친 다음에 함수로 넘겼다. 그리고 함수에서는 어떤
-플래그가 켜져있는지 확인해서 적절한 출력을 한다.</p><pre><code class=language-c>#include &lt;stdio.h&gt;
+플래그가 켜져있는지 확인해서 적절한 출력을 한다.</p><pre><code class="language-c line-numbers">#include &lt;stdio.h&gt;
 
 typedef enum {
   WIN_MODE_FULLSCREEN = 1 &lt;&lt; 0,
@@ -20,13 +20,13 @@ typedef enum {
 int create_window(win_mode_t mode)
 {
   if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
-    printf(&quot;fullscreen\n&quot;);
+    printf(&#34;fullscreen\n&#34;);
   }
   if(mode &amp; WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
-    printf(&quot;stencil\n&quot;);
+    printf(&#34;stencil\n&#34;);
   }
   if(mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
-    printf(&quot;double buffer\n&quot;);
+    printf(&#34;double buffer\n&#34;);
   }
   return 0;
 }
@@ -35,15 +35,14 @@ int main()
 {
   create_window(WIN_MODE_FULLSCREEN | WIN_MODE_DOUBLE_BUFFER);
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ make buggy &gt; /dev/null
+}</code></pre><pre><code class="language-bash line-numbers">$ make buggy &gt; /dev/null
 buggy.c:11:33: warning: self-comparison always evaluates to true [-Wtautological-compare]
   if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
                                 ^
 buggy.c:11:11: warning: &amp; has lower precedence than ==; == will be evaluated first [-Wparentheses]
   if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-buggy.c:11:11: note: place parentheses around the '==' expression to silence this warning
+buggy.c:11:11: note: place parentheses around the &#39;==&#39; expression to silence this warning
   if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
           ^
             (                                         )
@@ -57,7 +56,7 @@ buggy.c:14:30: warning: self-comparison always evaluates to true [-Wtautological
 buggy.c:14:11: warning: &amp; has lower precedence than ==; == will be evaluated first [-Wparentheses]
   if(mode &amp; WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-buggy.c:14:11: note: place parentheses around the '==' expression to silence this warning
+buggy.c:14:11: note: place parentheses around the &#39;==&#39; expression to silence this warning
   if(mode &amp; WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
           ^
             (                                   )
@@ -71,7 +70,7 @@ buggy.c:17:36: warning: self-comparison always evaluates to true [-Wtautological
 buggy.c:17:11: warning: &amp; has lower precedence than ==; == will be evaluated first [-Wparentheses]
   if(mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-buggy.c:17:11: note: place parentheses around the '==' expression to silence this warning
+buggy.c:17:11: note: place parentheses around the &#39;==&#39; expression to silence this warning
   if(mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
           ^
             (                                               )
@@ -79,8 +78,7 @@ buggy.c:17:11: note: place parentheses around the &amp; expression to evaluate i
   if(mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
           ^
      (                            )
-6 warnings generated.
-</code></pre><p>코드를 실행해보면 위의 설명과 실제 동작이 다르다. 옵션으로 fullscreen,
+6 warnings generated.</code></pre><p>코드를 실행해보면 위의 설명과 실제 동작이 다르다. 옵션으로 fullscreen,
 double buffer를 사용했는데 의도하지 않은 stencil 이 출력되었다. 원인은
 연산자 우선순위이다.</p><p><a href=http://en.cppreference.com/w/c/language/operator_precedence>C Operator
 Precedence</a></p><p><code>==</code> 연산자의 우선순위는 7인데 <code>&</code> 연산자의 우선순위는 8이다. 그래서
@@ -88,12 +86,11 @@ Precedence</a></p><p><code>==</code> 연산자의 우선순위는 7인데 <code>
 <code>(mode & WIN_MODE_STENCIL) == WIN_MODE_STENCIL</code> 가 아니라
 <code>mode & (WIN_MODE_STENCIL == WIN_MODE_STENCIL)</code> 이다.</p><p>제대로 돌아가게 하기 위해서는 괄호를 사용해서 계산 순서를 바꾸면 된다.
 하지만 실수를 근본적으로 막을수 있는 방법이 있지 않을까?</p><h2 id=대안1-경고-강화>대안1. 경고 강화</h2><p>이전에 컴파일할때는 gcc에 옵션을 아무것도 넘기지 않았다. <code>-W -Wall</code>
-옵션을 사용해서 다시 컴파일해보자.</p><pre><code>$ gcc buggy.c -W -Wall
+옵션을 사용해서 다시 컴파일해보자.</p><pre class=markdown-textblock><code>$ gcc buggy.c -W -Wall
 buggy.c: In function ‘create_window’:
-buggy.c:11:3: warning: suggest parentheses around comparison in operand of ‘&amp;’ [-Wparentheses]
-if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
-...
-</code></pre><p>옵션없이 컴파일할때는 아무런 경고 없이 컴파일 되었지만 옵션을 추가하니까
+buggy.c:11:3: warning: suggest parentheses around comparison in operand of ‘&’ [-Wparentheses]
+if(mode & WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
+...</code></pre><p>옵션없이 컴파일할때는 아무런 경고 없이 컴파일 되었지만 옵션을 추가하니까
 경고가 보인다. 경고의 내용은 괄효를 이용해서 <code>&</code> 연산자가 사고치지 않게
 바꾸라는거다.</p><p>컴파일 워닝은 표준이 있는게 아니라 컴파일러의 구현에 따라 다르기 때문에
 다른 컴파일러를 사용하면 다른 결과를 볼 수 있다. clang의 경우는 옵션을
@@ -105,7 +102,7 @@ if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
 true면 int 1, boolean false 는 int 0과 같은 것으로 취급한다. 그래서 비트
 AND 연산자의 수행이 가능하다.</p><p>하지만 C#의 경우는 int와 boolean으로 비트 AND 연산자 수행이 불가능하다.
 C/C++ 처럼 암묵적으로 타입을 바꾸지 못한다. 그래서 컴파일 에러가
-발생하고 버그가 있는 코드를 짜지 못한다.</p><pre><code class=language-csharp>public class Hello1
+발생하고 버그가 있는 코드를 짜지 못한다.</p><pre><code class="language-csharp line-numbers">public class Hello1
 {
     const int WIN_MODE_FULLSCREEN = 1 &lt;&lt; 0;
     const int WIN_MODE_STENCIL = 1 &lt;&lt; 1;
@@ -114,13 +111,13 @@ C/C++ 처럼 암묵적으로 타입을 바꾸지 못한다. 그래서 컴파일 
     public static int create_window(int mode)
     {
         if(mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN) {
-            System.Console.WriteLine(&quot;fullscreen&quot;);
+            System.Console.WriteLine(&#34;fullscreen&#34;);
         }
         if(mode &amp; WIN_MODE_STENCIL == WIN_MODE_STENCIL) {
-            System.Console.WriteLine(&quot;stencil&quot;);
+            System.Console.WriteLine(&#34;stencil&#34;);
         }
         if(mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER) {
-            System.Console.WriteLine(&quot;double buffer&quot;);
+            System.Console.WriteLine(&#34;double buffer&#34;);
         }
         return 0;
     }
@@ -129,33 +126,29 @@ C/C++ 처럼 암묵적으로 타입을 바꾸지 못한다. 그래서 컴파일 
     {
         create_window(WIN_MODE_FULLSCREEN | WIN_MODE_DOUBLE_BUFFER);
     }
-}
-</code></pre><pre><code class=language-bash>alternative_strongly_typed.cs(9,12): error CS0019: Operator `&amp;' cannot be applied to operands of type `int' and `bool'
-alternative_strongly_typed.cs(12,12): error CS0019: Operator `&amp;' cannot be applied to operands of type `int' and `bool'
-alternative_strongly_typed.cs(15,12): error CS0019: Operator `&amp;' cannot be applied to operands of type `int' and `bool'
-Compilation failed: 3 error(s), 0 warnings
-</code></pre><h2 id=대안3-연산자-우선순위-조정>대안3. 연산자 우선순위 조정</h2><p>문제가 발생하는 코드를 파이썬으로 옮겨쓰면 다음과 같다. 그리고 이를
-실행하면 최초에 의도한대로 작동한다.</p><pre><code class=language-python>WIN_MODE_FULLSCREEN = 1 &lt;&lt; 0
+}</code></pre><pre><code class="language-bash line-numbers">alternative_strongly_typed.cs(9,12): error CS0019: Operator `&amp;&#39; cannot be applied to operands of type `int&#39; and `bool&#39;
+alternative_strongly_typed.cs(12,12): error CS0019: Operator `&amp;&#39; cannot be applied to operands of type `int&#39; and `bool&#39;
+alternative_strongly_typed.cs(15,12): error CS0019: Operator `&amp;&#39; cannot be applied to operands of type `int&#39; and `bool&#39;
+Compilation failed: 3 error(s), 0 warnings</code></pre><h2 id=대안3-연산자-우선순위-조정>대안3. 연산자 우선순위 조정</h2><p>문제가 발생하는 코드를 파이썬으로 옮겨쓰면 다음과 같다. 그리고 이를
+실행하면 최초에 의도한대로 작동한다.</p><pre><code class="language-python line-numbers">WIN_MODE_FULLSCREEN = 1 &lt;&lt; 0
 WIN_MODE_STENCIL = 1 &lt;&lt; 1
 WIN_MODE_DOUBLE_BUFFER = 1 &lt;&lt; 2
 
 def create_window(mode):
     if mode &amp; WIN_MODE_FULLSCREEN == WIN_MODE_FULLSCREEN:
-        print(&quot;fullscreen&quot;);
+        print(&#34;fullscreen&#34;);
 
     if mode &amp; WIN_MODE_STENCIL == WIN_MODE_STENCIL:
-        print(&quot;stencil&quot;);
+        print(&#34;stencil&#34;);
 
     if mode &amp; WIN_MODE_DOUBLE_BUFFER == WIN_MODE_DOUBLE_BUFFER:
-        print(&quot;double buffer&quot;)
+        print(&#34;double buffer&#34;)
 
 
-if __name__ == &quot;__main__&quot;:
-    create_window(WIN_MODE_FULLSCREEN | WIN_MODE_DOUBLE_BUFFER)
-</code></pre><pre><code class=language-bash>$ python alternative_operator_precedence.py
+if __name__ == &#34;__main__&#34;:
+    create_window(WIN_MODE_FULLSCREEN | WIN_MODE_DOUBLE_BUFFER)</code></pre><pre><code class="language-bash line-numbers">$ python alternative_operator_precedence.py
 fullscreen
-double buffer
-</code></pre><p>파이썬의 경우는 연산자 우선순위를 바꾸는 방법으로 문제를 피했다.</p><p><a href=https://docs.python.org/3/reference/expressions.html#operator-precedence>Python Operator
+double buffer</code></pre><p>파이썬의 경우는 연산자 우선순위를 바꾸는 방법으로 문제를 피했다.</p><p><a href=https://docs.python.org/3/reference/expressions.html#operator-precedence>Python Operator
 precedence</a></p><p>파이썬의 경우는 <code>&</code> 연산자의 우선순위가 <code>==</code> 보다 높다. 그래서
 <code>mode & WIN_MODE_STENCIL == WIN_MODE_STENCIL</code> 는
 <code>(mode & WIN_MODE_STENCIL) == WIN_MODE_STENCIL</code> 처럼 작동한다.</p><p>파이썬의 이러한 접근법은 재밌는 회피법이지만 언어의 기본인 연산자
@@ -185,7 +178,6 @@ precedence</a></p><p>파이썬의 경우는 <code>&</code> 연산자의 우선�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>사람 낚는 strcmp()의 리턴타입 재설계하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="사람 낚는 strcmp()의 리턴타입 재설계하기"><meta name=keywords content="strcmp"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>사람 낚는 strcmp()의 리턴타입 재설계하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="사람 낚는 strcmp()의 리턴타입 재설계하기"><meta name=keywords content="strcmp"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -10,39 +10,34 @@
 사람마다 좋다고 생각하는 기준이 다르기 때문에 좋은 함수의 기준이 달라진다.
 반대로 후진 함수를 쓰라는건 어떨까?
 모든 사람이 공감할수 있는 후진 함수가 존재하지 않을까?
-이런 생각을 하다 <a href=https://twitter.com/if1live/status/589972518246617089>strcmp()로 간단한 코드</a>를 작성했다.</p><pre><code class=language-cpp>#include &lt;string.h&gt;
+이런 생각을 하다 <a href=https://twitter.com/if1live/status/589972518246617089>strcmp()로 간단한 코드</a>를 작성했다.</p><pre><code class="language-cpp line-numbers">#include &lt;string.h&gt;
 #include &lt;stdio.h&gt;
 
 int main() {
-  if(strcmp(&quot;foo&quot;, &quot;foo&quot;) == true) {
-    printf(&quot;same\n&quot;);
+  if(strcmp(&#34;foo&#34;, &#34;foo&#34;) == true) {
+    printf(&#34;same\n&#34;);
   } else {
-    printf(&quot;different\n&quot;);
+    printf(&#34;different\n&#34;);
   }
   return 0;
-}
-</code></pre><p>출력 결과가 무엇일까? <code>different</code>이다.
+}</code></pre><p>출력 결과가 무엇일까? <code>different</code>이다.
 strcmp 함수는 두 문자열이 같을때 0을 반환한다.
 0과 true를 비교하면 false이므로 different가 출력된다.
 하나씩 해석하면 쉬운 코드다. 하지만 이런 코드에는 원래 개발하던 사람도 낚인다.
 원래 개발하던 사람도 낚이는 코드를 작성할 수 있다면 이 함수는 나쁜 함수 아닐까?</p><ul><li><a href=https://twitter.com/kindtis/status/589974383583571968>@kindtis님의 반응</a></li><li><a href=https://twitter.com/Le_Ig_18/status/589972814704214016>@Le_Ig_18님의 반응</a></li></ul><h2 id=strcmp>strcmp()</h2><p>strcmp()를 <a href=http://www.cplusplus.com/reference/cstring/strcmp/>자세히</a> 보자.</p><p><code>int strcmp ( const char * str1, const char * str2 );</code></p><ul><li>&lt;0 : the first character that does not match has a lower value in ptr1 than in ptr2</li><li>0 : the contents of both strings are equal</li><li>>0 : the first character that does not match has a greater value in ptr1 than in ptr2</li></ul><p>두 문자열이 같으면 0을 반환하고 다르면 0보다 작거나 큰 값을 반환한다.
-두 문자열의 대소를 비교할수 있기 때문에 정렬에 사용할수 있다.</p><h2 id=개선하기>개선하기</h2><p>두 문자열이 같을때 함수의 리턴이 0이다. 두 문자열이 같을때 진입하는 if문은 다음과 같이 작성해야 한다.</p><pre><code class=language-c>if(strcmp(foo, bar) == 0) { ... }
-</code></pre><p>실수로 다음과 같이 작성하면 의도와는 다르게 동작한다.</p><pre><code class=language-c>if(strcmp(foo, bar) == true) { ... }
-if(strcmp(foo, bar)) { ... }
-</code></pre><p>만약 3가지 if문이 동일한 동작을 하도록 my_strcmp() 라는 함수를 만들수 있으면 실수를 줄일수 있지 않을까?</p><pre><code class=language-c>// 기존 strcmp와의 호환성 유지
+두 문자열의 대소를 비교할수 있기 때문에 정렬에 사용할수 있다.</p><h2 id=개선하기>개선하기</h2><p>두 문자열이 같을때 함수의 리턴이 0이다. 두 문자열이 같을때 진입하는 if문은 다음과 같이 작성해야 한다.</p><pre><code class="language-c line-numbers">if(strcmp(foo, bar) == 0) { ... }</code></pre><p>실수로 다음과 같이 작성하면 의도와는 다르게 동작한다.</p><pre><code class="language-c line-numbers">if(strcmp(foo, bar) == true) { ... }
+if(strcmp(foo, bar)) { ... }</code></pre><p>만약 3가지 if문이 동일한 동작을 하도록 my_strcmp() 라는 함수를 만들수 있으면 실수를 줄일수 있지 않을까?</p><pre><code class="language-c line-numbers">// 기존 strcmp와의 호환성 유지
 if(my_strcmp(foo, bar) == 0) { ... }
 
 // 바꿔치기 해야되는 동작
 if(my_strcmp(foo, bar) == true) { ... }
-if(my_strcmp(foo, bar)) { ... }
-</code></pre><ul><li>두 문자열이 같은 경우<ul><li>retval == 0 : true</li><li>retval == true : true</li><li>retval : true</li></ul></li><li>리턴타입은 기존의 strcmp()와의 호환성을 유지해야한다.</li></ul><p>이런 동작을 하는 my_strcmp()와 리턴타입을 만들어보자.</p><h2 id=obj-c>obj-c</h2><p>obj-c에서 strcmp()에 대응되는 함수의 리턴값은 enum이다.
+if(my_strcmp(foo, bar)) { ... }</code></pre><ul><li>두 문자열이 같은 경우<ul><li>retval == 0 : true</li><li>retval == true : true</li><li>retval : true</li></ul></li><li>리턴타입은 기존의 strcmp()와의 호환성을 유지해야한다.</li></ul><p>이런 동작을 하는 my_strcmp()와 리턴타입을 만들어보자.</p><h2 id=obj-c>obj-c</h2><p>obj-c에서 strcmp()에 대응되는 함수의 리턴값은 enum이다.
 각각의 enum은 -1, 0, 1에 대응하기 때문에 strcmp()와의 호환성을 유지한다.
-strcmp의 리턴값을 단순한 int가 아니라 enum으로 바꾸면 개선할수 있지 않을까?</p><pre><code class=language-c>typedef enum {
+strcmp의 리턴값을 단순한 int가 아니라 enum으로 바꾸면 개선할수 있지 않을까?</p><pre><code class="language-c line-numbers">typedef enum {
   NSOrderedAscending = -1,
   NSOrderSame,
   NSOrderedDescending
-} NSComparisonResult;
-</code></pre><h2 id=my_strcmp--enum-version>my_strcmp : enum version</h2><p>enum과 연산자 오버로딩을 이용해서 my_strcmp()의 대안 함수인 my_strcmp_enum()을 구현하면 다음과 같다.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+} NSComparisonResult;</code></pre><h2 id=my_strcmp--enum-version>my_strcmp : enum version</h2><p>enum과 연산자 오버로딩을 이용해서 my_strcmp()의 대안 함수인 my_strcmp_enum()을 구현하면 다음과 같다.</p><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;cassert&gt;
 
@@ -80,32 +75,30 @@ bool operator!=(MyComparisonResult a, bool b) { return !(a == b); }
 
 int main()
 {
-  assert(my_strcmp_enum(&quot;foo&quot;, &quot;foo&quot;) == 0);
-  assert(my_strcmp_enum(&quot;foo&quot;, &quot;foo&quot;) == true);
+  assert(my_strcmp_enum(&#34;foo&#34;, &#34;foo&#34;) == 0);
+  assert(my_strcmp_enum(&#34;foo&#34;, &#34;foo&#34;) == true);
 
-  assert(my_strcmp_enum(&quot;foo&quot;, &quot;bar&quot;) != 0);
-  assert(my_strcmp_enum(&quot;foo&quot;, &quot;bar&quot;) != true);
+  assert(my_strcmp_enum(&#34;foo&#34;, &#34;bar&#34;) != 0);
+  assert(my_strcmp_enum(&#34;foo&#34;, &#34;bar&#34;) != true);
 
   // compatible with strcmp
-  assert(my_strcmp_enum(&quot;1&quot;, &quot;1&quot;) == strcmp(&quot;1&quot;, &quot;1&quot;));
-  assert(my_strcmp_enum(&quot;1&quot;, &quot;2&quot;) == strcmp(&quot;1&quot;, &quot;2&quot;));
-  assert(my_strcmp_enum(&quot;2&quot;, &quot;1&quot;) == strcmp(&quot;2&quot;, &quot;1&quot;));
+  assert(my_strcmp_enum(&#34;1&#34;, &#34;1&#34;) == strcmp(&#34;1&#34;, &#34;1&#34;));
+  assert(my_strcmp_enum(&#34;1&#34;, &#34;2&#34;) == strcmp(&#34;1&#34;, &#34;2&#34;));
+  assert(my_strcmp_enum(&#34;2&#34;, &#34;1&#34;) == strcmp(&#34;2&#34;, &#34;1&#34;));
 
   // if(my_strcmp...)
-  printf(&quot;same : %d\n&quot;, my_strcmp_enum(&quot;foo&quot;, &quot;foo&quot;));
-  printf(&quot;different : %d\n&quot;, !my_strcmp_enum(&quot;foo&quot;, &quot;foo&quot;));
+  printf(&#34;same : %d\n&#34;, my_strcmp_enum(&#34;foo&#34;, &#34;foo&#34;));
+  printf(&#34;different : %d\n&#34;, !my_strcmp_enum(&#34;foo&#34;, &#34;foo&#34;));
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ make enum_version.exe &amp;&amp; ./enum_version.exe
-make: `enum_version.exe' is up to date.
+}</code></pre><pre><code class="language-bash line-numbers">$ make enum_version.exe &amp;&amp; ./enum_version.exe
+make: `enum_version.exe&#39; is up to date.
 same : 0
-different : 1
-</code></pre><p>my_strcmp()의 조건을 대부분 만족한다.</p><p>하지만 if문 안에서 my_strcmp를 바로 사용할 경우 의도한 것과 반대로 동작한다.
+different : 1</code></pre><p>my_strcmp()의 조건을 대부분 만족한다.</p><p>하지만 if문 안에서 my_strcmp를 바로 사용할 경우 의도한 것과 반대로 동작한다.
 MyComparisonResult 를 bool 또는 int로 캐스팅하는 연산자를 오버로딩할 수 있으면 가능할거 같지만
 전역함수로 conversion function (캐스팅 연산자)를 오버로딩할 수 없다.
 아무래도 다른 방법을 찾아야겠다.</p><blockquote><p>operator bool(MyComparisonResult a)</p><p>error: conversion function must be a non-static member function</p></blockquote><h2 id=my_strcmp--class-version>my_strcmp : class version</h2><p>C++에서는 class를 이용해서 새로운 타입을 만들 수 있다.
 enum 대신 클래스를 이용해서 구현하자.
-클래스의 멤버함수로 conversion function을 만들면 enum 버전에서 구현하지 못한 것도 할 수 있다.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+클래스의 멤버함수로 conversion function을 만들면 enum 버전에서 구현하지 못한 것도 할 수 있다.</p><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;cassert&gt;
 
@@ -155,21 +148,20 @@ ComparisonResult my_strcmp(const char *str1, const char *str2)
 
 int main()
 {
-  assert(my_strcmp(&quot;foo&quot;, &quot;foo&quot;) == 0);
-  assert(my_strcmp(&quot;foo&quot;, &quot;foo&quot;) == true);
-  assert(my_strcmp(&quot;foo&quot;, &quot;foo&quot;));
+  assert(my_strcmp(&#34;foo&#34;, &#34;foo&#34;) == 0);
+  assert(my_strcmp(&#34;foo&#34;, &#34;foo&#34;) == true);
+  assert(my_strcmp(&#34;foo&#34;, &#34;foo&#34;));
 
-  assert(my_strcmp(&quot;foo&quot;, &quot;bar&quot;) != 0);
-  assert(my_strcmp(&quot;foo&quot;, &quot;bar&quot;) != true);
-  assert(!my_strcmp(&quot;foo&quot;, &quot;bar&quot;));
+  assert(my_strcmp(&#34;foo&#34;, &#34;bar&#34;) != 0);
+  assert(my_strcmp(&#34;foo&#34;, &#34;bar&#34;) != true);
+  assert(!my_strcmp(&#34;foo&#34;, &#34;bar&#34;));
 
   // compatible with strcmp
-  assert(my_strcmp(&quot;1&quot;, &quot;1&quot;) == strcmp(&quot;1&quot;, &quot;1&quot;));
-  assert(my_strcmp(&quot;1&quot;, &quot;2&quot;) == strcmp(&quot;1&quot;, &quot;2&quot;));
-  assert(my_strcmp(&quot;2&quot;, &quot;1&quot;) == strcmp(&quot;2&quot;, &quot;1&quot;));
+  assert(my_strcmp(&#34;1&#34;, &#34;1&#34;) == strcmp(&#34;1&#34;, &#34;1&#34;));
+  assert(my_strcmp(&#34;1&#34;, &#34;2&#34;) == strcmp(&#34;1&#34;, &#34;2&#34;));
+  assert(my_strcmp(&#34;2&#34;, &#34;1&#34;) == strcmp(&#34;2&#34;, &#34;1&#34;));
   return 0;
-}
-</code></pre><h2 id=정리>정리</h2><ul><li>strcmp() 쓸때 조심하자.</li><li>C++ 연산자 오버로딩을 사용하면 strcmp()와의 호환성을 유지하면서 strcmp()보다 사고 덜치게 생긴 my_strcmp()를 구현할 수 있다.</li><li>연산자 오버로딩을 이용하면 x와 bool을 비교할때, x와 int를 비교할때 다른 방식으로 처리하는게 가능하다.</li><li>캐스팅 연산자는 전역함수로 오버로딩 불가능하다.</li><li>새로운 타입을 만들때는 enum보다 class를 사용하는게 자유롭다.</li><li>코드는 <a href=https://gist.github.com/if1live/3e8f24a4b8bdcc15a3e9>Gist</a>에 올렸다.</li></ul><h2 id=reference>Reference</h2><ul><li><a href=http://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B>Operators in C and C++</a></li><li><a href=http://www.cplusplus.com/reference/cstring/strcmp/>strcmp</a></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/strcmp>strcmp</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+}</code></pre><h2 id=정리>정리</h2><ul><li>strcmp() 쓸때 조심하자.</li><li>C++ 연산자 오버로딩을 사용하면 strcmp()와의 호환성을 유지하면서 strcmp()보다 사고 덜치게 생긴 my_strcmp()를 구현할 수 있다.</li><li>연산자 오버로딩을 이용하면 x와 bool을 비교할때, x와 int를 비교할때 다른 방식으로 처리하는게 가능하다.</li><li>캐스팅 연산자는 전역함수로 오버로딩 불가능하다.</li><li>새로운 타입을 만들때는 enum보다 class를 사용하는게 자유롭다.</li><li>코드는 <a href=https://gist.github.com/if1live/3e8f24a4b8bdcc15a3e9>Gist</a>에 올렸다.</li></ul><h2 id=reference>Reference</h2><ul><li><a href=http://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B>Operators in C and C++</a></li><li><a href=http://www.cplusplus.com/reference/cstring/strcmp/>strcmp</a></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/strcmp>strcmp</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -191,7 +183,6 @@ int main()
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

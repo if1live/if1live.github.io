@@ -1,21 +1,19 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C++ namespace 들여쓰기 방지하는 편법 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C++ namespace 들여쓰기 방지하는 편법"><meta name=keywords content="cpp ,namespace ,indent"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C++ namespace 들여쓰기 방지하는 편법 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C++ namespace 들여쓰기 방지하는 편법"><meta name=keywords content="cpp ,namespace ,indent"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C++ namespace 들여쓰기 방지하는 편법</h1><div class=tip><time datetime="2012-11-28 00:00:00 +0000 UTC">2012. 11. 28</time></div><div class=content><h2 id=개요>개요</h2><p>C++에는 C에는 없는 namespace라는 문법이 있다.(C가 구식이라서 없는거지 요즘 언어는 어지간하면 다 namespace와 유사한 문법이 있다.) 네임스페이스는 문법이 블럭과 동일하기때문에 내부 영역이 적절히 들여쓰기가 된다</p><pre><code class=language-cpp>namespace sora {
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C++ namespace 들여쓰기 방지하는 편법</h1><div class=tip><time datetime="2012-11-28 00:00:00 +0000 UTC">2012. 11. 28</time></div><div class=content><h2 id=개요>개요</h2><p>C++에는 C에는 없는 namespace라는 문법이 있다.(C가 구식이라서 없는거지 요즘 언어는 어지간하면 다 namespace와 유사한 문법이 있다.) 네임스페이스는 문법이 블럭과 동일하기때문에 내부 영역이 적절히 들여쓰기가 된다</p><pre><code class="language-cpp line-numbers">namespace sora {
     class SomeClass { }; 
-}
-</code></pre><p>그런데 네임스페이스의 깊이가 항상 1 level일수는 없잖아? 더 깊어질수도 있지 않겠는가? 그렇게 되면 코드가 다음과 같은 꼴이 된다.</p><pre><code class=language-cpp>namespace sora {
+}</code></pre><p>그런데 네임스페이스의 깊이가 항상 1 level일수는 없잖아? 더 깊어질수도 있지 않겠는가? 그렇게 되면 코드가 다음과 같은 꼴이 된다.</p><pre><code class="language-cpp line-numbers">namespace sora {
     namespace gl {
         class SomeClass {
             // TODO 적절히 구현하기
         }; 
     }
-}
-</code></pre><p>고작 네임스페이스 좀 그럴듯하게 보겟다고 코드의 왼쪽공간이 죄다 공백으로 도배되는 참사가 발생한다! 이를 해결하겟다고 irrlicht engine의 경우는 아래처럼 코딩했다.</p><pre><code class=language-cpp>namespace irr
+}</code></pre><p>고작 네임스페이스 좀 그럴듯하게 보겟다고 코드의 왼쪽공간이 죄다 공백으로 도배되는 참사가 발생한다! 이를 해결하겟다고 irrlicht engine의 경우는 아래처럼 코딩했다.</p><pre><code class="language-cpp line-numbers">namespace irr
 {
 namespace scene
 {
@@ -23,8 +21,7 @@ namespace scene
 
     typedef core::list&lt;ISceneNode*&gt; ISceneNodeList;
     typedef core::list&lt;ISceneNodeAnimator*&gt; ISceneNodeAnimatorList;
-    //....
-</code></pre><p>일부러 2번쨰 레벨의 네임스페이스를 들여쓰기 없이 사용했다. 하지만 이 방법은 visual studio랑 조합되면 별로 좋은 방법이 아니다. visual studio에서 제공하는 코드 포맷팅을 거치면 어김없이 밀려버린다.</p><pre><code class=language-cpp>namespace irr
+    //....</code></pre><p>일부러 2번쨰 레벨의 네임스페이스를 들여쓰기 없이 사용했다. 하지만 이 방법은 visual studio랑 조합되면 별로 좋은 방법이 아니다. visual studio에서 제공하는 코드 포맷팅을 거치면 어김없이 밀려버린다.</p><pre><code class="language-cpp line-numbers">namespace irr
 {
     namespace scene
     {
@@ -32,36 +29,28 @@ namespace scene
 
         typedef core::list&lt;ISceneNode*&gt; ISceneNodeList;
         typedef core::list&lt;ISceneNodeAnimator*&gt; ISceneNodeAnimatorList;
-        //....
-</code></pre><p>들여쓰기 없는 다음과 같은 네임스페이스를 쓰기 위해서는 어떻게 짜야 하는가?</p><pre><code class=language-cpp>namespace sora {
+        //....</code></pre><p>들여쓰기 없는 다음과 같은 네임스페이스를 쓰기 위해서는 어떻게 짜야 하는가?</p><pre><code class="language-cpp line-numbers">namespace sora {
 class SomeClass { }; 
-}
-</code></pre><h2 id=의-순기능>;의 순기능</h2><p>예전에 이를 막기위한 방법을 찾으면서 <a href=http://stackoverflow.com/questions/3727862/is-there-any-way-to-make-visual-studio-stop-indenting-namespaces>stackover</a>에서 적절한 편법을 찾았다. namespace를 구성하는 블럭의 {뒤에 ;를 붙여주는 거다</p><pre><code>namespace sora {;
+}</code></pre><h2 id=의-순기능>;의 순기능</h2><p>예전에 이를 막기위한 방법을 찾으면서 <a href=http://stackoverflow.com/questions/3727862/is-there-any-way-to-make-visual-studio-stop-indenting-namespaces>stackover</a>에서 적절한 편법을 찾았다. namespace를 구성하는 블럭의 {뒤에 ;를 붙여주는 거다</p><pre class=markdown-textblock><code>namespace sora {;
 class SomeClass { };
-}
-</code></pre><p>다만 이 방법에 한가지 문제가 있다면 visual studio에서만 지원한다. xcode같은거로 저 코드를 그래도 들고가서 자동 포맷팅을 한번 돌려주면 들여쓰기가 개발살 나는걸 볼수있다.</p><h2 id=매크로>매크로</h2><p>cocos2d-x 에서 사용하는 편법이다.</p><pre><code>#define NS_CC_BEGIN                     namespace cocos2d {
+}</code></pre><p>다만 이 방법에 한가지 문제가 있다면 visual studio에서만 지원한다. xcode같은거로 저 코드를 그래도 들고가서 자동 포맷팅을 한번 돌려주면 들여쓰기가 개발살 나는걸 볼수있다.</p><h2 id=매크로>매크로</h2><p>cocos2d-x 에서 사용하는 편법이다.</p><pre class=markdown-textblock><code>#define NS_CC_BEGIN                     namespace cocos2d {
 #define NS_CC_END                       }
 
 NS_CC_BEGIN
 class SomeClass { }; 
-NS_CC_END
-</code></pre><p>매크로를 사용하기 때문에 왠지 코드가 이상해보이지만 멀쩡히 작동한다. 매크로를 해석해서 치환하지 않으면 namespace라는걸 알수 없기 떄문에 자동 포맷팅에 의한 강제 들여쓰기도 피할수 없다. cocos2d-x를 처음쓸때는 왜 저짓을 햇나 한참 고민했엇는데 어제밤에 자다가 깨달은 좋은 편법이다</p><h2 id=내가-채택한-방법>내가 채택한 방법</h2><p>기본적으로는 cocos2d-x와 같이 매크로를 쓰는 기법을 채택했다. namespace 문법에 유사하게 만들기 위해서 매크로 함수같은 느낌으로 만들었다</p><pre><code class=language-cpp>#define SR_NS_BEGIN(NS)     namespace NS {
+NS_CC_END</code></pre><p>매크로를 사용하기 때문에 왠지 코드가 이상해보이지만 멀쩡히 작동한다. 매크로를 해석해서 치환하지 않으면 namespace라는걸 알수 없기 떄문에 자동 포맷팅에 의한 강제 들여쓰기도 피할수 없다. cocos2d-x를 처음쓸때는 왜 저짓을 햇나 한참 고민했엇는데 어제밤에 자다가 깨달은 좋은 편법이다</p><h2 id=내가-채택한-방법>내가 채택한 방법</h2><p>기본적으로는 cocos2d-x와 같이 매크로를 쓰는 기법을 채택했다. namespace 문법에 유사하게 만들기 위해서 매크로 함수같은 느낌으로 만들었다</p><pre><code class="language-cpp line-numbers">#define SR_NS_BEGIN(NS)     namespace NS {
 #define SR_NS_END(NS)       }
 
 SR_NS_BEGIN(sora)
-SR_NS_END(sora)
-
-</code></pre><h2 id=추가-잡소리>추가 잡소리</h2><p>namespace에 들여쓰기가 없어짐으로써 코드의 끝부분이 읽기 어려워질수도 있다. 함수와 네임스페이스의 끝이 같이 섞여서 }가 계속 나오기 때문이다.</p><pre><code class=language-cpp>namespace sora {;
+SR_NS_END(sora)</code></pre><h2 id=추가-잡소리>추가 잡소리</h2><p>namespace에 들여쓰기가 없어짐으로써 코드의 끝부분이 읽기 어려워질수도 있다. 함수와 네임스페이스의 끝이 같이 섞여서 }가 계속 나오기 때문이다.</p><pre><code class="language-cpp line-numbers">namespace sora {;
 void print() {
     //TODO PROFIT!?
 }
-}
-</code></pre><p>이를 방지하기 위해서 네임스페이스의 끝에 주석을 달아서 끝을 명시적으로 표현하기도 한다. <a href=http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Namespace_Names>google-coding-style</a></p><pre><code class=language-cpp>namespace sora {;
+}</code></pre><p>이를 방지하기 위해서 네임스페이스의 끝에 주석을 달아서 끝을 명시적으로 표현하기도 한다. <a href=http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#Namespace_Names>google-coding-style</a></p><pre><code class="language-cpp line-numbers">namespace sora {;
 void print() {
     //TODO PROFIT!?
 }
-} // namespace sora
-</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
+} // namespace sora</code></pre></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
 <a href=https://if1live.github.io/tags/namespace>namespace</a>
 <a href=https://if1live.github.io/tags/indent>indent</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
@@ -85,7 +74,6 @@ void print() {
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

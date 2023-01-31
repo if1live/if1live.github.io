@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C#의 프로퍼티 C++에서 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C#의 프로퍼티 C++에서 쓰기"><meta name=keywords content="cpp ,property"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C#의 프로퍼티 C++에서 쓰기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C#의 프로퍼티 C++에서 쓰기"><meta name=keywords content="cpp ,property"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -7,15 +7,14 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C#의 프로퍼티 C++에서 쓰기</h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><p>본문을 읽기전에 아래의 2개의 페이지를 읽어보면 이해에 도움이 될것이다. 사실상 내가 만든 코드는 위의 2개를 내 방식대로 묶은것뿐이다</p><ul><li>[Property(programming)][1]</li><li>[C++에서 속성 구현하기][2]
 [1]: <a href=http://en.wikipedia.org/wiki/Property_(programming)#C.2B.2B>http://en.wikipedia.org/wiki/Property_(programming)#C.2B.2B</a>
-[2]: <a href="http://www.gpgstudy.com/forum/viewtopic.php?t=3504">http://www.gpgstudy.com/forum/viewtopic.php?t=3504</a></li></ul><h2 id=step-1-c-느낌의-프로퍼티를-c에서-왜-쓰고-싶은가>Step 1. C# 느낌의 프로퍼티를 C++에서 왜 쓰고 싶은가?</h2><p>단계별로 코드를 안드로보내기 위해서 처음에는 간단한것부터 시작하자.</p><pre><code class=language-cpp>class Obj {
+[2]: <a href="http://www.gpgstudy.com/forum/viewtopic.php?t=3504">http://www.gpgstudy.com/forum/viewtopic.php?t=3504</a></li></ul><h2 id=step-1-c-느낌의-프로퍼티를-c에서-왜-쓰고-싶은가>Step 1. C# 느낌의 프로퍼티를 C++에서 왜 쓰고 싶은가?</h2><p>단계별로 코드를 안드로보내기 위해서 처음에는 간단한것부터 시작하자.</p><pre><code class="language-cpp line-numbers">class Obj {
 public:
 	int a;
 };
 
 Obj obj;
 obj.a = 1;
-printf(&quot;%d\n&quot;, obj.a);
-</code></pre><p>위의 코드처럼 클래스에 있는 멤버변수가 public이라면 그냥 .찍는것으로 변수를 얻을수있다. 하지만 개인적으로 public변수의 떡칠을 싫어한다. 첫번쨰 이유는 내가 컴맹이라서 브레이크 포인트를 변수에 거는 방법을 모른다. 두번째는 public으로 설정하면 readonly, const같은 통제를 하는것이 불가능하다.</p><p>그래서 멤버변수를 private로 하면 getter/setter를 쓰는것이 귀찮다. 왠지모르게 쓸데없이 코드가 길어지는 느낌이다. 이때 C#의 프로퍼티가 출동하면 좋지만 C++은 언어가 쓰레기라서 편법으로 구현해야한다.</p><h2 id=step-2-간단한-구현>Step 2. 간단한 구현</h2><p>일단 간단한 편법으로 property를 구현해보자</p><pre><code class=language-cpp>class PropertySample {
+printf(&#34;%d\n&#34;, obj.a);</code></pre><p>위의 코드처럼 클래스에 있는 멤버변수가 public이라면 그냥 .찍는것으로 변수를 얻을수있다. 하지만 개인적으로 public변수의 떡칠을 싫어한다. 첫번쨰 이유는 내가 컴맹이라서 브레이크 포인트를 변수에 거는 방법을 모른다. 두번째는 public으로 설정하면 readonly, const같은 통제를 하는것이 불가능하다.</p><p>그래서 멤버변수를 private로 하면 getter/setter를 쓰는것이 귀찮다. 왠지모르게 쓸데없이 코드가 길어지는 느낌이다. 이때 C#의 프로퍼티가 출동하면 좋지만 C++은 언어가 쓰레기라서 편법으로 구현해야한다.</p><h2 id=step-2-간단한-구현>Step 2. 간단한 구현</h2><p>일단 간단한 편법으로 property를 구현해보자</p><pre><code class="language-cpp line-numbers">class PropertySample {
 public:
 	class {
 	public:
@@ -30,10 +29,9 @@ int main() {
 	p1.b = 2;
 	int a = p1.b;
 	return 0;
-}
-</code></pre><p>모든것의 시작이 되는 코드이다. 연산자오버로딩을 통해서 적절히 멤버변수값을 얻을수있다. 하지만 문제가 있다.
+}</code></pre><p>모든것의 시작이 되는 코드이다. 연산자오버로딩을 통해서 적절히 멤버변수값을 얻을수있다. 하지만 문제가 있다.
 getter/setter를 위한 함수가 property sample클래스에 있는것이 아니라서 함수가 흩어지게 된다.
-또한 위의 클래스 존재하는 int a는 class b의 영역이 아니라서 getter에서 접근이 불가능하다. Step3에서 문제를 해결하자</p><h2 id=step-3-gettersetter-함수-연결하기>Step 3. Getter/Setter 함수 연결하기</h2><p>위의 문제를 해결하기 위한 중간과정으로 다음과 같은 방식으로 짤수있다</p><pre><code class=language-cpp>class PropertySample {
+또한 위의 클래스 존재하는 int a는 class b의 영역이 아니라서 getter에서 접근이 불가능하다. Step3에서 문제를 해결하자</p><h2 id=step-3-gettersetter-함수-연결하기>Step 3. Getter/Setter 함수 연결하기</h2><p>위의 문제를 해결하기 위한 중간과정으로 다음과 같은 방식으로 짤수있다</p><pre><code class="language-cpp line-numbers">class PropertySample {
 public:
   int get_a() {
     return a.value * 2;
@@ -64,8 +62,7 @@ int main() {
   PropertySample p1;
   p1.a = 1;   //set하면 2배가 저장
   return p1.a;   //get할때 다시 2배
-}
-</code></pre><p>offsetof를 적절히 이용해서 getter/setter 함수를 외부로 분리했다. 또한 getter/setter함수를 클래스로 둠으로써 클래스 멤버변수 int c에도 접근이 가능할수있다. 근데 저걸 일일이 치는것은 귀찮다. 적절한 수준으로 매크로와 템플릿의 도움을 받으면 참고자료2번째의 소스코드가 나온다. 하지만 그것과 똑같으면 재미 없잖아? 해서 생성자를 조금 고치니 템플릿의 한계로 인해 매크로로 템플릿을 찍어내고 그것으로 멤버변수를 찍어내는 괴상한 코드가 나왔다. 어쨋든 소스 올림</p><h2 id=source>Source</h2><pre><code class=language-cpp>#include &lt;cstdio&gt;
+}</code></pre><p>offsetof를 적절히 이용해서 getter/setter 함수를 외부로 분리했다. 또한 getter/setter함수를 클래스로 둠으로써 클래스 멤버변수 int c에도 접근이 가능할수있다. 근데 저걸 일일이 치는것은 귀찮다. 적절한 수준으로 매크로와 템플릿의 도움을 받으면 참고자료2번째의 소스코드가 나온다. 하지만 그것과 똑같으면 재미 없잖아? 해서 생성자를 조금 고치니 템플릿의 한계로 인해 매크로로 템플릿을 찍어내고 그것으로 멤버변수를 찍어내는 괴상한 코드가 나왔다. 어쨋든 소스 올림</p><h2 id=source>Source</h2><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;cstdlib&gt;
 #include &lt;string&gt;
 #include &lt;iostream&gt;
@@ -112,10 +109,10 @@ public:
   }
   
   std::string get_str() {
-    return std::string(&quot;a&quot;);
+    return std::string(&#34;a&#34;);
   }
   std::string set_str(const std::string &amp;str) {
-    return str + &quot;a&quot;;
+    return str &#43; &#34;a&#34;;
   }
 
   SR_PROPERTY(int, PropertySample, get_c, set_c, c);
@@ -125,21 +122,19 @@ public:
 int main() {
   PropertySample p1;
   
-  printf(&quot;default value. %d\n&quot;, p1.c);
+  printf(&#34;default value. %d\n&#34;, p1.c);
   p1.c = 1;
-  std::cout &lt;&lt; &quot;use cout. &quot; &lt;&lt; p1.c &lt;&lt; std::endl;
-  printf(&quot;use printf. %d\n&quot;, p1.c);
+  std::cout &lt;&lt; &#34;use cout. &#34; &lt;&lt; p1.c &lt;&lt; std::endl;
+  printf(&#34;use printf. %d\n&#34;, p1.c);
 
   
-  p1.d = &quot;msg&quot;;
+  p1.d = &#34;msg&#34;;
   std::string tmp = p1.d;
-  printf(&quot;%s\n&quot;, tmp.c_str());
+  printf(&#34;%s\n&#34;, tmp.c_str());
   getchar();
-}
-</code></pre><p>우왕 이제 위쪽 코드가 더럽긴 하지만 프로퍼티를 찍어낼수있어요! 하고 좋아하기에는 이르다. 출력결과를 보자.</p><pre><code class=language-cpp>default value. 0
+}</code></pre><p>우왕 이제 위쪽 코드가 더럽긴 하지만 프로퍼티를 찍어낼수있어요! 하고 좋아하기에는 이르다. 출력결과를 보자.</p><pre><code class="language-cpp line-numbers">default value. 0
 use cout. 9
-use printf. 3
-</code></pre><p>use cout. 9, use printf. 3은 같은 값이 나오길 기대했으나 완전히 다른값이 나왔다. 이는 printf로 넘어가는것이 객체이지 int가 아니기때문이다(이는 위에서 지적하지 않았지만 모든 예제코드에서 공통적으로 발생한다)</p><blockquote><p>( format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘PropertySample::Property_PropertySample_c&lt;int, PropertySample, &PropertySample::get_c, &PropertySample::set_c>’)</p></blockquote><p>이부분을 주의하면 제한된 용도로 쓸수있을거같다</p><h2 id=최종-코드의-권장되는-용도>최종 코드의 권장되는 용도</h2><p>pubilc member variable로 막 작업을 하고있었는데 함수를 거쳐서 추가작업을 수행해야되는경우, public멤버변수 때려박은곳을 전부 getter로 바꾸는건 미친짓이니까 그럴때는 이거라도 쓰면 좋을듯</p><h2 id=결론>결론</h2><p><strong>C++은 쓰레기</strong></p></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
+use printf. 3</code></pre><p>use cout. 9, use printf. 3은 같은 값이 나오길 기대했으나 완전히 다른값이 나왔다. 이는 printf로 넘어가는것이 객체이지 int가 아니기때문이다(이는 위에서 지적하지 않았지만 모든 예제코드에서 공통적으로 발생한다)</p><blockquote><p>( format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘PropertySample::Property_PropertySample_c&lt;int, PropertySample, &PropertySample::get_c, &PropertySample::set_c>’)</p></blockquote><p>이부분을 주의하면 제한된 용도로 쓸수있을거같다</p><h2 id=최종-코드의-권장되는-용도>최종 코드의 권장되는 용도</h2><p>pubilc member variable로 막 작업을 하고있었는데 함수를 거쳐서 추가작업을 수행해야되는경우, public멤버변수 때려박은곳을 전부 getter로 바꾸는건 미친짓이니까 그럴때는 이거라도 쓰면 좋을듯</p><h2 id=결론>결론</h2><p><strong>C++은 쓰레기</strong></p></div><div class=tags><a href=https://if1live.github.io/tags/cpp>cpp</a>
 <a href=https://if1live.github.io/tags/property>property</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -162,7 +157,6 @@ use printf. 3
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C#에서 GC없이 enum을 int로 변환하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C#에서 GC없이 enum을 int로 변환하기"><meta name=keywords content="csharp ,unity ,c# ,optimize"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>C#에서 GC없이 enum을 int로 변환하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="C#에서 GC없이 enum을 int로 변환하기"><meta name=keywords content="csharp ,unity ,c# ,optimize"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -8,27 +8,26 @@
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C#에서 GC없이 enum을 int로 변환하기</h1><div class=tip><time datetime="2017-08-17 00:00:00 +0000 UTC">2017. 08. 17</time></div><div class=content><h2 id=시나리오-enum으로-상태-관리>시나리오: enum으로 상태 관리</h2><p>간단한 예제를 생각해보자.
 <code>IState</code>를 구현한 클래스가 있다고 가정하자.
 그리고 클래스를 enum으로 관리하려고한다.
-<code>IState</code>를 구현한 클래스가 몇개로 늘어날지 모르니 배열을 사용했다.</p><pre><code class=language-csharp>﻿interface IState {
+<code>IState</code>를 구현한 클래스가 몇개로 늘어날지 모르니 배열을 사용했다.</p><pre><code class="language-csharp line-numbers">﻿interface IState {
     string GetMessage();
 }
 
 class State_Wait : IState {
     public string GetMessage() {
-        return &quot;wait&quot;;
+        return &#34;wait&#34;;
     }
 }
 
 class State_Run : IState {
     public string GetMessage() {
-        return &quot;run&quot;;
+        return &#34;run&#34;;
     }
 }
 
 enum States {
     Wait,
     Run,
-}
-</code></pre><pre><code class=language-csharp>﻿using UnityEngine;
+}</code></pre><pre><code class="language-csharp line-numbers">﻿using UnityEngine;
 
 class Main_SimpleArray : MonoBehaviour {
     IState[] states;
@@ -41,11 +40,10 @@ class Main_SimpleArray : MonoBehaviour {
     private void Update() {
         var msg = states[(int)States.Run].GetMessage();
     }
-}
-</code></pre><p>배열에 접근하기 위해서는 enum을 int로 바꿔야한다.
+}</code></pre><p>배열에 접근하기 위해서는 enum을 int로 바꿔야한다.
 매번 <code>states[(int)States.Run]</code>과 같이 <code>(int)</code>를 붙여서 캐스팅하는게 생각보다 귀찮더라.
 그래서 새로운 클래스를 만들어서 배열을 추상화시켜봤다.
-제네릭을 이용해서 여러종류의 enum에 대해서도 작동할수 있도록 구현했다.</p><pre><code class=language-csharp>class EnumArrayGarbage&lt;TEnum, TValue&gt; {
+제네릭을 이용해서 여러종류의 enum에 대해서도 작동할수 있도록 구현했다.</p><pre><code class="language-csharp line-numbers">class EnumArrayGarbage&lt;TEnum, TValue&gt; {
     TValue[] data;
 
     public EnumArrayGarbage(int count) {
@@ -62,8 +60,7 @@ class Main_SimpleArray : MonoBehaviour {
         var i = Convert.ChangeType(key, typeof(int));
         return (int)i;
     }
-}
-</code></pre><pre><code class=language-csharp>class Main_EnumArrayGarbage : MonoBehaviour {
+}</code></pre><pre><code class="language-csharp line-numbers">class Main_EnumArrayGarbage : MonoBehaviour {
     EnumArrayGarbage&lt;States, IState&gt; states;
     void Start() {
         states = new EnumArrayGarbage&lt;States, IState&gt;(2);
@@ -74,19 +71,17 @@ class Main_SimpleArray : MonoBehaviour {
     private void Update() {
         var msg = states[States.Run].GetMessage();
     }
-}
-</code></pre><p><code>EnumArrayGarbage</code>를 사용하면 캐스팅 없이 쓸 수 있으니까 좋다.</p><p>로 끝날거면 이런 글은 안쓴다.
-유니티 프로파일러를 띄워보자.</p><p><p class=markdown-image><img src=profiler.png alt=profilter></p></p><p><code>Main_EnumArrayGarbage.Update()</code>에서 60Byte씩 GC Alloc가 발생하고 있다.
+}</code></pre><p><code>EnumArrayGarbage</code>를 사용하면 캐스팅 없이 쓸 수 있으니까 좋다.</p><p>로 끝날거면 이런 글은 안쓴다.
+유니티 프로파일러를 띄워보자.</p><p><p class=markdown-image><a href=profiler.png target=_blank><img src=profiler.png alt=profilter></a></p></p><p><code>Main_EnumArrayGarbage.Update()</code>에서 60Byte씩 GC Alloc가 발생하고 있다.
 <code>Main_SimpleArray.Update()</code>에서는 GC Alloc가 없었는데 고작 int 캐스팅 없애겠다고 고친 코드에서 GC가 발생하니 쓰고싶지 않더라. int 캐스팅도 없으면서 GC Alloc도 없었으면 좋겠다.</p><p>GC Alloc가 발생하는 지점을 따라가보면 문제를 찾을수 있다.
 <code>ConvertToInt()</code>에서 사용한 <code>Convert.ChangeType()</code>에서 GC Alloc가 발생하고있다.
-<code>Convert.ChangeType()</code>의 첫번째 인자의 타입이 Object라서 boxing때문에 GC Alloc가 발생한다.</p><p>C++ 같았으면 무식하게 캐스팅 붙여서 enum을 int로 바꿀수 있었을 것이다.</p><pre><code class=language-csharp>int ConvertToIndex&lt;TEnum&gt;(TEnum key) {
+<code>Convert.ChangeType()</code>의 첫번째 인자의 타입이 Object라서 boxing때문에 GC Alloc가 발생한다.</p><p>C++ 같았으면 무식하게 캐스팅 붙여서 enum을 int로 바꿀수 있었을 것이다.</p><pre><code class="language-csharp line-numbers">int ConvertToIndex&lt;TEnum&gt;(TEnum key) {
     var i = (int)key;
     return i;
-}
-</code></pre><p>하지만 C#의 제네릭은 C++의 템플릿과 다르다.
+}</code></pre><p>하지만 C#의 제네릭은 C++의 템플릿과 다르다.
 그래서 C#에서의 위의 코드가 컴파일되지 않는다.
 다른 방법을 써야한다.</p><p>인터넷을 뒤지면 이런 문제는 누군가 해결해놨으니 갖다쓰면 된다.
-<a href=https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int>C# non-boxing conversion of generic enum to int?</a>을 참고해서 <code>EnumArray</code>를 다시 구현했다. 이렇게하면 GC Alloc가 발생하지 않는다.</p><pre><code class=language-csharp>class EnumArray&lt;TEnum, TValue&gt; {
+<a href=https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int>C# non-boxing conversion of generic enum to int?</a>을 참고해서 <code>EnumArray</code>를 다시 구현했다. 이렇게하면 GC Alloc가 발생하지 않는다.</p><pre><code class="language-csharp line-numbers">class EnumArray&lt;TEnum, TValue&gt; {
     TValue[] data;
 
     public EnumArray(int count) {
@@ -106,16 +101,16 @@ class Main_SimpleArray : MonoBehaviour {
 
 // https://stackoverflow.com/questions/1189144/c-sharp-non-boxing-conversion-of-generic-enum-to-int
 /// &lt;summary&gt;
-/// Class to cast to type &lt;see cref=&quot;T&quot;/&gt;
+/// Class to cast to type &lt;see cref=&#34;T&#34;/&gt;
 /// &lt;/summary&gt;
-/// &lt;typeparam name=&quot;T&quot;&gt;Target type&lt;/typeparam&gt;
+/// &lt;typeparam name=&#34;T&#34;&gt;Target type&lt;/typeparam&gt;
 public static class CastTo&lt;T&gt; {
     /// &lt;summary&gt;
-    /// Casts &lt;see cref=&quot;S&quot;/&gt; to &lt;see cref=&quot;T&quot;/&gt;.
+    /// Casts &lt;see cref=&#34;S&#34;/&gt; to &lt;see cref=&#34;T&#34;/&gt;.
     /// This does not cause boxing for value types.
     /// Useful in generic methods.
     /// &lt;/summary&gt;
-    /// &lt;typeparam name=&quot;S&quot;&gt;Source type to cast from. Usually a generic type.&lt;/typeparam&gt;
+    /// &lt;typeparam name=&#34;S&#34;&gt;Source type to cast from. Usually a generic type.&lt;/typeparam&gt;
     public static T From&lt;S&gt;(S s) {
         return Cache&lt;S&gt;.caster(s);
     }
@@ -124,13 +119,12 @@ public static class CastTo&lt;T&gt; {
         public static readonly Func&lt;S, T&gt; caster = Get();
 
         private static Func&lt;S, T&gt; Get() {
-            var p = Expression.Parameter(typeof(S), &quot;s&quot;);
+            var p = Expression.Parameter(typeof(S), &#34;s&#34;);
             var c = Expression.ConvertChecked(p, typeof(T));
             return Expression.Lambda&lt;Func&lt;S, T&gt;&gt;(c, p).Compile();
         }
     }
-}
-</code></pre><pre><code class=language-csharp>class Main_EnumArray : MonoBehaviour {
+}</code></pre><pre><code class="language-csharp line-numbers">class Main_EnumArray : MonoBehaviour {
     EnumArray&lt;States, IState&gt; states;
     void Start() {
         states = new EnumArray&lt;States, IState&gt;(2);
@@ -141,19 +135,17 @@ public static class CastTo&lt;T&gt; {
     private void Update() {
         var msg = states[States.Run].GetMessage();
     }
-}
-</code></pre><h2 id=il2cpp>IL2CPP</h2><p>유니티에서 모바일 개발을 하면 IL2CPP는 피할수 없다.
+}</code></pre><h2 id=il2cpp>IL2CPP</h2><p>유니티에서 모바일 개발을 하면 IL2CPP는 피할수 없다.
 iOS 11 부터는 64비트 어플리케이션만 굴러간다.
-그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.</p><p>IL2CPP 옵션을 켜고 빌드한후 실행하면 에러가 난다.</p><pre><code class=language-txt>NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.enumarray
+그리고 유니티에서 64비트 지원을 할수 있는 방법은 아직까지는 IL2CPP뿐이다.</p><p>IL2CPP 옵션을 켜고 빌드한후 실행하면 에러가 난다.</p><pre><code class="language-txt line-numbers">NotSupportedException: C:\Program Files\Unity-2017.1.0f3\Editor\Data\il2cpp\libil2cpp\icalls\mscorlib\System.Reflection.Emit\DynamicMethod.cpp(19) : Unsupported internal call for IL2CPP:DynamicMethod::create_dynamic_method - System.Reflection.Emit is not supported.: so.libsora.enumarray
   at System.Reflection.Emit.DynamicMethod.CreateDynMethod () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
   at System.Reflection.Emit.DynamicMethod.CreateDelegate (System.Type delegateType, System.Object target) [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
   at System.Linq.Expressions.Expression`1[TDelegate].Compile () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
-  at CastTo`1+Cache`1[T,S]..cctor () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
+  at CastTo`1&#43;Cache`1[T,S]..cctor () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
   at CastTo`1[T].From[S] (.S s) [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
   at EnumArray`2[TEnum,TValue].set_Item (.TEnum key, .TValue value) [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
   at Main_EnumArray.Start () [0x00000] in &lt;filename unknown&gt;:0 : so.libsora.enumarray
-Rethrow as TypeInitializationException: The type initializer for 'CastTo.Cache&lt;System.Int32,States&gt;' threw an excep: so.libsora.enumarray
-</code></pre><p><code>CastTo&lt;T></code>를 구현하는 과정에서 create dynamic method가 사용되었다.
+Rethrow as TypeInitializationException: The type initializer for &#39;CastTo.Cache&lt;System.Int32,States&gt;&#39; threw an excep: so.libsora.enumarray</code></pre><p><code>CastTo&lt;T></code>를 구현하는 과정에서 create dynamic method가 사용되었다.
 말 그대로 런타임에 함수를 생성하는 것이다.
 하지만 iOS에서는 런타임에 함수 생성하는게 금지되어 있다.
 그래서 IL2CPP에서도 관련 기능은 구현한거같지 않더라.</p><p>즉, IL2CPP를 쓰면 답이 없다. 캐스팅 노가다를 하자.</p><h2 id=updated-더-좋은-방법>Updated: 더 좋은 방법</h2><p>나는 iOS 개발을 주력으로 하지 않아서 여기까지 만지고 삽질을 관뒀다.
@@ -182,7 +174,6 @@ Rethrow as TypeInitializationException: The type initializer for 'CastTo.Cache&l
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

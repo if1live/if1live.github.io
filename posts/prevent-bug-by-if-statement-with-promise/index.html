@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기"><meta name=keywords content="typescript ,lint"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기"><meta name=keywords content="typescript ,lint"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -8,43 +8,38 @@
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기</h1><div class=tip><time datetime="2018-10-13 00:00:00 +0000 UTC">2018. 10. 13</time></div><div class=content><h2 id=async-function--if>async function + if</h2><p>옛날 옛적 미개한 자바스크립트에는 콜백뿐이었다.
 나중에 promise가 추가되서 좋아졌다.
 더 나중에 async/await가 추가되서 더 좋아졌다.
-async/await 좋다고 열심히 쓰다가 이번주에 아래와 같은 함정을 밟았다.</p><pre><code class=language-ts>export const isReady = async () =&gt; {
+async/await 좋다고 열심히 쓰다가 이번주에 아래와 같은 함정을 밟았다.</p><pre><code class="language-ts line-numbers">export const isReady = async () =&gt; {
   const timeout = new Promise((resolve) =&gt; {
     setTimeout(resolve, 100)
   });
   await timeout;
   return false;
-};
-</code></pre><p><code>common.ts</code>에 있는 <code>isReady()</code>는 async 함수이다.
-예제 코드니까 적당한 시간 뒤에 false를 반환하도록 구현했다.</p><pre><code class=language-ts>import { isReady } from './common';
+};</code></pre><p><code>common.ts</code>에 있는 <code>isReady()</code>는 async 함수이다.
+예제 코드니까 적당한 시간 뒤에 false를 반환하도록 구현했다.</p><pre><code class="language-ts line-numbers">import { isReady } from &#39;./common&#39;;
 
 const main = async () =&gt; {
   if (isReady()) {
-    console.log('ready');
+    console.log(&#39;ready&#39;);
   } else {
-    console.log('not ready');
+    console.log(&#39;not ready&#39;);
   }
 };
-main();
-</code></pre><p><code>isReady()</code>는 <code>common.ts</code>의 외부에서 사용된다.</p><pre><code class=language-bash>$ npx ts-node bug.ts
-ready
-</code></pre><p>코드를 돌리면 <code>ready</code>가 출력된다.
+main();</code></pre><p><code>isReady()</code>는 <code>common.ts</code>의 외부에서 사용된다.</p><pre><code class="language-bash line-numbers">$ npx ts-node bug.ts
+ready</code></pre><p>코드를 돌리면 <code>ready</code>가 출력된다.
 async/await의 리턴타입은 Promise이다.
 그리고 Promise는 if문 안에서 true로 취급된다.</p><h2 id=fix-bug>fix bug</h2><p>버그를 고치는 방법은 간단하다.
-<code>isReady()</code>를 호출할때 await를 붙여주면된다.</p><pre><code class=language-ts>import { isReady } from './common';
+<code>isReady()</code>를 호출할때 await를 붙여주면된다.</p><pre><code class="language-ts line-numbers">import { isReady } from &#39;./common&#39;;
 
 const main = async () =&gt; {
   const ready = await isReady();
   if (ready) {
-    console.log('ready');
+    console.log(&#39;ready&#39;);
   } else {
-    console.log('not ready');
+    console.log(&#39;not ready&#39;);
   }
 };
-main();
-</code></pre><pre><code class=language-bash>$ npx ts-node fixed.ts
-not ready
-</code></pre><p>위의 문제는 원인도 간단하고 해결하는 방법도 쉽다.
+main();</code></pre><pre><code class="language-bash line-numbers">$ npx ts-node fixed.ts
+not ready</code></pre><p>위의 문제는 원인도 간단하고 해결하는 방법도 쉽다.
 하지만 자주 밟을 가능성이 있다.
 프로젝트의 규모가 커지면 함수의 리턴타입을 전부 기억하기 어려워진다.
 <code>isXXX</code>같은 함수를 보고 boolean 리턴한다고 생각하는게 보통이다.
@@ -54,10 +49,9 @@ not ready
 tslint.json에 <code>"strict-boolean-expressions": true</code>를 추가해서 이를 활성화 시켜보자.</p><blockquote><p>$ npx tslint &ndash;project tsconfig.json -t verbose</p><p>ERROR: (strict-boolean-expressions) D:/blog/libsora.so/src/libsora.so/content/development/prevent-bug-by-if-and-promise/bug.ts[4, 7]: This type is not allowed in the &lsquo;if&rsquo; condition because it is always truthy. Only booleans are allowed.</p></blockquote><h3 id=naming-convention>naming convention</h3><p><a href=https://nodejs.org/api/fs.html>Node.js File System</a> 를 뒤져보면 아래같이 생긴 함수가 많이 보인다.</p><ul><li><code>fs.writeFile(file, data[, options], callback)</code></li><li><code>fs.writeFileSync(file, data[, options])</code></li></ul><p>nodejs에는 같은 기능을 동기로 구현한 함수도 있고 비동기로 구현한 함수도 있다.
 동기로 구현된 경우 비동기 함수 이름 뒤에 <code>Sync</code>가 붙는다.</p><p>헝가리안 표기법의 연장선으로 생각해서 코딩을 하자.
 함수 이름에 적당한 prefix/postfix를 붙여서 promise를 리턴한다고 명시하는 것이다.
-그러면 함수의 선언을 보지 않고도 리턴 타입을 알 수 있을것이다.</p><pre><code class=language-typescript>if(await isReadyAsync()) {
+그러면 함수의 선언을 보지 않고도 리턴 타입을 알 수 있을것이다.</p><pre><code class="language-typescript line-numbers">if(await isReadyAsync()) {
     ...
-}
-</code></pre><h2 id=내가-선택한-길>내가 선택한 길</h2><ul><li>tslint에서 strict-boolean-expression rule를 활성화</li><li>CI 스크립트에 tslint 추가. lint를 통과하지 못하면 CI에서 빌드가 실패한다.</li><li>함수 이름에 async붙이는건 이미 구현한게 많아서 귀찮다보니 생략</li></ul></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+}</code></pre><h2 id=내가-선택한-길>내가 선택한 길</h2><ul><li>tslint에서 strict-boolean-expression rule를 활성화</li><li>CI 스크립트에 tslint 추가. lint를 통과하지 못하면 CI에서 빌드가 실패한다.</li><li>함수 이름에 async붙이는건 이미 구현한게 많아서 귀찮다보니 생략</li></ul></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
 <a href=https://if1live.github.io/tags/lint>lint</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
 <a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
@@ -80,7 +74,6 @@ tslint.json에 <code>"strict-boolean-expressions": true</code>를 추가해서 �
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

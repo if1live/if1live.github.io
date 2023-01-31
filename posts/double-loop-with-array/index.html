@@ -1,11 +1,11 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>반복문, 재귀없이 터미널에 다이아 그리기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="반복문, 재귀없이 터미널에 다이아 그리기"><meta name=keywords content="black magic ,array ,loop"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>반복문, 재귀없이 터미널에 다이아 그리기 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="반복문, 재귀없이 터미널에 다이아 그리기"><meta name=keywords content="black magic ,array ,loop"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>반복문, 재귀없이 터미널에 다이아 그리기</h1><div class=tip><time datetime="2016-03-21 00:00:00 +0000 UTC">2016. 03. 21</time></div><div class=content><h2 id=간단한-문제>간단한 문제</h2><p><a href="http://www.todayhumor.co.kr/board/view.php?table=programmer&no=12810">극악의 c언어 문제</a></p><pre><code>-----
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>반복문, 재귀없이 터미널에 다이아 그리기</h1><div class=tip><time datetime="2016-03-21 00:00:00 +0000 UTC">2016. 03. 21</time></div><div class=content><h2 id=간단한-문제>간단한 문제</h2><p><a href="http://www.todayhumor.co.kr/board/view.php?table=programmer&no=12810">극악의 c언어 문제</a></p><pre class=markdown-textblock><code>-----
 
   *
  ***
@@ -18,98 +18,89 @@ for문을 이용해서
 별을 출력하는 문제인데
 주변에 프로그래밍좀 한다는 친구들도
 이 문제는 못풀더군요.
-과연 오유 여러분의 실력은 어느정도 될런지..
-</code></pre><p><a href=%7Barticle%7Drecursion-with-destructor>delete this 이용해서 터미널에 삼각형 그리기</a>를 쓰다 예전에 봤던 문제를 다시 꺼내봤다.
-그리고 이 문제를 반복문, 재귀호출 없이 풀었던게 생각나서 다시 풀어봤다.</p><h2 id=step-1-반복문-1개로-삼각형-출력하기>step 1. 반복문 1개로 삼각형 출력하기</h2><pre><code class=language-c>  *
+과연 오유 여러분의 실력은 어느정도 될런지..</code></pre><p><a href=%7Barticle%7Drecursion-with-destructor>delete this 이용해서 터미널에 삼각형 그리기</a>를 쓰다 예전에 봤던 문제를 다시 꺼내봤다.
+그리고 이 문제를 반복문, 재귀호출 없이 풀었던게 생각나서 다시 풀어봤다.</p><h2 id=step-1-반복문-1개로-삼각형-출력하기>step 1. 반복문 1개로 삼각형 출력하기</h2><pre><code class="language-c line-numbers">  *
  ***
-*****
-</code></pre><p>다이아의 위쪽을 먼저 그러보자.
+*****</code></pre><p>다이아의 위쪽을 먼저 그러보자.
 <code>*****</code>를 루프없이 그리는 여러가지 방법이 있지만 가장 간단한 <code>std::string</code>의 생성자를 이용했다.
-공백의 갯수, 별의 갯수를 받아서 출력하는 간단한 함수를 만들고 그것을 이용해서 삼각형을 그렸다.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+공백의 갯수, 별의 갯수를 받아서 출력하는 간단한 함수를 만들고 그것을 이용해서 삼각형을 그렸다.</p><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;string&gt;
 
 void print_space_and_star(int space, int star) {
-  std::string space_str(space, ' ');
-  std::string star_str(star, '*');
-  printf(&quot;%s%s\n&quot;, space_str.data(), star_str.data());
+  std::string space_str(space, &#39; &#39;);
+  std::string star_str(star, &#39;*&#39;);
+  printf(&#34;%s%s\n&#34;, space_str.data(), star_str.data());
 }
 
 int main()
 {
   const int size = 3;
 
-  for(int i = 1 ; i &lt;= size ; i++) {
+  for(int i = 1 ; i &lt;= size ; i&#43;&#43;) {
     int space_count = size - i;
     int star_count = i * 2 - 1;
     print_space_and_star(space_count, star_count);
   }
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang++ upper_triangle_one_loop.cpp &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang&#43;&#43; upper_triangle_one_loop.cpp &amp;&amp; ./a.out
   *
  ***
-*****
-</code></pre><h2 id=step-2-반복문-2개로-다이아-그리기-출력하기>step 2. 반복문 2개로 다이아 그리기 출력하기</h2><pre><code>  *
+*****</code></pre><h2 id=step-2-반복문-2개로-다이아-그리기-출력하기>step 2. 반복문 2개로 다이아 그리기 출력하기</h2><pre class=markdown-textblock><code>  *
  ***
 *****
  ***
-  *
-</code></pre><p>step 1에서 반복문 1개로 위쪽 삼각형을 그렸으니까 반복문을 하나 더 이용하면 비슷한 방법으로 아래쪽 삼각형을 그릴수 있을것이다.
-그리고 둘을 합쳐놓으면 다이아를 그릴수 있다.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+  *</code></pre><p>step 1에서 반복문 1개로 위쪽 삼각형을 그렸으니까 반복문을 하나 더 이용하면 비슷한 방법으로 아래쪽 삼각형을 그릴수 있을것이다.
+그리고 둘을 합쳐놓으면 다이아를 그릴수 있다.</p><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;string&gt;
 
 void print_space_and_star(int space, int star) {
-  std::string space_str(space, ' ');
-  std::string star_str(star, '*');
-  printf(&quot;%s%s\n&quot;, space_str.data(), star_str.data());
+  std::string space_str(space, &#39; &#39;);
+  std::string star_str(star, &#39;*&#39;);
+  printf(&#34;%s%s\n&#34;, space_str.data(), star_str.data());
 }
 
 int main()
 {
   const int size = 3;
 
-  for(int i = 1 ; i &lt;= size ; i++) {
+  for(int i = 1 ; i &lt;= size ; i&#43;&#43;) {
     int space_count = size - i;
     int star_count = i * 2 - 1;
     print_space_and_star(space_count, star_count);
   }
 
-  for(int i = 1 ; i &lt;= size - 1 ; i++) {
+  for(int i = 1 ; i &lt;= size - 1 ; i&#43;&#43;) {
     int space_count = i;
     int star_count = (size - i) * 2 - 1;
     print_space_and_star(space_count, star_count);
   }
 
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang++ diamond_two_loop.cpp &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang&#43;&#43; diamond_two_loop.cpp &amp;&amp; ./a.out
   *
  ***
 *****
  ***
-  *
-</code></pre><p><code>-N</code> ~ <code>+N</code> 과 절대값을 이용하면 두개의 루프를 하나로 합칠수 있지만 정공법인 관계로 흑마법에서는 다루지 않는다.</p><h2 id=step-3-반복문-없이-다이아-그리기-출력하기>step 3. 반복문 없이 다이아 그리기 출력하기</h2><p>배열을 루프에 쓴다는 컨셉을 <a href=https://kldp.org/node/99915#comment-543746>선구자</a>한테 배운적이 있다.
+  *</code></pre><p><code>-N</code> ~ <code>+N</code> 과 절대값을 이용하면 두개의 루프를 하나로 합칠수 있지만 정공법인 관계로 흑마법에서는 다루지 않는다.</p><h2 id=step-3-반복문-없이-다이아-그리기-출력하기>step 3. 반복문 없이 다이아 그리기 출력하기</h2><p>배열을 루프에 쓴다는 컨셉을 <a href=https://kldp.org/node/99915#comment-543746>선구자</a>한테 배운적이 있다.
 남이 만든 컨셉을 그냥 재탕하면 재미없으니 이것을 조금더 개선해보았다.</p><p>Q: 객체로 크기가 N인 배열을 만들면 어떤 일이 벌어지는가?</p><ul><li>객체의 생성자가 N번 호출된다.</li><li>객체의 소멸자가 N번 호출된다.</li></ul><p>생성자와 소멸자도 결국은 함수 호출이니까 N회 루프 2개를 돌릴수 있다는거 아닌가?
-그렇다면 아래의 두 코드는 사실상 같은 역할 아닌가?</p><pre><code class=language-cpp>class Sample {
+그렇다면 아래의 두 코드는 사실상 같은 역할 아닌가?</p><pre><code class="language-cpp line-numbers">class Sample {
 public:
     Sample() { foo(); }
     ~Sample() { bar(); }
 };
 
-Sample spam[3]
-</code></pre><pre><code class=language-cpp>for(int i = 0 ; i &lt; 3 ; i++) {
+Sample spam[3]</code></pre><pre><code class="language-cpp line-numbers">for(int i = 0 ; i &lt; 3 ; i&#43;&#43;) {
     foo();
 }
-for(int i = 0 ; i &lt; 3 ; i++) {
+for(int i = 0 ; i &lt; 3 ; i&#43;&#43;) {
     bar();
-}
-</code></pre><p>이점을 이용하면 step 2의 코드에서 사용된 2개의 for를 제거할수 있다.</p><pre><code class=language-cpp>#include &lt;cstdio&gt;
+}</code></pre><p>이점을 이용하면 step 2의 코드에서 사용된 2개의 for를 제거할수 있다.</p><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
 #include &lt;string&gt;
 
 void print_space_and_star(int space, int star) {
-  std::string space_str(space, ' ');
-  std::string star_str(star, '*');
-  printf(&quot;%s%s\n&quot;, space_str.data(), star_str.data());
+  std::string space_str(space, &#39; &#39;);
+  std::string star_str(star, &#39;*&#39;);
+  printf(&#34;%s%s\n&#34;, space_str.data(), star_str.data());
 }
 
 const int size = 3;
@@ -124,7 +115,7 @@ public:
     int space_count = size - i;
     int star_count = i * 2 - 1;
     print_space_and_star(space_count, star_count);
-    ctor_counter++;
+    ctor_counter&#43;&#43;;
   }
   ~DiamondLine() {
     int i = dtor_counter;
@@ -133,7 +124,7 @@ public:
       int star_count = (size - i) * 2 - 1;
       print_space_and_star(space_count, star_count);
     }
-    dtor_counter++;
+    dtor_counter&#43;&#43;;
   }
 };
 
@@ -141,23 +132,18 @@ int main()
 {
   DiamondLine lines[size];
   return 0;
-}
-</code></pre><pre><code class=language-bash>$ clang++ diamond_no_loop.cpp &amp;&amp; ./a.out
+}</code></pre><pre><code class="language-bash line-numbers">$ clang&#43;&#43; diamond_no_loop.cpp &amp;&amp; ./a.out
   *
  ***
 *****
  ***
-  *
-</code></pre><h2 id=이것을-왜-기억해야하는가>이것을 왜 기억해야하는가?</h2><p>파티클 시스템을 만든다고 가정하자.
+  *</code></pre><h2 id=이것을-왜-기억해야하는가>이것을 왜 기억해야하는가?</h2><p>파티클 시스템을 만든다고 가정하자.
 객체지향을 매우 좋아해서 객체지향적으로 파티클을 만들었다.
-파티클 입자 각각을 객체로 만들었다.</p><pre><code class=language-cpp>class Particle {
+파티클 입자 각각을 객체로 만들었다.</p><pre><code class="language-cpp line-numbers">class Particle {
 public:
     Particle() { ... }
     ~Particle() { ... }
-};
-
-</code></pre><p>그런데 파티클이 좀 화려해서 터졌다하면 기본 만개 단위로 터진다.</p><pre><code class=language-cpp>Particle particles[10000];
-</code></pre><p>만약 파티클의 생성자/소멸자 안에 특정 함수 호출이 있었다면 해당 함수는 만번씩 호출될것이다.
+};</code></pre><p>그런데 파티클이 좀 화려해서 터졌다하면 기본 만개 단위로 터진다.</p><pre><code class="language-cpp line-numbers">Particle particles[10000];</code></pre><p>만약 파티클의 생성자/소멸자 안에 특정 함수 호출이 있었다면 해당 함수는 만번씩 호출될것이다.
 이런 문제때문에 파티클 시스템의 경우는 파티클 입자 각각을 객체로 만들지 않고 전부 묶어서 취급한다.</p><p><a href=https://github.com/cocos2d/cocos2d-x/blob/8280f06c1f43bb6bcc493c24970f1a64769ddbb7/cocos/2d/CCParticleSystem.h#L43-L138>CCParticleSystem.h</a></p><p>객체로 크기가 큰 배열을 만들때는 생성자/소멸자에서 어떤 일을 하는지, 그것의 부하가 어느정도인지, 객체로 꼭 만들어야하는지를 생각해봐야할 것이다.</p></div><div class=tags><a href=https://if1live.github.io/tags/black-magic>black magic</a>
 <a href=https://if1live.github.io/tags/array>array</a>
 <a href=https://if1live.github.io/tags/loop>loop</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
@@ -182,7 +168,6 @@ public:
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

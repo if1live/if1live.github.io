@@ -1,4 +1,4 @@
-<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비"><meta name=keywords content="python ,ruby ,integer ,int ,exception"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.b37bd236b9686390807fad7eff1898250f2b9e0741f0bc3b23ac2ae89980297683235fd4e697df5c173cd7762925f24704eee8be259aa20a2efe80efacd0917c.css integrity="sha512-s3vSNrloY5CAf61+/xiYJQ8rngdB8Lw7I6wq6JmAKXaDI1/U5pffXBc813YpJfJHBO7oviWaogou/oDvrNCRfA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비 &#183; if1live space</title><meta name=author content="if1live"><meta name=description content="올바르지 않은 값을 정수로 변환하기 - 파이썬 vs 루비"><meta name=keywords content="python ,ruby ,integer ,int ,exception"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
 <span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
@@ -9,60 +9,44 @@
 예를 들어서 <code>/articles/?id={int}</code> 를 구현한 서버가 있다고 가정하자.
 <code>/articles/?id=1234</code>와 같이 id에 정수 문자열이 들어갈수도 있다.
 하지만 <code>/articles/?id=test</code>와 같이 숫자가 아닌 문자열이 들어갈수도 있고 <code>/articles/</code>처럼 id가 없을수도 있다.
-개발자는 이런 예외 상황을 잘 처리해야된다.</p><p>이 글에서는 파이썬과 루비에서 문자열을 숫자로 변환할때의 차이점을 간단하게 정리했다.</p><h2 id=string-to-int>String to int</h2><h3 id=success>Success</h3><p><code>"123"</code>과 같이 딱봐도 정수처럼 보이는 문자열을 정수로 바꿔보았다.</p><pre><code class=language-python>print(int(&quot;123&quot;))
-</code></pre><pre><code class=language-bash>$ python str_to_int_success.py
-123
-</code></pre><pre><code class=language-ruby>puts &quot;123&quot;.to_i
-</code></pre><pre><code class=language-bash>$ ruby str_to_int_success.rb
-123
-</code></pre><p>파이썬과 루비 모두 정상적으로 작동한다.</p><h3 id=fail>Fail</h3><p><code>"fail"</code>과 같이 정수처럼 보이지 않는 문자열을 정수로 바꿔보면 어떨까?</p><pre><code class=language-python>try:
-    print(int(&quot;fail&quot;))
+개발자는 이런 예외 상황을 잘 처리해야된다.</p><p>이 글에서는 파이썬과 루비에서 문자열을 숫자로 변환할때의 차이점을 간단하게 정리했다.</p><h2 id=string-to-int>String to int</h2><h3 id=success>Success</h3><p><code>"123"</code>과 같이 딱봐도 정수처럼 보이는 문자열을 정수로 바꿔보았다.</p><pre><code class="language-python line-numbers">print(int(&#34;123&#34;))</code></pre><pre><code class="language-bash line-numbers">$ python str_to_int_success.py
+123</code></pre><pre><code class="language-ruby line-numbers">puts &#34;123&#34;.to_i</code></pre><pre><code class="language-bash line-numbers">$ ruby str_to_int_success.rb
+123</code></pre><p>파이썬과 루비 모두 정상적으로 작동한다.</p><h3 id=fail>Fail</h3><p><code>"fail"</code>과 같이 정수처럼 보이지 않는 문자열을 정수로 바꿔보면 어떨까?</p><pre><code class="language-python line-numbers">try:
+    print(int(&#34;fail&#34;))
 except Exception as e:
-    print(repr(e))
-</code></pre><pre><code class=language-bash>$ python str_to_int_fail.py
-ValueError(&quot;invalid literal for int() with base 10: 'fail'&quot;,)
-</code></pre><pre><code class=language-ruby>begin
-  p &quot;fail&quot;.to_i
+    print(repr(e))</code></pre><pre><code class="language-bash line-numbers">$ python str_to_int_fail.py
+ValueError(&#34;invalid literal for int() with base 10: &#39;fail&#39;&#34;,)</code></pre><pre><code class="language-ruby line-numbers">begin
+  p &#34;fail&#34;.to_i
 rescue =&gt; ex
   p ex
-end
-</code></pre><pre><code class=language-bash>$ ruby str_to_int_fail.rb
-0
-</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Python: <a href=https://docs.python.org/3.5/library/functions.html#int>int()</a></li><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/String.html#method-i-to_i>String#to_i</a></li></ul><h2 id=none-to-int-nil-to-integer>None to int, nil to Integer</h2><p>파이썬에서는 None, 루비에서는 nil이라고 부르지만 둘은 비슷한 개념이다.
-이것을 정수로 변환하면 어떤 결과가 나올까?</p><pre><code class=language-python>try:
+end</code></pre><pre><code class="language-bash line-numbers">$ ruby str_to_int_fail.rb
+0</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Python: <a href=https://docs.python.org/3.5/library/functions.html#int>int()</a></li><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/String.html#method-i-to_i>String#to_i</a></li></ul><h2 id=none-to-int-nil-to-integer>None to int, nil to Integer</h2><p>파이썬에서는 None, 루비에서는 nil이라고 부르지만 둘은 비슷한 개념이다.
+이것을 정수로 변환하면 어떤 결과가 나올까?</p><pre><code class="language-python line-numbers">try:
     print(int(None))
 except Exception as e:
-    print(repr(e))
-</code></pre><pre><code class=language-bash>$ python null_to_int.py
-TypeError(&quot;int() argument must be a string or a number, not 'NoneType'&quot;,)
-</code></pre><pre><code class=language-ruby>begin
+    print(repr(e))</code></pre><pre><code class="language-bash line-numbers">$ python null_to_int.py
+TypeError(&#34;int() argument must be a string or a number, not &#39;NoneType&#39;&#34;,)</code></pre><pre><code class="language-ruby line-numbers">begin
   p nil.to_i
 rescue =&gt; ex
   p ex
-end
-</code></pre><pre><code class=language-bash>$ ruby null_to_int.rb
-0
-</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/NilClass.html#method-i-to_i>NilClass#to_i</a></li></ul><h2 id=동일한-동작을-하게-만드려면>동일한 동작을 하게 만드려면?</h2><p>&ldquo;파이썬에서는 예외가 나는게 정상이고 루비에서는 0으로 변환되는게 정상입니다"로 끝내기에는 간단한 문제가 아니다.
+end</code></pre><pre><code class="language-bash line-numbers">$ ruby null_to_int.rb
+0</code></pre><p>파이썬에서는 예외가 발생하지만 루비에서는 0으로 변환된다.</p><ul><li>Ruby: <a href=http://ruby-doc.org/core-2.3.0/NilClass.html#method-i-to_i>NilClass#to_i</a></li></ul><h2 id=동일한-동작을-하게-만드려면>동일한 동작을 하게 만드려면?</h2><p>&ldquo;파이썬에서는 예외가 나는게 정상이고 루비에서는 0으로 변환되는게 정상입니다"로 끝내기에는 간단한 문제가 아니다.
 파이썬으로 작성된 코드가 있고 이것을 루비로 그대로 옮겨서 사용하고 싶다고 가정하자.
 만약 파이썬 코드안에 문자열을 숫자로 바꾸는 코드가 있다면 루비로 그대로 옮겼을때 동일하게 동작한다는 보장이 없다.
 예외를 던지는 것과 0으로 변환되는 것은 다른 행동이기 때문에 코드를 옮기면서 로직을 수정해야될지 모른다.
 만약 파이썬처럼 루비에서도 문자열을 정수로 변환하려다 실패한 경우 예외를 던지면 포팅 작업이 더 편하지 않을까?</p><p>루비에서 파이썬처럼 예외를 던지려면 어떻게 해야될까?
 <code>#to_i</code>를 이용해서 정수로 변환해보고 만약 0이 나온 경우 문자열이 <code>"0"</code>, <code>"0.00"</code>등과 같은지 확인한 다음에 예외를 던지는 식으로 구현할수 있다.
-하지만 좋은 방법처럼 보이진 않는다. 더 쉬운 방법 없을까?</p><p><a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Integer>Kernel#Integer</a>를 사용하면 된다.</p><pre><code class=language-ruby>begin
-  puts Integer(&quot;fail&quot;)
+하지만 좋은 방법처럼 보이진 않는다. 더 쉬운 방법 없을까?</p><p><a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Integer>Kernel#Integer</a>를 사용하면 된다.</p><pre><code class="language-ruby line-numbers">begin
+  puts Integer(&#34;fail&#34;)
 rescue =&gt; ex
   p ex
-end
-</code></pre><pre><code class=language-bash>$ ruby str_to_int_fail_alt.rb
-#&lt;ArgumentError: invalid value for Integer(): &quot;fail&quot;&gt;
-</code></pre><pre><code class=language-ruby>begin
+end</code></pre><pre><code class="language-bash line-numbers">$ ruby str_to_int_fail_alt.rb
+#&lt;ArgumentError: invalid value for Integer(): &#34;fail&#34;&gt;</code></pre><pre><code class="language-ruby line-numbers">begin
   p Integer(nil)
 rescue =&gt; ex
   p ex
-end
-</code></pre><pre><code class=language-bash>$ ruby null_to_int_alt.rb
-#&lt;TypeError: can't convert nil into Integer&gt;
-</code></pre><p>비슷한 목적으로 <a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Float>Kernel#Float</a>도 있다.
+end</code></pre><pre><code class="language-bash line-numbers">$ ruby null_to_int_alt.rb
+#&lt;TypeError: can&#39;t convert nil into Integer&gt;</code></pre><p>비슷한 목적으로 <a href=http://ruby-doc.org/core-2.2.0/Kernel.html#method-i-Float>Kernel#Float</a>도 있다.
 Kernel 클래스에는 유용한 기능이 많으니 한번쯤 읽어두면 나중에 도움이 될거다.
 (sprintf, rand, sleep 조차 Kernel 클래스에 포함되어있다!)</p><p>반대로 파이썬에서 루비처럼 예외없이 정수로 바꾸고 싶으면 예외처리를 포함한 간단한 함수를 만들면 된다.
 자세한 설명은 생략한다.</p><h2 id=summary>Summary</h2><p>문자열을 숫자로 바꾸는 작업은 단순한 기능이다.
@@ -93,7 +77,6 @@ Kernel 클래스에는 유용한 기능이 많으니 한번쯤 읽어두면 나�
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.3.0/mermaid.min.js integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
-<script>mermaid.initialize({startOnLoad:!0}),function(){const e=document.querySelectorAll("code.language-mermaid");for(let t=0;t<e.length;t++){const s=`mermaid-${t}`,n=e[t],o=n.innerText,i=e=>{const t=document.createElement("div");t.innerHTML=e,n.parentElement.replaceWith(t)};mermaid.render(s,o,i)}}()</script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
 <script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
