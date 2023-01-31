@@ -3,17 +3,6 @@
     <h1>{{ .Site.Title }}</h1>
   </a>
   <ul class="menu-button-list">
-    {{ range .Site.Params.socials }}
-    {{ $name := index . 0 }}
-    {{ $url := index . 1 }}
-    <li>
-      <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ $url }}" title="{{ $name }}">
-        <i class="fa-brands fa-{{ lower $name }}"></i>
-        <span hidden>{{ $name }}</span>
-      </a>
-    </li>
-    {{ end }}
     <li>
       <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }} title="archive">
         <i class="fa-solid fa-box-archive"></i>
@@ -26,6 +15,17 @@
         <span hidden>tags</span>
       </a>
     </li>
+    {{ range .Site.Params.socials }}
+    {{ $name := index . 0 }}
+    {{ $url := index . 1 }}
+    <li>
+      <!-- social link icon : //fontawesome.io/icons/ -->
+      <a href="{{ $url }}" title="{{ $name }}">
+        <i class="fa-brands fa-{{ lower $name }}"></i>
+        <span hidden>{{ $name }}</span>
+      </a>
+    </li>
+    {{ end }}
     <li>
       <a href="{{ .Site.BaseURL }}about/" {{ if eq .Title "about" }} class="active" {{ end }} title="about">
         <i class="fa-solid fa-info"></i>

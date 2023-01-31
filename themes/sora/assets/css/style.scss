@@ -96,6 +96,9 @@ pre {
   word-break: normal;
   overflow-wrap: anywhere;
 }
+.markdown-image {
+  text-align: center;
+}
 .markdown-image img {
   max-width: 100%;
 }
@@ -163,6 +166,7 @@ pre code {
 .main {
   max-width: 800px;
   margin: 0 auto;
+  padding: 10px;
 }
 
 /* index post list */
@@ -233,17 +237,6 @@ pre code {
   font-size: 32px;
   font-weight: 400;
   line-height: 48px;
-}
-
-@media (max-width: 700px) {
-  #single {
-    padding: 0 18px;
-    margin: 20px auto 0 auto;
-  }
-  #single .title {
-    font-size: 24px;
-    line-height: 32px;
-  }
 }
 
 #single .tip {
