@@ -1,5 +1,5 @@
 {{ if eq .Type "" }}
 <pre class="markdown-textblock"><code>{{- .Inner | safeHTML }}</code></pre>
 {{ else }}
-<pre><code class="language-{{ .Type }} line-numbers">{{- .Inner | safeHTML }}</code></pre>
+<pre><code class="language-{{ .Type }} line-numbers">{{- .Inner }}</code></pre>
 {{ end }}
