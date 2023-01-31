@@ -4,19 +4,17 @@
 
 {{ hugo.Generator }}
 
-{{/* 개선 없이 기존꺼 일단 넣음 */}}
-<title> {{ .Title }} &middot; {{ .Site.Title }} </title>
+<title>{{ .Title }} - {{ .Site.Title }}</title>
 
 {{ if and (isset .Params "author") (ne .Params.author "") }}
 <meta name="author" content="{{ .Params.author }}" />
 {{ end }}
 
-{{ if ne .Title "" }}
-<meta name="description" content="{{ .Title }}" />
-{{ end }}
+<meta name="title" content="{{ .Title }}" />
+<meta name="description" content="{{ if .IsPage }}{{ .Summary }}{{ else }}{{ .Title }}{{ end }}">
 
 {{ if (isset .Params "tags") }}
-<meta name="keywords" content="{{ delimit .Params.tags " , " }}" />
+<meta name="keywords" content='{{ delimit .Params.tags ", " }}' />
 {{ end }}
 
 <meta name="naver-site-verification" content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502" />
