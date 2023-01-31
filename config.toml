@@ -15,37 +15,26 @@ PaginatePath = "page"
 posts = "/posts/:slug/"
 
 [taxonomies]
-  tag = "tags"
+tag = "tags"
+
+[social]
+twitter = 'if1live'
 
 [params]
-  hostName = "if1live.github.io"
-  twitterUsername = "if1live"
-
-  socials = [
-    ['GitHub', '//github.com/if1live'],
-  ]
-
-  links = []
-
-  #=============
-  # Twitter Card
-  #=============
-  # https://dev.twitter.com/cards
-  # http://michaelmartinez.in/twitter-card-plugin-for-pelican.html
-  twitterCardUse = true # (False)
-  twitterCardSite = '@if1live'  # The site's Twitter handle like @my_blog
-  twitterCardSiteId = ''  # The site's Twitter ID
-  twitterCardCreator = ''  # Your twitter handle like @monkmartinez
-  twitterCardCreatorId = ''  # The site creator's id
-  gravatarUrl = 'https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07'
+hostName = "if1live.github.io"
+socials = [['GitHub', '//github.com/if1live']]
+links = []
+images = [
+  'https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160',
+]
 
 [sitemap]
-  changefreq = "monthly"
-  priority = 0.5
+changefreq = "monthly"
+priority = 0.5
 
 [markup]
-  [markup.goldmark.renderer]
-    unsafe = true
+[markup.goldmark.renderer]
+unsafe = true
 
 [module]
 [module.hugoVersion]
@@ -53,9 +42,6 @@ extended = true
 min = "0.110.0"
 
 [[module.mounts]]
-excludeFiles = [
-  "posts/**/maya/**",
-  "posts/**/examples/**",
-]
+excludeFiles = ["posts/**/maya/**", "posts/**/examples/**"]
 source = "content"
 target = "content"

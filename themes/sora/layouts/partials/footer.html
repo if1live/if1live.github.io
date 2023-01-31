@@ -1,7 +1,7 @@
 <footer class="sora-footer">
   <p>
     <a href="//gohugo.io/" title="Hugo">Hugo</a> |
-    {{ with .Site.Params.twitterUsername }}
+    {{ with .Site.Social.twitter }}
     <a href="//twitter.com/{{ . }}/" title="@{{ . }}">@{{ . }}</a>
     {{ end }}
   </p>
