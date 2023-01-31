@@ -22,9 +22,7 @@ posts = "/posts/:slug/"
   twitterUsername = "if1live"
 
   socials = [
-    ['Twitter', '//twitter.com/if1live'],
     ['GitHub', '//github.com/if1live'],
-    ['BitBucket', '//bitbucket.org/if1live']
   ]
 
   links = []

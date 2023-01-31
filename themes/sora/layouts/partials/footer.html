@@ -1,32 +1,4 @@
 <footer class="footer">
-  <ul class="menu-button-list">
-    {{ range .Site.Params.socials }}
-    {{ $name := index . 0 }}
-    {{ $url := index . 1 }}
-    <li>
-      <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ $url }}" title="{{ $name }}">
-        <i class="fa-brands fa-{{ lower $name }}"></i>
-        <span hidden>{{ $name }}</span>
-      </a>
-    </li>
-    {{ end }}
-
-    <li>
-      <!-- social link icon : //fontawesome.io/icons/ -->
-      <a href="{{ .Site.RSSLink }}" title="RSS">
-        <i class="fa-solid fa-rss"></i>
-        <span hidden>RSS</span>
-      </a>
-    </li>
-
-    {{ range .Site.Params.links }}
-    {{ $name := index . 0 }}
-    {{ $url := index . 1 }}
-    <li><a href="{{ $url }}" title="{{ $name }}">{{ $name }}</a></li>
-    {{ end }}
-  </ul>
-
   <p>
     <a href="//gohugo.io/" title="Hugo">Hugo</a> |
     {{ with .Site.Params.twitterUsername }}
