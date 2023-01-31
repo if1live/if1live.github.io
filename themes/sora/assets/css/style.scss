@@ -142,6 +142,16 @@ pre code {
     monospace;
 }
 
+// 언어가 지정되지 않은 codeblock
+// log같은 text block으로도 쓸수 있어서 syntax hightlight 없는게 나을듯
+// css 속성은 prism 가져다씀
+pre:not([class]) {
+  background: #f5f2f0;
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
 /* toc */
 .toc {
   margin: auto;
