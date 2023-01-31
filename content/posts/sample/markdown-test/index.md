@@ -30,6 +30,13 @@ and this is footnote[^2]
 
 ## code block
 
+```
+// text
+ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz
+// very long text
+ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz
+```
+
 ```c
 // c
 #include<stdio.h>
