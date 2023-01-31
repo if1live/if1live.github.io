@@ -17,9 +17,10 @@
 
       <div class="title">
         <a href="{{ .Permalink }}">
-          <span class="post-title">{{ .Title }}</span>
-          <br/>
-          <span class="post-subtitle">{{ .Params.subtitle }}</span>
+          {{ .Title }}
+          {{ if ne .Params.subtitle nil }}
+          <br /> <small>{{ .Params.subtitle }}</small>
+          {{ end }}
         </a>
       </div>
 

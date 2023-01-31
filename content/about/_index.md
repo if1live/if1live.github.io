@@ -9,13 +9,12 @@ title: about
 
 current position : Seoul, South Korea.
 
-* [<i class="fa fa-envelope-o"></i> libsora25 at gmail.com](mailto:libsora25@gmail.com)
-* [<i class="fa fa-twitter"></i> @if1live](//twitter.com/if1live)
-* [<i class="fa fa-github"></i> if1live](//github.com/if1live/)
-* [<i class="fa fa-bitbucket"></i> if1live](//bitbucket.org/if1live/)
-* [<i class="fa fa-steam"></i> if1live](//steamcommunity.com/id/if1live/)
-* [<i class="fa fa-linkedin"></i> if1live](//www.linkedin.com/in/if1live)
-* [<i class="fa fa-keybase"></i>keybase : if1live](//keybase.io/if1live)
+* [<i class="fa-solid fa-envelope"></i> libsora25 at gmail.com](mailto:libsora25@gmail.com)
+* [<i class="fa-brands fa-twitter"></i> @if1live](//twitter.com/if1live)
+* [<i class="fa-brands fa-github"></i> if1live](//github.com/if1live/)
+* [<i class="fa-brands fa-steam"></i> if1live](//steamcommunity.com/id/if1live/)
+* [<i class="fa-brands fa-linkedin"></i> if1live](//www.linkedin.com/in/if1live)
+* [<i class="fa-brands fa-keybase"></i>keybase : if1live](//keybase.io/if1live)
 
 ## career
 

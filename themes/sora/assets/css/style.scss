@@ -5,7 +5,7 @@ html[theme="dark-mode"] {
 }
 
 body {
-  margin: 0; // added
+  margin: 0;
   line-height: 1;
   font: normal 15px/1.5em "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #404040;
@@ -166,6 +166,7 @@ pre code {
 }
 
 /* index post list */
+// #list-page: drop
 #list-page .item {
   margin: 12px 0;
 }
@@ -226,6 +227,7 @@ pre code {
 }
 
 /* single page */
+// #single: drop
 #single .title {
   text-align: center;
   font-size: 32px;
@@ -272,11 +274,7 @@ pre code {
   color: #0366d6;
 }
 
-#archive {
-  // 제목만 모으면 짧아서 줄여서 쓰는게 나은듯
-  margin: 0 auto;
-  padding: 0 24px;
-}
+// #archive: drop
 #archive .group {
   margin: 24px auto;
 }
@@ -288,50 +286,35 @@ pre code {
   font-size: 16px;
   margin-bottom: 12px;
 }
-
 #archive .group .value .date {
-  display: block;
   color: #999;
-  min-width: 60px;
 }
-
 #archive .group .value .title {
   display: inline;
-
-  a {
-    color: #404040;
-  }
-
-  a:hover {
-    color: #0366d6;
-  }
-
-  .post-subtitle {
-    font-size: 0.8em;
-  }
+}
+#archive .group .value .title a {
+  color: #404040;
+}
+#archive .group .value .title a:hover {
+  color: #0366d6;
 }
 
 #archive .group .value .tags {
   display: block;
-
-  a {
-    display: inline;
-    background: #f2f2f2;
-    padding: 4px 7px;
-    color: #999;
-    font-size: 14px;
-    margin-right: 3px;
-  }
-
-  a:hover {
-    color: #0366d6;
-  }
+}
+#archive .group .value .tags a {
+  background: #f2f2f2;
+  padding: 4px 7px;
+  color: #999;
+  font-size: 14px;
+  margin-right: 3px;
+}
+#archive .group .value .tags a:hover {
+  color: #0366d6;
 }
 
 /* taxonomy */
 #tags {
-  margin: 0 auto 0 auto;
-  padding: 0 12px;
   text-align: center;
 }
 #tags .tag {
@@ -351,11 +334,15 @@ pre code {
   color: #0366d6;
 }
 
-/* 404 page */
-#page-404 {
-  margin: 0 auto;
-  padding: 0 24px;
+/* section page */
+#section {
+  max-width: 580px;
+  margin: 48px auto 0 auto;
+  padding: 0 12px;
 }
+
+/* 404 page */
+// #page-404: drop
 #page-404 .item {
   margin: 12px 0 0 0;
 }
