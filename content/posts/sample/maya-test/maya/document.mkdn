@@ -37,18 +37,8 @@ cmd=python sample.py
 
 ## gist
 
-~~~maya:gist
-id=000ad3a34cb25c3386dd
-file=trigraphs.c
-~~~
+{{< gist if1live 000ad3a34cb25c3386dd >}}
 
 ## youtube
 
-~~~maya:youtube
-video_id=awfptUKbWEo
-width=720
-height=480
-~~~
-
-
-
+{{< youtube awfptUKbWEo >}}
