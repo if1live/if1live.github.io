@@ -1,5 +1,3 @@
 <p class="markdown-image">
-  <a href="{{ .Destination | safeURL }}" target="_blank">
-    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
-  </a>
+  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" {{ with .Title}} title="{{ . }}" {{ end }} />
 </p>
