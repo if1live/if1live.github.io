@@ -1,7 +1,12 @@
 {{ define "main" }}
 
 <section id="single">
-  <h1 class="title">{{ .Title }}</h1>
+  <h1 class="title">
+    <span>{{ .Title }}</span>
+    {{ if ne .Params.subtitle nil }}
+    <br /> <small>{{ .Params.subtitle }}</small>
+    {{ end }}
+  </h1>
 
   <div class="tip">
     <time datetime="{{ .PublishDate }}">{{ .Date.Format "2006. 01. 02" }}</time>
