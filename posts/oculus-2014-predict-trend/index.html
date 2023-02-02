@@ -29,9 +29,9 @@ graphics power for our demo development.</p></blockquote><p><a href=http://www.v
 이용해서 구현하는데 Pixel Shader는 원래 성능 많이 까먹는다. 세번째는
 <strong>Anti-Aliasing(이하 AA)</strong> 이다. 오큘러스는 저해상도이기 때문에
 계단현상이 심하게보인다. 이를 숨기기위한 AA가 선택이 아니라 필수다.
-각각의 추가 계산이 들어감에 따라서 FPS가 어떻게 변하는지 알아보자.</p><p><strong>No Stereo</strong> 일반적인 게임에서 사용하는 카메라</p><p><p class=markdown-image><a href=oculus-sample-no-stereo.jpg target=_blank><img src=oculus-sample-no-stereo.jpg alt="sample - no stereo"></a></p></p><p><strong>Stereo without barrel distortion</strong> 양쪽눈을 각각 렌더링. GPU 성능을
-한쪽눈일 때보다 2배는 사용한다. 아래의 표에서는 <strong>Stereo</strong> 라고 썻다.</p><p><p class=markdown-image><a href=oculus-sample-stereo.jpg target=_blank><img src=oculus-sample-stereo.jpg alt="sample - stereo"></a></p></p><p><strong>Stereo with barrel distortion</strong> 이렇게 렌더링을 해야 오큘러스 뒤집어
-쓰고 적절히 보인다. 아래의 표에서는 <strong>Oculus</strong> 라고 썻다.</p><p><p class=markdown-image><a href=oculus-sample-oculus.jpg target=_blank><img src=oculus-sample-oculus.jpg alt="sample - oculus rift"></a></p></p><p>내 컴퓨터에서 OculusSDK 0.2.5 안에 포함된 샘플인 OculusWorldDemo를
+각각의 추가 계산이 들어감에 따라서 FPS가 어떻게 변하는지 알아보자.</p><p><strong>No Stereo</strong> 일반적인 게임에서 사용하는 카메라</p><p><p class=markdown-image><img src=oculus-sample-no-stereo.jpg alt="sample - no stereo"></p></p><p><strong>Stereo without barrel distortion</strong> 양쪽눈을 각각 렌더링. GPU 성능을
+한쪽눈일 때보다 2배는 사용한다. 아래의 표에서는 <strong>Stereo</strong> 라고 썻다.</p><p><p class=markdown-image><img src=oculus-sample-stereo.jpg alt="sample - stereo"></p></p><p><strong>Stereo with barrel distortion</strong> 이렇게 렌더링을 해야 오큘러스 뒤집어
+쓰고 적절히 보인다. 아래의 표에서는 <strong>Oculus</strong> 라고 썻다.</p><p><p class=markdown-image><img src=oculus-sample-oculus.jpg alt="sample - oculus rift"></p></p><p>내 컴퓨터에서 OculusSDK 0.2.5 안에 포함된 샘플인 OculusWorldDemo를
 실행하면 나온는 위치에서의 FPS를 정리한 표이다. 적절히 1980x1080으로도
 돌려서 실행시의 FPS도 얻었다. 표 안의 FPS수치는 <strong>No MSAA FPS(MSAA FPS)</strong> 로 쓴 것이다.</p><table><thead><tr><th>Resolution</th><th>No Stereo</th><th>Stereo</th><th>Oculus</th></tr></thead><tbody><tr><td>1280x800</td><td>201(156)</td><td>160(126)</td><td>97(41)</td></tr><tr><td>1920x1080</td><td>160(124)</td><td>138(108)</td><td>68(24)</td></tr></tbody></table><p>FPS변화의 자료를 보면 No Stereo -> Stereo -> Oculus 로 가면서 점점
 프레임이 떨어진다. 위에서도 말했듯이 계산과정이 하나씩 늘어나는거니까

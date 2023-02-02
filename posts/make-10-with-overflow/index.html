@@ -25,7 +25,7 @@ an integer overflow occurs when an arithmetic operation attempts
 to create a numeric value that is outside of the range
 that can be represented with a given number of bits
 – either larger than the maximum or lower than the minimum representable value.
-<a href=https://en.wikipedia.org/wiki/Integer_overflow>https://en.wikipedia.org/wiki/Integer_overflow</a></p></blockquote><p><p class=markdown-image><a href=overflow.gif target=_blank><img src=overflow.gif alt=overflow></a></p></p><p>오버플로우는 상식적인 내용이니까 설명하지 않는다.
+<a href=https://en.wikipedia.org/wiki/Integer_overflow>https://en.wikipedia.org/wiki/Integer_overflow</a></p></blockquote><p><p class=markdown-image><img src=overflow.gif alt=overflow></p></p><p>오버플로우는 상식적인 내용이니까 설명하지 않는다.
 풀이에서 마음에 들었던건 버그의 상징 중 하나인 오버플로우를 기능으로 접근했다는 점이다.</p><p>어떻게 문제를 풀지 정했으면 답은 끼워맞추면 된다.
 문제풀이는 방향을 잡는게 어려운거지 답을 찾는게 어려운게 아니다.</p><p>char의 표현 범위는 -128~127이다.
 오버플로우는 256을 주기로 반복된다.</p><p>결국 <code>a % 256 == b % 256</code> 인 a, b를 char에 넣으면 둘은 똑같다.

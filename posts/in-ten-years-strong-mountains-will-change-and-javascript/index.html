@@ -14,7 +14,7 @@
 a.if
 &gt; 1
 a[&#39;if&#39;]
-&gt; 1</code></pre><p>재밌게도 위의 문법은 IE 구버전에서는 안돌아간다.</p><p><p class=markdown-image><a href=ie-legacy-property.png target=_blank><img src=ie-legacy-property.png alt=ie></a></p></p><p>IE 구버전에서는 키워드를 프로퍼티로 쓸 수 없다. 객체에 <code>a['if']</code> 로 접근할순 있지만 <code>a.if</code> 로 접근할 순 없다.
+&gt; 1</code></pre><p>재밌게도 위의 문법은 IE 구버전에서는 안돌아간다.</p><p><p class=markdown-image><img src=ie-legacy-property.png alt=ie></p></p><p>IE 구버전에서는 키워드를 프로퍼티로 쓸 수 없다. 객체에 <code>a['if']</code> 로 접근할순 있지만 <code>a.if</code> 로 접근할 순 없다.
 황당해서 찾아본 적이 있는데 자바스크립트 스펙이 변했더라.
 옛날 표준 자바스크립트에서는 키워드를 프로퍼티로 쓸수 없었지만 요새 자바스크립트에서는 키워드를 프로퍼티로 쓸 수 있다.</p><p>1997년 자바스크립트 스펙을 뒤져보자. <a href=https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf>ECMA-262 1판</a>이다.
 11.2 Left-Hand-Side Expressions 에 프로퍼티 문법이 있다.</p><pre class=markdown-textblock><code>MemberExpression :

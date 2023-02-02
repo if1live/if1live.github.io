@@ -1,0 +1,131 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>2016년 hugo를 2023년 hugo로 마이그레이션 하기 - if1live space</title><meta name=author content="if1live"><meta name=title content="2016년 hugo를 2023년 hugo로 마이그레이션 하기"><meta name=description content="계기 몇 개월 전에 구글 애널리스틱에 접속했더니 아래와 같은 경고가 떳다. 유니버설 애널리틱스는 2023년 7월 1일부터 표준 속성의 신규 데이터를 더 이상 처리하지"><meta name=keywords content="hugo,migration,post-mortem"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="2016년 hugo를 2023년 hugo로 마이그레이션 하기"><meta property="og:description" content="계기 몇 개월 전에 구글 애널리스틱에 접속했더니 아래와 같은 경고가 떳다. 유니버설 애널리틱스는 2023년 7월 1일부터 표준 속성의 신규 데이터를 더 이상 처리하지"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/migration-hugo-from-2016-to-2023/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-02-02T00:00:00+00:00"><meta property="article:modified_time" content="2023-02-02T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="2016년 hugo를 2023년 hugo로 마이그레이션 하기"><meta name=twitter:description content="계기 몇 개월 전에 구글 애널리스틱에 접속했더니 아래와 같은 경고가 떳다. 유니버설 애널리틱스는 2023년 7월 1일부터 표준 속성의 신규 데이터를 더 이상 처리하지"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>2016년 hugo를 2023년 hugo로 마이그레이션 하기</h1><div class=tip><time datetime="2023-02-02 00:00:00 +0000 UTC">2023. 02. 02</time></div><div class=content><h2 id=계기>계기</h2><p>몇 개월 전에 구글 애널리스틱에 접속했더니 아래와 같은 경고가 떳다.</p><blockquote><p>유니버설 애널리틱스는 2023년 7월 1일부터 표준 속성의 신규 데이터를 더 이상 처리하지 않습니다.
+지금 Google 애널리틱스 4 속성을 설정하고 이 속성으로 전환하여 준비하세요.</p></blockquote><p>게을러서 미루고 있었는데 이렇게 미루다보면 7월이 올거같더라.
+그래서 2023년을 맞이해서 블로그를 손대기로 했다.
+구글 애널리스틱 연동된 부분만 고쳐도 되지만 어차피 손대는거 또다른 일도 같이 처리하기로 했다.</p><h3 id=할일-hugo-테마-교체>할일: hugo 테마 교체</h3><p>2013년<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>에 정적 사이트 생성기인 pelican으로 블로그를 만들면서 테마를 만들었다.
+2016년에 <a href=https://if1live.github.io/posts/migration-from-pelican-to-hugo-post-mortem/>pelican을 hugo로 옮기면서</a> 테마도 같이 옮겼다.
+나한테는 디자인 센스가 없어서 테마가 그렇게 이쁘지 않은 부분도 있었다.
+게다가 hugo로 옮길때 기능이 고장난 부분도 있었는데 귀찮아서 고치지 않았다.
+갈아탈 hugo 테마를 뒤져보다가 <a href=https://github.com/nodejh/hugo-theme-mini>mini</a>를 발견했다.
+전체적인 디자인이 마음에 들어서 mini 테마를 적당히 고쳐서 쓰기로 했다.</p><h3 id=할일-hugo-표준-규격에-맞게-저장소-고치기>할일: hugo 표준 규격에 맞게 저장소 고치기</h3><p>나는 처음부터 hugo를 쓰지 않았다. pelican을 쓰다가 hugo로 바꿨다.
+하지만 hugo로는 내가 원하는 모든걸 할 수 없었다.
+pelican에서 탈출했듯이 미래에 hugo를 탈출하는 미래도 상상했다.
+그래서 <a href=https://github.com/if1live/if1live.github.io/tree/legacy/v2>내 블로그 저장소는 일반적인 hugo 저장소와는 구조 자체가 달랐다.</a></p><p>markdown 문서에 소스 파일 자체를 때려박고 싶은데 markdown으로는 이걸 할 수 없다.
+그래서 2016년에 <a href=https://github.com/if1live/maya>maya</a>라는 markdown 전처리기를 만들었다.
+maya가 블로그 빌드 과정에 낑겨들어가면서 일반적인 markdown로는 쓸 수 없는 글을 쓸 수 있게 되었다.</p><p>폴더 구조는 hugo와는 다르게 생겼다.
+크게 maya로 작성된 글, 이미지, 첨부파일을 넣는 <code>/content</code> 와 설정파일, 테마와 같이 hugo 종속적인 <code>/hugo</code> 로 구성되었다.</p><p>빌드 과정 역시 hugo와는 다르다.</p><ol><li><code>/content/**/article.mkdn</code>를 maya로 빌드해서 markdown 문서로 만든다.</li><li>생성된 markdown을 hugo가 인식할 수 있는 <code>/hugo/content/</code> 아래로 복사한다.</li><li><code>/content</code>에 있는 첨부파일을 hugo가 인식할수 <code>/hugo/content/</code> 아래로 복사한다.</li><li>hugo로 블로그 빌드</li></ol><p>GitHub Actions에서 maya로 문서를 빌드하고 첨부파일을 복사하는 과정은 충분히 빨라서 문제가 없었다.
+1초면 모든 작업이 끝났다.
+하지만 윈도우는 똑같은 명령어를 써도 10~20초 걸리더라.
+CI에서도 똑같은 문제가 있었다면 어쩔 수 없이 최적화를 해볼텐데 윈도우에서만 느리니까 문제를 고치고 싶지 않았다.</p><p>최적화는 하기 싫고 로컬 환경에서 작성한 글이 hugo에서 어떻게 보이나 확인하는데는 오래 걸리고.
+글쓰기도 개발하고 비슷해서 이터레이션 주기가 길어지니까 글을 쓰고싶지 않더라.
+환경이 구려서 글을 안쓰는건지 게을러서 글을 안쓰는건지 모르니까 일단 글쓰기 환경을 개선하기로 했다.
+순정 hugo를 쓰면 내가 원하는 수준의 글쓰기 환경이 나오더라.
+그래서 일반적인 hugo 구조로 갈아엎었다.</p><h2 id=v015---v01100>v0.15 -> v0.110.0</h2><p><a href=https://if1live.github.io/posts/migration-from-pelican-to-hugo-post-mortem/>pelican을 버리고 hugo로 이사간 글</a>을 꺼내봤다.
+내가 처음 hugo를 쓴게 2016년 2월이었다.</p><ul><li><a href=https://github.com/gohugoio/hugo/releases/tag/v0.15>v0.15</a>: Dec 19, 2015</li><li><a href=https://github.com/gohugoio/hugo/releases/tag/v0.16>v0.16</a>: Jun 6, 2016</li><li><a href=https://github.com/gohugoio/hugo/releases/tag/v0.110.0>v0.110.0</a>: Jan 17, 2023</li></ul><p>hugo 릴리즈 기록을 뒤져보니 내가 처음 쓴 hugo는 v0.15였다.
+그리고 오늘의 최신 버전은 v0.110.0 이다.
+와! 자릿수가 하나 늘었잖아? ㅋㅋㅋ</p><h2 id=hugo의-과거와-미래>hugo의 과거와 미래</h2><p>hugo에 눌러앉으면 다시 나가긴 쉽지 않을 것이다.
+2016년에 hugo를 고른 것은 올바른 선택이었는가?
+2023년에 hugo를 쓰는 것은 올바른 선택인가?
+두가지 질문에서 확신이 생긴 다음에 hugo에 눌러 앉아도 늦지 않는다.</p><p>GitHub Star는 지표로 쓸 수 있다.</p><ul><li><a href=https://github.com/jekyll/jekyll>jekyll/jekyll</a> 유명한 길</li><li><a href=https://github.com/gohugoio/hugo>gohugoio/hugo</a> 내가 선택한 길</li><li><a href=https://github.com/getpelican/pelican>getpelican/pelican</a> 내가 포기한 길</li></ul><p><p class=markdown-image><img src=star-history-202322.png alt="jekyll vs hugo vs pelican"></p></p><p><a href=https://star-history.com/#gohugoio/hugo&getpelican/pelican&jekyll/jekyll&Date>GitHub Star History</a>를 가져왔다.
+2016년에 hugo로 갈아탄건 좋은 선택이었다. 2023년에도 hugo는 써도 될거같다.</p><p><a href=https://jamstack.org/generators/>A List of Static Site Generators for Jamstack Sites</a>를 봐도 답이 보인다.
+2023-02-02 기준, 깃헙 스타 정렬로 1등은 Next.js, 2등은 Hugo, 3등은 Gatsby, 4등은 Jekyll이다.
+Next.js, Gatsby는 내가 원하는 정적 사이트 생성기와는 거리가 있으니까 Hugo는 합리적인 선택이다.</p><h2 id=-define-main-><code>{{ define "main" }}</code></h2><p><a href=https://github.com/nodejh/hugo-theme-mini>mini</a> 테마를 뜯으면서 문화충격 받은건 <code>{{ define "main" }}</code> 이다.
+2016년에 pelican에서 <a href=https://github.com/pallets/jinja>jinja2</a>로 작성된 테마를 golang의 <a href=golang-text-template>text/template</a>로 옮길떄 고통받았다.
+golang의 text/template는 jinja2에 비해서 너무 미개했다.</p><h3 id=v015>v0.15</h3><p><a href=https://github.com/gohugoio/hugoDocs/blob/v0.15/content/templates/content.md>v0.15의 템플릿 작성 문서</a>이다.</p><p>글 1개에 대응되는 템플릿 파일은 <code>single.html</code> 이다.</p><pre><code class="language-html line-numbers">&lt;!-- single.html --&gt;
+{{ partial &#34;head.html&#34; . }}
+{{ partial &#34;header.html&#34; . }}
+&lt;section id=&#34;main&#34;&gt;...&lt;/section&gt;
+{{ partial &#34;footer.html&#34; . }}</code></pre><p><code>single.html</code>에 등장하는 <code>head.html</code>, <code>footer.html</code>은 이렇게 생겼다.</p><pre><code class="language-html line-numbers">&lt;!-- head.html&gt; --&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;</code></pre><pre><code class="language-html line-numbers">&lt;!-- footer.html --&gt;
+&lt;/body&gt;</code></pre><p><code>&lt;body></code>와 <code>&lt;/body></code>가 다른 파일에 쪼개져 있다!
+태그의 시작과 끝이 서로 다른 파일에 들어있고 이걸 <code>partial</code>로 이어붙여서 html을 만들어야 한다.
+끔찍한 시절이었다. 하지만 아직도 어딘가에서 쓰고 있는 방식이다. 멍청하고 미개하지만 구현은 간단하니까.</p><h3 id=v016-go-16-block>v0.16: Go 1.6 block</h3><p><a href=https://gohugo.io/news/0.16-relnotes/>v0.16 릴리즈 뉴스</a>에 block keyword 추가가 언급된다.
+뉴스 작성일은 JUNE 6, 2016 이다.
+<a href=https://go.dev/doc/go1.6>Go 1.6</a>에서 <code>block</code> 이 추가되면서 hugo에도 새로운 문법이 추가된 것이다.</p><blockquote><p>Add support for Go 1.6 block keyword in templates #183</p></blockquote><p>나는 몇개월 차이, 버전 한단계 차이로 좋은 문법을 보지 못하고 미개한 문법으로 템플릿을 작성한 것이다!</p><p><a href=https://github.com/gohugoio/hugoDocs/blob/v0.16/content/templates/blocks.md>v0.16 blocks</a>를 참고하면 템플릿이 이전보다 깔끔해진다.</p><pre><code class="language-html line-numbers">&lt;!-- baseof.html --&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+{{ partial &#34;header.html&#34; . }}
+{{ block &#34;main&#34; . }}{{ end }}
+{{ partial &#34;footer.html&#34; . }}
+&lt;/body&gt;</code></pre><pre><code class="language-html line-numbers">&lt;!-- single.html --&gt;
+{{ define &#34;main&#34; }}
+&lt;section id=&#34;main&#34;&gt;...&lt;/section&gt;
+{{ end }}</code></pre><p><code>baseof.html</code> 안에 <code>&lt;body></code>, <code>&lt;/body></code>를 넣을 수 있다.</p><h2 id=code-block>code block</h2><h3 id=자바스크립트-기반-syntax-highlighting>자바스크립트 기반 syntax highlighting</h3><p>정적 사이트 생성기에 포함되는 syntax highlighting은 자바스크립트를 쓰지 않는 방향으로 구현된다.
+알록달록 색깔이 들어간 웹문서인데 자바스크립트를 쓰지 않는다?
+HTML을 열어보면 span 태그로 도배된 끔찍한 코드가 들어있다.</p><pre><code class="language-html line-numbers">&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;
+&lt;span style=&#34;color:#080&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&amp;lt;
+&lt;span style=&#34;color:#008000;font-weight:bold&#34;&gt;html&lt;/span&gt;
+&lt;span style=&#34;color:#b44&#34;&gt;lang&lt;/span&gt;
+&lt;span style=&#34;color:#666&#34;&gt;=&lt;/span&gt;</code></pre><p>HTML에 들어간 코드가 멀쩡한 코드처럼 보이면 좋겠다.
+<code>&lt;</code>, <code>></code>가 <code>&amp;lt;</code>, <code>&amp;gt;</code>로 바뀌는건 HTML의 한계라서 어쩔수 없다.
+syntax highlighting을 위해서 span으로 도배하는건 원한 결과가 아니다.</p><p>그래서 나는 hugo에 내장된 syntax highlighting을 껐다.
+syntax highlighting을 끄면 code 태그로 코드가 나온다.</p><pre><code class="language-html line-numbers">&lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;...&lt;/code&gt;&lt;/pre&gt;</code></pre><p>여기에 자바스크립트 기반 syntax highlighting 라이브러리인 <a href=https://github.com/PrismJS/prism>prism</a>를 끼얹었다.
+커밋을 뒤져보니
+<a href=https://github.com/if1live/if1live.github.io/commit/3381dca6a0871cc0a492cdcc9ec3a7bf9a41c5a3#diff-400cb27208ac69d586c0b92695ee090250b357e64f92c5dc5f14d50127491cc7R31>Mar 12, 2016</a> 에 만든 기능이더라.</p><h3 id=mermaid-diagram-as-code>mermaid: Diagram as Code</h3><p>2020년에 terraform을 쓰면서 IaC (Infrastructure as Code)를 처음 만지게 되었다.
+이때 주화입마에 빠져서 될 수 있는 한 많은걸 코드로 표현하려고 했다.
+시퀀스 다이어그램을 코드로 그릴 방법을 찾다가 <a href=https://mermaid.live/>mermaid</a>를 접했다.
+mermaid가 내가 원한 바로 그거라서 블로그에 집어넣었다.
+얼마나 인상적인 물건이었는지 <a href=https://if1live.github.io/posts/mermaid-diagram-as-code/>mermaid로 글</a>도 썼네.</p><p>커밋 뒤져보니 <a href=https://github.com/if1live/if1live.github.io/commit/2a581a846bfd8bfb01ab165a4f6a4fb583d2ff41>Nov 5, 2020</a>에 작업했다.
+자바스크립트를 적당히 끼워넣어서 <code>code.language-mermaid</code>인 DOM element을 찾아서 mermaid 적용하는 방식으로 구현했다.</p><h3 id=code-block-render-hooks>code block render hooks</h3><p>DECEMBER 23, 2019, <a href=https://gohugo.io/news/0.62.0-relnotes/>v0.62 릴리즈</a>로 markdown render hook이라는 기능이 소개되었다.
+<a href=https://gohugo.io/templates/render-hooks/>Markdown Render Hooks</a>을 사용하면 markdown의 특정 요소를 내가 원하는 방식으로 렌더링 할 수 있다.
+처음에는 image와 link에만 render hook를 적용할 수 있었다.</p><p>Feb 28, 2022, <a href=https://github.com/gohugoio/hugo/releases/tag/v0.93.0>v0.93 릴리즈</a>로 code block에도 markdown render hook을 적용할수 있게 되었다.
+릴리즈 노트부터 mermaid를 언급하고 있다. 내가 원했던 기능을 hugo로 만들수 있게 되었다.
+<code>render-codeblock.html</code>을 적당히 짜서 prism으로 syntax highlighting 구현할 수 있다!
+mermaid 붙이는 방법은 hugo 공식 문서만 따라해도 된다!</p><h2 id=scss>SCSS</h2><p>2016년 이전에 pelican 쓰던 시절에는 less로 스타일시트를 작성했다.
+<a href=https://getbootstrap.com/>bootstrap</a>라는 좋은 less 예제가 있어서 less를 썼다.
+<a href=https://blog.getbootstrap.com/2015/08/19/bootstrap-4-alpha/>bootstrap 4는 less에서 sass로 옮겨갔다.</a>
+다음에 블로그 테마를 짤떄는 SASS로 갈아타기로 마음 먹었다.</p><p>2016년, hugo로 이사가면서 less로 작성된 테마를 scss로 다시 짰다.
+정적 사이트 생성기로 golang 기반인 hugo를 쓰니까 scss 컴파일러도 golang 기반을 쓰기로 했다.
+<a href=https://github.com/wellington/wellington>wellington/wellington</a>의 <code>wt</code> CLI 명령으로 SCSS를 컴파일할 수 있다.
+그래서 <a href=https://github.com/if1live/if1live.github.io/commit/3a85c3b49ad8a55d28ebdb2aff11f3e95d4f0979>Mar 12, 2016</a> 에 <code>wt</code>로 블로그 테마를 컴파일하도록 했다.</p><p><a href=https://gohugo.io/hugo-pipes/scss-sass/>오늘날 hugo에는 scss가 포함되어있다.</a>
+그렇다면 언제부터 hugo에 scss가 포함되었나?
+<a href=https://gohugo.io/news/0.43-relnotes/>v0.43 릴리즈 뉴스</a>에 scss가 나온다.
+릴리즈 뉴스의 작성일은 JULY 9, 2018 이다.
+다행히도 hugo 문서 안 읽고 뻘짓한건 아니었다.
+내가 직접 넣은 기능이 hugo보다 2년 앞서 있었다.</p><p>블로그 테마를 손대는 김에 scss를 버리고 PostCSS로 갈아타는걸 생각해봤다.
+<a href=https://gohugo.io/news/0.66.0-relnotes/>v0.66.0</a>부터 hugo에 PostCSS가 포함되었다.
+릴리즈 뉴스의 작성일은 MARCH 3, 2020 이다.</p><p>하지만 <a href=https://gohugo.io/hugo-pipes/postcss/>PostCSS를 사용할 경우 node 의존성을 따로 설치야한다.</a>
+scss는 hugo에 내장되어서 hugo.exe 하나로 사이트를 빌드할 수 있다.
+scss에서 기능적으로 모자란게 있는건 아니라서 빌드 과정이 간단한 scss에 남았다.
+스타일시트 마이그레이션은 나중에 신경써야지.
+그때쯤 되면 PostCSS가 필요없는 웹환경이 되어있을지도 모르니까.</p><h2 id=summary>summary</h2><p>hugo를 고른건 좋은 선택이었다.
+유저수도 꾸준히 늘고있어서 프로젝트가 당분간은 죽지 않을거같다.</p><p>자체적으로 기능 구현한건 뻘짓이 아니었다.
+내가 필요로 하는 시점에는 hugo에는 없었다.
+하지만 최종적으로는 내가 필요로하는 기능이 hugo에 포함되었다.
+hugo 새버전 나올때마다 따라가면 공짜 점심이 있다.</p><p>나는 디자인 센스가 없다.
+테마 같은건 남들이 만든거 갖다써야지.</p><p>작업 기간은 2023-01-29 ~ 2023-01-31 로 3일 정도 사용되었다.
+3일 작업한거로 7년 써먹어야지. 2030년에도 글을 쓰고 있을진 모르겠지만.</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p><a href=https://github.com/if1live/if1live.github.io/commit/78ec0939965a603596efedcd1a4b916676145365>https://github.com/if1live/if1live.github.io/commit/78ec0939965a603596efedcd1a4b916676145365</a>&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></div><div class=tags><a href=https://if1live.github.io/tags/hugo>hugo</a>
+<a href=https://if1live.github.io/tags/migration>migration</a>
+<a href=https://if1live.github.io/tags/post-mortem>post-mortem</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>

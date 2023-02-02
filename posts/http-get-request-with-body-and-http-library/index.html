@@ -303,7 +303,7 @@ Unity의 HttpClient 구현체가 이것을 선택했다.
 코드를 잘못 짰을때 개발자가 이를 즉시 알수 있다는 점에서 좋다고 생각한다.
 예외를 처리하기 위한 코드가 추가되거나 GET 요청 함수와 POST 요청 함수를 분리해야된다는 단점이 있지만 그 정도는 감수할만하다.</p><p>GET 요청시 body가 붙어있으면 POST로 보내는 경우도 생각해보자.
 UnityWebRequest가 이것을 선택했다.
-개인적으로 이것은 오답이라고 본다.</p><p><p class=markdown-image><a href=programming-and-wrong-answer.jpg target=_blank><img src=programming-and-wrong-answer.jpg alt="하지만 오답은 있단다"></a></p></p><p>HTTP GET 요청에 body를 붙이는 것을 다른 관점에서 보자.
+개인적으로 이것은 오답이라고 본다.</p><p><p class=markdown-image><img src=programming-and-wrong-answer.jpg alt="하지만 오답은 있단다"></p></p><p>HTTP GET 요청에 body를 붙이는 것을 다른 관점에서 보자.
 HTTP 요청 함수에 HTTP Method와 body를 인자로 넣는다고 볼 수 있다.
 각각의 인자 (HTTP Method, body)는 같은 중요도를 갖지 않는다고 생각하다.
 body에 비해서 HTTP Method가 중요하다고 생각한다.</p><p>body가 붙은 GET 요청을 스펙에 가깝게 처리하고 싶었다면

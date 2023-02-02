@@ -6,17 +6,17 @@
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>NetFUNNEL 우회하기</h1><div class=tip><time datetime="2019-09-21 00:00:00 +0000 UTC">2019. 09. 21</time></div><div class=content><h2 id=개요>개요</h2><p><a href=https://www.hf.go.kr/>서민형 안심전환대출</a> 신청하게 되었다.
-신청하러 들어갔더니 대기 페이지가 뜨더라.</p><p><p class=markdown-image><a href=waiting.png target=_blank><img src=waiting.png alt=대기></a></p></p><p>기다리는 것보다 뜯어서 우회하는게 빠를거같더라.
+신청하러 들어갔더니 대기 페이지가 뜨더라.</p><p><p class=markdown-image><img src=waiting.png alt=대기></p></p><p>기다리는 것보다 뜯어서 우회하는게 빠를거같더라.
 나는 인내심이 없는 인간이라서 뜯어봤다.
 (얼마나 인내심이 없냐하면 신청이 끝나는 29일에 글을 쓰려고 했으나 참지 못하고 지금 쓴다)</p><h2 id=방법-1>방법 1</h2><p>팝업에서 대기자 수가 계속 바뀐다.
-이것에 대응되는 코드를 찾고 하나씩 따라가면 될거같다.</p><p><p class=markdown-image><a href=inspect-dom.png target=_blank><img src=inspect-dom.png alt=DOM></a></p></p><p><code>NetFunnel_Loading_Popup_Count</code>로 검색하면 하나만 걸린다.</p><pre><code class="language-js line-numbers">NetFunnel.countdown = function() {
+이것에 대응되는 코드를 찾고 하나씩 따라가면 될거같다.</p><p><p class=markdown-image><img src=inspect-dom.png alt=DOM></p></p><p><code>NetFunnel_Loading_Popup_Count</code>로 검색하면 하나만 걸린다.</p><pre><code class="language-js line-numbers">NetFunnel.countdown = function() {
     if (NetFunnel.gLastData &amp;&amp; NetFunnel.gLastData.time_left &gt;= 0) {
         if (NetFunnel.gPop) {
             var tTime = NetFunnel.gPop.getObj(&#34;NetFunnel_Loading_Popup_TimeLeft&#34;);
             var tCount = NetFunnel.gPop.getObj(&#34;NetFunnel_Loading_Popup_Count&#34;);
             var tNext = NetFunnel.gPop.getObj(&#34;NetFunnel_Loading_Popup_NextCnt&#34;);</code></pre><p><a href=https://www.hf.go.kr/_common/js/netfunnel.js>netfunnel.js</a>의 <code>countdown()</code>이다.
 js 파일명을 보니 <code>netfunnel</code>이라는 솔루션이 있나보다.</p><p>제정신을 갖고 만든 솔루션이라면 클라이언트에서 카운트다운을 세지 않을 것이다.
-서버에서 결과를 클라로 보내고 클라는 이를 적절히 처리할 것이다.</p><p><p class=markdown-image><a href=inspect-network.png target=_blank><img src=inspect-network.png alt="inspect network"></a></p></p><p>네트워크를 뜯어보면 주기적으로 클라가 서버로 요청보내는게 보인다.
+서버에서 결과를 클라로 보내고 클라는 이를 적절히 처리할 것이다.</p><p><p class=markdown-image><img src=inspect-network.png alt="inspect network"></p></p><p>네트워크를 뜯어보면 주기적으로 클라가 서버로 요청보내는게 보인다.
 폴링 방식으로 구현했나보다. 주고받는 response의 내용도 읽어보자.</p><pre><code class="language-js line-numbers">NetFunnel.gRtype=5002;NetFunnel.gControl.result=&#39;5002:201:key=2D02981FDB2DDE611B1D8C81B900312B5B57188B66DC8029EB79317DDAB32C7CE54D1E713188A821AF52E5B2FF09F2981050587F7A9D0A06787D50CF33ECA6929CDFAE73A86DC8BF1EA234386BFC00E442165990BD55429602E0DFCDFA16BA59672C302C392C312C38323132392C30&amp;nwait=82129&amp;nnext=675&amp;tps=0.599689&amp;ttl=3&amp;ip=netfunnel.hf.go.kr&amp;port=443&#39;; NetFunnel.gControl._showResult();</code></pre><p><code>NetFunnel.gRtype=5002</code>가 매우 거슬린다.
 <code>5002</code>에는 특별한 의미가 있을 것이다.
 검색하면 아래의 코드가 튀어나온다.</p><pre><code class="language-js line-numbers">NetFunnel.RTYPE_NONE = 0;
@@ -45,7 +45,7 @@ if (this.retval.getReqType() == NetFunnel.RTYPE_GET_TID_CHK_ENTER) {
 <code>getReqType()</code>의 리턴값이 5002가 아니라 5004가 되도록 바꿔두면 이후의 대기가 끝난거처럼 동작하지 않을까?</p><p>해보면 잘 된다.</p><p>이 방법을 통해 기다리지 않고 우회해서 신청을 넣었다.</p><h2 id=방법-2>방법 2</h2><p>방법1로 일단 NetFUNNEL 우회는 성공했다.</p><p>하지만 이게 최선의 방법이었을까?
 NetFUNNEL을 한두군데에만 팔아먹었을리 없다.
 다른 사람들은 어떻게 우회했나 찾아보려고 했다.
-&ldquo;NetFunnel 우회"를 입력하니까 첫 페이지에 개발 문서가 뜨더라.</p><p><p class=markdown-image><a href=google-search.png target=_blank><img src=google-search.png alt="google search"></a></p></p><p>???</p><p><a href="https://doc.netfunnel.co.kr/index.php?mid=guide_netfunnel&category=405">문서</a>를 읽어봤다.</p><blockquote><p>넷퍼넬 우회 기능 (Client Side Bypass)</p><p>넷퍼넬 적용 후 시스템에 문제가 생기거나 네트워크에 문제가 발생한 경우
+&ldquo;NetFunnel 우회"를 입력하니까 첫 페이지에 개발 문서가 뜨더라.</p><p><p class=markdown-image><img src=google-search.png alt="google search"></p></p><p>???</p><p><a href="https://doc.netfunnel.co.kr/index.php?mid=guide_netfunnel&category=405">문서</a>를 읽어봤다.</p><blockquote><p>넷퍼넬 우회 기능 (Client Side Bypass)</p><p>넷퍼넬 적용 후 시스템에 문제가 생기거나 네트워크에 문제가 발생한 경우
 서비스 소스에 적용된 넷퍼넬 함수를 우회하도록 설정할 수 있습니다.
 &ldquo;false&rdquo; 값을 &ldquo;true&rdquo; 로 변경해주면 넷퍼넬 서버로 요청하지 않고 우회합니다.</p><p>NetFunnel.TS_BYPASS = false; // NetFUNNEL Routine Bypass [true|false]</p></blockquote><p><code>NetFunnel.TS_BYPASS</code>가 사용되는 곳에 전부 브레이크 포인트 잡았다.
 그리고 처음으로 쓰이게 되는 지점에서 <code>NetFunnel.TS_BYPASS = true</code>로 설정해주면 될거같더라.</p><pre><code class="language-js line-numbers">NetFunnel.TsClient.prototype.getTidChkEnter = function(a, c, e, d) {

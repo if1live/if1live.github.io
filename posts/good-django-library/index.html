@@ -26,10 +26,10 @@ urlpatterns = patterns(&#39;&#39;,
 urlpatterns = patterns(&#39;&#39;,
     surl(&#39;/year/&lt;int4:year&gt;/&lt;word:month&gt;/&#39;, &#39;month.view&#39;),
 )</code></pre><p>smarturls은 기존 django프로젝트에 끼워넣어도 문제가 생기지 않는다는 점이
-좋다.</p><h2 id=debugger>Debugger</h2><p><p class=markdown-image><a href=twdp_0804.png target=_blank><img src=twdp_0804.png alt=image></a></p></p><p>Django 개발 도중에 에러가 발생하면 위와 같은 화면을 자주 볼 것이다.
+좋다.</p><h2 id=debugger>Debugger</h2><p><p class=markdown-image><img src=twdp_0804.png alt=image></p></p><p>Django 개발 도중에 에러가 발생하면 위와 같은 화면을 자주 볼 것이다.
 문제가 몇번째 줄에서 어떤식으로 발생했는지를 볼 수 있다. 이것만 있어도
 php보다는 정신건강에 좋다. 만약 에러난 지점에서 pdb가 돌아가서 변수값을
-직접 확인해볼수 있으면 더 좋지 않을까?</p><p><p class=markdown-image><a href=debug-screenshot.png target=_blank><img src=debug-screenshot.png alt=image></a></p></p><p>위의 화면은 werkzeug의 디버거이다. 문제가 발생한 지점에서 shell을 띄워서
+직접 확인해볼수 있으면 더 좋지 않을까?</p><p><p class=markdown-image><img src=debug-screenshot.png alt=image></p></p><p>위의 화면은 werkzeug의 디버거이다. 문제가 발생한 지점에서 shell을 띄워서
 변수값을 직접 확인할수도 있고 함수도 호출할 수 있다. flask의 경우는
 werkzeug를 이용하기 때문에 위의 디버거를 그냥 쓸수있지만 django는 그렇지
 않다.</p><p>하지만 추가 라이브러리를 쓰면 django에서도 이 좋은 디버거를 쓸 수 있다.

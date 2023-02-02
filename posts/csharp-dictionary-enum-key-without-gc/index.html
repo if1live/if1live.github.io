@@ -7,7 +7,7 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>GC없이 C# Dictionary에서 enum을 key로 쓰기</h1><div class=tip><time datetime="2017-08-20 00:00:00 +0000 UTC">2017. 08. 20</time></div><div class=content><h2 id=c-dictionary--enum>C# Dictionary + enum</h2><p>C# Dictionary는 Key-Value로 데이터를 저장할수 있는 좋은 자료구조이다.
 enum은 key로 쓰기에 좋은 타입이다.
-그렇다면 둘을 합쳐보자.</p><p><p class=markdown-image><a href=ppap.jpg target=_blank><img src=ppap.jpg alt=ppap></a></p></p><p>적당한 클래스와 enum을 준비한다.</p><pre><code class="language-csharp line-numbers">﻿interface IState {
+그렇다면 둘을 합쳐보자.</p><p><p class=markdown-image><img src=ppap.jpg alt=ppap></p></p><p>적당한 클래스와 enum을 준비한다.</p><pre><code class="language-csharp line-numbers">﻿interface IState {
     string GetMessage();
 }
 
@@ -48,7 +48,7 @@ public class Main_Simple : MonoBehaviour {
         var a = dict.ContainsKey(States.Run);
         var b = dict[States.Wait];
     }
-}</code></pre><p>유니티 프로파일러 띄워서 성능 이슈가 있는지 살펴보자.</p><p><p class=markdown-image><a href=profiler.png target=_blank><img src=profiler.png alt=profiler></a></p></p><p><code>Main_Simple</code>의 <code>ContainsKey</code>, <code>get_item</code>에서 GC Alloc이 발생하는 것을 볼수있다. Dictionary에 키가 있는지 확인하고 값을 읽는 것만으로도 GC가 발생하는건 쓸데없는 부하같다.</p><p>이를 최적화해서 GC Alloc이 없는 <code>Main_Manual</code>, <code>Main_Generic</code>로 만들어보자.</p><h2 id=custom-enumcomparer>Custom EnumComparer</h2><p>프로파일러에서 GC가 생기는 지점을 보면 <code>DefaultComparer</code>에서 GC Alloc가 발생하는 것을 알수있다.
+}</code></pre><p>유니티 프로파일러 띄워서 성능 이슈가 있는지 살펴보자.</p><p><p class=markdown-image><img src=profiler.png alt=profiler></p></p><p><code>Main_Simple</code>의 <code>ContainsKey</code>, <code>get_item</code>에서 GC Alloc이 발생하는 것을 볼수있다. Dictionary에 키가 있는지 확인하고 값을 읽는 것만으로도 GC가 발생하는건 쓸데없는 부하같다.</p><p>이를 최적화해서 GC Alloc이 없는 <code>Main_Manual</code>, <code>Main_Generic</code>로 만들어보자.</p><h2 id=custom-enumcomparer>Custom EnumComparer</h2><p>프로파일러에서 GC가 생기는 지점을 보면 <code>DefaultComparer</code>에서 GC Alloc가 발생하는 것을 알수있다.
 <code>DefaultComparer</code> 내부의 boxing 때문에 GC가 발생하는 것일테니 boxing이 없는 Comparer를 구현하면 GC Alloc를 없앨 수 있을 것이다.
 <code>IEqualityComparer</code>를 구현해서 EnumComparer를 직접 만들어보자. 이를 Dictionary의 생성자로 넣어준다.</p><pre><code class="language-csharp line-numbers">﻿using System.Collections.Generic;
 using UnityEngine;

@@ -7,7 +7,7 @@
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
 <span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>나머지 연산자 없이 x % 256 계산하기</h1><div class=tip><time datetime="2018-08-18 00:00:00 +0000 UTC">2018. 08. 18</time></div><div class=content><p>1년전, 2017년 8월 16일에 재밌는 생각이 나서 트윗을 쓴게 있다.</p><pre class=markdown-textblock><code>a%256 최적화 하기 : (int)(unsigned char)a
 clang 기준 -O3 옵션 주면 어셈 한줄
-https://twitter.com/if1live/status/897752172040929280</code></pre><p><p class=markdown-image><a href=DHV00dfUwAAd-VR.jpg target=_blank><img src=DHV00dfUwAAd-VR.jpg alt=screenshot></a></p></p><p>C에서 타입 캐스팅을 캐스팅 연산자라고 부르니까 이걸 다른 연산자로 쓰는게 가능하지 않을까?
+https://twitter.com/if1live/status/897752172040929280</code></pre><p><p class=markdown-image><img src=DHV00dfUwAAd-VR.jpg alt=screenshot></p></p><p>C에서 타입 캐스팅을 캐스팅 연산자라고 부르니까 이걸 다른 연산자로 쓰는게 가능하지 않을까?
 그런 생각이 들어서 짜본 코드다.</p><p>그럴싸하게 정리해보려다가 귀찮아서 미룬걸 1년만에 해본다.</p><h2 id=구현>구현</h2><p><a href=https://ideone.com/ZvMaRZ>https://ideone.com/ZvMaRZ</a></p><pre><code class="language-c line-numbers">#include &lt;assert.h&gt;
 
 int mod_256(int x)
@@ -47,7 +47,7 @@ int main()
   return 0;
 }</code></pre><p>캐스팅을 풀어서 쓰면 위의 코드와 동일하다.
 내가 필요한건 int에서 하위 1바이트이다.
-x86이 little endian이라서 배열의 3번째 요소가 아니라 0번째 요소를 사용했다.</p><p><p class=markdown-image><a href=280px-Little-Endian.svg.png target=_blank><img src=280px-Little-Endian.svg.png alt="little endian"></a></p></p><p><a href=https://godbolt.org/g/TqYCTC>https://godbolt.org/g/TqYCTC</a></p><pre><code class="language-c line-numbers">mod_256(int):                            # @mod_256(int)
+x86이 little endian이라서 배열의 3번째 요소가 아니라 0번째 요소를 사용했다.</p><p><p class=markdown-image><img src=280px-Little-Endian.svg.png alt="little endian"></p></p><p><a href=https://godbolt.org/g/TqYCTC>https://godbolt.org/g/TqYCTC</a></p><pre><code class="language-c line-numbers">mod_256(int):                            # @mod_256(int)
         movzx   eax, dil
         ret
 mod_256_union(int):                     # @mod_256_union(int)

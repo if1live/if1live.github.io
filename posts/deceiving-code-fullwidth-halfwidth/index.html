@@ -12,7 +12,7 @@
 악의를 가지고 코드를 수정하지 않는 이상 위의 코드를 볼 일은 없다.
 그렇다면 이건 어떨까?</p><blockquote><p>프로그래머 머리 터지게 하는 방법
 작업중인 코드의 정규식을 몰래 열어 반각 공백문자 2개( )를 전각 공백문자 1개(　)로 바꾼다
-<a href=https://twitter.com/if1live/status/591252041479008256>tweet</a></p></blockquote><h2 id=반각전각>반각/전각</h2><p>여기에서는 간단하게 설명한다. 자세한 설명은 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>위키피디아</a>를 참고.</p><p><p class=markdown-image><a href=KoreanDOSPrompt.png target=_blank><img src=KoreanDOSPrompt.png alt=반각/전각></a></p></p><ol><li>일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다.</li><li>한글, 한자, 일본어는 가로폭 넓다.</li><li>고정폭 폰트를 사용하면 화면에 보이는 글자가 격자에 딱 맞게 들어가야한다.</li><li>한글 한글자의 가로폭을 알파벳 2글자 크기가 맞추면 되지 않을까?</li></ol><h2 id=실제-사례로-보는-버그>실제 사례로 보는 버그</h2><h3 id=버그>버그</h3><p><a href=http://birthday.libsora.so/>Happy Birthday, Waifu</a>를 만들때 낚인 사례이다.
+<a href=https://twitter.com/if1live/status/591252041479008256>tweet</a></p></blockquote><h2 id=반각전각>반각/전각</h2><p>여기에서는 간단하게 설명한다. 자세한 설명은 <a href=http://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms>위키피디아</a>를 참고.</p><p><p class=markdown-image><img src=KoreanDOSPrompt.png alt=반각/전각></p></p><ol><li>일반적으로 사용하는 알파벳, 숫자는 가로폭이 좁다.</li><li>한글, 한자, 일본어는 가로폭 넓다.</li><li>고정폭 폰트를 사용하면 화면에 보이는 글자가 격자에 딱 맞게 들어가야한다.</li><li>한글 한글자의 가로폭을 알파벳 2글자 크기가 맞추면 되지 않을까?</li></ol><h2 id=실제-사례로-보는-버그>실제 사례로 보는 버그</h2><h3 id=버그>버그</h3><p><a href=http://birthday.libsora.so/>Happy Birthday, Waifu</a>를 만들때 낚인 사례이다.
 레일즈를 공부할겸 캐릭터 생일을 보여주는 간단한 웹서비스를 만들었다.
 개발 당시 캐릭터의 생일DB가 깨끗하게 정리된 곳을 찾지 못했다.
 그래서 DB는 <a href=http://www.animecharactersdatabase.com/>Anime Characters Database</a>를 크롤링하기로 했다.

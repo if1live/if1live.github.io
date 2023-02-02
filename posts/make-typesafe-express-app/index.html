@@ -65,7 +65,7 @@ app.get(&#39;/sum&#39;, (req, res) =&gt; res.json(handleSum(req)))</code></pre><
 다행히도 타입스크립트에는 함수의 리턴타입을 알아내는 방법이 있다.
 <a href=https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html>typescript 2.8</a>에 추가된 <code>ReturnType</code>을 쓰면 된다.</p><pre><code class="language-ts line-numbers">function foo() { return 1; }
 
-type A = ReturnType&lt;typeof foo&gt;;</code></pre><p><p class=markdown-image><a href=ts-returntype.png target=_blank><img src=ts-returntype.png alt=ReturnType></a></p></p><h3 id=asyncawait>async/await</h3><pre><code class="language-ts line-numbers">const handleSum = async (req: express.Request) =&gt; { ... };</code></pre><p><code>handleSum()</code>이 <code>Resp</code>을 리턴하면 <code>ReturnType</code>만으로 충분하다.
+type A = ReturnType&lt;typeof foo&gt;;</code></pre><p><p class=markdown-image><img src=ts-returntype.png alt=ReturnType></p></p><h3 id=asyncawait>async/await</h3><pre><code class="language-ts line-numbers">const handleSum = async (req: express.Request) =&gt; { ... };</code></pre><p><code>handleSum()</code>이 <code>Resp</code>을 리턴하면 <code>ReturnType</code>만으로 충분하다.
 하지만 <code>handleSum()</code>이 <code>Promise&lt;Resp></code>를 리턴하면 <code>ReturnType</code>만으로는 부족하다.
 내가 필요한건 <code>Resp</code>이지 <code>Promise&lt;Resp></code>가 아니다.
 <a href=https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html>typescript 2.8</a>에 있는 기능을 잘 이용하면 <code>Promise</code>가 들고있는 타입을 얻을 수 있다.
@@ -73,7 +73,7 @@ type A = ReturnType&lt;typeof foo&gt;;</code></pre><p><p class=markdown-image><a
 type A = ThenArg&lt;Promise&lt;number&gt;&gt;;
 type B = ThenArg&lt;number&gt;;
 
-type C = A | B;</code></pre><p><p class=markdown-image><a href=ts-thenarg.png target=_blank><img src=ts-thenarg.png alt=ThenArg></a></p></p><pre><code class="language-ts line-numbers">export type Resp = ThenArg&lt;ReturnType&lt;typeof handleSum&gt;&gt;;</code></pre><p>둘을 합치면 sum API의 응답 타입을 올바르게 가져올 수 있다.</p><h2 id=typesafe-express-app>typesafe express app</h2><p>지금까지 다룬 내용을 종합하면 아래와 같은 서버를 구현할 수 있다.</p><pre><code class="language-typescript line-numbers">import express from &#39;express&#39;;
+type C = A | B;</code></pre><p><p class=markdown-image><img src=ts-thenarg.png alt=ThenArg></p></p><pre><code class="language-ts line-numbers">export type Resp = ThenArg&lt;ReturnType&lt;typeof handleSum&gt;&gt;;</code></pre><p>둘을 합치면 sum API의 응답 타입을 올바르게 가져올 수 있다.</p><h2 id=typesafe-express-app>typesafe express app</h2><p>지금까지 다룬 내용을 종합하면 아래와 같은 서버를 구현할 수 있다.</p><pre><code class="language-typescript line-numbers">import express from &#39;express&#39;;
 import * as yup from &#39;yup&#39;;
 
 const app = express();

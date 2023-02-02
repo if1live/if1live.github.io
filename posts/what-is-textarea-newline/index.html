@@ -23,15 +23,15 @@ bar"
 A: "foo\r\nbar"
 B: "foo\nbar"
 C: 브라우저에 따라서 다르다</code></pre><h2 id=test>Test</h2><p>HTML textarea의 개행문자가 무엇인지 확인하려고 다음의 테스트를 준비했다.</p><ul><li><code>LF</code> , <code>CRLF</code> 을 섞어서 HTML textarea에 집어 넣는다.</li><li>HTML textarea를 submit하고 서버에 어떤 값이 도착하는지 확인한다.</li><li>wireshark를 이용해서 해석</li></ul><p>테스트 코드는 여기에서 볼 수 있다.
-<a href=https://github.com/if1live/libsora.so/tree/master/content/development/what-is-textarea-newline>Repo</a></p><p>6가지 경우의 개행문자의 조합을 테스트했다.</p><ul><li><code>\n</code> 만 사용하면 어떻게 되는가?</li><li><code>\r</code> 만 사용하면 어떻게 되는가? (예외 처리 테스트)</li><li><code>\n</code> 을 연속으로 사용하면 어떻게 되는가?</li><li><code>\r</code> 을 연속으로 사용하면 어떻게 되는가? (예외 처리 테스트)</li><li><code>\r\n</code> (CRLF)를 사용하면 어떻게 되는가?</li><li><code>\n\r</code> (LFCR)을 사용하면 어떻게 되는가? (예외 처리 테스트)</li></ul><p>POST, GET일때 기본적인 내용은 동일하더라. 그래서 POST 일때만 정리했다.</p><p><p class=markdown-image><a href=browser-input.png target=_blank><img src=browser-input.png alt="간단하게 구현한 POST 요청을 보내는 HTML이다. 겉보기에는 평범한 개행이
+<a href=https://github.com/if1live/libsora.so/tree/master/content/development/what-is-textarea-newline>Repo</a></p><p>6가지 경우의 개행문자의 조합을 테스트했다.</p><ul><li><code>\n</code> 만 사용하면 어떻게 되는가?</li><li><code>\r</code> 만 사용하면 어떻게 되는가? (예외 처리 테스트)</li><li><code>\n</code> 을 연속으로 사용하면 어떻게 되는가?</li><li><code>\r</code> 을 연속으로 사용하면 어떻게 되는가? (예외 처리 테스트)</li><li><code>\r\n</code> (CRLF)를 사용하면 어떻게 되는가?</li><li><code>\n\r</code> (LFCR)을 사용하면 어떻게 되는가? (예외 처리 테스트)</li></ul><p>POST, GET일때 기본적인 내용은 동일하더라. 그래서 POST 일때만 정리했다.</p><p><p class=markdown-image><img src=browser-input.png alt="간단하게 구현한 POST 요청을 보내는 HTML이다. 겉보기에는 평범한 개행이
 들어있는 textarea이지만 실제로는 각각의 줄은 다른 개행문자를
-쓰고있다."></a></p></p><p><p class=markdown-image><a href=wireshark-input.png target=_blank><img src=wireshark-input.png alt="서버에서 생성한 테스트용 개행문자가 섞인 HTML은 클라에 잘 도착했다.
+쓰고있다."></p></p><p><p class=markdown-image><img src=wireshark-input.png alt="서버에서 생성한 테스트용 개행문자가 섞인 HTML은 클라에 잘 도착했다.
 나머지는 브라우저의
-역할이다."></a></p></p><p><p class=markdown-image><a href=browser-output.png target=_blank><img src=browser-output.png alt="클라가 submit 한 결과를 그대로 출력했다. <code>CRLF</code> 만 보인다. 각각의 줄의
+역할이다."></p></p><p><p class=markdown-image><img src=browser-output.png alt="클라가 submit 한 결과를 그대로 출력했다. <code>CRLF</code> 만 보인다. 각각의 줄의
 결과는 아래에서
-분석한다."></a></p></p><p><p class=markdown-image><a href=wireshark-output.png target=_blank><img src=wireshark-output.png alt="클라가 보낸 요청을 wireshark 로 열어본 것이다. form의 내용을 열어보면
+분석한다."></p></p><p><p class=markdown-image><img src=wireshark-output.png alt="클라가 보낸 요청을 wireshark 로 열어본 것이다. form의 내용을 열어보면
 <code>CRLF</code> 만
-보인다."></a></p></p><h3 id=result>Result</h3><p>wireshark로 확인해 본 결과 브라우저로 진입하는 순간에는 <code>LF</code>, <code>CRLF</code> 를
+보인다."></p></p><h3 id=result>Result</h3><p>wireshark로 확인해 본 결과 브라우저로 진입하는 순간에는 <code>LF</code>, <code>CRLF</code> 를
 포함한 여러가지 개행문자 조합이 존재하지만 브라우저에서 나올때는 <code>CRLF</code>
 만 남아있다. (글에서는 POST만 다루었지만 실제로는 GET, POST 요청의
 결과가 동일하다)</p><p>6가지 개행문자를 이용해서 테스트한 결과를 정리하면 다음과 같다.</p><ul><li>LF만 사용하는 경우 : <code>only-LF\n</code> -> <code>only-LF\r\n</code><ul><li>CRLF로 치환</li></ul></li><li>CR만 사용하는 경우 : <code>only-CR\r</code> -> <code>only-CR\r\n</code><ul><li>CRLF로 치환</li></ul></li><li>연속된 LF를 사용하는 경우 : <code>many-LF\n\n</code> -> <code>many-LF\r\n\r\n</code><ul><li>각각의 LF를 CRLF로 치환</li></ul></li><li>연속된 CR을 사용하는 경우 : * <code>many-CR\r\r</code> -> <code>many-cr\r\n\r\n</code><ul><li>각각의 CR을 CRLF로 치환</li></ul></li><li>CRLF를 사용하는 경우 : <code>CRLF\r\n</code> -> <code>CRLF\r\n</code><ul><li>변경 없음</li></ul></li><li>LFCR을 사용하는 경우 : <code>LFCR\r\n</code> -> <code>LFCR\r\n\r\n</code><ul><li>CRLF가 2개로 바뀐다. 첫번째 LF에 의해서 CRLF가 나오고 두번째 CR에 의해서 CRLF가 나온거로 보인다</li></ul></li></ul><p>즉, textarea에는 어떤 개행을 넣든지간에 <code>CRLF</code> 만 나온다.</p><h2 id=끝>끝?</h2><p>과면 이걸로 끝날까? wireshark를 이용해서 브라우저로 진입하는 순간과
@@ -54,7 +54,7 @@ LF에 대응되는 문자를 읽을수 있는 문자열로 바꾸는 함수이�
   return readable;
 }
 var node = document.getElementsByTagName(&#39;textarea&#39;)[0];
-convertReadableString(node.value);</code></pre><p><p class=markdown-image><a href=textarea-js.png target=_blank><img src=textarea-js.png alt=output></a></p></p><p><strong>CR이 전부 사라졌다!!!</strong> 게다가 <strong>LF만 있는데 어떻게 클라의 요청에는
+convertReadableString(node.value);</code></pre><p><p class=markdown-image><img src=textarea-js.png alt=output></p></p><p><strong>CR이 전부 사라졌다!!!</strong> 게다가 <strong>LF만 있는데 어떻게 클라의 요청에는
 CRLF가 있던거지???</strong></p><p>이 질문의 답을 찾으려면 HTML 스펙 문서를 뒤져야한다.</p><h3 id=왜-cr이-전부-lf가-되었는가>왜 CR이 전부 LF가 되었는가?</h3><p>HTML5 스펙문서의 &ldquo;4.10.11 The textarea element&rdquo; 에서 이것과 관련된
 내용을 찾을수 있다.</p><p><a href=http://www.w3.org/TR/html5/forms.html#concept-textarea-raw-value>http://www.w3.org/TR/html5/forms.html#concept-textarea-raw-value</a></p><p>간단하게 요약하면 textarea의 value를 이용해서 값에 접근할때 CR, CRLF가
 있으면 LF로 치환한 결과를 보여준다는거다. 그래서 자바스크립트로 얻은

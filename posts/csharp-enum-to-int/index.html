@@ -72,7 +72,7 @@ class Main_SimpleArray : MonoBehaviour {
         var msg = states[States.Run].GetMessage();
     }
 }</code></pre><p><code>EnumArrayGarbage</code>를 사용하면 캐스팅 없이 쓸 수 있으니까 좋다.</p><p>로 끝날거면 이런 글은 안쓴다.
-유니티 프로파일러를 띄워보자.</p><p><p class=markdown-image><a href=profiler.png target=_blank><img src=profiler.png alt=profilter></a></p></p><p><code>Main_EnumArrayGarbage.Update()</code>에서 60Byte씩 GC Alloc가 발생하고 있다.
+유니티 프로파일러를 띄워보자.</p><p><p class=markdown-image><img src=profiler.png alt=profilter></p></p><p><code>Main_EnumArrayGarbage.Update()</code>에서 60Byte씩 GC Alloc가 발생하고 있다.
 <code>Main_SimpleArray.Update()</code>에서는 GC Alloc가 없었는데 고작 int 캐스팅 없애겠다고 고친 코드에서 GC가 발생하니 쓰고싶지 않더라. int 캐스팅도 없으면서 GC Alloc도 없었으면 좋겠다.</p><p>GC Alloc가 발생하는 지점을 따라가보면 문제를 찾을수 있다.
 <code>ConvertToInt()</code>에서 사용한 <code>Convert.ChangeType()</code>에서 GC Alloc가 발생하고있다.
 <code>Convert.ChangeType()</code>의 첫번째 인자의 타입이 Object라서 boxing때문에 GC Alloc가 발생한다.</p><p>C++ 같았으면 무식하게 캐스팅 붙여서 enum을 int로 바꿀수 있었을 것이다.</p><pre><code class="language-csharp line-numbers">int ConvertToIndex&lt;TEnum&gt;(TEnum key) {

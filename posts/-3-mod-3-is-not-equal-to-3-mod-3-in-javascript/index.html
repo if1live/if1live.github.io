@@ -16,14 +16,14 @@ cursor를 대충 건드려도 적당히 굴러갈것이다.</p><pre><code class=
 만약 자바스크립트에서의 답이 2라면 % 연산의 결과를 배열 인덱스로 그대로 꽂아도 된다.
 하지만 -1이 답이라면 %의 값을 그대로 쓸 수 없다.</p><p>예전에 글을 쓴 적이 있으니 답만 공개한다.
 자바스크립트에서 나눗셈의 결과는 Dividend(피제수)의 부호를 따라간다.
-<code>-4 % 3</code>의 답은 <code>-1</code> 이다.</p><p><p class=markdown-image><a href=divisor.jpg target=_blank><img src=divisor.jpg alt=divide></a></p></p><p>자세한 것은 이전에 작성한 <a href=https://if1live.github.io/posts/sign-of-mod-operator/>-4 % 3 = ?</a>를 읽어보자.</p><h2 id=-0>-0</h2><p>jest 로 아래의 유닛테스트를 작성하고 돌리면 아래와 같은 로그가 뜬다.</p><pre><code class="language-js line-numbers">expect(-3 % 3).toEqual(3 % 3);</code></pre><pre class=markdown-textblock><code>Expected value to equal:
+<code>-4 % 3</code>의 답은 <code>-1</code> 이다.</p><p><p class=markdown-image><img src=divisor.jpg alt=divide></p></p><p>자세한 것은 이전에 작성한 <a href=https://if1live.github.io/posts/sign-of-mod-operator/>-4 % 3 = ?</a>를 읽어보자.</p><h2 id=-0>-0</h2><p>jest 로 아래의 유닛테스트를 작성하고 돌리면 아래와 같은 로그가 뜬다.</p><pre><code class="language-js line-numbers">expect(-3 % 3).toEqual(3 % 3);</code></pre><pre class=markdown-textblock><code>Expected value to equal:
     0
 Received:
     -0</code></pre><p>-0과 0이 다르기 때문이 실패한댄다.
 왜 둘이 다른지는 나중에 생각하고 -0이 왜 튀어나왔는지를 먼저 생각해보자.</p><p>자바스크립트는 흔한 언어와 다르게 정수 타입이 없다.
 number type 하나로 숫자를 다룬다.
 number type은 IEEE 754 부동소수점이다.
-IEEE 754 부동소수점에는 -0, +0이 있다.</p><p><p class=markdown-image><a href=618px-IEEE_754_Single_Negative_Zero.svg.png target=_blank><img src=618px-IEEE_754_Single_Negative_Zero.svg.png alt=ieee></a></p></p><ol><li>자바스크립트에는 +0, -0이 있다.</li><li>modulo 연산 결과는 Dividend(피제수)를 따라간다.</li></ol><p>둘의 조합 덕분에 <code>-3 % 3</code>은 <code>0</code>이 아니라 <code>-0</code>이다.</p><h2 id=jest-matcher>jest matcher</h2><p>+0과 -0을 비교하는 jest 테스트 코드를 간단히 짜봤다.</p><pre><code class="language-js line-numbers">const a = -3 % 3;
+IEEE 754 부동소수점에는 -0, +0이 있다.</p><p><p class=markdown-image><img src=618px-IEEE_754_Single_Negative_Zero.svg.png alt=ieee></p></p><ol><li>자바스크립트에는 +0, -0이 있다.</li><li>modulo 연산 결과는 Dividend(피제수)를 따라간다.</li></ol><p>둘의 조합 덕분에 <code>-3 % 3</code>은 <code>0</code>이 아니라 <code>-0</code>이다.</p><h2 id=jest-matcher>jest matcher</h2><p>+0과 -0을 비교하는 jest 테스트 코드를 간단히 짜봤다.</p><pre><code class="language-js line-numbers">const a = -3 % 3;
 const b = 3 % 3;
 
 test(&#39;==&#39;, () =&gt; expect(a == b).toBeTruthy());

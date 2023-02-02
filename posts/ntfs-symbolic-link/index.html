@@ -15,7 +15,7 @@
 당시에도 <a href="https://partner.steamgames.com/doc/features/cloud?l=koreana">스팀 클라우드</a>로 세이브 파일을 저장하는 기능이 있긴했다.
 하지만 스팀 클라우드는 내가 내용물을 직접 볼수 있는것도 아니고 모든 게임이 지원하는 것도 아니었다.
 그래서 git으로 세이브 파일을 관리한다는 개념이 뻘짓같진 않더라.</p><p>저장소에 폴더를 만들고 이것을 세이브 파일이 저장되는 위치로 심볼릭 링크로 걸어둔다.
-세이브 파일이 생성되면 이것을 git에서도 볼수있고 이를 그대로 커밋하면 되겠더라.</p><p><p class=markdown-image><a href=game-save-files.png target=_blank><img src=game-save-files.png alt=diagram></a></p></p><p>게임마다 세이브 데이터의 구현이 다를 것이다.</p><p>하나의 세이브 슬롯이 여러개의 파일로 구성되는 경우도 있을 것이다.
+세이브 파일이 생성되면 이것을 git에서도 볼수있고 이를 그대로 커밋하면 되겠더라.</p><p><p class=markdown-image><img src=game-save-files.png alt=diagram></p></p><p>게임마다 세이브 데이터의 구현이 다를 것이다.</p><p>하나의 세이브 슬롯이 여러개의 파일로 구성되는 경우도 있을 것이다.
 (스크린샷용 이미지 파일과 세이브 데이터가 하나의 세이브 슬롯을 구성하는 경우가 있다)
 이런 경우는 게임 세이브 폴더에 대한 심볼릭 링크를 쓰는 것이 좋다.</p><p>세이브 파일이 저장되는 폴더가 분리되지 않고 게임 데이터 파일에 섞이는 경우도 있을것이다.
 이런 경우는 세이브 파일 하나에 대해서만 심볼릭 링크를 쓰는 것이 좋다.</p><p>디렉토리에 대한 심볼릭 링크, 파일에 대한 심볼릭 링크를 만들수 있다면 게임 세이브 파일을 git으로 관리하는게 가능해질거다.
@@ -53,9 +53,9 @@ C:\Users\libso\Downloads\foo>dir
 2018-08-15  오후 11:45    <symlink>      file-sym.txt [file.txt]
 2018-08-15  오후 11:44                 0 file.txt
                3개 파일                   0 바이트
-               3개 디렉터리  40,185,454,592 바이트 남음</code></pre><p><p class=markdown-image><a href=ntfs-symlink.png target=_blank><img src=ntfs-symlink.png alt="NTFS symlink"></a></p></p><p>파일의 심볼릭링크는 상상한대로 생겼지만 폴더의 심볼릭 링크는 생긴게 이상하다.
+               3개 디렉터리  40,185,454,592 바이트 남음</code></pre><p><p class=markdown-image><img src=ntfs-symlink.png alt="NTFS symlink"></p></p><p>파일의 심볼릭링크는 상상한대로 생겼지만 폴더의 심볼릭 링크는 생긴게 이상하다.
 아이콘이 폴더 모양이 아니다. 바로가기가 오히려 심볼릭 링크처럼 생겼다.
-그리고 <code>dir-sym</code>을 더블클릭하면 파일 열기가 뜬다. 반면 바로가기를 더블클릭하면 <code>dir</code>로 들어가진다.</p><p><p class=markdown-image><a href=ntfs-shortcut.png target=_blank><img src=ntfs-shortcut.png alt=shortcut></a></p></p><p>폴더의 심볼릭 링크를 만들 목적으로 NTFS에서 지원하는 심볼릭 링크는 못 쓰겠다.
+그리고 <code>dir-sym</code>을 더블클릭하면 파일 열기가 뜬다. 반면 바로가기를 더블클릭하면 <code>dir</code>로 들어가진다.</p><p><p class=markdown-image><img src=ntfs-shortcut.png alt=shortcut></p></p><p>폴더의 심볼릭 링크를 만들 목적으로 NTFS에서 지원하는 심볼릭 링크는 못 쓰겠다.
 다른 무언가가 있어야한다.</p><h3 id=windows-10-에서의-변경사항>windows 10 에서의 변경사항</h3><p><a href=https://blogs.windows.com/buildingapps/2016/12/02/symlinks-windows-10/#Ko51LFQ8bjGcBSq1.97>윈도우 10 build 14972부터는 administrator 권한 없이도 가능</a>하게 바뀌었다.
 하지만 내가 NTFS 파일 시스템 붙잡고 삽질하던 2014년에는 윈도우 10도 없었다.
 2014년에 썻어야할 글을 게을러서 미루다 2018년에 쓰게 되어서 꼬였다.</p><h2 id=ntfs-junction-point>NTFS junction point</h2><p>윈도우 95부터는 바로 가기 라는 개념이 있다.
@@ -101,7 +101,7 @@ C:\Users\libso\Downloads\foo>dir
 2018-08-15  오후 11:30    <dir>          dir
 2018-08-15  오후 11:42    <junction>     dir-junction [C:\Users\libso\Downloads\foo\dir]
                0개 파일                   0 바이트
-               4개 디렉터리  40,187,174,912 바이트 남음</code></pre><p><p class=markdown-image><a href=ntfs-junction.png target=_blank><img src=ntfs-junction.png alt="NTFS junction"></a></p></p><p>파이썬으로 junction을 열려고 하면 열 수 없다.
+               4개 디렉터리  40,187,174,912 바이트 남음</code></pre><p><p class=markdown-image><img src=ntfs-junction.png alt="NTFS junction"></p></p><p>파이썬으로 junction을 열려고 하면 열 수 없다.
 바로가기를 사용했을때와는 결과가 바뀌었다.</p><pre class=markdown-textblock><code>>>> f = open('dir-junction')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>

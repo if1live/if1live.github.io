@@ -18,7 +18,7 @@ redis MSET 한번으로 될 일을 SET 100번 호출하고 있더라도 유닛�
   ...
 }</code></pre><h2 id=ioredis-v4173-debug>ioredis (v4.17.3): debug</h2><p>ioredis는 typeorm만큼 자유롭지 않다.
 ioredis는 <a href=https://www.npmjs.com/package/debug>debug</a>를 쓴다.
-<a href=https://github.com/luin/ioredis/blob/v4.17.3/lib/utils/debug.ts#L1>https://github.com/luin/ioredis/blob/v4.17.3/lib/utils/debug.ts#L1</a></p><p>환경변수에 <code>DEBUG=ioredis:*</code>를 넣으면 로그를 볼 수 있다.<p class=markdown-image><a href=ioredis-debug.png target=_blank><img src=ioredis-debug.png alt="ioredis logging"></a></p></p><p>ioredis 코드에 정의된 디버그 로그가 찍히기 때문에 마음대로 커스터마이징 할 수 없다.
+<a href=https://github.com/luin/ioredis/blob/v4.17.3/lib/utils/debug.ts#L1>https://github.com/luin/ioredis/blob/v4.17.3/lib/utils/debug.ts#L1</a></p><p>환경변수에 <code>DEBUG=ioredis:*</code>를 넣으면 로그를 볼 수 있다.<p class=markdown-image><img src=ioredis-debug.png alt="ioredis logging"></p></p><p>ioredis 코드에 정의된 디버그 로그가 찍히기 때문에 마음대로 커스터마이징 할 수 없다.
 <a href=https://github.com/luin/ioredis/blob/v4.17.3/lib/redis/index.ts#L704>https://github.com/luin/ioredis/blob/v4.17.3/lib/redis/index.ts#L704</a></p><p>이럴때는 ioredis는 fork해서 custom logger를 구현하면 된다.
 잘 구현해서 풀리퀘를 보내면 ioredis에서 머지해줄테고 많은 사람들이 이득을 본다.
 이래서 오픈소스가 좋은 것이다.</p><p>하지만 나는 게으르다.
@@ -31,7 +31,7 @@ ioredis 안고치고 로깅 기능을 추가하기로 했다.</p><h2 id=monkey-p
     default_sendCommand(...params);
     ...
   }
-}</code></pre><p><p class=markdown-image><a href=ioredis-logging.png target=_blank><img src=ioredis-logging.png alt="ioredis logging"></a></p></p><p>왼쪽은 터미널에서 실행한 결과이고 오른쪽은 <code>redis-cli monitor</code>이다.
+}</code></pre><p><p class=markdown-image><img src=ioredis-logging.png alt="ioredis logging"></p></p><p>왼쪽은 터미널에서 실행한 결과이고 오른쪽은 <code>redis-cli monitor</code>이다.
 몽키 패치가 잘 돌아간다.
 C, C++ 같은 언어였으면 훨씬 복잡했을텐데 자바스크립트라서 간단하게 문제를 해결했다.</p><pre><code class="language-javascript line-numbers">const Redis = require(&#39;ioredis&#39;);
 

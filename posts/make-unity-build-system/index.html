@@ -9,7 +9,7 @@
 이걸로 끝이 아니라 조만간 Windows Store도 추가될 예정이다.</p><p>내가 개발해보니까 이정도 갯수의 플랫폼을 지원하기 위해서는 빌드 시스템 수준에서도 크로스 플랫폼을 고려해야 하더라.
 게임을 개발하면서 빌드시스템이 어떻게 변화되어서 최종 형태를 갖추었는지 정리해봤다.</p><h2 id=수동-빌드>수동 빌드</h2><p>초기에는 빌드시스템이고 뭐고 없었다.
 빌드를 뽑아서 보여줄 사람이 없는데 뭣하러 빌드에 공을 들이나?
-유니티에서 직접 빌드했다.</p><p><p class=markdown-image><a href=manual-build.png target=_blank><img src=manual-build.png alt="manual build"></a></p></p><h2 id=간단한-빌드-스크립트>간단한 빌드 스크립트</h2><p>유니티에는 커맨드 라인을 통해 스크립트의 특정 함수를 호출하는 기능이 있다.
+유니티에서 직접 빌드했다.</p><p><p class=markdown-image><img src=manual-build.png alt="manual build"></p></p><h2 id=간단한-빌드-스크립트>간단한 빌드 스크립트</h2><p>유니티에는 커맨드 라인을 통해 스크립트의 특정 함수를 호출하는 기능이 있다.
 <a href=https://docs.unity3d.com/Manual/CommandLineArguments.html>Command line arguments</a>
 빌드를 뽑는 함수를 만들고 이를 커맨드 라인에서 호출한다.
 그러면 빌드가 짠!</p><pre><code class="language-csharp line-numbers">public class BuildScript {
@@ -52,7 +52,7 @@ toy clash는 기어VR, 구글 데이드림, 스팀VR을 동시에 지원했다.
 다국어 지원 설정을 하려면 visual studio 프로젝트를 연후 몇가지 설정을 수정해야한다.
 근데 visual stdio 프로젝트는 텍스트 파일이잖아? 수정 전후에 어떤 내용이 바뀌었는지 볼수있잖아?
 그렇다면 빌드한 다음에 visual studio 프로젝트를 열어서 고치는 것까지 자동화시킬 수 있다.</p><h2 id=superunitybuild>SuperUnityBuild</h2><p>플랫폼과 빌드설정의 가짓수가 늘어나다보니 이를 유지보수하는게 귀찮더라.
-더 좋은 방법이 뭐가 있나 찾아보니 <a href=https://github.com/Chaser324/unity-build>SuperUnityBuild</a> 라는게 있더라.</p><p><p class=markdown-image><a href=super-unity-build.png target=_blank><img src=super-unity-build.png alt=SuperUnityBuild></a></p></p><p>하지만 나는 SuperUnityBuild를 사용하지 않았다.
+더 좋은 방법이 뭐가 있나 찾아보니 <a href=https://github.com/Chaser324/unity-build>SuperUnityBuild</a> 라는게 있더라.</p><p><p class=markdown-image><img src=super-unity-build.png alt=SuperUnityBuild></p></p><p>하지만 나는 SuperUnityBuild를 사용하지 않았다.
 두가지 부분이 마음에 들지 않았다.</p><p>첫번째, 내가 필요로하는 기능이 모두 있는게 아니었다.
 VR게임을 빌드하려면 VR관련 몇가지 설정을 바꿔줘야한다. 하지만 SuperUnityBuild는 VR게임을 위해서 만들어지지 않았다.
 구글 데이드림과 기어VR은 서로 다른 AndroidManifest.xml을 사용해야한다. 하지만 SuperUnityBuild에는 그런 기능이 보이지 않았다.

@@ -62,7 +62,7 @@ P_AproxDistance
     return dx&#43;dy-(dy&gt;&gt;1);
 }</code></pre><p>벡터의 길이를 대충 계산하는지는 방법은 매우 간단하다. <code>length = a + b/2</code> (단, a >= b).
 그림으로 보면 간단하게 이해할 수 있다.
-구현체에는 곱셈, 나눗셈도 없이 덧셈, 뺄셈, left shift정도만 사용했다. 빠르긴 진짜 빠르겠지.</p><p><p class=markdown-image><a href=vector-length-triangle-debuggerd.jpg target=_blank><img src=vector-length-triangle-debuggerd.jpg alt=AproxDistance></a></p></p><blockquote><p>와&mldr;ㅁㅊ, id 소프트웨어는 무슨 어둠의 의회 같은덴가&mldr;.
+구현체에는 곱셈, 나눗셈도 없이 덧셈, 뺄셈, left shift정도만 사용했다. 빠르긴 진짜 빠르겠지.</p><p><p class=markdown-image><img src=vector-length-triangle-debuggerd.jpg alt=AproxDistance></p></p><blockquote><p>와&mldr;ㅁㅊ, id 소프트웨어는 무슨 어둠의 의회 같은덴가&mldr;.
 <a href=https://twitter.com/debuggerD/status/727748272945762305>@debuggerD</a></p></blockquote><h2 id=vectornormalize>vector.normalize()</h2><p>Normalized Vector를 구하는 방법은 <code>normalized_vector = vector / vector.length</code> 이다.
 위에서 벡터의 길이를 구하는 함수를 만들어냈으니 이것을 이용하면 normalized vector를 구할수 있을거다.
 하지만 DOOM은 그런 방법을 선택하지 않았다.</p><p><a href=https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074>https://github.com/id-Software/DOOM/blob/77735c3ff0772609e9c8d29e3ce2ab42ff54d20b/linuxdoom-1.10/p_enemy.c#L1050-L1074</a></p><pre><code class="language-c line-numbers">exact = R_PointToAngle2 (actor-&gt;x, actor-&gt;y, dest-&gt;x, dest-&gt;y);

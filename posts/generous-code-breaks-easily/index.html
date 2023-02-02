@@ -10,7 +10,7 @@
 액티브엑스 기반 강의라고 붙어있더니 역시나 크롬에서 안되는거같더라.
 그래서 익스플로러를 켜고 인강을 들어갔다.
 IE로도 동영상 강의가 나오지 않더라.
-왜 안돌아가나 확인해가 위해서 크롬 개발자 도구를 켰더니 이런 코드가 있더라.</p><p><p class=markdown-image><a href=bug.png target=_blank><img src=bug.png alt=bug></a></p></p><pre><code class="language-javascript line-numbers">function window.onload() {
+왜 안돌아가나 확인해가 위해서 크롬 개발자 도구를 켰더니 이런 코드가 있더라.</p><p><p class=markdown-image><img src=bug.png alt=bug></p></p><pre><code class="language-javascript line-numbers">function window.onload() {
     ....
 }</code></pre><p>잉? 함수 이름에 <code>.</code> 들어가는게 가능했어?
 이런 코드는 처음봤다.
@@ -21,7 +21,7 @@ a.b = {};
 a.b.foo = function() { console.log(1); };
 a.b.foo();</code></pre><p>하지만 아래의 코드는 아마 안돌아갈거다.</p><pre><code class="language-javascript line-numbers">function a.b.bar() { console.log(2); }
 a.b.bar();</code></pre><p>크롬의 경우 <code>Uncaught SyntaxError: Unexpected token .</code> 라는 에러가 발생한다.
-함수이름에 <code>.</code>이 들어가는게 문법적으로 올바르지 않나보다.</p><p><p class=markdown-image><a href=capture-chrome.png target=_blank><img src=capture-chrome.png alt=chrome></a></p></p><p>하지만 IE 호환성 모드를 활성화하면 잘 돌아간다.</p><p><p class=markdown-image><a href=capture-ie-legacy.png target=_blank><img src=capture-ie-legacy.png alt="ie legacy"></a></p></p><h2 id=원인>원인</h2><p>IE 구버전은 옛날 물건이다.
+함수이름에 <code>.</code>이 들어가는게 문법적으로 올바르지 않나보다.</p><p><p class=markdown-image><img src=capture-chrome.png alt=chrome></p></p><p>하지만 IE 호환성 모드를 활성화하면 잘 돌아간다.</p><p><p class=markdown-image><img src=capture-ie-legacy.png alt="ie legacy"></p></p><h2 id=원인>원인</h2><p>IE 구버전은 옛날 물건이다.
 요새 자바스크립트 스펙으로 IE 구버전을 공격하는건 너무하잖아?
 1997년에 작성된 <a href=https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%201st%20edition,%20June%201997.pdf>ECMA-262 1판</a>을 보자.</p><p><code>13. Function Definition</code> 에 함수의 문법 정의가 있다.</p><pre class=markdown-textblock><code>FunctionDeclaration :
     function Identifier ( FormalParameterListopt ) Block</code></pre><p>함수 이름은 identifier만 가능하다.

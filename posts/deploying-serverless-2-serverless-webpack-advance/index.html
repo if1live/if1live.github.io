@@ -47,7 +47,7 @@ node_modules에서 직접 지운다.</p><pre><code class="language-yaml line-num
     packagerOptions:
       scripts:
         - npx rimraf &#34;node_modules/aws-sdk&#34;</code></pre><p>배포 패키지 크기: 6,901KB (-5,272KB)</p><h2 id=typeorm-최적화>typeorm 최적화</h2><p>배포 패키지 zip 파일을 직접 뜯어보면 크기를 줄일 수 있는 힌트를 찾을 수 있다.
-figlet 라이브러리가 압축된 크기 1.26MB 씩이나 차지하고 있는게 보인다.</p><p><p class=markdown-image><a href=artifact-figlet.png target=_blank><img src=artifact-figlet.png alt=figlet></a></p></p><p>figlet 같이 거대한 패키지가 대체 어떻게 끌려들어간건가? 이걸 제거할 방법이 있나?
+figlet 라이브러리가 압축된 크기 1.26MB 씩이나 차지하고 있는게 보인다.</p><p><p class=markdown-image><img src=artifact-figlet.png alt=figlet></p></p><p>figlet 같이 거대한 패키지가 대체 어떻게 끌려들어간건가? 이걸 제거할 방법이 있나?
 뜯으면 답이 나온다.
 typeorm은 yargonaut를 사용하고 yargonaut가 figlet를 사용한다.
 typeorm에서 yargonaut를 런타임에 사용하지 않는다면 figlet를 지워도 런타임에 문제가 생기지 않을 것이다.

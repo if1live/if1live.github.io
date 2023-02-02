@@ -85,7 +85,7 @@ C, C++ 쓰다보면 컴파일은 성공했지만 링킹(linking)이 되지 않�
 이것을 하나로 합쳐야 실행 가능한 파일이 만들어진다.</p><p>타입스크립트 소스 파일들이 컴파일되어 자바스크립트 파일이 생성되었다.
 하지만 자바스크립트 파일간에는 연결이 없다.
 <code>@src</code>를 node도 알아먹을수 있는 형태로 바꿔야한다.</p><h2 id=webpack>webpack</h2><p>webpack은 모듈 번들러이다.
-webpack을 쓰면 분리되어있는 자바스크립트 소스 파일을 하나로 파일로 묶어줄 수 있다.</p><p><p class=markdown-image><a href=toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png target=_blank><img src=toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png alt=webpack></a></p></p><p>생각해보면 linker와 하는 짓이 유사하다.</p><p><p class=markdown-image><a href=COMPILE.gif target=_blank><img src=COMPILE.gif alt=linker></a></p></p><p>linking 하듯이 webpack을 이용해서 분리된 자바스크립트 파일을 합칠때 <code>@src</code>를 멀쩡한 이름으로 바꿀 수 있으면 프로그램이 돌아갈거다.
+webpack을 쓰면 분리되어있는 자바스크립트 소스 파일을 하나로 파일로 묶어줄 수 있다.</p><p><p class=markdown-image><img src=toptal-blog-image-1476174229140-3890202f75d94c0692549af41f9d652a.png alt=webpack></p></p><p>생각해보면 linker와 하는 짓이 유사하다.</p><p><p class=markdown-image><img src=COMPILE.gif alt=linker></p></p><p>linking 하듯이 webpack을 이용해서 분리된 자바스크립트 파일을 합칠때 <code>@src</code>를 멀쩡한 이름으로 바꿀 수 있으면 프로그램이 돌아갈거다.
 webpack이 <code>@src</code>를 알아듣게 만드는 방법은 남들이 간 길을 찾으니 나오더라.
 <a href=https://robferguson.org/blog/2017/11/22/working-with-typescript-webpack-and-ionic-3/>Working with TypeScript, webpack and Ionic 3</a> 를 참고했다.
 webpack 설정파일에 alias 를 설정하면 된다더라.

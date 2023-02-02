@@ -45,7 +45,7 @@ class DummyMonoBehaviourEditor : UnityEditor.Editor {
         Debug.Log(&#34;method invoked - base behaviour&#34;);
     }
     ...
-}</code></pre><p><p class=markdown-image><a href=unity-inspector-show.png target=_blank><img src=unity-inspector-show.png alt=inspector></a></p></p><h3 id=디버그-로그-onoff>디버그 로그 On/Off</h3><p>새로운 기능을 개발하다보면 <code>Debug.Log()</code>를 이용해서 콘솔 출력을 쓰게된다.
+}</code></pre><p><p class=markdown-image><img src=unity-inspector-show.png alt=inspector></p></p><h3 id=디버그-로그-onoff>디버그 로그 On/Off</h3><p>새로운 기능을 개발하다보면 <code>Debug.Log()</code>를 이용해서 콘솔 출력을 쓰게된다.
 그런데 기능 개발이 끝나면 디버그용 로그는 어떻게 되는가?</p><p>쓸데없는 로그 출력은 성능상 필요없다. 또한 다른 로그와 뒤섞여서 개발에 방해되기 때문에 지울것이다.
 보통은 주석으로 지울텐데 주석으로 지우면 코드를 건드리잖아? 그러면 스크립트 컴파일을 다시해야되니 유니티가 멈추잖아?
 VFW에서 제공하는 <code>dLog()</code>, <code>dLogFormat()</code>를 이용하면 스크립트 컴파일 없이 로그를 없앨수있다.</p><pre><code class="language-csharp line-numbers">[Show]
@@ -62,8 +62,8 @@ void PrintDebugLog() {
 protected void dLog(object obj)
 {
     if (dbg) Log(obj);
-}</code></pre><p><p class=markdown-image><a href=vfw-log-flag.png target=_blank><img src=vfw-log-flag.png alt="debug log on/off"></a></p></p><h3 id=interface도-보인다>Interface도 보인다</h3><pre><code class="language-csharp line-numbers">public IDummyContainer foo_interface = null;</code></pre><p>스크립트 안에 인터페이스가 멤버변수로 있는 경우 유니티 기본 인스펙터에서는 보이지 않는다.
-하지만 BaseBehaviour에서는 보인다.</p><p><p class=markdown-image><a href=unity-inspector-interface.png target=_blank><img src=unity-inspector-interface.png alt=inspector></a></p></p><h2 id=단점>단점</h2><h3 id=새로-배워야한다>새로 배워야한다</h3><pre><code class="language-csharp line-numbers">[Header(&#34;bar&#34;)]
+}</code></pre><p><p class=markdown-image><img src=vfw-log-flag.png alt="debug log on/off"></p></p><h3 id=interface도-보인다>Interface도 보인다</h3><pre><code class="language-csharp line-numbers">public IDummyContainer foo_interface = null;</code></pre><p>스크립트 안에 인터페이스가 멤버변수로 있는 경우 유니티 기본 인스펙터에서는 보이지 않는다.
+하지만 BaseBehaviour에서는 보인다.</p><p><p class=markdown-image><img src=unity-inspector-interface.png alt=inspector></p></p><h2 id=단점>단점</h2><h3 id=새로-배워야한다>새로 배워야한다</h3><pre><code class="language-csharp line-numbers">[Header(&#34;bar&#34;)]
 [Range(0, 10)]
 public int bar_int = 3;
 [Range(0, 1.0f)]
