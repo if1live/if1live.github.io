@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>cocos2d-x 메모리 관리에 대한 간단한 정리</h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><p>cocos2d-x는 cocos2d를 거의 그대로 포팅한 2d게임 엔진이다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>cocos2d-x 메모리 관리에 대한 간단한 정리</span></h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><p>cocos2d-x는 cocos2d를 거의 그대로 포팅한 2d게임 엔진이다.
 원작이 objc 기반인 cocos2d를 C++로 옮겼으니 완전히 똑같지는 않다.
 특히 메모리 모델의 경우는 언어상의 차이로 다를수밖에 없다.</p><p>objc의 메모리 관리는 기본적으로 레퍼런스 카운팅 방식이다. 모든 objc의 클래스는 NSObject를 상속받는다.
 retain, release를 적절히 써서 레러런서 카운팅 쌍을 맞춰주면 적절히 메모리가 관리된다.

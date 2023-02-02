@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>[#if UNITY_EDITOR] 줄이는 편법</h1><div class=tip><time datetime="2017-02-13 00:00:00 +0000 UTC">2017. 02. 13</time></div><div class=content><p>내 경우 유니티 에디터 확장을 따로 짜기 귀찮아서 MonoBehaviour 대신 <a href=https://github.com/vexe/VFW>VFW</a>의 BaseBehaviour를 자주 사용한다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>[#if UNITY_EDITOR] 줄이는 편법</span></h1><div class=tip><time datetime="2017-02-13 00:00:00 +0000 UTC">2017. 02. 13</time></div><div class=content><p>내 경우 유니티 에디터 확장을 따로 짜기 귀찮아서 MonoBehaviour 대신 <a href=https://github.com/vexe/VFW>VFW</a>의 BaseBehaviour를 자주 사용한다.
 그래서 에디터에서만 쓸수있는 클래스가 스크립트에서 자주 등장한다.
 대표적인 예로 <code>UnityEditor.AssetDatabase</code>가 있다.</p><pre><code class="language-csharp line-numbers">using UnityEditor;
 

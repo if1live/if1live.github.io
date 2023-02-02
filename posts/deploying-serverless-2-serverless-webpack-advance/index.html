@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>serverless 배포하기 (2) serverless-webpack 기반으로 배포 패키지 크기 줄이기</h1><div class=tip><time datetime="2021-08-01 23:00:00 +0900 +0900">2021. 08. 01</time></div><div class=content><p><a href=/posts/deploying-serverless-1-serverless-webpack-beginning>이전글</a>에서는 serverless-webpack를 사용해서 람다 배포하는걸 다뤘다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>serverless 배포하기 (2) serverless-webpack 기반으로 배포 패키지 크기 줄이기</span></h1><div class=tip><time datetime="2021-08-01 23:00:00 +0900 +0900">2021. 08. 01</time></div><div class=content><p><a href=/posts/deploying-serverless-1-serverless-webpack-beginning>이전글</a>에서는 serverless-webpack를 사용해서 람다 배포하는걸 다뤘다.
 배포 패키지의 크기는 21.18 MB (21,685KB) 였다.
 2부에서는 배포 패키지 크기를 줄이는 편법을 다룬다.</p><h2 id=왜-배포-패키지-크기를-줄이나>왜 배포 패키지 크기를 줄이나?</h2><p>배포 패키지 (.zip 파일 아카이브)는 <a href=https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/gettingstarted-limits.html>50MB</a>로 제한되어있고 당분간 늘어나지 않을 것이다.
 (최근에 컨테이너 형태로 람다 배포하는 방법이 추가되었다. 배포컨테이너 이미지를 쓰면 10GB까지 배포할 수 있다.)

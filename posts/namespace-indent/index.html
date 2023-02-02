@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C++ namespace 들여쓰기 방지하는 편법</h1><div class=tip><time datetime="2012-11-28 00:00:00 +0000 UTC">2012. 11. 28</time></div><div class=content><h2 id=개요>개요</h2><p>C++에는 C에는 없는 namespace라는 문법이 있다.(C가 구식이라서 없는거지 요즘 언어는 어지간하면 다 namespace와 유사한 문법이 있다.) 네임스페이스는 문법이 블럭과 동일하기때문에 내부 영역이 적절히 들여쓰기가 된다</p><pre><code class="language-cpp line-numbers">namespace sora {
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>C++ namespace 들여쓰기 방지하는 편법</span></h1><div class=tip><time datetime="2012-11-28 00:00:00 +0000 UTC">2012. 11. 28</time></div><div class=content><h2 id=개요>개요</h2><p>C++에는 C에는 없는 namespace라는 문법이 있다.(C가 구식이라서 없는거지 요즘 언어는 어지간하면 다 namespace와 유사한 문법이 있다.) 네임스페이스는 문법이 블럭과 동일하기때문에 내부 영역이 적절히 들여쓰기가 된다</p><pre><code class="language-cpp line-numbers">namespace sora {
     class SomeClass { }; 
 }</code></pre><p>그런데 네임스페이스의 깊이가 항상 1 level일수는 없잖아? 더 깊어질수도 있지 않겠는가? 그렇게 되면 코드가 다음과 같은 꼴이 된다.</p><pre><code class="language-cpp line-numbers">namespace sora {
     namespace gl {

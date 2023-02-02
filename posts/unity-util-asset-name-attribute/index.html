@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>유니티에서 에셋을 파일이름 기반으로 관리하는 편법</h1><div class=tip><time datetime="2017-02-20 00:00:00 +0000 UTC">2017. 02. 20</time></div><div class=content><h2 id=문제--오디오-파일과-함수를-어떻게-연결할것인가>문제 : 오디오 파일과 함수를 어떻게 연결할것인가?</h2><p>게임에서 사용할 수십, 수백개의 오디오 파일이 있다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>유니티에서 에셋을 파일이름 기반으로 관리하는 편법</span><br><small>C# Attribute와 Reflection을 써서 노가다 줄이기</small></h1><div class=tip><time datetime="2017-02-20 00:00:00 +0000 UTC">2017. 02. 20</time></div><div class=content><h2 id=문제--오디오-파일과-함수를-어떻게-연결할것인가>문제 : 오디오 파일과 함수를 어떻게 연결할것인가?</h2><p>게임에서 사용할 수십, 수백개의 오디오 파일이 있다.
 그리고 어떤 상황(또는 함수)에서 어떤 사운드 파일을 재생해야되는지를 알고있다.
 이것을 구현하는게 목적이다.
 간단한 방법은 사운드 에셋을 컴포넌트에 직접 연결하는것이다.</p><pre><code class="language-csharp line-numbers">public class AudioPlayer : MonoBehaviour {

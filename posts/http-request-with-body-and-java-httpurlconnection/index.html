@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2</h1><div class=tip><time datetime="2019-02-09 00:00:00 +0000 UTC">2019. 02. 09</time></div><div class=content><h2 id=삽질의-시작>삽질의 시작</h2><p>이전에 <a href=https://if1live.github.io/posts/http-get-request-with-body-and-http-library/>HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?</a>를 썼다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>HTTP 요청에 body를 붙여서 보내면 어떤 일이 벌어질까? part 2</span><br><small>Java HttpURLConnection의 경우</small></h1><div class=tip><time datetime="2019-02-09 00:00:00 +0000 UTC">2019. 02. 09</time></div><div class=content><h2 id=삽질의-시작>삽질의 시작</h2><p>이전에 <a href=https://if1live.github.io/posts/http-get-request-with-body-and-http-library/>HTTP GET 요청에 body를 붙여서 보내면 어떤 일이 벌어질까?</a>를 썼다.
 나중에 자바의 HttpURLConnection의 동작이 안드로이드 버전의 UnityWebRequest와 똑같다는 소리를 들었다.
 유니티 개발자들이 HTTP 라이브러리 만들기 귀찮아서 플랫폼별로 내장된 HTTP 라이브러리를 쓴거 아닐까? 하는 망상을 했다.
 그래서 HttpURLConnection로 HTTP 요청을 보낼때 body 붙이는 짓을 해봤다.</p><h2 id=테스트>테스트</h2><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);

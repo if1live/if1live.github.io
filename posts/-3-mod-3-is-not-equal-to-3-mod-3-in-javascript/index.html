@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>자바스크립트에서 expect(-3 % 3).toEqual(3 % 3)가 실패하는 이유</h1><div class=tip><time datetime="2018-12-09 00:00:00 +0000 UTC">2018. 12. 09</time></div><div class=content><h2 id=-33-과-33은-같은가><code>-3%3</code> 과 <code>3%3</code>은 같은가?</h2><p>얼마전에 코딩하다 밟은 버그에 대해서 이야기를 해본다.</p><p>자바스크립트로 미디어 플레이어의 플레이리스트를 구현하고 있었다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>자바스크립트에서 expect(-3 % 3).toEqual(3 % 3)가 실패하는 이유</span><br><small>함정과 함정과 그리고 함정</small></h1><div class=tip><time datetime="2018-12-09 00:00:00 +0000 UTC">2018. 12. 09</time></div><div class=content><h2 id=-33-과-33은-같은가><code>-3%3</code> 과 <code>3%3</code>은 같은가?</h2><p>얼마전에 코딩하다 밟은 버그에 대해서 이야기를 해본다.</p><p>자바스크립트로 미디어 플레이어의 플레이리스트를 구현하고 있었다.
 플레이리스트는 간단히 배열로 구현했다.</p><pre><code class="language-js line-numbers">const item = playlistItems[cursor];</code></pre><p>만약 플레이리스트의 크기가 3이고, cursor가 2인 경우 다음곡을 누르는 경우를 생각하자.
 2에 1을 더한 후 3을 cursor로 배열에 그대로 접근하면 out of index 에러가 발생할것이다.
 (배열의 크기가 3이면 가능한 인덱스는 0~2이니까)</p><p>cursor를 index로 바꿔주는 적절한 함수가 있다고 치자.

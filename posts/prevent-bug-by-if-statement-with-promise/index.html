@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기</h1><div class=tip><time datetime="2018-10-13 00:00:00 +0000 UTC">2018. 10. 13</time></div><div class=content><h2 id=async-function--if>async function + if</h2><p>옛날 옛적 미개한 자바스크립트에는 콜백뿐이었다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>타입스크립트에서 if문 안에 promise가 들어가는 문제 피하기</span><br><small>lint + naming convention</small></h1><div class=tip><time datetime="2018-10-13 00:00:00 +0000 UTC">2018. 10. 13</time></div><div class=content><h2 id=async-function--if>async function + if</h2><p>옛날 옛적 미개한 자바스크립트에는 콜백뿐이었다.
 나중에 promise가 추가되서 좋아졌다.
 더 나중에 async/await가 추가되서 더 좋아졌다.
 async/await 좋다고 열심히 쓰다가 이번주에 아래와 같은 함정을 밟았다.</p><pre><code class="language-ts line-numbers">export const isReady = async () =&gt; {

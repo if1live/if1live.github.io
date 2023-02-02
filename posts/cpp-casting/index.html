@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>C++ 다중상속(interface) 관련 삽질 자료</h1><div class=tip><time datetime="2012-11-27 00:00:00 +0000 UTC">2012. 11. 27</time></div><div class=content><p>나는 다중상속을 쓰는것을 싫어한다. 왜냐하면 다중상속을 써서 구현했다는것은 그 소스를 자바나 C#으로 똑같이 구현하는것이 불가능하다는 뜻이기 떄문이다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>C++ 다중상속(interface) 관련 삽질 자료</span></h1><div class=tip><time datetime="2012-11-27 00:00:00 +0000 UTC">2012. 11. 27</time></div><div class=content><p>나는 다중상속을 쓰는것을 싫어한다. 왜냐하면 다중상속을 써서 구현했다는것은 그 소스를 자바나 C#으로 똑같이 구현하는것이 불가능하다는 뜻이기 떄문이다.
 하지만 자바나 C#처럼 interface라는것은 설계를하다보면 자주 쓰게되는데 C++의 경우는 interface같은것이 문법차원으로 지원되지 않는다. 순수가상함수로만 채워진 함수를 상속받으면 그것이 interface처럼 동작하는것뿐이다. 그래서 실제 구현결과는 다중상속이나 마찬가지다
 이로인해 발생할듯한 문제를 테스트 해봤다</p><p>실험에 사용된 클래스 소스는..</p><pre><code class="language-cpp line-numbers">class Super1 {
 public:

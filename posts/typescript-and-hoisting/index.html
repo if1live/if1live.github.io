@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>타입스크립트와 호이스팅</h1><div class=tip><time datetime="2020-01-02 00:00:00 +0000 UTC">2020. 01. 02</time></div><div class=content><p>타입스크립트에는 union type이 있다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>타입스크립트와 호이스팅</span><br><small>오늘의 멍청한 코드</small></h1><div class=tip><time datetime="2020-01-02 00:00:00 +0000 UTC">2020. 01. 02</time></div><div class=content><p>타입스크립트에는 union type이 있다.
 타입스크립트는 매우 좋은 언어라서 분기를 적절히 처리해주면 union type의 특정 타입으로 한정할 수 있다.
 아래의 <a href="http://www.typescriptlang.org/play/index.html?ssl=1&ssc=1&pln=7&pc=1#code/GYVwdgxgLglg9mABMAFAQwFyIM5QE4xgDmiAPomCADZUCUiA3gFCKuIzCLqIC8fF1Oo0R4AplBB4wAbkQBfFm0WsICXIgAevLvR4A+RKrDY4VUQDoqcIulrTlycNHhIAninoNDa0xas20O3kmBSA">코드</a>는 <code>string | null</code> 타입이 들어왔지만 <code>null</code>을 분기로 빼냈다.
 그래서 분기 아래에서는 a가 string인게 보장된다.</p><pre><code class="language-ts line-numbers">function f(a: string | null) {

@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>ioredis에 로깅 끼워넣기</h1><div class=tip><time datetime="2020-07-09 00:00:00 +0000 UTC">2020. 07. 09</time></div><div class=content><h2 id=로깅의-필요성>로깅의 필요성</h2><p>요새 작업하고 있는 프로젝트에서 <a href=https://github.com/typeorm/typeorm>typeorm</a>과 <a href=https://github.com/luin/ioredis>ioredis</a>를 쓰고 있다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>ioredis에 로깅 끼워넣기</span><br><small>라이브러리 코드 수정 없이 라이브러리 개조하기</small></h1><div class=tip><time datetime="2020-07-09 00:00:00 +0000 UTC">2020. 07. 09</time></div><div class=content><h2 id=로깅의-필요성>로깅의 필요성</h2><p>요새 작업하고 있는 프로젝트에서 <a href=https://github.com/typeorm/typeorm>typeorm</a>과 <a href=https://github.com/luin/ioredis>ioredis</a>를 쓰고 있다.
 기능이 검증된 코드를 짜기 위해서 유닛 테스트를 도배하고 있다.
 하지만 유닛 테스트로는 성능을 확인할 순 없다.
 redis MSET 한번으로 될 일을 SET 100번 호출하고 있더라도 유닛테스트는 통과할 것이다.</p><p>최적화라는 빅-픽쳐를 위해 서버가 redis, rdbms로 요청 보낼때 로그를 남기기로 했다.

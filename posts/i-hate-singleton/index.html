@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>나는 싱글턴이 싫어요</h1><div class=tip><time datetime="2013-05-19 00:00:00 +0000 UTC">2013. 05. 19</time></div><div class=content><p>옛날에는 싱글턴을 자주 썼는데 요즘에는 안쓴다. 내가 싱글턴을 안쓰게 된 몇가지 이유가 있는데 다음과 같다</p><h2 id=소멸-시점이-있긴한가>소멸 시점이 있긴한가?</h2><p>static을 이용해서 구현한 싱글턴 설계에서 존재하는 문제점이다.</p><pre><code class="language-cpp line-numbers">class Singleton {
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>나는 싱글턴이 싫어요</span></h1><div class=tip><time datetime="2013-05-19 00:00:00 +0000 UTC">2013. 05. 19</time></div><div class=content><p>옛날에는 싱글턴을 자주 썼는데 요즘에는 안쓴다. 내가 싱글턴을 안쓰게 된 몇가지 이유가 있는데 다음과 같다</p><h2 id=소멸-시점이-있긴한가>소멸 시점이 있긴한가?</h2><p>static을 이용해서 구현한 싱글턴 설계에서 존재하는 문제점이다.</p><pre><code class="language-cpp line-numbers">class Singleton {
 private:
     Singleton() {}
     Singleton(const Singleton&amp; other);

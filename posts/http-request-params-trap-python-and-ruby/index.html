@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>버그 삽질기 - 파이썬으로 구현한 API 서버 루비로 포팅하기</h1><div class=tip><time datetime="2016-03-01 00:00:00 +0000 UTC">2016. 03. 01</time></div><div class=content><p>간단한 명언 API 서버를 만들보자. 필요한 기능은 다음과 같다.</p><ol><li>명언 목록을 데이터로 분리한다. 나중에 목록을 쉽게 갱신할수 있어야한다.</li><li>서버에 접속하면 명언중 하나를 임의로 골라서 보여준다.</li><li>Query String을 이용해서 특정 명언을 골라서 볼수 있어야 한다. (결정론적으로 작동해야 테스트하기 쉬우니까)</li><li>Query String이 올바르지 않으면 임의로 하나를 보여준다.</li></ol><p>다은은 간단한 작성된 명언 목록이다. 한줄에 하나의 명언을 적었다.</p><pre><code class="language-txt line-numbers">가정이 무너지고 사회가 무너지고
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>버그 삽질기 - 파이썬으로 구현한 API 서버 루비로 포팅하기</span><br><small>HTTP 요청 parameters를 이용하다 밟을수 있는 함정</small></h1><div class=tip><time datetime="2016-03-01 00:00:00 +0000 UTC">2016. 03. 01</time></div><div class=content><p>간단한 명언 API 서버를 만들보자. 필요한 기능은 다음과 같다.</p><ol><li>명언 목록을 데이터로 분리한다. 나중에 목록을 쉽게 갱신할수 있어야한다.</li><li>서버에 접속하면 명언중 하나를 임의로 골라서 보여준다.</li><li>Query String을 이용해서 특정 명언을 골라서 볼수 있어야 한다. (결정론적으로 작동해야 테스트하기 쉬우니까)</li><li>Query String이 올바르지 않으면 임의로 하나를 보여준다.</li></ol><p>다은은 간단한 작성된 명언 목록이다. 한줄에 하나의 명언을 적었다.</p><pre><code class="language-txt line-numbers">가정이 무너지고 사회가 무너지고
 안 되겠소 쏩시다
 트위터는 인생의 낭비
 비둘기야 먹자

@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>디버깅 포스트모템 - 박살난 소멸자</h1><div class=tip><time datetime="2016-01-17 00:00:00 +0000 UTC">2016. 01. 17</time></div><div class=content><h2 id=개요>개요</h2><p>최근에 레거시 코드에 숨겨진 버퍼 오버플로우 버그를 잡느라고 하루를
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>디버깅 포스트모템 - 박살난 소멸자</span><br><small>LLDB를 이용해서 버퍼 오버플로우 찾기</small></h1><div class=tip><time datetime="2016-01-17 00:00:00 +0000 UTC">2016. 01. 17</time></div><div class=content><h2 id=개요>개요</h2><p>최근에 레거시 코드에 숨겨진 버퍼 오버플로우 버그를 잡느라고 하루를
 날렸습니다. 찾고나니 간단한 버그였지만 하루씩이나 걸렸습니다. 버그를
 잡은 다음에 생각하니 여러가지 요소가 결합되어서 디버깅이 오래 걸린거
 같았습니다.</p><ul><li>콜스택이 이상하게 나와서 버퍼 오버플로우 버그인지 감을 잡는데 오래 걸림</li><li>step in, step out, continue, next 이외의 디버거 기능을 안써봤다.</li><li>말로만 듣고 한번도 안써본 watchpoint 사용법을 찾아보는데 오래 걸림</li><li>gdb만 쓰다가 lldb를 처음 써봄. gdb와 lldb의 명령어는 다르다</li></ul><p>버퍼 오버플로우 문제가 발생하는 가상 시나리오를 작성하고 이를

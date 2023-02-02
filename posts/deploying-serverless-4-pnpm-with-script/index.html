@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>serverless 배포하기 (4) 플러그인 안쓰고 타입스크립트 함수 배포하기</h1><div class=tip><time datetime="2022-08-20 20:00:00 +0900 +0900">2022. 08. 20</time></div><div class=content><p><a href=/posts/deploying-serverless-3-flaw-of-serverless-webpack>이전글</a>에서는 serverless-webpack 를 사용했을때 발생할 수 있는 문제를 다뤘다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>serverless 배포하기 (4) 플러그인 안쓰고 타입스크립트 함수 배포하기</span></h1><div class=tip><time datetime="2022-08-20 20:00:00 +0900 +0900">2022. 08. 20</time></div><div class=content><p><a href=/posts/deploying-serverless-3-flaw-of-serverless-webpack>이전글</a>에서는 serverless-webpack 를 사용했을때 발생할 수 있는 문제를 다뤘다.
 이번에는 serverless-webpack같은 플러그인을 쓰지 않고 serverless framework만으로 타입스크립트 함수를 배포한다.
 손으로 serverless를 배포해보면 AWS Lambda 핸들러가 어떻게 돌아갈지 이해하고 어떤 부분을 더 개선할수 있을지 보인다.</p><h2 id=빌드>빌드</h2><p>타입스크립트로 간단한 핸들러를 작성하고 webpack을 사용해서 번들링한다.
 요새는 webpack 잘 안쓴다던데 예제 코드를 작성한게 2021년이라서 webpack을 유지했다.

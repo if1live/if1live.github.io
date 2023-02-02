@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>Box2d Stack Allocator</h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><h2 id=구조>구조</h2><p>고정크기로 b2_stackSize(기본값 100kb)의 메모리를 가지고 이것을 맨앞부터 쪼개서(그래서 스택기반) 사용하는 할당자이다. 구조가 단순한만큼 빠르다. 초기화에서 한번에 여러개를 할당하고 몰아서 해제하는 객체 로딩같은곳에서 사용 가능할듯하다.</p><p>할당한 순서와 정확히 반대로 해제해야 정상 작동한다. (그래야 스택답지)</p><pre><code class="language-cpp line-numbers">const int32 b2_stackSize = 100 * 1024;	// 100k
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>Box2d Stack Allocator</span></h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><h2 id=구조>구조</h2><p>고정크기로 b2_stackSize(기본값 100kb)의 메모리를 가지고 이것을 맨앞부터 쪼개서(그래서 스택기반) 사용하는 할당자이다. 구조가 단순한만큼 빠르다. 초기화에서 한번에 여러개를 할당하고 몰아서 해제하는 객체 로딩같은곳에서 사용 가능할듯하다.</p><p>할당한 순서와 정확히 반대로 해제해야 정상 작동한다. (그래야 스택답지)</p><pre><code class="language-cpp line-numbers">const int32 b2_stackSize = 100 * 1024;	// 100k
 const int32 b2_maxStackEntries = 32;
 struct b2StackEntry
 {

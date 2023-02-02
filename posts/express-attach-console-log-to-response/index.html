@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기</h1><div class=tip><time datetime="2020-07-11 00:00:00 +0900 +0900">2020. 07. 11</time></div><div class=content><h2 id=http-응답에-콘솔-로그-붙인-이유>HTTP 응답에 콘솔 로그 붙인 이유</h2><p>간단한 express 서버가 있다고 치자.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>express에서 콘솔로 찍은 로그를 HTTP 응답에 붙이기</span><br><small>continuation local storage</small></h1><div class=tip><time datetime="2020-07-11 00:00:00 +0900 +0900">2020. 07. 11</time></div><div class=content><h2 id=http-응답에-콘솔-로그-붙인-이유>HTTP 응답에 콘솔 로그 붙인 이유</h2><p>간단한 express 서버가 있다고 치자.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 const delay = require(&#39;delay&#39;);
 
 const app = express();

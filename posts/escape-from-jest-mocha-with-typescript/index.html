@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>Jest 탈출기 - 타입스크립트 + Mocha</h1><div class=tip><time datetime="2019-07-03 01:00:00 +0900 +0900">2019. 07. 03</time></div><div class=content><h2 id=개요>개요</h2><p><a href=https://if1live.github.io/posts/escape-from-jest-jest-is-slow/>Jest 탈출기 - Jest는 느리다</a>,
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>Jest 탈출기 - 타입스크립트 + Mocha</span><br><small>ts-node, tsc</small></h1><div class=tip><time datetime="2019-07-03 01:00:00 +0900 +0900">2019. 07. 03</time></div><div class=content><h2 id=개요>개요</h2><p><a href=https://if1live.github.io/posts/escape-from-jest-jest-is-slow/>Jest 탈출기 - Jest는 느리다</a>,
 <a href=https://if1live.github.io/posts/escape-from-jest-use-mocha/>Jest 탈출기 - Mocha를 쓰자</a>에서는 자바스크립트 기준으로 예제를 작성했다.
 하지만 실제로 내가 쓰는 언어는 타입스크립트이다.</p><p>이 글에서는 타입스크립트에서 mocha 굴리는 방법을 다룬다.</p><h2 id=목표-타입스크립트로-작성된-테스트-돌리기>목표: 타입스크립트로 작성된 테스트 돌리기</h2><p>아래의 테스트는 타입스크립트로 작성되었다.
 이것을 mocha로 돌리는게 목표이다.</p><pre><code class="language-js line-numbers">import { Sample } from &#39;@src/sample&#39;;

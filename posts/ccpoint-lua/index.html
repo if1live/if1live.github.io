@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>cocos2d-x 1.x->2.0으로 변하면서 바뀐 부분 :: CCPoint</h1><div class=tip><time datetime="2012-12-04 00:00:00 +0000 UTC">2012. 12. 04</time></div><div class=content><p>나는 cocos2d-x를 1.X에 쓰기 시작했다. 최근에 다시 게임을 만들면서 cocos2d-x 2.0으로 옮겨갔다. 1.x->2.0으로 버전이 올라가면서 대부분의 영역에서 설계 측면에서 약간씩 설계적으로 개선된것이 보인다. 하지만 일부의 경우는 개선이라고 하기에는 너무 달라져서 새로 짯다 라는 느낌이다. 그 중의 하나가 CCGeomerty.h에 정의된 CCPoint 클래스이다.</p><p>cocos2d-x 1.x에서 사용하는 CCPoint는 다음과 같이 생겼다. 구시대 버전을 찾아서 CCGeomerty.h를 찾으면 나온다.</p><pre><code class="language-cpp line-numbers">class CC_DLL CCPoint
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>cocos2d-x 1.x->2.0으로 변하면서 바뀐 부분 :: CCPoint</span></h1><div class=tip><time datetime="2012-12-04 00:00:00 +0000 UTC">2012. 12. 04</time></div><div class=content><p>나는 cocos2d-x를 1.X에 쓰기 시작했다. 최근에 다시 게임을 만들면서 cocos2d-x 2.0으로 옮겨갔다. 1.x->2.0으로 버전이 올라가면서 대부분의 영역에서 설계 측면에서 약간씩 설계적으로 개선된것이 보인다. 하지만 일부의 경우는 개선이라고 하기에는 너무 달라져서 새로 짯다 라는 느낌이다. 그 중의 하나가 CCGeomerty.h에 정의된 CCPoint 클래스이다.</p><p>cocos2d-x 1.x에서 사용하는 CCPoint는 다음과 같이 생겼다. 구시대 버전을 찾아서 CCGeomerty.h를 찾으면 나온다.</p><pre><code class="language-cpp line-numbers">class CC_DLL CCPoint
 {
 public:
 	float x;

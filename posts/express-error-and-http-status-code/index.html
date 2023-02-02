@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>express에서 에러로 HTTP status code 통제하기</h1><div class=tip><time datetime="2019-08-12 00:00:00 +0000 UTC">2019. 08. 12</time></div><div class=content><h2 id=throw-new-errorbadrequest>throw new Error(&lsquo;BadRequest&rsquo;)</h2><p>자바스크립트에서 Error를 던져서 에러 처리하는 것은 쉽고 간단한 방법이다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>express에서 에러로 HTTP status code 통제하기</span><br><small>throw new createError.BadRequest()</small></h1><div class=tip><time datetime="2019-08-12 00:00:00 +0000 UTC">2019. 08. 12</time></div><div class=content><h2 id=throw-new-errorbadrequest>throw new Error(&lsquo;BadRequest&rsquo;)</h2><p>자바스크립트에서 Error를 던져서 에러 처리하는 것은 쉽고 간단한 방법이다.
 express에서도 마찬가지이다.
 Error를 던지면 200 OK가 아닌 500 Internal Server Error를 발생시킬 수 있다.</p><pre><code class="language-js line-numbers">const express = require(&#39;express&#39;);
 const app = express();

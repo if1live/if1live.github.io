@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>2020년식으로 블로그 빌드 고치기</h1><div class=tip><time datetime="2020-11-14 00:00:00 +0000 UTC">2020. 11. 14</time></div><div class=content><h2 id=dep---go-modules>dep -> Go Modules</h2><p>golang의 패키지 관리자는 golang이 만들어진 이후 몇 년동안 개판이었다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>2020년식으로 블로그 빌드 고치기</span><br><small>dep -> Go Modules, travis-ci -> GitHub Actions</small></h1><div class=tip><time datetime="2020-11-14 00:00:00 +0000 UTC">2020. 11. 14</time></div><div class=content><h2 id=dep---go-modules>dep -> Go Modules</h2><p>golang의 패키지 관리자는 golang이 만들어진 이후 몇 년동안 개판이었다.
 얼마나 개판이었는지는 golang <a href=https://github.com/golang/go/wiki/PackageManagementTools>PackageManagementTools</a>의 스크롤을 보면 된다.</p><p>하지만 golang의 패키지 관리자가 개판인 시절은 끝이다. golang에서 직접 칼을 뽑았다!
 저장소 좌표부터 <a href=github.com/golang/dep>github.com/golang/dep</a>이다.
 언어에서 공식적으로 넣은 패키지 관리자라면 당연히 갈아타야지!</p><p>2018년 3월 9일에 블로그 빌드 시스템에서 <code>go get</code>으로 패키지 설치하던걸 <code>dep</code>로 교체했다.

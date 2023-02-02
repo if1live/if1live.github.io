@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>auto_ptr을 썻는데 소멸자가 불리지 않는다?</h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><p>auto_ptr은 아주 간단한 스마트 포인터의 일정으로 동적할당된 객체를 자동으로 delete하는데 쓰인다. 하지만 잘못된 코딩을 하면 소멸자가 호출되지 않는다. 소멸자를 호출시키지 않는 auto_ptr의 예제이다</p><h2 id=문제의-소스>문제의 소스</h2><h3 id=maincpp>main.cpp</h3><pre><code class="language-cpp line-numbers">// Ŭnicode please
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>auto_ptr을 썻는데 소멸자가 불리지 않는다?</span></h1><div class=tip><time datetime="2013-01-25 00:00:00 +0000 UTC">2013. 01. 25</time></div><div class=content><p>auto_ptr은 아주 간단한 스마트 포인터의 일정으로 동적할당된 객체를 자동으로 delete하는데 쓰인다. 하지만 잘못된 코딩을 하면 소멸자가 호출되지 않는다. 소멸자를 호출시키지 않는 auto_ptr의 예제이다</p><h2 id=문제의-소스>문제의 소스</h2><h3 id=maincpp>main.cpp</h3><pre><code class="language-cpp line-numbers">// Ŭnicode please
 #include &lt;memory&gt;
 #include &lt;cstdio&gt;
 #include &#34;example.h&#34;

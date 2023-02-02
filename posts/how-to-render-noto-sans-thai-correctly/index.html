@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>Noto Sans Thai 올바르게 렌더링하는 방법</h1><div class=tip><time datetime="2016-05-16 00:00:00 +0000 UTC">2016. 05. 16</time></div><div class=content><h2 id=개요>개요</h2><p>cocos2d-x 2.x 기반으로 개발된 모바일 게임을 태국에서 서비스하는 일을 예전에 했었다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>Noto Sans Thai 올바르게 렌더링하는 방법</span><br><small>Mission: 크롬하고 똑같이 보이게 하라!</small></h1><div class=tip><time datetime="2016-05-16 00:00:00 +0000 UTC">2016. 05. 16</time></div><div class=content><h2 id=개요>개요</h2><p>cocos2d-x 2.x 기반으로 개발된 모바일 게임을 태국에서 서비스하는 일을 예전에 했었다.
 (게임의 기본 폰트는 Noto Sans Thai였다)
 개발하면서 크고 작은 태국어 렌더링 버그를 겪었고 대부분의 문제는 어떻게든 해결했다.
 하지만 어떤 편법을 써도 제대로 렌더링하지 못했던 문자열이 있었다.</p><blockquote><p>ร่ำ นายนี่ไม่ได้เปลี่รํ่า</p></blockquote><p>(뜻도 모른다. 렌더링 제대로 안되는 글자를 모아문 문자열이다)</p><p>이 문자열을 크롬하고 똑같이 보이게 하기 위해서 삽질했던 기록을 정리했다.</p><p><p class=markdown-image><img src=chrome-original.png alt=chrome></p></p><h3 id=주의>주의</h3><ul><li>태국어 폰트에 대한 설명은 다루지 않는다. 나도 태국어 폰트 구조를 모른다</li><li>Noto Sans Thai만 취급한다. 다른 폰트에서는 문제가 없을 수 있다.</li><li>왜 그렇게 렌더링되는지에 대한 상세한 분석은 하지 않는다. 나는 문제 해결에만 관심있다.</li><li>2015/05/16 이후에는 다른 방법이 생겼을지 모른다. 새로운 버전에서는 버그가 해결되었는지 테스트하기 쉽도록 버그를 발생시키는 방법을 기록해두었다.</li></ul><h2 id=iososx>iOS/OSX</h2><p>cocos2d-x 2.x는 시스템 내장 폰트 렌더러를 이용한다.

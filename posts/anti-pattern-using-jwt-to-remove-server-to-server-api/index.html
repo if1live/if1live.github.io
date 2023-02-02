@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>JWT를 사용해서 server-to-server API 없애는 안티패턴</h1><div class=tip><time datetime="2022-08-22 00:00:00 +0000 UTC">2022. 08. 22</time></div><div class=content><p>오늘 SNS에서 JWT, OAuth, access token, refresh token에 대해서 이야기하는걸 봤다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>JWT를 사용해서 server-to-server API 없애는 안티패턴</span><br><small>인증, 로그인과 관계없는 JWT 이야기</small></h1><div class=tip><time datetime="2022-08-22 00:00:00 +0000 UTC">2022. 08. 22</time></div><div class=content><p>오늘 SNS에서 JWT, OAuth, access token, refresh token에 대해서 이야기하는걸 봤다.
 나는 보안에 대해서는 무식해서 OAuth, access token, refresh token 로는 아무 이야기도 할 수 없다. 하지만 JWT로는 어느정도 떠들 수 있다.</p><p><a href=https://jwt.io/>JWT</a>를 구글에서 검색하면 대부분이 인증, 보안, 로그인, &mldr; 과 관련된 글이 나온다.
 인증에만 집중해서 JWT의 진짜 가치를 보지 못하는 현실이 안타까워서 글을 써본다.</p><p>???</p><h2 id=jwtjson-web-tokens의-특징>JWT(JSON Web Tokens)의 특징</h2><p><a href=https://jwt.io/>JWT</a>의 소개를 인용한다.</p><blockquote><p>JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.</p></blockquote><p>JWT는 스펙이 공개되어 있으며 간단하다. 웬만한 언어로는 JWT 구현체가 있다.
 JWT와 비슷하면서 JWT보다 좋다고 하는게 있는데 언어에 따라서는 구현체가 없을 수 있다.

@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>golang 패키지 관리의 약점과 대응책</h1><div class=tip><time datetime="2016-05-14 00:00:00 +0000 UTC">2016. 05. 14</time></div><div class=content><h2 id=개요>개요</h2><p>2016년 3월 22일, <a href=http://www.bloter.net/archives/253447>npm에서 left-pad가 사라지면서 node.js를 사용하는 수많은 사람들이 혼돈의 카오스</a>에 빠졌다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>golang 패키지 관리의 약점과 대응책</span><br><small>left-pad, 그것의 npm만의 문제인가? 그리고 golang의 해결법</small></h1><div class=tip><time datetime="2016-05-14 00:00:00 +0000 UTC">2016. 05. 14</time></div><div class=content><h2 id=개요>개요</h2><p>2016년 3월 22일, <a href=http://www.bloter.net/archives/253447>npm에서 left-pad가 사라지면서 node.js를 사용하는 수많은 사람들이 혼돈의 카오스</a>에 빠졌다.
 그리고 2016년 5월 5일, <a href=https://gohugo.io/>hugo</a>를 쓰던 나도 비슷한 경험을 했다.
 그날, hugo에서는 어떤 문제가 있었는지를 살펴봄으로써 golang 패키지 관리 기법의 문제점을 이해하고 golang은 어떤식의 해결책을 제시했는지 정리해보았다.</p><h2 id=githubcomkrtext-사태-가칭-문제-발생>github.com/kr/text 사태 (가칭) 문제 발생</h2><h3 id=20160505-0048-0900--정상>2016/05/05 00:48 +0900 : 정상</h3><p><a href=https://travis-ci.org/if1live/libsora.so/builds/127831488>hugo에 의존하는 블로그 빌드</a>가 정상적으로 작동했다.
 특별한 문제는 없다</p><h3 id=20160505-1534-0900--빌드-실패>2016/05/05 15:34 +0900 : 빌드 실패!</h3><p><a href=https://travis-ci.org/if1live/libsora.so/builds/127988451>hugo에 의존하는 블로그 빌드</a>가 깨졌다.

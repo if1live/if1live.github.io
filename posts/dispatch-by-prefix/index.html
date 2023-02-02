@@ -5,7 +5,7 @@
 <span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
 <span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
 <span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
-<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title>윈도우에서 길고 아름다운 경로명을 사용하는 방법</h1><div class=tip><time datetime="2016-06-05 00:00:00 +0000 UTC">2016. 06. 05</time></div><div class=content><h2 id=max_path>MAX_PATH</h2><p>윈도우는 경로 최대길이가 제한되어 있다. <code>MAX_PATH</code>라는 상수로 260이다.
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>윈도우에서 길고 아름다운 경로명을 사용하는 방법</span><br><small>prefix를 이용한 기법</small></h1><div class=tip><time datetime="2016-06-05 00:00:00 +0000 UTC">2016. 06. 05</time></div><div class=content><h2 id=max_path>MAX_PATH</h2><p>윈도우는 경로 최대길이가 제한되어 있다. <code>MAX_PATH</code>라는 상수로 260이다.
 그래서 매우 긴 디렉토리를 만든 다음에 안에서 파일을 만들라고하면 다음과 같은 문제가 발생한다.</p><p><p class=markdown-image><img src=newfile-fail.png alt="new file fail"></p></p><p>지금이 90년대 컴퓨터도 아니고 고작 260글자까지밖에 지원하지 않는다고?
 MAX_PATH가 260라니 윈도우에 실망했습니다. 윈도우 팬 그만둡니다.</p><p>로 끝내면 재미없다. MSDN을 읽어보자.</p><h3 id=msdn>MSDN</h3><blockquote><p>Maximum Path Length Limitation</p><p>In the Windows API (with some exceptions discussed in the following paragraphs),
 the maximum length for a path is MAX_PATH, which is defined as 260 characters.
