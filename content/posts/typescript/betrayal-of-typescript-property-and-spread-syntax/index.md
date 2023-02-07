@@ -2,10 +2,10 @@
 title: 타입스크립트의 배신 - property와 spread syntax
 subtitle: class + property + spread = FAIL
 tags: [typescript, javascript, class, property, spread syntax]
-slug: betray-of-typescript-property-and-spread-syntax
+slug: betrayal-of-typescript-property-and-spread-syntax
 author: if1live
 date: 2023-02-07
-url: /posts/betray-of-typescript-property-and-spread-syntax
+url: /posts/betrayal-of-typescript-property-and-spread-syntax
 ---
 
 ## 준비물
