@@ -69,7 +69,10 @@ console.log(&#39;c.v&#39;, c.v);</code></pre><p><a href="https://www.typescriptl
 [LOG]: "c.v",  1</code></pre><p><code>a</code>는 클래스에서 만들어진 객체라서 특별하다. property인 <code>v</code>가 콘솔 로그에는 보이지 않지만 <code>v</code>로 접근할 수 있다.
 <code>b</code>는 비어있는 자바스크립트 객체이다. spread syntax로 만들었기떄문에 클래스 Y와는 관계가 없다.
 <code>c</code>는 직접 만든 자바스크립트 객체이다. 원한대로 잘 돌아간다.</p><h2 id=summary>summary</h2><p>타입스크립트 컴파일을 통과해도 런타임에서 터질 수 있다.</p><p>일반 자바스크립트 객체에만 spread syntax를 적용하자.
-클래스로 만들어진 객체에와 spread syntax를 같이 쓰면 프로퍼티가 사고칠 수 있다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+클래스로 만들어진 객체에와 spread syntax를 같이 쓰면 프로퍼티가 사고칠 수 있다.</p><p>spread syntax를 사용했을때는 의도와 실제 동작이 달라서 문제가 생겼다.
+하지만 구식 방법으로 각각의 필드를 연결하면 직접 연결하면 원하는대로 돌아간다.
+새로운 기술이라고 항상 좋은게 아니다.
+엑셀 팡션을 사용하지 말라는 상사의 조언을 받아들이자.</p><p><p class=markdown-image><img src=excel-function-supervisor.png alt="엑셀에 함수를 쓰지말라고 하는 상사"></p></p></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
 <a href=https://if1live.github.io/tags/javascript>javascript</a>
 <a href=https://if1live.github.io/tags/class>class</a>
 <a href=https://if1live.github.io/tags/property>property</a>
