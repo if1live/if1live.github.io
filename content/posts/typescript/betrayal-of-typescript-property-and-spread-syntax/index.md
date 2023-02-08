@@ -137,6 +137,13 @@ https://www.typescriptlang.org/play?target=9&module=0#code/JYOwLgpgTgZghgYwgAgBr
 일반 자바스크립트 객체에만 spread syntax를 적용하자.
 클래스로 만들어진 객체에와 spread syntax를 같이 쓰면 프로퍼티가 사고칠 수 있다.
 
+spread syntax를 사용했을때는 의도와 실제 동작이 달라서 문제가 생겼다.
+하지만 구식 방법으로 각각의 필드를 연결하면 직접 연결하면 원하는대로 돌아간다.
+새로운 기술이라고 항상 좋은게 아니다.
+엑셀 팡션을 사용하지 말라는 상사의 조언을 받아들이자.
+
+![엑셀에 함수를 쓰지말라고 하는 상사](excel-function-supervisor.png)
+
 [mdn-spread-syntax]: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
 [mdn-class]: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Classes#%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85_%EB%A9%94%EC%84%9C%EB%93%9C
