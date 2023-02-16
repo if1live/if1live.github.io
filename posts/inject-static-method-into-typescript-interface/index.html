@@ -1,0 +1,179 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>타입스크립트 interface에 정적 함수, 타입 끼워넣기 - if1live space</title><meta name=author content="if1live"><meta name=title content="타입스크립트 interface에 정적 함수, 타입 끼워넣기"><meta name=description content="요구 사항 인터페이스에 정적 함수를 넣고 싶다. interface A { x: number; // compile error static add(data: A, input: number) { return data.x + input; } } Add support Interfaces to define static methods #13462 타입스크립트 interface에 정적 함수를 넣"><meta name=keywords content="typescript,interface,namespace"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="타입스크립트 interface에 정적 함수, 타입 끼워넣기"><meta property="og:description" content="요구 사항 인터페이스에 정적 함수를 넣고 싶다. interface A { x: number; // compile error static add(data: A, input: number) { return data.x + input; } } Add support Interfaces to define static methods #13462 타입스크립트 interface에 정적 함수를 넣"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/inject-static-method-into-typescript-interface/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-02-16T00:00:00+00:00"><meta property="article:modified_time" content="2023-02-16T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="타입스크립트 interface에 정적 함수, 타입 끼워넣기"><meta name=twitter:description content="요구 사항 인터페이스에 정적 함수를 넣고 싶다. interface A { x: number; // compile error static add(data: A, input: number) { return data.x + input; } } Add support Interfaces to define static methods #13462 타입스크립트 interface에 정적 함수를 넣"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>타입스크립트 interface에 정적 함수, 타입 끼워넣기</span><br><small>ESM 시대에 잊혀질 namespace, declaration merging 응용</small></h1><div class=tip><time datetime="2023-02-16 00:00:00 +0000 UTC">2023. 02. 16</time></div><div class=content><h2 id=요구-사항>요구 사항</h2><h3 id=인터페이스에-정적-함수를-넣고-싶다>인터페이스에 정적 함수를 넣고 싶다.</h3><pre><code class="language-ts line-numbers">interface A {
+  x: number;
+
+  // compile error
+  static add(data: A, input: number) {
+    return data.x &#43; input;
+  }
+}</code></pre><p><a href=https://github.com/microsoft/TypeScript/issues/13462>Add support Interfaces to define static methods #13462</a></p><p>타입스크립트 interface에 정적 함수를 넣고 싶다는 요구 사항은 옛날부터 있었지만 구현되지 않은거로 알고있다.
+(내가 타입스크립트를 그렇게 잘 하는게 아니라서 확신을 못하겠다.)</p><p>인터페이스를 다루는 정적 함수, 정적 변수, 상수 같은것을 인터페이스에 묶어서 들고 다니고 싶다.
+클래스에서는 정적 함수 같은것을 유용하고 쓰는데 인터페이스에서는 똑같은 방식으로 코딩할 수 없는게 불편하더라.</p><pre><code class="language-ts line-numbers">interface A {
+  x: number;
+  y: number;
+}
+
+export const A = {
+  add(data: A) {
+    return data.x &#43; data.y;
+  }
+}
+
+const data: A = { x: 1, y: 2 };
+const result = A.add(data);</code></pre><p>인터페이스에 정적함수 같은거 방법이 아예 없는건 아니다.
+위와 같은 형태로 코딩하면 내가 원하는걸 할 수 있다.</p><h3 id=c-typedef>C++ typedef</h3><pre><code class="language-cpp line-numbers">#include &lt;cstdio&gt;
+
+struct A {
+    typedef float input_t;
+    typedef float output_t;
+    
+    int x;
+    
+    static output_t add(A &amp;self, input_t input) {
+        return (float)(self.x &#43; input);
+    }
+};
+
+int main()
+{
+    A foo { 1 };
+    A::input_t input = 2.3;
+    A::output_t result = A::add(foo, input);
+    printf(&#34;%f&#34;, result);
+    return 0;
+}</code></pre><p>C++에서는 typedef로 특정 struct, class 범위에서 사용할수 있는 새로운 타입을 지정할 수 있다.
+비슷한 이름의 타입이 전역 범위에 넘쳐나면 IDE 자동완성, 힌트가 개판이 된다.
+이름 충돌을 피하겠다고 타입 이름을 길게 쓰면 타자치기 귀찮다.
+Input, Request, Context 같은 짧은 이름을 쓰고 싶다.
+typedef 같은 느낌으로 작동하는게 필요하다.</p><p><p class=markdown-image><img src=hint-name-conflict.png alt="hint: name conflict"></p>타입이 사용되는 범위를 제한해서 이런식으로 전역 범위의 자동완성이 망가지지 않게 만들고 싶다.</p><pre><code class="language-ts line-numbers">interface A {
+  x: number;
+}
+
+type Input = number;
+type Output = string;
+
+export const A = {
+  add(data: A, input: Input): Output {
+    return (data.x &#43; input).toString();
+  },
+  Input,
+  Output,
+}
+
+const foo: A = { x: 1 };
+const input: A.Input = 2.3;
+const result: A.Output = A.add(foo, input);</code></pre><p>불행히도 자바스크립트 객체는 타입스크립트 타입을 알아먹지 못한다.
+위의 코드는 컴파일되지 않는다.</p><p>대신 namespace를 쓰면 C++ typedef 같은 느낌으로 짤 수 있다.</p><pre><code class="language-ts line-numbers">interface A {
+  x: number;
+}
+
+namespace A {
+  export type In = number;
+}
+
+const a: A.In = 1;</code></pre><h3 id=함수-호출할때-클래스-이름을-입력하고-싶지-않다>함수 호출할때 클래스 이름을 입력하고 싶지 않다.</h3><pre><code class="language-ts line-numbers">class VeryVeryLongClassName {
+    static invoke_s() { return 1; }
+    invoke_m() { return VeryVeryLongClassName.invoke_s(); } // &lt;--
+}
+console.log(VeryVeryLongClassName.invoke_s());
+console.log(new VeryVeryLongClassName().invoke_m());</code></pre><p>클래스의 멤버 함수에서 정적 함수를 호출하려면 클래스 이름을 붙여야한다.
+파이썬의 <code>cls</code> 같이 짧은 이름으로 자기 자신의 클래스를 가리킬수 있으면 좋을텐데 어떻게 하는지 모르겠다.
+&ldquo;<code>cls</code>는 없고, 클래스 이름 <code>VeryVeryVeryVeryVeryVeryLongClassName</code> 전부 치기 귀찮고, 정적 함수로 만드는거 포기하고 <code>this</code>를 쓸까?&rdquo; 같은 생각을 하게 되더라.
+정적 함수로 짜는게 맞는 선택인걸 알고 있음에도 타자치기 귀찮다고 정적 함수로 안짜는건 잘못된 길이다.
+정적 함수를 쓸때의 귀찮음을 줄이고 싶다.</p><p>정적 함수를 다시 생각하면 클래스라는 이름공간에 종속되는 일반 함수 아닐까?
+namespace에 그냥 함수 만들어서 쓰면 클래스 정적 함수보다 타자 덜쳐도 될거같은데?</p><h2 id=해결책-declaration-merging-선언-병합>해결책: Declaration Merging, 선언 병합</h2><p>타입스크립트에는 <a href=https://www.typescriptlang.org/docs/handbook/declaration-merging.html>Declaration Merging</a> 라는 기능이 있다.
+또는 <a href=https://www.typescriptlang.org/docs/handbook/declaration-merging.html>선언 병합</a>으로 찾을 수 있다.
+이를 응용해서 프로덕션 환경에서도 유용하게 쓰고있다.</p><pre><code class="language-ts line-numbers">interface A {
+  x: number;
+}
+
+namespace A {
+  export type In = number;
+  export type Out = string;
+
+  export function add(data: A, input: In): Out {
+    return `${data.x} &#43; ${input}`;
+  }
+}
+
+const data: A = { x: 1 };
+const input: A.In = 2.3;
+const output: A.Out = A.add(data, input);</code></pre><p>namespace에는 넣고싶은거 다 넣어도 잘 돌아간다.
+내 경우는 인터페이스와 관련있는 상수도 namespace에서 넣는다.</p><p>클래스에서도 declaration merging은 잘 돌아간다.
+자주 쓰는 패턴은 아니지만 아래와 같은 식으로 정적 함수를 일반 함수로 구현해서 연결 할 수 있다.
+원한게 private static method인 경우에는 namespace도 떼버리고 일반 함수로 짜도 대충 돌아간다.</p><pre><code class="language-ts line-numbers">// 정적 함수는 일반 함수와 다른게 없다
+function invoke_s_priv() { return 1; }
+
+class VeryVeryLongClassName {
+  invoke_m() { return invoke_s_priv(); } 
+}
+namespace VeryVeryLongClassName {
+  // export 할때 이름 충돌을 적절히 피해야한다.
+  export const invoke_s = invoke_s_priv;
+}
+
+console.log(VeryVeryLongClassName.invoke_s());
+console.log(new VeryVeryLongClassName().invoke_m());</code></pre><h2 id=약점>약점</h2><h3 id=rename>rename</h3><p>declaration merging을 했더라도 <code>interface A</code>와 <code>namespace A</code>는 서로 다른 범위이다.
+<code>interface A</code>를 <code>interface B</code>로 이름을 바꿔도 알아서 <code>namespace B</code>로 바뀌지 않는다.
+<code>namespace A</code>를 <code>namespace B</code>로 바꾸는 작업을 또 해야된다.
+이름 변경을 두번해야되는게 귀찮지만 어차피 고생은 IDE가 하는거지 내가 하는게 아니니까.</p><h3 id=namespace는-자바스크립트에-없는-문법>namespace는 자바스크립트에 없는 문법</h3><p>자바스크립트에 namespace는 존재하지 않는다.</p><pre><code class="language-ts line-numbers">namespace A {
+  export function a() { return 1; }
+}</code></pre><p>tsc를 돌리면 타입스크립트 namespace가 자바스크립트 object로 컴파일된다.</p><pre><code class="language-js line-numbers">// target: ESNext
+// module: CommonJS
+&#34;use strict&#34;;
+Object.defineProperty(exports, &#34;__esModule&#34;, { value: true });
+var A;
+(function (A) {
+    function a() { return 1; }
+    A.a = a;
+})(A || (A = {}));</code></pre><pre><code class="language-js line-numbers">// target: ESNext
+// module: NodeNext
+var A;
+(function (A) {
+    function a() { return 1; }
+    A.a = a;
+})(A || (A = {}));
+export {};</code></pre><p>타입스크립트만의 문법이라서 자바스크립트 생태계의 발전에 의한 공짜 점심이 없다.
+tree-shaking 같은걸 기준으로 들이대면 타입스크립트 네임스페이스와 얼마나 잘 작동하는지 모르겠다.</p><h3 id=esm과-namespace>ESM과 namespace</h3><blockquote><p>It is also worth noting that, for Node.js applications,
+modules are the default and we recommended modules over namespaces in modern code.</p><p>Starting with ECMAScript 2015, modules are native part of the language,
+and should be supported by all compliant engine implementations.
+Thus, for new projects modules would be the recommended code organization mechanism.</p><p><a href=https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html>TypeScript Handbook: Namespaces and Modules</a></p></blockquote><p>namespace는 요새는 권장되는 코드가 아니다.
+자바스크립트가 미개하던 시절에 타입스크립트가 몸비틀어 만들어낸 결과물에 가깝다.
+타입스크립트 공식 문서에서 추천하는 문법이 아니니까 얼마나 미래가 있을지 모르겠다.</p><h2 id=declaration-merging-namespace-는-미래에도-살아남을까>declaration merging, namespace 는 미래에도 살아남을까?</h2><pre><code class="language-ts line-numbers">import * as shapes from &#34;./shapes&#34;;
+let t = new shapes.Triangle();</code></pre><p><a href=https://www.typescriptlang.org/docs/handbook/namespaces-and-modules.html>Namespaces and Modules</a>를 보면 네임스페이스 같은거 쓰지말고 파일 자체를 모듈로 import 한다.</p><pre><code class="language-ts line-numbers">import { shapes } from &#34;./shapes&#34;;
+let t = new shapes.Triangle();</code></pre><p>근데 나는 <code>import * as mod from</code> 문법이 싫다.
+모듈이 어떤 이름으로 import 될지 모듈의 구현에서 결정하게 만들고 싶다.
+IDE 에서 알아서 import 할때 내가 원하는 이름으로 import 되도록 만들고 싶다.</p><p><p class=markdown-image><img src=hint-import.png alt="IDE hint"></p></p><p>ESM 시대가 열리면서 선언 병합을 통해서 interface와 namespace를 섞어쓰는 기법의 대안이 있는지 찾아보았지만 내가 원하는 수준의 결과물은 없었다.
+타입스크립트 잘 하는 사람이 내 요구사항에 딱 맞는 기법을 보여주면 좋을텐데 그런건 없을거같다.</p><p>나는 앞으로도 몇 년은 declaration merging을 사용할거다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+<a href=https://if1live.github.io/tags/interface>interface</a>
+<a href=https://if1live.github.io/tags/namespace>namespace</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
