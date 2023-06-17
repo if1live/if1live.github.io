@@ -4,7 +4,7 @@ subtitle: lodash를 탈출하는 이유, 그리고 가고 싶은 방향
 tags: [typescript, lodash]
 slug: escape-from-lodash-why-i-escape
 author: if1live
-date: 2023-06-17
+date: 2023-06-17T00:00:00+09:00
 url: /posts/escape-from-lodash-why-i-escape
 ---
 
