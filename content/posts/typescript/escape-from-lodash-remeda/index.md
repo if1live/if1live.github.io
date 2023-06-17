@@ -261,6 +261,11 @@ remeda에 `minBy`, `maxBy`, `sumBy`는 있지만 `min`, `max`, `sum`은 없다.
 
 다음 글에서는 구멍난 부분을 어떻게 땜질했는지 다룬다.
 
+## 연결
+* [lodash 탈출기 - 왜 lodash에서 벗어나는가?]({{< ref escape-from-lodash-why-i-escape >}})
+* [lodash 탈출기 - lodash의 대안과 결정]({{< ref escape-from-lodash-remeda >}})
+* [lodash 탈출기 - remeda의 틈을 막아라]({{< ref escape-from-lodash-just >}})
+
 [site-fp-ts]: https://gcanti.github.io/fp-ts/
 [github-ramda]: https://github.com/ramda/ramda
 [github-rambda]: https://github.com/selfrefactor/rambda

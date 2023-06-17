@@ -164,6 +164,11 @@ ramda 같은거 보니까 `import * as R from "ramda"` 로 사용해서 unused i
 다음 글에서는 lodash의 대안으로 어떤걸 알아봣는지에 대해서 다룬다.
 언제 쓸지는 모르겠지만.
 
+## 연결
+* [lodash 탈출기 - 왜 lodash에서 벗어나는가?]({{< ref escape-from-lodash-why-i-escape >}})
+* [lodash 탈출기 - lodash의 대안과 결정]({{< ref escape-from-lodash-remeda >}})
+* [lodash 탈출기 - remeda의 틈을 막아라]({{< ref escape-from-lodash-just >}})
+
 [site-underscore]: https://underscorejs.org/
 [github-lodash]: https://github.com/lodash/lodash
 [npm-lodash]: https://www.npmjs.com/package/lodash
