@@ -1,0 +1,150 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.110.0"><title>lodash 탈출기 - lodash의 대안과 결정 - if1live space</title><meta name=author content="if1live"><meta name=title content="lodash 탈출기 - lodash의 대안과 결정"><meta name=description content="개요 이전 글에서 lodash를 탈출하게된 동기를 다뤘다. 이번에는 검토해 본 후보들과 선택되지 않은 이유, 최종 선택을 다룬다. 요구사항 (A) 타입스크립트로 작성"><meta name=keywords content="typescript,lodash,remeda"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.01f2debd31367b25d1a2e360eed0f61347cb907850e4d65c6df0ec4f3349a804ff76662df734eebebf41c70ae4ad5bf520fb9f73ce4b9b59dc06aaed2f676f60.css integrity="sha512-AfLevTE2eyXRouNg7tD2E0fLkHhQ5NZcbfDsTzNJqAT/dmYt9zTuvr9BxwrkrVv1IPufc85Lm1ncBqrtL2dvYA=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="lodash 탈출기 - lodash의 대안과 결정"><meta property="og:description" content="개요 이전 글에서 lodash를 탈출하게된 동기를 다뤘다. 이번에는 검토해 본 후보들과 선택되지 않은 이유, 최종 선택을 다룬다. 요구사항 (A) 타입스크립트로 작성"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/escape-from-lodash-remeda/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-06-17T00:01:00+09:00"><meta property="article:modified_time" content="2023-06-17T00:01:00+09:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="lodash 탈출기 - lodash의 대안과 결정"><meta name=twitter:description content="개요 이전 글에서 lodash를 탈출하게된 동기를 다뤘다. 이번에는 검토해 본 후보들과 선택되지 않은 이유, 최종 선택을 다룬다. 요구사항 (A) 타입스크립트로 작성"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>lodash 탈출기 - lodash의 대안과 결정</span><br><small>fp-ts vs ramda vs rambda vs FxTS vs radash vs remeda</small></h1><div class=tip><time datetime="2023-06-17 00:01:00 +0900 +0900">2023. 06. 17</time></div><div class=content><h2 id=개요>개요</h2><p>이전 글에서 lodash를 탈출하게된 동기를 다뤘다.
+이번에는 검토해 본 후보들과 선택되지 않은 이유, 최종 선택을 다룬다.</p><h2 id=요구사항>요구사항</h2><h3 id=a-타입스크립트로-작성된-라이브러리여야한다>(A) 타입스크립트로 작성된 라이브러리여야한다.</h3><p>lodash의 경우 자바스크립트로 라이브러리를 작성하고 타입 선언 파일을 배포했다.
+lodash의 경우 타입 정의를 손으로 작성했는지 양쪽의 버전이 다르더라.
+<code>lodash</code> 최신 버전은 2년전 (2021년)에 릴리즈된 4.17.21 이다.
+<code>@types/lodash</code>의 최신 버전은 2023년에 배포된 4.14.195 이다.
+라이브러리와 타입 선언의 버전을 맞추는 가장 확실한 방법은 하나로 배포되는 것이다.
+그리고 타입스크립트로 작성된 라이브러리면 하나로 배포된다.</p><h3 id=b-타입스크립트의-국룰에서-크게-벗어나면-안된다>(B) 타입스크립트의 국룰(?)에서 크게 벗어나면 안된다.</h3><p>내가 원하는건 함수형 라이브러리이지 함수형 프로그래밍 언어가 아니다.
+lodash를 새로운 함수형 라이브러리로 바꿨다고 기존 코드가 전부 박살나는건 원하는게 아니다.
+라이브러리 하나 새로 넣었다고 모나드부터 시작해서 수많은걸 새로 배우고 싶진 않다.</p><h3 id=c-lodash와-너무-다르면-안된다>(C) lodash와 너무 다르면 안된다.</h3><p>신규 프로젝트에 넣을 lodash의 대안을 찾는거면 lodash와 비슷할 필요없다.
+하지만 나는 라이브 서비스 중인 코드에서 lodash의 대안을 찾는것이다.
+lodash와 너무 많은게 다르면 lodash의 대안이 될 수 없다.</p><h3 id=d-파이프-연산자랑-비슷하게-생긴게-있으면-좋겠다>(D) 파이프 연산자랑 비슷하게 생긴게 있으면 좋겠다.</h3><p>파이프 연산자를 elixir 쓰다가 처음 접했는데 좋더라.
+파이프 연산자를 사용하면 코드를 앞에서부터 읽어서 어떤 일이 벌어날지 알 수 있다.
+파이프 연산자가 없다면 함수의 호출 순서는 괄호 안쪽부터 읽어야하니까 잘 안보인다.</p><pre><code class="language-elixir line-numbers">// pipe operator
+iex&gt; &#34;Elixir rocks&#34; |&gt; String.upcase() |&gt; String.split()
+[&#34;ELIXIR&#34;, &#34;ROCKS&#34;]
+
+// no pipe operator
+String.split(String.upcase(&#34;Elixir rocks&#34;))</code></pre><p>좋은건 서로 베끼는 세상이니까 자바스크립트에도 파이프 연산자 넣자는 이야기는 있다.
+하지만 언제 들어갈까? 타입스크립트에도 적용되는 날은 언제 올까?
+<a href=https://github.com/tc39/proposal-pipeline-operator>Pipe Operator (|>) for JavaScript</a></p><p>lodash에도 pipe가 있긴하다.
+lodash의 <a href=https://github.com/lodash/lodash/wiki/FP-Guide>FP Guide</a>에는 <code>_.pipe</code>가 있다.</p><blockquote><p>_.pipe is an alias of _.flow</p></blockquote><p><code>_.flow</code> 예제는 다음과 같다.</p><pre><code class="language-ts line-numbers">function square(n) {
+  return n * n;
+}
+ 
+var addSquare = _.flow([_.add, square]);
+addSquare(1, 2);
+// =&gt; 9</code></pre><p>파이프 연산자의 형태라면 <code>pipe(데이터, 함수, 함수)</code> 같은 형태로 작성되고 데이터가 함수를 거치면서 가공된다.
+<code>_.flow</code>를 쓰면 <code>flow(함수, 함수)(데이터)</code> 같은 형태로 작성된다. <code>flow</code>로 합성 함수를 만들고 데이터를 넣는 느낌이다.
+수학적으로는 <code>flow</code>가 맞을지 몰라도 내가 원하는건 파이프 연산자의 순서로 작성되는 것이다.</p><h3 id=e-esm-시대에-맞는-라이브러리여야한다>(E) ESM 시대에 맞는 라이브러리여야한다.</h3><p>dual package로 배포되서 CommonJS를 동시에 지원해도 괜찮다.
+아무튼 ESM을 공식적으로 지원해야된다.</p><h3 id=f-깃헙-스타수가-적당히-많고-유지보수-되는-느낌의-라이브러리여야-한다>(F) 깃헙 스타수가 적당히 많고 유지보수 되는 느낌의 라이브러리여야 한다.</h3><p>다 죽어가는 라이브러리로 갈아타면 lodash를 그대로 쓰는것보다 얻는게 없다.</p><h2 id=후보-fp-tssite-fp-ts>후보: <a href=https://gcanti.github.io/fp-ts/>fp-ts</a></h2><p>함수형 타입스크립트를 검색하면 순위권에 나오는 라이브러리이다.
+공식 사이트에는 <a href=https://gcanti.github.io/fp-ts/ecosystem/>Ecosystem</a> 문서가 있다.
+fp-ts는 함수형 프로그래밍에 너무 심취한 나머지 (B)를 지키지 못했다.
+공부하고 만져보면 배울건 많은데 신규 프로젝트가 아닌 곳에서는 쓸 수 없다.</p><h2 id=후보-ramdagithub-ramda>후보: <a href=https://github.com/ramda/ramda>ramda</a></h2><p>함수형으로 유명한 라이브러리인데 (A)를 만족하지 않는다.
+<code>@types/ramda</code>를 따로 설치하고 싶지 않아.</p><h2 id=후보-rambdagithub-rambda>후보: <a href=https://github.com/selfrefactor/rambda>rambda</a></h2><p>ramda의 호환성을 유지하면서 타입스크립트를 지원하는 라이브러리이다.
+깃헙 페이지를 봤을때는 자바스크립트와 타입스크립트가 뒤섞인 물건이다.
+하지만 밖에서 보면 별도의 타입 정의가 없으니까 (A)의 기준은 넘겼다.</p><p><code>uniqBy</code> 예제를 통해서 (C)를 만족하는지 확인하자</p><pre><code class="language-ts line-numbers">/* rambda */
+const list = [{a:1}, {a:2}, {a:1}]
+const result = R.uniqBy(x =&gt; x, list)
+// =&gt; [{a:1}, {a:2}]
+
+/* lodash */
+_.uniqBy([2.1, 1.2, 2.3], Math.floor);
+// =&gt; [2.1, 1.2]</code></pre><p>rambda와 lodash의 <code>uniqBy</code>의 인자 순서는 반대이다.
+함수를 인자로 받는 경우, lodash와 rambda의 인자는 전부 반대로 생각해도 된다.
+인자 순서로 전부 바꾸는건 미친 짓이니 (C)에서 걸려서 쓸 수 없다.</p><h2 id=후보-fxtssite-fxts>후보: <a href=https://fxts.dev/>FxTS</a></h2><p>함수형 라이브러리를 찾다가 도달했는데 README에 한국어 슬랙 링크가 있는게 신선해서 기억한다.
+<a href=https://www.marpple.com/>마플</a>에서 만든 라이브러리이다.
+마플에서 만든 티셔츠보다 라이브러리를 먼저 만져볼 줄이야 ㅋ</p><p>공식 사이트에도 pipe 예제를 자랑스럽게 걸어놨더라.
+이게 내가 원하는 파이프 함수야! (D)를 만족한다.</p><pre><code class="language-ts line-numbers">pipe(
+  [1, 2, 3, 4, 5],
+  map(a =&gt; a &#43; 10),
+  filter(a =&gt; a % 2 === 0),
+  take(2),
+  toArray
+); // [12, 14]</code></pre><p>근데 <code>uniqBy</code>의 인자 순서가 lodash와는 반대더라. (C)를 만족하지 않는다.
+함수형 프로그래밍 세계에서는 함수 인자를 lodash랑 반대로 쓰는게 일상인가?</p><pre><code class="language-ts line-numbers">const iter = uniqBy(a =&gt; a.age, [{age: 21}, {age: 23}, {age: 21}, {age: 34}]);
+iter.next() // {done:false, value: {age: 21}}
+iter.next() // {done:false, value: {age: 23}}
+iter.next() // {done:false, value: {age: 34}}
+iter.next() // {done:true, value: undefined}</code></pre><h2 id=후보-radashsite-radash>후보: <a href=https://radash-docs.vercel.app/docs/getting-started>radash</a></h2><p>이름부터 lodash의 짭같은 라이브러리이다.
+그런데 생각보다 lodash와의 호환성을 원하진 않았나보다.</p><p>lodash의 <code>difference</code>는 radash에서는 <code>diff</code>이다.
+lodash의 <code>minBy</code>는 radash에서는 <code>min</code>이다.
+lodash의 <code>unique</code>는 radash에서는 <code>uniq</code>이다.</p><p>함수가 1:1로 대응되긴 하는데 이름이 많이 바뀌다보니까 음&mldr;.
+(C)를 만족한건가? 만족하지 못하는건가?
+대안을 더 찾아보자.</p><h2 id=후보-remedagithub-remeda>후보: <a href=https://github.com/remeda/remeda>remeda</a></h2><blockquote><p>The first &ldquo;data-first&rdquo; and &ldquo;data-last&rdquo; utility library designed especially for TypeScript.</p></blockquote><p>README 첫줄부터 (A)를 만족한다.</p><p><a href=https://github.com/remeda/remeda/blob/master/mapping.md>Mapping for Lodash and Ramda</a>
+lodash와 remeda의 함수 이름은 비슷하다.
+일부 다른게 있지만 radash의 경우를 생각하면 비슷한거나 다름없다.
+radash에 비해서 (C)를 만족한다.</p><p>remeda에서 마음에 들었던건 README 시작부터 나오는 <strong>What&rsquo;s &ldquo;data-first&rdquo; and &ldquo;data-last&rdquo;?</strong> 이다.</p><pre><code class="language-ts line-numbers">// Remeda
+R.pick(obj, [&#39;firstName&#39;, &#39;lastName&#39;]);</code></pre><p>ramda의 경우 함수 인자를 먼저 넣고, 다음에 데이터를 넣는다.
+앞에서부터 입력하니까 <code>['firstName', 'lastName']</code>를 입력할때는 <code>obj</code>가 어떤 타입인지 모른다.
+<code>obj</code>를 모르니까 <code>firstName</code> 입력할때 자동 완성을 할 수 없다.</p><pre><code class="language-ts line-numbers">// Remeda
+R.pick(obj, [&#39;firstName&#39;, &#39;lastName&#39;]);
+// Lodash
+_.pick(obj, [&#39;firstName&#39;, &#39;lastName&#39;]);</code></pre><p>lodash, remeda는 데이터를 먼저 넣고, 다음에 함수 인자를 넣는다.
+<code>obj</code>부터 입력하니까 <code>R.pick(obj,</code> 입력된 다음에 <code>R.pick</code>가 어떤 타입으로 호출되어야하는지 알 수 있다.
+그래서 <code>['firstName', 'lastName']</code>를 자동 완성으로 채울 수 있다.</p><p><p class=markdown-image><img src=auto-complete-pick.png alt="auto complete pick"></p></p><p>위의 원리는 파이프에서도 똑같이 적용된다.
+아래는 remeda README에서 긁은 pipe 함수의 예제이다.
+<code>broken typings in TS :(</code> 가 왜 발생하는지는 쉽게 이해할 수 있다.</p><pre><code class="language-ts line-numbers">const users = [
+  { name: &#39;john&#39;, age: 20, gender: &#39;m&#39; },
+  { name: &#39;marry&#39;, age: 22, gender: &#39;f&#39; },
+  { name: &#39;samara&#39;, age: 24, gender: &#39;f&#39; },
+  { name: &#39;paula&#39;, age: 24, gender: &#39;f&#39; },
+  { name: &#39;bill&#39;, age: 33, gender: &#39;m&#39; },
+];
+
+// Remeda
+R.pipe(
+  users,
+  R.filter(x =&gt; x.gender === &#39;f&#39;),
+  R.groupBy(x =&gt; x.age)
+);
+
+// Ramda
+R.pipe(
+  R.filter(x =&gt; x.gender === &#39;f&#39;),
+  R.groupBy(x =&gt; x.age)
+)(users); // broken typings in TS :(
+
+// Lodash
+_(users)
+  .filter(x =&gt; x.gender === &#39;f&#39;)
+  .groupBy(x =&gt; x.age)
+  .value();
+
+// Lodash-fp
+_.flow(
+  _.filter(x =&gt; x.gender === &#39;f&#39;),
+  _.groupBy(x =&gt; x.age)
+)(users); // broken typings in TS :(</code></pre><p>이정도 pipe 함수면 (D)도 만족한거다.</p><h2 id=최종-선택-remeda>최종 선택: remeda</h2><p>remeda가 후보 중에 제일 멀쩡했다.
+lodash보다 더 좋아진 점도 있었다.
+그래서 바로 갈아탔다.</p><p>lodash에서 remeda로 갈아타는 것은 쉬웠다.
+<code>import _ from 'lodash'</code>는 <code>import * as R from 'remeda'</code>로 바꾸면 된다.
+<code>_.uniqBy(</code>를 <code>R.uniqBy(</code>로 바꾸면 된다.
+1:1로 맵핑되는 함수는 위와 같은 식으로 바꾸면 된다.</p><p>구글에서 한국어 웹으로 검색했을때 remeda가 많이 언급되었다면 글을 쓸 이유가 없었을거다.
+remeda는 완성도, 가치에 비해서 알려지지 않은 라이브러리라서 글을 써봤다.</p><h2 id=next>next?</h2><p>문자열 치환만 돌려도 lodash에서 remeda로 갈아탈 수 있는것처럼 이야기했지만 사실 뻥이다.
+remeda는 lodash를 100% 대체하진 못한다.</p><p>remeda에는 <code>_.shuffle</code>, <code>_.random</code> 같은 함수가 없다.
+(내가 remeda 처음 쓸때는 isEmpty, sample도 없었는데 지금은 추가되었더라)</p><p>remeda에 <code>minBy</code>, <code>maxBy</code>, <code>sumBy</code>는 있지만 <code>min</code>, <code>max</code>, <code>sum</code>은 없다.
+(실제로 다루고 싶은 내용은 <code>Math.min</code>, <code>Math.max</code>를 안쓴 이유겠지만)</p><p>다음 글에서는 구멍난 부분을 어떻게 땜질했는지 다룬다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typescript>typescript</a>
+<a href=https://if1live.github.io/tags/lodash>lodash</a>
+<a href=https://if1live.github.io/tags/remeda>remeda</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
