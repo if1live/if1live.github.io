@@ -4,7 +4,7 @@ subtitle: 어쩌다 방통대 경제학과를 지원했나
 tags: [postmortem, knou]
 slug: knou-post-mortem-1-reason-i-applied
 author: if1live
-date: 2023-07-08
+date: 2023-07-08T00:01:00+09:00
 url: /posts/knou-post-mortem-1-reason-i-applied
 ---
 
