@@ -111,3 +111,9 @@ url: /posts/knou-post-mortem-1-reason-i-applied
 과목명만 들어도 중요해보이는 기초미시경제론, 기초거시경제론, 고급미시경제론, 고급거시경제론부터 쌓아올라가면서 고학년 과목도 들으려고 했다.
 
 초기 계획은 시작하고 얼마 지나지 않아서 박살났는데 그건 다음에 언젠가 글쓰는거로.
+
+## 연결
+* [방송대 포스트모템 - 동기: 어쩌다 방송대 경제학과를 지원했나]({{< ref knou-post-mortem-1-reason-i-applied >}})
+* [방송대 포스트모템 - 타임라인: 스매시 레전드, 이제는 말할 수 있다]({{< ref knou-post-mortem-2-timeline >}})
+* [방송대 포스트모템 - 비용: 학사 학위 얻는 저렴한 길]({{< ref knou-post-mortem-3-cost >}})
+* [방송대 포스트모템 - 전공: 전공과 관련된 아무말]({{< ref knou-post-mortem-4-major >}})

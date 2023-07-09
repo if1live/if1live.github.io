@@ -236,3 +236,9 @@ url: /posts/knou-post-mortem-4-major
 2년의 시간을 확보하는것 자체가 현실적으로 어렵다.
 방송대를 한 번 더 한다는 선택지는 몇 년 동안 없을거같다.
 좋은 경험이었는데 한번 더 하기에는 자원이 너무 많이 들어가.
+
+## 연결
+* [방송대 포스트모템 - 동기: 어쩌다 방송대 경제학과를 지원했나]({{< ref knou-post-mortem-1-reason-i-applied >}})
+* [방송대 포스트모템 - 타임라인: 스매시 레전드, 이제는 말할 수 있다]({{< ref knou-post-mortem-2-timeline >}})
+* [방송대 포스트모템 - 비용: 학사 학위 얻는 저렴한 길]({{< ref knou-post-mortem-3-cost >}})
+* [방송대 포스트모템 - 전공: 전공과 관련된 아무말]({{< ref knou-post-mortem-4-major >}})
