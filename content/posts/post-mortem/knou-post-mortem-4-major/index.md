@@ -1,7 +1,7 @@
 ---
 title: 방송대 포스트모템 - 전공
 subtitle: 전공과 관련된 아무말
-tags: [postmortem, knou]
+tags: [postmortem, knou, 방통대, 방송대]
 slug: knou-post-mortem-4-major
 author: if1live
 date: 2023-07-10T00:01:00+09:00
