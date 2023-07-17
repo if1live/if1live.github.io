@@ -31,3 +31,10 @@
 *.png binary
 *.jpg binary
 *.ico binary
+*.gif binary
+*.mp4 binary
+*.avi binary
+*.webm binary
+*.webp binary
+*.zip binary
+*.pdf binary
