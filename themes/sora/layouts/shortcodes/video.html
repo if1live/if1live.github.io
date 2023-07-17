@@ -1,0 +1,9 @@
+{{/*
+https://roneo.org/en/hugo-create-a-shortcode-for-local-videos/
+{{< video src="/holiday.webm" type="video/webm" preload="auto" >}}
+*/}}
+<video class="video-shortcode" preload="{{ .Get "preload" }}" controls>
+  <source src="{{ .Get "src" }}" type="{{ .Get "type" }}">
+  There should have been a video here but your browser does not seem
+  to support it.
+</video>
