@@ -1,0 +1,85 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.115.1"><title>최상위 비트의 위치 찾는 방법 - if1live space</title><meta name=author content="if1live"><meta name=title content="최상위 비트의 위치 찾는 방법"><meta name=description content="개요 이전에 나머지 연산자 없이 x % 256 계산하기과 나머지 연산자 없이 x % (2의 거듭제곱) 계산하기라는 글을 썻다. 색다른 기법을 다루는 글인척 하지만 컴파일러가"><meta name=keywords content="c++,union,endian"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.f2340c998d4e073dc7d9e2bca0e0c5d770466c4ad200bcc9528d7a7c240bb73ac2cb995257ae58afcf21dbc23e616a1700f146daf3f0f62c7584c4b8507359b2.css integrity="sha512-8jQMmY1OBz3H2eK8oODF13BGbErSALzJUo16fCQLtzrCy5lSV65Yr88h28I+YWoXAPFG2vPw9ix1hMS4UHNZsg=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="최상위 비트의 위치 찾는 방법"><meta property="og:description" content="개요 이전에 나머지 연산자 없이 x % 256 계산하기과 나머지 연산자 없이 x % (2의 거듭제곱) 계산하기라는 글을 썻다. 색다른 기법을 다루는 글인척 하지만 컴파일러가"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/find-the-highest-order-bit/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-08-26T00:00:00+00:00"><meta property="article:modified_time" content="2018-08-26T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="최상위 비트의 위치 찾는 방법"><meta name=twitter:description content="개요 이전에 나머지 연산자 없이 x % 256 계산하기과 나머지 연산자 없이 x % (2의 거듭제곱) 계산하기라는 글을 썻다. 색다른 기법을 다루는 글인척 하지만 컴파일러가"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=https://if1live.github.io/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=https://if1live.github.io/posts/ title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=https://if1live.github.io/tags/ title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=https://if1live.github.io/about/ title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>최상위 비트의 위치 찾는 방법</span><br><small>low-level을 이용해서 O(logN)으로 구현하기</small></h1><div class=tip><time datetime="2018-08-26 00:00:00 +0000 UTC">2018. 08. 26</time></div><div class=content><h2 id=개요>개요</h2><p>이전에 <a href=%7Battach%7Duse-casting-as-mod-operator/>나머지 연산자 없이 x % 256 계산하기</a>과 <a href=%7Battach%7Duse-bit-op-as-mod-operator/>나머지 연산자 없이 x % (2의 거듭제곱) 계산하기</a>라는 글을 썻다.
+색다른 기법을 다루는 글인척 하지만 컴파일러가 이미 그렇게 동작하기때문에 니가 하는 최적화는 뻘짓이라는걸 보여주는 목적의 글이었다.
+여기에서 글이 끝나면 재미없다. 위의 글을 통해 배운 기법을 이용해서 조금 더 쓸모있어 보이는 (하지만 실제로는 쓸모없는) 코드를 짜보자.</p><h2 id=최상위-비트의-위치-찾기>최상위 비트의 위치 찾기</h2><pre class=markdown-textblock><code>1 -> 0001 -> 0
+2 -> 0010 -> 1
+3 -> 0011 -> 1
+4 -> 0100 -> 2
+...
+8 -> 1000 -> 3
+9 -> 1001 -> 3
+...</code></pre><p>양의 정수가 주어졌을때 이것의 최상위 비트를 찾아보자.
+부호 문제를 신경쓰기 귀찮으니 양수 범위로만 한정하자.</p><p>쉽게 풀려면 쉽게 풀수도 있는 문제다. 그냥 반복문을 돌려서 풀수도 있다.
+루프를 돌리기때문에 O(N)인것처럼 보이지만 N의 범위는 뻔하기 때문에 O(1)이나 마찬가지다.
+64비트, 128비트 정수를 쓸일은 있어도 1048576비트 정수를 볼일이 얼마나 있을까?</p><p>하지만 나는 그럴싸한 뻘짓을 위해서 O(logN)으로 구현해보았다.
+1048576비트 정수가 있어도 돌아갈거다. (아마도?)</p><h2 id=code>code</h2><p><a href=https://ideone.com/LdQ3qu>https://ideone.com/LdQ3qu</a></p><pre><code class="language-maya:view line-numbers">file=main.cpp
+lang=c&#43;&#43;</code></pre><p>x86에서 돌아가는 코드다.</p><h2 id=해설>해설</h2><p>코드는 길지만 그냥 길기만 할 뿐이다.
+풀어써서 길 뿐이다.</p><h3 id=integer---byte-array>integer -> byte array</h3><pre><code class="language-cpp line-numbers">template &lt;typename T&gt;
+int find_high_bit(T x)
+{
+    ...
+    union container_t {
+        T val;
+        uint8_t data[sizeof(T)];
+    };
+    ...</code></pre><p><p class=markdown-image><img src=%7battach%7dfind-the-highest-order-bit/union-integer-to-byte-array.png alt="integer to byte array"></p></p><p>union을 쓰면 데이터를 다른 형식으로 해석할 수 있다.
+이걸 이용하면 정수를 바이트 배열로 바꿀 수 있다.
+요새 회사에서 union이 없는 언어를 쓰고있는데 이런짓을 못해서 심심하더라.</p><h3 id=endian>endian</h3><pre><code class="language-cpp line-numbers">template &lt;int N&gt;
+int find_high_bit_r(uint8_t data[N], int base_idx)
+{
+    union container_t {
+        uint8_t data[N];
+        struct
+        {
+            uint8_t low[N / 2];
+            uint8_t high[N / 2];
+        };
+    } c;
+    std::memcpy(c.data, data, N);
+    ...</code></pre><p><p class=markdown-image><img src=%7battach%7dfind-the-highest-order-bit/union-endian.png alt=endian></p></p><p>union을 쓰면 데이터를 다른 형식으로 해석할 수 있다.
+이걸 이용하면 배열을 다른 크기의 배열로 해석할수도 있다.
+union을 쓰면 특별한 작업 없이 크기가 N인 배열을 크기가 N/2인 배열 2개로 해석하는게 가능하다.</p><p>union을 보면 data를 배열 2개로 자르는데 low가 high보다 먼저 나온다.
+x86이 little endian을 사용하기때문이다. 그림을 보면 이해할수 있을것이다.</p><h3 id=byte>byte</h3><pre><code class="language-cpp line-numbers">template &lt;int N&gt;
+int find_high_bits_in_byte_r(uint8_t x, int base_idx)
+{
+    uint8_t high = x &gt;&gt; N;
+    uint8_t low = ((1 &lt;&lt; N) - 1) &amp; x;
+    ...</code></pre><p><p class=markdown-image><img src=%7battach%7dfind-the-highest-order-bit/union-bits.png alt=bits></p></p><p>C의 기본 타입중에서는 비트를 다루는게 없다.
+하지만 비트를 다루는게 불가능한건 아니다.
+<a href=https://docs.microsoft.com/ko-kr/cpp/c-language/c-bit-fields>C 비트 필드</a>를 이용하면 비트 단위에서 타입의 크기를 지정할 수 있다.</p><p>새로운 기법을 설명하기는 귀찮은 관계로 이전에 사용한 기법을 재사용하자.
+<a href=%7Battach%7Duse-bit-op-as-mod-operator/>나머지 연산자 없이 x % (2의 거듭제곱) 계산하기</a>의 코드를 이용하면 low를 구할수 있다.</p><h3 id=전체-구조>전체 구조</h3><ol><li>0은 걸러내기. 0을 제외하면 최상위비트가 항상 존재한다.</li><li>정수를 바이트 배열로 바꾼다.</li><li>바이트 배열을 반으로 잘라가면서 최상위비트가 있을 구역을 찾는다.</li><li>바이트 배열을 반으로 자르다 1바이트에 도달. 비트 단위로 계산의 시작점</li><li>N비트를 2개의 N/2비트로 잘라서 최상위 비트가 있을 자리를 찾는다.</li><li>최상위 비트를 찾았다.</li></ol><h2 id=이-코드는-쓸모있는가>이 코드는 쓸모있는가?</h2><p>C에서 정수를 다루는 방법을 이해할때는 도움이 될거다.
+그 이상의 가치는 없다.</p><p><a href=https://stackoverflow.com/questions/53161/find-the-highest-order-bit-in-c>Find the highest order bit in C</a>는 흔한 떡밥이다보니까 다양한 구현이 있고 더 효율적인 구현도 있다.
+최상위 비트를 찾아내는게 성능상 중요하지 않은 프로젝트라면 더 간단한 방법으로 구현해도 된다.
+최상위 비트를 찾아내는게 성능상 중요한 프로젝트라면 더 효율적인 방법을 쓰면 된다.</p><h2 id=연습문제>연습문제</h2><p><a href=https://docs.microsoft.com/ko-kr/cpp/c-language/c-bit-fields>C 비트 필드</a>를 이용해서 구현하시오.</p></div><div class=tags><a href=https://if1live.github.io/tags/c++/>c++</a>
+<a href=https://if1live.github.io/tags/union/>union</a>
+<a href=https://if1live.github.io/tags/endian/>endian</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
