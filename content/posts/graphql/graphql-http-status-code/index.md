@@ -5,6 +5,7 @@ tags: [graphql]
 slug: graphql-http-status-code
 author: if1live
 date: 2019-07-28
+url: /posts/graphql-http-status-code
 ---
 
 ## 아무도 관심갖지 않는 GraphQL 이야기
