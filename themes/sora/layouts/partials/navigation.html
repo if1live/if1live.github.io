@@ -1,16 +1,16 @@
 <nav class="sora-navigation">
-  <a href="{{ .Site.BaseURL }}" title="home">
+  <a href='{{ "/" | relURL }}' title="home">
     <h1>{{ .Site.Title }}</h1>
   </a>
   <ul class="menu-button-list">
     <li>
-      <a href="{{ .Site.BaseURL }}posts/" {{ if eq (lower .Title) "posts" }} class="active" {{ end }} title="archive">
+      <a href='{{ "/posts" | relURL }}' {{ if eq (lower .Title) "posts" }} class="active" {{ end }} title="archive">
         <i class="fa-solid fa-box-archive"></i>
         <span hidden>archive</span>
       </a>
     </li>
     <li>
-      <a href="{{ .Site.BaseURL }}tags/" {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
+      <a href='{{ "/tags" | relURL }}' {{ if eq .Data.Plural "tags" }} class="active" {{ end }} title="tags">
         <i class="fa-solid fa-tags"></i>
         <span hidden>tags</span>
       </a>
@@ -27,7 +27,7 @@
     </li>
     {{ end }}
     <li>
-      <a href="{{ .Site.BaseURL }}about/" {{ if eq .Title "about" }} class="active" {{ end }} title="about">
+      <a href='{{ "/about" | relURL }}' {{ if eq .Title "about" }} class="active" {{ end }} title="about">
         <i class="fa-solid fa-info"></i>
         <span hidden>about</span>
       </a>
