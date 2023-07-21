@@ -42,10 +42,111 @@ url: /posts/find-the-highest-order-bit
 
 https://ideone.com/LdQ3qu
 
-~~~maya:view
-file=main.cpp
-lang=c++
-~~~
+```cpp
+#include <cassert>
+#include <cstdio>
+#include <cstring>
+#include <cstdint>
+
+template <int N>
+int find_high_bits_in_byte_r(uint8_t x, int base_idx)
+{
+    uint8_t high = x >> N;
+    uint8_t low = ((1 << N) - 1) & x;
+    if (high > 0)
+    {
+        return find_high_bits_in_byte_r<N / 2>(high, base_idx + N);
+    }
+    else
+    {
+        return find_high_bits_in_byte_r<N / 2>(low, base_idx);
+    }
+}
+
+template <>
+int find_high_bits_in_byte_r<0>(uint8_t x, int base_idx)
+{
+    return base_idx;
+}
+
+int find_high_bits_in_byte(uint8_t x)
+{
+    return find_high_bits_in_byte_r<4>(x, 0);
+}
+
+template <int N>
+bool is_greater_than_zero(uint8_t data[N])
+{
+    uint8_t zerofill[N] = { 0 };
+    auto retval = std::memcmp(data, zerofill, N);
+    return (retval != 0);
+}
+
+template <int N>
+int find_high_bit_r(uint8_t data[N], int base_idx)
+{
+    union container_t {
+        uint8_t data[N];
+        struct
+        {
+            uint8_t low[N / 2];
+            uint8_t high[N / 2];
+        };
+    } c;
+    std::memcpy(c.data, data, N);
+
+    if (is_greater_than_zero<N / 2>(c.high))
+    {
+        return find_high_bit_r<N / 2>(c.high, base_idx + N / 2);
+    }
+    else
+    {
+        return find_high_bit_r<N / 2>(c.low, base_idx);
+    }
+}
+
+template <>
+int find_high_bit_r<1>(uint8_t data[1], int base_idx)
+{
+    auto bit_idx = find_high_bits_in_byte(data[0]);
+    return bit_idx + base_idx * 8;
+}
+
+template <typename T>
+int find_high_bit(T x)
+{
+    if (x == 0)
+    {
+        return -1;
+    }
+
+    union container_t {
+        T val;
+        uint8_t data[sizeof(T)];
+    };
+    container_t c;
+    c.val = x;
+    return find_high_bit_r<sizeof(T)>(c.data, 0);
+}
+
+int main()
+{
+    for (int i = 0; i < 8; i++)
+    {
+        assert(i == find_high_bits_in_byte(1 << i));
+    }
+
+    for (int i = 0; i < 32; i++)
+    {
+        assert(i == find_high_bit<uint32_t>(1 << i));
+    }
+
+    assert(3 == find_high_bit<uint32_t>(0b1011));
+    assert(27 == find_high_bit<uint32_t>(0b00001000'00000100'00000010'00000001));
+
+    return 0;
+}
+```
 
 x86에서 돌아가는 코드다.
 
@@ -68,7 +169,7 @@ int find_high_bit(T x)
     ...
 ```
 
-![integer to byte array]({attach}find-the-highest-order-bit/union-integer-to-byte-array.png)
+![integer to byte array](union-integer-to-byte-array.png)
 
 union을 쓰면 데이터를 다른 형식으로 해석할 수 있다.
 이걸 이용하면 정수를 바이트 배열로 바꿀 수 있다.
@@ -92,7 +193,7 @@ int find_high_bit_r(uint8_t data[N], int base_idx)
     ...
 ```
 
-![endian]({attach}find-the-highest-order-bit/union-endian.png)
+![endian](union-endian.png)
 
 union을 쓰면 데이터를 다른 형식으로 해석할 수 있다.
 이걸 이용하면 배열을 다른 크기의 배열로 해석할수도 있다.
@@ -112,7 +213,7 @@ int find_high_bits_in_byte_r(uint8_t x, int base_idx)
     ...
 ```
 
-![bits]({attach}find-the-highest-order-bit/union-bits.png)
+![bits](union-bits.png)
 
 C의 기본 타입중에서는 비트를 다루는게 없다.
 하지만 비트를 다루는게 불가능한건 아니다.
@@ -146,6 +247,6 @@ C에서 정수를 다루는 방법을 이해할때는 도움이 될거다.
 
 
 [stackoverflow-1]: https://stackoverflow.com/questions/53161/find-the-highest-order-bit-in-c
-[blog-mod-256]: {attach}use-casting-as-mod-operator/
-[blog-mod-pot]: {attach}use-bit-op-as-mod-operator/
+[blog-mod-256]: {{< ref use-casting-as-mod-operator >}}
+[blog-mod-pot]: {{< ref use-bit-op-as-mod-operator >}}
 [msdn-c-bit-fields]: https://docs.microsoft.com/ko-kr/cpp/c-language/c-bit-fields
