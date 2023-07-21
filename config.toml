@@ -42,6 +42,12 @@ extended = true
 min = "0.110.0"
 
 [[module.mounts]]
-excludeFiles = ["posts/**/maya/**", "posts/**/examples/**"]
+excludeFiles = [
+  "posts/**/maya/**",
+  "posts/**/examples/**",
+  "posts/**/node_modules/**",
+  "posts/**/package.json",
+  "posts/**/pnpm-lock.yaml",
+]
 source = "content"
 target = "content"
