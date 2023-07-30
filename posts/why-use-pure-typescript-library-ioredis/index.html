@@ -1,0 +1,120 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.115.1"><title>순수 타입스크립트 라이브러리를 사용해야되는 이유, 그리고 ioredis - if1live space</title><meta name=author content="if1live"><meta name=title content="순수 타입스크립트 라이브러리를 사용해야되는 이유, 그리고 ioredis"><meta name=description content="ioredis 작성일 기준으로 ioredis는 2개의 메이저 버전이 살아있다. ioredis v4 v4 마지막 버전: v4.28.5 2022-02-06 ioredis v5 v5 작성일 기준 최신 버전: v5.3.2 2023-04-15 v5 첫번째 안정 릴리즈: v5.0.0 2022-03-26 여러"><meta name=keywords content="typescript,javascript,ioredis,prototype"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.f2340c998d4e073dc7d9e2bca0e0c5d770466c4ad200bcc9528d7a7c240bb73ac2cb995257ae58afcf21dbc23e616a1700f146daf3f0f62c7584c4b8507359b2.css integrity="sha512-8jQMmY1OBz3H2eK8oODF13BGbErSALzJUo16fCQLtzrCy5lSV65Yr88h28I+YWoXAPFG2vPw9ix1hMS4UHNZsg=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="순수 타입스크립트 라이브러리를 사용해야되는 이유, 그리고 ioredis"><meta property="og:description" content="ioredis 작성일 기준으로 ioredis는 2개의 메이저 버전이 살아있다. ioredis v4 v4 마지막 버전: v4.28.5 2022-02-06 ioredis v5 v5 작성일 기준 최신 버전: v5.3.2 2023-04-15 v5 첫번째 안정 릴리즈: v5.0.0 2022-03-26 여러"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/why-use-pure-typescript-library-ioredis/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-07-30T00:00:00+00:00"><meta property="article:modified_time" content="2023-07-30T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="순수 타입스크립트 라이브러리를 사용해야되는 이유, 그리고 ioredis"><meta name=twitter:description content="ioredis 작성일 기준으로 ioredis는 2개의 메이저 버전이 살아있다. ioredis v4 v4 마지막 버전: v4.28.5 2022-02-06 ioredis v5 v5 작성일 기준 최신 버전: v5.3.2 2023-04-15 v5 첫번째 안정 릴리즈: v5.0.0 2022-03-26 여러"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=/posts title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=/tags title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=/about title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>순수 타입스크립트 라이브러리를 사용해야되는 이유, 그리고 ioredis</span><br><small>prototype의 함정</small></h1><div class=tip><time datetime="2023-07-30 00:00:00 +0000 UTC">2023. 07. 30</time></div><div class=content><h2 id=ioredis>ioredis</h2><p>작성일 기준으로 <a href=https://github.com/redis/ioredis>ioredis</a>는 2개의 메이저 버전이 살아있다.</p><ul><li>ioredis v4<ul><li>v4 마지막 버전: <a href=https://github.com/redis/ioredis/releases/tag/v4.28.5>v4.28.5</a><ul><li>2022-02-06</li></ul></li></ul></li><li>ioredis v5<ul><li>v5 작성일 기준 최신 버전: <a href=https://github.com/redis/ioredis/releases/tag/v5.3.2>v5.3.2</a><ul><li>2023-04-15</li></ul></li><li>v5 첫번째 안정 릴리즈: <a href=https://github.com/redis/ioredis/releases/tag/v5.0.0>v5.0.0</a><ul><li>2022-03-26</li></ul></li></ul></li></ul><p>여러 가지 이유로 ioredis v4를 사용중인 프로젝트는 많을거다.
+ioredis v5 나오기 전에 출시한 프로젝트라서 라이브러리 버전을 올릴 동기가 없을 수 있다.
+<a href=https://github.com/mike-marcacci/node-redlock/blob/v4.2.0/package.json#L31C5-L31C5>갖다 쓴 외부 라이브러리가 ioredis v4만 지원할 수도 있다.</a></p><h2 id=문제-redisgetbuffer--ioredis-v4>문제: redis.getBuffer + ioredis v4</h2><p>최근에 ioredis v4에서 <code>await redis.getBuffer(...)</code>를 호출할 일이 생겼다.</p><p>redis의 <code>GET</code>은 키가 없으면 null을 리턴한다.
+그렇다면 ioredis의 <code>get</code>, <code>getBuffer</code>도 키가 없다면 null을 반환할 것이다.</p><p>직접 코드를 짜서 돌려보면 키가 없을때 <code>getBuffer</code>는 null을 반환한다.
+하지만 타입스크립트에서 자동 완성은 <code>Buffer | null</code> 이 아니라 <code>Buffer</code> 로 되더라.</p><p><p class=markdown-image><img src=ioredis-v4-getbuffer.png alt=redis.getBuffer></p></p><h2 id=원인-타입-정의>원인: 타입 정의</h2><p>ioredis v4를 사용한다면 <a href=https://www.npmjs.com/package/@types/ioredis/v/4.28.10>@types/ioredis</a>를 설치해야 한다.
+해당 패키지의 <code>index.d.ts</code> 열어보면 <code>get</code>, <code>getBuffer</code>의 정의를 찾을 수 있다.</p><pre><code class="language-ts line-numbers">get(key: KeyType, callback: Callback&lt;string | null&gt;): void;
+get(key: KeyType): Promise&lt;string | null&gt;;
+...
+getBuffer(key: KeyType, callback: Callback&lt;Buffer&gt;): void;
+getBuffer(key: KeyType): Promise&lt;Buffer&gt;;</code></pre><p><code>get()</code>은 리턴 타입이 <code>Promise&lt;string | null></code>로 올바르게 정의되어 있다.
+<code>getBuffer()</code>은 리턴 타입이 <code>Promise&lt;Buffer></code>로 잘못 정의되어 있다.</p><p>ioredis v5부터는 <code>@types/ioredis</code>를 설치하지 않는다. <code>ioredis</code>만 있어도 된다.
+ioredis의 <code>built/utils/RedisCommander.d.ts</code> 열어보면 <code>get</code>, <code>getBuffer</code>의 정의를 찾을 수 있다.</p><pre><code class="language-ts line-numbers">/**
+ * Get the value of a key
+ * - _group_: string
+ * - _complexity_: O(1)
+ * - _since_: 1.0.0
+ */
+get(key: RedisKey, callback?: Callback&lt;string | null&gt;): Result&lt;string | null, Context&gt;;
+getBuffer(key: RedisKey, callback?: Callback&lt;Buffer | null&gt;): Result&lt;Buffer | null, Context&gt;;</code></pre><p><code>get</code>, <code>getBuffer</code> 의 리턴 타입이 올바르게 정의되어 있다.</p><p>ioredis v4를 v5로 업그레이드하면 <code>getBuffer</code>의 리턴 타입이 잘못 나오는 문제는 고쳐진다.
+문제를 고치기전에 궁금증이 생겼다.</p><ol><li>ioredis v4에서 <code>getBuffer</code>를 어떻게 구현했길래 문제가 생긴걸까?</li><li>ioredis v4도 타입스크립트 기반인데 v5와 달리 <code>@types/ioredis</code>를 따로 설치해야되는 이유는 무엇인가?</li></ol><p>이럴땐 코드를 뜯어보면 된다.</p><h2 id=코드-ioredis-v4>코드: ioredis v4</h2><p>ioredis v4.28.5 소스를 받아서 압축을 풀고 <code>getBuffer(</code> 로 문자열 검색해보자.
+함수가 정의되어있다면 검색에서 잡힐 것이다.
+그런데 <code>getBuffer(</code> 를 검색하면 없다!
+검색 결과는 있지만 전부 테스트 코드이다.
+ioredis 구현에서 <code>getBuffer()</code> 함수가 없다?
+코드가 대체 어떻게 돌아가는거지?</p><p><p class=markdown-image><img src=search-getbuffer.png alt="getBuffer( 검색결과"></p></p><p><code>getBuffer(</code> 로 검색하는 대신 <code>Buffer"</code>로 검색한다.
+그러면 <code>getBuffer()</code>의 구현을 찾을 수 있다.</p><p><a href=https://github.com/redis/ioredis/blob/v4.28.5/lib/commander.ts#L37>https://github.com/redis/ioredis/blob/v4.28.5/lib/commander.ts#L37</a></p><pre><code class="language-ts line-numbers">const commands = require(&#34;redis-commands&#34;).list.filter(function (command) {
+  return command !== &#34;monitor&#34;;
+});
+commands.push(&#34;sentinel&#34;);
+
+...
+
+commands.forEach(function (commandName) {
+  Commander.prototype[commandName] = generateFunction(
+    commandName,
+    commandName,
+    &#34;utf8&#34;
+  );
+  Commander.prototype[commandName &#43; &#34;Buffer&#34;] = generateFunction(
+    commandName &#43; &#34;Buffer&#34;,
+    commandName,
+    null
+  );
+});</code></pre><p><code>redis-commands</code> 패키지는 무엇인가?
+패키지를 열어보면 <code>getBuffer</code>가 돌아가는 방식을 알 수 있다.</p><pre class=markdown-textblock><code>> require('redis-commands').list
+[
+  'acl',               'append',               'asking',
+  'auth',              'bgrewriteaof',         'bgsave',
+  'bitcount',          'bitfield',             'bitfield_ro',
+  'bitop',             'bitpos',               'blmove',
+...</code></pre><p>세상에!
+<code>Commander.prototype[commandName] = generateFunction(...)</code> 라니!
+동적으로 함수를 만들어서 prototype에 끼워넣는다니!</p><p>2015년 ES6에서 class 문법이 추가되었다.
+ES6 이후로는 prototype으로 객체지향하는 코드는 잊혀진줄 알았는데 아직도 살아있을 줄이야!</p><p>ioredis v4의 동작을 요약하면 다음과 같다.</p><ol><li>redis 명령어를 하나씩 손으로 입력하기 귀찮으니 redis-commands 패키지에서 가져온다.</li><li><code>Commander.prototype[commandName] = ...</code> 로 <code>get()</code>, <code>hget()</code>, &mldr; 를 찍어낸다.</li><li><code>commander.prototype[commandName + "Buffer"] = ...</code> 로 <code>getBuffer()</code>, <code>hgetBuffer()</code>, &mldr; 를 찍어낸다.</li><li><code>@types/ioredis</code>에 손으로 타입 정의를 추가한다.</li><li>손으로 타입 정의를 만들다가 <code>getBuffer()</code>의 타입 정의에서 실수했다.</li></ol><h2 id=코드-ioredis-v5>코드: ioredis v5</h2><blockquote><p>100% written in TypeScript and official declarations are provided</p></blockquote><p>ioredis v5는 README에서 타입스크립트로 작성했다고 강조하더라.
+ioredis v5에서는 위의 코드가 어떻게 바뀌었나 뒤져보자.</p><p><code>hget()</code>, <code>getBuffer()</code> 같은 redis 함수는 RedisCommander.ts에서 인터페이스로 정의한다.
+타입스크립트 인터페이스를 도입해서 손으로 타입 정의 작성하다 실수하는 문제는 사라진다.</p><p><a href=https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/RedisCommander.ts#L3669>https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/RedisCommander.ts#L3669</a></p><pre><code class="language-ts line-numbers">interface RedisCommander&lt;Context extends ClientContext = { type: &#34;default&#34; }&gt; {
+  ...
+  get(
+    key: RedisKey,
+    callback?: Callback&lt;string | null&gt;
+  ): Result&lt;string | null, Context&gt;;
+  getBuffer(
+    key: RedisKey,
+    callback?: Callback&lt;Buffer | null&gt;
+  ): Result&lt;Buffer | null, Context&gt;;
+  ...
+}</code></pre><p>ioredis 클라이언트를 생성할때는 <code>const redis = new Redis(...)</code>를 쓴다.
+<code>redis.getBuffer()</code>를 호출하려면 <code>Redis</code>의 부모 어딘가서 <code>RedisCommander</code>를 구현했을 것이다.</p><p><a href=https://github.com/redis/ioredis/blob/v5.3.2/lib/Redis.ts#L64>https://github.com/redis/ioredis/blob/v5.3.2/lib/Redis.ts#L64</a></p><pre><code class="language-ts line-numbers">class Redis extends Commander implements DataHandledable {</code></pre><p><a href=https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/Commander.ts#L17>https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/Commander.ts#L17</a></p><pre><code class="language-ts line-numbers">class Commander&lt;Context extends ClientContext = { type: &#34;default&#34; }&gt; {</code></pre><p><a href=https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/Commander.ts#L95>https://github.com/redis/ioredis/blob/v5.3.2/lib/utils/Commander.ts#L95</a></p><pre><code class="language-ts line-numbers">interface Commander&lt;Context&gt; extends RedisCommander&lt;Context&gt; {}</code></pre><p><code>interface Commander</code> 아래까지 읽어보면 익숙한 코드가 나온다.</p><pre><code class="language-ts line-numbers">interface Commander&lt;Context&gt; extends RedisCommander&lt;Context&gt; {}
+
+const commands = list.filter((command) =&gt; command !== &#34;monitor&#34;);
+commands.push(&#34;sentinel&#34;);
+
+commands.forEach(function (commandName) {
+  Commander.prototype[commandName] = generateFunction(
+    commandName,
+    commandName,
+    &#34;utf8&#34;
+  );
+  Commander.prototype[commandName &#43; &#34;Buffer&#34;] = generateFunction(
+    commandName &#43; &#34;Buffer&#34;,
+    commandName,
+    null
+  );
+});</code></pre><p>으악!
+타입스크립트에서 prototype 직접 건드리는 방식으로 객체지향을 하다니!
+이런건 &ldquo;100% written in TypeScript&rdquo; 가 아니야!</p><p>기능 측면에서는 문제가 없지만 몰랐으면 좋았을 내용을 알아버렸다.</p></div><div class=tags><a href=https://if1live.github.io/tags/typescript/>typescript</a>
+<a href=https://if1live.github.io/tags/javascript/>javascript</a>
+<a href=https://if1live.github.io/tags/ioredis/>ioredis</a>
+<a href=https://if1live.github.io/tags/prototype/>prototype</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
