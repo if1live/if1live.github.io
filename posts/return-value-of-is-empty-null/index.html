@@ -1,0 +1,194 @@
+<!doctype html><html lang=ko-kr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.115.1"><title>isEmpty(null)의 리턴 값은? - if1live space</title><meta name=author content="if1live"><meta name=title content="isEmpty(null)의 리턴 값은?"><meta name=description content="isEmpty(null) 옛날 옛적에 lodash를 사용해서 아래와 같은 함수를 만들었다. /** * prev를 next의 부분을 Partial<CharacterModel"><meta name=keywords content="typescript,lodash,just,ramda,remeda"><meta name=naver-site-verification content="2ddc1a56777489f4a64a4f6a59822f8b1c1ea502"><meta name=google-site-verification content="VsvNNnJZUV-iLEYKNju16p-HtDqZeqL15H-VVy-HwpA"><meta name=gc:client-id content="785d47c81cbc2fd42b65"><meta name=gc:client-secret content="5e5d558f0b16fae154aa47fc9d94f7c09e540ec7"><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><script type=text/javascript>var host="if1live.github.io";host==window.location.host&&window.location.protocol!="https:"?window.location.protocol="https":console.log("skip https redirect")</script><link rel=stylesheet href=/css/style.f2340c998d4e073dc7d9e2bca0e0c5d770466c4ad200bcc9528d7a7c240bb73ac2cb995257ae58afcf21dbc23e616a1700f146daf3f0f62c7584c4b8507359b2.css integrity="sha512-8jQMmY1OBz3H2eK8oODF13BGbErSALzJUo16fCQLtzrCy5lSV65Yr88h28I+YWoXAPFG2vPw9ix1hMS4UHNZsg=="><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin=anonymous><script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-3043297488880636",enable_page_level_ads:!0})</script><meta property="og:title" content="isEmpty(null)의 리턴 값은?"><meta property="og:description" content="isEmpty(null) 옛날 옛적에 lodash를 사용해서 아래와 같은 함수를 만들었다. /** * prev를 next의 부분을 Partial<CharacterModel"><meta property="og:type" content="article"><meta property="og:url" content="https://if1live.github.io/posts/return-value-of-is-empty-null/"><meta property="og:image" content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-08-01T00:00:00+00:00"><meta property="article:modified_time" content="2023-08-01T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/fb9672e7e0d256f39369595381d1ea07?size=160"><meta name=twitter:title content="isEmpty(null)의 리턴 값은?"><meta name=twitter:description content="isEmpty(null) 옛날 옛적에 lodash를 사용해서 아래와 같은 함수를 만들었다. /** * prev를 next의 부분을 Partial<CharacterModel"><meta name=twitter:site content="@if1live"><script async src="https://www.googletagmanager.com/gtag/js?id=G-SKE54STL16"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-SKE54STL16",{anonymize_ip:!1})}</script></head><body><nav class=sora-navigation><a href=/ title=home><h1>if1live space</h1></a><ul class=menu-button-list><li><a href=/posts title=archive><i class="fa-solid fa-box-archive"></i>
+<span hidden>archive</span></a></li><li><a href=/tags title=tags><i class="fa-solid fa-tags"></i>
+<span hidden>tags</span></a></li><li><a href=//github.com/if1live title=GitHub><i class="fa-brands fa-github"></i>
+<span hidden>GitHub</span></a></li><li><a href=/about title=about><i class="fa-solid fa-info"></i>
+<span hidden>about</span></a></li><li><a href=https://if1live.github.io/index.xml title=RSS><i class="fa-solid fa-rss"></i>
+<span hidden>RSS</span></a></li></ul></nav><div class=main><section id=single><h1 class=title><span>isEmpty(null)의 리턴 값은?</span><br><small>true, false, 그리고 제3의 선택</small></h1><div class=tip><time datetime="2023-08-01 00:00:00 +0000 UTC">2023. 08. 01</time></div><div class=content><h2 id=isemptynull>isEmpty(null)</h2><p>옛날 옛적에 lodash를 사용해서 아래와 같은 함수를 만들었다.</p><pre><code class="language-ts line-numbers">/**
+ * prev를 next의 부분을 Partial&lt;CharacterModel&gt;로 리턴
+ * prev와 next가 똑같다면 null
+ */
+function compare(
+  prev: CharacterModel,
+  next: CharacterModel,
+): Partial&lt;CharacterModel&gt; | null {
+  ...
+}
+
+const delta_character = compare(prev, next);
+const diff_character = _.isEmpty(delta_character) ? delta_character : null;</code></pre><p>lodash로 몇년동안 쓰다가 <a href=https://if1live.github.io/posts/escape-from-lodash-remeda/>lodash를 버리고 remeda로 마이그레이션</a> 했다.
+당시의 remeda에는 <code>isEmpty()</code>가 구현되어 있지 않아서 <a href=https://if1live.github.io/posts/escape-from-lodash-just/>remeda의 틈을 just</a>로 막았다.
+지금은 remeda에 <code>isEmpty()</code>가 구현되어서 just-is-empty를 사용하지 않아도 된다.
+remeda 버전 올리면서 just-is-empty 지우고 <code>R.isEmpty()</code> 쓰게 바꿨더니 문제가 생겼다.</p><p>글을 읽기 전에 <code>isEmpty(null)</code>는 어떻게 동작하는게 올바른 명세일지 생각해보자.
+그렇게 동작해야 된다고 생각한 이유는 무엇인가?</p><h2 id=라이브러리>라이브러리</h2><p>몇가지 라이브러리의 <code>isEmpty()</code> 명세를 뒤져봤다.
+주로 뒤져본 항목은 다음과 같다.</p><ol><li>작성일 기준 최신 코드 또는 명세</li><li>주석으로 <code>isEmpty(null)</code>가 언급된 시점</li><li><code>isEmpty()</code>가 처음 구현된 시점</li></ol><h3 id=lodash>lodash</h3><p>lodash 4.17.15 <code>_.isEmpty(value)</code>의 <a href=https://lodash.com/docs/4.17.15#isEmpty>문서</a></p><blockquote><p>Checks if value is an empty object, collection, map, or set.
+Objects are considered empty if they have no own enumerable string keyed properties.
+Array-like values such as arguments objects, arrays, buffers, strings,
+or jQuery-like collections are considered empty if they have a length of 0.
+Similarly, maps and sets are considered empty if they have a size of 0.</p></blockquote><pre class=markdown-textblock><code>_.isEmpty(null);
+// => true</code></pre><p><a href=https://github.com/lodash/lodash/commit/52e96c38dc52c79e0b73679456c7c6e092ffa775>52e96c3</a>부터 isEmpty에서 null을 명시적으로 처리했다.
+커밋 메세지는 &ldquo;Exit early from _.isEmpty for nullish values.&rdquo; 커밋 날짜는 2016-10-09</p><pre class=markdown-textblock><code>     function isEmpty(value) {
++      if (value == null) {
++        return true;
++      }
+       if (isArrayLike(value) &&</code></pre><p>loash에서 <code>_.isEmpty(null)</code>를 주석으로 처음 언급한 것은 <a href=https://github.com/lodash/lodash/commit/8c61878>8c61878</a>으로 추정된다.
+JSDoc에서 <code>_.isEmpty(null)</code>이 처음으로 등장하더라 (유닛테스트로 isEmpty를 취급하는건 더 나중의 일인거같지만)
+커밋 날짜는 2014-05-04</p><pre class=markdown-textblock><code>     /**
+-     * Checks if `value` is empty. Arrays, strings, or `arguments` objects with a
+-     * length of `0` and objects with no own enumerable properties are considered
+-     * "empty".
++     * Checks if a collection is empty. A value is considered empty unless it is
++     * an array, array-like object, or string with a length greater than `0` or
++     * an object with own properties.
+      *
+      * @static
+      * @memberOf _
+      * @category Objects
+      * @param {Array|Object|string} value The value to inspect.
+-     * @returns {boolean} Returns `true` if the `value` is empty, else `false`.
++     * @returns {boolean} Returns `true` if `value` is empty, else `false`.
+      * @example
+      *
+-     * _.isEmpty([1, 2, 3]);
+-     * // => false
++     * _.isEmpty(null);  <----------------------
++     * // => true
+      *
+-     * _.isEmpty({});
++     * _.isEmpty(true);
+      * // => true
+      *
+-     * _.isEmpty('');
++     * _.isEmpty(1);
+      * // => true
++     *
++     * _.isEmpty([1, 2, 3]);
++     * // => false
++     *
++     * _.isEmpty({ 'a': 1 });
++     * // => false
+      */
+      function isEmpty(value) {</code></pre><p><a href=https://github.com/lodash/lodash/commit/b5920e94a3221bbd8c6146d9839408030eb1922a>b5920e9</a>
+&ldquo;added an isEmpty function that works on arrays and objects"에서 처음으로 <code>isEmpty</code>가 구현되었다.
+커밋 날짜는 2009-11-08, 수정된 파일은 <code>underscore.js</code>이며 코드는 다음과 같다.</p><pre><code class="language-js line-numbers">// Is a given array or object empty?
+_.isEmpty = function(obj) {
+  return (_.isArray(obj) ? obj : _.values(obj)).length == 0;
+};</code></pre><p>lodash의 <code>_.values()</code>를 호출해보면 다음과 같이 작동한다.</p><pre class=markdown-textblock><code>> _.values(null)
+[]</code></pre><p>lodash를 뒤져서 얻은걸 정리하자.</p><ul><li><code>_.isEmpty(null)</code>: true</li><li><code>_.isEmpty()</code>를 만들때는 null을 고민하지 않은 것으로 보인다.<ul><li>함수 만든 시점과 주석으로 언급된 시점이 몇년 차이난다</li></ul></li><li><code>_.isEmpty()</code>는 처음부터 배열과 객체를 동시에 고려했다.</li><li><code>_.values(null) => []</code>이다. null은 빈 객체와 비슷하게 취급된다.</li><li>lodash의 부모는 underscore.js</li></ul><h3 id=just-is-empty>just-is-empty</h3><p>just-is-empty의 <a href=https://github.com/angus-c/just/tree/d8c5dd18941062d8db7e9310ecc8f53fd607df54#just-is-empty>명세</a></p><blockquote><p>Return true if object has no enumerable key values</p></blockquote><pre><code class="language-ts line-numbers">isEmpty(null) // true</code></pre><p><a href=https://github.com/angus-c/just/commit/12eb3e24825b1601be2c9eba7474d1a33c9addf9>12eb3e2</a>
+&ldquo;Inital commit of object empty&rdquo; 2016-08-03</p><p>just의 isEmpty는 처음부터 null을 고려했다.
+isEmpty의 초기 구현인 objectEmpty부터 null을 처리했다.</p><pre><code class="language-ts line-numbers"> ...
+ var obj = null;
+ objectEmpty(obj} // true
+*/
+
+function objectEmpty(obj1, obj2 /*, [objn]*/) {
+  if (obj == null) {
+    return true;
+  }
+  ...</code></pre><p>just를 뒤져서 얻은걸 정리하자.</p><ul><li><code>isEmpty(null)</code>: true</li><li><code>isEmpty()</code>의 시작부터 null을 고려</li><li><code>isEmpty()</code>는 객체를 기준으로 잡았다. 패키지 이름부터 <code>object-empty</code></li></ul><h3 id=ramda>ramda</h3><p>lodash, just의 isEmpty의 동작이 똑같다.
+모든 유명한 라이브러리의 isEmpty의 동작이 똑같다면 글을 안쓸거다.
+재밌는건 ramda부터 시작이다.</p><p>Ramda v0.29.0 isEmpty <a href=https://ramdajs.com/docs/#isEmpty>문서</a></p><blockquote><p>Returns true if the given value is its type&rsquo;s empty value; false otherwise.</p></blockquote><pre><code class="language-ts line-numbers">R.isEmpty(null);  //=&gt; false</code></pre><p>ramda는 lodash, just와는 동작이 반대다!</p><p>ramda의 주석으로 <code>isEmpty(null)</code>가 처음 언급되는건 다음의 커밋이다.
+<a href=https://github.com/ramda/ramda/commit/c2f3bad990705fbcb0df6cbf33986ea1c3426403#diff-b6bd0c98a2be150ec2d37193cb14a264d8445e4ce39c04d714051e1ab8ea9c51R728>c2f3bad</a>
+<code>isEmpty</code>의 구현은 고치지 않고 JSDoc만 개선한 커밋이다.
+2014-07-14</p><pre class=markdown-textblock><code>         /**
+-         * XXX
++         * Reports whether an array is empty.
++         *
++         * @static
++         * @memberOf R
++         * @category Array
++         * @param {Array} arr The array to consider.
++         * @return {boolean} Returns true if the `arr` argument has a length of 0 or if `arr` is a
++         * falsy value (e.g. undefined).
++         * @example
++         *
++         * ramda.isEmpty([1, 2, 3]); //=> false
++         * ramda.isEmpty([]); //=> true
++         * ramda.isEmpty(); //=> true
++         * ramda.isEmpty(null); //=> true
+          */
+-        // Boolean function which reports whether a list is empty.
+         var isEmpty = R.isEmpty = function (arr) {
+             return !arr || !arr.length;
+         };</code></pre><p>잉???
+과거의 ramda는 <code>ramda.isEmpty(null)</code>가 <code>true</code> 였다.
+ramda는 <code>isEmpty()</code>의 동작을 중간에 바꿨다!</p><p><code>isEmpty()</code>의 동작을 바꾼 커밋은 다음과 같다.
+<a href=https://github.com/ramda/ramda/commit/6c01c22b5ed7fec3dd23a30e0f5fe9b9a8c76e3c>6c01c22</a>
+&ldquo;simplify semantics of R.isEmpty&rdquo; 2014-11-20</p><p>이전: true</p><pre><code class="language-ts line-numbers">/**
+ * Reports whether a value is &#34;empty&#34;.
+ * Empty values are null, undefined, &#34;&#34;, and every object with a length
+ * property whose value is 0 (such as an empty array).
+ *
+ * @func
+ * @memberOf R
+ * @category Core
+ * @sig * -&gt; Boolean
+ * @param {*} val
+ * @return {Boolean}
+ * @example
+ *
+ *      R.isEmpty([1, 2, 3]); //=&gt; false
+ *      R.isEmpty([]); //=&gt; true
+ *      R.isEmpty(&#39;&#39;); //=&gt; true
+ *      R.isEmpty(null); //=&gt; true
+ */
+var isEmpty = R.isEmpty = function isEmpty(val) {
+    return val == null || val.length === 0;
+};</code></pre><p>이후: false</p><pre><code class="language-ts line-numbers">/**
+ * Reports whether the list has zero elements.
+ *
+ * @func
+ * @memberOf R
+ * @category Core
+ * @sig [a] -&gt; Boolean
+ * @param {Array} list
+ * @return {Boolean}
+ * @example
+ *
+ *      R.isEmpty([1, 2, 3]); //=&gt; false
+ *      R.isEmpty([]); //=&gt; true
+ *      R.isEmpty(&#39;&#39;); //=&gt; true
+ *      R.isEmpty(null); //=&gt; false
+ */
+R.isEmpty = function isEmpty(list) {
+    return Object(list).length === 0;
+};</code></pre><p>ramda를 뒤져서 얻은걸 정리하자.</p><ul><li>2014-11-20 이전<ul><li><code>R.isEmpty(null)</code>: true</li><li><code>isEmpty()</code>는 배열을 생각하고 만들었다.<ul><li><code>arr.length</code></li></ul></li></ul></li><li>2014-11-20 이후<ul><li><code>R.isEmpty(null)</code>: false</li><li><code>isEmpty()</code>는 배열을 생각하고 만들었다.<ul><li>JSDoc: Reports whether the list has zero elements.</li></ul></li></ul></li><li><code>isEmpty()</code>의 명세는 버전이 올라가면 바뀔 수 있다.</li></ul><h3 id=remeda>remeda</h3><p>just-is-empty를 remeda의 <code>R.isEmpty()</code>로 바꾸고 생긴 문제는 런타임 문제가 아니다.
+remeda로는 <code>R.isEmpty(null)</code>가 컴파일되지 않는다.</p><p>remeda isEmpty <a href=https://remedajs.com/docs#isEmpty>문서</a></p><blockquote><p>A function that checks if the passed parameter is empty</p></blockquote><pre><code class="language-ts line-numbers">R.isEmpty(&#39;&#39;) //=&gt; true
+R.isEmpty([]) //=&gt; true
+R.isEmpty({}) //=&gt; true
+R.isEmpty(&#39;test&#39;) //=&gt; false
+R.isEmpty([1, 2, 3]) //=&gt; false
+R.isEmpty({ length: 0 }) //=&gt; false</code></pre><p>remeda는 문서에도 <code>R.isEmpty(null)</code>이 없다.
+remeda에 isEmpty가 추가된 PR을 따라가면 배경을 알 수 있다.</p><p><a href=https://github.com/remeda/remeda/pull/314#issuecomment-1533208805>feat: add isEmpty util function #314</a>
+PR의 시작에서는 <code>R.isEmpty(null) //=> false</code>가 있었지만 lodash와 ramda에서의 <code>isEmpty(null)</code>이 다른게 언급된다.</p><p><a href=https://github.com/remeda/remeda/pull/314/commits/16817bc381d7808ac9562f8c281829d6e338ed21>feat: add isEmpty util function</a></p><p>PR에서 3줄이 사라진다.</p><pre class=markdown-textblock><code>-   *    R.isEmpty(null) //=> false
+-   *    R.isEmpty(1) //=> false
+-   *    R.isEmpty(true) //=> false</code></pre><p>remeda를 뒤져서 얻은걸 정리하자.</p><ul><li><code>R.isEmpty(null)</code>: 컴파일 에러</li><li>true, false 어느쪽도 고를수 없다면 아무것도 고르지 않는다.<ul><li>타입시스템을 이용해서 컴파일되지 않도록 막는다.</li></ul></li></ul><h2 id=요약>요약</h2><ul><li><code>isEmpty()</code>는 단순한 함수지만 라이브러리마다 구현이 다르다.</li><li><code>isEmpty()</code>가 객체를 위한 함수인지, 배열을 위한 함수인지는 사람마다 관점이 다르다.</li><li><code>isEmpty([])</code>, <code>isEmpty({})</code>의 리턴으로는 논쟁이 없지만 <code>isEmpty(null)</code>은 의견이 갈라진다.<ul><li>true, false를 리턴하는 라이브러리를 찾았다.</li><li>컴파일 에러를 던지는 라이브러리도 있더라.</li><li>예외를 던지는 구현도 누군가 만들지 않았을까?</li></ul></li><li>라이브러리의 명세는 언제든 바뀔수 있다.<ul><li>리턴값을 뒤집은 ramda.isEmpty()</li></ul></li><li>어떤 것도 고를수 없을때는 아무것도 안고르면 된다.<ul><li>remeda의 컴파일 에러를 보고 배우자.</li></ul></li><li>컴파일 타임에 검증이 된다는건 좋은 것이다.<ul><li>node.js REPL을 쓰면 remeda의 <code>R.isEmpty(null)</code>을 호출할 수 있다.</li><li>REPL을 믿기 vs 컴파일러를 믿기</li></ul></li></ul></div><div class=tags><a href=https://if1live.github.io/tags/typescript/>typescript</a>
+<a href=https://if1live.github.io/tags/lodash/>lodash</a>
+<a href=https://if1live.github.io/tags/just/>just</a>
+<a href=https://if1live.github.io/tags/ramda/>ramda</a>
+<a href=https://if1live.github.io/tags/remeda/>remeda</a></div><div id=comment><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//libsora.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></section></div><footer class=sora-footer><p><a href=//gohugo.io/ title=Hugo>Hugo</a> |
+<a href=//twitter.com/if1live/ title=@if1live>@if1live</a></p></footer><script src=/js/main.js></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js integrity="sha512-BttltKXFyWnGZQcRWj6osIg7lbizJchuAMotOkdLxHxwt/Hyo+cl47bZU0QADg+Qt5DJwni3SbYGXeGMB5cBcw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js integrity="sha512-/Rynaa6ehLZJO9fdk+EUsgiOdJqFSFUB4Qgy+gP4vU4U1DrmPJWypfXe1CgyaV7rRdZjGxdpLe9djxhx1ZHvqQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js integrity="sha512-8VrjxGFLIkS0mgEmO3p46A5OkqATHhrNVwyv2V7yUeZrk1jmSDuI3SOEpC9XHEHUWEOsfzzcJeBlUkee9lKGrw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js integrity="sha512-namzGTZvHaug0jeipHRN2pMepMiJj+EbrloktVFlMYGnA0EwZhbdLeENjBYLCgoghVbZGinIz/FFYHmB0o3wLw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js integrity="sha512-uOw7XYETzS/DPmmirpP5UCMihSDNMeyTS965J0/456OSPfxn9xEtHHjj5Q/5WefVdqyMfN/afmQnNpZd/tpkcA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js integrity="sha512-AKaNmg8COK0zEbjTdMHJAPJ0z6VeNqvRvH4/d5M4sHJbQQUToMBtodq4HaV4fa+WV2UTfoperElm66c9/8cKmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js integrity="sha512-jwrwRWZWW9J6bjmBOJxPcbRvEBSQeY4Ad0NEXSfP0vwYi/Yu9x5VhDBl3wz6Pnxs8Rx/t1P8r9/OHCRciHcT7Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js integrity="sha512-xKcnbsdT0KMoA4yrozkqZM1XJVTrPsjdQwvigxlAlxEDu8YDvC/jl+LfVqn0fY3Vs6m2y4a89JCHEIA/Z9zpmQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js integrity="sha512-pmt3kb6dRndjFXFFwCa3rSzuUQ0GjeCfC5QULWde+8ZBIsUzuP1heOIOSAMfAyXHSufrrTp8h7UHw85K4IJ2/g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js integrity="sha512-whYhDwtTmlC/NpZlCr6PSsAaLOrfjVg/iXAnC4H/dtiHawpShhT2SlIMbpIhT/IL/NrpdMm+Hq2C13+VKpHTYw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js integrity="sha512-/Dti0iV9cxgJe8r0U/89YJIv9ZBQu1ExEWffVyBj4juMQ4GNglQ3TQ0Up4gcbiHvg0g87arcUFbKBtw2PxH1Dw==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js integrity="sha512-w200Nz1i9KgDNi+IpPMgpZBVRIvfVK/V5vskyHjkz7XJkVnRJcb1uNmpiHhDv0/Ln+GG2VqScKKz/1izBfg64Q==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-less.min.js integrity="sha512-lL5HvfIycntK04Iiai/VTsyuj7mvDkhz9k+cA8fqXr932s4jLJ1YwplIs6Dhpw0pzVwAe1jGe8sGwbyuHG44QQ==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js integrity="sha512-aczOaJ+mB9uGT6dMJbDaUsS2PWG+XII+1ypFQ0L22Z132V6kMM6m70pQssXsPAFmLI5xkgx/hknBuUuJIJKZfA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js integrity="sha512-uMdVuOpm+9lNPCT7mV/YaMb9YQ/R4+eeON7aEMj6Ig/f4BoU+Q5k6iaZkDsX7LH9cjTHZt0CuKxbzd0/fndrWA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js integrity="sha512-6O/PZimM3TD1NN3yrazePA4AbZrPcwt1QCGJrVY7WoHDJROZFc9TlBvIKMe+QfqgcslW4lQeBzNJEJvIMC8WhA==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-batch.min.js integrity="sha512-tPgIjUKiv2HcUAIWXA3v6G4cNuWXkoMsF+ibxfHLnp+/s1C3Bw5/qp78+JjhrfoyWIiHXHx0LtH4M/LAwyQqWg==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lisp.min.js integrity="sha512-W461RnQzrhSCQQMfEGFKOHbK2DuJTVxrXs2PzctPaxV3A+qPB/TcnMgucSsBNkyccNK8VoENBsAnbf/SuBE71g==" crossorigin=anonymous referrerpolicy=no-referrer></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin=anonymous></script>
+<script>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]});for(var inlineMathArray=document.querySelectorAll("script[type='math/tex']"),inlineMath,tex,replaced,displayMathArray,displayMath,i=0;i<inlineMathArray.length;i++)inlineMath=inlineMathArray[i],tex=inlineMath.innerText||inlineMath.textContent,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex,{displayMode:!1}),inlineMath.parentNode.replaceChild(replaced,inlineMath);displayMathArray=document.querySelectorAll("script[type='math/tex; mode=display']");for(i=0;i<displayMathArray.length;i++)displayMath=displayMathArray[i],tex=displayMath.innerHTML,replaced=document.createElement("span"),replaced.innerHTML=katex.renderToString(tex.replace(/%.*/g,""),{displayMode:!0}),displayMath.parentNode.replaceChild(replaced,displayMath)</script></body></html>
