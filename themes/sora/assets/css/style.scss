@@ -284,6 +284,23 @@ pre code {
   color: #0366d6;
 }
 
+#single .pagination-item {
+  margin: 1em 0 1em 0;
+}
+
+#single .left {
+  text-align: left;
+}
+#single .right {
+  text-align: right;
+}
+
+#single .pagination-item a {
+  display: inline-block;
+  padding: 0.75em;
+  background-color: #fafafa;
+}
+
 // #archive: drop
 #archive .group {
   margin: 24px auto;

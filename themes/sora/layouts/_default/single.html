@@ -24,6 +24,46 @@
   </div>
   {{ end}}
 
+  <hr />
+
+  <div class="pagination">
+    {{ if ne .Prev nil }}
+    {{ with .Prev}}
+    <div class="left pagination-item">
+      <a href="{{ .Permalink }}">
+        🡰 {{ .Title }}
+      </a>
+    </div>
+    {{ end }}
+    {{ end }}
+
+    {{ if ne .Next nil }}
+    {{ with .Next}}
+    <div class="right pagination-item">
+      <a href="{{ .Permalink }}">
+        {{ .Title }} 🡲
+      </a>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+
+  <div class="see-also">
+    {{ $related := .Site.RegularPages.Related . | first 5 }}
+    {{ with $related }}
+    <h2>See Also</h2>
+    <ul>
+      {{ range . }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          {{ .Title }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    {{ end }}
+  </div>
+
   <div id="comment">
     <!-- https://gohugo.io/templates/internal/#use-the-disqus-template -->
     {{ template "_internal/disqus.html" . }}
