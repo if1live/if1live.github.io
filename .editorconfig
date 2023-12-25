@@ -14,8 +14,11 @@ end_of_line = lf
 indent_style = space
 indent_size = 2
 
+# ol, ul 들여쓰기 4칸으로 안하면 2단으로 사용하는게 제대로 처리되지 않는다.
+# js 코드가 포함되는 상황때문에 2칸을 기본으로 쓰고 싶었는데 으...
+# TODO: hugo 설정으로 고칠 수 있는 문제일까?
 [*.md]
-indent_size = 2
+indent_size = 4
 trim_trailing_whitespace = false
 
 [*.mkdn]
